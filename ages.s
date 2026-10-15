@@ -1238,17 +1238,18 @@ titlescreenMakuSeedSprite:
 	.db $74 $00 $46 $02
 
 titlescreenPressStartSprites:
+	; FR: "PRESS" / "START" on two lines, below AGES (combined titlescreen)
 	.db $0a
-	.db $80 $2c $38 $00
-	.db $80 $34 $3a $00
-	.db $80 $3c $3c $00
-	.db $80 $44 $3e $00
-	.db $80 $4c $3e $00
-	.db $80 $5c $3e $00
-	.db $80 $64 $40 $00
-	.db $80 $6c $42 $00
-	.db $80 $74 $3a $00
-	.db $80 $7c $40 $00
+	.db $7f $18 $38 $00
+	.db $7f $20 $3a $00
+	.db $7f $28 $3c $00
+	.db $7f $30 $3e $00
+	.db $7f $38 $3e $00
+	.db $8a $24 $3e $00
+	.db $8a $2c $40 $00
+	.db $8a $34 $42 $00
+	.db $8a $3c $3a $00
+	.db $8a $44 $40 $00
 
 ; Sprites used on the closeup shot of Link on the horse in the intro
 linkOnHorseCloseupSprites_2:
@@ -1459,6 +1460,18 @@ sound7aChannel2:
 
  m_section_superfree "Gfx_3f" ALIGN $10
 	m_GfxDataSimple spr_extra_mags
+.ends
+
+; FR: combined Ages + Seasons titlescreen. Gfx headers can only address banks
+; $00-$3f; bank $33 is empty in Ages.
+.BANK $33 SLOT 1
+.ORG 0
+
+ m_section_free "FR_Titlescreen" ALIGN $10
+	m_GfxDataSimple gfx_titlecombo_1
+	m_GfxDataSimple gfx_titlecombo_2
+	m_GfxDataSimple map_titlecombo
+	m_GfxDataSimple flg_titlecombo
 .ends
 
 .BANK $42 SLOT 1

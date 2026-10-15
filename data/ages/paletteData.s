@@ -18,45 +18,46 @@ paletteData4008:
 	m_RGB16 $03 $00 $17
 
 paletteData4018:
+; FR : écran titre combiné (généré par fr/import_title.py)
+	m_RGB16 $0b $00 $11
+	m_RGB16 $0c $18 $1c
+	m_RGB16 $0e $0e $12
+	m_RGB16 $1c $1e $1f
+
+	m_RGB16 $0c $18 $1c
 	m_RGB16 $0e $0c $04
 	m_RGB16 $1c $1e $1f
-	m_RGB16 $0c $18 $1c
-	m_RGB16 $0b $00 $11
+	m_RGB16 $1e $0d $00
 
-	m_RGB16 $1f $19 $10
-	m_RGB16 $1f $14 $09
+	m_RGB16 $14 $00 $00
+	m_RGB16 $18 $0e $00
+	m_RGB16 $1a $16 $00
+	m_RGB16 $1c $1e $1f
+
+	m_RGB16 $0a $12 $1f
+	m_RGB16 $0c $18 $1c
+	m_RGB16 $0e $0c $04
+	m_RGB16 $1c $1e $1f
+
+	m_RGB16 $1e $0d $00
 	m_RGB16 $1f $10 $03
-	m_RGB16 $1e $0d $00
+	m_RGB16 $1f $14 $09
+	m_RGB16 $1f $19 $10
 
+	m_RGB16 $0a $12 $1f
 	m_RGB16 $0e $0c $04
-	m_RGB16 $1f $1c $00
-	m_RGB16 $0c $18 $1c
-	m_RGB16 $00 $0e $00
+	m_RGB16 $1a $16 $00
+	m_RGB16 $1c $1e $1f
 
+	m_RGB16 $0b $00 $11
+	m_RGB16 $0c $18 $1c
 	m_RGB16 $0e $0c $04
-	m_RGB16 $1d $1f $1f
-	m_RGB16 $0c $18 $1c
-	m_RGB16 $0b $00 $11
+	m_RGB16 $1c $1e $1f
 
-	m_RGB16 $0e $0e $12
-	m_RGB16 $1d $1f $1f
-	m_RGB16 $0c $18 $1c
-	m_RGB16 $0b $00 $11
-
-	m_RGB16 $0e $0c $04
-	m_RGB16 $1e $0d $00
-	m_RGB16 $0c $18 $1c
-	m_RGB16 $0b $00 $11
-
-	m_RGB16 $13 $13 $17
-	m_RGB16 $1d $1f $1f
-	m_RGB16 $0c $18 $1c
-	m_RGB16 $0b $00 $11
-
-	m_RGB16 $0e $0c $04
-	m_RGB16 $1d $1f $1f
-	m_RGB16 $0c $18 $1c
-	m_RGB16 $1e $0d $00
+	m_RGB16 $0a $12 $1f
+	m_RGB16 $10 $16 $1f
+	m_RGB16 $16 $1a $1f
+	m_RGB16 $1e $1e $1f
 
 paletteData4058:
 	m_RGB16 $0c $12 $1f

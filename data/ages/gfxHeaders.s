@@ -197,15 +197,12 @@ gfxHeader01:
 	m_GfxHeader map_capcom_nintendo $9880 $13|$80
 	m_GfxHeader gfx_capcom_nintendo $8800 $4f
 gfxHeader02:
+	; FR: combined Ages + Seasons titlescreen (fr/import_title.py)
 	m_GfxHeader spr_titlescreen_sprites $8380 $3d|$80
-	m_GfxHeader gfx_titlescreen_1 $8800 $4f|$80
-	m_GfxHeader gfx_titlescreen_2 $8d00 $5f|$80
-	m_GfxHeader gfx_titlescreen_3 $9300 $0f|$80
-	m_GfxHeader gfx_titlescreen_4 $9400 $3f|$80
-	m_GfxHeader gfx_titlescreen_5 $8801 $4f|$80
-	m_GfxHeader gfx_titlescreen_6 $8cd1 $05|$80
-	m_GfxHeader map_titlescreen $9800 $23|$80
-	m_GfxHeader flg_titlescreen $9801 $23
+	m_GfxHeader gfx_titlecombo_1 $8800 $7f|$80
+	m_GfxHeader gfx_titlecombo_2 $9000 $7f|$80
+	m_GfxHeader map_titlecombo $9800 $23|$80
+	m_GfxHeader flg_titlecombo $9801 $23
 gfxHeader03:
 	m_GfxHeader gfx_done $8801 $1f
 gfxHeader04:
