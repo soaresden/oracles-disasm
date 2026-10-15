@@ -995,7 +995,17 @@ _getTextAddress:
 	ld a,(wTextIndexH)
 	cp TEXT_OFFSET_SPLIT_INDEX
 	jr c,+
+
+	; FR: the French text needs a 3rd offset (like the European version).
+	; If wTextIndexH >= TEXT_OFFSET_SPLIT_INDEX_2, text is relative to TEXT_OFFSET_3
+	cp TEXT_OFFSET_SPLIT_INDEX_2
+	jr c,@offset2
+	ld e,:TEXT_OFFSET_3
+	ld hl,TEXT_OFFSET_3&$3fff
+	jr +
+
 ; Else, text is relative to TEXT_OFFSET_2
+@offset2:
 	ld a,(wActiveLanguage)
 	add a
 	ld hl,textOffset2Table
