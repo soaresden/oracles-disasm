@@ -443,7 +443,9 @@ _fileSelectMode5:
 	and BTN_A | BTN_START
 	ret z
 
+	; FR: the first two buttons are "AGES" and "SEASONS": which game to start with
 	ld a,(wFileSelect.cursorPos)
+	ld (wNewGameFirstGame),a
 	ld hl,@selectionModes
 	rst_addAToHl
 	ld a,(hl)
@@ -452,8 +454,8 @@ _fileSelectMode5:
 	jp playSound
 
 @selectionModes:
-	.db $02 ; Name entry
-	.db $06 ; Secret entry
+	.db $02 ; Name entry, starting with Ages
+	.db $02 ; Name entry, starting with Seasons
 	.db $07 ; Game link
 
 @upOrDown:
@@ -6191,6 +6193,69 @@ _runMapMenu:
 	rst_jumpTable
 	.dw _mapMenu_state0
 	.dw _mapMenu_state1
+	.dw _mapMenu_state2
+
+;;
+; FR: Vasu's shop, where the door to the other game is
+.ifdef ROM_AGES
+	.define VASU_MAP_ROOM	$58
+	.define VASU_GROUP	$02
+	.define VASU_ROOM	$ee
+.else
+	.define VASU_MAP_ROOM	$e8
+	.define VASU_GROUP	$03
+	.define VASU_ROOM	$91
+.endif
+	.define VASU_POS	$55
+
+;;
+; FR: is the cursor on Vasu's square of the overworld map? (only reachable once
+; that square has been visited)
+; @param[out]	cflag	c if so
+_mapMenu_checkVasuShortcut:
+	ld a,(wMapMenu.mode)
+	or a
+	ret nz
+	ld a,(wMapMenu.cursorIndex)
+	cp VASU_MAP_ROOM
+	scf
+	ret z
+	and a
+	ret
+
+;;
+; FR: State 2: asked whether to go to Vasu's shop; waiting for the answer
+_mapMenu_state2:
+	call @checkAnswer
+	jp _mapMenu_drawSprites
+
+@checkAnswer:
+	call retIfTextIsActive
+
+	ld a,(wSelectedTextOption)
+	or a
+	jr z,@warp
+
+	; "No": back to the map
+	ld a,$01
+	ld (wMenuActiveState),a
+	ret
+
+@warp:
+	ld (wOpenedMenuType),a
+	ld a,VASU_GROUP | $80
+	ld (wWarpDestGroup),a
+	ld a,VASU_ROOM
+	ld (wWarpDestRoom),a
+	ld a,VASU_POS
+	ld (wWarpDestPos),a
+	ld a,TRANSITION_DEST_SET_RESPAWN
+	ld (wWarpTransition),a
+	ld a,$03
+	ld (wWarpTransition2),a
+	ld a,$03
+	call setMusicVolume
+	jp fadeoutToWhite
 
 ;;
 _mapMenu_state0:
@@ -6586,8 +6651,19 @@ _mapMenu_state1:
 
 @showRoomText:
 	call _mapGetRoomTextOrReturn
+
+	; FR: on Vasu's square, offer to warp to his shop (to change games)
+	call _mapMenu_checkVasuShortcut
+	jr c,@vasuPrompt
+
 	ld hl,wSubmenuState
 	inc (hl)
+	jp showText
+
+@vasuPrompt:
+	ld a,$02
+	ld (wMenuActiveState),a
+	ld bc,TX_VASU_WARP
 	jp showText
 
 ; These are offsets to add to wMapMenu.cursorIndex (shifted left by 1) when

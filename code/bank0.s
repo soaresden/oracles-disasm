@@ -2021,12 +2021,27 @@ initializeFile:
 
 	call saveCurrentGameAsLastSavedGame
 
+	; FR: the game played second is a linked game (like entering the other
+	; game's secret), so the real ending is kept. Both games are first
+	; initialized as standard games though: crossworld shares the inventory,
+	; so the linked game's starting sword/shield would leak into the 1st game.
+	xor a
+	call @setLinkedGame
+
 	; Call normal initialize using Seasons
 	call fillBootstrappedSramWithSeasons
 	ld a,SRAMBANK_SEASONS
 	ld ($4444),a
 	ld c,$00
 	call fileManagement_caller
+
+	; FR: Seasons is linked if Ages comes first
+	ld a,(wNewGameFirstGame)
+	and $01
+	jr nz,+
+	ld a,SRAMBANK_SEASONS
+	call @markLinkedAndSave
++
 
 	; Load fresh Ages game
 	call fillBootstrappedSramWithAges
@@ -2047,11 +2062,40 @@ initializeFile:
 	pop af
 	ldh (<SVBK),a
 
+	; FR: the load above overwrote the flags
+	xor a
+	call @setLinkedGame
+
 	; Finally save ages
 	ld a,SRAMBANK_AGES
 	ld ($4444),a
 	ld c,$00
 	call fileManagement_caller
+
+	; FR: Ages is linked if Seasons comes first (with the linked game's
+	; pirate ship position)
+	ld a,(wNewGameFirstGame)
+	and $01
+	jr z,+
+	ld a,$58
+	ld (AGES_wPirateShipY),a
+	ld a,$78
+	ld (AGES_wPirateShipX),a
+	ld a,SRAMBANK_AGES
+	call @markLinkedAndSave
++
+
+	; FR: start the file on the chosen game
+	ld a,SRAMBANK_OTHERGAME_BACKUP
+	ld ($4444),a
+	ldh a,(<hActiveFileSlot)
+	ld hl,CURRENT_SAVED_GAME_START
+	rst_addAToHl
+	ld a,(wNewGameFirstGame)
+	and $01
+	ld (hl),a
+	ld a,SRAMBANK_BOOTSTRAP
+	ld ($4444),a
 
 	pop af
 	setrombank
@@ -2062,6 +2106,24 @@ initializeFile:
 	pop af
 
 	ret
+
+;;
+; @param	a	1 to make the file being initialized a linked game
+@setLinkedGame:
+	ld (wFileIsLinkedGame),a
+	xor a
+	ld (wFileIsHeroGame),a
+	ret
+
+;;
+; Marks the file in wram as a linked game and saves it
+; @param	a	SRAM bank of the game (its bootstrap must be loaded)
+@markLinkedAndSave:
+	ld ($4444),a
+	ld a,$01
+	ld (wFileIsLinkedGame),a
+	ld c,$01
+	jp fileManagement_caller
 
 fillBootstrappedSramWithAges:
 	push af

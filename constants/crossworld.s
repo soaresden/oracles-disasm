@@ -7,3 +7,7 @@
 .define AGES_BACKUP			$a000
 .define SEASONS_BACKUP			$a550
 .define CURRENT_SAVED_GAME_START	$aaa0 ; $0 for ages, $1 for seasons
+
+; FR: Ages-only wram used by the shared bank 0 code (must stay identical in both games)
+.define AGES_wPirateShipY		$c6ed
+.define AGES_wPirateShipX		$c6ee

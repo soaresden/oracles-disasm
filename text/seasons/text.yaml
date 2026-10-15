@@ -1547,6 +1547,11 @@ groups:
       Maison des
       panneaux
       subrosien
+  - name: TX_VASU_WARP
+    index: auto
+    text: |-
+      Aller chez Vasu?
+       \opt()Oui \opt()Non
 - group: 0x04
   data:
   - name: TX_0400

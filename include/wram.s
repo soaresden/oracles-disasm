@@ -322,6 +322,12 @@ wCurrentGame:
 ; $01: seasons
 	db
 
+wNewGameFirstGame:
+; FR: game chosen in the new game menu to start with (other one becomes a linked game)
+; $00: ages
+; $01: seasons
+	db
+
 ; $c4bb-$c4bf unused?
 
 .ENDS

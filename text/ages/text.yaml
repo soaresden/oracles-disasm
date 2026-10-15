@@ -1972,6 +1972,11 @@ groups:
     text: |-
       Maison de
       Dekadin
+  - name: TX_VASU_WARP
+    index: auto
+    text: |-
+      Aller chez Vasu?
+       \opt()Oui \opt()Non
 - group: 0x05
   data:
   - name:
