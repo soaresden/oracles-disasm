@@ -1693,6 +1693,10 @@ _introCinematic_ridingHorse_state4:
 	; certainly didn't intend to write there. They probably intended for hl to point
 	; to wTmpcbb3, and set the counter for the next state?
 	; It makes no difference, though, since the next state doesn't use wTmpcbb3.
+	; FR: it does make a difference in crossworld! Writing to rom selects an
+	; SRAM bank, and crossworld runs part of bank 0 from SRAM, so the game
+	; crashed (and rebooted on the "Game Boy Color only" screen).
+	ld hl,wTmpcbb3
 	ld (hl),90
 
 	ld a,PALH_9b

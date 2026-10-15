@@ -3486,6 +3486,11 @@ _initializeGame:
 	call checkGlobalFlag
 	jr nz,_func_5a60
 
+	; FR: the 2nd game is created as a standard game and only then marked as
+	; linked (so its starting sword/shield can't leak into the 1st game). Give
+	; them now that the linked game starts, since it skips the sword event.
+	call @giveLinkedGameStartingItems
+
 	ld a,GLOBALFLAG_3d
 	call checkGlobalFlag
 	jr nz,@summonLinkCutscene
@@ -3503,6 +3508,26 @@ _initializeGame:
 	xor a
 	ld (w1Link.enabled),a
 	ret
+
+;;
+; FR: wooden sword and shield of a linked game (see above)
+@giveLinkedGameStartingItems:
+	ld a,(wIsLinkedGame)
+	or a
+	ret z
+	ld a,TREASURE_SWORD
+	call checkTreasureObtained
+	jr c,+
+	ld a,TREASURE_SWORD
+	ld c,$01
+	call giveTreasure
++
+	ld a,TREASURE_SHIELD
+	call checkTreasureObtained
+	ret c
+	ld a,TREASURE_SHIELD
+	ld c,$01
+	jp giveTreasure
 
 ;;
 _loadingRoom:
