@@ -30,7 +30,7 @@
 ; copy the data quickly enough to fit within vblank. If you need to draw stuff while the screen is
 ; on, see the "queueDmaTransfer" function or "data/{game}/uniqueGfxHeaders.s".
 
-.define NUM_GFX_HEADERS $bd ; BALLADE: +2 (GFXH_FILM, GFXH_TITLE)
+.define NUM_GFX_HEADERS $c9 ; BALLADE: +2 (GFXH_FILM, GFXH_TITLE), +12 (menus en français)
 
 gfxHeaderTable:
 	.repeat NUM_GFX_HEADERS index COUNT
@@ -988,3 +988,117 @@ m_GfxHeaderStart $bc, GFXH_TITLE
 	m_GfxHeader map_title_bg, $9800
 	m_GfxHeader flg_title_bg, $9801
 	m_GfxHeaderEnd
+
+; BALLADE: menus en français (tools/make_menus_fr.py). Mêmes listes que les headers anglais, avec
+; les images *_fr ; loadGfxHeader les prend à leur place quand wActiveLanguage = 1
+; (balladeLangGfxHeader, code/bank0.s).
+m_GfxHeaderStart $bd, GFXH_FILE_MENU_WITH_MESSAGE_SPEED_FR
+	m_GfxHeader map_file_menu_message_speed, w4TileMap+$240
+	m_GfxHeader flg_file_menu_message_speed, w4AttributeMap+$240
+	; Fall through
+m_GfxHeaderStart $be, GFXH_FILE_MENU_FR
+	m_GfxHeader spr_din_1, $8001, $06
+	m_GfxHeader spr_nayru_1, $8061, $04
+	m_GfxHeader gfx_messagespeed_fr, $9200
+	m_GfxHeader gfx_pickafile_2_fr, $8801
+	m_GfxHeader gfx_copy_fr, $8a01
+	m_GfxHeader gfx_erase_fr, $8aa1
+	m_GfxHeader map_file_menu_top, w4TileMap
+	m_GfxHeader flg_file_menu_top, w4AttributeMap
+	m_GfxHeader map_file_menu_middle, w4TileMap+$0a0
+	m_GfxHeader flg_file_menu_middle, w4AttributeMap+$0a0
+	m_GfxHeader map_file_menu_bottom, w4TileMap+$1e0
+	m_GfxHeader flg_file_menu_bottom, w4AttributeMap+$1e0
+	m_GfxHeaderEnd
+
+m_GfxHeaderStart $bf, GFXH_FILE_MENU_COPY_FR
+	m_GfxHeader gfx_copywhatwhere_fr, $8801
+	m_GfxHeader gfx_quit_2_fr, $8a01
+	m_GfxHeader gfx_copy_fr, $8aa1
+	m_GfxHeader map_file_menu_top, w4TileMap
+	m_GfxHeader flg_file_menu_top, w4AttributeMap
+	m_GfxHeader map_file_menu_copy, w4TileMap+$0a0
+	m_GfxHeader flg_file_menu_copy, w4AttributeMap+$0a0
+	m_GfxHeader map_file_menu_bottom, w4TileMap+$1e0
+	m_GfxHeader flg_file_menu_bottom, w4AttributeMap+$1e0
+	m_GfxHeaderEnd
+
+m_GfxHeaderStart $c0, GFXH_FILE_MENU_ERASE_FR
+	m_GfxHeader gfx_pickafile_fr, $8801
+	m_GfxHeader gfx_quit_2_fr, $8a01
+	m_GfxHeader gfx_erase_fr, $8aa1
+	m_GfxHeaderEnd
+
+m_GfxHeaderStart $c1, GFXH_NAME_ENTRY_FR
+	m_GfxHeader gfx_name_fr, $8801
+	m_GfxHeader map_name_entry_top, w4TileMap
+	m_GfxHeader flg_name_entry_top, w4AttributeMap
+	m_GfxHeader map_name_entry_middle, w4TileMap+$0a0
+	m_GfxHeader flg_name_entry_middle, w4AttributeMap+$0a0
+	m_GfxHeader map_name_entry_bottom, w4TileMap+$1e0
+	m_GfxHeader flg_name_entry_bottom, w4AttributeMap+$1e0
+	m_GfxHeaderEnd
+
+m_GfxHeaderStart $c2, GFXH_NEW_FILE_OPTIONS_FR
+	m_GfxHeader gfx_newfilescreen_fr, $8801
+	m_GfxHeaderEnd
+
+m_GfxHeaderStart $c3, GFXH_SAVE_MENU_GFX_FR
+	m_GfxHeader gfx_savescreen_fr, $8801
+	m_GfxHeaderEnd
+
+m_GfxHeaderStart $c4, GFXH_GAME_OVER_GFX_FR
+	m_GfxHeader gfx_gameover_fr, $8801
+	m_GfxHeaderEnd
+
+m_GfxHeaderStart $c5, GFXH_QUIT_GFX_FR
+	m_GfxHeader gfx_quit_fr, $8a01
+	m_GfxHeaderEnd
+
+m_GfxHeaderStart $c6, GFXH_DONE_FR
+	m_GfxHeader gfx_done_fr, $8801
+	m_GfxHeaderEnd
+
+m_GfxHeaderStart $c7, GFXH_ERROR_TEXT_FR
+	m_GfxHeader gfx_error_fr, $8801
+	m_GfxHeaderEnd
+
+; Inventaire : bouton « SAUV »
+m_GfxHeaderStart $c8, GFXH_INVENTORY_SCREEN_FR
+	m_GfxHeader gfx_inventory_hud_1, $8000
+	m_GfxHeader spr_present_past_symbols, $8300
+	m_GfxHeader spr_quest_items_5, $8400
+	m_GfxHeader spr_map_compass_keys_bookofseals, $8600
+	m_GfxHeader gfx_save_fr, $8600
+	m_GfxHeader gfx_blank, $8800
+	m_GfxHeader gfx_rings, $8a00
+	m_GfxHeader gfx_inventory_hud_2, $8e00
+	m_GfxHeader spr_item_icons_1_spr, $8001
+	m_GfxHeader spr_item_icons_2, $8201
+	m_GfxHeader spr_item_icons_3, $8401
+	m_GfxHeader spr_essences, $8601
+	m_GfxHeader spr_quest_items_1, $8801
+	m_GfxHeader spr_quest_items_2, $8a01
+	m_GfxHeader spr_quest_items_3, $8c01
+	m_GfxHeader spr_quest_items_4, $8e01
+	m_GfxHeader map_inventory_textbar, w4TileMap+$1e0
+	m_GfxHeader flg_inventory_textbar, w4AttributeMap+$1e0
+	m_GfxHeader map_inventory_screen_1, w4TileMap+$040
+	m_GfxHeader flg_inventory_screen_1, w4AttributeMap+$040
+	m_GfxHeaderEnd
+
+; Anglais -> français (liste terminée par $00)
+balladeLangGfxHeaders:
+	.db GFXH_FILE_MENU_WITH_MESSAGE_SPEED,	GFXH_FILE_MENU_WITH_MESSAGE_SPEED_FR
+	.db GFXH_FILE_MENU,			GFXH_FILE_MENU_FR
+	.db GFXH_FILE_MENU_COPY,		GFXH_FILE_MENU_COPY_FR
+	.db GFXH_FILE_MENU_ERASE,		GFXH_FILE_MENU_ERASE_FR
+	.db GFXH_NAME_ENTRY,			GFXH_NAME_ENTRY_FR
+	.db GFXH_NEW_FILE_OPTIONS,		GFXH_NEW_FILE_OPTIONS_FR
+	.db GFXH_SAVE_MENU_GFX,			GFXH_SAVE_MENU_GFX_FR
+	.db GFXH_GAME_OVER_GFX,			GFXH_GAME_OVER_GFX_FR
+	.db GFXH_QUIT_GFX,			GFXH_QUIT_GFX_FR
+	.db GFXH_DONE,				GFXH_DONE_FR
+	.db GFXH_ERROR_TEXT,			GFXH_ERROR_TEXT_FR
+	.db GFXH_INVENTORY_SCREEN,		GFXH_INVENTORY_SCREEN_FR
+	.db $00

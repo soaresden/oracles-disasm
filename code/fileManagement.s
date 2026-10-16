@@ -97,6 +97,15 @@ saveFile:
 	ld d,b
 	call copyFileFromHlToDe
 
+	; BALLADE: langue du dernier fichier sauvé (SRAM $bff0, après les 6 copies de fichiers) :
+	; l'écran du choix du fichier s'affiche dans cette langue
+	ld a,$0a
+	ld ($1111),a
+	ld a,(wActiveLanguage)
+	ld ($bff0),a
+	xor a
+	ld ($1111),a
+
 	; Redundant?
 	jr verifyFileCopies
 

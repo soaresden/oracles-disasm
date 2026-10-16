@@ -529,3 +529,19 @@
 	m_GfxData gfx_title_bg_2
 	m_GfxData map_title_bg
 	m_GfxData flg_title_bg
+	; BALLADE: menus en français (tools/make_menus_fr.py)
+	m_GfxData gfx_pickafile_fr
+	m_GfxData gfx_pickafile_2_fr
+	m_GfxData gfx_gameover_fr
+	m_GfxData gfx_done_fr
+	m_GfxData gfx_error_fr
+	m_GfxData gfx_copywhatwhere_fr
+	m_GfxData gfx_savescreen_fr
+	m_GfxData gfx_newfilescreen_fr
+	m_GfxData gfx_copy_fr
+	m_GfxData gfx_erase_fr
+	m_GfxData gfx_quit_2_fr
+	m_GfxData gfx_quit_fr
+	m_GfxData gfx_name_fr
+	m_GfxData gfx_messagespeed_fr
+	m_GfxData gfx_save_fr

@@ -1302,6 +1302,7 @@ loadGfxHeader:
 	push bc
 	ld a,:bank1Moveable.gfxHeaderTable
 	setrombank
+	call balladeLangGfxHeader ; BALLADE
 	ld a,e
 	ld hl,bank1Moveable.gfxHeaderTable
 	rst_addDoubleIndex
@@ -1344,6 +1345,26 @@ loadGfxHeader:
 	setrombank
 	ld a,c
 	ld ($ff00+R_SVBK),a
+	ret
+
+;;
+; BALLADE: menus en français. Si wActiveLanguage = 1, remplace le header e par sa variante
+; française (data/ages/gfxHeaders.s, balladeLangGfxHeaders ; la banque est déjà chargée).
+;
+; @param[in,out]	e	Index du gfx header
+balladeLangGfxHeader:
+	ld a,(wActiveLanguage)
+	dec a
+	ret nz
+	ld hl,bank1Moveable.balladeLangGfxHeaders
+-
+	ldi a,(hl)
+	or a
+	ret z
+	cp e
+	ldi a,(hl)
+	jr nz,-
+	ld e,a
 	ret
 
 ;;

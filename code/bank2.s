@@ -214,12 +214,31 @@ getFileDisplayVariableAddress_paramE:
 	ret
 
 ;;
+; BALLADE: avant de choisir un fichier, la langue n'est pas connue : les menus prennent celle du
+; dernier fichier sauvé (écrite par saveFile en SRAM $bff0). 1 = français, sinon anglais.
+balladeMenuLanguage:
+	ld a,$0a
+	ld ($1111),a
+	ld a,($bff0)
+	ld b,a
+	xor a
+	ld ($1111),a
+	ld a,b
+	cp $01
+	jr z,+
+	xor a
++
+	ld (wActiveLanguage),a
+	ret
+
+;;
 ; Initialization of file select screen
 fileSelectMode0:
 	ld hl,wFileSelect.mode
 	ld b,$10
 	call clearMemory
 	call disableLcd
+	call balladeMenuLanguage
 	ld a,GFXH_FILE_MENU_GFX
 	call loadGfxHeader
 	ld a,MUS_FILE_SELECT
