@@ -30,6 +30,14 @@
 ; secrets tracker opened from the inventory (openMenu clears it otherwise)
 .define FR_TRACKER_MARK			$ff
 
+; FR: wFrHudPhase values (see frHudBottomVblank)
+.define FRHUD_PHASE_GAME		1
+.define FRHUD_PHASE_LCDC_A7		2
+.define FRHUD_PHASE_RING_TEXT		3
+.define FRHUD_PHASE_RING_END		4
+.define FRHUD_PHASE_WAVE		5
+.define FRHUD_PHASE_STATUS		6
+
 ; FR: Ages' GLOBALFLAG_RETURNED_DOG, also read from Seasons: Mamamu (exchange 6
 ; of the secrets that begin in Seasons) never sets her DONE flag
 .define FR_AGES_GLOBALFLAG_RETURNED_DOG	$3b

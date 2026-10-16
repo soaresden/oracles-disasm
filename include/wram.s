@@ -357,10 +357,14 @@ wObjectsToDrawEnd: ; $c540
 
 wFrHudBottom: ; $c580
 ; FR: 1 while the status bar is drawn at the bottom of the screen this frame
-; (OPT_HUD_BOTTOM, see frHudBottomVblank)
+; (OPT_HUD_BOTTOM, see frHudBottomVblank): 1 in gameplay, 2 in a menu
 	db
 
-; $c581-$c5af unused?
+wFrHudPhase: ; $c581
+; FR: next LCD interrupt event with the status bar at the bottom (FRHUD_PHASE_*)
+	db
+
+; $c582-$c5af unused?
 
 .ENDS
 
