@@ -310,7 +310,9 @@ gfxHeader1e:
 gfxHeader1f:
 	m_GfxHeader gfx_blurb_makupath $8c00 $27
 gfxHeader20:
-	m_GfxHeader gfx_hud $9000 $2f
+	m_GfxHeader gfx_hud $9000 $2f|$80
+	m_GfxHeader gfx_fr_door_icons $93a0 $03|$80 ; FR: icons above Vasu's doors (OPT_DOOR_ICONS)
+	m_GfxHeader gfx_fr_hud_icon $93f0 $00 ; FR: game icon (OPT_HUD_GAME_ICON)
 gfxHeader21:
 	m_GfxHeader map_0e $d244 $03|$80
 	m_GfxHeader map_0f $d644 $03

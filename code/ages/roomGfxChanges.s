@@ -80,6 +80,7 @@ applyRoomSpecificTileChangesAfterGfxLoad:
 	.dw _roomTileChangesAfterLoad08
 	.dw _roomTileChangesAfterLoad09
 	.dw _roomTileChangesAfterLoad0a
+	.dw frRoomTileChangesVasuDoors
 
 ;;
 ; Unused stub
@@ -109,6 +110,7 @@ applyRoomSpecificTileChangesAfterGfxLoad:
 ; $08: Gasha spot (draws the tree or the plant if something has been planted)
 ; $09: Mermaid statue screen in Lynna City (replaces it with the base for the Link statue)
 ; $0a: Maku tree past screen
+; $0b: FR: Vasu's shop (icons above the doors)
 
 @group0:
 	.db $05 $08
@@ -145,6 +147,7 @@ applyRoomSpecificTileChangesAfterGfxLoad:
 	.db $38 $0a
 	.db $00
 @group2:
+	.db $ee $0b
 	.db $5e $04
 	.db $7e $04
 	.db $af $05
@@ -696,5 +699,43 @@ checkLoadPastSignAndChestGfx:
 rectangleData_02_7de1:
 	.db $06 $06
 	.dw w3VramTiles+8 w2TmpGfxBuffer
+
+;;
+; FR: Vasu's shop: icons above the two doors, hourglass on the left (Ages) and sun
+; on the right (Seasons), same in both games. Tiles $3a-$3d are loaded with the
+; status bar graphics (gfxHeader20); the floor's attributes are kept.
+frRoomTileChangesVasuDoors:
+	ld a,(OPT_DOOR_ICONS)
+	or a
+	ret z
+.ifdef ROM_SEASONS
+	ld a,(wActiveGroup)
+	cp $03
+	ret nz
+.endif
+	ld a,($ff00+R_SVBK)
+	push af
+	ld a,:w3VramTiles
+	ld ($ff00+R_SVBK),a
+	ld hl,w3VramTiles+13*$20+5
+	ld (hl),$3a
+	inc l
+	ld (hl),$3b
+	ld l,<(w3VramTiles+13*$20+13)
+	ld (hl),$3c
+	inc l
+	ld (hl),$3d
+
+	; Attributes: vram bank 0 (where the icons are), palette FR_DOOR_ICON_PALETTE
+	ld hl,w3VramAttributes+13*$20+5
+	ld a,FR_DOOR_ICON_PALETTE
+	ldi (hl),a
+	ld (hl),a
+	ld l,<(w3VramAttributes+13*$20+13)
+	ldi (hl),a
+	ld (hl),a
+	pop af
+	ld ($ff00+R_SVBK),a
+	ret
 
 .ends

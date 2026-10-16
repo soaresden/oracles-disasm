@@ -1488,6 +1488,8 @@ sound7aChannel2:
 	m_GfxDataSimple gfx_titlecombo_2
 	m_GfxDataSimple map_titlecombo
 	m_GfxDataSimple flg_titlecombo
+	m_GfxDataSimple gfx_fr_hud_icon
+	m_GfxDataSimple gfx_fr_door_icons
 .ends
 
 .BANK $42 SLOT 1

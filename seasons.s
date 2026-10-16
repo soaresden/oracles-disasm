@@ -795,6 +795,15 @@ sounda1Channel2:
 	m_GfxDataSimple spr_extra_mags
 .ends
 
+.BANK $35 SLOT 1
+.ORG 0
+
+; FR: added data (gfx headers can only address banks $00-$3f; bank $35 is empty)
+ m_section_free "FR_Data" ALIGN $10
+	m_GfxDataSimple gfx_fr_hud_icon
+	m_GfxDataSimple gfx_fr_door_icons
+.ends
+
 .BANK $42 SLOT 1
 .ORG 0
 

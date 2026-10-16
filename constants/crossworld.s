@@ -26,3 +26,6 @@
 ; FR: original Ages titlescreen, used when OPT_TITLE_COMBINED is off
 .define FR_GFXH_TITLE_ORIG		$bb
 .define FR_PALH_TITLE_ORIG		$cb
+
+; FR: BG palette of the icons above Vasu's doors
+.define FR_DOOR_ICON_PALETTE		$00

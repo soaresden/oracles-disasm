@@ -66,6 +66,7 @@ applyRoomSpecificTileChangesAfterGfxLoad:
 	.dw _roomTileChangesAfterLoad0d
 	.dw _roomTileChangesAfterLoad0e
 	.dw _roomTileChangesAfterLoad0f
+	.dw frRoomTileChangesVasuDoors
 
 @tileChangesGroupTable:
 	.dw @group0
@@ -94,6 +95,7 @@ applyRoomSpecificTileChangesAfterGfxLoad:
 ; $0d: Load mystery tree graphics (woods of winter)
 ; $0e: West of din's troupe: create wagon
 ; $0f: Maku tree entrance & one screen south: forbid digging up enemies
+; $10: FR: Vasu's shop (icons above the doors)
 
 @group0:
 	.db $98 $03
@@ -129,6 +131,7 @@ applyRoomSpecificTileChangesAfterGfxLoad:
 @group1:
 @group2:
 @group3:
+	.db $91 $10
 	.db $9c $04
 	.db $a6 $04
 	.db $b0 $04
@@ -733,5 +736,43 @@ _roomTileChangesAfterLoad04:
 	set 1,(hl)
 	ld a,TREE_GFXH_03
 	jp loadTreeGfx
+
+;;
+; FR: Vasu's shop: icons above the two doors, hourglass on the left (Ages) and sun
+; on the right (Seasons), same in both games. Tiles $3a-$3d are loaded with the
+; status bar graphics (gfxHeader20); the floor's attributes are kept.
+frRoomTileChangesVasuDoors:
+	ld a,(OPT_DOOR_ICONS)
+	or a
+	ret z
+.ifdef ROM_SEASONS
+	ld a,(wActiveGroup)
+	cp $03
+	ret nz
+.endif
+	ld a,($ff00+R_SVBK)
+	push af
+	ld a,:w3VramTiles
+	ld ($ff00+R_SVBK),a
+	ld hl,w3VramTiles+13*$20+5
+	ld (hl),$3a
+	inc l
+	ld (hl),$3b
+	ld l,<(w3VramTiles+13*$20+13)
+	ld (hl),$3c
+	inc l
+	ld (hl),$3d
+
+	; Attributes: vram bank 0 (where the icons are), palette FR_DOOR_ICON_PALETTE
+	ld hl,w3VramAttributes+13*$20+5
+	ld a,FR_DOOR_ICON_PALETTE
+	ldi (hl),a
+	ld (hl),a
+	ld l,<(w3VramAttributes+13*$20+13)
+	ldi (hl),a
+	ld (hl),a
+	pop af
+	ld ($ff00+R_SVBK),a
+	ret
 
 .ends

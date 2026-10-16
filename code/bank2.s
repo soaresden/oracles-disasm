@@ -2986,6 +2986,20 @@ _updateStatusBar:
 	ld ($ff00+R_SVBK),a
 	call loadStatusBarMap
 
+	; FR: icon of the current game (hourglass / sun), next to the rupees.
+	; Tile $3f is loaded with the HUD graphics (gfxHeader20).
+	ld a,(OPT_HUD_GAME_ICON)
+	or a
+	jr z,+
+	ld hl,w4StatusBarTileMap+11
+	ld a,(hl)
+	cp $3f
+	jr z,+
+	ld (hl),$3f
+	ld hl,wStatusBarNeedsRefresh
+	set 1,(hl)
++
+
 	; Check whether A and B items need refresh
 	ld a,(wStatusBarNeedsRefresh)
 	bit 0,a
