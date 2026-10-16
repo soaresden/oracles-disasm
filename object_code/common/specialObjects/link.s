@@ -5046,6 +5046,49 @@ checkLinkPushingAgainstBed:
 	cp $03
 	ret nz
 
+.ifdef ROM_AGES
+	; BALLADE: A tout contre le lit (à gauche de ses deux cases, ou juste en dessous) :
+	; « Dormir un peu ? » (INTERAC_MARINE $03, qui endort Link)
+	ld a,(wActiveRoom)
+	cp <ROOM_AGES_39e
+	jr nz,@notA
+	ld a,(wGameKeysJustPressed)
+	and BTN_A
+	jr z,@notA
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	ld a,(wActiveTilePos)
+	ld b,a
+	ld e,SpecialObject.direction
+	ld a,(de)
+	ld c,a
+	ld hl,@bedSpots
+@nextSpot:
+	ldi a,(hl)
+	or a
+	jr z,@notA
+	cp b
+	ldi a,(hl)
+	jr nz,@nextSpot
+	cp c
+	jr nz,@nextSpot
+	call getFreeInteractionSlot
+	ret nz
+	ld (hl),INTERAC_MARINE
+	inc l
+	ld (hl),$03
+	ret
+
+; Case de Link, et la direction où il regarde
+@bedSpots:
+	.db $17, DIR_RIGHT
+	.db $27, DIR_RIGHT
+	.db $38, DIR_UP
+	.db $00
+
+@notA:
+.endif
 	; Check link is in the room with the bed, and is next to it
 .ifdef ROM_AGES
 	ldbc <ROOM_AGES_39e, $17
@@ -5067,22 +5110,6 @@ checkLinkPushingAgainstBed:
 	cp l
 	ret nz
 
-.ifdef ROM_AGES
-	; BALLADE: A devant le lit : « Dormir un peu ? » (INTERAC_MARINE $03, qui endort Link)
-	ld a,(wGameKeysJustPressed)
-	and BTN_A
-	jr z,+
-	ld a,(wTextIsActive)
-	or a
-	ret nz
-	call getFreeInteractionSlot
-	ret nz
-	ld (hl),INTERAC_MARINE
-	inc l
-	ld (hl),$03
-	ret
-+
-.endif
 	call checkLinkPushingAgainstWall
 	ret z
 

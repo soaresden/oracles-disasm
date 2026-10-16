@@ -25,6 +25,11 @@ parentItemCode_harp:
 	ld a,$ff ~ DISABLE_LINK ~ DISABLE_ALL_BUT_INTERACTIONS
 	ld (wDisabledObjects),a
 
+.ifdef ROM_AGES
+	; BALLADE: la Lanterne des Songes (la harpe) ne joue pas d'air : elle s'allume tout de suite
+	call @getSelectedSongAddr
+	jp nz,@harp
+.endif
 	call parentItemLoadAnimationAndIncState
 
 	; Determine what sound to play
@@ -120,7 +125,8 @@ parentItemCode_harp:
 	; Only allow harp playing on overworld, non-maku tree screens
 	ld a,(wTilesetFlags)
 	and (TILESETFLAG_UNDERWATER|TILESETFLAG_SIDESCROLL|TILESETFLAG_LARGE_INDOORS|TILESETFLAG_DUNGEON|TILESETFLAG_INDOORS|TILESETFLAG_MAKU)
-	jr nz,@clearSelf
+	; BALLADE: dedans, « La Lanterne ne brille pas, ici. » (TX_5110)
+	jp nz,@tuneEchoesInVain
 
 	; BALLADE: la Lanterne des Songes. Dehors, n'importe quel air fait passer du Réel (groupe 1) au
 	; Songe (groupe 0) et retour : un fondu, puis l'arrivée du voyage dans le temps d'Ages (le
@@ -150,7 +156,8 @@ parentItemCode_harp:
 	ld (wcc50),a
 	ld a,$10 ; garde les drapeaux de la salle tels quels (voir warpTransition6@substate7)
 	ld (wLinkStateParameter),a
-	ld a,SND_TIMEWARP_INITIATED
+	; Le bruit d'une flamme qu'on allume
+	ld a,SND_LIGHTTORCH
 	call playSound
 	jp @clearSelf
 

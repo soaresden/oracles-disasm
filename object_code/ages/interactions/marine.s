@@ -45,6 +45,13 @@ interactionCodee7:
 	callab balladeMarine.switchDream
 	jp interactionDelete
 @sleep:
+	; Link se met contre l'oreiller (là où il pousse le lit), d'où qu'il ait parlé au lit
+	ld hl,w1Link.yh
+	ld (hl),$18
+	ld l,<w1Link.xh
+	ld (hl),$78
+	ld l,<w1Link.direction
+	ld (hl),DIR_RIGHT
 	ld a,LINK_STATE_SLEEPING
 	ld (wLinkForceState),a
 	jp interactionDelete
