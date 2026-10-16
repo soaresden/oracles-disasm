@@ -3627,22 +3627,18 @@ _initializeGame:
 	ret
 
 ;;
-; FR: wooden sword and shield of a linked game (see above)
+; FR: a linked game starts with the wooden sword (see
+; _initialFileVariables_linkedGame; the crossworld file starts as a standard
+; one), unless it came with the shared inventory. No shield: Impa gives it in
+; Ages, it's bought in Seasons.
 @giveLinkedGameStartingItems:
 	ld a,(wIsLinkedGame)
 	or a
 	ret z
 	ld a,TREASURE_SWORD
 	call checkTreasureObtained
-	jr c,+
-	ld a,TREASURE_SWORD
-	ld c,$01
-	call giveTreasure
-+
-	ld a,TREASURE_SHIELD
-	call checkTreasureObtained
 	ret c
-	ld a,TREASURE_SHIELD
+	ld a,TREASURE_SWORD
 	ld c,$01
 	jp giveTreasure
 

@@ -8043,6 +8043,8 @@ saveSeasonsTreasureDataForAges:
 	jr nz,--
 
 	; copy extra treasures
+	; FR: exactly (also when not obtained anymore: used keys, ores, potion...),
+	; not only the obtained ones, else they come back after two swaps
 	ld hl,crossworldExtraTreasuresTable
 	push hl
 --
@@ -8054,10 +8056,13 @@ saveSeasonsTreasureDataForAges:
 	push hl
 	ld hl,$c692-wFileStart+SEASONS_BACKUP
 	call checkFlag
-	jr z,--
 	ld hl,$c69a
 	ld a,b
+	jr z,+
 	call setFlag
+	jr --
++
+	call unsetFlag
 	jr --
 ++
 
@@ -8106,6 +8111,8 @@ saveAgesTreasureDataForSeasons:
 	jr nz,--
 
 	; copy extra treasures
+	; FR: exactly (also when not obtained anymore: used keys, ores, potion...),
+	; not only the obtained ones, else they come back after two swaps
 	ld hl,crossworldExtraTreasuresTable
 	push hl
 --
@@ -8117,10 +8124,13 @@ saveAgesTreasureDataForSeasons:
 	push hl
 	ld hl,$c69a-wFileStart+AGES_BACKUP
 	call checkFlag
-	jr z,--
 	ld hl,$c692
 	ld a,b
+	jr z,+
 	call setFlag
+	jr --
++
+	call unsetFlag
 	jr --
 ++
 
@@ -8313,6 +8323,7 @@ frHudBottomVblank:
 	inc a
 +
 	ld (hl),a
+	call frMoveStatusBarItemsDown
 	ld b,$00
 
 	ld a,(wGfxRegsFinal.LYC)
@@ -8521,6 +8532,33 @@ frHudWaveLine:
 	ld ($ff00+R_LYC),a
 	ld a,FRHUD_PHASE_WAVE
 	ld (wFrHudPhase),a
+	ret
+
+;;
+; FR: the A/B item sprites (wOam 0-3) may still be at the top, drawn before
+; the status bar went to the bottom (cutscenes don't redraw them): move them
+; down before the OAM gets copied.
+frMoveStatusBarItemsDown:
+	push hl
+	ld hl,wOam
+	ld c,$04
+@next:
+	ld a,(hl)
+	cp $10
+	jr nz,+
+	inc l
+	ld a,(hl)
+	dec l
+	cp $50
+	jr nc,+
+	ld (hl),$90
++
+	ld a,l
+	add $04
+	ld l,a
+	dec c
+	jr nz,@next
+	pop hl
 	ret
 
 ;;
