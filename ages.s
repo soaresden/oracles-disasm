@@ -16,6 +16,7 @@
 .include "include/musicMacros.s"
 
 .include {"{BUILD_DIR}/textDefines.s"}
+.include {"{BUILD_DIR}/textDefinesFr.s"} ; BALLADE: le texte français
 
 
 .BANK $00 SLOT 0
@@ -1348,3 +1349,7 @@ oamData_7249:
 
 ; HACK-BASE: Expanded tileset data
 .include {"{GAME_DATA_DIR}/expandedTilesets.s"}
+
+
+; BALLADE: le texte français (deuxième langue, banques $71 et suivantes ; voir code/textbox.s)
+.include {"{BUILD_DIR}/textDataFR.s"}

@@ -1000,9 +1000,18 @@ getTextAddress:
 	ldi a,(hl)
 	ld h,(hl)
 	ld l,a
+	; BALLADE: le texte français (langue 1) a son propre découpage
+	ld a,(wActiveLanguage)
+	or a
 	ld a,(wTextIndexH)
+	jr nz,@frenchSplit
 	cp TEXT_OFFSET_SPLIT_INDEX
 	jr c,+
+	jr @offset2
+@frenchSplit:
+	cp TEXT_OFFSET_SPLIT_INDEX_FR
+	jr c,+
+@offset2:
 ; Else, text is relative to TEXT_OFFSET_2
 	ld a,(wActiveLanguage)
 	add a
@@ -1036,8 +1045,9 @@ textOffset1Table:
 	.db :TEXT_OFFSET_1
 	.dw TEXT_OFFSET_1&$3fff
 	.db 0
-	.db :TEXT_OFFSET_1
-	.dw TEXT_OFFSET_1&$3fff
+	; BALLADE: langue 1 = français
+	.db :TEXT_OFFSET_1_FR
+	.dw TEXT_OFFSET_1_FR&$3fff
 	.db 0
 	.db :TEXT_OFFSET_1
 	.dw TEXT_OFFSET_1&$3fff
@@ -1056,8 +1066,9 @@ textOffset2Table:
 	.db :TEXT_OFFSET_2
 	.dw TEXT_OFFSET_2&$3fff
 	.db 0
-	.db :TEXT_OFFSET_2
-	.dw TEXT_OFFSET_2&$3fff
+	; BALLADE: langue 1 = français
+	.db :TEXT_OFFSET_2_FR
+	.dw TEXT_OFFSET_2_FR&$3fff
 	.db 0
 ; These seem to be corrupted. Only the first entry is used anyway, though.
 	.db :TEXT_OFFSET_2
@@ -1075,7 +1086,7 @@ textOffset2Table:
 
 textTableTable:
 	Pointer3Byte textTableENG
-	Pointer3Byte textTableENG
+	Pointer3Byte textTableFR ; BALLADE: langue 1 = français
 	Pointer3Byte textTableENG
 	Pointer3Byte textTableENG
 	Pointer3Byte textTableENG

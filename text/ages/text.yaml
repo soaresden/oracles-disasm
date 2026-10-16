@@ -111,24 +111,22 @@ groups:
   - name: TX_000e
     index: 0x0e
     text: |-
-      \pos(2)\slow()Le Veilleur dort
-      enfin. Il rêve
-      de sa femme, qui
-      lui apporte la
-      soupe...\stop
-      Tu as trouvé le
-      \col(1)premier couplet\col(0)
-      de la chanson de
-      Marine!\stop
-      \col(1)Marine\col(0): Tu
-      l'entends? Ce
-      n'est pas la
-      Ballade du
-      Poisson-Rêve...\stop
-      C'est la mienne.
-      Ma chanson à
-      moi!
-
+      \pos(2)\slow()The Keeper is
+      finally asleep.
+      He dreams of his
+      wife, bringing
+      him soup...\stop
+      You found the
+      \col(1)first verse\col(0) of
+      Marin's song!\stop
+      \col(1)Marin\col(0): Do you
+      hear it? It's
+      not the Ballad
+      of the Wind
+      Fish...\stop
+      It's mine.
+      My very own
+      song!
   - name: TX_000f
     index: 0x0f
     text: |-
@@ -221,9 +219,8 @@ groups:
   - name: TX_0016
     index: 0x16
     text: |-
-      Tu as trouvé un
-      \col(1)réceptacle de
-      cœur\col(0)!
+      You got a
+      \col(1)Heart Container\col(0)!
 
   - name: TX_0017
     index: 0x17
@@ -262,31 +259,28 @@ groups:
   - name: TX_001a
     index: 0x1a
     text: |-
-      Tu as trouvé une
-      \col(1)petite clé\col(0)!\stop
-      Elle ouvre une
-      porte ou un bloc
-      verrouillé de ce
-      donjon.
+      You found a
+      \col(1)Small Key\col(0)!\stop
+      Use it to open a
+      locked door or
+      block in this
+      dungeon.
 
   - name: TX_001b
     index: 0x1b
     text: |-
-      Tu as trouvé la
-      \col(1)clé du boss\col(0)!
+      You found the
+      \col(1)Boss Key\col(0)!
 
   - name: TX_001c
     index: 0x1c
     text: |-
-      Tu as retrouvé
-      ton \col(1)épée\col(0)!\stop
-      Garde \abtn ou \bbtn
-      enfoncé pour la
-      charger, puis
-      lâche pour une
-      attaque
-      tournoyante.
-
+      You got your
+      \col(1)sword\col(0) back!\stop
+      Hold \abtn or \bbtn
+      to charge it,
+      then let go for
+      a spin attack.
   - name: TX_001d
     index: 0x1d
     text: |-
@@ -920,13 +914,12 @@ groups:
   - name: TX_0071
     index: 0x71
     text: |-
-      Tu as trouvé la
-      \col(1)Lanterne des
-      Songes\col(0)!\stop
-      Sa lumière vient
-      du monde des
-      rêves...
-
+      You got the
+      \col(1)Lantern of
+      Dreams\col(0)!\stop
+      Its light comes
+      from the world
+      of dreams...
   - name: TX_0072
     index: 0x72
     text: |-
@@ -1960,19 +1953,15 @@ groups:
   - name: TX_0336
     index: 0x36
     text: |-
-      Sea of No
-      Return
-
+      Mist Island
   - name: TX_0337
     index: 0x37
     text: |-
-      Deku Forest
-
+      Port-Veille
   - name: TX_0338
     index: 0x38
     text: |-
-      Ambi's Palace
-
+      Lighthouse Cape
   - name: TX_0339
     index: 0x39
     text: |-
@@ -3957,11 +3946,10 @@ groups:
   - name: TX_0901
     index: 0x01
     text: |-
-      Eternal Spirit
-      It speaks across
-      time to the
-      heart!
-
+      First Verse
+      Marin's song,
+      starting to come
+      back.
   - name: TX_0902
     index: 0x02
     text: |-
@@ -4194,8 +4182,9 @@ groups:
     index: 0x23
     text: |-
       Wooden Sword
-      A hero's blade.
-
+      Fished out of
+      the sea by an
+      old fisherman.
   - name: TX_0924
     index: 0x24
     text: |-
@@ -4391,13 +4380,11 @@ groups:
   - name: TX_0941
     index: 0x41
     text: |-
-      Lanterne des
-      Songes
-      Dehors, sa
-      lumière ouvre
-      le chemin des
-      rêves.
-
+      Lantern of
+      Dreams
+      Outdoors, its
+      light opens the
+      way of dreams.
   - name: TX_0942
     index: 0x42
     text: |-
@@ -4619,15 +4606,13 @@ groups:
   - name: TX_0965
     index: 0x65
     text: |-
-      The current age
-      is the present.
-
+      You are in the
+      \col(1)Dream World\col(0).
   - name: TX_0966
     index: 0x66
     text: |-
-      The current age
-      is the past.
-
+      You are in the
+      real world.
   # CROSSITEMS: Text for Seasons items on the subscreen.
   - name: TX_09_MAGNETGLOVES
     index: auto
@@ -14290,23 +14275,20 @@ groups:
   - name: TX_2e1f
     index: 0x1f
     text: |-
-      « Baraque du
-      forain »\stop
-      FERMÉ!
-      Je reviens vite,
-      avec mes pelles
-      et mes monstres.
-
+      "Showman's
+      Stall"\stop
+      CLOSED!
+      Back soon, with
+      my shovels and
+      my monsters.
   - name: TX_2e20
     index: 0x20
     text: |-
-      « Ne pas
-      déranger. »\stop
-      Derrière la
-      porte, on entend
-      quelqu'un
-      tourner en rond.
-
+      "Do not
+      disturb."\stop
+      Behind the door,
+      you hear someone
+      pacing around.
 
 - group: 0x2f
   data:
@@ -20613,9 +20595,9 @@ groups:
   - name: TX_5110
     index: 0x10
     text: |-
-      Your \col(1)tune\col(0) echoes
-      in vain.
-
+      The \col(1)Lantern\col(0)
+      won't shine
+      here.
   - name: TX_5111
     index: 0x11
     text: |-
@@ -22070,647 +22052,638 @@ groups:
       I'd actually get
       get to you!
 
-# ===== Gulls of Life (story/textes.yaml) =====
+# ===== Gulls of Life (story/textes.en.yaml) =====
 - group: 0x5a
   data:
 
-  # Prologue (film d'ouverture)
+  # Prologue (opening film)
   - name: TX_5a00
     index: 0x00
     text: |-
-      Le Poisson-Rêve
-      s'était éveillé.
-      L'île Cocolint
-      avait disparu
-      dans l'écume.\stop
-      Accroché à une
-      épave, le héros
-      dériva de longs
-      jours...\stop
-      ...jusqu'à un
-      archipel où plus
-      personne ne
-      rêvait.
+      The Wind Fish
+      had awoken.
+      Koholint Island
+      had vanished
+      into the foam.\stop
+      Clinging to a
+      wreck, the hero
+      drifted for long
+      days...\stop
+      ...until he
+      reached islands
+      where no one
+      dreamed anymore.
 
-  # La mouette se pose à côté de Link
+  # The seagull lands next to Link
   - name: TX_5a01
     index: 0x01
     text: |-
-      Hé!
-      Réveille-toi,
-      gros dormeur!\stop
+      Hey!
+      Wake up,
+      sleepyhead!\stop
       ...\stop
-      Tu ne me
-      reconnais pas?\stop
-      Pourtant, je
-      t'ai déjà sorti
-      de l'eau une
-      fois.\stop
-      Ça devient une
-      habitude!
+      Don't you
+      recognize me?\stop
+      I've already
+      pulled you out
+      of the water
+      once, you know.\stop
+      It's becoming a
+      habit!
 
-  # Link est debout
+  # Link stands up
   - name: TX_5a02
     index: 0x02
     text: |-
-      C'est moi,
-      \col(1)Marine\col(0)!\stop
-      Tu te souviens?
-      Sur la plage, je
-      t'avais dit que
-      si j'étais une
-      mouette, je
-      volerais au-delà
-      de la mer...\stop
-      Avant de se
-      réveiller, le
-      Poisson-Rêve a
-      entendu mon vœu.\stop
-      Il m'a dit:
-      "Ce qui est rêvé
-      assez fort ne
-      disparaît jamais
-      vraiment."\stop
-      Et voilà: vœu
-      exaucé, mot pour
-      mot!\stop
-      J'aurais peut-
-      être dû préciser
-      que je voulais
-      garder mes
-      mains...\stop
-      Mais je ne vais
-      pas me plaindre!\stop
-      Tu es content
-      de me revoir?
-        \opt()Oui \opt()Carrément!
+      It's me,
+      \col(1)Marin\col(0)!\stop
+      Remember? On the
+      beach, I told
+      you that if I
+      were a seagull,
+      I'd fly beyond
+      the sea...\stop
+      Before waking
+      up, the Wind
+      Fish heard my
+      wish.\stop
+      He told me:
+      "What is dreamed
+      strongly enough
+      never truly
+      disappears."\stop
+      And there you
+      go: wish granted
+      word for word!\stop
+      Maybe I should
+      have said I
+      wanted to keep
+      my hands...\stop
+      But I won't
+      complain!\stop
+      Are you happy
+      to see me?
+        \opt()Yes \opt()Totally!
 
   - name: TX_5a03
     index: 0x03
     text: |-
-      Juste "oui"?\stop
-      Toujours aussi
-      bavard, toi.\stop
-      Ça m'avait
-      manqué,
-      figure-toi.\stop
-      Allez, viens.
-      Il y a quelque
-      chose de bizarre
-      sur cette île...
+      Just "yes"?\stop
+      Chatty as ever,
+      aren't you?\stop
+      I missed that,
+      you know.\stop
+      Come on.
+      Something is
+      strange about
+      this island...
 
   - name: TX_5a04
     index: 0x04
     text: |-
-      Hi hi!
-      Moi aussi,
-      tu sais.\stop
-      Allez, viens.
-      Il y a quelque
-      chose de bizarre
-      sur cette île...
+      Hee hee!
+      Me too,
+      you know.\stop
+      Come on.
+      Something is
+      strange about
+      this island...
 
-  # Juste avant : où sont passés tous les objets de Link's Awakening ?
+  # Where did all the items of Link's Awakening go?
   - name: TX_5a15
     index: 0x15
     text: |-
-      Attends...
-      Il est où, ton
-      barda?\stop
-      Ta plume, ton
-      bracelet, tes
-      bottes, tes
-      palmes...\stop
-      Le grappin, le
-      boomerang, le
-      bouclier miroir,
-      le bâton de
-      feu...\stop
-      L'arc, les
-      bombes, et même
-      la poudre
-      magique?!\stop
-      Tu as tout perdu
-      en mer?!\stop
+      Wait...
+      Where's all
+      your gear?\stop
+      Your feather,
+      your bracelet,
+      your boots, your
+      flippers...\stop
+      The hookshot,
+      the boomerang,
+      the mirror
+      shield, the
+      fire rod...\stop
+      The bow, the
+      bombs, and even
+      the magic
+      powder?!\stop
+      You lost it all
+      at sea?!\stop
       ...\stop
-      Bon. Tu m'as
-      moi, c'est déjà
-      pas mal, non?
+      Well. You've got
+      me, that's not
+      bad, right?
 
-  # Elle a froid : elle va se mettre dans la tunique de Link
+  # She's cold: she slips into Link's tunic
   - name: TX_5a05
     index: 0x05
     text: |-
-      Tu sens ça,
+      Do you feel it,
       \Link?
-      Cet archipel est
-      trop calme.\stop
-      Brr! Et le vent
-      de la mer est
-      glacé...\stop
-      Bon. Je me mets
-      au chaud dans ta
-      tunique!\stop
-      Et pas de
-      commentaire!
+      These islands
+      are too quiet.\stop
+      Brr! And the sea
+      wind is
+      freezing...\stop
+      Right. I'm
+      getting warm in
+      your tunic!\stop
+      And no comments!
 
-  # Depuis la tunique (elle y passera toute l'aventure)
+  # From the tunic (where she spends the whole adventure)
   - name: TX_5a06
     index: 0x06
     text: |-
-      Mmh... Ça sent
-      le sel et
-      l'aventure,
-      là-dedans.\stop
-      Allons voir s'il
-      y a quelqu'un.\stop
-      Et ne casse pas
-      toutes leurs
-      jarres, cette
-      fois!\stop
-      Si tu veux me
-      parler, garde
-      \col(1)SELECT\col(0) enfoncé.\stop
-      Pour ta carte,
-      un petit appui
-      suffit.
+      Mmh... It smells
+      of salt and
+      adventure in
+      here.\stop
+      Let's see if
+      anyone's around.\stop
+      And don't break
+      all their pots
+      this time!\stop
+      If you want to
+      talk to me, hold
+      \col(1)SELECT\col(0).\stop
+      For your map,
+      just tap it.
 
   # ============================================================================
-  # Select gardé enfoncé : Marine parle depuis la tunique (code/ages/balladeMarine.s)
+  # SELECT held: Marin talks from the tunic (code/ages/balladeMarine.s)
   # ============================================================================
 
-  # Sur la plage du réveil
+  # On the beach where Link woke up
   - name: TX_5a07
     index: 0x07
     text: |-
-      Personne sur la
-      plage...\stop
-      Les gens doivent
-      vivre plus loin.
-      Allons voir!
+      Nobody on the
+      beach...\stop
+      People must live
+      further in.
+      Let's go see!
 
-  # Port-Veille, devant l'auberge (1:9a)
+  # Port-Veille, in front of the inn (1:9a)
   - name: TX_5a08
     index: 0x08
     text: |-
-      Une auberge!\stop
-      Ils doivent
-      avoir des lits,
-      non? Un lit,
-      c'est fait pour
-      dormir...\stop
-      Et toi, quand tu
-      dors, tu rêves.
-      C'est ton vrai
-      talent, ça.
+      An inn!\stop
+      They must have
+      beds, right? A
+      bed is for
+      sleeping...\stop
+      And when you
+      sleep, you
+      dream. That's
+      your real
+      talent.
 
-  # La place de Port-Veille (1:9b)
+  # The square of Port-Veille (1:9b)
   - name: TX_5a09
     index: 0x09
     text: |-
-      Ils ont tous des
-      cernes jusqu'au
-      menton...\stop
-      Personne ne dort
-      sur cette île?
-      Brr. Ça me donne
-      des frissons.
+      They all have
+      bags under their
+      eyes...\stop
+      Doesn't anyone
+      sleep on this
+      island? Brr. It
+      gives me chills.
 
-  # La plage est (1:9c)
+  # The east beach (1:9c)
   - name: TX_5a0a
     index: 0x0a
     text: |-
-      Des enfants qui
-      ne jouent pas...
-      Ce n'est pas
+      Children who
+      don't play...
+      That's not
       normal.\stop
-      Sur Cocolint, on
-      passait nos
-      journées à
-      faire semblant!
+      On Koholint, we
+      spent our days
+      pretending!
 
-  # Le port de pêche (1:ab)
+  # The fishing port (1:ab)
   - name: TX_5a0b
     index: 0x0b
     text: |-
-      Un phare...
-      Tu l'as vu, au
-      nord? Il est
-      tout éteint.\stop
-      Un phare éteint,
-      c'est comme une
-      chanson qu'on
-      ne chante plus.
+      A lighthouse...
+      Did you see it,
+      up north? It's
+      completely dark.\stop
+      A dark
+      lighthouse is
+      like a song no
+      one sings
+      anymore.
 
-  # Le sentier au pont cassé (1:8a)
+  # The path with the broken bridge (1:8a)
   - name: TX_5a0c
     index: 0x0c
     text: |-
-      Le pont est
-      cassé...\stop
-      Si seulement on
-      pouvait passer
-      en rêve!\stop
-      ...Attends. Et
-      si on pouvait?
+      The bridge is
+      broken...\stop
+      If only we could
+      cross it in a
+      dream!\stop
+      ...Wait. What if
+      we could?
 
-  # L'auberge, dedans (3:9e)
+  # Inside the inn (3:9e)
   - name: TX_5a0d
     index: 0x0d
     text: |-
-      Le lit, là-bas!
-      Pousse-le un
-      moment pour te
-      coucher.\stop
-      Moi, je ne bouge
-      pas d'ici. Il
-      fait tellement
-      bon, dans ta
-      tunique!
+      The bed, over
+      there! Stand in
+      front of it and
+      press \col(1)A\col(0) to
+      lie down.\stop
+      Me, I'm not
+      moving. It's so
+      cozy in your
+      tunic!
 
-  # Partout ailleurs : une réplique au hasard
+  # Anywhere else: a random line
   - name: TX_5a10
     index: 0x10
     text: |-
-      Oui? Tu as
-      besoin de moi?\stop
-      Je faisais une
-      petite sieste...
+      Yes? Do you
+      need me?\stop
+      I was taking a
+      little nap...
 
   - name: TX_5a11
     index: 0x11
     text: |-
-      Hé! Arrête de
-      me secouer!\stop
-      Je suis très
-      bien installée,
-      moi!
+      Hey! Stop
+      shaking me!\stop
+      I'm very
+      comfortable
+      in here!
 
   - name: TX_5a12
     index: 0x12
     text: |-
-      Tu sais que tu
-      ronfles, quand
-      tu dors?\stop
-      Comme mon père.\stop
-      ...Ça me fait
-      un peu de bien,
-      en fait.
+      Did you know you
+      snore when you
+      sleep?\stop
+      Just like my
+      dad.\stop
+      ...It actually
+      feels kind of
+      nice.
 
   - name: TX_5a13
     index: 0x13
     text: |-
-      Perdu? Un petit
-      appui sur
-      \col(1)SELECT\col(0): la
-      carte.\stop
-      Et pour moi,
-      garde-le
-      enfoncé!
+      Lost? Tap
+      \col(1)SELECT\col(0) for the
+      map.\stop
+      And for me,
+      hold it down!
 
   # ============================================================================
-  # Les habitants de Port-Veille (INTERAC_BALLADE_NPC, scripts/ages/ballade.s)
+  # The people of Port-Veille (INTERAC_BALLADE_NPC, scripts/ages/ballade.s)
   # ============================================================================
 
-  # L'aubergiste (3:9e)
+  # The innkeeper (3:9e)
   - name: TX_5a20
     index: 0x20
     text: |-
-      Bienvenue à
-      l'auberge de la
-      Brume...\stop
-      Une chambre?
-      À quoi bon...\stop
-      Personne ne dort
-      plus, ici. Pas
-      depuis que le
-      phare s'est
-      éteint.\stop
-      On ferme les
-      yeux, et...
-      rien. Le noir.
-      Comme si on
-      avait vidé
-      nos têtes.\stop
-      Mais toi, tu as
-      l'air épuisé.
-      Le lit est au
-      fond. Gratuit:
-      plus personne
-      ne s'en sert.
+      Welcome to the
+      Mist Inn...\stop
+      A room?
+      What for...\stop
+      Nobody sleeps
+      here anymore.
+      Not since the
+      lighthouse went
+      dark.\stop
+      We close our
+      eyes, and...
+      nothing. Black.
+      As if our heads
+      were emptied.\stop
+      But you look
+      exhausted. The
+      bed is in the
+      back. Free:
+      no one uses it
+      anymore.
 
-  # Le vieux pêcheur (1:ab)
+  # The old fisherman (1:ab)
   - name: TX_5a21
     index: 0x21
     text: |-
-      Avant, la
-      lumière du phare
-      guidait nos
-      bateaux...\stop
-      ...et elle
-      berçait nos
-      nuits.\stop
-      Depuis qu'elle
-      s'est éteinte,
-      la brume ne
-      quitte plus
-      l'île.\stop
-      Et le sommeil
-      non plus.\stop
-      Le phare est au
-      nord, au bout
-      des falaises.
-      Mais le pont du
-      sentier s'est
-      écroulé.
+      The lighthouse
+      light used to
+      guide our
+      boats...\stop
+      ...and it
+      rocked our
+      nights.\stop
+      Since it went
+      out, the mist
+      never leaves
+      the island.\stop
+      And neither does
+      sleeplessness.\stop
+      The lighthouse
+      is up north,
+      past the cliffs.
+      But the path's
+      bridge has
+      collapsed.
 
-  # Un garçon (1:9c)
+  # A boy (1:9c)
   - name: TX_5a22
     index: 0x22
     text: |-
-      Jouer? C'est
-      quoi, jouer?\stop
-      Maman dit
-      qu'avant, on
-      faisait semblant
-      d'être des
-      chevaliers.\stop
-      Moi, je n'arrive
-      plus à faire
-      semblant.
+      Play? What's
+      playing?\stop
+      Mom says we used
+      to pretend to
+      be knights.\stop
+      Me, I can't
+      pretend anymore.
 
-  # Un autre enfant (1:9c)
+  # Another child (1:9c)
   - name: TX_5a23
     index: 0x23
     text: |-
-      Je voulais faire
-      un château de
-      sable.\stop
-      Mais je ne sais
-      plus à quoi ça
-      ressemble, un
-      château...\stop
-      Il faudrait que
-      j'en rêve.
+      I wanted to
+      build a sand
+      castle.\stop
+      But I don't
+      remember what a
+      castle looks
+      like...\stop
+      I'd have to
+      dream of one.
 
-  # La dame insomniaque (1:9b)
+  # The sleepless lady (1:9b)
   - name: TX_5a24
     index: 0x24
     text: |-
-      Trois semaines
-      que je n'ai pas
-      fermé l'œil.\stop
-      J'ai compté les
-      étoiles, les
-      vagues, les
-      grains de
-      sable...\stop
-      Il m'en manquait
-      toujours un.
+      Three weeks
+      without a wink
+      of sleep.\stop
+      I counted the
+      stars, the
+      waves, the
+      grains of
+      sand...\stop
+      I was always
+      one short.
 
-  # Le vieux qui compte les moutons (1:9b)
+  # The old man counting sheep (1:9b)
   - name: TX_5a25
     index: 0x25
     text: |-
-      Cent quarante-
-      deux moutons...
-      Cent quarante-
-      trois...\stop
-      Ah! Tu m'as fait
-      perdre le
-      compte!\stop
-      Et il n'y a même
-      pas de moutons,
-      sur cette île!\stop
-      \col(1)Marine\col(0):
-      Pff! Hi hi!
+      One hundred and
+      forty-two
+      sheep...
+      One hundred and
+      forty-three...\stop
+      Ah! You made me
+      lose count!\stop
+      And there aren't
+      even any sheep
+      on this island!\stop
+      \col(1)Marin\col(0):
+      Pfft! Hee hee!
 
-  # L'ado qui rêve d'être marin (1:9a)
+  # The teen who dreams of being a sailor (1:9a)
   - name: TX_5a26
     index: 0x26
     text: |-
-      On dit qu'en
-      haut du phare
-      brûlait une
-      lanterne qui
-      faisait rêver
-      tout l'archipel.\stop
-      Moi, je voudrais
-      devenir marin.\stop
-      Mais pour ça,
-      il faudrait
-      d'abord que j'en
-      rêve, non?
+      They say a
+      lantern once
+      burned atop the
+      lighthouse, and
+      it made all the
+      islands dream.\stop
+      I want to become
+      a sailor.\stop
+      But for that, I
+      would have to
+      dream of it
+      first, right?
 
   # ============================================================================
-  # Le Songe : Marine humaine (auberge du Songe, 2:9e)
+  # The Dream World: human Marin (the dream inn, 2:9e)
   # ============================================================================
 
-  # La première rencontre : la scène des mains
+  # The first meeting: the hands scene
   - name: TX_5a27
     index: 0x27
     text: |-
       ...\stop
       Oh.\stop
       Oh!\stop
-      J'ai des mains!
-      Et des pieds!\stop
-      J'avais oublié
-      comme c'est nul
-      pour
-      l'équilibre,
-      des pieds!\stop
+      I have hands!
+      And feet!\stop
+      I forgot how
+      bad feet are
+      for balance!\stop
       \Link!
 
-  # Le câlin des retrouvailles
+  # The reunion hug
   - name: TX_5a2c
     index: 0x2c
     text: |-
       ...\stop
-      Je suis là.
-      Je suis vivante.
-      J'ai un corps!\stop
-      Je peux te
-      serrer dans mes
-      bras... Enfin!\stop
-      Ne bouge pas.
-      Encore un peu.\stop
+      I'm here.
+      I'm alive.
+      I have a body!\stop
+      I can hold you
+      in my arms...
+      At last!\stop
+      Don't move.
+      Just a little
+      longer.\stop
       ...\stop
-      Bon! Pardon.
-      C'est que...
-      j'ai eu si peur
-      de disparaître
-      pour toujours.
+      Okay! Sorry.
+      It's just...
+      I was so scared
+      of disappearing
+      forever.
 
-  # Ce qu'elle n'a jamais osé demander
+  # What she never dared to ask
   - name: TX_5a2d
     index: 0x2d
     text: |-
-      Tu sais... sur
-      Cocolint, je
-      n'ai jamais su
-      si tu m'avais
-      vraiment vue.\stop
-      Ou si j'étais
-      juste la fille
-      qui chante sur
-      la plage.
-        \opt()Je t'ai vue
+      You know... on
+      Koholint, I
+      never knew if
+      you really saw
+      me.\stop
+      Or if I was
+      just the girl
+      singing on the
+      beach.
+        \opt()I saw you
         \opt()...
 
   - name: TX_5a28
     index: 0x28
     text: |-
-      ...Idiot.\stop
-      Je vais pleurer,
-      et dans un rêve,
-      ça mouille quand
-      même.
+      ...Dummy.\stop
+      I'm going to
+      cry, and even
+      in a dream, it's
+      still wet.
 
   - name: TX_5a29
     index: 0x29
     text: |-
-      Toujours aussi
-      bavard.\stop
-      Ce n'est pas
-      grave. J'ai
-      compris quand
-      même.
+      Chatty as
+      ever.\stop
+      It's okay. I
+      understood
+      anyway.
 
-  # Ensuite, quand on lui parle
+  # Afterwards, when you talk to her
   - name: TX_5a2a
     index: 0x2a
     text: |-
-      Ici, c'est le
-      \col(1)Songe\col(0): le
-      monde tel qu'on
-      le rêve.\stop
-      Je ne peux être
-      moi-même que
-      quand tu dors.
-      Alors ne te
-      couche pas trop
-      tard, d'accord?\stop
-      Le pont cassé du
-      sentier... Ici,
-      il doit être
-      entier!\stop
-      De l'autre côté,
-      garde \col(1)SELECT\col(0)
-      enfoncé: je te
-      réveillerai.
+      This is the
+      \col(1)Dream World\col(0):
+      the world as we
+      dream it.\stop
+      I can only be
+      myself when you
+      sleep. So don't
+      stay up too
+      late, okay?\stop
+      The broken
+      bridge on the
+      path... Here, it
+      must be whole!\stop
+      On the other
+      side, hold
+      \col(1)SELECT\col(0): I'll
+      wake you up.
 
-  # À l'auberge, A devant le lit
+  # At the inn, A in front of the bed
   - name: TX_5a16
     index: 0x16
     text: |-
-      Ce lit a l'air
-      bien douillet...
-      Dormir un peu?
-        \opt()Oui \opt()Non
+      This bed looks
+      really cozy...
+      Take a nap?
+        \opt()Yes \opt()No
 
-  # Dans le Songe, Select : se réveiller ?
+  # In the Dream World, SELECT: wake up?
   - name: TX_5a14
     index: 0x14
     text: |-
-      Tu veux te
-      réveiller?
-        \opt()Oui \opt()Non
+      Do you want to
+      wake up?
+        \opt()Yes \opt()No
 
   # ============================================================================
-  # Le vieux pêcheur rend son épée à Link (la 1re fois qu'on lui parle)
+  # The old fisherman gives Link his sword back (the first time you talk to him)
   # ============================================================================
   - name: TX_5a2b
     index: 0x2b
     text: |-
-      Hé, toi! C'est
-      bien toi, le
-      naufragé?\stop
-      J'ai repêché ça
-      hier, dans mes
-      filets.\stop
-      Une épée! Elle
-      doit être à toi.\stop
-      Le reste de ton
-      matos? Oh, j'ai
-      bien vu des
-      trucs flotter,
-      au loin...\stop
-      Mais ramer
-      jusque-là?
-      Flemme!\stop
-      Hé hé! Tu vas
-      tout recommencer
-      à zéro, mon
-      gars!\stop
-      Prends-la. Le
-      phare, au nord,
-      n'est plus sûr
-      depuis qu'il
-      s'est éteint.
+      Hey, you! You're
+      the castaway,
+      right?\stop
+      I fished this
+      out yesterday,
+      in my nets.\stop
+      A sword! It must
+      be yours.\stop
+      The rest of your
+      stuff? Oh, I saw
+      things floating,
+      far out...\stop
+      But row all the
+      way out there?
+      Too lazy!\stop
+      Heh heh! You'll
+      have to start
+      from scratch,
+      pal!\stop
+      Take it. The
+      lighthouse up
+      north isn't safe
+      since it went
+      dark.
 
-  # Juste après : Marine, depuis la tunique, sur l'épée retrouvée
+  # Right after: Marin, from the tunic, about the sword
   - name: TX_5a2e
     index: 0x2e
     text: |-
-      \col(1)Marine\col(0):
-      Attends... Ton
-      épée, ce n'était
-      pas une épée de
-      niveau 3?\stop
-      Là, c'est écrit
-      niveau 1!\stop
-      Le sel de la mer
-      l'a rouillée?
-      Ou alors tu
-      l'as mal
-      rangée...\stop
-      Pas de sac à
-      dos, voilà le
-      problème!
+      \col(1)Marin\col(0):
+      Wait... Wasn't
+      your sword a
+      level 3 sword?\stop
+      This says
+      level 1!\stop
+      Did the sea salt
+      rust it? Or did
+      you pack it
+      badly...\stop
+      No backpack,
+      that's the
+      problem!
 
   # ============================================================================
-  # Le Phare Éteint
+  # The Dark Lighthouse
   # ============================================================================
 
-  # Marine, en entrant dans le phare (Select)
+  # Marin, entering the lighthouse (SELECT)
   - name: TX_5a0e
     index: 0x0e
     text: |-
-      Brr... Il fait
-      froid, là-
-      dedans.\stop
-      Le phare devrait
-      briller tout là-
-      haut. On monte?
+      Brr... It's cold
+      in here.\stop
+      The lighthouse
+      should shine all
+      the way up
+      there. Shall we
+      climb?
 
   # ============================================================================
-  # Après le Phare : sur fond noir, Marine parle depuis la tunique, puis « À suivre »
+  # After the lighthouse: on a black screen, Marin talks, then "To be continued"
   # ============================================================================
   - name: TX_5a30
     index: 0x30
     text: |-
-      \Link... Tu as
-      vu? Le Veilleur
-      dort enfin.\stop
-      Ce soir, tout
-      Port-Veille va
-      rêver.\stop
-      Mais d'autres
-      îles ont perdu
-      leurs rêves...
-      Je le sens.\stop
-      Le vent me le
-      dit.\stop
-      On ira, hein?
-      Ensemble.
+      \Link... Did you
+      see? The Keeper
+      is finally
+      asleep.\stop
+      Tonight, all of
+      Port-Veille will
+      dream.\stop
+      But other
+      islands have
+      lost their
+      dreams... I can
+      feel it.\stop
+      The wind tells
+      me so.\stop
+      We'll go, right?
+      Together.
 
   - name: TX_5a31
     index: 0x31
     text: |-
-      
-         À suivre...
+
+       To be continued
+
+  # The language choice, at the start of a new game (the same in both files)
+  - name: TX_5a17
+    index: 0x17
+    text: |-
+         \opt()Français
+         \opt()English
 
 # ==============================================================================
-# Textes d'Ages remplacés (même nom) : les objets qu'on trouve parlent français
+# Ages texts replaced (same name)
 # ==============================================================================

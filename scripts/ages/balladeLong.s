@@ -12,6 +12,7 @@
 marineBeachScript:
 	jumpifroomflagset $40, @alreadySeen
 
+
 	; Link passe dans l'état de cinématique (LINK_STATE_08), qui prend ensuite l'animation
 	; écrite dans wcc50 : il reste allongé tant que wDisabledObjects n'est pas nul. On ne
 	; désactive que les ennemis (bit 2) : désactiver Link l'empêcherait de changer d'état.
@@ -23,6 +24,17 @@ marineBeachScript:
 	wait 2
 	writememory wcc50, LINK_ANIM_MODE_COLLAPSED
 	wait 90
+
+	; La langue du jeu (gardée dans la sauvegarde) : 0 = anglais, 1 = français. Link est
+	; allongé sur le sable ; Marine arrive juste après.
+	showtext TX_5a17
+	jumpiftextoptioneq $00, @french
+	writememory wActiveLanguage, $00
+	scriptjump @languageChosen
+@french:
+	writememory wActiveLanguage, $01
+@languageChosen:
+	wait 30
 
 	; Elle descend du ciel en diagonale, puis plane jusqu'au sable, à droite de Link
 	setanimation $02
