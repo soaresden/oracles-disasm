@@ -52,6 +52,9 @@ chestGroup3Data:
 	.db $ff
 
 chestGroup4Data:
+	; BALLADE: le Phare Éteint : la clé du boss, en haut de la tour (le coffre apparaît quand
+	; les 3 torches sont allumées)
+	m_ChestData $57, $17, TREASURE_OBJECT_BOSS_KEY_03
 	m_ChestData $57, $08, TREASURE_OBJECT_SMALL_KEY_03
 	; BALLADE: le Phare Éteint : la Lanterne des Songes (la harpe d'Ages)
 	m_ChestData $57, $15, TREASURE_OBJECT_HARP_02

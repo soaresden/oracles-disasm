@@ -21,6 +21,20 @@ marineToBeContinuedScript:
 marineBedScript:
 	loadscript balladeScripts.marineBedScript
 
+; INTERAC_MARINE subid $04 : salle du boss du Phare. Jack (la citrouille) menace les héros, Marine
+; lui répond (une seule fois, tant que Jack n'est pas battu ; les ennemis attendent la fin)
+marineJackScript:
+	stopifroomflag80set
+	stopifroomflag40set
+	orroomflag $40
+	setdisabledobjectsto91
+	wait 40
+	showtext TX_5a34
+	wait 20
+	showtext TX_5a35
+	enableallobjects
+	scriptend
+
 ; INTERAC_MARINE subid $01 : dans le Songe, Select -> « Tu veux te réveiller ? »
 ; (le code de l'interaction fait le réveil quand var37 passe à 1)
 marineWakeScript:

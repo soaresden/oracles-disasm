@@ -31,8 +31,8 @@ dungeonDataTable:
 dungeonData00:
 	m_DungeonData >wGroup4RoomFlags, $04, dungeon00Layout, $01, $03, $00, $01, $00
 dungeonData01:
-	; BALLADE: le Phare Éteint, sur 2 étages (rez-de-chaussée et sommet)
-	m_DungeonData >wGroup4RoomFlags, $24, dungeon01LayoutPhare, $02, $03, $03, $00, $00
+	; BALLADE: le Phare Éteint, sur un seul étage (tout en hauteur)
+	m_DungeonData >wGroup4RoomFlags, $24, dungeon01LayoutPhare, $01, $03, $01, $00, $00
 dungeonData02:
 	m_DungeonData >wGroup4RoomFlags, $46, dungeon02Layout, $02, $02, $01, $00, $00
 dungeonData03:

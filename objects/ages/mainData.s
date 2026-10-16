@@ -2622,7 +2622,6 @@ group4Map11ObjectData:
 	obj_Pointer group4Map12EnemyObjectData
 	obj_End
 
-group4Map13ObjectData:
 	obj_Interaction $1e $08 $07 $00
 	obj_Interaction $1e $0b $70 $00
 	obj_Interaction $20 $03 $58 $78
@@ -2636,7 +2635,6 @@ group4Map13ObjectData:
 	obj_Part $09 $00 $1d
 	obj_End
 
-group4Map16ObjectData:
 	obj_Interaction $20 $00 $18 $78
 	obj_Interaction $20 $05 $00 $00
 	obj_Interaction $1e $06 $a7 $00
@@ -2644,11 +2642,9 @@ group4Map16ObjectData:
 	obj_Part $09 $01 $2c
 	obj_End
 
-group4Map17ObjectData:
 	obj_Pointer group4Map17EnemyObjectData
 	obj_End
 
-group4Map18ObjectData:
 	obj_Interaction $1e $08 $07 $00
 	obj_Interaction $1e $0b $50 $00
 	obj_Interaction $20 $02 $58 $78
@@ -2656,11 +2652,9 @@ group4Map18ObjectData:
 	obj_BeforeEvent group4Map18BeforeEventObjectData
 	obj_End
 
-group4Map19ObjectData:
 	obj_Pointer group4Map19EnemyObjectData
 	obj_End
 
-group4Map1aObjectData:
 	obj_Pointer group4Map1aEnemyObjectData
 	obj_End
 
@@ -2668,6 +2662,7 @@ group4Map1aObjectData:
 	obj_Pointer group4Map1bEnemyObjectData
 	obj_End
 
+group4Map1cObjectData:
 	obj_Interaction $20 $00 $58 $98
 	obj_Part $09 $00 $55
 	obj_Pointer group4Map1cEnemyObjectData
@@ -4944,17 +4939,42 @@ group3Map9eObjectData:
 group4Map12ObjectData:
 	obj_RandomEnemy $40 ENEMY_GHINI $00
 	obj_End
+group4Map13ObjectData:
+	obj_Interaction $1e $08 $07 $00
+	obj_Interaction $1e $0a $a7 $00
+	obj_Interaction $20 $03 $58 $78
+	obj_Interaction INTERAC_MARINE $04 $58 $78
+	obj_BeforeEvent group4Map13BeforeEventObjectData
+	obj_End
 group4Map14ObjectData:
-	obj_RandomEnemy $40 ENEMY_KEESE $00
+	obj_RandomEnemy $30 ENEMY_KEESE $00
 	obj_End
 group4Map15ObjectData:
+	obj_SpecificEnemyA $00 ENEMY_STALFOS $00 $38 $58
+	obj_SpecificEnemyA     ENEMY_STALFOS $00 $78 $98
+	obj_End
+group4Map16ObjectData:
+	obj_Part $08 $00 $00
+	obj_Interaction $1e $14 $07 $00
+	obj_RandomEnemy $20 ENEMY_KEESE $00
+	obj_End
+group4Map17ObjectData:
+	obj_Part $08 $00 $00
+	obj_Interaction $24 $02 $03 $01
+	obj_Interaction $20 $00 $58 $78
+	obj_End
+group4Map18ObjectData:
+	obj_Interaction $1e $08 $07 $00
+	obj_Interaction $1e $0a $a7 $00
+	obj_Interaction $20 $02 $58 $78
+	obj_BeforeEvent group4Map18BeforeEventObjectData
+	obj_End
+group4Map19ObjectData:
+	obj_End
+group4Map1aObjectData:
 	obj_End
 group4Map1bObjectData:
 	obj_RandomEnemy $60 ENEMY_ZOL $00
-	obj_End
-group4Map1cObjectData:
-	obj_SpecificEnemyA $00 ENEMY_STALFOS $00 $38 $58
-	obj_SpecificEnemyA     ENEMY_STALFOS $00 $78 $58
 	obj_End
 group4Map24ObjectData:
 	; « Niveau 1 - Phare Éteint » en entrant (INTERAC_DUNGEON_STUFF $00, texte TX_0201)

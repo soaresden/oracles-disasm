@@ -122,6 +122,20 @@ parentItemCode_harp:
 .ifdef ROM_SEASONS
 	jr @clearSelf
 .else
+	; BALLADE: dans un donjon, la Lanterne pose une petite flamme devant Link (une graine de feu,
+	; comme la sacoche d'Ages, sans en consommer) : elle allume les torches et brûle la citrouille
+	; de Jack. Une seule flamme à la fois.
+	ld a,(wTilesetFlags)
+	and TILESETFLAG_DUNGEON
+	jr z,++
+	ld e,Item.relatedObj2+1
+	ld a,>w1Link
+	ld (de),a
+	ldbc ITEM_EMBER_SEED,$00
+	ld e,$01
+	call itemCreateChildWithID
+	jr @clearSelf
+++
 	; Only allow harp playing on overworld, non-maku tree screens
 	ld a,(wTilesetFlags)
 	and (TILESETFLAG_UNDERWATER|TILESETFLAG_SIDESCROLL|TILESETFLAG_LARGE_INDOORS|TILESETFLAG_DUNGEON|TILESETFLAG_INDOORS|TILESETFLAG_MAKU)
@@ -133,8 +147,11 @@ parentItemCode_harp:
 	; rayon de lumière ; si la case d'arrivée est bloquée, Link est renvoyé d'où il vient). Sans la
 	; cinématique de départ d'Ages, qui laissait une trace dans le décor.
 	; Comme elle, on garde la salle de départ de côté (pour y renvoyer Link si besoin)
+	; (elles changent d : sans ça, clearParentItem effacerait un autre objet, Link par exemple)
+	push de
 	callab tilesets.func_04_6f07
 	callab tilesets.func_04_6e9b
+	pop de
 	; Le temps du noctambule repart de zéro
 	ld hl,wBalladeNoctambule
 	xor a
@@ -171,14 +188,14 @@ parentItemCode_harp:
 @tuneOfEchoes:
 	call getThisRoomFlags
 	bit ROOMFLAG_BIT_PORTALSPOT_DISCOVERED,(hl)
-	jr nz,@clearSelf
-	jr @tuneEchoesInVain
+	jp nz,@clearSelf
+	jp @tuneEchoesInVain
 
 @tuneOfCurrents:
 	; Test TILESETFLAG_BIT_PAST
 	ld a,(wTilesetFlags)
 	rlca
-	jr nc,@tuneEchoesInVain
+	jp nc,@tuneEchoesInVain
 
 @tuneOfAges:
 	call restartSound

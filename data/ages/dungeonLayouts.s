@@ -268,20 +268,21 @@ dungeon09Layout:
 	.db $00 $00 $00 $00 $00 $00 $00 $00
 	.db $00 $00 $00 $00 $00 $00 $00 $00
 
-; BALLADE: le Phare Éteint (donjon 1). Étage 0 : rez-de-chaussée ; étage 1 : le sommet.
+; BALLADE: le Phare Éteint (donjon 1), un seul étage, tout en hauteur comme un phare.
 ; (Voir story/salles/phare.txt dans le dépôt ZeldaGullsOfLife.)
+; Un seul étage, mais on garde la place du 2e : chaque plan doit commencer à un multiple de $40
+; octets de dungeonLayoutDataStart.
 dungeon01LayoutPhare:
-	.db $00 $00 $00 $00 $00 $00 $00 $00
-	.db $00 $00 $14 $00 $00 $00 $00 $00
-	.db $00 $00 $15 $00 $00 $00 $00 $00
-	.db $00 $1b $24 $1c $00 $00 $00 $00
-	.db $00 $00 $00 $00 $00 $00 $00 $00
-	.db $00 $00 $00 $00 $00 $00 $00 $00
-	.db $00 $00 $00 $00 $00 $00 $00 $00
-	.db $00 $00 $00 $00 $00 $00 $00 $00
-
 	.db $00 $00 $00 $11 $00 $00 $00 $00
-	.db $00 $00 $12 $13 $00 $00 $00 $00
+	.db $00 $00 $00 $13 $00 $00 $00 $00
+	.db $00 $00 $19 $12 $1a $00 $00 $00
+	.db $00 $00 $00 $17 $00 $00 $00 $00
+	.db $00 $00 $00 $18 $00 $00 $00 $00
+	.db $00 $00 $00 $16 $00 $00 $00 $00
+	.db $00 $00 $1b $14 $15 $00 $00 $00
+	.db $00 $00 $00 $24 $00 $00 $00 $00
+	.db $00 $00 $00 $00 $00 $00 $00 $00
+	.db $00 $00 $00 $00 $00 $00 $00 $00
 	.db $00 $00 $00 $00 $00 $00 $00 $00
 	.db $00 $00 $00 $00 $00 $00 $00 $00
 	.db $00 $00 $00 $00 $00 $00 $00 $00

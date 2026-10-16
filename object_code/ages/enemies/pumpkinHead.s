@@ -761,7 +761,7 @@ pumpkinHead_ghost_state16:
 	ld h,(hl)
 	ld l,Enemy.state
 	ld a,(hl)
-	cp $02
+	call pumpkinHead_isHeadHeldOrBurning
 	jp z,enemyAnimate
 
 	ld h,d
@@ -811,7 +811,7 @@ pumpkinHead_ghost_state17:
 	ld h,(hl)
 	ld l,Enemy.state
 	ld a,(hl)
-	cp $02
+	call pumpkinHead_isHeadHeldOrBurning
 	ret z
 
 	ld (hl),$13 ; [head.state] = $13
@@ -847,6 +847,7 @@ pumpkinHead_head:
 	.dw pumpkinHead_head_state14
 	.dw pumpkinHead_head_state15
 	.dw pumpkinHead_head_state16
+	.dw pumpkinHead_head_state17
 
 
 ; Initialization
@@ -1067,12 +1068,15 @@ pumpkinHead_head_state11:
 	ld l,Enemy.state
 	inc (hl)
 	ld l,Enemy.counter1
-	ld (hl),120
+	; BALLADE: 4 secondes au lieu de 2 pour sortir la Lanterne
+	ld (hl),240
 	ret
 
 
-; Head is grabbable for 120 frames
+; Head is grabbable for 120 frames (BALLADE: 240), or burnable with the Lantern
 pumpkinHead_head_state12:
+	call pumpkinHead_head_checkBurned
+	ret z
 	call ecom_decCounter1
 	jp nz,pumpkinHead_head_state16
 
@@ -1172,6 +1176,68 @@ pumpkinHead_head_state16:
 	ret z
 	call objectAddToGrabbableObjectBuffer
 	jp objectPushLinkAwayOnCollision
+
+
+; BALLADE: la tête brûle (la flamme de la Lanterne) : le fantôme de Jack est à découvert
+; (la banque 15 est pleine : pas de place pour la faire clignoter)
+pumpkinHead_head_state17:
+	call ecom_decCounter1
+	jp nz,pumpkinHead_head_state16
+
+	; Elle a fini de brûler : posée par terre, le fantôme y retourne
+	ld l,e
+	ld (hl),$16 ; [state]
+	ret
+
+
+;;
+; BALLADE: la flamme de la Lanterne (une graine de feu) a touché la tête posée par terre ?
+; Alors la tête brûle (état $17) et le fantôme s'enfuit, à découvert, comme quand Link
+; soulève la tête avec le bracelet dans Ages.
+; @param[out]	zflag	z si la tête vient de prendre feu
+pumpkinHead_head_checkBurned:
+	ld e,Enemy.var2a
+	ld a,(de)
+	ld b,a
+	xor a
+	ld (de),a
+	ld a,b
+	cp $80|ITEMCOLLISION_EMBER_SEED
+	ld e,Enemy.state
+	ret nz
+
+	ld a,$17
+	ld (de),a
+	ld e,Enemy.counter1
+	ld a,240
+	ld (de),a
+
+	; [ghost.state] = $13 : il s'enfuit, et on peut le frapper
+	ld a,Object.relatedObj1+1
+	call objectGetRelatedObject1Var
+	ld h,(hl)
+	ld l,Enemy.state
+	ld (hl),$13
+	ld l,Enemy.zh
+	ld (hl),$f8
+	ld l,Enemy.invincibilityCounter
+	ld (hl),$f4
+
+	ld a,SND_LIGHTTORCH
+	call playSound
+	xor a
+	ret
+
+
+;;
+; BALLADE: la tête est tenue (état $02) ou elle brûle (état $17)
+; @param	a	[head.state]
+; @param[out]	zflag	z si oui
+pumpkinHead_isHeadHeldOrBurning:
+	cp $02
+	ret z
+	cp $17
+	ret
 
 
 ;;
