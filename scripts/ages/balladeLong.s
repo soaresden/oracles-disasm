@@ -50,6 +50,9 @@ marineBeachScript:
 @answeredYes:
 	showtext TX_5a03
 @sceneDone:
+	; Tous les objets de Link's Awakening sont restés au fond de la mer
+	wait 20
+	showtext TX_5a15
 	; Elle a froid : elle saute se mettre au chaud dans la tunique de Link, où elle passera toute
 	; l'aventure (pas de mouette qui suit Link à l'écran).
 	showtext TX_5a05
@@ -87,18 +90,26 @@ marineHumanScript:
 	wait 40
 	showtext TX_5a27
 
-	; Les retrouvailles : elle court se blottir contre Link (lui est en $18/$78, elle en $28/$68)
-	setspeed SPEED_100
-	moveup $08
-	moveright $08
+	; Les retrouvailles : face à face, elle se blottit contre Link (lui est en $18/$78 et la
+	; regarde, elle part de $28/$68, passe juste sous lui et monte se serrer contre lui, de dos)
+	; Elle fonce comme avec des bottes de Pégase et se jette dans ses bras (les deux sprites se
+	; mêlent)
+	writememory w1Link.direction, DIR_DOWN
+	playsound SND_SLASH
+	setspeed SPEED_300
+	moveright $10
+	moveup $0b
+	playsound SND_STRIKE
+	wait 20
 	playsound SND_GAINHEART
-	spawninteraction INTERAC_KISS_HEART, $00, $10, $70
+	spawninteraction INTERAC_KISS_HEART, $00, $0a, $70
 	wait 30
-	spawninteraction INTERAC_KISS_HEART, $01, $0c, $78
+	spawninteraction INTERAC_KISS_HEART, $01, $08, $80
 	wait 60
 	showtext TX_5a2c
-	moveleft $08
-	movedown $08
+	setspeed SPEED_100
+	movedown $0b
+	moveleft $10
 	wait 20
 
 	showtext TX_5a2d
@@ -123,6 +134,21 @@ marineHumanScript:
 ; ==================================================================================================
 ; INTERAC_MARINE subid $02 : après l'essence du Phare, sur le cap. Comme la télépathie de l'Arbre
 ; Bojo d'Ages : fond noir, Marine parle depuis la tunique, « À suivre... », puis on rend la main.
+marineBedScript:
+	setdisabledobjectsto91
+	showtext TX_5a16
+	enableallobjects
+	jumpiftextoptioneq $00, @sleep
+	scriptend
+@sleep:
+	; Le code de l'interaction endort Link (comme quand il pousse le lit)
+	writeobjectbyte Interaction.var37, $01
+	wait 60
+	scriptend
+
+
+; ==================================================================================================
+; INTERAC_MARINE subid $02 : (voir plus bas)
 marineToBeContinuedScript:
 	disableinput
 	writememory wTextboxFlags, TEXTBOXFLAG_ALTPALETTE1

@@ -222,7 +222,8 @@ treasureDisplayData_harp:
 	.db $00, $02, $04, $02, $00, $05, <TX_0941 ; No song?
 	.db $00, $a3, $00, $a4, $00, $05, <TX_0941 ; Tune of echoes
 	.db $00, $a7, $03, $a8, $03, $05, <TX_0941 ; Tune of currents
-	.db $00, $ab, $01, $ac, $01, $05, <TX_0941 ; Tune of ages
+	; BALLADE: la Lanterne des Songes (art/lanterne.txt), sans le petit symbole de l'air joué
+	.db $00, $ab, $01, $ac, $01, $ff, <TX_0941 ; Tune of ages
 
 treasureDisplayData_tuniNut:
 	.db TREASURE_TUNI_NUT, $f3, $05, $f4, $05, $ff, <TX_0957 ; Broken

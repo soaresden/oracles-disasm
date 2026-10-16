@@ -1402,6 +1402,7 @@
 ; @subid_00{Sur la plage, au réveil de Link (chapitre 1) ; elle finit dans la tunique de Link}
 ; @subid_01{Invisible : dans le Songe, demande à Link s'il veut se réveiller (Select)}
 ; @subid_02{Invisible : après le Phare, sur fond noir, Marine parle puis « À suivre... »}
+; @subid_03{Invisible : à l'auberge, A devant le lit -> « Dormir un peu ? » (oui : Link s'endort)}
 .define INTERAC_MARINE $e7
 
 ;;

@@ -15,6 +15,9 @@ signTextGroupTable:
 	.dw signTextGroup7Data
 
 signTextGroup0Data:
+	; BALLADE: les portes condamnées de la place de Port-Veille (Réel et Songe)
+	.db $32, $9b, <TX_2e1f
+	.db $37, $9b, <TX_2e20
 	.db $35, $2a, <TX_2e01
 	.db $51, $3d, <TX_2e05
 	.db $46, $19, <TX_2e06
@@ -33,6 +36,9 @@ signTextGroup0Data:
 	.db $00
 
 signTextGroup1Data:
+	; BALLADE: les portes condamnées de la place de Port-Veille (Réel et Songe)
+	.db $32, $9b, <TX_2e1f
+	.db $37, $9b, <TX_2e20
 	.db $54, $39, <TX_2e03
 	.db $53, $33, <TX_2e04
 	.db $24, $1d, <TX_2e08

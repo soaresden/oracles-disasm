@@ -55,8 +55,9 @@ singleTileChangeGroup2Data:
 singleTileChangeGroup3Data:
 	.db $d6 $f1 $55 $e9
 	.db $0f $80 $16 $af
-	.db $9e $80 $31 $1c
-	.db $9e $80 $32 $a0
+	; BALLADE: 3:9e est notre auberge : sans les changements de cases d'Ages
+	;.db $9e $80 $31 $1c
+	;.db $9e $80 $32 $a0
 	.db $00 $00
 
 singleTileChangeGroup4Data:

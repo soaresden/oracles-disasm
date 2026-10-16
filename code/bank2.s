@@ -3033,8 +3033,8 @@ b2_updateMenus:
 
 	call playHeartBeepAtInterval
 .ifdef ROM_AGES
-	; BALLADE: Start = inventaire (Start + Select = sauvegarde), comme avant. Mais Select : un
-	; appui court fait parler Marine, et la carte ne s'ouvre que si on le garde enfoncé.
+	; BALLADE: Start = inventaire (Start + Select = sauvegarde), comme avant. Select : un appui
+	; court ouvre la carte ; gardé enfoncé, Marine parle.
 	ld a,(wKeysJustPressed)
 	and BTN_START | BTN_SELECT
 	ld c,$03
@@ -3052,13 +3052,13 @@ b2_updateMenus:
 	; Select enfoncé
 	ld a,(hl)
 	inc a
-	ret z ; carte déjà ouverte pendant cet appui
+	ret z ; Marine a déjà parlé pendant cet appui
 	ld (hl),a
 	cp BALLADE_SELECT_HOLD_FRAMES
 	ret c
 	ld (hl),$ff
-	ld c,$02
-	jp openMenu_body
+	callab balladeMarine.marineTalk
+	ret
 
 @selectReleased:
 	ld a,(hl)
@@ -3066,9 +3066,9 @@ b2_updateMenus:
 	or a
 	ret z ; Select n'était pas enfoncé
 	inc a
-	ret z ; on vient de fermer la carte
-	callab balladeMarine.marineTalk
-	ret
+	ret z ; Marine vient de parler
+	ld c,$02
+	jp openMenu_body
 
 @openMenu:
 	xor a
@@ -5536,7 +5536,8 @@ seedAndHarpSpriteTable:
 	.db $14 $10 $50 $0b
 
 @sprite7:
-	.db $02
+	; BALLADE: pas de sablier (l'air des Âges) à côté de la Lanterne des Songes
+	.db $00
 	.db $14 $08 $56 $09
 	.db $14 $10 $58 $09
 

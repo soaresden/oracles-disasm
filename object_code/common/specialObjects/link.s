@@ -939,6 +939,10 @@ warpTransition6:
 ; Warp is completed; create a time portal if necessary, restore control to Link
 
 	; Check if a time portal should be created
+.ifdef ROM_AGES
+	; BALLADE: pas de portail (le sablier) : la Lanterne des Songes marche partout dehors
+	jr ++
+.endif
 	ld a,(wLinkTimeWarpTile)
 	or a
 	jr nz,++
@@ -5063,6 +5067,22 @@ checkLinkPushingAgainstBed:
 	cp l
 	ret nz
 
+.ifdef ROM_AGES
+	; BALLADE: A devant le lit : « Dormir un peu ? » (INTERAC_MARINE $03, qui endort Link)
+	ld a,(wGameKeysJustPressed)
+	and BTN_A
+	jr z,+
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	call getFreeInteractionSlot
+	ret nz
+	ld (hl),INTERAC_MARINE
+	inc l
+	ld (hl),$03
+	ret
++
+.endif
 	call checkLinkPushingAgainstWall
 	ret z
 

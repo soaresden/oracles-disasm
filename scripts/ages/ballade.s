@@ -17,6 +17,10 @@ marineToBeContinuedScript:
 	orroomflag $40
 	loadscript balladeScripts.marineToBeContinuedScript
 
+; INTERAC_MARINE subid $03 : à l'auberge, A devant le lit -> « Dormir un peu ? »
+marineBedScript:
+	loadscript balladeScripts.marineBedScript
+
 ; INTERAC_MARINE subid $01 : dans le Songe, Select -> « Tu veux te réveiller ? »
 ; (le code de l'interaction fait le réveil quand var37 passe à 1)
 marineWakeScript:
@@ -64,6 +68,7 @@ balladeNpc01Script: ; le vieux pêcheur (il rend son épée à Link)
 	jumpifitemobtained TREASURE_SWORD, @hasSword
 	showtext TX_5a2b
 	giveitem TREASURE_OBJECT_SWORD_00
+	showtext TX_5a2e
 	enableallobjects
 	scriptjump @loop
 @hasSword:

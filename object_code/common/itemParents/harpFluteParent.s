@@ -123,8 +123,31 @@ parentItemCode_harp:
 	jr nz,@clearSelf
 
 	; BALLADE: la Lanterne des Songes. Dehors, n'importe quel air fait passer du Réel (groupe 1) au
-	; Songe (groupe 0) et retour, avec l'effet du voyage dans le temps d'Ages
-	jr @tuneOfAges
+	; Songe (groupe 0) et retour : un fondu, puis l'arrivée du voyage dans le temps d'Ages (le
+	; rayon de lumière ; si la case d'arrivée est bloquée, Link est renvoyé d'où il vient). Sans la
+	; cinématique de départ d'Ages, qui laissait une trace dans le décor.
+	; Comme elle, on garde la salle de départ de côté (pour y renvoyer Link si besoin)
+	callab tilesets.func_04_6f07
+	callab tilesets.func_04_6e9b
+	ld hl,wWarpDestGroup
+	ld a,(wActiveGroup)
+	xor $01
+	or $80
+	ldi (hl),a
+	ld a,(wActiveRoom)
+	ldi (hl),a
+	ld a,TRANSITION_DEST_TIMEWARP
+	ldi (hl),a
+	ld a,(wActiveTilePos)
+	ldi (hl),a
+	ld (hl),$03 ; wWarpTransition2 : fondu
+	ld a,$01 ; couleur de l'animation d'arrivée
+	ld (wcc50),a
+	ld a,$10 ; garde les drapeaux de la salle tels quels (voir warpTransition6@substate7)
+	ld (wLinkStateParameter),a
+	ld a,SND_TIMEWARP_INITIATED
+	call playSound
+	jp @clearSelf
 
 	ld a,(hl)
 	rst_jumpTable

@@ -102,6 +102,7 @@ m_PaletteHeaderStart $10, PALH_TILESET_LYNNA_CITY
 
 m_PaletteHeaderStart $11, PALH_TILESET_LYNNA_VILLAGE
 	m_PaletteHeaderBg  2, 6, paletteData4a60
+	m_PaletteHeaderBg  0, 1, paletteData48e0 ; BALLADE: après le Songe
 	m_PaletteHeaderEnd
 
 m_PaletteHeaderStart $12, PALH_TILESET_FAIRIES_FOREST
@@ -118,6 +119,7 @@ m_PaletteHeaderStart $14, PALH_TILESET_CRESCENT_ISLAND_PRESENT
 
 m_PaletteHeaderStart $15, PALH_TILESET_CRESCENT_ISLAND_PAST
 	m_PaletteHeaderBg  2, 6, paletteData4c40
+	m_PaletteHeaderBg  0, 1, paletteData48e0 ; BALLADE: après le Songe
 	m_PaletteHeaderEnd
 
 m_PaletteHeaderStart $16, PALH_TILESET_SYMMETRY_CITY_RUINED
@@ -431,6 +433,7 @@ m_PaletteHeaderStart $6f, PALH_6f
 
 m_PaletteHeaderStart $70, PALH_TILESET_INDOORS_PRESENT
 	m_PaletteHeaderBg  2, 6, paletteData5600
+	m_PaletteHeaderBg  0, 1, paletteData48e0 ; BALLADE: après le Songe
 	m_PaletteHeaderEnd
 
 m_PaletteHeaderStart $71, PALH_TILESET_OLD_MAN_CAVE_PRESENT
@@ -821,14 +824,17 @@ m_PaletteHeaderStart $cb, PALH_FILM
 ; BALLADE-SONGE-DEBUT (tools/make_songe.py)
 m_PaletteHeaderStart $cc, PALH_SONGE_VILLAGE
 	m_PaletteHeaderBg  2, 6, paletteDataSongeVillage
+	m_PaletteHeaderBg  0, 1, paletteDataSongeVillage0
 	m_PaletteHeaderEnd
 
 m_PaletteHeaderStart $cd, PALH_SONGE_PLAGE
 	m_PaletteHeaderBg  2, 6, paletteDataSongePlage
+	m_PaletteHeaderBg  0, 1, paletteDataSongePlage0
 	m_PaletteHeaderEnd
 
 m_PaletteHeaderStart $ce, PALH_SONGE_AUBERGE
 	m_PaletteHeaderBg  2, 6, paletteDataSongeAuberge
+	m_PaletteHeaderBg  0, 1, paletteDataSongeAuberge0
 	m_PaletteHeaderEnd
 
 ; BALLADE-SONGE-FIN

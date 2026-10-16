@@ -28,14 +28,23 @@ interactionCodee7:
 	.dw mainScripts.marineBeachScript
 	.dw mainScripts.marineWakeScript
 	.dw mainScripts.marineToBeContinuedScript
+	.dw mainScripts.marineBedScript
 
 @state1:
 	call interactionRunScript
 	jp c,interactionDelete
-	; Sous-type 1 : le script a répondu « oui » au réveil
+	; Le script a répondu « oui » : sous-type 1, se réveiller ; sous-type 3, s'endormir
 	ld e,Interaction.var37
 	ld a,(de)
 	or a
 	jp z,interactionAnimate
+	ld e,Interaction.subid
+	ld a,(de)
+	cp $03
+	jr z,@sleep
 	callab balladeMarine.switchDream
+	jp interactionDelete
+@sleep:
+	ld a,LINK_STATE_SLEEPING
+	ld (wLinkForceState),a
 	jp interactionDelete

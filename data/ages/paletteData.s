@@ -4329,6 +4329,12 @@ paletteDataSongeVillage: ; Songe : paletteData4a60 en bleuté
 	m_RGB16 $09 $05 $0e
 	m_RGB16 $03 $05 $0a
 
+paletteDataSongeVillage0: ; Songe : la palette 0 (paletteData48e0) en bleuté
+	m_RGB16 $08 $05 $0a
+	m_RGB16 $0f $07 $0c
+	m_RGB16 $16 $18 $1a
+	m_RGB16 $01 $02 $06
+
 paletteDataSongePlage: ; Songe : paletteData4c40 en bleuté
 	m_RGB16 $12 $11 $14
 	m_RGB16 $0d $0f $0f
@@ -4360,6 +4366,12 @@ paletteDataSongePlage: ; Songe : paletteData4c40 en bleuté
 	m_RGB16 $09 $08 $0d
 	m_RGB16 $01 $02 $06
 
+paletteDataSongePlage0: ; Songe : la palette 0 (paletteData48e0) en bleuté
+	m_RGB16 $08 $05 $0a
+	m_RGB16 $0f $07 $0c
+	m_RGB16 $16 $18 $1a
+	m_RGB16 $01 $02 $06
+
 paletteDataSongeAuberge: ; Songe : paletteData5600 en bleuté
 	m_RGB16 $0d $10 $12
 	m_RGB16 $12 $12 $10
@@ -4389,6 +4401,12 @@ paletteDataSongeAuberge: ; Songe : paletteData5600 en bleuté
 	m_RGB16 $15 $1a $1f
 	m_RGB16 $0a $0f $15
 	m_RGB16 $06 $0a $10
+	m_RGB16 $01 $02 $06
+
+paletteDataSongeAuberge0: ; Songe : la palette 0 (paletteData48e0) en bleuté
+	m_RGB16 $08 $05 $0a
+	m_RGB16 $0f $07 $0c
+	m_RGB16 $16 $18 $1a
 	m_RGB16 $01 $02 $06
 
 ; BALLADE-SONGE-FIN

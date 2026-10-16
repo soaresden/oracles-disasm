@@ -356,7 +356,7 @@ interactiond7SubidData:
 	m_InteractionSubidData $7f $0c $02
 	m_InteractionSubidData $7f $0e $13
 	m_InteractionSubidData $7f $12 $53
-	m_InteractionSubidData $79 $1a $23
+	m_InteractionSubidData $7e $16 $21 ; BALLADE: la Lanterne des Songes (au lieu de la harpe), flamme bleue
 	m_InteractionSubidData $7e $06 $03
 	m_InteractionSubidData $7e $0e $33
 	m_InteractionSubidData $7e $16 $13

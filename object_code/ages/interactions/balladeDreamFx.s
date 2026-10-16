@@ -16,6 +16,8 @@ interactionCodee9:
 	jr nz,@state1
 
 @state0:
+	; Rien à afficher (sinon une image au hasard apparaît en haut à gauche de l'écran)
+	call objectSetInvisible
 	call interactionSetAlwaysUpdateBit
 	call interactionIncState
 	ld a,(wGfxRegs2.LYC)
@@ -42,5 +44,28 @@ interactionCodee9:
 	ld (wGfxRegs2.LYC),a
 	ld a,$02
 	ldh (<hNextLcdInterruptBehaviour),a
-	ld a,$01
-	jp loadBigBufferScrollValues
+	; Comme loadBigBufferScrollValues, mais en ajoutant le défilement horizontal de la caméra :
+	; les valeurs de la vague remplacent celui de chaque ligne, et sans lui l'écran resterait figé
+	; pendant (et après) le passage d'une salle à l'autre. Une seule passe, pour que l'écran ne se
+	; déchire pas pendant qu'il est lu.
+	ld a,(wGfxRegs2.SCX)
+	ld c,a
+	ld a,:w2WaveScrollValues
+	ld ($ff00+R_SVBK),a
+	ld a,(wFrameCounter)
+	and $7f
+	ld de,w2WaveScrollValues
+	call addAToDe
+	ld hl,wBigBuffer
+-
+	ld a,(de)
+	add c
+	ldi (hl),a
+	inc e
+	res 7,e
+	ld a,l
+	or a
+	jr nz,-
+	xor a
+	ld ($ff00+R_SVBK),a
+	ret

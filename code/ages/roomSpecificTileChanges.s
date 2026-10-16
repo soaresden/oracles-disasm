@@ -89,11 +89,13 @@ roomTileChangerCodeGroup0Data:
 	.db $48 $17
 	.db $5c $14
 	.db $73 $16
-	.db $ac $18
+	; BALLADE: salle réutilisée par Gulls of Life, sans le changement de cases d'Ages
+	;.db $ac $18
 	.db $2c $19
 	.db $1c $1a
 	.db $ba $1b
-	.db $aa $1c
+	; BALLADE: salle réutilisée par Gulls of Life, sans le changement de cases d'Ages
+	;.db $aa $1c
 	.db $cc $1d
 	.db $bc $1e
 	.db $da $1f
@@ -114,19 +116,22 @@ roomTileChangerCodeGroup0Data:
 roomTileChangerCodeGroup1Data:
 	.db $38 $09
 	.db $27 $28
-	.db $8c $2c
+	; BALLADE: salle réutilisée par Gulls of Life, sans le changement de cases d'Ages
+	;.db $8c $2c
 	.db $58 $34
 	.db $00
 roomTileChangerCodeGroup2Data:
 	.db $f7 $15
 	.db $90 $2b
-	.db $9e $2f
+	; BALLADE: salle réutilisée par Gulls of Life, sans le changement de cases d'Ages
+	;.db $9e $2f
 	.db $7e $02
 	.db $00
 roomTileChangerCodeGroup3Data:
 	.db $00
 roomTileChangerCodeGroup4Data:
-	.db $1b $01
+	; BALLADE: salle réutilisée par Gulls of Life, sans le changement de cases d'Ages
+	;.db $1b $01
 	.db $4c $03
 	.db $4e $04
 	.db $59 $05
