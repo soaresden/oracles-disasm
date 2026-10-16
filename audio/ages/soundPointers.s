@@ -2,7 +2,7 @@
 ; constants/common/music.s.
 soundPointers:
 	/* 0x00 */ m_soundPointer musNone
-	/* 0x01 */ m_soundPointer musTitlescreen
+	/* 0x01 */ m_soundPointer musBalladeTitre ; BALLADE: la Ballade tout en douceur, avec les mouettes
 	/* 0x02 */ m_soundPointer musMinigame
 	/* 0x03 */ m_soundPointer musOverworld
 	/* 0x04 */ m_soundPointer musOverworldPast
@@ -46,8 +46,8 @@ soundPointers:
 	/* 0x2a */ m_soundPointer musCredits2
 	/* 0x2b */ m_soundPointer musMapleTheme
 	/* 0x2c */ m_soundPointer musMapleGame
-	/* 0x2d */ m_soundPointer musMiniboss
-	/* 0x2e */ m_soundPointer musBoss
+	/* 0x2d */ m_soundPointer musBalladeMiniboss ; BALLADE: (au lieu de musMiniboss)
+	/* 0x2e */ m_soundPointer musBalladeTheme ; BALLADE: le thème du jeu contre les boss (au lieu de musBoss)
 	/* 0x2f */ m_soundPointer musLadxSideview
 	/* 0x30 */ m_soundPointer musFairyForest
 	/* 0x31 */ m_soundPointer musCrazyDance
@@ -67,10 +67,10 @@ soundPointers:
 	/* 0x3f */ m_soundPointer musIntro1
 	/* 0x40 */ m_soundPointer musIntro2
 	/* 0x41 */ m_soundPointer musBalladePhare ; BALLADE: le Phare Éteint
-	/* 0x42 */ m_soundPointer mus42
-	/* 0x43 */ m_soundPointer mus43
-	/* 0x44 */ m_soundPointer mus44
-	/* 0x45 */ m_soundPointer mus45
+	/* 0x42 */ m_soundPointer musBalladeIle ; BALLADE: l'île de la Brume
+	/* 0x43 */ m_soundPointer musBalladeAuberge ; BALLADE: l'auberge
+	/* 0x44 */ m_soundPointer musBalladeTheme ; BALLADE: le thème du jeu
+	/* 0x45 */ m_soundPointer musBalladeBoss ; BALLADE: le Veilleur Creux (pour un autre boss)
 	/* 0x46 */ m_soundPointer musBlackTowerEntrance
 	/* 0x47 */ m_soundPointer mus47
 	/* 0x48 */ m_soundPointer mus48

@@ -393,6 +393,11 @@
 
 ; BALLADE: musique et bruitage originaux (tools/make_music.py, music/*.txt)
 .define MUS_BALLADE_PHARE $41
+.define MUS_BALLADE_ILE   $42
+.define MUS_BALLADE_AUBERGE $43
+.define MUS_BALLADE_THEME $44
+.define MUS_BALLADE_VEILLEUR $45
+; MUS_BOSS ($2e) joue le thème du jeu (music/theme.txt), MUS_MINIBOSS ($2d) music/miniboss.txt
 .define SND_BALLADE_GULL  $d6
 
 ; Part of the implementation for "SNDCTRL_STOPMUSIC"?

@@ -1555,19 +1555,6 @@ sndTimewarpCompleted:
 	.dw sndTimewarpCompletedChannel2
 	.db $ff
 
-; BALLADE: musiques originales de Gulls of Life (données dans audio/ages/mus/ballade.s)
-musBalladePhare:
-	.db $00
-	.dw musBalladePhareChannel0
-	.db $01
-	.dw musBalladePhareChannel1
-	.db $04
-	.dw musBalladePhareChannel4
-	.db $06
-	.dw musBalladePhareChannel6
-	.db $ff
-
-sndBalladeGull:
-	.db $02
-	.dw sndBalladeGullChannel2
-	.db $ff
+; BALLADE: musiques et bruitages originaux de Gulls of Life (généré par tools/make_music.py ;
+; données dans audio/ages/mus/ballade.s)
+.include "audio/ages/balladeChannelPointers.s"
