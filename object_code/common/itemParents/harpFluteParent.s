@@ -129,6 +129,11 @@ parentItemCode_harp:
 	; Comme elle, on garde la salle de départ de côté (pour y renvoyer Link si besoin)
 	callab tilesets.func_04_6f07
 	callab tilesets.func_04_6e9b
+	; Le temps du noctambule repart de zéro
+	ld hl,wBalladeNoctambule
+	xor a
+	ldi (hl),a
+	ld (hl),a
 	ld hl,wWarpDestGroup
 	ld a,(wActiveGroup)
 	xor $01

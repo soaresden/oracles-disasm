@@ -59,9 +59,15 @@
 
 
 
-; BALLADE: nombre d'images où il faut garder Select enfoncé pour ouvrir la carte (un appui plus
-; court fait parler Marine)
+; BALLADE: nombre d'images où il faut garder Select enfoncé pour que Marine parle (un appui plus
+; court ouvre la carte)
 .define BALLADE_SELECT_HOLD_FRAMES 20
+; BALLADE: le noctambule : temps dehors dans le Songe avant de se réveiller (images, 60 par seconde ;
+; il commence en sortant de l'auberge ou en jouant de la Lanterne), et quand Marine prévient.
+; Trajet parfait de la porte de l'auberge du Songe à l'autre côté de la mer ouverte : 360 images
+; (6,0 s, mesuré par tools/test_noctambule.py) ; on laisse 1 seconde de marge.
+.define BALLADE_NOCTAMBULE_FRAMES 420
+.define BALLADE_NOCTAMBULE_WARNING 120
 
 ; BALLADE: amplitude de l'ondulation de l'écran dans le Songe (en pixels)
 .define BALLADE_DREAM_WAVE 2

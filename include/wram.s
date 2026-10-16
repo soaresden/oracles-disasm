@@ -2803,12 +2803,17 @@ wcde3: ; $cde3
 ; are given back to Link during credits cutscene state 3
 	dw
 
-; BALLADE: durée d'appui sur Select (court = Marine parle, maintenu = carte ; $ff = carte
-; déjà ouverte pendant cet appui)
+; BALLADE: durée d'appui sur Select (court = carte, maintenu = Marine parle ; $ff = Marine a
+; déjà parlé pendant cet appui)
 wBalladeSelectTimer: ; $cde5
 	db
 
-; $cde6-$cdff unused?
+; BALLADE: le noctambule : temps qui reste dans le Songe, en images (0 = pas dans le Songe).
+; Voir INTERAC_BALLADE_DREAM_FX.
+wBalladeNoctambule: ; $cde6
+	dw
+
+; $cde8-$cdff unused?
 
 .endif ; ROM_AGES
 .ENDS

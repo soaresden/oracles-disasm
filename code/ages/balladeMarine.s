@@ -82,6 +82,11 @@ enterDreamFromBed:
 
 ;;
 switchDream:
+	; Le temps du noctambule repart de zéro (il recommencera au prochain passage dans le Songe)
+	ld hl,wBalladeNoctambule
+	xor a
+	ldi (hl),a
+	ld (hl),a
 	ld a,(wActiveGroup)
 	xor $01
 	or $80
