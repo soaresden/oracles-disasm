@@ -230,6 +230,7 @@ interactionAnimationTable:
 	.dw interactione4Animations
 	.dw interactione5Animations
 	.dw interactione6Animations
+	.dw interactione7Animations ; BALLADE
 
 interactionOamDataTable: ; 0x59a23
 	.dw interaction00OamDataPointers
@@ -463,6 +464,7 @@ interactionOamDataTable: ; 0x59a23
 	.dw interactione4OamDataPointers
 	.dw interactione5OamDataPointers
 	.dw interactione6OamDataPointers
+	.dw interactione7OamDataPointers ; BALLADE
 
 interaction00Animations:
 interaction01Animations:
@@ -766,6 +768,7 @@ interaction4bAnimations:
 	.dw interactionAnimation5a3e9
 interaction4cAnimations:
 interactione3Animations:
+interactione7Animations: ; BALLADE: Marine = animations du perroquet
 	.dw interactionAnimation5a460
 	.dw interactionAnimation5a596
 	.dw interactionAnimation5a604
@@ -3489,6 +3492,7 @@ interaction4bOamDataPointers: ; 0x5b00c
 
 interaction4cOamDataPointers: ; 0x5b024
 interactione3OamDataPointers: ; 0x5b024
+interactione7OamDataPointers: ; BALLADE
 	.dw interactionOamData5020e
 	.dw interactionOamData502f8
 	.dw interactionOamData502a7

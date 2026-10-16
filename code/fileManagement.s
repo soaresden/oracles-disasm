@@ -362,12 +362,16 @@ initialFileVariables:
 	.db <wLinkMaxHealth,			$10
 
 .ifdef ROM_AGES
-	; Initial spawn location
-	.db <wDeathRespawnBuffer.group,		$00
-	.db <wDeathRespawnBuffer.room,		$8a
-	.db <wDeathRespawnBuffer.y,		$38
-	.db <wDeathRespawnBuffer.x,		$48
-	.db <wDeathRespawnBuffer.facingDir,	$00
+	; BALLADE: Initial spawn location: the beach where Link washes up (chapter 1)
+	.db <wDeathRespawnBuffer.group,		$01
+	.db <wDeathRespawnBuffer.room,		$aa
+	.db <wDeathRespawnBuffer.y,		$48
+	.db <wDeathRespawnBuffer.x,		$28
+	.db <wDeathRespawnBuffer.facingDir,	DIR_DOWN
+
+	; BALLADE: Skip Ages' intro (the story starts on the beach)
+	.db <wGlobalFlags+GLOBALFLAG_INTRO_DONE/8,		1<<(GLOBALFLAG_INTRO_DONE&7)
+	.db <wGlobalFlags+GLOBALFLAG_PREGAME_INTRO_DONE/8,	1<<(GLOBALFLAG_PREGAME_INTRO_DONE&7)
 
 	.db <wJabuWaterLevel,			$21
 	.db <wPortalGroup,			$ff

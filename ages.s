@@ -509,6 +509,7 @@ m_section_free Ages_Interactions_Bank0b NAMESPACE agesInteractionsBank0b
 	 m_section_free Scripts namespace mainScripts
 		.include "code/scripting.s"
 		.include "scripts/ages/scripts.s"
+		.include "scripts/ages/ballade.s" ; BALLADE
 	.ends
 
 
@@ -702,6 +703,7 @@ m_section_free Ages_Interactions_Bank10 NAMESPACE agesInteractionsBank10
 	.include "object_code/ages/interactions/timeportalSpawner.s"
 	.include "object_code/ages/interactions/knowItAllBird.s"
 	.include "object_code/ages/interactions/raft.s"
+	.include "object_code/ages/interactions/marine.s" ; BALLADE
 .ends
 
 

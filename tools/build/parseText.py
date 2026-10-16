@@ -24,9 +24,9 @@ if len(sys.argv) < 5:
 
 argIndex = 1
 
-dictFile = open(sys.argv[argIndex], 'r')
+dictFile = open(sys.argv[argIndex], 'r', encoding='utf-8')
 argIndex+=1
-textFile = open(sys.argv[argIndex], 'r')
+textFile = open(sys.argv[argIndex], 'r', encoding='utf-8')
 argIndex+=1
 outFilename = sys.argv[argIndex]
 argIndex+=1

@@ -1896,13 +1896,8 @@ group1Mapa9ObjectData:
 	obj_End
 
 group1MapaaObjectData:
-	obj_Interaction $48 $00 $48 $18
-	obj_Interaction $48 $01 $58 $38
-	obj_Interaction $48 $02 $58 $28
-	obj_Interaction $48 $03 $58 $18
-	obj_Interaction $48 $04 $48 $38
-	obj_Interaction $48 $1f $58 $78
-	obj_Interaction $6b $08
+	; BALLADE: la plage du réveil (à la place des Tokays qui volent les objets)
+	obj_Interaction INTERAC_MARINE $00 $08 $98
 	obj_End
 
 group1MapabObjectData:

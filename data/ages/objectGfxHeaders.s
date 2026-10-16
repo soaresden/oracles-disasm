@@ -229,3 +229,6 @@ objectGfxHeaderTable:
 
 	; CROSSITEMS: Extra object gfx headers
 	/* $e0 */ m_ObjectGfxHeader spr_hyperslingshot_inventory
+
+	; BALLADE
+	/* $e1 */ m_ObjectGfxHeader spr_marine_gull

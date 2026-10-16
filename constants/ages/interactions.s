@@ -1395,3 +1395,9 @@
 ; @subid_01{Raft outside Rafton's house}
 ; @subid_02{Raft created when SPECIALOBJECT_RAFT is dismounted}
 .define INTERAC_RAFT $e6
+
+;;
+; BALLADE: Marine, changée en mouette. Ses animations sont celles du perroquet
+; (INTERAC_KNOW_IT_ALL_BIRD) : 0/1 posée, 2/3 en vol (gauche / droite).
+; @subid_00{Sur la plage, au réveil de Link (chapitre 1)}
+.define INTERAC_MARINE $e7

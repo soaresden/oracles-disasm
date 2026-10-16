@@ -516,3 +516,6 @@
 	m_GfxData flg_secret_list_menu ; $0e2a57
 	m_GfxData oth_twinrova_lava_layout ; $0e2aa2
 	m_GfxData oth_twinrova_normal_layout ; $0e2ad7
+
+	; BALLADE
+	m_GfxData spr_marine_gull
