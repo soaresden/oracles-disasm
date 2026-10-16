@@ -19,6 +19,7 @@
 	.db $01	; OPT_LINKED_WARNING
 	.db $01	; OPT_AUTO_SECRETS
 	.db $00	; OPT_HUD_BOTTOM
-	.dsb 9 $00
+	.db $01	; OPT_REWARD_MARKERS
+	.dsb 8 $00
 
 .ENDS

@@ -1492,6 +1492,7 @@ sound7aChannel2:
 	m_GfxDataSimple gfx_fr_door_icons
 
 	.include "code/crossworldSecrets.s"
+	.include "code/crossworldMapMarkers.s"
 .ends
 
 .BANK $42 SLOT 1

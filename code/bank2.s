@@ -7542,6 +7542,9 @@ _mapMenu_drawSprites:
 	or a
 	jp nz,_mapMenu_drawWarpSites
 
+	; FR: where a linked-secret reward waits (code/crossworldMapMarkers.s)
+	callab frDrawRewardMarkers
+
 .ifdef ROM_AGES
 	jp _mapMenu_drawTimePortal
 

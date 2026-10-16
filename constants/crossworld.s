@@ -22,6 +22,7 @@
 .define OPT_LINKED_WARNING		$3ff4
 .define OPT_AUTO_SECRETS		$3ff5
 .define OPT_HUD_BOTTOM			$3ff6
+.define OPT_REWARD_MARKERS		$3ff7
 
 ; FR: original Ages titlescreen, used when OPT_TITLE_COMBINED is off
 .define FR_GFXH_TITLE_ORIG		$bb
@@ -54,4 +55,13 @@
 .define FR_OTHER_GAME_GLOBALFLAGS	SEASONS_BACKUP + $c6ca - $c5b0
 .else
 .define FR_OTHER_GAME_GLOBALFLAGS	AGES_BACKUP + $c6d0 - $c5b0
+.endif
+
+; FR: Farore's square on the overworld map (reward markers)
+.ifdef ROM_AGES
+.define FR_FARORE_MAP_GROUP		$00
+.define FR_FARORE_MAP_ROOM		$38
+.else
+.define FR_FARORE_MAP_GROUP		$00
+.define FR_FARORE_MAP_ROOM		$c9
 .endif

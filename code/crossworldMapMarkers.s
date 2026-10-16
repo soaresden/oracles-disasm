@@ -1,0 +1,181 @@
+; FR: blinking circles on the overworld map where a linked-secret reward waits
+; (OPT_REWARD_MARKERS). Called from _mapMenu_drawSprites (bank 2) with callab;
+; placed in a free bank (ages.s / seasons.s).
+;
+; - First game (not linked), once finished: the characters who give a reward
+;   for a secret the other game handed out (other game's BEGAN flag set, own DONE
+;   flag not set yet).
+; - Linked game: Farore, when a return secret is waiting (same test as
+;   frAutoFaroreSecret).
+
+frDrawRewardMarkers:
+	ld a,(OPT_REWARD_MARKERS)
+	or a
+	ret z
+
+	; Animated circle (like the warp destinations), built in wTmpcec0
+	ld hl,wTmpcec0
+	ld a,$01
+	ldi (hl),a
+	ld a,$0c
+	ldi (hl),a
+	ld a,$08
+	ldi (hl),a
+	ld a,(wFrameCounter)
+	and $18
+	rrca
+	rrca
+	add $10
+	ldi (hl),a
+	ld (hl),$07
+
+	call checkIsLinkedGame
+	jr nz,@linkedGame
+
+	ld a,GLOBALFLAG_FINISHEDGAME
+	call checkGlobalFlag
+	ret z
+
+	ld c,$00
+@nextReceiver:
+	push bc
+.ifdef ROM_AGES
+	ld a,GLOBALFLAG_FIRST_SEASONS_BEGAN_SECRET
+.else
+	ld a,GLOBALFLAG_FIRST_AGES_BEGAN_SECRET
+.endif
+	add c
+	call frCheckOtherGameFlag
+	jr z,@skipReceiver
+	ld a,c
+.ifdef ROM_AGES
+	add GLOBALFLAG_FIRST_SEASONS_DONE_SECRET
+.else
+	add GLOBALFLAG_FIRST_AGES_DONE_SECRET
+.endif
+	call checkGlobalFlag
+	jr nz,@skipReceiver
+
+	ld a,c
+	ld hl,@receiverSquares
+	rst_addDoubleIndex
+	ldi a,(hl)
+	ld b,(hl)
+	call @drawAt
+@skipReceiver:
+	pop bc
+	inc c
+	ld a,c
+	cp $0a
+	jr c,@nextReceiver
+	ret
+
+@linkedGame:
+	ld c,$00
+@nextFarore:
+	ld a,c
+	cp $03
+	jr z,@skipFarore
+	cp $06
+	jr z,@skipFarore
+.ifdef ROM_AGES
+	add GLOBALFLAG_FIRST_AGES_DONE_SECRET
+.else
+	add GLOBALFLAG_FIRST_SEASONS_DONE_SECRET
+.endif
+	push af
+	call frCheckOtherGameFlag
+	pop de
+	jr z,@skipFarore
+	ld a,d
+	call checkGlobalFlag
+	jr nz,@skipFarore
+	ld a,c
+.ifdef ROM_AGES
+	add GLOBALFLAG_FIRST_AGES_BEGAN_SECRET
+.else
+	add GLOBALFLAG_FIRST_SEASONS_BEGAN_SECRET
+.endif
+	call checkGlobalFlag
+	jr z,@skipFarore
+	ld a,FR_FARORE_MAP_GROUP
+	ld b,FR_FARORE_MAP_ROOM
+	jr @drawAt
+@skipFarore:
+	inc c
+	ld a,c
+	cp $0a
+	jr c,@nextFarore
+	ret
+
+;;
+; @param	a	Map: 0 = present / Holodrum, 1 = past / Subrosia, $ff = none,
+;			$fe = Seasons deku scrub (depends on the animal companion)
+; @param	b	Room (square) on that map
+@drawAt:
+	cp $fe
+	jr nz,+
+	; Seasons deku scrub: Ricky's region or Moosh's / Dimitri's
+	ld b,$79
+	ld a,(wAnimalCompanion)
+	cp $0b
+	ld a,$00
+	jr z,+
+	ld b,$59
++
+	ld e,a
+	ld a,(wMapMenu.mode)
+	cp e
+	ret nz
+
+	ld c,b
+	ldde OVERWORLD_MAP_START_Y*8, OVERWORLD_MAP_START_X*8
+.ifdef ROM_SEASONS
+	ld a,(wMapMenu.mode)
+	rrca
+	jr nc,+
+	ldde SUBROSIA_MAP_START_Y*8, SUBROSIA_MAP_START_X*8
++
+.endif
+	ld a,c
+	and $f0
+	srl a
+	add d
+	ld b,a
+	ld a,c
+	and $0f
+	add a
+	add a
+	add a
+	add e
+	ld c,a
+	ld hl,wTmpcec0
+	jp addSpritesToOam_withOffset
+
+; Square of the character who gives the reward for exchange i (map, room)
+@receiverSquares:
+.ifdef ROM_AGES
+	; Secrets from Seasons, rewarded in Ages
+	.db $00 $a1	; 0 King Zora
+	.db $00 $70	; 1 Fairy
+	.db $00 $1d	; 2 Troy
+	.db $00 $57	; 3 Plen
+	.db $01 $a5	; 4 Library (past)
+	.db $00 $bd	; 5 Tokay
+	.db $ff $00	; 6 Mamamu (never sets its DONE flag: no marker)
+	.db $00 $79	; 7 Tingle
+	.db $01 $1d	; 8 Goron Elder (past)
+	.db $01 $13	; 9 Symmetry (past)
+.else
+	; Secrets from Ages, rewarded in Seasons
+	.db $00 $d7	; 0 Clock shop
+	.db $00 $e0	; 1 Graveyard
+	.db $01 $04	; 2 Subrosian (Subrosia)
+	.db $00 $5d	; 3 Diver
+	.db $01 $33	; 4 Smith (Subrosia)
+	.db $01 $72	; 5 Pirate (Subrosia)
+	.db $01 $72	; 6 Temple (Subrosia)
+	.db $fe $00	; 7 Deku scrub (depends on the companion)
+	.db $00 $08	; 8 Biggoron
+	.db $00 $c8	; 9 Ruul (mayor's house)
+.endif
