@@ -171,7 +171,7 @@ _scriptCmd_showPasswordScreen:
 	ldi a,(hl)
 	push hl
 	cp $ff
-	jr z,@openSecretMenu
+	jr z,@farore
 
 	ld b,a
 	swap a
@@ -192,12 +192,31 @@ _scriptCmd_showPasswordScreen:
 
 ;;
 @askForSecret:
+	; FR: both games are in the same file, so the secret is given automatically
+	; if the other game handed it out (OPT_AUTO_SECRETS, code/crossworldSecrets.s).
+	; Bit 7 of wSecretInputType is set when that happened.
 	ld a,b
+	ld (wSecretInputType),a
+	callab frAutoAskSecret
+	ld a,(wSecretInputType)
+	bit 7,a
+	jr nz,++
 	or $80
 ;;
 @openSecretMenu:
 	call openSecretInputMenu
 	jr ++
+
+@farore:
+	; FR: wSecretInputType becomes 0 when a return secret was given automatically
+	ld a,$fe
+	ld (wSecretInputType),a
+	callab frAutoFaroreSecret
+	ld a,(wSecretInputType)
+	or a
+	jr z,++
+	ld a,$ff
+	jr @openSecretMenu
 
 ;;
 @generateSecret:

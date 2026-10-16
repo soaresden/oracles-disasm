@@ -47,3 +47,11 @@
 ; FR: set once the player agreed to enter the linked game before finishing the
 ; first one (OPT_LINKED_WARNING)
 .define GLOBALFLAG_FR_LINKED_WARNING_OK	GLOBALFLAG_7f
+
+; FR: the other game's global flags, in its save copy (SRAMBANK_OTHERGAME_BACKUP).
+; wFileStart is $c5b0 in both games; wGlobalFlags is $c6d0 (Ages) / $c6ca (Seasons).
+.ifdef ROM_AGES
+.define FR_OTHER_GAME_GLOBALFLAGS	SEASONS_BACKUP + $c6ca - $c5b0
+.else
+.define FR_OTHER_GAME_GLOBALFLAGS	AGES_BACKUP + $c6d0 - $c5b0
+.endif

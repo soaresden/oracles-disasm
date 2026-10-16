@@ -1490,6 +1490,8 @@ sound7aChannel2:
 	m_GfxDataSimple flg_titlecombo
 	m_GfxDataSimple gfx_fr_hud_icon
 	m_GfxDataSimple gfx_fr_door_icons
+
+	.include "code/crossworldSecrets.s"
 .ends
 
 .BANK $42 SLOT 1
