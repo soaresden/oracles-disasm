@@ -191,6 +191,11 @@ specialObjectLoadAnimationFrameToBuffer:
 		.include "code/fileManagement.s"
 	.ends
 
+	 ; BALLADE: film d'ouverture (la banque 3 des cinématiques est pleine)
+	 m_section_superfree Ballade_Film namespace balladeFilm
+		.include "code/ages/cutscenes/film.s"
+	.ends
+
 	 ; This section can't be superfree, since it must be in the same bank as section
 	 ; "Bank_7_Data".
 	 m_section_free Enemy_Part_Collisions namespace bank7

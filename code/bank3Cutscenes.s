@@ -677,11 +677,20 @@ titlescreenPressStartSprites:
 runIntroCinematic:
 	ld a,(wIntro.cinematicState)
 	rst_jumpTable
+.ifdef ROM_AGES
+	.dw introCinematic_filmCaller ; BALLADE: film d'ouverture (à la place de la chevauchée)
+.else
 	.dw introCinematic_ridingHorse
+.endif
 	.dw introCinematic_inTemple
 	.dw introCinematic_preTitlescreen
 
 .ifdef ROM_AGES
+
+;;
+; BALLADE: le film d'ouverture est dans une autre banque (code/ages/cutscenes/film.s)
+introCinematic_filmCaller:
+	jpab balladeFilm.introCinematic_film
 
 ;;
 ; Covers intro sections after the capcom screen and before the temple scene.

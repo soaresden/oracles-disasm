@@ -30,7 +30,7 @@
 ; copy the data quickly enough to fit within vblank. If you need to draw stuff while the screen is
 ; on, see the "queueDmaTransfer" function or "data/{game}/uniqueGfxHeaders.s".
 
-.define NUM_GFX_HEADERS $bb
+.define NUM_GFX_HEADERS $bc ; BALLADE: +1 (GFXH_FILM)
 
 gfxHeaderTable:
 	.repeat NUM_GFX_HEADERS index COUNT
@@ -969,4 +969,12 @@ m_GfxHeaderStart $b8, GFXH_TWINROVA_LAVA_LAYOUT
 
 m_GfxHeaderStart $b9, GFXH_TWINROVA_NORMAL_LAYOUT
 	m_GfxHeader oth_twinrova_normal_layout, wRoomLayout
+	m_GfxHeaderEnd
+
+; BALLADE: film d'ouverture (code/ages/cutscenes/film.s)
+m_GfxHeaderStart $bb, GFXH_FILM
+	m_GfxHeader spr_film, $8000
+	m_GfxHeader gfx_film_bg, $9000
+	m_GfxHeader map_film_bg, $9800
+	m_GfxHeader flg_film_bg, $9801
 	m_GfxHeaderEnd

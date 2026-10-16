@@ -4247,3 +4247,47 @@ paletteData5960:
 	m_RGB16 $0a $0a $0a
 	m_RGB16 $00 $00 $00
 
+; BALLADE: film d'ouverture (voir tools/make_film.py)
+paletteDataFilmBg:
+	; 0 : bandes noires
+	m_RGB16 $00 $00 $00
+	m_RGB16 $00 $00 $00
+	m_RGB16 $00 $00 $00
+	m_RGB16 $00 $00 $00
+	; 1 : ciel à l'aube (haut -> horizon)
+	m_RGB16 $04 $0a $18
+	m_RGB16 $0a $12 $1c
+	m_RGB16 $12 $19 $1f
+	m_RGB16 $1f $1b $12
+	; 2 : mer
+	m_RGB16 $02 $06 $12
+	m_RGB16 $05 $0c $19
+	m_RGB16 $0c $17 $1d
+	m_RGB16 $1d $1f $1f
+
+paletteDataFilmSpr:
+	; 0 : Link
+	m_RGB16 $1f $1f $1f
+	m_RGB16 $00 $00 $00
+	m_RGB16 $02 $15 $08
+	m_RGB16 $1f $1a $11
+	; 1 : Marine (mouette)
+	m_RGB16 $1f $1f $1f
+	m_RGB16 $00 $00 $00
+	m_RGB16 $1f $01 $05
+	m_RGB16 $1f $1a $11
+	; 2 : rondin
+	m_RGB16 $1f $1f $1f
+	m_RGB16 $0a $05 $01
+	m_RGB16 $14 $0b $04
+	m_RGB16 $1c $15 $0a
+	; 3 : soleil
+	m_RGB16 $1f $1f $1f
+	m_RGB16 $1f $0f $01
+	m_RGB16 $1f $1b $05
+	m_RGB16 $1f $1f $15
+	; 4 : bulle, cœur
+	m_RGB16 $1f $1f $1f
+	m_RGB16 $00 $00 $00
+	m_RGB16 $1f $01 $05
+	m_RGB16 $1f $1f $1f
