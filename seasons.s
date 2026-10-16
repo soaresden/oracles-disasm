@@ -23,6 +23,8 @@
 
 	.include "code/bank0.s"
 
+	.include "code/crossworldOptions.s"
+
 
 .BANK $01 SLOT 1
 .ORG 0

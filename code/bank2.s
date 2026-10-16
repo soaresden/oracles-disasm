@@ -6213,6 +6213,9 @@ _runMapMenu:
 ; that square has been visited)
 ; @param[out]	cflag	c if so
 _mapMenu_checkVasuShortcut:
+	ld a,(OPT_VASU_SHORTCUT)
+	or a
+	ret z
 	ld a,(wMapMenu.mode)
 	or a
 	ret nz

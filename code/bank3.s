@@ -1340,7 +1340,13 @@ _intro_titlescreen:
 	ld a,(wTmpcbb3)
 	and $20
 	ret nz
+	; FR: "PRESS START" moves below AGES on the combined titlescreen
 	ld hl,bank3f.titlescreenPressStartSprites
+	ld a,(OPT_TITLE_COMBINED)
+	or a
+	jr nz,+
+	ld hl,bank3f.titlescreenPressStartSpritesOrig
++
 	ld e,:bank3f.titlescreenPressStartSprites
 	jp addSpritesFromBankToOam
 
@@ -1375,10 +1381,27 @@ _intro_titlescreen_state0:
 	call stopTextThread
 
 	call disableLcd
+.ifdef ROM_AGES
+	; FR: combined Ages + Seasons titlescreen, or the original one
+	ld a,(OPT_TITLE_COMBINED)
+	or a
+	ld a,GFXH_02
+	ld b,PALH_03
+	jr nz,+
+	ld a,FR_GFXH_TITLE_ORIG
+	ld b,FR_PALH_TITLE_ORIG
++
+	push bc
+	call loadGfxHeader
+	pop bc
+	ld a,b
+	call loadPaletteHeader
+.else
 	ld a,GFXH_02
 	call loadGfxHeader
 	ld a,PALH_03
 	call loadPaletteHeader
+.endif
 
 	; cbb3-cbb4 used as a 2-byte counter until automatically exiting
 	ld hl,wTmpcbb3

@@ -186,6 +186,7 @@ gfxHeaderTable: ; 1:69da
 	.dw gfxHeaderb8
 	.dw gfxHeaderb9
 	.dw gfxHeaderba
+	.dw gfxHeaderbb ; FR_GFXH_TITLE_ORIG
 
 
 gfxHeader00:
@@ -933,3 +934,15 @@ gfxHeaderb8:
 	m_GfxHeader unk_0e2aa2 $cf00 $0a
 gfxHeaderb9:
 	m_GfxHeader unk_0e2ad7 $cf00 $0a
+
+; FR: original Ages titlescreen (OPT_TITLE_COMBINED off)
+gfxHeaderbb:
+	m_GfxHeader spr_titlescreen_sprites $8380 $3d|$80
+	m_GfxHeader gfx_titlescreen_1 $8800 $4f|$80
+	m_GfxHeader gfx_titlescreen_2 $8d00 $5f|$80
+	m_GfxHeader gfx_titlescreen_3 $9300 $0f|$80
+	m_GfxHeader gfx_titlescreen_4 $9400 $3f|$80
+	m_GfxHeader gfx_titlescreen_5 $8801 $4f|$80
+	m_GfxHeader gfx_titlescreen_6 $8cd1 $05|$80
+	m_GfxHeader map_titlescreen $9800 $23|$80
+	m_GfxHeader flg_titlescreen $9801 $23

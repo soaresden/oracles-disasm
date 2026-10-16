@@ -4246,3 +4246,45 @@ paletteData5960:
 	m_RGB16 $0a $0a $0a
 	m_RGB16 $00 $00 $00
 
+; FR: original Ages titlescreen palettes (OPT_TITLE_COMBINED off)
+paletteDataTitleOrig:
+	m_RGB16 $0e $0c $04
+	m_RGB16 $1c $1e $1f
+	m_RGB16 $0c $18 $1c
+	m_RGB16 $0b $00 $11
+
+	m_RGB16 $1f $19 $10
+	m_RGB16 $1f $14 $09
+	m_RGB16 $1f $10 $03
+	m_RGB16 $1e $0d $00
+
+	m_RGB16 $0e $0c $04
+	m_RGB16 $1f $1c $00
+	m_RGB16 $0c $18 $1c
+	m_RGB16 $00 $0e $00
+
+	m_RGB16 $0e $0c $04
+	m_RGB16 $1d $1f $1f
+	m_RGB16 $0c $18 $1c
+	m_RGB16 $0b $00 $11
+
+	m_RGB16 $0e $0e $12
+	m_RGB16 $1d $1f $1f
+	m_RGB16 $0c $18 $1c
+	m_RGB16 $0b $00 $11
+
+	m_RGB16 $0e $0c $04
+	m_RGB16 $1e $0d $00
+	m_RGB16 $0c $18 $1c
+	m_RGB16 $0b $00 $11
+
+	m_RGB16 $13 $13 $17
+	m_RGB16 $1d $1f $1f
+	m_RGB16 $0c $18 $1c
+	m_RGB16 $0b $00 $11
+
+	m_RGB16 $0e $0c $04
+	m_RGB16 $1d $1f $1f
+	m_RGB16 $0c $18 $1c
+	m_RGB16 $1e $0d $00
+

@@ -202,6 +202,7 @@ paletteHeaderTable:
 	.dw paletteHeaderc8
 	.dw paletteHeaderc9
 	.dw paletteHeaderca
+	.dw paletteHeadercb ; FR_PALH_TITLE_ORIG
 
 paletteHeader00: ; $64c2
 	m_PaletteHeaderBg  0 1 paletteData4000 $00
@@ -623,3 +624,8 @@ paletteHeaderc9: ; $673b
 	m_PaletteHeaderSpr 0 8 paletteData4668 $00
 paletteHeaderca: ; $6741
 	m_PaletteHeaderBg  0 8 paletteData46f0 $00
+
+; FR: original Ages titlescreen palettes (OPT_TITLE_COMBINED off)
+paletteHeadercb:
+	m_PaletteHeaderBg  0 8 paletteDataTitleOrig $80
+	m_PaletteHeaderSpr 0 8 paletteData4058 $00
