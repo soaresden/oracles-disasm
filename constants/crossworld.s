@@ -24,6 +24,7 @@
 .define OPT_HUD_BOTTOM			$3ff6
 .define OPT_REWARD_MARKERS		$3ff7
 .define OPT_SECRETS_TRACKER		$3ff8
+.define OPT_GBA_SHOP			$3ff9
 
 ; FR: wSubmenuState value marking Farore's secret list (menu $0a) as the
 ; secrets tracker opened from the inventory (openMenu clears it otherwise)
