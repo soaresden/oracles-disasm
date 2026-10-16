@@ -149,23 +149,15 @@ group1Map6aObjectData:
 group1Map6cObjectData:
 group1Map6eObjectData:
 group1Map6fObjectData:
-group1Map7aObjectData:
 group1Map7eObjectData:
 group1Map7fObjectData:
 group1Map85ObjectData:
 group1Map87ObjectData:
 group1Map88ObjectData:
-group1Map89ObjectData:
-group1Map8aObjectData:
-group1Map8bObjectData:
 group1Map8dObjectData:
 group1Map8eObjectData:
 group1Map8fObjectData:
 group1Map98ObjectData:
-group1Map99ObjectData:
-group1Map9aObjectData:
-group1Map9bObjectData:
-group1Map9cObjectData:
 group1Map9dObjectData:
 group1Map9eObjectData:
 group1Map9fObjectData:
@@ -1429,7 +1421,6 @@ group1Map78ObjectData:
 	obj_SpecificEnemyA $00 $5a $0c $00 $00
 	obj_End
 
-group1Map79ObjectData:
 	obj_Interaction $37 $10 $90 $78
 	obj_End
 
@@ -1796,11 +1787,9 @@ group1Map77ObjectData:
 	obj_Interaction $45 $01 $48 $58
 	obj_End
 
-group1Map7bObjectData:
 	obj_Pointer group1Map7bEnemyObjectData
 	obj_End
 
-group1Map7cObjectData:
 	obj_Interaction $82 $02 $30 $78
 	obj_End
 
@@ -1840,7 +1829,6 @@ group1Map86ObjectData:
 	obj_Interaction $dc $07 $28 $78
 	obj_End
 
-group1Map8cObjectData:
 	obj_Interaction $dc $0e $38 $48
 	obj_End
 
@@ -1891,20 +1879,21 @@ group1Mapa8ObjectData:
 	obj_Interaction $9b $00
 	obj_End
 
-group1Mapa9ObjectData:
 	obj_Interaction $e6 $00 $38 $78
 	obj_End
 
-group1MapaaObjectData:
-	; BALLADE: la plage du réveil (à la place des Tokays qui volent les objets)
-	obj_Interaction INTERAC_MARINE $00 $08 $98
+	obj_Interaction $48 $00 $48 $18
+	obj_Interaction $48 $01 $58 $38
+	obj_Interaction $48 $02 $58 $28
+	obj_Interaction $48 $03 $58 $18
+	obj_Interaction $48 $04 $48 $38
+	obj_Interaction $48 $1f $58 $78
+	obj_Interaction $6b $08
 	obj_End
 
-group1MapabObjectData:
 	obj_Pointer group1MapabEnemyObjectData
 	obj_End
 
-group1MapacObjectData:
 	obj_Interaction $48 $11 $38 $48
 	obj_Interaction $80 $04 $38 $48
 	obj_End
@@ -4878,3 +4867,40 @@ group5MapfbObjectData:
 	obj_Pointer group5MapfbEnemyObjectData
 	obj_End
 
+; ==================================================================================================
+; BALLADE: objets des salles de nos îles (générés par tools/make_rooms.py depuis
+; story/salles/objets.txt)
+; ==================================================================================================
+group1Map79ObjectData:
+	obj_End
+group1Map7aObjectData:
+	obj_End
+group1Map7bObjectData:
+	obj_End
+group1Map7cObjectData:
+	obj_End
+group1Map89ObjectData:
+	obj_End
+group1Map8aObjectData:
+	obj_End
+group1Map8bObjectData:
+	obj_End
+group1Map8cObjectData:
+	obj_End
+group1Map99ObjectData:
+	obj_End
+group1Map9aObjectData:
+	obj_End
+group1Map9bObjectData:
+	obj_End
+group1Map9cObjectData:
+	obj_End
+group1Mapa9ObjectData:
+	obj_End
+group1MapaaObjectData:
+	obj_Interaction INTERAC_MARINE $00 $08 $98
+	obj_End
+group1MapabObjectData:
+	obj_End
+group1MapacObjectData:
+	obj_End
