@@ -1554,3 +1554,20 @@ sndTimewarpCompleted:
 	.db $a2
 	.dw sndTimewarpCompletedChannel2
 	.db $ff
+
+; BALLADE: musiques originales de Gulls of Life (données dans audio/ages/mus/ballade.s)
+musBalladePhare:
+	.db $00
+	.dw musBalladePhareChannel0
+	.db $01
+	.dw musBalladePhareChannel1
+	.db $04
+	.dw musBalladePhareChannel4
+	.db $06
+	.dw musBalladePhareChannel6
+	.db $ff
+
+sndBalladeGull:
+	.db $02
+	.dw sndBalladeGullChannel2
+	.db $ff

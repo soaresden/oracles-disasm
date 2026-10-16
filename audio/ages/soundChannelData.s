@@ -490,3 +490,6 @@ sndddChannel6:
 
 
 .undefine MUSIC_CHANNEL_FALLBACK
+
+; BALLADE: musiques et bruitages originaux (généré par tools/make_music.py)
+.include "audio/ages/mus/ballade.s"

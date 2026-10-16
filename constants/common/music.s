@@ -391,6 +391,10 @@
 
 ; Aside from $de, $d5-$ef are undefined?
 
+; BALLADE: musique et bruitage originaux (tools/make_music.py, music/*.txt)
+.define MUS_BALLADE_PHARE $41
+.define SND_BALLADE_GULL  $d6
+
 ; Part of the implementation for "SNDCTRL_STOPMUSIC"?
 .define SNDCTRL_DE		$de
 

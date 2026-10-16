@@ -66,7 +66,7 @@ soundPointers:
 	/* 0x3e */ m_soundPointer musGoronCave
 	/* 0x3f */ m_soundPointer musIntro1
 	/* 0x40 */ m_soundPointer musIntro2
-	/* 0x41 */ m_soundPointer mus41
+	/* 0x41 */ m_soundPointer musBalladePhare ; BALLADE: le Phare Éteint
 	/* 0x42 */ m_soundPointer mus42
 	/* 0x43 */ m_soundPointer mus43
 	/* 0x44 */ m_soundPointer mus44
@@ -216,7 +216,7 @@ soundPointers:
 	/* 0xd3 */ m_soundPointer sndWind
 	/* 0xd4 */ m_soundPointer sndTimewarpCompleted
 	/* 0xd5 */ m_soundPointer sndd5
-	/* 0xd6 */ m_soundPointer sndd6
+	/* 0xd6 */ m_soundPointer sndBalladeGull ; BALLADE: cri de mouette
 	/* 0xd7 */ m_soundPointer sndd7
 	/* 0xd8 */ m_soundPointer sndd8
 	/* 0xd9 */ m_soundPointer sndd9

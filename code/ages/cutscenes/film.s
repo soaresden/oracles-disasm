@@ -150,8 +150,6 @@ introCinematic_film_state2b:
 	ld (wTmpcbb9),a
 	ld a,FILM_GULL_FLYING
 	ld (wTmpcbbe),a
-	ld a,SND_WAVE
-	call playSound
 	xor a
 	jp introCinematic_film_nextState
 
@@ -209,7 +207,7 @@ introCinematic_film_state4b:
 	ld (wTmpcbbf),a
 	ld a,FILM_GULL_WINK
 	ld (wTmpcbbe),a
-	ld a,SND_CLINK2
+	ld a,SND_BALLADE_GULL ; son cri de mouette (tools/make_music.py)
 	call playSound
 	ld a,30
 	jp introCinematic_film_nextState
@@ -231,8 +229,6 @@ introCinematic_film_state6:
 	ret nz
 	ld a,FILM_BUBBLE_EXCLAIM
 	ld (wTmpcbbf),a
-	ld a,SND_COMPASS
-	call playSound
 	ld a,50
 	jp introCinematic_film_nextState
 
@@ -248,8 +244,6 @@ introCinematic_film_state7:
 	ld a,$01
 	ld (wTmpcbba),a
 	ld (wTmpcbbb),a
-	ld a,SND_SOLVEPUZZLE
-	call playSound
 	ld a,170
 	jp introCinematic_film_nextState
 

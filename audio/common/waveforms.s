@@ -4,7 +4,7 @@
 ; If adding a new waveform, remember to add a reference to it at the end of waveformTable.
 
 
-.define NUM_WAVEFORMS $2e
+.define NUM_WAVEFORMS $2f ; BALLADE: +1 (voix du « HEY ! »)
 
 ; Table of pointers to waveform data
 waveformTable:
@@ -174,3 +174,9 @@ m_waveform $2a, WF_SQUARE_75_VOL_3
 
 m_waveform $2d, WF_2d
 	.db $9b $df $ff $fe $dc $ba $98 $76 $21 $00 $01 $23 $22 $22 $23 $23
+
+; BALLADE: une voix qui crie « HEY ! » (fondamentale forte, un peu d'éclat vers 1,5-2 kHz comme
+; la voyelle « é », d'après l'enregistrement de Denis) : le cri des marins dans la musique du
+; Phare (music/phare.txt)
+m_waveform $2e, WF_BALLADE_VOIX
+	.db $cf $dc $de $ee $de $ee $dc $df $c8 $55 $44 $41 $01 $44 $45 $58
