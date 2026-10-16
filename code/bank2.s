@@ -3023,7 +3023,8 @@ _updateStatusBar:
 
 	; Update item sprites
 	ld e,$10
-	ld bc,$1038
+	ld c,$38
+	call frGetStatusBarItemsY ; FR: $10, or $90 with the status bar at the bottom
 	rrca
 	jr nc,+
 	ld c,$30
@@ -3089,7 +3090,8 @@ _updateStatusBar:
 	ld hl,wOam
 	ld de,@oamData
 	ld b,$10
-	jp copyMemoryReverse
+	call copyMemoryReverse
+	jp frFixStatusBarItemsY
 
 @oamData:
 	.db $10 $18 $78 $0b ; B Item

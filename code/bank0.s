@@ -3199,6 +3199,7 @@ addSpritesToOam:
 ; @param	bc	Sprite offset
 ; @param	hl	OAM data
 addSpritesToOam_withOffset:
+	call frMenuSpriteYOffset
 	ldh a,(<hOamTail)
 	cp $a0
 	ret nc
@@ -8260,11 +8261,14 @@ sramBootstrap:
 ;;
 ; FR: status bar at the bottom of the screen (OPT_HUD_BOTTOM), like Link's
 ; Awakening. Called by vblankInterrupt once it wrote the status bar's registers
-; (wGfxRegsFinal). In normal gameplay (LCD interrupt behaviour 3, status bar
-; until line $0f, no menu open), the game is shown from line 0 instead, with
-; the room 16 pixels higher (see frGetSpriteCameraY for objects), and
-; lcdInterrupt switches to the status bar on line $7f (frHudBottomLcdSwitch).
-; Other screens (menus, cutscenes with wave effects...) keep it at the top.
+; (wGfxRegsFinal). In normal gameplay and in the inventory (LCD interrupt
+; behaviour 3, status bar until line $0f), the game is shown from line 0
+; instead, 16 pixels higher (see frGetSpriteCameraY for objects,
+; frMenuSpriteYOffset for menu sprites), and lcdInterrupt switches to the status
+; bar on line $7f (frHudBottomLcdSwitch).
+; Other screens (other menus, cutscenes with wave effects...) keep it on top.
+;
+; wFrHudBottom: 1 in gameplay, 2 in the inventory.
 frHudBottomVblank:
 	push hl
 	ld hl,wFrHudBottom
@@ -8279,9 +8283,10 @@ frHudBottomVblank:
 	cp $0f
 	jr nz,@end
 	ld a,(wOpenedMenuType)
-	or a
-	jr nz,@end
-	inc (hl)
+	cp $02
+	jr nc,@end
+	inc a
+	ld (hl),a
 
 	; Game registers: wGfxRegs2 when this vblank copies them to wGfxRegs3
 	ld hl,wGfxRegs3
@@ -8290,9 +8295,7 @@ frHudBottomVblank:
 	jr nz,+
 	ld hl,wGfxRegs2
 +
-	; LCDC: like lcdInterrupt_setLcdcToA7, on line $10 with the status bar on top
 	ldi a,(hl)
-	and $bf
 	ld ($ff00+R_LCDC),a
 	ldi a,(hl)
 	add $10
@@ -8303,21 +8306,57 @@ frHudBottomVblank:
 	cp $90
 	jr nc,+
 	sub $10
+	jr nc,+
+	xor a
 +
 	ld ($ff00+R_WY),a
 	ldi a,(hl)
 	ld ($ff00+R_WX),a
+
+	; Their LYC is where lcdInterrupt_setLcdcToA7 changes LCDC: 16 lines higher
+	; now (right away for the gameplay's line $10), then the status bar on $7f
+	ld a,(hl)
+	sub $11
+	jr c,@lcdcA7Now
+	cp $7f-1
 	ld a,$7f
+	jr nc,+
+	ld a,(hl)
+	sub $10
++
 	ld ($ff00+R_LYC),a
 @end:
 	pop hl
 	ret
 
+@lcdcA7Now:
+	ld a,$a7
+	ld ($ff00+R_LCDC),a
+	ld a,$7f
+	ld ($ff00+R_LYC),a
+	pop hl
+	ret
+
 ;;
-; FR: LCD interrupt on line $7f with the status bar at the bottom: show the status
-; bar (wGfxRegsFinal, as on the top of the screen) for the last 16 lines.
+; FR: LCD interrupt with the status bar at the bottom: first the LCDC change of
+; lcdInterrupt_setLcdcToA7 if any (inventory textbox), then on line $7f the
+; status bar (wGfxRegsFinal, as on the top of the screen) for the last 16 lines.
 ; @param	c	$03 (STAT mode mask)
 frHudBottomLcdSwitch:
+	ld a,($ff00+R_LYC)
+	cp $7f
+	jr z,@statusBar
+-
+	ld a,($ff00+R_STAT)
+	and c
+	jr nz,-
+	ld a,$a7
+	ld ($ff00+R_LCDC),a
+	ld a,$7f
+	ld ($ff00+R_LYC),a
+	jp _lcdInterruptEnd
+
+@statusBar:
 	ld hl,wGfxRegsFinal
 -
 	ld a,($ff00+R_STAT)
@@ -8325,7 +8364,7 @@ frHudBottomLcdSwitch:
 	jr nz,-
 
 	ldi a,(hl)
-	and $df ; No window (a textbox could still be drawing it)
+	and $df ; No window (a textbox or the inventory could still be drawing it)
 	ld ($ff00+R_LCDC),a
 	ldi a,(hl)
 	sub $80
@@ -8337,6 +8376,50 @@ frHudBottomLcdSwitch:
 	ld a,$01
 	ldh (<hLcdInterruptCounter),a
 	jp _lcdInterruptEnd
+
+;;
+; FR: menu sprites (addSpritesToOam) 16 pixels higher in the inventory with the
+; status bar at the bottom
+; @param	b	Y offset, adjusted
+frMenuSpriteYOffset:
+	ld a,(wFrHudBottom)
+	cp $02
+	ret nz
+	ld a,b
+	sub $10
+	ld b,a
+	ret
+
+;;
+; FR: y-position of the A/B item sprites (wOam 0-3) on the status bar
+; @param[out]	b	$10 on top, $90 at the bottom
+frGetStatusBarItemsY:
+	push af
+	ld b,$10
+	ld a,(wFrHudBottom)
+	or a
+	jr z,+
+	ld b,$90
++
+	pop af
+	ret
+
+;;
+; FR: moves the A/B item sprites (wOam 0-3, written at the top) to the bottom
+; status bar if needed
+frFixStatusBarItemsY:
+	ld a,(wFrHudBottom)
+	or a
+	ret z
+	ld hl,wOam
+	ld de,$0004
+	ld b,e
+-
+	ld (hl),$90
+	add hl,de
+	dec b
+	jr nz,-
+	ret
 
 ;;
 ; FR: camera y-position used to place objects on the screen; 16 pixels lower
