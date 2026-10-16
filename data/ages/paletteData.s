@@ -4410,3 +4410,37 @@ paletteDataSongeAuberge0: ; Songe : la palette 0 (paletteData48e0) en bleuté
 	m_RGB16 $01 $02 $06
 
 ; BALLADE-SONGE-FIN
+
+; BALLADE-TITRE-DEBUT (tools/make_title.py)
+paletteDataTitle: ; écran titre de Gulls of Life
+	; ciel de la nuit, texte
+	m_RGB16 $02 $03 $09
+	m_RGB16 $05 $07 $10
+	m_RGB16 $1f $1f $1f
+	m_RGB16 $10 $12 $19
+	; logo doré
+	m_RGB16 $07 $0b $15
+	m_RGB16 $07 $03 $01
+	m_RGB16 $1f $18 $06
+	m_RGB16 $1f $1e $16
+	; Marine en mouette
+	m_RGB16 $07 $0b $15
+	m_RGB16 $04 $03 $04
+	m_RGB16 $1b $05 $05
+	m_RGB16 $1f $1e $1b
+	; aube
+	m_RGB16 $1e $15 $0f
+	m_RGB16 $1d $0e $05
+	m_RGB16 $1f $1b $09
+	m_RGB16 $1f $1f $1a
+	; soleil levant
+	m_RGB16 $1e $15 $0f
+	m_RGB16 $1d $0e $05
+	m_RGB16 $1f $1b $09
+	m_RGB16 $1f $1f $1a
+	; mer
+	m_RGB16 $03 $07 $12
+	m_RGB16 $06 $0e $1a
+	m_RGB16 $0e $18 $1e
+	m_RGB16 $1f $1f $1f
+; BALLADE-TITRE-FIN

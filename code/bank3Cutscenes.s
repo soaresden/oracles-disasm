@@ -567,9 +567,16 @@ intro_titlescreen_state0:
 	call stopTextThread
 
 	call disableLcd
+.ifdef ROM_AGES
+	; BALLADE: l'écran titre de Gulls of Life
+	ld a,GFXH_TITLE
+	call loadGfxHeader
+	ld a,PALH_TITLE
+.else
 	ld a,GFXH_TITLESCREEN
 	call loadGfxHeader
 	ld a,PALH_03
+.endif
 	call loadPaletteHeader
 
 	; cbb3-cbb4 used as a 2-byte counter until automatically exiting
@@ -683,9 +690,18 @@ runIntroCinematic:
 	.dw introCinematic_ridingHorse
 .endif
 	.dw introCinematic_inTemple
+.ifdef ROM_AGES
+	.dw introCinematic_gotoTitle ; BALLADE: plus de montée de l'arbre : l'écran titre tout de suite
+.else
 	.dw introCinematic_preTitlescreen
+.endif
 
 .ifdef ROM_AGES
+
+;;
+; BALLADE: après le film d'ouverture, directement l'écran titre de Gulls of Life
+introCinematic_gotoTitle:
+	jp intro_gotoTitlescreen
 
 ;;
 ; BALLADE: le film d'ouverture est dans une autre banque (code/ages/cutscenes/film.s)

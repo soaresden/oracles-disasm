@@ -7,7 +7,7 @@
 ; - PALH_SPR:     Loads sprite palettes only
 ; - PALH:         If none of the above, could load both sprite & bg palettes (or not yet categorized)
 
-.define NUM_PALETTE_HEADERS $cf ; BALLADE: + film, Songe
+.define NUM_PALETTE_HEADERS $d0 ; BALLADE: + film, Songe, titre
 
 paletteHeaderTable:
 	.repeat NUM_PALETTE_HEADERS index COUNT
@@ -838,3 +838,9 @@ m_PaletteHeaderStart $ce, PALH_SONGE_AUBERGE
 	m_PaletteHeaderEnd
 
 ; BALLADE-SONGE-FIN
+
+; BALLADE: l'écran titre de Gulls of Life (tools/make_title.py) ; sprites : ceux d'Ages (PRESS START)
+m_PaletteHeaderStart $cf, PALH_TITLE
+	m_PaletteHeaderBg  0, 6, paletteDataTitle
+	m_PaletteHeaderSpr 0, 8, paletteData4058
+	m_PaletteHeaderEnd

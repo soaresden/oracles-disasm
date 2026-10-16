@@ -1112,6 +1112,8 @@ data_5951:
 ; In Seasons these sprites are located elsewhere
 
 titlescreenMakuSeedSprite:
+	; BALLADE: pas de graine Bojo sur l'écran titre de Gulls of Life
+	.db $00
 	.db $13
 	.db $48 $90 $62 $06
 	.db $42 $8e $68 $06

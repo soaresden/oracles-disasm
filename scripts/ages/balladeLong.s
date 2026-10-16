@@ -107,10 +107,11 @@ marineHumanScript:
 	; Elle fonce comme avec des bottes de Pégase et se jette dans ses bras (les deux sprites se
 	; mêlent)
 	writememory w1Link.direction, DIR_DOWN
+	; (les déplacements comptent des images : à SPEED_200, 2 pixels par image)
 	playsound SND_SLASH
-	setspeed SPEED_300
-	moveright $10
-	moveup $0b
+	setspeed SPEED_200
+	moveright $08
+	moveup $06
 	playsound SND_STRIKE
 	wait 20
 	playsound SND_GAINHEART
@@ -120,7 +121,7 @@ marineHumanScript:
 	wait 60
 	showtext TX_5a2c
 	setspeed SPEED_100
-	movedown $0b
+	movedown $0c
 	moveleft $10
 	wait 20
 

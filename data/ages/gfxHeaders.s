@@ -30,7 +30,7 @@
 ; copy the data quickly enough to fit within vblank. If you need to draw stuff while the screen is
 ; on, see the "queueDmaTransfer" function or "data/{game}/uniqueGfxHeaders.s".
 
-.define NUM_GFX_HEADERS $bc ; BALLADE: +1 (GFXH_FILM)
+.define NUM_GFX_HEADERS $bd ; BALLADE: +2 (GFXH_FILM, GFXH_TITLE)
 
 gfxHeaderTable:
 	.repeat NUM_GFX_HEADERS index COUNT
@@ -977,4 +977,13 @@ m_GfxHeaderStart $bb, GFXH_FILM
 	m_GfxHeader gfx_film_bg, $9000
 	m_GfxHeader map_film_bg, $9800
 	m_GfxHeader flg_film_bg, $9801
+	m_GfxHeaderEnd
+
+; BALLADE: l'écran titre de Gulls of Life (tools/make_title.py) ; « PRESS START » reste celui d'Ages
+m_GfxHeaderStart $bc, GFXH_TITLE
+	m_GfxHeader spr_titlescreen_sprites, $8380
+	m_GfxHeader gfx_title_bg, $8800
+	m_GfxHeader gfx_title_bg_2, $9000
+	m_GfxHeader map_title_bg, $9800
+	m_GfxHeader flg_title_bg, $9801
 	m_GfxHeaderEnd
