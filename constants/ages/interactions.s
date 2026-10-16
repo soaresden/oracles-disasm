@@ -1401,6 +1401,7 @@
 ; (INTERAC_KNOW_IT_ALL_BIRD) : 0/1 posée, 2/3 en vol (gauche / droite).
 ; @subid_00{Sur la plage, au réveil de Link (chapitre 1) ; elle finit dans la tunique de Link}
 ; @subid_01{Invisible : dans le Songe, demande à Link s'il veut se réveiller (Select)}
+; @subid_02{Invisible : après le Phare, sur fond noir, Marine parle puis « À suivre... »}
 .define INTERAC_MARINE $e7
 
 ;;

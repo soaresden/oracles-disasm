@@ -4900,6 +4900,7 @@ group1Map79ObjectData:
 group1Map7aObjectData:
 	obj_End
 group1Map7bObjectData:
+	obj_Interaction INTERAC_MARINE $02 $48 $48
 	obj_End
 group1Map7cObjectData:
 	obj_End

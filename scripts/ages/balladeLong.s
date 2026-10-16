@@ -118,3 +118,35 @@ marineHumanScript:
 	showtext TX_5a2a
 	enableallobjects
 	scriptjump @talk
+
+
+; ==================================================================================================
+; INTERAC_MARINE subid $02 : après l'essence du Phare, sur le cap. Comme la télépathie de l'Arbre
+; Bojo d'Ages : fond noir, Marine parle depuis la tunique, « À suivre... », puis on rend la main.
+marineToBeContinuedScript:
+	disableinput
+	writememory wTextboxFlags, TEXTBOXFLAG_ALTPALETTE1
+	wait 40
+	writememory wDontUpdateStatusBar, $77
+	asm15 hideStatusBar
+	asm15 scriptHelp.remoteMakuCutscene_fadeoutToBlackWithDelay, $02
+	checkpalettefadedone
+	; Link aussi disparaît dans le noir
+	writememory w1Link.visible, $00
+	wait 30
+	showtext TX_5a30
+	wait 30
+	; (le jeu remet ce réglage à zéro après chaque texte : sans lui, noir sur noir)
+	writememory wTextboxFlags, TEXTBOXFLAG_ALTPALETTE1
+	showtext TX_5a31
+	wait 60
+	writememory w1Link.visible, $c2
+	asm15 showStatusBar
+	asm15 clearFadingPalettes
+	asm15 fadeinFromWhiteWithDelay, $02
+	checkpalettefadedone
+	resetmusic
+	enablemenu
+	writememory wDisabledObjects, $00
+	enableinput
+	scriptend

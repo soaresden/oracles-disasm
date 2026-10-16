@@ -27,6 +27,7 @@ interactionCodee7:
 @scripts:
 	.dw mainScripts.marineBeachScript
 	.dw mainScripts.marineWakeScript
+	.dw mainScripts.marineToBeContinuedScript
 
 @state1:
 	call interactionRunScript

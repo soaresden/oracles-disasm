@@ -122,6 +122,10 @@ parentItemCode_harp:
 	and (TILESETFLAG_UNDERWATER|TILESETFLAG_SIDESCROLL|TILESETFLAG_LARGE_INDOORS|TILESETFLAG_DUNGEON|TILESETFLAG_INDOORS|TILESETFLAG_MAKU)
 	jr nz,@clearSelf
 
+	; BALLADE: la Lanterne des Songes. Dehors, n'importe quel air fait passer du Réel (groupe 1) au
+	; Songe (groupe 0) et retour, avec l'effet du voyage dans le temps d'Ages
+	jr @tuneOfAges
+
 	ld a,(hl)
 	rst_jumpTable
 	.dw @clearSelf

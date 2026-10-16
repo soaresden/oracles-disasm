@@ -221,8 +221,9 @@ groups:
   - name: TX_0016
     index: 0x16
     text: |-
-      You got a
-      \col(1)Heart Container\col(0)!
+      Tu as trouvé un
+      \col(1)réceptacle de
+      cœur\col(0)!
 
   - name: TX_0017
     index: 0x17
@@ -22605,6 +22606,33 @@ groups:
       Le phare devrait
       briller tout là-
       haut. On monte?
+
+  # ============================================================================
+  # Après le Phare : sur fond noir, Marine parle depuis la tunique, puis « À suivre »
+  # ============================================================================
+  - name: TX_5a30
+    index: 0x30
+    text: |-
+      \Link... Tu as
+      vu? Le Veilleur
+      dort enfin.\stop
+      Ce soir, tout
+      Port-Veille va
+      rêver.\stop
+      Mais d'autres
+      îles ont perdu
+      leurs rêves...
+      Je le sens.\stop
+      Le vent me le
+      dit.\stop
+      On ira, hein?
+      Ensemble.
+
+  - name: TX_5a31
+    index: 0x31
+    text: |-
+      
+         À suivre...
 
 # ==============================================================================
 # Textes d'Ages remplacés (même nom) : les objets qu'on trouve parlent français

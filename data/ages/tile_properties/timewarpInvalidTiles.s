@@ -11,4 +11,5 @@ invalidTimewarpTileList:
 	.db $e8 $00
 	.db $e9 $00 ; Whirlpool
 	.db $fc $01 ; Deep water
+	.db $fa $01 ; BALLADE: l'eau de nos îles (la rivière sous le pont)
 	.db $00

@@ -8,6 +8,15 @@
 marineBeachScript:
 	loadscript balladeScripts.marineBeachScript
 
+; INTERAC_MARINE subid $02 : après l'essence du Phare (« À suivre... »)
+marineToBeContinuedScript:
+	stopifroomflag40set
+	jumpifc6xxset <wEssencesObtained, $01, @go
+	scriptend
+@go:
+	orroomflag $40
+	loadscript balladeScripts.marineToBeContinuedScript
+
 ; INTERAC_MARINE subid $01 : dans le Songe, Select -> « Tu veux te réveiller ? »
 ; (le code de l'interaction fait le réveil quand var37 passe à 1)
 marineWakeScript:
