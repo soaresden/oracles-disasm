@@ -1,8 +1,9 @@
 ; ==================================================================================================
 ; BALLADE: Film d'ouverture, avant l'écran titre (remplace la chevauchée et le temple d'Ages).
 ;
-; À l'aube, Link dérive sur un rondin. Il lève les yeux : une mouette arrive et se pose au bout du
-; rondin. Link ne comprend pas (« ? »), elle lui fait un clin d'œil, il la reconnaît (« ! ») et
+; À l'aube, Link dérive sur un rondin. Il lève les yeux : le visage de Marine se dessine dans les
+; nuages (comme à la fin secrète de Link's Awakening), puis s'efface, et une mouette s'envole de
+; l'endroit où il était. Elle se pose au bout du rondin. Link ne comprend pas (« ? »), elle lui fait un clin d'œil, il la reconnaît (« ! ») et
 ; saute de joie, et Marine aussi ; son cœur s'envole, puis celui de Marine lui répond. Puis on passe
 ; à la montée de l'arbre et à l'écran titre (introCinematic_preTitlescreen).
 ;
@@ -22,6 +23,7 @@
 ;   wTmpcbbd: pose de Link (FILM_LINK_*)
 ;   wTmpcbbe: image de la mouette (FILM_GULL_*)
 ;   wTmpcbbf: bulle au-dessus de Link (FILM_BUBBLE_*)
+;   $cbc0:    durée restante du visage dans les nuages (FILM_FACE_TIMER ; libre pendant l'intro)
 ; ==================================================================================================
 
 .enum 0
@@ -32,9 +34,11 @@
 
 .enum 0
 	FILM_GULL_HIDDEN	db
-	FILM_GULL_FLYING	db
+	FILM_GULL_FLYING	db ; en vol vers la droite (miroir)
 	FILM_GULL_PERCHED	db
 	FILM_GULL_WINK		db
+	FILM_GULL_FLAP		db ; ailes ouvertes, tournée vers Link (quand elle saute)
+	FILM_GULL_FOLDED_R	db ; ailes repliées vers la droite (battement en vol)
 .ende
 
 .enum 0
@@ -42,6 +46,11 @@
 	FILM_BUBBLE_EXCLAIM	db
 	FILM_BUBBLE_QUESTION	db
 .ende
+
+.define FILM_FACE_TIMER		$cbc0
+.define FILM_FACE_DURATION	168 ; 24 + 24 images d'apparition, 72 bien visible, 24 + 24 pour s'effacer
+.define FILM_FACE_X		36
+.define FILM_FACE_Y		18
 
 .define FILM_GULL_LAND_X	78
 .define FILM_GULL_LAND_Y	88
@@ -56,6 +65,7 @@ introCinematic_film:
 	.dw introCinematic_film_state0
 	.dw introCinematic_film_state1
 	.dw introCinematic_film_state2
+	.dw introCinematic_film_state2b
 	.dw introCinematic_film_state3
 	.dw introCinematic_film_state4
 	.dw introCinematic_film_state4b
@@ -100,10 +110,7 @@ introCinematic_film_state0:
 	ld (wTmpcbbf),a
 	ld (wTmpcbbd),a ; FILM_LINK_SIDE
 	ld (wTmpcbbe),a ; FILM_GULL_HIDDEN
-	ld a,168
-	ld (wTmpcbb8),a
-	ld a,20
-	ld (wTmpcbb9),a
+	ld (FILM_FACE_TIMER),a
 
 	ld a,MUS_INTRO_1
 	call playSound
@@ -119,14 +126,28 @@ introCinematic_film_state1:
 	ret nz
 	ld a,FILM_LINK_BACK
 	ld (wTmpcbbd),a
-	ld a,50
+	ld a,40
 	jp introCinematic_film_nextState
 
 ;;
-; State 2: Link lève les yeux vers le ciel
+; State 2: Link lève les yeux vers le ciel... le visage de Marine apparaît dans les nuages
 introCinematic_film_state2:
 	call decCbb3
 	ret nz
+	ld a,FILM_FACE_DURATION
+	ld (FILM_FACE_TIMER),a
+	ld a,FILM_FACE_DURATION-48
+	jp introCinematic_film_nextState
+
+;;
+; State 2b: le visage s'efface ; une mouette s'envole de l'endroit où il était
+introCinematic_film_state2b:
+	call decCbb3
+	ret nz
+	ld a,FILM_FACE_X+6
+	ld (wTmpcbb8),a
+	ld a,FILM_FACE_Y+8
+	ld (wTmpcbb9),a
 	ld a,FILM_GULL_FLYING
 	ld (wTmpcbbe),a
 	ld a,SND_WAVE
@@ -135,32 +156,35 @@ introCinematic_film_state2:
 	jp introCinematic_film_nextState
 
 ;;
-; State 3: la mouette descend en diagonale vers le bout du rondin
+; State 3: la mouette descend vers le bout du rondin
 introCinematic_film_state3:
-	ld hl,wTmpcbb8
-	dec (hl)
+	ld hl,wTmpcbb9
 	ld a,(hl)
-	; Link la suit des yeux : il se tourne vers elle quand elle approche
-	cp 120
+	cp FILM_GULL_LAND_Y
 	jr nc,+
+	inc (hl)
+	; Link la suit des yeux : il se tourne vers elle quand elle approche
+	cp 60
+	jr c,+
 	ld a,FILM_LINK_SIDE
 	ld (wTmpcbbd),a
 +
 	ld a,(wIntro.frameCounter)
-	and $03
-	jr z,+
-	ld hl,wTmpcbb9
+	and $01
+	jr nz,+
+	ld hl,wTmpcbb8
 	ld a,(hl)
-	cp FILM_GULL_LAND_Y
+	cp FILM_GULL_LAND_X
 	jr nc,+
 	inc (hl)
 +
 	ld a,(wTmpcbb8)
 	cp FILM_GULL_LAND_X
 	ret nz
+	ld a,(wTmpcbb9)
+	cp FILM_GULL_LAND_Y
+	ret nz
 
-	ld a,FILM_GULL_LAND_Y
-	ld (wTmpcbb9),a
 	ld a,FILM_GULL_PERCHED
 	ld (wTmpcbbe),a
 	ld a,50
@@ -282,6 +306,7 @@ introCinematic_film_draw:
 	call @drawHearts
 	call @drawGull
 	call @drawLink
+	call @drawFace
 
 	; Rondin
 	ld a,(wTmpcbb4)
@@ -327,6 +352,37 @@ introCinematic_film_draw:
 	ldi a,(hl)
 	ld h,(hl)
 	ld l,a
+	jp addSpritesToOam_withOffset
+
+;;
+; Le visage de Marine dans les nuages : il apparaît et s'efface en scintillant (dessiné une image
+; sur 4, puis une sur 2, puis à chaque image), comme une vision.
+@drawFace:
+	ld hl,FILM_FACE_TIMER
+	ld a,(hl)
+	or a
+	ret z
+	dec (hl)
+	ld b,$03
+	cp FILM_FACE_DURATION-24
+	jr nc,@flicker
+	cp 24
+	jr c,@flicker
+	ld b,$01
+	cp FILM_FACE_DURATION-48
+	jr nc,@flicker
+	cp 48
+	jr c,@flicker
+	ld b,$00
+@flicker:
+	ld a,(wIntro.frameCounter)
+	and b
+	ret nz
+	ldbc FILM_FACE_Y-4+16, FILM_FACE_X+20+8
+	ld hl,@flowerSprites
+	call addSpritesToOam_withOffset
+	ldbc FILM_FACE_Y+16, FILM_FACE_X+8
+	ld hl,@faceSprites
 	jp addSpritesToOam_withOffset
 
 ;;
@@ -389,7 +445,7 @@ introCinematic_film_draw:
 	ld a,(wIntro.frameCounter)
 	and $08
 	jr z,@position
-	ld d,FILM_GULL_PERCHED
+	ld d,FILM_GULL_FOLDED_R
 	jr @position
 
 @notFlying:
@@ -412,7 +468,7 @@ introCinematic_film_draw:
 	ld a,b
 	or a
 	jr z,@position
-	ld d,FILM_GULL_FLYING
+	ld d,FILM_GULL_FLAP
 	ld a,(wIntro.frameCounter)
 	and $04
 	jr z,@position
@@ -486,9 +542,20 @@ introCinematic_film_draw:
 
 @gullSprites:
 	.dw @gullPerched ; (FILM_GULL_HIDDEN, jamais dessinée)
-	.dw @gullFlying
+	.dw @gullFlyingRight
 	.dw @gullPerched
 	.dw @gullWink
+	.dw @gullFlying
+	.dw @gullPerchedRight
+
+@gullFlyingRight:
+	.db $02
+	.db $00 $00 $16 $21
+	.db $00 $08 $14 $21
+@gullPerchedRight:
+	.db $02
+	.db $00 $00 $12 $21
+	.db $00 $08 $10 $21
 
 @gullPerched:
 	.db $02
@@ -507,6 +574,22 @@ introCinematic_film_draw:
 	.db $02
 	.db $00 $00 $1c $04
 	.db $00 $08 $1e $04
+
+@faceSprites:
+	.db $08
+	.db $00 $00 $40 $05
+	.db $00 $08 $42 $05
+	.db $00 $10 $44 $05
+	.db $00 $18 $46 $05
+	.db $10 $00 $60 $05
+	.db $10 $08 $62 $05
+	.db $10 $10 $64 $05
+	.db $10 $18 $66 $05
+
+@flowerSprites:
+	.db $02
+	.db $00 $00 $48 $04
+	.db $00 $08 $4a $04
 
 @questionSprites:
 	.db $02

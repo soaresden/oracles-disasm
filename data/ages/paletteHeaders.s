@@ -815,5 +815,5 @@ m_PaletteHeaderStart $ca, PALH_ca
 ; BALLADE: film d'ouverture
 m_PaletteHeaderStart $cb, PALH_FILM
 	m_PaletteHeaderBg  0, 3, paletteDataFilmBg
-	m_PaletteHeaderSpr 0, 5, paletteDataFilmSpr
+	m_PaletteHeaderSpr 0, 6, paletteDataFilmSpr
 	m_PaletteHeaderEnd

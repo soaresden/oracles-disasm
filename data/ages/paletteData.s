@@ -4286,8 +4286,13 @@ paletteDataFilmSpr:
 	m_RGB16 $1f $0f $01
 	m_RGB16 $1f $1b $05
 	m_RGB16 $1f $1f $15
-	; 4 : bulle, cœur
+	; 4 : bulles, cœur, fleur d'hibiscus
 	m_RGB16 $1f $1f $1f
 	m_RGB16 $00 $00 $00
 	m_RGB16 $1f $01 $05
 	m_RGB16 $1f $1f $1f
+	; 5 : visage de Marine dans les nuages
+	m_RGB16 $1f $1f $1f
+	m_RGB16 $0c $04 $06
+	m_RGB16 $1f $0b $04
+	m_RGB16 $1f $1a $12
