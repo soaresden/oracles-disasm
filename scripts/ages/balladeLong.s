@@ -99,32 +99,56 @@ marineHumanScript:
 	jumpifroomflagset $40, @talk
 
 	setdisabledobjectsto91
+	; Link au pied du lit, toujours au même endroit (il sort du lit plus ou moins haut) : le câlin
+	; doit superposer les deux sprites
+	writememory w1Link.yh, $16
+	writememory w1Link.xh, $78
 	wait 40
 	showtext TX_5a27
 
-	; Les retrouvailles : face à face, elle se blottit contre Link (lui est en $18/$78 et la
-	; regarde, elle part de $28/$68, passe juste sous lui et monte se serrer contre lui, de dos)
-	; Elle fonce comme avec des bottes de Pégase et se jette dans ses bras (les deux sprites se
-	; mêlent)
-	writememory w1Link.direction, DIR_DOWN
+	; Elle le dit d'abord (« je peux enfin te serrer dans mes bras ! »)...
+	showtext TX_5a2c
+	wait 10
+
+	; ... puis les retrouvailles. Elle fonce comme avec des bottes de Pégase, traverse Link et se
+	; blottit contre lui juste au-dessus (elle finit en $0f/$78, 7 pixels plus haut) : Link, de
+	; dos, la serre dans ses bras, on voit le visage de Marine par-dessus son épaule. (Le jeu
+	; dessine Link devant tout objet moins de 11 pixels plus bas que lui : impossible de la mettre
+	; devant lui en les superposant vraiment.)
+	writememory w1Link.direction, DIR_UP
+	; Sinon elle pousse Link en se jetant sur lui (PNJ solide) et ils ne se superposent pas
+	writememory wLinkCanPassNpcs, $01
 	; (les déplacements comptent des images : à SPEED_200, 2 pixels par image)
 	playsound SND_SLASH
 	setspeed SPEED_200
 	moveright $08
-	moveup $06
+	moveup $0b
+	; puis 3 pixels de plus : son visage dépasse par-dessus l'épaule de Link
+	setspeed SPEED_100
+	moveup $03
 	playsound SND_STRIKE
 	wait 20
 	playsound SND_GAINHEART
-	spawninteraction INTERAC_KISS_HEART, $00, $0a, $70
+	spawninteraction INTERAC_KISS_HEART, $00, $06, $70
 	wait 30
-	spawninteraction INTERAC_KISS_HEART, $01, $08, $80
-	wait 60
-	showtext TX_5a2c
+	spawninteraction INTERAC_KISS_HEART, $01, $04, $80
+	wait 40
+	; Dans ses bras : « je suis tellement heureuse ! »
+	showtext TX_5a2f
+	playsound SND_GAINHEART
+	spawninteraction INTERAC_KISS_HEART, $00, $02, $78
+	wait 40
+	; Elle se détache et recule d'un pas, à gauche
 	setspeed SPEED_100
-	movedown $0c
-	moveleft $10
+	moveleft $14
+	movedown $0f
+	writememory wLinkCanPassNpcs, $00
+	writememory w1Link.direction, DIR_LEFT
 	wait 20
 
+	; Elle recule d'un pas... et le taquine : « Tu rêves de moi ?! »
+	showtext TX_5a32
+	wait 10
 	showtext TX_5a2d
 	jumpiftextoptioneq $00, @sawHer
 	showtext TX_5a29
