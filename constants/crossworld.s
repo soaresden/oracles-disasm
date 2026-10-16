@@ -23,6 +23,15 @@
 .define OPT_AUTO_SECRETS		$3ff5
 .define OPT_HUD_BOTTOM			$3ff6
 .define OPT_REWARD_MARKERS		$3ff7
+.define OPT_SECRETS_TRACKER		$3ff8
+
+; FR: wSubmenuState value marking Farore's secret list (menu $0a) as the
+; secrets tracker opened from the inventory (openMenu clears it otherwise)
+.define FR_TRACKER_MARK			$ff
+
+; FR: Ages' GLOBALFLAG_RETURNED_DOG, also read from Seasons: Mamamu (exchange 6
+; of the secrets that begin in Seasons) never sets her DONE flag
+.define FR_AGES_GLOBALFLAG_RETURNED_DOG	$3b
 
 ; FR: original Ages titlescreen, used when OPT_TITLE_COMBINED is off
 .define FR_GFXH_TITLE_ORIG		$bb

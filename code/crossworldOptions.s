@@ -20,6 +20,7 @@
 	.db $01	; OPT_AUTO_SECRETS
 	.db $00	; OPT_HUD_BOTTOM
 	.db $01	; OPT_REWARD_MARKERS
-	.dsb 8 $00
+	.db $01	; OPT_SECRETS_TRACKER
+	.dsb 7 $00
 
 .ENDS

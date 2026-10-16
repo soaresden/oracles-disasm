@@ -1493,6 +1493,8 @@ sound7aChannel2:
 
 	.include "code/crossworldSecrets.s"
 	.include "code/crossworldMapMarkers.s"
+	.include "code/crossworldSecretList.s"
+	.include "code/crossworldSecretNames.s"
 .ends
 
 .BANK $42 SLOT 1
