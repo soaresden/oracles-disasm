@@ -842,7 +842,7 @@ interactione8SubidData:
 	m_InteractionSubidData $5c $00 $22 ; la dame insomniaque
 	m_InteractionSubidData $42 $00 $32 ; le vieux qui compte les moutons
 	m_InteractionSubidData $4f $10 $12 ; l'ado
-	m_InteractionSubidData $e2 $00 $22 ; Marine humaine (spr_marine_human, palette rouge)
+	m_InteractionSubidData $e2 $00 $32 ; Marine humaine (spr_marine_human) : cheveux orange, robe jaune pâle
 	m_InteractionSubidDataEnd
 
 interactiond4SubidData:
