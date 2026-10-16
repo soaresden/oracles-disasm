@@ -196,6 +196,11 @@ specialObjectLoadAnimationFrameToBuffer:
 		.include "code/ages/cutscenes/film.s"
 	.ends
 
+	 ; BALLADE: Marine parle depuis la tunique de Link (Select)
+	 m_section_superfree Ballade_Marine namespace balladeMarine
+		.include "code/ages/balladeMarine.s"
+	.ends
+
 	 ; This section can't be superfree, since it must be in the same bank as section
 	 ; "Bank_7_Data".
 	 m_section_free Enemy_Part_Collisions namespace bank7

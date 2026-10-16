@@ -59,6 +59,11 @@
 
 
 
+; BALLADE: nombre d'images où il faut garder Select enfoncé pour ouvrir la carte (un appui plus
+; court fait parler Marine)
+.define BALLADE_SELECT_HOLD_FRAMES 20
+
+
 ; Define to help with building directory strings, maybe other stuff
 .ifdef ROM_SEASONS
 	.define GAME "seasons"

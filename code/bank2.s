@@ -3032,6 +3032,50 @@ b2_updateMenus:
 	ret nz
 
 	call playHeartBeepAtInterval
+.ifdef ROM_AGES
+	; BALLADE: Start = inventaire (Start + Select = sauvegarde), comme avant. Mais Select : un
+	; appui court fait parler Marine, et la carte ne s'ouvre que si on le garde enfoncé.
+	ld a,(wKeysJustPressed)
+	and BTN_START | BTN_SELECT
+	ld c,$03
+	cp BTN_START | BTN_SELECT
+	jr z,@openMenu
+	ld c,$01
+	bit BTN_BIT_START,a
+	jr nz,@openMenu
+
+	ld hl,wBalladeSelectTimer
+	ld a,(wKeysPressed)
+	bit BTN_BIT_SELECT,a
+	jr z,@selectReleased
+
+	; Select enfoncé
+	ld a,(hl)
+	inc a
+	ret z ; carte déjà ouverte pendant cet appui
+	ld (hl),a
+	cp BALLADE_SELECT_HOLD_FRAMES
+	ret c
+	ld (hl),$ff
+	ld c,$02
+	jp openMenu_body
+
+@selectReleased:
+	ld a,(hl)
+	ld (hl),$00
+	or a
+	ret z ; Select n'était pas enfoncé
+	inc a
+	ret z ; on vient de fermer la carte
+	callab balladeMarine.marineTalk
+	ret
+
+@openMenu:
+	xor a
+	ld (wBalladeSelectTimer),a
+	jp openMenu_body
+
+.else
 	ld a,(wKeysJustPressed)
 	and BTN_START | BTN_SELECT
 	ret z
@@ -3046,6 +3090,7 @@ b2_updateMenus:
 	dec c
 +
 	jp openMenu_body
+.endif
 
 @updateMenu:
 	ld a,$ff

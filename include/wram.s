@@ -2803,7 +2803,12 @@ wcde3: ; $cde3
 ; are given back to Link during credits cutscene state 3
 	dw
 
-; $cde5-$cdff unused?
+; BALLADE: durée d'appui sur Select (court = Marine parle, maintenu = carte ; $ff = carte
+; déjà ouverte pendant cet appui)
+wBalladeSelectTimer: ; $cde5
+	db
+
+; $cde6-$cdff unused?
 
 .endif ; ROM_AGES
 .ENDS
