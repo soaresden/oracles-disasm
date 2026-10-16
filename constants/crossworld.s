@@ -29,3 +29,21 @@
 
 ; FR: BG palette of the icons above Vasu's doors
 .define FR_DOOR_ICON_PALETTE		$00
+
+; FR: Vasu's shop, where the door to the other game is
+.ifdef ROM_AGES
+.define VASU_MAP_ROOM			$58
+.define VASU_GROUP			$02
+.define VASU_ROOM			$ee
+.define VASU_OTHER_GAME_DOOR_POS	$57	; a bit in front of the right door
+.else
+.define VASU_MAP_ROOM			$e8
+.define VASU_GROUP			$03
+.define VASU_ROOM			$91
+.define VASU_OTHER_GAME_DOOR_POS	$53	; a bit in front of the left door
+.endif
+.define VASU_POS			$55	; map shortcut destination
+
+; FR: set once the player agreed to enter the linked game before finishing the
+; first one (OPT_LINKED_WARNING)
+.define GLOBALFLAG_FR_LINKED_WARNING_OK	GLOBALFLAG_7f

@@ -2591,6 +2591,123 @@ cutscene19:
 .include "data/dungeonProperties.s"
 .include "data/dungeonLayouts.s"
 
+;;
+; FR: before going to the other game for the first time (from the first game, before
+; finishing it), warn the player: the warp is turned into a warp back into the
+; shop, and frUpdateLinkedWarning asks once the room is loaded.
+; @param[out]	zflag	nz if the warp was redirected
+frCheckLinkedWarning:
+	ld a,(OPT_LINKED_WARNING)
+	or a
+	ret z
+	call checkIsLinkedGame
+	jr nz,@noWarning
+	ld a,GLOBALFLAG_FINISHEDGAME
+	call checkGlobalFlag
+	jr nz,@noWarning
+	ld a,GLOBALFLAG_FR_LINKED_WARNING_OK
+	call checkGlobalFlag
+	jr nz,@noWarning
+
+	ld a,VASU_GROUP | $80
+	ld (wWarpDestGroup),a
+	ld a,VASU_ROOM
+	ld (wWarpDestRoom),a
+	ld a,VASU_OTHER_GAME_DOOR_POS
+	ld (wWarpDestPos),a
+	; Appear in place (the door's transition would make Link walk into it again)
+	ld a,TRANSITION_DEST_0
+	ld (wWarpTransition),a
+	ld a,$01
+	ld (wFrLinkedWarningState),a
+	or a
+	ret
+
+@noWarning:
+	xor a
+	ret
+
+;;
+; Go to the other game (Vasu's door): the swap happens in the main loop. When coming
+; back, Link appears in front of Vasu's shop.
+frSwapToOtherGame:
+.ifdef ROM_AGES
+	ld a,SRAMBANK_SEASONS
+.else
+	ld a,SRAMBANK_AGES
+.endif
+	ld (wSwapGame),a
+
+	call setDeathRespawnPoint
+	ld hl,wDeathRespawnBuffer
+	lda, $00
+	ldi (hl),a
+.ifdef ROM_AGES
+	ld a,$58
+.else
+	ld a,$e8
+.endif
+	ldi (hl),a
+	inc hl
+	ld a,DIR_DOWN
+	ldi (hl),a
+	ld a,$48
+	ldi (hl),a
+	ld a,$58
+	ld (hl),a
+	ret
+
+;;
+; FR: asks "enter the linked game?" (see frCheckLinkedWarning). Called every frame of
+; normal gameplay. States: 1 = ask, 2 = waiting for the answer, 3 = fading out
+; before going to the other game.
+frUpdateLinkedWarning:
+	ld a,(wFrLinkedWarningState)
+	or a
+	ret z
+	call retIfTextIsActive
+	ld a,(wFrLinkedWarningState)
+	cp $03
+	jr z,@fadingOut
+	dec a
+	jr nz,@gotAnswer
+
+	ld a,$02
+	ld (wFrLinkedWarningState),a
+	ld bc,TX_FR_LINKED_WARNING
+	jp showText
+
+@gotAnswer:
+	xor a
+	ld (wFrLinkedWarningState),a
+	; Only if still in the shop (the text could have been interrupted)
+	ld a,(wActiveGroup)
+	cp VASU_GROUP
+	ret nz
+	ld a,(wActiveRoom)
+	cp VASU_ROOM
+	ret nz
+	ld a,(wSelectedTextOption)
+	or a
+	ret nz
+
+	; "Yes": don't ask again, fade out, then go to the other game
+	ld a,GLOBALFLAG_FR_LINKED_WARNING_OK
+	call setGlobalFlag
+	ld a,$03
+	ld (wFrLinkedWarningState),a
+	ld a,$01
+	ld (wDisabledObjects),a
+	jp fadeoutToWhite
+
+@fadingOut:
+	ld a,(wPaletteThread_mode)
+	or a
+	ret nz
+	xor a
+	ld (wFrLinkedWarningState),a
+	jp frSwapToOtherGame
+
 .ends
 
  m_section_free "Bank_1_Code_2" NAMESPACE "bank1"
@@ -3544,32 +3661,12 @@ _loadingRoom:
 	ld a,(wWarpDestRoom)
 	cp $ff
 	jr nz,+
-.ifdef ROM_AGES
-	ld a,SRAMBANK_SEASONS
-.else
-	ld a,SRAMBANK_AGES
-.endif
-	ld (wSwapGame),a
 
-	call setDeathRespawnPoint
-	ld hl,wDeathRespawnBuffer
-	lda, $00
-	ldi (hl),a
-.ifdef ROM_AGES
-	ld a,$58
-.else
-	ld a,$e8
-.endif
-	ldi (hl),a
-	inc hl
-	ld a,DIR_DOWN
-	ldi (hl),a
-	ld a,$48
-	ldi (hl),a
-	ld a,$58
-	ld (hl),a
-
-	ret
+	; FR: first time in the linked game before finishing this one? Reload the
+	; shop and ask first (frUpdateLinkedWarning).
+	call frCheckLinkedWarning
+	jr nz,+
+	jp frSwapToOtherGame
 +
 
 	call applyWarpDest
@@ -3722,6 +3819,8 @@ cutscene01:
 	call updateMenus
 	ret nz
 	; Returns if a menu is being displayed
+
+	call frUpdateLinkedWarning
 
 .ifdef ROM_AGES
 	call updatePirateShip

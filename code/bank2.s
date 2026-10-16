@@ -6210,19 +6210,6 @@ _runMapMenu:
 	.dw _mapMenu_state2
 
 ;;
-; FR: Vasu's shop, where the door to the other game is
-.ifdef ROM_AGES
-	.define VASU_MAP_ROOM	$58
-	.define VASU_GROUP	$02
-	.define VASU_ROOM	$ee
-.else
-	.define VASU_MAP_ROOM	$e8
-	.define VASU_GROUP	$03
-	.define VASU_ROOM	$91
-.endif
-	.define VASU_POS	$55
-
-;;
 ; FR: is the cursor on Vasu's square of the overworld map? (only reachable once
 ; that square has been visited)
 ; @param[out]	cflag	c if so

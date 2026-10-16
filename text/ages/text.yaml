@@ -1977,6 +1977,15 @@ groups:
     text: |-
       Aller chez Vasu?
         \opt()Oui \opt()Non
+  - name: TX_FR_LINKED_WARNING
+    index: auto
+    text: |-
+      Vous entrez dans
+      la partie li\xa6e
+      sans avoir fini
+      cette aventure.\stop
+      Continuer?
+        \opt()Oui \opt()Non
 - group: 0x05
   data:
   - name:

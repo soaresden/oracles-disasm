@@ -328,6 +328,11 @@ wNewGameFirstGame:
 ; $01: seasons
 	db
 
+wFrLinkedWarningState:
+; FR: warning before entering the linked game (OPT_LINKED_WARNING)
+; $00: nothing; $01: ask; $02: waiting for the answer
+	db
+
 ; $c4bb-$c4bf unused?
 
 .ENDS
