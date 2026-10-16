@@ -1399,5 +1399,5 @@
 ;;
 ; BALLADE: Marine, changée en mouette. Ses animations sont celles du perroquet
 ; (INTERAC_KNOW_IT_ALL_BIRD) : 0/1 posée, 2/3 en vol (gauche / droite).
-; @subid_00{Sur la plage, au réveil de Link (chapitre 1)}
+; @subid_00{Sur la plage, au réveil de Link (chapitre 1) ; elle finit dans la tunique de Link}
 .define INTERAC_MARINE $e7

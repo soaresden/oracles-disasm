@@ -5,8 +5,8 @@
 ; ==================================================================================================
 ; INTERAC_MARINE subid $00 : la plage du réveil (chapitre 1)
 ;
-; Link est évanoui sur le sable ; Marine arrive en volant et se pose à côté de lui.
-; Le drapeau $40 de la salle retient que la scène a été vue.
+; Link est évanoui sur le sable ; Marine arrive en volant et se pose à côté de lui, puis elle se
+; glisse dans sa tunique. Le drapeau $40 de la salle retient que la scène a été vue.
 ; ==================================================================================================
 marineBeachScript:
 	jumpifroomflagset $40, @alreadySeen
@@ -49,24 +49,21 @@ marineBeachScript:
 @answeredYes:
 	showtext TX_5a03
 @sceneDone:
+	; Elle a froid : elle saute se mettre au chaud dans la tunique de Link, où elle passera toute
+	; l'aventure (pas de mouette qui suit Link à l'écran).
+	showtext TX_5a05
+	wait 20
+	setanimation $02
+	setspeed SPEED_100
+	setangle ANGLE_LEFT
+	applyspeed $12
+	writeobjectbyte Interaction.visible, $00
+	playsound SND_PICKUP
+	wait 40
+	showtext TX_5a06
 	orroomflag $40
 	enableallobjects
 	enablemenu
-	scriptjump @npc
 
 @alreadySeen:
-	setcoords $48, $40
-	setanimation $00
-	writeobjectbyte Interaction.visible, $80
-
-@npc:
-	setcollisionradii $08, $08
-	makeabuttonsensitive
-@npcLoop:
-	checkabutton
-	setdisabledobjectsto91
-	cplinkx Interaction.direction
-	setanimationfromobjectbyte Interaction.direction
-	showtext TX_5a05
-	enableallobjects
-	scriptjump @npcLoop
+	scriptend
