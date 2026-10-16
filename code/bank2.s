@@ -3544,6 +3544,10 @@ updateStatusBar_body:
 	add $10
 	ld (hl),a
 +
+.ifdef ROM_AGES
+	; BALLADE: le noctambule : les secondes qui restent, à la place du compteur de clés
+	callab balladeMarine.drawNoctambuleTimer
+.endif
 	xor a
 	ld ($ff00+R_SVBK),a
 	ld a,(wcbe8)

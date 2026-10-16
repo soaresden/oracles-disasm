@@ -109,3 +109,69 @@ switchDream:
 	ld a,SND_FADEOUT
 	jp playSound
 
+
+;;
+; Le noctambule : dans la barre d'état, les secondes qui restent dans le Songe (à la place du
+; compteur de clés, qui n'apparaît que dans les donjons). Appelé par updateStatusBar_body
+; (code/bank2.s), la banque 4 de la WRAM étant sélectionnée.
+drawNoctambuleTimer:
+	ld a,(wTilesetFlags)
+	bit TILESETFLAG_BIT_DUNGEON,a
+	ret nz
+
+	; Secondes = images / 60, arrondi au-dessus
+	ld hl,wBalladeNoctambule
+	ldi a,(hl)
+	ld c,a
+	ld b,(hl)
+	ld d,$00
+@divide:
+	ld a,b
+	or c
+	jr z,@gotSeconds
+	inc d
+	ld a,c
+	sub 60
+	ld c,a
+	jr nc,@divide
+	ld a,b
+	or a
+	jr z,@gotSeconds
+	dec b
+	jr @divide
+@gotSeconds:
+	; Une valeur nouvelle : la barre d'état sera redessinée
+	ld hl,wBalladeNoctambuleShown
+	ld a,d
+	cp (hl)
+	jr z,+
+	ld (hl),a
+	ld hl,wStatusBarNeedsRefresh
+	set 4,(hl)
++
+	; Une petite lune (tuile $03, tools/make_sprites.py) puis les secondes (écrites à chaque image :
+	; la carte de la barre peut être rechargée)
+	ld hl,w4StatusBarTileMap+$0b
+	ld a,(wcbe8)
+	rrca
+	jr nc,+
+	dec l
++
+	ld a,d
+	or a
+	jr nz,+
+	; Plus de compte à rebours : des cases vides
+	ld a,$04
+	ldi (hl),a
+	ld (hl),a
+	ret
++
+	cp 10
+	jr c,+
+	ld a,9
++
+	ld (hl),$03
+	inc l
+	add $10
+	ld (hl),a
+	ret

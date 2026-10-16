@@ -2813,7 +2813,11 @@ wBalladeSelectTimer: ; $cde5
 wBalladeNoctambule: ; $cde6
 	dw
 
-; $cde8-$cdff unused?
+; BALLADE: secondes du noctambule affichées dans la barre d'état (0 = rien)
+wBalladeNoctambuleShown: ; $cde8
+	db
+
+; $cde9-$cdff unused?
 
 .endif ; ROM_AGES
 .ENDS
