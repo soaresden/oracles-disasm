@@ -1,5 +1,5 @@
 # See "text/info.txt" for documentation about this file.
-# VF : textes de la ROM Europe (langue 1), voir fr/make_fr_text.py.
+# Textes de la ROM Europe (langue fr), voir fr/make_fr_text.py.
 
 groups:
 - group: 0x00
@@ -1551,7 +1551,7 @@ groups:
     index: auto
     text: |-
       Aller chez Vasu?
-       \opt()Oui \opt()Non
+        \opt()Oui \opt()Non
 - group: 0x04
   data:
   - name: TX_0400
