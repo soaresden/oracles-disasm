@@ -27,8 +27,6 @@ marineWakeScript:
 ; ==================================================================================================
 balladeNpc00Script: ; l'aubergiste
 	rungenericnpc TX_5a20
-balladeNpc01Script: ; le vieux pêcheur
-	rungenericnpc TX_5a21
 balladeNpc02Script: ; un garçon
 	rungenericnpc TX_5a22
 balladeNpc03Script: ; un autre enfant
@@ -40,38 +38,27 @@ balladeNpc05Script: ; le vieux qui compte les moutons
 balladeNpc06Script: ; l'ado
 	rungenericnpc TX_5a26
 balladeNpc07Script: ; Marine humaine (dans le Songe)
-	scriptjump marineHumanScript
+	loadscript balladeScripts.marineHumanScript
 
 
 ; ==================================================================================================
-; INTERAC_BALLADE_NPC subid $07 : Marine humaine, dans l'auberge du Songe (2:9e)
-;
-; La première fois : elle découvre ses mains, et elle parle de Cocolint. Ensuite, elle explique le
-; Songe et le réveil. Le drapeau $40 de la salle retient que la scène a été vue.
-; (Pas de « loadscript » dans le Songe : ces scripts s'exécutent depuis wBigBuffer, que
-; l'ondulation de l'écran réécrit à chaque image.)
+; INTERAC_BALLADE_NPC subid $01 : le vieux pêcheur. La 1re fois, il rend à Link l'épée qu'il a
+; repêchée après le naufrage (le jeu commence sans épée).
+; (Dans la banque des scripts : « checkabutton » ne marche pas dans un script chargé par
+; « loadscript ».)
 ; ==================================================================================================
-marineHumanScript:
+balladeNpc01Script: ; le vieux pêcheur (il rend son épée à Link)
 	initcollisions
-	jumpifroomflagset $40, @talk
-
-	setdisabledobjectsto91
-	wait 40
-	showtext TX_5a27
-	jumpiftextoptioneq $00, @sawHer
-	showtext TX_5a29
-	scriptjump @sceneDone
-@sawHer:
-	showtext TX_5a28
-@sceneDone:
-	orroomflag $40
-	showtext TX_5a2a
-	enableallobjects
-
-@talk:
+@loop:
 	checkabutton
 	setdisabledobjectsto91
-	showtext TX_5a2a
+	jumpifitemobtained TREASURE_SWORD, @hasSword
+	showtext TX_5a2b
+	giveitem TREASURE_OBJECT_SWORD_00
 	enableallobjects
-	scriptjump @talk
+	scriptjump @loop
+@hasSword:
+	showtext TX_5a21
+	enableallobjects
+	scriptjump @loop
 

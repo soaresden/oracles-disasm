@@ -7,8 +7,11 @@
 
 ;;
 marineTalk:
-	; Dans le Songe (groupes 0 et 2), Marine propose de réveiller Link (INTERAC_MARINE $01)
+	; Dans le Songe (groupes 0 et 2, pas les donjons), Marine propose de réveiller Link
+	; (INTERAC_MARINE $01)
 	ld a,(wActiveGroup)
+	cp $03
+	jr nc,+
 	and $01
 	jr nz,+
 	call getFreeInteractionSlot
@@ -59,6 +62,7 @@ marineTalk:
 	.db $01, $ab, <TX_5a0b ; le port de pêche
 	.db $01, $8a, <TX_5a0c ; le sentier au pont cassé
 	.db $03, $9e, <TX_5a0d ; dans l'auberge
+	.db $04, $24, <TX_5a0e ; le hall du Phare Éteint
 	.db $ff
 
 

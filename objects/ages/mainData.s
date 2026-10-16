@@ -2619,7 +2619,6 @@ group4Map11ObjectData:
 	obj_Interaction $7f $00 $28 $78
 	obj_End
 
-group4Map12ObjectData:
 	obj_Pointer group4Map12EnemyObjectData
 	obj_End
 
@@ -2630,10 +2629,8 @@ group4Map13ObjectData:
 	obj_BeforeEvent group4Map13BeforeEventObjectData
 	obj_End
 
-group4Map14ObjectData:
 	obj_End
 
-group4Map15ObjectData:
 	obj_Interaction $20 $00 $58 $a8
 	obj_Interaction $79 $05 $90 $30
 	obj_Part $09 $00 $1d
@@ -2667,12 +2664,10 @@ group4Map1aObjectData:
 	obj_Pointer group4Map1aEnemyObjectData
 	obj_End
 
-group4Map1bObjectData:
 	obj_Interaction $20 $04 $28 $b8
 	obj_Pointer group4Map1bEnemyObjectData
 	obj_End
 
-group4Map1cObjectData:
 	obj_Interaction $20 $00 $58 $98
 	obj_Part $09 $00 $55
 	obj_Pointer group4Map1cEnemyObjectData
@@ -2721,7 +2716,6 @@ group4Map23ObjectData:
 	obj_Pointer group4Map23EnemyObjectData
 	obj_End
 
-group4Map24ObjectData:
 	obj_Interaction $12 $00 $88 $78
 	obj_Interaction $e2 $01
 	obj_Interaction $7e $00
@@ -4936,14 +4930,30 @@ group1MapaaObjectData:
 	obj_Interaction INTERAC_MARINE $00 $08 $98
 	obj_End
 group1MapabObjectData:
-	obj_Interaction INTERAC_BALLADE_NPC $01 $38 $88
+	obj_Interaction INTERAC_BALLADE_NPC $01 $38 $58
 	obj_End
 group1MapacObjectData:
 	obj_End
 group2Map9eObjectData:
 	obj_Interaction INTERAC_BALLADE_NPC $07 $28 $68
-	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
 	obj_End
 group3Map9eObjectData:
 	obj_Interaction INTERAC_BALLADE_NPC $00 $48 $38
+	obj_End
+group4Map12ObjectData:
+	obj_RandomEnemy $40 ENEMY_GHINI $00
+	obj_End
+group4Map14ObjectData:
+	obj_RandomEnemy $40 ENEMY_KEESE $00
+	obj_End
+group4Map15ObjectData:
+	obj_End
+group4Map1bObjectData:
+	obj_RandomEnemy $60 ENEMY_ZOL $00
+	obj_End
+group4Map1cObjectData:
+	obj_SpecificEnemyA $00 ENEMY_STALFOS $00 $38 $58
+	obj_SpecificEnemyA     ENEMY_STALFOS $00 $78 $58
+	obj_End
+group4Map24ObjectData:
 	obj_End

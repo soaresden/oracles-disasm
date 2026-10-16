@@ -175,6 +175,7 @@ group1WarpDestTable:
 	m_WarpDest $e2 $32 $0 $4
 	; BALLADE
 	m_WarpDest $9a $45 $0 $1 ; $49 : devant la porte de l'auberge de Port-Veille
+	m_WarpDest $7b $44 $0 $1 ; $4a : devant la porte du Phare Éteint, sur le cap
 
 group2WarpDestTable:
 	m_WarpDest $90 $45 $0 $e

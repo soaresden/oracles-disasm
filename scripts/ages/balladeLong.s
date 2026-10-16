@@ -68,3 +68,53 @@ marineBeachScript:
 
 @alreadySeen:
 	scriptend
+
+
+; ==================================================================================================
+; INTERAC_BALLADE_NPC subid $07 : Marine humaine, dans l'auberge du Songe (2:9e)
+;
+; La première fois : elle découvre ses mains, se jette dans les bras de Link (des cœurs
+; s'envolent), puis elle parle de Cocolint. Ensuite, elle explique le
+; Songe et le réveil. Le drapeau $40 de la salle retient que la scène a été vue.
+; (Chargé par « loadscript » : il tourne depuis wBigBuffer ; l'auberge du Songe n'a donc pas
+; d'ondulation, qui réécrit cette mémoire à chaque image.)
+; ==================================================================================================
+marineHumanScript:
+	initcollisions
+	jumpifroomflagset $40, @talk
+
+	setdisabledobjectsto91
+	wait 40
+	showtext TX_5a27
+
+	; Les retrouvailles : elle court se blottir contre Link (lui est en $18/$78, elle en $28/$68)
+	setspeed SPEED_100
+	moveup $08
+	moveright $08
+	playsound SND_GAINHEART
+	spawninteraction INTERAC_KISS_HEART, $00, $10, $70
+	wait 30
+	spawninteraction INTERAC_KISS_HEART, $01, $0c, $78
+	wait 60
+	showtext TX_5a2c
+	moveleft $08
+	movedown $08
+	wait 20
+
+	showtext TX_5a2d
+	jumpiftextoptioneq $00, @sawHer
+	showtext TX_5a29
+	scriptjump @sceneDone
+@sawHer:
+	showtext TX_5a28
+@sceneDone:
+	orroomflag $40
+	showtext TX_5a2a
+	enableallobjects
+
+@talk:
+	checkabutton
+	setdisabledobjectsto91
+	showtext TX_5a2a
+	enableallobjects
+	scriptjump @talk

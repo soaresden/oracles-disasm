@@ -53,10 +53,13 @@ chestGroup3Data:
 
 chestGroup4Data:
 	m_ChestData $57, $08, TREASURE_OBJECT_SMALL_KEY_03
-	m_ChestData $5a, $15, TREASURE_OBJECT_GASHA_SEED_01
+	; BALLADE: le Phare Éteint : la Lanterne des Songes (la harpe d'Ages)
+	m_ChestData $57, $15, TREASURE_OBJECT_HARP_02
 	m_ChestData $17, $16, TREASURE_OBJECT_SMALL_KEY_03
 	m_ChestData $2c, $1a, TREASURE_OBJECT_SMALL_KEY_03
-	m_ChestData $59, $1c, TREASURE_OBJECT_RING_0e
+	; BALLADE: le Phare Éteint : la clé du boss, et la petite clé (salle 4:1b)
+	m_ChestData $5a, $1c, TREASURE_OBJECT_BOSS_KEY_03
+	m_ChestData $54, $1b, TREASURE_OBJECT_SMALL_KEY_03
 	m_ChestData $53, $1d, TREASURE_OBJECT_COMPASS_02
 	m_ChestData $73, $1f, TREASURE_OBJECT_RING_04
 	m_ChestData $16, $23, TREASURE_OBJECT_BOSS_KEY_03

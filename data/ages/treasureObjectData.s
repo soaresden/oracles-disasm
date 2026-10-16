@@ -186,6 +186,7 @@ treasureObjectData11:
 	m_BeginTreasureSubids TREASURE_HARP
 	m_TreasureSubid $0a, $00, $71, $68, TREASURE_OBJECT_HARP_00
 	m_TreasureSubid $0a, $01, $78, $68, TREASURE_OBJECT_HARP_01
+	m_TreasureSubid $38, $00, $71, $68, TREASURE_OBJECT_HARP_02 ; BALLADE: la Lanterne des Songes, dans un coffre
 
 treasureObjectData13:
 	m_BeginTreasureSubids TREASURE_SLINGSHOT

@@ -242,6 +242,7 @@ group1WarpSources:
 	m_StandardWarp $0 $74 $1a $5 $4
 	m_StandardWarp $0 $79 $02 $2 $4
 	m_StandardWarp $0 $9a $1a $3 $4 ; BALLADE: porte de l'auberge de Port-Veille -> 3:9e
+	m_StandardWarp $0 $7b $02 $4 $4 ; BALLADE: porte du Phare Éteint (cap) -> hall du phare (4:24)
 	m_StandardWarp $0 $91 $19 $5 $4
 	m_StandardWarp $0 $a3 $39 $3 $4
 	m_StandardWarp $0 $a5 $57 $5 $4
@@ -488,7 +489,7 @@ warpSource7ac6:
 	m_WarpListFallThrough
 
 group4WarpSources:
-	m_StandardWarp $4 $24 $01 $0 $3
+	m_StandardWarp $4 $24 $4a $1 $3 ; BALLADE: sortie du Phare Éteint -> le cap (1:7b)
 	m_StandardWarp $4 $46 $01 $1 $3
 	m_StandardWarp $4 $66 $02 $0 $3
 	m_StandardWarp $4 $91 $03 $0 $3
