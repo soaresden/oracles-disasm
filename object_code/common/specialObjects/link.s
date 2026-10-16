@@ -2159,6 +2159,12 @@ linkState05:
 	jp brightenRoom
 
 @animParameter4:
+.ifdef ROM_AGES
+	; BALLADE: après le sommeil, Link se retrouve dans le Songe
+	callab balladeMarine.enterDreamFromBed
+	ld a,LINK_STATE_NORMAL
+	jp linkSetState
+.endif
 	ld bc,-$180
 	call objectSetSpeedZ
 
@@ -5026,9 +5032,11 @@ linkPullIntoHole:
 ; LINK_STATE_SLEEPING.
 ; The only bed that this works for is the one in Nayru's house.
 checkLinkPushingAgainstBed:
+.ifndef ROM_AGES
 	ld hl,wInformativeTextsShown
 	bit 1,(hl)
 	ret nz
+.endif
 
 	ld a,(wActiveGroup)
 	cp $03

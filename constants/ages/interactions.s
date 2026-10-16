@@ -1400,4 +1400,22 @@
 ; BALLADE: Marine, changée en mouette. Ses animations sont celles du perroquet
 ; (INTERAC_KNOW_IT_ALL_BIRD) : 0/1 posée, 2/3 en vol (gauche / droite).
 ; @subid_00{Sur la plage, au réveil de Link (chapitre 1) ; elle finit dans la tunique de Link}
+; @subid_01{Invisible : dans le Songe, demande à Link s'il veut se réveiller (Select)}
 .define INTERAC_MARINE $e7
+
+;;
+; BALLADE: habitants de nos îles. L'apparence dépend du sous-type (sprites de villageois d'Ages,
+; animations communes des villageois) ; le script aussi (scripts/ages/ballade.s).
+; @subid_00{L'aubergiste de Port-Veille}
+; @subid_01{Le vieux pêcheur}
+; @subid_02{Un garçon qui ne joue plus}
+; @subid_03{Un autre enfant}
+; @subid_04{La dame insomniaque}
+; @subid_05{Le vieux qui compte les moutons}
+; @subid_06{L'ado qui rêve d'être marin}
+; @subid_07{Marine humaine, dans le Songe}
+.define INTERAC_BALLADE_NPC $e8
+
+;;
+; BALLADE: dans chaque salle du Songe, l'écran ondule doucement, comme sous l'eau.
+.define INTERAC_BALLADE_DREAM_FX $e9

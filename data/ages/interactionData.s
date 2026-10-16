@@ -244,6 +244,8 @@ interactionData:
 	/* $e5 */ m_InteractionData $6c $08 $10
 	/* $e6 */ m_InteractionData $00 $60 $b0
 	/* $e7 */ m_InteractionData $e1 $14 $20 ; BALLADE: Marine en mouette (palette 2)
+	/* $e8 */ m_InteractionData interactione8SubidData ; BALLADE: habitants
+	/* $e9 */ m_InteractionData $00 $00 $00 ; BALLADE: ondulation du Songe (rien à afficher)
 
 interaction60SubidData:
 interaction63SubidData:
@@ -829,6 +831,18 @@ interactiond2SubidData:
 	m_InteractionSubidData $86 $00 $21
 	m_InteractionSubidData $86 $00 $22
 	m_InteractionSubidData $86 $00 $23
+	m_InteractionSubidDataEnd
+
+; BALLADE: habitants de nos îles (INTERAC_BALLADE_NPC) : gfx, tuile de départ, palette + animation
+interactione8SubidData:
+	m_InteractionSubidData $5c $10 $12 ; l'aubergiste
+	m_InteractionSubidData $5b $00 $32 ; le vieux pêcheur (casquette)
+	m_InteractionSubidData $3e $00 $02 ; un garçon
+	m_InteractionSubidData $3e $10 $02 ; un autre enfant
+	m_InteractionSubidData $5c $00 $22 ; la dame insomniaque
+	m_InteractionSubidData $42 $00 $32 ; le vieux qui compte les moutons
+	m_InteractionSubidData $4f $10 $12 ; l'ado
+	m_InteractionSubidData $e2 $00 $22 ; Marine humaine (spr_marine_human, palette rouge)
 	m_InteractionSubidDataEnd
 
 interactiond4SubidData:

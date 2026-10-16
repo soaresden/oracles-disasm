@@ -231,6 +231,8 @@ interactionAnimationTable:
 	.dw interactione5Animations
 	.dw interactione6Animations
 	.dw interactione7Animations ; BALLADE
+	.dw interactione8Animations ; BALLADE
+	.dw interactione4Animations ; BALLADE: $e9 (rien à afficher)
 
 interactionOamDataTable: ; 0x59a23
 	.dw interaction00OamDataPointers
@@ -465,6 +467,8 @@ interactionOamDataTable: ; 0x59a23
 	.dw interactione5OamDataPointers
 	.dw interactione6OamDataPointers
 	.dw interactione7OamDataPointers ; BALLADE
+	.dw interactione8OamDataPointers ; BALLADE
+	.dw interactione4OamDataPointers ; BALLADE: $e9
 
 interaction00Animations:
 interaction01Animations:
@@ -685,6 +689,7 @@ interaction39Animations:
 	.dw interactionAnimation5a5ec
 interaction2eAnimations:
 interaction3aAnimations:
+interactione8Animations: ; BALLADE: habitants = animations des villageois
 interaction3bAnimations:
 interaction3cAnimations:
 interaction3dAnimations:
@@ -3504,6 +3509,7 @@ interactione7OamDataPointers: ; BALLADE
 
 interaction2eOamDataPointers: ; 0x5b034
 interaction3aOamDataPointers: ; 0x5b034
+interactione8OamDataPointers: ; BALLADE
 interaction3bOamDataPointers: ; 0x5b034
 interaction3cOamDataPointers: ; 0x5b034
 interaction3dOamDataPointers: ; 0x5b034

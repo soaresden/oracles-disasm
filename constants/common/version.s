@@ -63,6 +63,9 @@
 ; court fait parler Marine)
 .define BALLADE_SELECT_HOLD_FRAMES 20
 
+; BALLADE: amplitude de l'ondulation de l'écran dans le Songe (en pixels)
+.define BALLADE_DREAM_WAVE 2
+
 
 ; Define to help with building directory strings, maybe other stuff
 .ifdef ROM_SEASONS

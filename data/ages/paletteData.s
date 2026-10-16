@@ -4296,3 +4296,99 @@ paletteDataFilmSpr:
 	m_RGB16 $0c $04 $06
 	m_RGB16 $1f $0b $04
 	m_RGB16 $1f $1a $12
+
+; BALLADE-SONGE-DEBUT (tools/make_songe.py)
+paletteDataSongeVillage: ; Songe : paletteData4a60 en bleuté
+	m_RGB16 $12 $11 $14
+	m_RGB16 $0d $0f $0f
+	m_RGB16 $09 $08 $0a
+	m_RGB16 $01 $02 $06
+
+	m_RGB16 $0f $0d $10
+	m_RGB16 $0d $0f $0f
+	m_RGB16 $09 $08 $0a
+	m_RGB16 $01 $02 $06
+
+	m_RGB16 $12 $11 $14
+	m_RGB16 $0f $0d $10
+	m_RGB16 $09 $08 $0d
+	m_RGB16 $01 $02 $06
+
+	m_RGB16 $12 $14 $19
+	m_RGB16 $0e $0f $14
+	m_RGB16 $09 $09 $0f
+	m_RGB16 $04 $04 $07
+
+	m_RGB16 $17 $1c $1d
+	m_RGB16 $0b $0b $17
+	m_RGB16 $08 $07 $11
+	m_RGB16 $01 $02 $06
+
+	m_RGB16 $13 $14 $16
+	m_RGB16 $0f $0d $14
+	m_RGB16 $09 $05 $0e
+	m_RGB16 $03 $05 $0a
+
+paletteDataSongePlage: ; Songe : paletteData4c40 en bleuté
+	m_RGB16 $12 $11 $14
+	m_RGB16 $0d $0f $0f
+	m_RGB16 $09 $08 $0a
+	m_RGB16 $01 $02 $06
+
+	m_RGB16 $0f $0d $10
+	m_RGB16 $0d $0f $0f
+	m_RGB16 $09 $08 $0a
+	m_RGB16 $01 $02 $06
+
+	m_RGB16 $12 $11 $14
+	m_RGB16 $0f $0d $10
+	m_RGB16 $09 $08 $0d
+	m_RGB16 $01 $02 $06
+
+	m_RGB16 $0b $0b $17
+	m_RGB16 $0f $0d $10
+	m_RGB16 $09 $08 $0d
+	m_RGB16 $01 $02 $06
+
+	m_RGB16 $17 $1c $1d
+	m_RGB16 $0b $0b $17
+	m_RGB16 $08 $07 $11
+	m_RGB16 $01 $02 $06
+
+	m_RGB16 $0a $0a $0c
+	m_RGB16 $10 $0f $12
+	m_RGB16 $09 $08 $0d
+	m_RGB16 $01 $02 $06
+
+paletteDataSongeAuberge: ; Songe : paletteData5600 en bleuté
+	m_RGB16 $0d $10 $12
+	m_RGB16 $12 $12 $10
+	m_RGB16 $0a $09 $0c
+	m_RGB16 $01 $02 $06
+
+	m_RGB16 $14 $16 $18
+	m_RGB16 $0d $0d $10
+	m_RGB16 $07 $08 $0a
+	m_RGB16 $01 $02 $06
+
+	m_RGB16 $14 $17 $19
+	m_RGB16 $0d $0f $12
+	m_RGB16 $07 $0a $0d
+	m_RGB16 $01 $02 $06
+
+	m_RGB16 $14 $17 $19
+	m_RGB16 $0c $10 $0f
+	m_RGB16 $05 $08 $09
+	m_RGB16 $01 $02 $06
+
+	m_RGB16 $17 $1b $1a
+	m_RGB16 $0c $0d $17
+	m_RGB16 $08 $08 $10
+	m_RGB16 $01 $02 $06
+
+	m_RGB16 $15 $1a $1f
+	m_RGB16 $0a $0f $15
+	m_RGB16 $06 $0a $10
+	m_RGB16 $01 $02 $06
+
+; BALLADE-SONGE-FIN

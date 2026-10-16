@@ -30,17 +30,12 @@ group0Map7eObjectData:
 group0Map7fObjectData:
 group0Map85ObjectData:
 group0Map87ObjectData:
-group0Map8aObjectData:
-group0Map8cObjectData:
 group0Map8eObjectData:
 group0Map8fObjectData:
 group0Map93ObjectData:
 group0Map95ObjectData:
 group0Map96ObjectData:
 group0Map97ObjectData:
-group0Map9aObjectData:
-group0Map9bObjectData:
-group0Map9cObjectData:
 group0Map9dObjectData:
 group0Map9eObjectData:
 group0Map9fObjectData:
@@ -717,7 +712,6 @@ group0Map14ObjectData:
 	obj_Pointer group0Map14EnemyObjectData
 	obj_End
 
-group0MapacObjectData:
 	obj_SpecificEnemyA $00 $5a $17 $00 $00
 	obj_End
 
@@ -1161,23 +1155,19 @@ group0Map78ObjectData:
 	obj_Interaction $3d $04 $18 $28
 	obj_End
 
-group0Map79ObjectData:
 	obj_Interaction $d0 $01 $38 $78
 	obj_Interaction $c8 $00 $32 $38
 	obj_End
 
-group0Map7aObjectData:
 	obj_Interaction $6b $00
 	obj_End
 
-group0Map7bObjectData:
 	obj_Interaction $3c $03 $48 $48
 	obj_Interaction $3c $04 $48 $68
 	obj_Interaction $3f $02 $38 $58
 	obj_Interaction $b6 $03 $28 $68
 	obj_End
 
-group0Map7cObjectData:
 	obj_Interaction $59 $00 $38 $68 $00
 	obj_Interaction $59 $00 $38 $68 $02
 	obj_Pointer group0Map7cEnemyObjectData
@@ -1227,7 +1217,6 @@ group0Map88ObjectData:
 	obj_Interaction $54 $01 $38 $68 $02
 	obj_End
 
-group0Map89ObjectData:
 	obj_Interaction $d0 $00 $38 $30
 	obj_Interaction $71 $02 $6d $38
 	obj_End
@@ -1237,7 +1226,6 @@ group0Map83ObjectData:
 	obj_Interaction $dc $02 $48 $38
 	obj_End
 
-group0Map8bObjectData:
 	obj_Interaction $dc $07 $38 $28
 	obj_End
 
@@ -1266,7 +1254,6 @@ group0Map98ObjectData:
 	obj_Interaction $71 $06
 	obj_End
 
-group0Map99ObjectData:
 	obj_Interaction $71 $06
 	obj_End
 
@@ -1283,11 +1270,9 @@ group0Mapa8ObjectData:
 	obj_Interaction $71 $06
 	obj_End
 
-group0Mapa9ObjectData:
 	obj_Interaction $e1 $00 $58 $78
 	obj_End
 
-group0MapaaObjectData:
 	obj_Interaction $48 $0f $48 $18
 	obj_Interaction $48 $10 $58 $38
 	obj_Interaction $67 $03
@@ -1295,7 +1280,6 @@ group0MapaaObjectData:
 	obj_Pointer group0MapaaEnemyObjectData
 	obj_End
 
-group0MapabObjectData:
 	obj_Pointer group0MapabEnemyObjectData
 	obj_End
 
@@ -2109,7 +2093,6 @@ group2MapefObjectData:
 	obj_Interaction $66 $00 $40 $50
 	obj_End
 
-group2Map9eObjectData:
 	obj_Interaction $dc $12
 	obj_Part $03 $00 $61
 	obj_End
@@ -2313,7 +2296,6 @@ group3Map90ObjectData:
 	obj_Interaction $ba $00 $40 $50
 	obj_End
 
-group3Map9eObjectData:
 	obj_Interaction $4f $00
 	obj_Interaction $36 $0b $28 $58
 	obj_Interaction $ad $07 $38 $78
@@ -4871,6 +4853,54 @@ group5MapfbObjectData:
 ; BALLADE: objets des salles de nos îles (générés par tools/make_rooms.py depuis
 ; story/salles/objets.txt)
 ; ==================================================================================================
+group0Map79ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map7aObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map7bObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map7cObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map89ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map8aObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map8bObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map8cObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map99ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map9aObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map9bObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map9cObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Mapa9ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0MapaaObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0MapabObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0MapacObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
 group1Map79ObjectData:
 	obj_End
 group1Map7aObjectData:
@@ -4890,10 +4920,15 @@ group1Map8cObjectData:
 group1Map99ObjectData:
 	obj_End
 group1Map9aObjectData:
+	obj_Interaction INTERAC_BALLADE_NPC $06 $58 $78
 	obj_End
 group1Map9bObjectData:
+	obj_Interaction INTERAC_BALLADE_NPC $04 $58 $28
+	obj_Interaction INTERAC_BALLADE_NPC $05 $58 $78
 	obj_End
 group1Map9cObjectData:
+	obj_Interaction INTERAC_BALLADE_NPC $02 $38 $38
+	obj_Interaction INTERAC_BALLADE_NPC $03 $48 $68
 	obj_End
 group1Mapa9ObjectData:
 	obj_End
@@ -4901,6 +4936,14 @@ group1MapaaObjectData:
 	obj_Interaction INTERAC_MARINE $00 $08 $98
 	obj_End
 group1MapabObjectData:
+	obj_Interaction INTERAC_BALLADE_NPC $01 $38 $88
 	obj_End
 group1MapacObjectData:
+	obj_End
+group2Map9eObjectData:
+	obj_Interaction INTERAC_BALLADE_NPC $07 $28 $68
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group3Map9eObjectData:
+	obj_Interaction INTERAC_BALLADE_NPC $00 $48 $38
 	obj_End

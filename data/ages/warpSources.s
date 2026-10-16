@@ -51,6 +51,7 @@ warpSourcesTable:
 	.dw group7WarpSources
 
 group0WarpSources:
+	m_StandardWarp $0 $9a $4d $2 $4 ; BALLADE: Songe, porte de l'auberge -> 2:9e
 	m_StandardWarp $4 $38 $06 $0 $3
 	m_StandardWarp $8 $38 $06 $0 $3
 	m_StandardWarp $1 $48 $07 $0 $3
@@ -240,6 +241,7 @@ group1WarpSources:
 	m_StandardWarp $0 $72 $1b $5 $4
 	m_StandardWarp $0 $74 $1a $5 $4
 	m_StandardWarp $0 $79 $02 $2 $4
+	m_StandardWarp $0 $9a $1a $3 $4 ; BALLADE: porte de l'auberge de Port-Veille -> 3:9e
 	m_StandardWarp $0 $91 $19 $5 $4
 	m_StandardWarp $0 $a3 $39 $3 $4
 	m_StandardWarp $0 $a5 $57 $5 $4
@@ -322,8 +324,8 @@ group2WarpSources:
 	m_StandardWarp $4 $8e $48 $0 $3
 	m_StandardWarp $4 $8f $26 $1 $3
 	m_StandardWarp $0 $8f $52 $5 $2
-	m_StandardWarp $4 $9e $3e $0 $3
-	m_StandardWarp $0 $9e $3c $0 $4
+	; BALLADE: 2:9e devient l'auberge du Songe ; sa sortie ramène devant l'auberge du Songe (0:9a)
+	m_StandardWarp $4 $9e $4d $0 $3
 	m_StandardWarp $0 $9f $1d $2 $2
 	m_StandardWarp $4 $9f $0e $0 $3
 	m_StandardWarp $8 $9f $0f $0 $3
@@ -422,8 +424,9 @@ group3WarpSources:
 	m_StandardWarp $0 $8c $08 $7 $4
 	m_StandardWarp $4 $8e $09 $0 $3
 	m_StandardWarp $0 $8f $09 $7 $2
-	m_StandardWarp $4 $9e $29 $0 $3
-	m_StandardWarp $0 $9e $1c $3 $2
+	; BALLADE: 3:9e devient l'auberge de Port-Veille ; sa sortie ramène devant l'auberge (1:9a),
+	; et l'escalier de la maison de Nayru ne mène plus nulle part.
+	m_StandardWarp $4 $9e $49 $1 $3
 	m_PointerWarp     $9f warpSource7abe
 	m_StandardWarp $0 $a1 $60 $5 $4
 	m_StandardWarp $0 $ae $1d $3 $2

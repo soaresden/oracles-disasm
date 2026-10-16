@@ -26,7 +26,15 @@ interactionCodee7:
 
 @scripts:
 	.dw mainScripts.marineBeachScript
+	.dw mainScripts.marineWakeScript
 
 @state1:
 	call interactionRunScript
-	jp interactionAnimate
+	jp c,interactionDelete
+	; Sous-type 1 : le script a répondu « oui » au réveil
+	ld e,Interaction.var37
+	ld a,(de)
+	or a
+	jp z,interactionAnimate
+	callab balladeMarine.switchDream
+	jp interactionDelete

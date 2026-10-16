@@ -756,6 +756,6 @@ tilesetData:
 	.db $0f $01 $00 $00 $00 $00 $00 $00 ; Tileset 0x7a
 	.db $0f $01 $00 $00 $00 $00 $00 $00 ; Tileset 0x7b
 	.db $0f $01 $00 $00 $00 $00 $00 $00 ; Tileset 0x7c
-	.db $0f $01 $00 $00 $00 $00 $00 $00 ; Tileset 0x7d
-	.db $0f $01 $00 $00 $00 $00 $00 $00 ; Tileset 0x7e
-	.db $0f $01 $00 $00 $00 $00 $00 $00 ; Tileset 0x7f
+	.db $0f, $01, UNIQUE_GFXH_LYNNA_CITY_2, GFXH_TILESET_OVERWORLD_PAST, PALH_SONGE_VILLAGE, $0f, $00, $00 ; Tileset 0x7d BALLADE: Songe
+	.db $0f, $01, UNIQUE_GFXH_CRESCENT_ISLAND, GFXH_TILESET_OVERWORLD_PAST, PALH_SONGE_PLAGE, $04, $00, $01 ; Tileset 0x7e BALLADE: Songe
+	.db $1f, $04, UNIQUE_GFXH_NONE, GFXH_TILESET_INDOORS, PALH_SONGE_AUBERGE, $15, $03, $10 ; Tileset 0x7f BALLADE: Songe

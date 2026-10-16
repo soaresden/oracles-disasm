@@ -7,7 +7,7 @@
 ; - PALH_SPR:     Loads sprite palettes only
 ; - PALH:         If none of the above, could load both sprite & bg palettes (or not yet categorized)
 
-.define NUM_PALETTE_HEADERS $cc ; BALLADE: +1 (PALH_FILM)
+.define NUM_PALETTE_HEADERS $cf ; BALLADE: + film, Songe
 
 paletteHeaderTable:
 	.repeat NUM_PALETTE_HEADERS index COUNT
@@ -817,3 +817,18 @@ m_PaletteHeaderStart $cb, PALH_FILM
 	m_PaletteHeaderBg  0, 3, paletteDataFilmBg
 	m_PaletteHeaderSpr 0, 6, paletteDataFilmSpr
 	m_PaletteHeaderEnd
+
+; BALLADE-SONGE-DEBUT (tools/make_songe.py)
+m_PaletteHeaderStart $cc, PALH_SONGE_VILLAGE
+	m_PaletteHeaderBg  2, 6, paletteDataSongeVillage
+	m_PaletteHeaderEnd
+
+m_PaletteHeaderStart $cd, PALH_SONGE_PLAGE
+	m_PaletteHeaderBg  2, 6, paletteDataSongePlage
+	m_PaletteHeaderEnd
+
+m_PaletteHeaderStart $ce, PALH_SONGE_AUBERGE
+	m_PaletteHeaderBg  2, 6, paletteDataSongeAuberge
+	m_PaletteHeaderEnd
+
+; BALLADE-SONGE-FIN

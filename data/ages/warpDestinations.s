@@ -96,6 +96,8 @@ group0WarpDestTable:
 	m_WarpDest $e1 $26 $0 $1
 	m_WarpDest $e2 $54 $0 $1
 	m_WarpDest $f1 $43 $0 $1
+	; BALLADE
+	m_WarpDest $9a $45 $0 $1 ; $4d : Songe, devant la porte de l'auberge
 
 group1WarpDestTable:
 	m_WarpDest $48 $21 $0 $1
@@ -171,6 +173,8 @@ group1WarpDestTable:
 	m_WarpDest $dd $31 $0 $1
 	m_WarpDest $e0 $11 $0 $4
 	m_WarpDest $e2 $32 $0 $4
+	; BALLADE
+	m_WarpDest $9a $45 $0 $1 ; $49 : devant la porte de l'auberge de Port-Veille
 
 group2WarpDestTable:
 	m_WarpDest $90 $45 $0 $e
@@ -250,6 +254,8 @@ group2WarpDestTable:
 	m_WarpDest $fe $ff $9 $3
 	m_WarpDest $ff $f6 $9 $3
 	m_WarpDest $ff $48 $0 $4
+	; BALLADE
+	m_WarpDest $9e $ff $9 $3 ; $4d : Songe, entrée de l'auberge par le bas
 
 group3WarpDestTable:
 	m_WarpDest $0f $f4 $9 $3

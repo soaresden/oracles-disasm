@@ -196,6 +196,11 @@ specialObjectLoadAnimationFrameToBuffer:
 		.include "code/ages/cutscenes/film.s"
 	.ends
 
+	 ; BALLADE: longs scripts (la banque des scripts d'Ages est pleine)
+	 m_section_superfree Ballade_Scripts namespace balladeScripts
+		.include "scripts/ages/balladeLong.s"
+	.ends
+
 	 ; BALLADE: Marine parle depuis la tunique de Link (Select)
 	 m_section_superfree Ballade_Marine namespace balladeMarine
 		.include "code/ages/balladeMarine.s"
@@ -714,6 +719,8 @@ m_section_free Ages_Interactions_Bank10 NAMESPACE agesInteractionsBank10
 	.include "object_code/ages/interactions/knowItAllBird.s"
 	.include "object_code/ages/interactions/raft.s"
 	.include "object_code/ages/interactions/marine.s" ; BALLADE
+	.include "object_code/ages/interactions/balladeNpc.s" ; BALLADE
+	.include "object_code/ages/interactions/balladeDreamFx.s" ; BALLADE
 .ends
 
 
