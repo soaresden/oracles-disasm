@@ -528,6 +528,8 @@ intro_titlescreen:
 	ld hl,bank3f.titlescreenMakuSeedSprite
 	ld e,:bank3f.titlescreenMakuSeedSprite
 	call addSpritesFromBankToOam
+	; BALLADE: Marine en mouette, qui vit sa vie sur le logo
+	callab balladeTitle.titleGull_update
 
 	ld a,(wTmpcbb3)
 	and $20
@@ -571,6 +573,7 @@ intro_titlescreen_state0:
 	; BALLADE: l'écran titre de Gulls of Life
 	ld a,GFXH_TITLE
 	call loadGfxHeader
+	callab balladeTitle.titleGull_init
 	ld a,PALH_TITLE
 .else
 	ld a,GFXH_TITLESCREEN

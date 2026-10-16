@@ -981,6 +981,7 @@ m_GfxHeaderStart $bb, GFXH_FILM
 
 ; BALLADE: l'écran titre de Gulls of Life (tools/make_title.py) ; « PRESS START » reste celui d'Ages
 m_GfxHeaderStart $bc, GFXH_TITLE
+	m_GfxHeader spr_title_gull, $8000
 	m_GfxHeader spr_titlescreen_sprites, $8380
 	m_GfxHeader gfx_title_bg, $8800
 	m_GfxHeader gfx_title_bg_2, $9000

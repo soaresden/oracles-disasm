@@ -4329,12 +4329,6 @@ paletteDataSongeVillage: ; Songe : paletteData4a60 en bleuté
 	m_RGB16 $09 $05 $0e
 	m_RGB16 $03 $05 $0a
 
-paletteDataSongeVillage0: ; Songe : la palette 0 (paletteData48e0) en bleuté
-	m_RGB16 $08 $05 $0a
-	m_RGB16 $0f $07 $0c
-	m_RGB16 $16 $18 $1a
-	m_RGB16 $01 $02 $06
-
 paletteDataSongePlage: ; Songe : paletteData4c40 en bleuté
 	m_RGB16 $12 $11 $14
 	m_RGB16 $0d $0f $0f
@@ -4364,12 +4358,6 @@ paletteDataSongePlage: ; Songe : paletteData4c40 en bleuté
 	m_RGB16 $0a $0a $0c
 	m_RGB16 $10 $0f $12
 	m_RGB16 $09 $08 $0d
-	m_RGB16 $01 $02 $06
-
-paletteDataSongePlage0: ; Songe : la palette 0 (paletteData48e0) en bleuté
-	m_RGB16 $08 $05 $0a
-	m_RGB16 $0f $07 $0c
-	m_RGB16 $16 $18 $1a
 	m_RGB16 $01 $02 $06
 
 paletteDataSongeAuberge: ; Songe : paletteData5600 en bleuté
@@ -4403,12 +4391,6 @@ paletteDataSongeAuberge: ; Songe : paletteData5600 en bleuté
 	m_RGB16 $06 $0a $10
 	m_RGB16 $01 $02 $06
 
-paletteDataSongeAuberge0: ; Songe : la palette 0 (paletteData48e0) en bleuté
-	m_RGB16 $08 $05 $0a
-	m_RGB16 $0f $07 $0c
-	m_RGB16 $16 $18 $1a
-	m_RGB16 $01 $02 $06
-
 ; BALLADE-SONGE-FIN
 
 ; BALLADE-TITRE-DEBUT (tools/make_title.py)
@@ -4418,11 +4400,11 @@ paletteDataTitle: ; écran titre de Gulls of Life
 	m_RGB16 $05 $07 $10
 	m_RGB16 $1f $1f $1f
 	m_RGB16 $10 $12 $19
-	; logo doré
+	; logo rose corail, contour prune
 	m_RGB16 $07 $0b $15
-	m_RGB16 $07 $03 $01
-	m_RGB16 $1f $18 $06
-	m_RGB16 $1f $1e $16
+	m_RGB16 $0a $03 $07
+	m_RGB16 $1e $0d $12
+	m_RGB16 $1f $1b $1d
 	; Marine en mouette
 	m_RGB16 $07 $0b $15
 	m_RGB16 $04 $03 $04
@@ -4442,5 +4424,21 @@ paletteDataTitle: ; écran titre de Gulls of Life
 	m_RGB16 $03 $07 $12
 	m_RGB16 $06 $0e $1a
 	m_RGB16 $0e $18 $1e
+	m_RGB16 $1f $1f $1f
+paletteDataTitleSpr: ; écran titre : sprites
+	; « PRESS START » (comme Ages, paletteData4058)
+	m_RGB16 $0c $12 $1f
+	m_RGB16 $00 $06 $0a
+	m_RGB16 $03 $10 $12
+	m_RGB16 $0a $18 $1c
+	; Marine en mouette
+	m_RGB16 $00 $00 $00
+	m_RGB16 $04 $03 $04
+	m_RGB16 $1b $05 $05
+	m_RGB16 $1f $1e $1b
+	; cœur
+	m_RGB16 $00 $00 $00
+	m_RGB16 $08 $01 $03
+	m_RGB16 $1d $05 $09
 	m_RGB16 $1f $1f $1f
 ; BALLADE-TITRE-FIN

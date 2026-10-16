@@ -52,6 +52,7 @@ warpSourcesTable:
 
 group0WarpSources:
 	m_StandardWarp $0 $9a $4d $2 $4 ; BALLADE: Songe, porte de l'auberge -> 2:9e
+	m_StandardWarp $0 $7b $02 $4 $4 ; BALLADE: Songe, porte du Phare -> hall du phare (on se réveille en entrant)
 	m_StandardWarp $4 $38 $06 $0 $3
 	m_StandardWarp $8 $38 $06 $0 $3
 	m_StandardWarp $1 $48 $07 $0 $3

@@ -314,16 +314,16 @@ $(BUILD_DIR)/rooms/room06%.cmp: rooms/$(GAME)/large/room06%.bin | $(BUILD_DIR)/r
 	@cat $< >> $@
 
 # Parse & compress text
-# BALLADE: --EU for the extra accented letters (ô), and a second language (French) in banks $71+
+# BALLADE: a second language (French) in banks $71+
 $(BUILD_DIR)/textData.s: text/$(GAME)/text.yaml text/$(GAME)/dict.yaml tools/build/parseText.py | $(BUILD_DIR)
 	@echo "Compressing text..."
-	@$(PYTHON) tools/build/parseText.py text/$(GAME)/dict.yaml $< $@ $$(($(TEXT_INSERT_ADDRESS))) --EU
+	@$(PYTHON) tools/build/parseText.py text/$(GAME)/dict.yaml $< $@ $$(($(TEXT_INSERT_ADDRESS)))
 
 $(BUILD_DIR)/textDefines.s: $(BUILD_DIR)/textData.s
 
 $(BUILD_DIR)/textDataFR.s: text/$(GAME)/text_fr.yaml text/$(GAME)/dict.yaml tools/build/parseText.py tools/build/parseTextLang.py $(BUILD_DIR)/textData.s | $(BUILD_DIR)
 	@echo "Compressing French text..."
-	@$(PYTHON) tools/build/parseTextLang.py text/$(GAME)/dict.yaml $< $@ $$((0x1c4000)) FR --EU
+	@$(PYTHON) tools/build/parseTextLang.py text/$(GAME)/dict.yaml $< $@ $$((0x1c4000)) FR
 
 $(BUILD_DIR)/textDefinesFr.s: $(BUILD_DIR)/textDataFR.s
 

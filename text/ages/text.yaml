@@ -1605,10 +1605,9 @@ groups:
 
   - name: TX_0201
     index: 0x01
-    text: |2-
-       Level 1
-        Spirit's Grave
-
+    text: |-
+      Level 1
+      Dark Lighthouse
   - name: TX_0202
     index: 0x02
     text: |2-
@@ -22564,7 +22563,13 @@ groups:
       On the other
       side, hold
       \col(1)SELECT\col(0): I'll
-      wake you up.
+      wake you up.\stop
+      Hee hee! You're
+      a sleepwalker
+      now!\stop
+      And you'll wake
+      up right where
+      you are.
 
   # At the inn, A in front of the bed
   - name: TX_5a16

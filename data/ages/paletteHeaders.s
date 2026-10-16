@@ -272,6 +272,7 @@ m_PaletteHeaderStart $40, PALH_TILESET_MAKU_PATH_PRESENT
 
 m_PaletteHeaderStart $41, PALH_TILESET_SPIRITS_GRAVE
 	m_PaletteHeaderBg  2, 6, paletteData5060
+	m_PaletteHeaderBg  0, 1, paletteData48e0 ; BALLADE: après le Songe
 	m_PaletteHeaderEnd
 
 m_PaletteHeaderStart $42, PALH_TILESET_WING_DUNGEON
@@ -824,17 +825,14 @@ m_PaletteHeaderStart $cb, PALH_FILM
 ; BALLADE-SONGE-DEBUT (tools/make_songe.py)
 m_PaletteHeaderStart $cc, PALH_SONGE_VILLAGE
 	m_PaletteHeaderBg  2, 6, paletteDataSongeVillage
-	m_PaletteHeaderBg  0, 1, paletteDataSongeVillage0
 	m_PaletteHeaderEnd
 
 m_PaletteHeaderStart $cd, PALH_SONGE_PLAGE
 	m_PaletteHeaderBg  2, 6, paletteDataSongePlage
-	m_PaletteHeaderBg  0, 1, paletteDataSongePlage0
 	m_PaletteHeaderEnd
 
 m_PaletteHeaderStart $ce, PALH_SONGE_AUBERGE
 	m_PaletteHeaderBg  2, 6, paletteDataSongeAuberge
-	m_PaletteHeaderBg  0, 1, paletteDataSongeAuberge0
 	m_PaletteHeaderEnd
 
 ; BALLADE-SONGE-FIN
@@ -842,5 +840,5 @@ m_PaletteHeaderStart $ce, PALH_SONGE_AUBERGE
 ; BALLADE: l'écran titre de Gulls of Life (tools/make_title.py) ; sprites : ceux d'Ages (PRESS START)
 m_PaletteHeaderStart $cf, PALH_TITLE
 	m_PaletteHeaderBg  0, 6, paletteDataTitle
-	m_PaletteHeaderSpr 0, 8, paletteData4058
+	m_PaletteHeaderSpr 0, 3, paletteDataTitleSpr
 	m_PaletteHeaderEnd

@@ -524,6 +524,7 @@
 	m_GfxData gfx_film_bg
 	m_GfxData map_film_bg
 	m_GfxData flg_film_bg
+	m_GfxData spr_title_gull
 	m_GfxData gfx_title_bg
 	m_GfxData gfx_title_bg_2
 	m_GfxData map_title_bg

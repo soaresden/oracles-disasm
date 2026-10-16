@@ -1589,10 +1589,9 @@ groups:
 
   - name: TX_0201
     index: 0x01
-    text: |2-
-       Level 1
-        Spirit's Grave
-
+    text: |-
+      Niveau 1
+       Phare Éteint
   - name: TX_0202
     index: 0x02
     text: |2-
@@ -20552,7 +20551,7 @@ groups:
     index: 0x0d
     text: |-
       Ça ne s'ouvre
-      pas de ce côté!
+      pas de ce coté!
   - name: TX_510e
     index: 0x0e
     text: |-
@@ -22550,10 +22549,17 @@ groups:
       sentier... Ici,
       il doit être
       entier!\stop
-      De l'autre côté,
+      De l'autre coté,
       garde \col(1)SELECT\col(0)
       enfoncé: je te
-      réveillerai.
+      réveillerai.\stop
+      Hi hi! Te voilà
+      noctambule: tu
+      te promènes en
+      dormant!\stop
+      Et tu te
+      réveilleras pile
+      là où tu seras.
 
   # À l'auberge, A devant le lit
   - name: TX_5a16

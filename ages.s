@@ -197,6 +197,11 @@ specialObjectLoadAnimationFrameToBuffer:
 		.include "code/ages/cutscenes/film.s"
 	.ends
 
+	 ; BALLADE: Marine en mouette sur l'écran titre
+	 m_section_superfree Ballade_Title namespace balladeTitle
+		.include "code/ages/cutscenes/titleGull.s"
+	.ends
+
 	 ; BALLADE: longs scripts (la banque des scripts d'Ages est pleine)
 	 m_section_superfree Ballade_Scripts namespace balladeScripts
 		.include "scripts/ages/balladeLong.s"

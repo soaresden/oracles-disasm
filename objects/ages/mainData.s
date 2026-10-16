@@ -4957,4 +4957,6 @@ group4Map1cObjectData:
 	obj_SpecificEnemyA     ENEMY_STALFOS $00 $78 $58
 	obj_End
 group4Map24ObjectData:
+	; « Niveau 1 - Phare Éteint » en entrant (INTERAC_DUNGEON_STUFF $00, texte TX_0201)
+	obj_Interaction $12 $00 $88 $78
 	obj_End
