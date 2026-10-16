@@ -2462,6 +2462,7 @@ vblankInterrupt:
 	ld ($ff00+R_WX),a
 	ldi a,(hl)
 	ld ($ff00+R_LYC),a
+	call frHudBottomVblank
 
 	; increment wVBlankChecker
 	inc (hl)
@@ -2797,6 +2798,9 @@ lcdInterrupt:
 	ldh a,(<hLcdInterruptCounter)
 	or a
 	jr nz,@notStatusBar
+	ld a,(wFrHudBottom)
+	or a
+	jp nz,frHudBottomLcdSwitch
 	ld hl,wGfxRegs3
 -
 	ld a,($ff00+R_STAT)
@@ -3663,8 +3667,7 @@ _drawObjectTerrainEffects:
 _getObjectPositionOnScreen:
 	ldh a,(<hCameraX)
 	ld c,a
-	ldh a,(<hCameraY)
-	ld b,a
+	call frGetSpriteCameraY
 
 	; Object.yh
 	ldi a,(hl)
@@ -3715,8 +3718,7 @@ _getObjectPositionOnScreen:
 _label_00_152:
 	ldh a,(<hCameraX)
 	ld c,a
-	ldh a,(<hCameraY)
-	ld b,a
+	call frGetSpriteCameraY
 	ldi a,(hl)
 	sub b
 	add $10
@@ -3749,8 +3751,7 @@ _getObjectPositionOnScreen_duringScreenTransition:
 
 	; Read Object.yh
 	ld d,$00
-	ldi a,(hl)
-	add $10
+	call frLdiYAddHudOffset
 	ld c,a
 	ld a,d
 	adc a
@@ -8255,6 +8256,115 @@ sramBootstrap:
 	call fillBootstrappedSram
 
 	jpfrombank0 init
+
+;;
+; FR: status bar at the bottom of the screen (OPT_HUD_BOTTOM), like Link's
+; Awakening. Called by vblankInterrupt once it wrote the status bar's registers
+; (wGfxRegsFinal). In normal gameplay (LCD interrupt behaviour 3, status bar
+; until line $0f, no menu open), the game is shown from line 0 instead, with
+; the room 16 pixels higher (see frGetSpriteCameraY for objects), and
+; lcdInterrupt switches to the status bar on line $7f (frHudBottomLcdSwitch).
+; Other screens (menus, cutscenes with wave effects...) keep it at the top.
+frHudBottomVblank:
+	push hl
+	ld hl,wFrHudBottom
+	ld (hl),$00
+	ld a,(OPT_HUD_BOTTOM)
+	or a
+	jr z,@end
+	ldh a,(<hLcdInterruptBehaviour)
+	cp $03
+	jr nz,@end
+	ld a,(wGfxRegsFinal.LYC)
+	cp $0f
+	jr nz,@end
+	ld a,(wOpenedMenuType)
+	or a
+	jr nz,@end
+	inc (hl)
+
+	; Game registers: wGfxRegs2 when this vblank copies them to wGfxRegs3
+	ld hl,wGfxRegs3
+	ld a,(wVBlankChecker)
+	inc a
+	jr nz,+
+	ld hl,wGfxRegs2
++
+	; LCDC: like lcdInterrupt_setLcdcToA7, on line $10 with the status bar on top
+	ldi a,(hl)
+	and $bf
+	ld ($ff00+R_LCDC),a
+	ldi a,(hl)
+	add $10
+	ld ($ff00+R_SCY),a
+	ldi a,(hl)
+	ld ($ff00+R_SCX),a
+	ldi a,(hl)
+	cp $90
+	jr nc,+
+	sub $10
++
+	ld ($ff00+R_WY),a
+	ldi a,(hl)
+	ld ($ff00+R_WX),a
+	ld a,$7f
+	ld ($ff00+R_LYC),a
+@end:
+	pop hl
+	ret
+
+;;
+; FR: LCD interrupt on line $7f with the status bar at the bottom: show the status
+; bar (wGfxRegsFinal, as on the top of the screen) for the last 16 lines.
+; @param	c	$03 (STAT mode mask)
+frHudBottomLcdSwitch:
+	ld hl,wGfxRegsFinal
+-
+	ld a,($ff00+R_STAT)
+	and c
+	jr nz,-
+
+	ldi a,(hl)
+	and $df ; No window (a textbox could still be drawing it)
+	ld ($ff00+R_LCDC),a
+	ldi a,(hl)
+	sub $80
+	ld ($ff00+R_SCY),a
+	ldi a,(hl)
+	ld ($ff00+R_SCX),a
+	ld a,$c7
+	ld ($ff00+R_LYC),a
+	ld a,$01
+	ldh (<hLcdInterruptCounter),a
+	jp _lcdInterruptEnd
+
+;;
+; FR: camera y-position used to place objects on the screen; 16 pixels lower
+; with the status bar at the bottom.
+; @param[out]	b	Camera y-position
+frGetSpriteCameraY:
+	ld a,(wFrHudBottom)
+	or a
+	ldh a,(<hCameraY)
+	jr z,+
+	add $10
++
+	ld b,a
+	ret
+
+;;
+; FR: object y-position (ldi from hl) plus the status bar's height if it's on top
+; @param[out]	cflag	Carry of the addition
+frLdiYAddHudOffset:
+	ld a,(wFrHudBottom)
+	or a
+	ld c,$10
+	jr z,+
+	ld c,$00
++
+	ldi a,(hl)
+	add c
+	ret
 .ENDS
 
 .BANK $41 SLOT 4

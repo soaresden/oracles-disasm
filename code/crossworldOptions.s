@@ -11,7 +11,7 @@
 	.db $01			; table version
 	.dsb 7 $00
 
-; Default values (all on, except the experimental bottom status bar)
+; Default values (all on, except the bottom status bar: top by default)
 	.db $01	; OPT_TITLE_COMBINED
 	.db $01	; OPT_VASU_SHORTCUT
 	.db $01	; OPT_DOOR_ICONS
