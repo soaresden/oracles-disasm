@@ -52,17 +52,17 @@ chestGroup3Data:
 	.db $ff
 
 chestGroup4Data:
-	; BALLADE: le Phare Éteint : la clé du boss, en haut de la tour (le coffre apparaît quand
-	; les 3 torches sont allumées)
-	m_ChestData $57, $17, TREASURE_OBJECT_BOSS_KEY_03
+	; BALLADE: le Phare Éteint (story/salles/phare.txt ; un coffre par salle, le premier compte)
+	m_ChestData $57, $1e, TREASURE_OBJECT_SMALL_KEY_03   ; les Zols (quand ils sont battus)
+	m_ChestData $8c, $1f, TREASURE_OBJECT_RUPEES_04      ; la statue sur le bouton : 30 rubis
+	m_ChestData $57, $15, TREASURE_OBJECT_HARP_02        ; la Lanterne des Songes
+	m_ChestData $2c, $1d, TREASURE_OBJECT_RUPEES_05      ; derrière le mur qui brûle : 50 rubis
+	m_ChestData $53, $1c, TREASURE_OBJECT_SMALL_KEY_03   ; la douve
+	m_ChestData $57, $17, TREASURE_OBJECT_SMALL_KEY_03   ; la tour, 3 torches
+	m_ChestData $5a, $19, TREASURE_OBJECT_BOSS_KEY_03    ; le balcon ouest
+	m_ChestData $1c, $1a, TREASURE_OBJECT_RUPEES_06      ; le balcon est : 100 rubis
 	m_ChestData $57, $08, TREASURE_OBJECT_SMALL_KEY_03
-	; BALLADE: le Phare Éteint : la Lanterne des Songes (la harpe d'Ages)
-	m_ChestData $57, $15, TREASURE_OBJECT_HARP_02
 	m_ChestData $17, $16, TREASURE_OBJECT_SMALL_KEY_03
-	m_ChestData $2c, $1a, TREASURE_OBJECT_SMALL_KEY_03
-	; BALLADE: le Phare Éteint : la clé du boss, et la petite clé (salle 4:1b)
-	m_ChestData $5a, $1c, TREASURE_OBJECT_BOSS_KEY_03
-	m_ChestData $54, $1b, TREASURE_OBJECT_SMALL_KEY_03
 	m_ChestData $53, $1d, TREASURE_OBJECT_COMPASS_02
 	m_ChestData $73, $1f, TREASURE_OBJECT_RING_04
 	m_ChestData $16, $23, TREASURE_OBJECT_BOSS_KEY_03

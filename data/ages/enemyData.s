@@ -298,7 +298,7 @@ extraEnemyData:
 	.db $06 $06 $fe $12 ; 0x21
 	.db $0c $0c $fc $1e ; 0x22
 	.db $08 $08 $fa $12 ; 0x23
-	.db $06 $0c $fc $08 ; 0x24
+	.db $06 $0c $fc $0e ; 0x24 ; BALLADE: Jack (Pumpkin Head) : 14 points de vie au lieu de 8
 	.db $12 $0f $fc $04 ; 0x25
 	.db $09 $09 $fa $0c ; 0x26
 	.db $06 $06 $f8 $14 ; 0x27

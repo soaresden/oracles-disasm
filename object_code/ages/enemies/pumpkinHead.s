@@ -1361,7 +1361,7 @@ pumpkinHead_noHealth:
 	; Otherwise, the body just disappears temporarily
 	ld h,d
 	ld l,Enemy.health
-	ld (hl),$08
+	ld (hl),$0e ; BALLADE: comme enemyData (14)
 
 	ld l,Enemy.state
 	ld (hl),$10

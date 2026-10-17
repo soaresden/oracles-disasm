@@ -2662,23 +2662,19 @@ group4Map11ObjectData:
 	obj_Pointer group4Map1bEnemyObjectData
 	obj_End
 
-group4Map1cObjectData:
 	obj_Interaction $20 $00 $58 $98
 	obj_Part $09 $00 $55
 	obj_Pointer group4Map1cEnemyObjectData
 	obj_End
 
-group4Map1dObjectData:
 	obj_End
 
-group4Map1eObjectData:
 	obj_Interaction $1e $0a $a7 $00
 	obj_Interaction $1e $0b $50 $00
 	obj_Interaction $12 $01 $58 $38
 	obj_Pointer group4Map1eEnemyObjectData
 	obj_End
 
-group4Map1fObjectData:
 	obj_Pointer group4Map1fEnemyObjectData
 	obj_End
 
@@ -4950,6 +4946,8 @@ group4Map13ObjectData:
 	obj_BeforeEvent group4Map13BeforeEventObjectData
 	obj_End
 group4Map14ObjectData:
+	obj_Interaction $1e $14 $07 $00
+	obj_Pointer objectData_makeAllTorchesLightable
 	obj_RandomEnemy $30 ENEMY_KEESE $00
 	obj_End
 group4Map15ObjectData:
@@ -4973,11 +4971,30 @@ group4Map18ObjectData:
 	obj_BeforeEvent group4Map18BeforeEventObjectData
 	obj_End
 group4Map19ObjectData:
+	obj_Part $09 $00 $22
+	obj_Interaction $20 $00 $58 $a8
 	obj_End
 group4Map1aObjectData:
+	obj_RandomEnemy $20 ENEMY_GHINI $00
 	obj_End
 group4Map1bObjectData:
+	obj_Interaction $1e $0b $50 $00
+	obj_SpecificEnemyA $00 ENEMY_STALFOS $00 $38 $78
+	obj_SpecificEnemyA     ENEMY_STALFOS $00 $78 $78
+	obj_End
+group4Map1cObjectData:
+	obj_End
+group4Map1dObjectData:
+	obj_Part $05 $01 $5a
+	obj_RandomEnemy $30 ENEMY_KEESE $00
+	obj_End
+group4Map1eObjectData:
 	obj_RandomEnemy $60 ENEMY_ZOL $00
+	obj_Interaction $12 $02 $58 $78
+	obj_End
+group4Map1fObjectData:
+	obj_Part $09 $00 $3a
+	obj_Interaction $20 $00 $88 $c8
 	obj_End
 group4Map24ObjectData:
 	; « Niveau 1 - Phare Éteint » en entrant (INTERAC_DUNGEON_STUFF $00, texte TX_0201)

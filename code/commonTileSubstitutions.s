@@ -197,6 +197,11 @@ replaceSwitchTiles:
 	;   b3: Position of tile to replace
 
 	@group4SwitchData:
+		.db $1c $01 $a0 $55 ; BALLADE: le pont de la douve du Phare
+		.db $1c $01 $a0 $56 ; BALLADE: le pont de la douve du Phare
+		.db $1c $01 $a0 $57 ; BALLADE: le pont de la douve du Phare
+		.db $1c $01 $a0 $58 ; BALLADE: le pont de la douve du Phare
+		.db $1c $01 $a0 $59 ; BALLADE: le pont de la douve du Phare
 		.db $2f $02 $0b $79
 		.db $2f $02 $5a $6c
 		.db $3b $20 $af $79
