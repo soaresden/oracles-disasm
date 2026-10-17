@@ -72,6 +72,20 @@
 ; BALLADE: amplitude de l'ondulation de l'écran dans le Songe (en pixels)
 .define BALLADE_DREAM_WAVE 2
 
+; BALLADE: boss de fin en rythme (prototype, INTERAC_BALLADE_RHYTHM), réglé tolérant :
+; fenêtre d'un coup juste (en images, avant ou après la note ; 12 = 0,2 s)
+.define BALLADE_RHYTHM_WINDOW 12
+; coups justes d'affilée pour que la harpe revienne, puis la basse
+.define BALLADE_RHYTHM_HARP 6
+.define BALLADE_RHYTHM_BASS 12
+; Marine chante à la fin d'un tour où notes justes - coups dans le vide >= ce nombre (sur 18)
+.define BALLADE_RHYTHM_GOAL 14
+; nombre de niveaux de musique (un bon tour = un niveau de plus ; après le dernier, Marine chante)
+.define BALLADE_RHYTHM_LEVELS 5
+; code secret de l'écran titre (Select tenu + Start) écrit en SRAM $bff1 : la partie suivante
+; commence dans la salle de test du boss en rythme (balladeRhythm.checkTestStart)
+.define BALLADE_RHYTHM_TEST_CODE $a5
+
 
 ; Define to help with building directory strings, maybe other stuff
 .ifdef ROM_SEASONS

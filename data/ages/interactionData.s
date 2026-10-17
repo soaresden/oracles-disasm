@@ -246,6 +246,7 @@ interactionData:
 	/* $e7 */ m_InteractionData $e1 $14 $20 ; BALLADE: Marine en mouette (palette 2)
 	/* $e8 */ m_InteractionData interactione8SubidData ; BALLADE: habitants
 	/* $e9 */ m_InteractionData $00 $00 $00 ; BALLADE: ondulation du Songe (rien à afficher)
+	/* $ea */ m_InteractionData $00 $00 $00 ; BALLADE: boss en rythme (rien à afficher)
 
 interaction60SubidData:
 interaction63SubidData:

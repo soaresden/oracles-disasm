@@ -3373,6 +3373,8 @@ initializeGame:
 	ld c,$03
 	call loadDeathRespawnBufferPreset
 +++
+	; BALLADE: code secret de l'écran titre -> la salle de test du boss en rythme
+	callab balladeRhythm.checkTestStart
 	ld a,(wFileIsLinkedGame)
 	ld (wIsLinkedGame),a
 	ld hl,wDeathRespawnBuffer

@@ -51,6 +51,8 @@
 ;;
 ; Au chargement de l'écran titre
 titleGull_init:
+	; BALLADE: efface le code secret du boss en rythme (il ne vaut que pour ce passage au titre)
+	callab balladeRhythm.titleClearCode
 	ld hl,TITLE_GULL_STEP
 	ld b,$06
 	call clearMemory
@@ -63,6 +65,8 @@ titleGull_init:
 ;;
 ; À chaque image de l'écran titre (après les autres sprites)
 titleGull_update:
+	; BALLADE: Select tenu + Start = code secret du boss en rythme
+	callab balladeRhythm.titleCheckCode
 	call @updateHeart
 
 	; Commande de l'étape en cours : b = paramètre 1, c = paramètre 2

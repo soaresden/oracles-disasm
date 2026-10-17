@@ -236,6 +236,13 @@ updateSound:
 	jr z,+
 	jp @ret
 +
+	; BALLADE: l'horloge du boss en rythme (INTERAC_BALLADE_RHYTHM), au pas de la musique
+	ld hl,wBalladeRhythmClock
+	inc (hl)
+	jr nz,+
+	inc hl
+	inc (hl)
++
 	ld a,(wSoundVolume)
 	ld ($ff00+R_NR50),a
 	ld a,(wSoundFadeDirection)
@@ -1950,6 +1957,13 @@ playSound:
 	ld a,$00
 	ld (wSoundFadeDirection),a
 	ld a,(wSoundTmp)
+	; BALLADE: une nouvelle musique rouvre toutes les voix (le boss en rythme les coupe avec NR51)
+	cp SND_GETITEM
+	jr nc,+
+	ld a,$ff
+	ld ($ff00+R_NR51),a
+	ld a,(wSoundTmp)
++
 
 	; Get a*3 in de
 	ld d,$00

@@ -234,6 +234,7 @@ interactionCodeTable: ; $3b8b
 	.dw agesInteractionsBank10.interactionCodee7 ; 0xe7 BALLADE: INTERAC_MARINE
 	.dw agesInteractionsBank10.interactionCodee8 ; 0xe8 BALLADE: INTERAC_BALLADE_NPC
 	.dw agesInteractionsBank10.interactionCodee9 ; 0xe9 BALLADE: INTERAC_BALLADE_DREAM_FX
+	.dw agesInteractionsBank10.interactionCodeea ; 0xea BALLADE: INTERAC_BALLADE_RHYTHM
 
 .else; ROM_SEASONS
 

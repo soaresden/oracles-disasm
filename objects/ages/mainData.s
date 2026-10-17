@@ -2914,7 +2914,6 @@ group4Map49ObjectData:
 	obj_Interaction $7f $00 $28 $78
 	obj_End
 
-group4Map4aObjectData:
 	obj_Interaction $1e $0b $50 $00
 	obj_Interaction $1e $09 $5e $00
 	obj_Interaction $20 $01 $58 $78
@@ -4979,4 +4978,7 @@ group4Map1bObjectData:
 group4Map24ObjectData:
 	; « Niveau 1 - Phare Éteint » en entrant (INTERAC_DUNGEON_STUFF $00, texte TX_0201)
 	obj_Interaction $12 $00 $88 $78
+	obj_End
+group4Map4aObjectData:
+	obj_Interaction INTERAC_BALLADE_RHYTHM $00 $58 $78
 	obj_End

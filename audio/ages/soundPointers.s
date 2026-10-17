@@ -56,10 +56,10 @@ soundPointers:
 	/* 0x34 */ m_soundPointer musGanon
 	/* 0x35 */ m_soundPointer musRalph
 	/* 0x36 */ m_soundPointer musCave
-	/* 0x37 */ m_soundPointer mus37
+	/* 0x37 */ m_soundPointer musBalladeRythme4 ; BALLADE: boss en rythme, niveau 4
 	/* 0x38 */ m_soundPointer musZeldaSaved
 	/* 0x39 */ m_soundPointer musGreatMoblin
-	/* 0x3a */ m_soundPointer mus3a
+	/* 0x3a */ m_soundPointer musBalladeRythme5 ; BALLADE: boss en rythme, niveau 5
 	/* 0x3b */ m_soundPointer mus3b
 	/* 0x3c */ m_soundPointer musSyrup
 	/* 0x3d */ m_soundPointer mus3d
@@ -72,11 +72,11 @@ soundPointers:
 	/* 0x44 */ m_soundPointer musBalladeTheme ; BALLADE: le thème du jeu
 	/* 0x45 */ m_soundPointer musBalladeBoss ; BALLADE: le Veilleur Creux (pour un autre boss)
 	/* 0x46 */ m_soundPointer musBlackTowerEntrance
-	/* 0x47 */ m_soundPointer mus47
-	/* 0x48 */ m_soundPointer mus48
-	/* 0x49 */ m_soundPointer mus49
+	/* 0x47 */ m_soundPointer musBalladeRythme ; BALLADE: le boss de fin en rythme (prototype)
+	/* 0x48 */ m_soundPointer musBalladeRythmeFin ; BALLADE: sa fin, Marine chante
+	/* 0x49 */ m_soundPointer musBalladeRythme2 ; BALLADE: boss en rythme, niveau 2
 	/* 0x4a */ m_soundPointer musPrecredits
-	/* 0x4b */ m_soundPointer mus4b
+	/* 0x4b */ m_soundPointer musBalladeRythme3 ; BALLADE: boss en rythme, niveau 3
 
 	/* 0x4c */ m_soundPointer sndGetItem
 	/* 0x4d */ m_soundPointer sndSolvePuzzle

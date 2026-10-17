@@ -397,6 +397,14 @@
 .define MUS_BALLADE_AUBERGE $43
 .define MUS_BALLADE_THEME $44
 .define MUS_BALLADE_VEILLEUR $45
+; Boss de fin en rythme (INTERAC_BALLADE_RHYTHM) : 5 niveaux (music/rythme.txt, rythme2-5.txt),
+; puis Marine chante (music/rythme_fin.txt)
+.define MUS_BALLADE_RYTHME $47
+.define MUS_BALLADE_RYTHME_FIN $48
+.define MUS_BALLADE_RYTHME_2 $49
+.define MUS_BALLADE_RYTHME_3 $4b
+.define MUS_BALLADE_RYTHME_4 $37
+.define MUS_BALLADE_RYTHME_5 $3a
 ; MUS_BOSS ($2e) joue le thème du jeu (music/theme.txt), MUS_MINIBOSS ($2d) music/miniboss.txt
 .define SND_BALLADE_GULL  $d6
 

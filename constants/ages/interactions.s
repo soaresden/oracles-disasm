@@ -1421,3 +1421,9 @@
 ;;
 ; BALLADE: dans chaque salle du Songe, l'écran ondule doucement, comme sous l'eau.
 .define INTERAC_BALLADE_DREAM_FX $e9
+
+;;
+; BALLADE: prototype du boss de fin en rythme (code/ages/balladeRhythm.s). Invisible : il ne reste
+; qu'un métronome ; chaque coup d'épée (A) en rythme fait entendre une note de la Ballade.
+; @subid_00{Salle de test (4:4a) : donne l'épée sur A et commence aussitôt}
+.define INTERAC_BALLADE_RHYTHM $ea

@@ -233,6 +233,7 @@ interactionAnimationTable:
 	.dw interactione7Animations ; BALLADE
 	.dw interactione8Animations ; BALLADE
 	.dw interactione4Animations ; BALLADE: $e9 (rien à afficher)
+	.dw interactione4Animations ; BALLADE: $ea (rien à afficher)
 
 interactionOamDataTable: ; 0x59a23
 	.dw interaction00OamDataPointers
@@ -469,6 +470,7 @@ interactionOamDataTable: ; 0x59a23
 	.dw interactione7OamDataPointers ; BALLADE
 	.dw interactione8OamDataPointers ; BALLADE
 	.dw interactione4OamDataPointers ; BALLADE: $e9
+	.dw interactione4OamDataPointers ; BALLADE: $ea
 
 interaction00Animations:
 interaction01Animations:

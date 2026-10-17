@@ -2817,7 +2817,27 @@ wBalladeNoctambule: ; $cde6
 wBalladeNoctambuleShown: ; $cde8
 	db
 
-; $cde9-$cdff unused?
+; BALLADE: boss de fin en rythme (INTERAC_BALLADE_RHYTHM) : horloge comptée par le moteur son
+; (un pas par appel de updateSound, remise à zéro quand le boss lance son morceau)
+wBalladeRhythmClock: ; $cde9
+	dw
+
+; BALLADE: boss en rythme : notes réussies (au total) ; étape (0 = rien, 1 = le combat en rythme,
+; 2 = Marine chante, 3 = le boss est vaincu). Lues aussi par tools/test_rythme.py.
+wBalladeRhythmHits: ; $cdeb
+	db
+wBalladeRhythmStage: ; $cdec
+	db
+
+; BALLADE: boss en rythme lancé par le code secret de l'écran titre (Select tenu + Start) : on
+; revient au titre après le boss. wBalladeRhythmSpawn garde le vrai point de départ du fichier
+; (wDeathRespawnBuffer, 6 octets), rendu en arrivant dans la salle de test.
+wBalladeRhythmTest: ; $cded
+	db
+wBalladeRhythmSpawn: ; $cdee
+	dsb 6
+
+; $cdf4-$cdff unused?
 
 .endif ; ROM_AGES
 .ENDS

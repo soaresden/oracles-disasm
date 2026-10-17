@@ -212,6 +212,11 @@ specialObjectLoadAnimationFrameToBuffer:
 		.include "code/ages/balladeMarine.s"
 	.ends
 
+	 ; BALLADE: le boss de fin en rythme (prototype, INTERAC_BALLADE_RHYTHM)
+	 m_section_superfree Ballade_Rhythm namespace balladeRhythm
+		.include "code/ages/balladeRhythm.s"
+	.ends
+
 	 ; This section can't be superfree, since it must be in the same bank as section
 	 ; "Bank_7_Data".
 	 m_section_free Enemy_Part_Collisions namespace bank7
@@ -727,6 +732,7 @@ m_section_free Ages_Interactions_Bank10 NAMESPACE agesInteractionsBank10
 	.include "object_code/ages/interactions/marine.s" ; BALLADE
 	.include "object_code/ages/interactions/balladeNpc.s" ; BALLADE
 	.include "object_code/ages/interactions/balladeDreamFx.s" ; BALLADE
+	.include "object_code/ages/interactions/balladeRhythm.s" ; BALLADE
 .ends
 
 

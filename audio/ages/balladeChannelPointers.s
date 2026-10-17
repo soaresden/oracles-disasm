@@ -77,6 +77,72 @@ musBalladeTitre:
 	.dw musBalladeTitreChannel6
 	.db $ff
 
+musBalladeRythme:
+	.db $00
+	.dw musBalladeRythmeChannel0
+	.db $01
+	.dw musBalladeRythmeChannel1
+	.db $04
+	.dw musBalladeRythmeChannel4
+	.db $06
+	.dw musBalladeRythmeChannel6
+	.db $ff
+
+musBalladeRythmeFin:
+	.db $00
+	.dw musBalladeRythmeFinChannel0
+	.db $01
+	.dw musBalladeRythmeFinChannel1
+	.db $04
+	.dw musBalladeRythmeFinChannel4
+	.db $06
+	.dw musBalladeRythmeFinChannel6
+	.db $ff
+
+musBalladeRythme2:
+	.db $00
+	.dw musBalladeRythme2Channel0
+	.db $01
+	.dw musBalladeRythme2Channel1
+	.db $04
+	.dw musBalladeRythme2Channel4
+	.db $06
+	.dw musBalladeRythme2Channel6
+	.db $ff
+
+musBalladeRythme3:
+	.db $00
+	.dw musBalladeRythme3Channel0
+	.db $01
+	.dw musBalladeRythme3Channel1
+	.db $04
+	.dw musBalladeRythme3Channel4
+	.db $06
+	.dw musBalladeRythme3Channel6
+	.db $ff
+
+musBalladeRythme4:
+	.db $00
+	.dw musBalladeRythme4Channel0
+	.db $01
+	.dw musBalladeRythme4Channel1
+	.db $04
+	.dw musBalladeRythme4Channel4
+	.db $06
+	.dw musBalladeRythme4Channel6
+	.db $ff
+
+musBalladeRythme5:
+	.db $00
+	.dw musBalladeRythme5Channel0
+	.db $01
+	.dw musBalladeRythme5Channel1
+	.db $04
+	.dw musBalladeRythme5Channel4
+	.db $06
+	.dw musBalladeRythme5Channel6
+	.db $ff
+
 sndBalladeGull:
 	.db $02
 	.dw sndBalladeGullChannel2
