@@ -185,31 +185,102 @@ marineBedScript:
 
 
 ; ==================================================================================================
-; INTERAC_MARINE subid $02 : (voir plus bas)
+; INTERAC_MARINE subid $02 : sur le cap, après l'essence du Phare. Le phare brille de nouveau ;
+; Marine emmène Link voir les gens qu'ils ont sauvés : le tour du village (subid $05 ci-dessous).
 marineToBeContinuedScript:
 	disableinput
-	writememory wTextboxFlags, TEXTBOXFLAG_ALTPALETTE1
 	wait 40
-	writememory wDontUpdateStatusBar, $77
-	asm15 hideStatusBar
-	asm15 scriptHelp.remoteMakuCutscene_fadeoutToBlackWithDelay, $02
-	checkpalettefadedone
-	; Link aussi disparaît dans le noir
-	writememory w1Link.visible, $00
-	wait 30
 	showtext TX_5a30
+	wait 20
+	writememory wBalladeEnding, $01
+	writememory wWarpDestRoom, $9b
+	writememory wWarpTransition, $00
+	writememory wWarpDestPos, $75
+	writememory wWarpTransition2, $03 ; fondu
+	writememory wWarpDestGroup, $81
+	wait 240
+	scriptend
+
+
+; ==================================================================================================
+; INTERAC_MARINE subid $05 : le tour du village à la fin du chapitre 1 (une étape par salle, selon
+; wBalladeEnding) : la place (la dame insomniaque dort enfin, le vieux ne compte plus les
+; moutons), la plage (les enfants jouent), l'auberge (pleine), le port (Marine, « À suivre... »).
+; Sans étape en cours, rien.
+marineEndingScript:
+	jumpifmemoryeq wBalladeEnding, $00, @none
+	disableinput
+	disablemenu
+	; (un texte affiché pendant l'arrivée dans la salle serait effacé aussitôt)
+	wait 70
+	jumptable_memoryaddress wBalladeEnding
+	.dw @none
+	.dw @place
+	.dw @beach
+	.dw @inn
+	.dw @harbour
+@none:
+	scriptend
+
+@place:
+	showtext TX_5a3e
 	wait 30
-	; (le jeu remet ce réglage à zéro après chaque texte : sans lui, noir sur noir)
-	writememory wTextboxFlags, TEXTBOXFLAG_ALTPALETTE1
+	showtext TX_5a3f
+	wait 30
+	writememory wBalladeEnding, $02
+	writememory wWarpDestRoom, $9c
+	writememory wWarpTransition, $00
+	writememory wWarpDestPos, $55
+	writememory wWarpTransition2, $03 ; fondu
+	writememory wWarpDestGroup, $81
+	wait 240
+	scriptend
+
+@beach:
+	showtext TX_5a40
+	wait 30
+	writememory wBalladeEnding, $03
+	writememory wWarpDestRoom, $9e
+	writememory wWarpTransition, $00
+	writememory wWarpDestPos, $46
+	writememory wWarpTransition2, $03 ; fondu
+	writememory wWarpDestGroup, $83
+	wait 240
+	scriptend
+
+@inn:
+	showtext TX_5a41
+	wait 30
+	writememory wBalladeEnding, $04
+	writememory wWarpDestRoom, $ab
+	writememory wWarpTransition, $00
+	writememory wWarpDestPos, $65
+	writememory wWarpTransition2, $03 ; fondu
+	writememory wWarpDestGroup, $81
+	wait 240
+	scriptend
+
+@harbour:
+	showtext TX_5a42
+	wait 40
 	showtext TX_5a31
-	wait 60
-	writememory w1Link.visible, $c2
-	asm15 showStatusBar
-	asm15 clearFadingPalettes
-	asm15 fadeinFromWhiteWithDelay, $02
-	checkpalettefadedone
-	resetmusic
+	writememory wBalladeEnding, $00
 	enablemenu
-	writememory wDisabledObjects, $00
 	enableinput
+	scriptend
+
+
+; ==================================================================================================
+; INTERAC_MARINE subid $04 : salle du boss du Phare. Jack menace les héros, Marine lui répond
+; (une seule fois, tant que Jack n'est pas battu ; les ennemis attendent la fin)
+marineJackScript:
+	stopifroomflag80set
+	stopifroomflag40set
+	orroomflag $40
+	setdisabledobjectsto91
+	wait 40
+	showtext TX_5a34
+	wait 20
+	showtext TX_5a35
+	enableallobjects
 	scriptend

@@ -24,16 +24,11 @@ marineBedScript:
 ; INTERAC_MARINE subid $04 : salle du boss du Phare. Jack (la citrouille) menace les héros, Marine
 ; lui répond (une seule fois, tant que Jack n'est pas battu ; les ennemis attendent la fin)
 marineJackScript:
-	stopifroomflag80set
-	stopifroomflag40set
-	orroomflag $40
-	setdisabledobjectsto91
-	wait 40
-	showtext TX_5a34
-	wait 20
-	showtext TX_5a35
-	enableallobjects
-	scriptend
+	loadscript balladeScripts.marineJackScript
+
+; INTERAC_MARINE subid $05 : le tour du village, à la fin du chapitre 1
+marineEndingScript:
+	loadscript balladeScripts.marineEndingScript
 
 ; INTERAC_MARINE subid $01 : dans le Songe, Select -> « Tu veux te réveiller ? »
 ; (le code de l'interaction fait le réveil quand var37 passe à 1)
@@ -66,6 +61,16 @@ balladeNpc06Script: ; l'ado
 	rungenericnpc TX_5a26
 balladeNpc07Script: ; Marine humaine (dans le Songe)
 	loadscript balladeScripts.marineHumanScript
+
+; Après l'essence du Phare (balladeNpc.s, @scriptsSaved) : les répliques du tour du village
+balladeNpc00SavedScript: ; l'aubergiste : l'auberge est pleine
+	rungenericnpc TX_5a41
+balladeKidsSavedScript: ; les enfants jouent aux chevaliers
+	rungenericnpc TX_5a40
+balladeNpc04SavedScript: ; la dame dort enfin
+	rungenericnpc TX_5a3e
+balladeNpc05SavedScript: ; le vieux ne compte plus les moutons
+	rungenericnpc TX_5a3f
 
 
 ; ==================================================================================================

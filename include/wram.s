@@ -2837,7 +2837,12 @@ wBalladeRhythmTest: ; $cded
 wBalladeRhythmSpawn: ; $cdee
 	dsb 6
 
-; $cdf4-$cdff unused?
+; BALLADE: le tour du village à la fin du chapitre 1 (INTERAC_MARINE $05) : l'étape en cours
+; (0 = rien, 1 la place, 2 la plage, 3 l'auberge, 4 le port)
+wBalladeEnding: ; $cdf4
+	db
+
+; $cdf5-$cdff unused?
 
 .endif ; ROM_AGES
 .ENDS

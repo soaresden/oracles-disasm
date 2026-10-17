@@ -30,6 +30,7 @@ interactionCodee7:
 	.dw mainScripts.marineToBeContinuedScript
 	.dw mainScripts.marineBedScript
 	.dw mainScripts.marineJackScript
+	.dw mainScripts.marineEndingScript
 
 @state1:
 	call interactionRunScript

@@ -4914,10 +4914,12 @@ group1Map9aObjectData:
 group1Map9bObjectData:
 	obj_Interaction INTERAC_BALLADE_NPC $04 $58 $28
 	obj_Interaction INTERAC_BALLADE_NPC $05 $58 $78
+	obj_Interaction INTERAC_MARINE $05 $08 $08 ; la fin du chapitre 1 : le tour du village
 	obj_End
 group1Map9cObjectData:
 	obj_Interaction INTERAC_BALLADE_NPC $02 $38 $38
 	obj_Interaction INTERAC_BALLADE_NPC $03 $48 $68
+	obj_Interaction INTERAC_MARINE $05 $08 $08 ; la fin du chapitre 1 : le tour du village
 	obj_End
 group1Mapa9ObjectData:
 	obj_End
@@ -4926,6 +4928,7 @@ group1MapaaObjectData:
 	obj_End
 group1MapabObjectData:
 	obj_Interaction INTERAC_BALLADE_NPC $01 $38 $58
+	obj_Interaction INTERAC_MARINE $05 $08 $08 ; la fin du chapitre 1 : le tour du village
 	obj_End
 group1MapacObjectData:
 	obj_End
@@ -4934,6 +4937,7 @@ group2Map9eObjectData:
 	obj_End
 group3Map9eObjectData:
 	obj_Interaction INTERAC_BALLADE_NPC $00 $48 $38
+	obj_Interaction INTERAC_MARINE $05 $08 $08 ; la fin du chapitre 1 : le tour du village
 	obj_End
 group4Map12ObjectData:
 	obj_RandomEnemy $40 ENEMY_GHINI $00
