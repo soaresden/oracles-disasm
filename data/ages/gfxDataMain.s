@@ -545,3 +545,4 @@
 	m_GfxData gfx_name_fr
 	m_GfxData gfx_messagespeed_fr
 	m_GfxData gfx_save_fr
+	m_GfxData gfx_blurb_d1_fr

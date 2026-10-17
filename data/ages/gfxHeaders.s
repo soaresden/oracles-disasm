@@ -30,7 +30,7 @@
 ; copy the data quickly enough to fit within vblank. If you need to draw stuff while the screen is
 ; on, see the "queueDmaTransfer" function or "data/{game}/uniqueGfxHeaders.s".
 
-.define NUM_GFX_HEADERS $c9 ; BALLADE: +2 (GFXH_FILM, GFXH_TITLE), +12 (menus en français)
+.define NUM_GFX_HEADERS $ca ; BALLADE: +2 (GFXH_FILM, GFXH_TITLE), +12 (menus en français), +1 (nom du Phare en français)
 
 gfxHeaderTable:
 	.repeat NUM_GFX_HEADERS index COUNT
@@ -1087,6 +1087,11 @@ m_GfxHeaderStart $c8, GFXH_INVENTORY_SCREEN_FR
 	m_GfxHeader flg_inventory_screen_1, w4AttributeMap+$040
 	m_GfxHeaderEnd
 
+; Carte d'un donjon : le nom du Phare Éteint en français (tools/make_blurbs.py)
+m_GfxHeaderStart $c9, GFXH_DUNGEON_1_BLURB_FR
+	m_GfxHeader gfx_blurb_d1_fr, $8c00
+	m_GfxHeaderEnd
+
 ; Anglais -> français (liste terminée par $00)
 balladeLangGfxHeaders:
 	.db GFXH_FILE_MENU_WITH_MESSAGE_SPEED,	GFXH_FILE_MENU_WITH_MESSAGE_SPEED_FR
@@ -1101,4 +1106,5 @@ balladeLangGfxHeaders:
 	.db GFXH_DONE,				GFXH_DONE_FR
 	.db GFXH_ERROR_TEXT,			GFXH_ERROR_TEXT_FR
 	.db GFXH_INVENTORY_SCREEN,		GFXH_INVENTORY_SCREEN_FR
+	.db GFXH_DUNGEON_1_BLURB,		GFXH_DUNGEON_1_BLURB_FR
 	.db $00
