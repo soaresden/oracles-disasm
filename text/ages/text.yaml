@@ -886,11 +886,11 @@ groups:
   - name: TX_006d
     index: 0x6d
     text: |-
-      You got a \col(1)Magic
-      Potion\col(0)! It kicks
-      in when you run
-      out of hearts!
-
+      You got a \col(1)Fairy
+      in a Bottle\col(0)! It
+      revives you when
+      you run out of
+      hearts!
   - name: TX_006e
     index: 0x6e
     text: |-
@@ -4115,9 +4115,9 @@ groups:
   - name: TX_0919
     index: 0x19
     text: |-
-      Magic Potion
-      Fill your heart!
-
+      Fairy in Bottle
+      It revives you
+      when you fall.
   - name: TX_091a
     index: 0x1a
     text: |-
@@ -6487,8 +6487,9 @@ groups:
     - 0x1c
     - 0x1d
     text: |-
-      \col(1)Gasha Seed\col(0)\stop
-      \num1 Rupees
+      \col(1)Fairy in a
+      Bottle\col(0)\stop
+       \num1 Rupees
       \jump(TX_0e2b)
     null_terminator: False
 

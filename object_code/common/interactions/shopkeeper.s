@@ -592,6 +592,10 @@ shopkeeperCheckLinkHasItemAlready:
 	cp $0d
 	jr z,@flute
 
+	; BALLADE: la fée en bouteille : une seule à la fois
+	cp $09
+	jr z,@fairy
+
 	ld l,<wNumBombs
 	cp $04
 	jr z,+
@@ -609,6 +613,10 @@ shopkeeperCheckLinkHasItemAlready:
 
 @shield:
 	ld a,TREASURE_SHIELD
+	jr @checkObtained
+
+@fairy:
+	ld a,TREASURE_POTION
 	jr @checkObtained
 
 @flute:

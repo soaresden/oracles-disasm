@@ -148,6 +148,7 @@ applyRoomSpecificTileChangesAfterGfxLoad:
 	.db $af $05
 	.db $00
 @group3:
+	.db $5e $04 ; BALLADE: la boutique de Port-Veille
 	.db $ed $04
 	.db $fe $04
 @group4:

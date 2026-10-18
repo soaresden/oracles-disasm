@@ -661,6 +661,17 @@ linkApplyDamage:
 
 	ld a,TREASURE_POTION
 	call loseTreasure
+
+	; BALLADE: la fée en bouteille : elle sort et tourne autour de Link
+	call getFreePartSlot
+	jr nz,+
+	ld (hl),PART_ITEM_DROP
+	inc l
+	ld (hl),ITEM_DROP_FAIRY
+	call objectCopyPosition
++
+	ld a,SND_FAIRY_HEAL
+	call playSound
 	jr ++
 
 ; Link is dead, and has no potion.

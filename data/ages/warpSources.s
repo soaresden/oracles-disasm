@@ -243,6 +243,7 @@ group1WarpSources:
 	m_StandardWarp $0 $74 $1a $5 $4
 	m_StandardWarp $0 $79 $02 $2 $4
 	m_StandardWarp $0 $9a $1a $3 $4 ; BALLADE: porte de l'auberge de Port-Veille -> 3:9e
+	m_StandardWarp $0 $9b $11 $3 $4 ; BALLADE: porte de la boutique de Port-Veille -> 3:5e
 	m_StandardWarp $0 $7b $02 $4 $4 ; BALLADE: porte du Phare Éteint (cap) -> hall du phare (4:24)
 	m_StandardWarp $0 $91 $19 $5 $4
 	m_StandardWarp $0 $a3 $39 $3 $4
@@ -417,7 +418,8 @@ group3WarpSources:
 	m_StandardWarp $4 $3f $1b $0 $3
 	m_PointerWarp     $4e warpSource7ab6
 	m_StandardWarp $4 $4f $2b $0 $3
-	m_StandardWarp $4 $5e $20 $0 $3
+	m_StandardWarp $4 $5e $4b $1 $3 ; BALLADE: sorties de la boutique (porte de gauche, de droite)
+	m_StandardWarp $8 $5e $4b $1 $3 ; -> devant sa porte (1:9b)
 	m_StandardWarp $4 $5f $1e $0 $3
 	m_StandardWarp $4 $6e $08 $1 $3
 	m_StandardWarp $4 $6f $09 $1 $3

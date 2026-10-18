@@ -2239,7 +2239,6 @@ group3MapffObjectData:
 	obj_Interaction $dc $16
 	obj_End
 
-group3Map5eObjectData:
 	obj_Interaction $4e $03 $38 $50
 	obj_End
 
@@ -4930,6 +4929,11 @@ group1MapacObjectData:
 	obj_End
 group2Map9eObjectData:
 	obj_Interaction INTERAC_BALLADE_NPC $07 $28 $68
+	obj_End
+group3Map5eObjectData:
+	obj_Interaction $47 $01 $28 $80
+	obj_Interaction $47 $09 $28 $60
+	obj_Interaction $46 $00 $58 $88
 	obj_End
 group3Map9eObjectData:
 	obj_Interaction INTERAC_BALLADE_NPC $00 $48 $38

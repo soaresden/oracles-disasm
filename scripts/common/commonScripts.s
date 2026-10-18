@@ -483,7 +483,7 @@ shopkeeperScript_purchaseItem:
 	.dw @buyHiddenShopGashaSeed2
 	.dw @buyUpgradeableItem
 	.dw @buyUpgradeableItem
-	.dw @buyUpgradeableItem
+	.dw @buyFairyBottle ; BALLADE: $09
 	.dw @buyUpgradeableItem
 	.dw @buyUpgradeableItem
 	.dw @buyUpgradeableItem
@@ -518,6 +518,12 @@ shopkeeperScript_purchaseItem:
 .endif
 	callscript shopkeeperConfirmPurchase
 	ormemory wBoughtShopItems1, $01
+	scriptend
+
+; BALLADE: la fée en bouteille (la potion d'Ages)
+@buyFairyBottle:
+	showtextnonexitablelowindex <TX_0e1d ; (texte de la boutique cachée, inutilisée ici)
+	callscript shopkeeperConfirmPurchase
 	scriptend
 
 @buy3Hearts:

@@ -452,7 +452,7 @@ shopItemPrices:
 	/* $06 */ .db RUPEEVAL_500
 	/* $07 */ .db RUPEEVAL_300
 	/* $08 */ .db RUPEEVAL_300
-	/* $09 */ .db RUPEEVAL_300
+	/* $09 */ .db RUPEEVAL_060 ; BALLADE: la fée en bouteille
 	/* $0a */ .db RUPEEVAL_300
 	/* $0b */ .db RUPEEVAL_100
 	/* $0c */ .db RUPEEVAL_010
