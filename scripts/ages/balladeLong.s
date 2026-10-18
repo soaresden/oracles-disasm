@@ -188,6 +188,11 @@ marineBedScript:
 ; INTERAC_MARINE subid $02 : sur le cap, après l'essence du Phare. Le phare brille de nouveau ;
 ; Marine emmène Link voir les gens qu'ils ont sauvés : le tour du village (subid $05 ci-dessous).
 marineToBeContinuedScript:
+	stopifroomflag40set
+	jumpifc6xxset <wEssencesObtained, $01, @go
+	scriptend
+@go:
+	orroomflag $40
 	disableinput
 	wait 40
 	showtext TX_5a30

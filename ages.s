@@ -217,6 +217,11 @@ specialObjectLoadAnimationFrameToBuffer:
 		.include "code/ages/balladeRhythm.s"
 	.ends
 
+	 ; BALLADE: le Creuse-Rubis du forain (INTERAC_BALLADE_CREUSE)
+	 m_section_superfree Ballade_Creuse namespace balladeCreuse
+		.include "code/ages/balladeCreuse.s"
+	.ends
+
 	 ; This section can't be superfree, since it must be in the same bank as section
 	 ; "Bank_7_Data".
 	 m_section_free Enemy_Part_Collisions namespace bank7
@@ -733,6 +738,7 @@ m_section_free Ages_Interactions_Bank10 NAMESPACE agesInteractionsBank10
 	.include "object_code/ages/interactions/balladeNpc.s" ; BALLADE
 	.include "object_code/ages/interactions/balladeDreamFx.s" ; BALLADE
 	.include "object_code/ages/interactions/balladeRhythm.s" ; BALLADE
+	.include "object_code/ages/interactions/balladeCreuse.s" ; BALLADE
 .ends
 
 

@@ -1427,3 +1427,8 @@
 ; qu'un métronome ; chaque coup d'épée (A) en rythme fait entendre une note de la Ballade.
 ; @subid_00{Salle de test (4:4a) : donne l'épée sur A et commence aussitôt}
 .define INTERAC_BALLADE_RHYTHM $ea
+
+;;
+; BALLADE: le Creuse-Rubis, le mini-jeu du forain (code/ages/balladeCreuse.s). Invisible : il
+; surveille le champ de sable de la salle 1:ac.
+.define INTERAC_BALLADE_CREUSE $eb

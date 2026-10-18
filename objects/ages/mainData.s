@@ -4926,6 +4926,8 @@ group1MapabObjectData:
 	obj_Interaction INTERAC_MARINE $05 $08 $08 ; la fin du chapitre 1 : le tour du village
 	obj_End
 group1MapacObjectData:
+	obj_Interaction INTERAC_BALLADE_NPC $08 $38 $78
+	obj_Interaction INTERAC_BALLADE_CREUSE $00 $08 $08
 	obj_End
 group2Map9eObjectData:
 	obj_Interaction INTERAC_BALLADE_NPC $07 $28 $68

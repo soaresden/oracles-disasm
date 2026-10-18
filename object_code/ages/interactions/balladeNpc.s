@@ -47,6 +47,7 @@ interactionCodee8:
 	.dw mainScripts.balladeNpc05Script
 	.dw mainScripts.balladeNpc06Script
 	.dw mainScripts.balladeNpc07Script
+	.dw mainScripts.balladeNpc08Script
 
 @scriptsSaved:
 	.dw mainScripts.balladeNpc00SavedScript
@@ -57,3 +58,4 @@ interactionCodee8:
 	.dw mainScripts.balladeNpc05SavedScript
 	.dw mainScripts.balladeNpc06Script
 	.dw mainScripts.balladeNpc07Script
+	.dw mainScripts.balladeNpc08Script

@@ -247,6 +247,7 @@ interactionData:
 	/* $e8 */ m_InteractionData interactione8SubidData ; BALLADE: habitants
 	/* $e9 */ m_InteractionData $00 $00 $00 ; BALLADE: ondulation du Songe (rien à afficher)
 	/* $ea */ m_InteractionData $00 $00 $00 ; BALLADE: boss en rythme (rien à afficher)
+	/* $eb */ m_InteractionData $00 $00 $00 ; BALLADE: le Creuse-Rubis (rien à afficher)
 
 interaction60SubidData:
 interaction63SubidData:
@@ -844,6 +845,7 @@ interactione8SubidData:
 	m_InteractionSubidData $42 $00 $32 ; le vieux qui compte les moutons
 	m_InteractionSubidData $4f $10 $12 ; l'ado
 	m_InteractionSubidData $e2 $00 $32 ; Marine humaine (spr_marine_human) : cheveux orange, robe jaune pâle
+	m_InteractionSubidData $42 $00 $12 ; le forain (le vieux, autres couleurs)
 	m_InteractionSubidDataEnd
 
 interactiond4SubidData:

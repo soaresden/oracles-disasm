@@ -2842,7 +2842,21 @@ wBalladeRhythmSpawn: ; $cdee
 wBalladeEnding: ; $cdf4
 	db
 
-; $cdf5-$cdff unused?
+; BALLADE: le Creuse-Rubis du forain (code/ages/balladeCreuse.s) : l'état (0 rien, 1 en jeu), le
+; niveau (0-2), les bombes et les cases creusées (24 bits
+; chacun, à la suite), les cases sûres qui restent
+wBalladeCreuseState: ; $cdf5
+	db
+wBalladeCreuseLevel: ; $cdf6
+	db
+wBalladeCreuseMines: ; $cdf7
+	dsb 3
+wBalladeCreuseDug: ; $cdfa
+	dsb 3
+wBalladeCreuseLeft: ; $cdfd
+	db
+
+; $cdfe-$cdff unused?
 
 .endif ; ROM_AGES
 .ENDS

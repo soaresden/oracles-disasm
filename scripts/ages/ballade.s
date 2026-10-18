@@ -10,11 +10,6 @@ marineBeachScript:
 
 ; INTERAC_MARINE subid $02 : après l'essence du Phare (« À suivre... »)
 marineToBeContinuedScript:
-	stopifroomflag40set
-	jumpifc6xxset <wEssencesObtained, $01, @go
-	scriptend
-@go:
-	orroomflag $40
 	loadscript balladeScripts.marineToBeContinuedScript
 
 ; INTERAC_MARINE subid $03 : à l'auberge, A devant le lit -> « Dormir un peu ? »
@@ -61,6 +56,8 @@ balladeNpc06Script: ; l'ado
 	rungenericnpc TX_5a26
 balladeNpc07Script: ; Marine humaine (dans le Songe)
 	loadscript balladeScripts.marineHumanScript
+balladeNpc08Script: ; le forain : le Creuse-Rubis (code/ages/balladeCreuse.s lit le choix)
+	rungenericnpc TX_5a43
 
 ; Après l'essence du Phare (balladeNpc.s, @scriptsSaved) : les répliques du tour du village
 balladeNpc00SavedScript: ; l'aubergiste : l'auberge est pleine
