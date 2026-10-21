@@ -143,6 +143,28 @@ musBalladeRythme5:
 	.dw musBalladeRythme5Channel6
 	.db $ff
 
+musBalladeGrelot:
+	.db $00
+	.dw musBalladeGrelotChannel0
+	.db $01
+	.dw musBalladeGrelotChannel1
+	.db $04
+	.dw musBalladeGrelotChannel4
+	.db $06
+	.dw musBalladeGrelotChannel6
+	.db $ff
+
+musBalladeCoffre:
+	.db $00
+	.dw musBalladeCoffreChannel0
+	.db $01
+	.dw musBalladeCoffreChannel1
+	.db $04
+	.dw musBalladeCoffreChannel4
+	.db $06
+	.dw musBalladeCoffreChannel6
+	.db $ff
+
 sndBalladeGull:
 	.db $02
 	.dw sndBalladeGullChannel2

@@ -60,9 +60,9 @@ soundPointers:
 	/* 0x38 */ m_soundPointer musZeldaSaved
 	/* 0x39 */ m_soundPointer musGreatMoblin
 	/* 0x3a */ m_soundPointer musBalladeRythme5 ; BALLADE: boss en rythme, niveau 5
-	/* 0x3b */ m_soundPointer mus3b
+	/* 0x3b */ m_soundPointer musBalladeCoffre ; BALLADE: le Coffre à Jouets (donjon 2)
 	/* 0x3c */ m_soundPointer musSyrup
-	/* 0x3d */ m_soundPointer mus3d
+	/* 0x3d */ m_soundPointer musBalladeGrelot ; BALLADE: Hameau-Grelot (île 2)
 	/* 0x3e */ m_soundPointer musGoronCave
 	/* 0x3f */ m_soundPointer musIntro1
 	/* 0x40 */ m_soundPointer musIntro2

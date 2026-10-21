@@ -405,6 +405,8 @@
 .define MUS_BALLADE_RYTHME_3 $4b
 .define MUS_BALLADE_RYTHME_4 $37
 .define MUS_BALLADE_RYTHME_5 $3a
+.define MUS_BALLADE_COFFRE $3b ; le Coffre à Jouets (donjon 2)
+.define MUS_BALLADE_GRELOT $3d ; Hameau-Grelot (île 2)
 ; MUS_BOSS ($2e) joue le thème du jeu (music/theme.txt), MUS_MINIBOSS ($2d) music/miniboss.txt
 .define SND_BALLADE_GULL  $d6
 
