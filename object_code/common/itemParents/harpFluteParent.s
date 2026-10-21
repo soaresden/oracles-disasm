@@ -142,11 +142,15 @@ parentItemCode_harp:
 	; BALLADE: dedans, « La Lanterne ne brille pas, ici. » (TX_5110)
 	jp nz,@tuneEchoesInVain
 
-	; BALLADE: ni au fond de la mer ouverte du Songe (briques $1a, $1b) : dans le Réel, c'est l'eau
-	; profonde (comme le réveil du noctambule, balladeDreamFx.s)
-	ld a,(wActiveGroup)
-	or a
-	jr nz,++
+	; BALLADE: ni au fond de la mer ouverte du Songe (briques $1a, $1b des décors $7d, $7e : la Brume,
+	; la Lagune ; ailleurs c'est du sol) : dans le Réel, c'est l'eau profonde (comme le réveil du
+	; noctambule, balladeDreamFx.s)
+	ld a,(wTilesetIndex)
+	and $7f
+	cp $7d
+	jr c,++
+	cp $7f
+	jr nc,++
 	ld a,(wActiveTilePos)
 	ld l,a
 	ld h,>wRoomLayout

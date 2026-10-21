@@ -140,7 +140,14 @@ interactionCodee9:
 	or (hl)
 	ret nz
 
-	; Pas au fond de la mer ouverte (dans le Réel, c'est l'eau) : on attend qu'il en sorte
+	; Pas au fond de la mer ouverte (dans le Réel, c'est l'eau) : on attend qu'il en sorte. Seuls
+	; les décors $7d et $7e (la Brume, la Lagune) en ont une ; ailleurs, $1a et $1b sont du sol
+	ld a,(wTilesetIndex)
+	and $7f
+	cp $7d
+	jr c,@wake
+	cp $7f
+	jr nc,@wake
 	ld a,(wActiveTilePos)
 	ld l,a
 	ld h,>wRoomLayout
@@ -149,6 +156,7 @@ interactionCodee9:
 	jr z,@notYet
 	cp $1b
 	jr z,@notYet
+@wake:
 	callab balladeMarine.switchDream
 	ret
 @notYet:

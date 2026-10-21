@@ -85,14 +85,14 @@ roomTileChangerCodeGroupTable:
 ;   b1: Index for jump table above
 
 roomTileChangerCodeGroup0Data:
-	.db $38 $08
+	;.db $38 $08 ; BALLADE: Mont-Braise (1:08-3c)
 	.db $48 $17
 	.db $5c $14
 	.db $73 $16
 	; BALLADE: salle réutilisée par Gulls of Life, sans le changement de cases d'Ages
 	;.db $ac $18
-	.db $2c $19
-	.db $1c $1a
+	;.db $2c $19 ; BALLADE: Mont-Braise (1:08-3c)
+	;.db $1c $1a ; BALLADE: Mont-Braise (1:08-3c)
 	.db $ba $1b
 	; BALLADE: salle réutilisée par Gulls of Life, sans le changement de cases d'Ages
 	;.db $aa $1c
@@ -105,8 +105,8 @@ roomTileChangerCodeGroup0Data:
 	.db $54 $23
 	; BALLADE: la Lagune des Serments (1:04-37), sans le changement de cases d'Ages
 	;.db $25 $24
-	.db $3a $25
-	.db $0b $26
+	;.db $3a $25 ; BALLADE: Mont-Braise (1:08-3c)
+	;.db $0b $26 ; BALLADE: Mont-Braise (1:08-3c)
 	.db $e0 $30
 	.db $e1 $31
 	.db $e2 $32
@@ -115,7 +115,7 @@ roomTileChangerCodeGroup0Data:
 	.db $76 $36
 	.db $00
 roomTileChangerCodeGroup1Data:
-	.db $38 $09
+	;.db $38 $09 ; BALLADE: Mont-Braise (1:08-3c)
 	; BALLADE: la Lagune des Serments (1:04-37), sans le changement de cases d'Ages
 	;.db $27 $28
 	; BALLADE: salle réutilisée par Gulls of Life, sans le changement de cases d'Ages

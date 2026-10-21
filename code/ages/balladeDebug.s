@@ -433,9 +433,9 @@ debugEntries:
 	.db $0d, $01, $35, $34 ; la plage des bouteilles, l'essence en poche : la fin du chapitre 3
 	.dw debugNone
 	; 4. Mont-Braise
-	.db $ff, $00, $00, $00
+	.db $0e, $01, $38, $44 ; le ponton, en arrivant (la fin du chapitre 3 vue)
 	.dw debugNone
-	.db $ff, $00, $00, $00
+	.db $0e, $01, $2a, $55 ; le village goron
 	.dw debugNone
 	.db $ff, $00, $00, $00
 	.dw debugNone
@@ -556,6 +556,13 @@ debugMilestones:
 	.db DBG_TREASURE, TREASURE_ESSENCE, $02
 	.db DBG_TREASURE, TREASURE_HEART_CONTAINER, $04
 	.db DBG_FULLHEALTH
+	.db DBG_END
+	; 14. La fin du chapitre 3 a été vue (la plage des bouteilles) : Mont-Braise est repéré
+	.db DBG_ROOMFLAG, $01, $35, $40
+	.db DBG_GLOBALFLAG, GLOBALFLAG_BALLADE_ISLAND4
+	.db DBG_END
+	; 15. Brasia a eu son idée : le Bracelet de force
+	.db DBG_TREASURE, TREASURE_BRACELET, $01
 	.db DBG_END
 
 debugNone:

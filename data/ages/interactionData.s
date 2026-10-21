@@ -872,6 +872,12 @@ interactionedSubidData:
 	m_InteractionSubidData $41 $00 $22 ; $10 le facteur des bouteilles (le facteur d'Ages)
 	m_InteractionSubidData $42 $00 $02 ; $11 Gaspard (le vieux monsieur)
 	m_InteractionSubidData $e3 $0c $32 ; $12 la bouteille à la mer (palette 3)
+	m_InteractionSubidData $00 $00 $00 ; $13 les coquillages-échos (invisible)
+	m_InteractionSubidData $2a $00 $22 ; $14 Brasia, la forgeronne goron
+	m_InteractionSubidData $5b $00 $22 ; $15 Pinceau, le peintre
+	m_InteractionSubidData $5b $00 $22 ; $16 Pinceau dans le Songe
+	m_InteractionSubidData $2a $00 $32 ; $17 un musicien des Cuivres
+	m_InteractionSubidData $42 $00 $22 ; $18 le marchand de copies
 	m_InteractionSubidDataEnd
 
 interactiond4SubidData:

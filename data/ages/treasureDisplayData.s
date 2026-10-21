@@ -200,7 +200,7 @@ treasureDisplayData_bracelet:
 treasureDisplayData_trade:
 	.db TREASURE_TRADEITEM, $c0, $05, $c1, $05, $ff, <TX_0909 ; Poe clock
 	.db TREASURE_TRADEITEM, $c2, $02, $c2, $22, $ff, <TX_090a ; Stationery
-	.db TREASURE_TRADEITEM, $c3, $00, $c4, $00, $ff, <TX_090b ; Stink bag
+	.db TREASURE_TRADEITEM, $c3, $05, $c4, $05, $ff, <TX_090b ; Stink bag ; BALLADE: le tableau de la mer (palette 5)
 	.db TREASURE_TRADEITEM, $c5, $03, $c6, $03, $ff, <TX_090c ; Tasty meat
 	.db TREASURE_TRADEITEM, $c7, $03, $c8, $03, $ff, <TX_090d ; Doggy mask
 	.db TREASURE_TRADEITEM, $c9, $01, $ca, $01, $ff, <TX_090e ; Dumbbell

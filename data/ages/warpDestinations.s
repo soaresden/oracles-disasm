@@ -186,6 +186,7 @@ group1WarpDestTable:
 	m_WarpDest $17 $36 $0 $1 ; $51 : devant le club de plongée
 	m_WarpDest $27 $46 $0 $1 ; $52 : devant la grotte des amoureux
 	m_WarpDest $36 $44 $0 $1 ; $53 : devant la bouche du Récif Murmurant
+	m_WarpDest $28 $23 $0 $1 ; $54 : devant la mine abandonnée (Mont-Braise)
 
 group2WarpDestTable:
 	m_WarpDest $90 $45 $0 $e
@@ -540,6 +541,7 @@ group5WarpDestTable:
 	m_WarpDest $b0 $87 $0 $4 ; $6d : la grotte de la Boîte, au-dessus de l'escalier
 	m_WarpDest $b1 $87 $0 $4 ; $6e : la grotte des amoureux, au-dessus de l'escalier
 	m_WarpDest $44 $97 $0 $4 ; $6f : le Récif Murmurant, l'entrée (sous l'arche)
+	m_WarpDest $b2 $87 $0 $4 ; $70 : la mine abandonnée, au-dessus de l'escalier
 
 group6WarpDestTable:
 	m_WarpDest $05 $02 $f $3

@@ -24,6 +24,11 @@
 ; @subid_11{Gaspard (3:23) : la bouteille contre les Palmes de Zora}
 ; @subid_12{La bouteille à la mer, sur l'îlot de la lagune (1:15, 0:15)}
 ; @subid_13{Invisible : les coquillages-échos du Récif Murmurant (5:39)}
+; @subid_14{Brasia, la forgeronne goron (Mont-Braise, 1:2a) : le tableau contre le Bracelet de force}
+; @subid_15{Pinceau, le peintre (1:19, dans le Réel)}
+; @subid_16{Pinceau dans le Songe (0:19) : il peint la mer, et donne le tableau}
+; @subid_17{Un musicien des Cuivres, la fanfare goron (1:2a)}
+; @subid_18{Le marchand de copies (1:3a)}
 ; ==================================================================================================
 
 ;;
@@ -51,6 +56,11 @@ main:
 	.dw gaspard
 	.dw bottle
 	.dw echoShells
+	.dw brasia
+	.dw villager
+	.dw dreamPainter
+	.dw villager
+	.dw villager
 
 
 ;;
@@ -146,6 +156,7 @@ arrivalTalk:
 	.db $01, $24, <TX_5a70, $ff ; la Lagune des Serments, le ponton
 	.db $05, $b1, <TX_5a7a, $ff ; la grotte des amoureux
 	.db $01, $36, <TX_5a7b, $ff ; devant le Récif Murmurant
+	.db $01, $38, <TX_5a80, $ff ; Mont-Braise, le ponton
 	.db $ff
 
 
@@ -334,7 +345,7 @@ jetties:
 	.db $01, $99, $43 ; 1. la Brume (le Ponton)
 	.db $01, $31, $43 ; 2. Hameau-Grelot (la jetée)
 	.db $01, $24, $33 ; 3. la Lagune des Serments (le ponton)
-	.db $01, $99, $52 ; 4.
+	.db $01, $38, $44 ; 4. Mont-Braise (le ponton)
 	.db $01, $99, $52 ; 5.
 	.db $01, $99, $52 ; 6.
 	.db $01, $99, $52 ; 7.
@@ -1065,14 +1076,20 @@ villager:
 	call interactionAnimateAsNpc
 	call npcCheckTalk
 	ret z
+	; La ligne de l'habitant dans @texts
 	ld e,Interaction.subid
 	ld a,(de)
-	sub $0b
+	ld c,a
 	ld hl,@texts
-	ld b,a
-	add a
-	add b
-	rst_addAToHl
+-
+	ldi a,(hl)
+	cp c
+	jr z,+
+	inc hl
+	inc hl
+	inc hl
+	jr -
++
 	ldi a,(hl)
 	ld b,a
 	ld a,(wEssencesObtained)
@@ -1086,14 +1103,17 @@ villager:
 	ld a,$02
 	jp npcSay
 
-; masque d'essence de l'île, texte avant, texte après
+; sous-type, masque d'essence de l'île, texte avant, texte après
 @texts:
-	.db $02, <TX_5a68, <TX_5a69 ; $0b un enfant de la place du Grelot
-	.db $02, <TX_5a6a, <TX_5a6b ; $0c un autre enfant
-	.db $02, <TX_5a6c, <TX_5a6d ; $0d Mme Bonnet, la maîtresse
-	.db $04, <TX_5a74, <TX_5a75 ; $0e Héloïse
-	.db $04, <TX_5a76, <TX_5a77 ; $0f Bulle, la monitrice du club de plongée
-	.db $04, <TX_5a78, <TX_5a79 ; $10 le facteur des bouteilles
+	.db $0b, $02, <TX_5a68, <TX_5a69 ; un enfant de la place du Grelot
+	.db $0c, $02, <TX_5a6a, <TX_5a6b ; un autre enfant
+	.db $0d, $02, <TX_5a6c, <TX_5a6d ; Mme Bonnet, la maîtresse
+	.db $0e, $04, <TX_5a74, <TX_5a75 ; Héloïse
+	.db $0f, $04, <TX_5a76, <TX_5a77 ; Bulle, la monitrice du club de plongée
+	.db $10, $04, <TX_5a78, <TX_5a79 ; le facteur des bouteilles
+	.db $15, $08, <TX_5a84, <TX_5a85 ; Pinceau, le peintre (dans le Réel)
+	.db $17, $08, <TX_5a88, <TX_5a89 ; un musicien des Cuivres
+	.db $18, $08, <TX_5a8a, <TX_5a8b ; le marchand de copies
 
 
 ; ==================================================================================================
@@ -1415,3 +1435,117 @@ echoShells:
 	.db $01, $02, $00 ; Dimitri, Moosh, Ricky
 @chest:
 	.db $8b ; le coffre de la clé du boss (ligne 8, colonne 11)
+
+
+; ==================================================================================================
+; Brasia, la forgeronne goron de Mont-Braise (subid $14, le village 1:2a). Elle forge 412 épées
+; identiques et cherche une idée ; le tableau de la mer de Pinceau (l'objet d'échange 2) lui en
+; donne une : elle donne le Bracelet de force.
+; ==================================================================================================
+brasia:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw npcInit
+	.dw @idle
+	.dw npcWaitText
+	.dw @gift
+
+@idle:
+	call interactionAnimateAsNpc
+	call npcCheckTalk
+	ret z
+	ld a,TREASURE_BRACELET
+	call checkTreasureObtained
+	ld bc,TX_5a83
+	jr c,@say
+	ld a,$02
+	call hasTradeItem
+	ld bc,TX_5a81
+	jr nc,@say
+	ld a,$03
+	ld bc,TX_5a82
+	jp npcSay
+@say:
+	ld a,$02
+	jp npcSay
+
+; Elle prend le tableau ; le Bracelet de force apparaît au-dessus de la tête de Link
+@gift:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	ld a,TREASURE_TRADEITEM
+	call loseTreasure
+	ldbc TREASURE_BRACELET, $00
+	call giveTreasureAtLink
+	xor a
+	ld (wDisabledObjects),a
+	ld e,Interaction.state
+	inc a
+	ld (de),a
+	ret
+
+;;
+; @param	a	Le numéro de l'objet d'échange
+; @param[out]	cflag	c si Link l'a
+hasTradeItem:
+	ld b,a
+	ld a,TREASURE_TRADEITEM
+	push bc
+	call checkTreasureObtained
+	pop bc
+	ret nc
+	ld a,(wTradeItem)
+	cp b
+	scf
+	ret z
+	xor a
+	ret
+
+
+; ==================================================================================================
+; Pinceau dans le Songe (subid $16, l'atelier 0:19) : dans le rêve, il voit enfin la mer, et la
+; peint ; il donne le tableau (l'objet d'échange 2) à Link, pour Brasia.
+; ==================================================================================================
+dreamPainter:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw npcInit
+	.dw @idle
+	.dw npcWaitText
+	.dw @gift
+
+@idle:
+	call interactionAnimateAsNpc
+	call npcCheckTalk
+	ret z
+	; Le tableau déjà donné (Link l'a, ou Brasia l'a eu)
+	ld a,TREASURE_BRACELET
+	call checkTreasureObtained
+	ld bc,TX_5a87
+	jr c,@say
+	ld a,$02
+	call hasTradeItem
+	ld bc,TX_5a87
+	jr c,@say
+	ld a,$03
+	ld bc,TX_5a86
+	jp npcSay
+@say:
+	ld a,$02
+	jp npcSay
+
+@gift:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	ldbc TREASURE_TRADEITEM, $02
+	call giveTreasureAtLink
+	xor a
+	ld (wDisabledObjects),a
+	ld e,Interaction.state
+	inc a
+	ld (de),a
+	ret

@@ -4422,6 +4422,37 @@ paletteDataSongeGrelot: ; Songe : paletteData4a30 en bleuté
 	m_RGB16 $07 $07 $0f
 	m_RGB16 $03 $05 $0a
 
+paletteDataSongeBraise: ; Songe : paletteData4dc0 en bleuté
+	m_RGB16 $12 $11 $14
+	m_RGB16 $0d $0f $0f
+	m_RGB16 $09 $08 $0a
+	m_RGB16 $01 $02 $06
+
+	m_RGB16 $0f $0d $10
+	m_RGB16 $0d $0f $0f
+	m_RGB16 $09 $08 $0a
+	m_RGB16 $01 $02 $06
+
+	m_RGB16 $12 $11 $14
+	m_RGB16 $0f $0d $10
+	m_RGB16 $09 $08 $0d
+	m_RGB16 $01 $02 $06
+
+	m_RGB16 $15 $19 $19
+	m_RGB16 $15 $19 $19
+	m_RGB16 $15 $19 $19
+	m_RGB16 $15 $19 $19
+
+	m_RGB16 $17 $1c $1d
+	m_RGB16 $0b $0b $17
+	m_RGB16 $08 $07 $11
+	m_RGB16 $01 $02 $06
+
+	m_RGB16 $0d $0f $0f
+	m_RGB16 $0f $0e $11
+	m_RGB16 $09 $08 $0d
+	m_RGB16 $01 $02 $06
+
 ; BALLADE-SONGE-FIN
 
 ; BALLADE-TITRE-DEBUT (tools/make_title.py)

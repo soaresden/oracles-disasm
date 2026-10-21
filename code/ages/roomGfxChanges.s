@@ -110,7 +110,7 @@ applyRoomSpecificTileChangesAfterGfxLoad:
 
 @group0:
 	;.db $05 $08 ; BALLADE: la Lagune des Serments (1:04-37)
-	.db $2c $08
+	;.db $2c $08 ; BALLADE: Mont-Braise (1:08-3c)
 	.db $30 $08
 	.db $7b $08
 	.db $90 $08
@@ -121,26 +121,26 @@ applyRoomSpecificTileChangesAfterGfxLoad:
 	.db $ac $03
 	.db $c1 $01
 	.db $83 $00
-	.db $38 $06
-	.db $0a $07
+	;.db $38 $06 ; BALLADE: Mont-Braise (1:08-3c)
+	;.db $0a $07 ; BALLADE: Mont-Braise (1:08-3c)
 	.db $67 $09
 	.db $00
 @group1:
 	.db $01 $08
-	.db $0a $08
-	.db $28 $08
+	;.db $0a $08 ; BALLADE: Mont-Braise (1:08-3c)
+	;.db $28 $08 ; BALLADE: Mont-Braise (1:08-3c)
 	;.db $34 $08 ; BALLADE: la Lagune des Serments (1:04-37)
 	.db $55 $08
 	.db $95 $08
 	.db $d0 $08
 	.db $ca $08
-	.db $08 $01
+	;.db $08 $01 ; BALLADE: Mont-Braise (1:08-3c)
 	;.db $25 $01 ; BALLADE: la Lagune des Serments (1:04-37)
 	.db $2d $01
 	.db $80 $01
 	.db $c1 $01
 	.db $67 $09
-	.db $38 $0a
+	;.db $38 $0a ; BALLADE: Mont-Braise (1:08-3c)
 	.db $00
 @group2:
 	.db $5e $04

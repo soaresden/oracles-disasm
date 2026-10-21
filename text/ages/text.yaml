@@ -358,13 +358,12 @@ groups:
   - name: TX_0026
     index: 0x26
     text: |-
-      \pos(2)You got the
-      \col(1)Power Bracelet\col(0)!
-      Hold the button
-      and press \col(0x84)\item(0x00)\col(0)
-      to lift heavy
-      objects!
-
+      \pos(2)The \col(1)Power
+      Bracelet\col(0)!\stop
+      Facing a rock,
+      hold the button
+      and pull: you
+      lift it!
   - name: TX_0027
     index: 0x27
     text: |-
@@ -771,11 +770,11 @@ groups:
   - name: TX_005c
     index: 0x5c
     text: |-
-      You traded \col(0x84)\item(0x02)\col(0)
-      for a \col(0x84)\item(0x03) \col(1)Stink
-      Bag\col(0)! Eww...
-      It stinks!
-
+      The \col(1)painting
+      of the sea\col(0)!\stop
+      Waves, a red
+      sun... The paint
+      is still wet.
   - name: TX_005d
     index: 0x5d
     text: |-
@@ -4027,9 +4026,9 @@ groups:
   - name: TX_090b
     index: 0x0b
     text: |-
-      Stink Bag
-      Very stinky...
-
+      Sea painting
+      Painted in a
+      dream.
   - name: TX_090c
     index: 0x0c
     text: |-
@@ -4235,9 +4234,7 @@ groups:
     index: 0x2b
     text: |-
       Power Bracelet
-      A strength
-      booster.
-
+      For lifting.
   - name: TX_092c
     index: 0x2c
     text: |-
@@ -23603,6 +23600,165 @@ groups:
     text: |-
          \opt()Français
          \opt()English
+
+  # Chapter 4: Ember Peak (1:08-3c)
+  # Arriving at the jetty (1:38), the first time (INTERAC_BALLADE_OBJECT $01)
+  - name: TX_5a80
+    index: 0x80
+    text: |-
+      \col(1)Marin\col(0): Ugh,
+      it smells like
+      rotten eggs!\stop
+      A volcano...
+      It's asleep, but
+      it snores.\stop
+      Someone's
+      hammering up
+      there. Always
+      the same blow.
+      Bong. Bong.
+
+  # Brasia, the Goron smith (1:2a ; INTERAC_BALLADE_OBJECT $14): before the painting
+  - name: TX_5a81
+    index: 0x81
+    text: |-
+      \col(1)Brasia\col(0): Bong!
+      Four hundred
+      and twelve
+      swords! All the
+      same!\stop
+      I'm out of
+      ideas, kid. Not
+      one left. The
+      volcano sleeps,
+      so does my head.\stop
+      If someone
+      showed me
+      something I've
+      never seen...
+
+  # Brasia: Link shows her the painting of the sea (she gives the Power Bracelet)
+  - name: TX_5a82
+    index: 0x82
+    text: |-
+      \col(1)Brasia\col(0): Is
+      that...
+      the sea?!
+      Blue, moving,
+      never sitting
+      still!\stop
+      A sword shaped
+      like a wave! I
+      have an idea!
+      AN IDEA!\stop
+      Here, my
+      \col(1)Power
+      Bracelet\col(0). I
+      don't need it:
+      I have an idea!
+
+  - name: TX_5a83
+    index: 0x83
+    text: |-
+      \col(1)Brasia\col(0): Bong!
+      A wave! Bong!
+      Another wave!
+      No two alike!
+
+  # Pinceau, the painter (1:19, in the Real ; $15): before / after the Sleeping Forge
+  - name: TX_5a84
+    index: 0x84
+    text: |-
+      \col(1)Pinceau\col(0): The
+      volcano. The
+      volcano again.\stop
+      It's all I can
+      paint. They say
+      there's a sea
+      down below.\stop
+      I can't see it.
+      Not even with
+      my eyes closed.
+
+  - name: TX_5a85
+    index: 0x85
+    text: |-
+      \col(1)Pinceau\col(0): I
+      paint the sea,
+      the lagoon, a
+      seagull...\stop
+      Your seagull
+      looks just like
+      you!
+
+  # Pinceau in the Dream (0:19 ; $16): he sees the sea, and paints; he gives the painting
+  - name: TX_5a86
+    index: 0x86
+    text: |-
+      \col(1)Pinceau\col(0): The
+      sea! I can see
+      it! With my eyes
+      closed, I see
+      it!\stop
+      Quick, quick...
+      There!\stop
+      Take this
+      painting. Show
+      it to someone
+      who needs it.
+
+  - name: TX_5a87
+    index: 0x87
+    text: |-
+      \col(1)Pinceau\col(0): I
+      still paint the
+      sea. And the
+      sky. And you!
+
+  # A Brass musician, the Goron band (1:2a ; $17)
+  - name: TX_5a88
+    index: 0x88
+    text: |-
+      \col(1)The Brass\col(0):
+      Toot. Toot.
+      Toot.\stop
+      We've played
+      the same note
+      for a hundred
+      years. Pretty,
+      isn't it?
+
+  - name: TX_5a89
+    index: 0x89
+    text: |-
+      \col(1)The Brass\col(0):
+      Toot-ta-da-
+      toot! We found
+      a second note!
+
+  # The copy merchant (1:3a ; $18)
+  - name: TX_5a8a
+    index: 0x8a
+    text: |-
+      \col(1)Merchant\col(0):
+      Copies! Copies
+      of copies!\stop
+      A Piece of
+      Heart? Brand
+      new! Well...
+      a drawing of a
+      Piece of Heart.
+
+  - name: TX_5a8b
+    index: 0x8b
+    text: |-
+      \col(1)Merchant\col(0):
+      Nobody buys my
+      copies
+      anymore...\stop
+      Good! I'm sick
+      of copying.
+
 
 # ==============================================================================
 # Ages texts replaced (same name)

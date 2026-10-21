@@ -53,26 +53,26 @@ warpSourcesTable:
 group0WarpSources:
 	m_StandardWarp $0 $9a $4d $2 $4 ; BALLADE: Songe, porte de l'auberge -> 2:9e
 	m_StandardWarp $0 $7b $02 $4 $4 ; BALLADE: Songe, porte du Phare -> hall du phare (on se réveille en entrant)
-	m_StandardWarp $4 $38 $06 $0 $3
-	m_StandardWarp $8 $38 $06 $0 $3
+	;m_StandardWarp $4 $38 $06 $0 $3 ; BALLADE: Mont-Braise (1:08-3c)
+	;m_StandardWarp $8 $38 $06 $0 $3 ; BALLADE: Mont-Braise (1:08-3c)
 	m_StandardWarp $1 $48 $07 $0 $3
 	m_StandardWarp $2 $48 $07 $0 $3
 	m_PointerWarp     $48 warpSource7706
 	m_PointerWarp     $8d warpSource7716
 	m_StandardWarp $0 $ba $04 $4 $4
 	m_StandardWarp $0 $03 $05 $4 $4
-	m_PointerWarp     $0a warpSource76aa
+	;m_PointerWarp     $0a warpSource76aa ; BALLADE: Mont-Braise (1:08-3c)
 	;m_StandardWarp $0 $02 $18 $3 $4 ; BALLADE: 0:02 = manège du Songe
 	;m_StandardWarp $0 $04 $34 $3 $4 ; BALLADE: la Lagune des Serments (1:04-37)
 	;m_StandardWarp $0 $12 $35 $3 $4 ; BALLADE: 0:12 = boutique du Songe (fermée)
 	m_StandardWarp $0 $21 $4e $2 $4 ; BALLADE: Songe, porte de la maison de Lila -> 2:21
 	;m_StandardWarp $0 $14 $36 $3 $4 ; BALLADE: la Lagune des Serments (1:04-37)
 	;m_StandardWarp $0 $06 $2d $2 $4 ; BALLADE: la Lagune des Serments (1:04-37)
-	m_PointerWarp     $09 warpSource769a
-	m_PointerWarp     $0b warpSource76b2
-	m_StandardWarp $0 $0c $09 $3 $4
-	m_PointerWarp     $1b warpSource76ce
-	m_PointerWarp     $1c warpSource76d6
+	;m_PointerWarp     $09 warpSource769a ; BALLADE: Mont-Braise (1:08-3c)
+	;m_PointerWarp     $0b warpSource76b2 ; BALLADE: Mont-Braise (1:08-3c)
+	;m_StandardWarp $0 $0c $09 $3 $4 ; BALLADE: Mont-Braise (1:08-3c)
+	;m_PointerWarp     $1b warpSource76ce ; BALLADE: Mont-Braise (1:08-3c)
+	;m_PointerWarp     $1c warpSource76d6 ; BALLADE: Mont-Braise (1:08-3c)
 	m_PointerWarp     $1d warpSource76de
 	;m_StandardWarp $0 $27 $39 $2 $4 ; BALLADE: la Lagune des Serments (1:04-37)
 	;m_StandardWarp $0 $37 $3e $2 $4 ; BALLADE: la Lagune des Serments (1:04-37)
@@ -98,17 +98,17 @@ group0WarpSources:
 	m_StandardWarp $0 $cd $29 $2 $4
 	m_StandardWarp $0 $da $3a $3 $4
 	m_StandardWarp $0 $dd $08 $2 $4
-	m_StandardWarp $0 $3a $1a $3 $4
-	m_PointerWarp     $38 warpSource76e6
+	;m_StandardWarp $0 $3a $1a $3 $4 ; BALLADE: Mont-Braise (1:08-3c)
+	;m_PointerWarp     $38 warpSource76e6 ; BALLADE: Mont-Braise (1:08-3c)
 	m_StandardWarp $0 $e0 $14 $2 $4
 	m_PointerWarp     $e1 warpSource771e
 	m_StandardWarp $0 $e2 $13 $2 $4
 	m_StandardWarp $0 $f1 $3d $5 $4
 	m_PointerWarp     $0d warpSource76be
-	m_PointerWarp     $18 warpSource76c6
-	m_StandardWarp $0 $28 $1f $5 $4
-	m_StandardWarp $0 $2b $4e $5 $4
-	m_StandardWarp $0 $3c $05 $1 $4
+	;m_PointerWarp     $18 warpSource76c6 ; BALLADE: Mont-Braise (1:08-3c)
+	;m_StandardWarp $0 $28 $1f $5 $4 ; BALLADE: Mont-Braise (1:08-3c)
+	;m_StandardWarp $0 $2b $4e $5 $4 ; BALLADE: Mont-Braise (1:08-3c)
+	;m_StandardWarp $0 $3c $05 $1 $4 ; BALLADE: Mont-Braise (1:08-3c)
 	m_StandardWarp $0 $5b $28 $5 $4
 	m_StandardWarp $0 $a0 $33 $5 $4
 	m_StandardWarp $0 $a5 $3e $5 $4
@@ -199,9 +199,9 @@ group1WarpSources:
 	m_StandardWarp $0 $48 $01 $4 $4
 	m_StandardWarp $0 $83 $03 $4 $4
 	m_StandardWarp $0 $5c $02 $5 $4
-	m_StandardWarp $0 $38 $09 $4 $2
-	m_StandardWarp $4 $38 $03 $1 $3
-	m_StandardWarp $8 $38 $03 $1 $3
+	;m_StandardWarp $0 $38 $09 $4 $2 ; BALLADE: Mont-Braise (1:08-3c)
+	;m_StandardWarp $4 $38 $03 $1 $3 ; BALLADE: Mont-Braise (1:08-3c)
+	;m_StandardWarp $8 $38 $03 $1 $3 ; BALLADE: Mont-Braise (1:08-3c)
 	m_StandardWarp $1 $48 $04 $1 $3
 	m_StandardWarp $2 $48 $04 $1 $3
 	m_StandardWarp $0 $0e $00 $5 $4
@@ -210,9 +210,9 @@ group1WarpSources:
 	;m_StandardWarp $0 $05 $3f $5 $4 ; BALLADE: la Lagune des Serments (1:04-37)
 	;m_StandardWarp $0 $06 $41 $5 $4 ; BALLADE: la Lagune des Serments (1:04-37)
 	;m_StandardWarp $0 $07 $43 $5 $4 ; BALLADE: la Lagune des Serments (1:04-37)
-	m_StandardWarp $0 $09 $62 $5 $4
-	m_PointerWarp     $0b warpSource7836
-	m_StandardWarp $0 $0c $0b $3 $4
+	;m_StandardWarp $0 $09 $62 $5 $4 ; BALLADE: Mont-Braise (1:08-3c)
+	;m_PointerWarp     $0b warpSource7836 ; BALLADE: Mont-Braise (1:08-3c)
+	;m_StandardWarp $0 $0c $0b $3 $4 ; BALLADE: Mont-Braise (1:08-3c)
 	m_StandardWarp $0 $0d $47 $2 $4
 	;m_StandardWarp $0 $04 $14 $3 $4 ; BALLADE: la Lagune des Serments (1:04-37)
 	; BALLADE: Hameau-Grelot (1:00-33) : la boutique de Pépin, la maison de Lila, l'école, la grotte
@@ -226,17 +226,19 @@ group1WarpSources:
 	m_StandardWarp $0 $17 $47 $3 $4 ; BALLADE: porte du club de plongée -> 3:24
 	m_StandardWarp $0 $27 $6e $5 $4 ; BALLADE: grotte des amoureux -> 5:b1
 	m_StandardWarp $0 $36 $6f $5 $4 ; BALLADE: la bouche du visage de corail -> le Récif Murmurant (5:44)
+	; BALLADE: Mont-Braise (1:08-3c) : la mine abandonnée
+	m_StandardWarp $0 $28 $70 $5 $4 ; BALLADE: entrée de la mine abandonnée -> 5:b2
 	;m_StandardWarp $0 $13 $67 $5 $4 ; BALLADE: 1:13 est la plage aux châteaux de sable
 	;m_StandardWarp $0 $14 $16 $3 $4 ; BALLADE: la Lagune des Serments (1:04-37)
-	m_StandardWarp $0 $18 $55 $5 $4
-	m_StandardWarp $0 $1c $07 $3 $4
+	;m_StandardWarp $0 $18 $55 $5 $4 ; BALLADE: Mont-Braise (1:08-3c)
+	;m_StandardWarp $0 $1c $07 $3 $4 ; BALLADE: Mont-Braise (1:08-3c)
 	m_StandardWarp $0 $1d $31 $3 $4
 	;m_StandardWarp $0 $23 $22 $3 $4 ; BALLADE: 1:23 est le jardin des toupies
-	m_StandardWarp $0 $28 $2f $5 $4
-	m_StandardWarp $0 $2b $4c $5 $4
+	;m_StandardWarp $0 $28 $2f $5 $4 ; BALLADE: Mont-Braise (1:08-3c)
+	;m_StandardWarp $0 $2b $4c $5 $4 ; BALLADE: Mont-Braise (1:08-3c)
 	m_StandardWarp $0 $2d $42 $2 $4
-	m_StandardWarp $0 $39 $28 $0 $8
-	m_PointerWarp     $3c warpSource783e
+	;m_StandardWarp $0 $39 $28 $0 $8 ; BALLADE: Mont-Braise (1:08-3c)
+	;m_PointerWarp     $3c warpSource783e ; BALLADE: Mont-Braise (1:08-3c)
 	m_StandardWarp $0 $3d $4b $2 $4
 	m_StandardWarp $0 $43 $20 $3 $4
 	m_StandardWarp $0 $45 $3f $3 $4
@@ -662,7 +664,7 @@ group5WarpSources:
 	m_StandardWarp $0 $f5 $16 $5 $2
 	m_StandardWarp $0 $b0 $4f $1 $4 ; BALLADE: grotte de la Boîte -> devant l'entrée (1:32)
 	m_StandardWarp $0 $b1 $52 $1 $4 ; BALLADE: grotte des amoureux -> devant l'entrée (1:27)
-	m_StandardWarp $0 $b2 $32 $1 $4
+	m_StandardWarp $0 $b2 $54 $1 $4 ; BALLADE: la mine abandonnée -> devant son entrée (1:28)
 	m_StandardWarp $0 $b3 $31 $1 $4
 	m_PointerWarp     $b4 warpSource7dba
 	m_StandardWarp $0 $b5 $30 $1 $4
