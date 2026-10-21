@@ -458,10 +458,10 @@ debugEntries:
 	.dw debugCathBossKey
 	.db $16, $01, $62, $55 ; la place du silence, l'essence en poche : la fin du chapitre 5
 	.dw debugNone
-	; 6. Nid des Vents
-	.db $ff, $00, $00, $00
+	; 6. Le Nid des Vents
+	.db $17, $01, $75, $44 ; le courant ascendant, en arrivant (la fin du chapitre 5 vue)
 	.dw debugNone
-	.db $ff, $00, $00, $00
+	.db $17, $01, $67, $44 ; le village des plumes
 	.dw debugNone
 	.db $ff, $00, $00, $00
 	.dw debugNone
@@ -591,6 +591,10 @@ debugMilestones:
 	; 22. Le souvenir : l'essence (le 5e couplet ; pas de boss, pas de cœur)
 	.db DBG_ROOMFLAG, $01, $26, $80
 	.db DBG_TREASURE, TREASURE_ESSENCE, $04
+	.db DBG_END
+	; 23. La fin du chapitre 5 a été vue (la place du silence) : le Nid des Vents est repéré
+	.db DBG_ROOMFLAG, $01, $62, $40
+	.db DBG_GLOBALFLAG, GLOBALFLAG_BALLADE_ISLAND6
 	.db DBG_END
 
 debugNone:

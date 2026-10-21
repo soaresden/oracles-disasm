@@ -175,6 +175,9 @@ parentItemCode_harp:
 	xor a
 	ldi (hl),a
 	ld (hl),a
+	; Pas de « renvoyé par une force étrange » en cours : sinon la salle d'arrivée reprendrait la
+	; disposition de la salle de départ (func_131f, wcddf), le Réel dans le Songe
+	ld (wcddf),a
 	ld hl,wWarpDestGroup
 	ld a,(wActiveGroup)
 	xor $01

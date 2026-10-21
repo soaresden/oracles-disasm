@@ -76,6 +76,11 @@ main:
 	.dw buriedKey
 	.dw cathedralGate
 	.dw tarkin
+	.dw villager
+	.dw villager
+	.dw villager
+	.dw villager
+	.dw motherPlume
 
 
 ;;
@@ -189,6 +194,8 @@ arrivalTalk:
 	.db $01, $64, <TX_5a91, $ff ; le cimetière de l'est : la tombe fleurie
 	.db $05, $aa, <TX_5a9e, $ff ; la Cathédrale des Échos : les Veilleurs
 	.db $05, $7b, <TX_5a9f, $ff ; le chœur : l'escalier vers le souvenir
+	.db $01, $75, <TX_5aad, $ff ; le Nid des Vents, le courant ascendant
+	.db $01, $57, <TX_5aae, $ff ; le pont de nuages : dans le Songe, rien ne tombe
 	.db $ff
 
 
@@ -428,7 +435,7 @@ jetties:
 	.db $01, $24, $33 ; 3. la Lagune des Serments (le ponton)
 	.db $01, $38, $44 ; 4. Mont-Braise (le ponton)
 	.db $01, $70, $44 ; 5. l'île des Échos (le ponton)
-	.db $01, $99, $52 ; 6.
+	.db $01, $75, $44 ; 6. le Nid des Vents (le courant ascendant)
 	.db $01, $99, $52 ; 7.
 	.db $01, $99, $52 ; 8.
 
@@ -1239,6 +1246,10 @@ villager:
 	.db $1a, $10, <TX_5a94, <TX_5a95 ; Noé
 	.db $1c, $10, <TX_5a9a, <TX_5a9b ; la veuve Marée
 	.db $1d, $10, <TX_5a9c, <TX_5a9d ; le sonneur
+	.db $21, $20, <TX_5aaf, <TX_5ab0 ; le Rito égaré
+	.db $22, $20, <TX_5ab1, <TX_5ab2 ; Zéphyr
+	.db $23, $20, <TX_5ab3, <TX_5ab3 ; Zéphyr dans le Songe
+	.db $24, $20, <TX_5ab4, <TX_5ab5 ; un meunier
 
 
 ; ==================================================================================================
@@ -1928,3 +1939,43 @@ tarkin:
 	ld a,SND_SOLVEPUZZLE
 	call playSound
 	jp npcWaitText
+
+
+; ==================================================================================================
+; Mère Plume (subid $25), au Nid des Vents (1:48) : elle donne la Plume de Roc (« venu sans ailes
+; jusqu'à mon nid ») ; on l'atteint par le Songe (le pont de nuages : les nuages y tiennent).
+; ==================================================================================================
+motherPlume:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw npcInit
+	.dw @idle
+	.dw npcWaitText
+	.dw @gift
+
+@idle:
+	call interactionAnimateAsNpc
+	call npcCheckTalk
+	ret z
+	ld a,TREASURE_FEATHER
+	call checkTreasureObtained
+	ld bc,TX_5ab7
+	ld a,$02
+	jp c,npcSay
+	ld a,$03
+	ld bc,TX_5ab6
+	jp npcSay
+
+@gift:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	ldbc TREASURE_FEATHER, $00
+	call giveTreasureAtLink
+	xor a
+	ld (wDisabledObjects),a
+	ld e,Interaction.state
+	inc a
+	ld (de),a
+	ret

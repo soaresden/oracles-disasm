@@ -886,6 +886,11 @@ interactionedSubidData:
 	m_InteractionSubidData $00 $00 $00 ; $1e la clé enterrée (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $1f la grille de la cathédrale (invisible)
 	m_InteractionSubidData $46 $1c $12 ; $20 Tarkin, le père de Marine (le moustachu d'Ages)
+	m_InteractionSubidData $3e $10 $02 ; $21 le Rito égaré
+	m_InteractionSubidData $3e $00 $22 ; $22 Zéphyr
+	m_InteractionSubidData $3e $00 $22 ; $23 Zéphyr dans le Songe
+	m_InteractionSubidData $4f $00 $32 ; $24 un meunier
+	m_InteractionSubidData $42 $10 $22 ; $25 Mère Plume
 	m_InteractionSubidDataEnd
 
 interactiond4SubidData:

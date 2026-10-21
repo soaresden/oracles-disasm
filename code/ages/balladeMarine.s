@@ -91,6 +91,8 @@ switchDream:
 	xor a
 	ldi (hl),a
 	ld (hl),a
+	; (et pas de salle à « remettre comme au départ » : voir harpFluteParent.s, wcddf)
+	ld (wcddf),a
 	ld a,(wActiveGroup)
 	xor $01
 	or $80

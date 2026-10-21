@@ -2201,7 +2201,7 @@ paletteData4d00:
 	m_RGB16 $0a $04 $14
 	m_RGB16 $00 $00 $00
 
-	m_RGB16 $0e $0b $01
+	m_RGB16 $14 $1a $1f ; BALLADE: le ciel du Nid des Vents (la brique f3, palette 7)
 	m_RGB16 $18 $0b $07
 	m_RGB16 $0e $05 $07
 	m_RGB16 $00 $00 $00
@@ -4483,6 +4483,37 @@ paletteDataSongeEchos: ; Songe : paletteData4a90 en bleuté
 	m_RGB16 $0f $0a $0a
 	m_RGB16 $07 $04 $05
 	m_RGB16 $03 $02 $01
+
+paletteDataSongeNid: ; Songe : paletteData4d00 en bleuté
+	m_RGB16 $12 $11 $14
+	m_RGB16 $0d $0f $0f
+	m_RGB16 $09 $08 $0a
+	m_RGB16 $01 $02 $06
+
+	m_RGB16 $0f $0d $10
+	m_RGB16 $0d $0f $0f
+	m_RGB16 $09 $08 $0a
+	m_RGB16 $01 $02 $06
+
+	m_RGB16 $12 $11 $14
+	m_RGB16 $0f $0d $10
+	m_RGB16 $09 $08 $0d
+	m_RGB16 $01 $02 $06
+
+	m_RGB16 $13 $15 $1a
+	m_RGB16 $0e $11 $17
+	m_RGB16 $09 $0a $0f
+	m_RGB16 $04 $04 $07
+
+	m_RGB16 $17 $1c $1d
+	m_RGB16 $0b $0b $17
+	m_RGB16 $08 $07 $11
+	m_RGB16 $01 $02 $06
+
+	m_RGB16 $11 $17 $1e
+	m_RGB16 $0f $0d $10
+	m_RGB16 $09 $08 $0d
+	m_RGB16 $01 $02 $06
 
 ; BALLADE-SONGE-FIN
 
