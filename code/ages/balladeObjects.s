@@ -14,6 +14,10 @@
 ; @subid_08{Invisible, l'antichambre du donjon 2 : l'essence apparaît quand le boss est vaincu}
 ; @subid_09{Invisible, l'entrée d'un donjon : en arrivant par l'arche du bas, le donjon s'initialise
 ;           et son nom s'affiche (comme INTERAC_DUNGEON_STUFF $00, qui ne marche qu'au chargement)}
+; @subid_0a{Invisible : la fin d'un chapitre (chez Lila, puis la place du Grelot ; @endings)}
+; @subid_0b{Un enfant de la place du Grelot (avant / après le Coffre à Jouets)}
+; @subid_0c{Un autre enfant de la place du Grelot}
+; @subid_0d{Mme Bonnet, la maîtresse (l'école)}
 ; ==================================================================================================
 
 ;;
@@ -31,6 +35,10 @@ main:
 	.dw carnetCatchUp
 	.dw essenceSpawner
 	.dw dungeonEntrance
+	.dw chapterEnding
+	.dw villager
+	.dw villager
+	.dw villager
 
 
 ;;
@@ -517,6 +525,11 @@ lila:
 	call interactionAnimateAsNpc
 	call npcCheckTalk
 	ret z
+	; Après le Coffre à Jouets, elle est réveillée et joue
+	ld a,(wEssencesObtained)
+	and $02
+	ld bc,TX_5a6e
+	jr nz,@say
 	ld a,GLOBALFLAG_BALLADE_LILA_ASLEEP
 	call checkGlobalFlag
 	ld bc,TX_5a5c
@@ -763,3 +776,269 @@ dungeonEntrance:
 	ld b,>TX_0200
 	call showText
 	jp interactionDelete
+
+
+; ==================================================================================================
+; La fin d'un chapitre (subid $0a, invisible) : une suite d'ordres (@endings) qui passe d'une salle
+; à l'autre ; l'étape en cours est dans wBalladeEnding (comme le tour du village du chapitre 1,
+; qui prend les valeurs 1 à 4 ; ici $11...).
+;   END_TEXT t      un texte (groupe $5a), on attend qu'il se ferme
+;   END_WARP g r c  fondu vers une salle (on y reprend avec l'objet $0a de cette salle)
+;   END_FLAG f      un drapeau global
+;   END_STEP v      wBalladeEnding = v
+;   END_SOUND s     un son
+;   END_WAIT n      attendre n images
+;   END_DONE        fin : Link reprend la main
+; ==================================================================================================
+.enum 0
+	END_DONE	db
+	END_TEXT	db
+	END_WARP	db
+	END_FLAG	db
+	END_STEP	db
+	END_SOUND	db
+	END_WAIT	db
+.ende
+
+chapterEnding:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw @start
+	.dw @run
+	.dw @idle
+
+@start:
+	call waitRoomReady
+	ret nz
+	; Chaque suite : groupe, salle, wBalladeEnding attendu, masque d'essence (si l'étape attendue
+	; est $00 : au réveil, après l'essence, une seule fois : drapeau $40 de la salle), ordres
+	ld hl,@endings
+@nextEnding:
+	ldi a,(hl)
+	cp $ff
+	jp z,interactionDelete
+	ld b,a
+	ld a,(wActiveGroup)
+	cp b
+	jr nz,@skip3
+	ld a,(wActiveRoom)
+	cp (hl)
+	jr nz,@skip3
+	inc hl
+	ld a,(wBalladeEnding)
+	cp (hl)
+	jr nz,@skip2
+	inc hl
+	or a
+	jr nz,@go
+	ld a,(wEssencesObtained)
+	and (hl)
+	jr z,@skip1
+	push hl
+	call getThisRoomFlags
+	bit 6,(hl)
+	set 6,(hl)
+	pop hl
+	jr nz,@skip1
+@go:
+	inc hl
+	ldi a,(hl)
+	ld h,(hl)
+	ld l,a
+	ld e,Interaction.var30
+	ld a,l
+	ld (de),a
+	inc e
+	ld a,h
+	ld (de),a
+	call interactionIncState
+	ld a,$91
+	ld (wDisabledObjects),a
+	ret
+@skip3:
+	inc hl
+@skip2:
+	inc hl
+@skip1:
+	inc hl
+	inc hl
+	inc hl
+	jr @nextEnding
+
+@run:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	ld e,Interaction.counter1
+	ld a,(de)
+	or a
+	jr z,+
+	dec a
+	ld (de),a
+	ret
++
+	ld h,d
+	ld l,Interaction.var30
+	ldi a,(hl)
+	ld h,(hl)
+	ld l,a
+	ldi a,(hl)
+	push hl
+	rst_jumpTable
+	.dw @done
+	.dw @text
+	.dw @warp
+	.dw @flag
+	.dw @step
+	.dw @sound
+	.dw @wait
+
+; @param	hl	La suite des ordres (sauvée dans var30/31)
+@saveAndRet:
+	ld e,Interaction.var30
+	ld a,l
+	ld (de),a
+	inc e
+	ld a,h
+	ld (de),a
+	ret
+
+@done:
+	pop hl
+	xor a
+	ld (wDisabledObjects),a
+	jp interactionDelete
+
+@text:
+	pop hl
+	ldi a,(hl)
+	ld c,a
+	ld b,>TX_5a00
+	push bc
+	call @saveAndRet
+	pop bc
+	jp showText
+
+@warp:
+	pop hl
+	ldi a,(hl)
+	or $80
+	ld b,a
+	ldi a,(hl)
+	ld (wWarpDestRoom),a
+	ldi a,(hl)
+	ld (wWarpDestPos),a
+	xor a
+	ld (wWarpTransition),a
+	ld a,$03 ; fondu
+	ld (wWarpTransition2),a
+	ld a,b
+	ld (wWarpDestGroup),a
+	ld e,Interaction.state
+	ld a,$02
+	ld (de),a
+	ret
+
+@flag:
+	pop hl
+	ldi a,(hl)
+	push hl
+	call setGlobalFlag
+	pop hl
+	jr @saveAndRet
+
+@step:
+	pop hl
+	ldi a,(hl)
+	ld (wBalladeEnding),a
+	jr @saveAndRet
+
+@sound:
+	pop hl
+	ldi a,(hl)
+	push hl
+	call playSound
+	pop hl
+	jr @saveAndRet
+
+@wait:
+	pop hl
+	ldi a,(hl)
+	ld e,Interaction.counter1
+	ld (de),a
+	jr @saveAndRet
+
+@idle:
+	ret
+
+; groupe, salle, wBalladeEnding attendu, masque d'essence (si l'étape attendue est $00), ordres
+@endings:
+	.db $03, $21, $00, $02
+	.dw @lilaWakes
+	.db $01, $11, $11, $00
+	.dw @grelotSquare
+	.db $ff
+
+; Chapitre 2 : Lila se réveille ; la place du Grelot ; Marine lit le vent (la Lagune des Serments)
+@lilaWakes:
+	.db END_WAIT, 40
+	.db END_TEXT, <TX_5a64
+	.db END_TEXT, <TX_5a65
+	.db END_STEP, $11
+	.db END_WARP, $01, $11, $46
+@grelotSquare:
+	.db END_WAIT, 30
+	.db END_SOUND, SND_PIRATE_BELL
+	.db END_TEXT, <TX_5a66
+	.db END_WAIT, 40
+	.db END_TEXT, <TX_5a67
+	.db END_FLAG, GLOBALFLAG_BALLADE_ISLAND3
+	.db END_STEP, $00
+	.db END_WAIT, 30
+	.db END_TEXT, <TX_5a31
+	.db END_DONE
+
+
+; ==================================================================================================
+; Les habitants à deux répliques (subids $0b-$0d) : une avant que l'île soit sauvée, une après
+; (le bit de wEssencesObtained de l'île).
+; ==================================================================================================
+villager:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw npcInit
+	.dw @idle
+	.dw npcWaitText
+
+@idle:
+	call interactionAnimateAsNpc
+	call npcCheckTalk
+	ret z
+	ld e,Interaction.subid
+	ld a,(de)
+	sub $0b
+	ld hl,@texts
+	ld b,a
+	add a
+	add b
+	rst_addAToHl
+	ldi a,(hl)
+	ld b,a
+	ld a,(wEssencesObtained)
+	and b
+	ldi a,(hl)
+	jr z,+
+	ld a,(hl)
++
+	ld c,a
+	ld b,>TX_5a00
+	ld a,$02
+	jp npcSay
+
+; masque d'essence de l'île, texte avant, texte après
+@texts:
+	.db $02, <TX_5a68, <TX_5a69 ; $0b un enfant de la place du Grelot
+	.db $02, <TX_5a6a, <TX_5a6b ; $0c un autre enfant
+	.db $02, <TX_5a6c, <TX_5a6d ; $0d Mme Bonnet, la maîtresse

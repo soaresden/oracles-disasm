@@ -4893,6 +4893,9 @@ group1Map03ObjectData:
 group1Map10ObjectData:
 	obj_End
 group1Map11ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $0b $58 $28
+	obj_Interaction INTERAC_BALLADE_OBJECT $0c $58 $98
+	obj_Interaction INTERAC_BALLADE_OBJECT $0a $08 $08
 	obj_End
 group1Map12ObjectData:
 	obj_End
@@ -4980,8 +4983,10 @@ group3Map20ObjectData:
 	obj_End
 group3Map21ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $04 $48 $38
+	obj_Interaction INTERAC_BALLADE_OBJECT $0a $08 $08 ; la fin du chapitre 2 (au réveil)
 	obj_End
 group3Map22ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $0d $48 $38
 	obj_End
 group3Map5eObjectData:
 	obj_Interaction $47 $01 $28 $80

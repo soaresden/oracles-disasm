@@ -863,6 +863,10 @@ interactionedSubidData:
 	m_InteractionSubidData $00 $00 $00 ; $07 rattrapage du Carnet des Rêves (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $08 l'essence du donjon 2 apparaît après le boss (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $09 l'entrée d'un donjon : son nom (invisible)
+	m_InteractionSubidData $00 $00 $00 ; $0a la fin d'un chapitre (invisible)
+	m_InteractionSubidData $3e $00 $02 ; $0b un enfant de la place du Grelot
+	m_InteractionSubidData $3e $10 $32 ; $0c un autre enfant
+	m_InteractionSubidData $5c $00 $12 ; $0d Mme Bonnet, la maîtresse (en bleu)
 	m_InteractionSubidDataEnd
 
 interactiond4SubidData:

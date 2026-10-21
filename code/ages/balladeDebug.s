@@ -413,8 +413,8 @@ debugEntries:
 	.dw debugNone
 	.db $07, $04, $39, $97 ; l'entrée du Coffre à Jouets (bombes, Marine les porte, Lila dort)
 	.dw debugNone
-	.db $08, $04, $2c, $5c ; le Soldat de Plomb (avec le boomerang)
-	.dw debugNone
+	.db $08, $04, $2d, $52 ; devant le volet du Soldat de Plomb (le cristal touché, le boomerang)
+	.dw debugCoffreCrystal
 	.db $08, $04, $2e, $96 ; l'antichambre de Pantin-Sans-Fil, avec la clé du boss
 	.dw debugCoffreBossKey
 	.db $09, $03, $21, $46 ; chez Lila, l'essence en poche : la fin du chapitre 2
@@ -550,6 +550,12 @@ debugPhareBossKey:
 	.db DBG_OR
 	.dw wDungeonBossKeys
 	.db $02
+	.db DBG_END
+
+debugCoffreCrystal:
+	.db DBG_WRITE
+	.dw wSwitchState
+	.db $01
 	.db DBG_END
 
 debugCoffreBossKey:
