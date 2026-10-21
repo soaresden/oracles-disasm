@@ -88,7 +88,7 @@ roomTileChangerCodeGroup0Data:
 	;.db $38 $08 ; BALLADE: Mont-Braise (1:08-3c)
 	.db $48 $17
 	.db $5c $14
-	.db $73 $16
+	;.db $73 $16 ; BALLADE: l'île des Échos (1:40-74)
 	; BALLADE: salle réutilisée par Gulls of Life, sans le changement de cases d'Ages
 	;.db $ac $18
 	;.db $2c $19 ; BALLADE: Mont-Braise (1:08-3c)
@@ -100,9 +100,9 @@ roomTileChangerCodeGroup0Data:
 	.db $bc $1e
 	.db $da $1f
 	.db $ca $20
-	.db $61 $21
-	.db $51 $22
-	.db $54 $23
+	;.db $61 $21 ; BALLADE: l'île des Échos (1:40-74)
+	;.db $51 $22 ; BALLADE: l'île des Échos (1:40-74)
+	;.db $54 $23 ; BALLADE: l'île des Échos (1:40-74)
 	; BALLADE: la Lagune des Serments (1:04-37), sans le changement de cases d'Ages
 	;.db $25 $24
 	;.db $3a $25 ; BALLADE: Mont-Braise (1:08-3c)

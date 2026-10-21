@@ -446,9 +446,9 @@ debugEntries:
 	.db $11, $01, $2a, $55 ; le village goron, l'essence en poche : la fin du chapitre 4
 	.dw debugNone
 	; 5. Île des Échos
-	.db $ff, $00, $00, $00
+	.db $12, $01, $70, $44 ; le ponton, en arrivant (la fin du chapitre 4 vue)
 	.dw debugNone
-	.db $ff, $00, $00, $00
+	.db $12, $01, $62, $55 ; la place du silence
 	.dw debugNone
 	.db $ff, $00, $00, $00
 	.dw debugNone
@@ -571,6 +571,16 @@ debugMilestones:
 	.db DBG_TREASURE, TREASURE_ESSENCE, $03
 	.db DBG_TREASURE, TREASURE_HEART_CONTAINER, $04
 	.db DBG_FULLHEALTH
+	.db DBG_END
+	; 18. La fin du chapitre 4 a été vue (le village goron) : l'île des Échos est repérée
+	.db DBG_ROOMFLAG, $01, $2a, $40
+	.db DBG_GLOBALFLAG, GLOBALFLAG_BALLADE_ISLAND5
+	.db DBG_END
+	; 19. La Pelle de Bêche ; la clé de la cathédrale déterrée, la grille ouverte
+	.db DBG_TREASURE, TREASURE_SHOVEL, $00
+	.db DBG_TREASURE, TREASURE_GRAVEYARD_KEY, $00
+	.db DBG_ROOMFLAG, $01, $64, $40
+	.db DBG_ROOMFLAG, $01, $42, $40
 	.db DBG_END
 
 debugNone:

@@ -80,7 +80,7 @@ group0WarpSources:
 	m_StandardWarp $0 $45 $3e $3 $4
 	m_PointerWarp     $47 warpSource76fe
 	m_StandardWarp $0 $4d $09 $2 $4
-	m_StandardWarp $0 $53 $32 $2 $4
+	;m_StandardWarp $0 $53 $32 $2 $4 ; BALLADE: l'île des Échos (1:40-74)
 	m_StandardWarp $0 $55 $3b $3 $4
 	m_StandardWarp $0 $56 $01 $2 $4
 	m_StandardWarp $0 $57 $3c $3 $4
@@ -228,6 +228,8 @@ group1WarpSources:
 	m_StandardWarp $0 $36 $6f $5 $4 ; BALLADE: la bouche du visage de corail -> le Récif Murmurant (5:44)
 	; BALLADE: Mont-Braise (1:08-3c) : la mine abandonnée
 	m_StandardWarp $0 $28 $70 $5 $4 ; BALLADE: entrée de la mine abandonnée -> 5:b2
+	; BALLADE: l'île des Échos (1:40-74) : la cabane du fossoyeur
+	m_StandardWarp $0 $61 $48 $3 $4 ; BALLADE: porte de la cabane du fossoyeur -> 3:25
 	m_StandardWarp $0 $0a $4e $4 $4 ; BALLADE: la bouche du grand visage du cratère -> la Forge Endormie (4:bb)
 	;m_StandardWarp $0 $13 $67 $5 $4 ; BALLADE: 1:13 est la plage aux châteaux de sable
 	;m_StandardWarp $0 $14 $16 $3 $4 ; BALLADE: la Lagune des Serments (1:04-37)
@@ -241,20 +243,20 @@ group1WarpSources:
 	;m_StandardWarp $0 $39 $28 $0 $8 ; BALLADE: Mont-Braise (1:08-3c)
 	;m_PointerWarp     $3c warpSource783e ; BALLADE: Mont-Braise (1:08-3c)
 	m_StandardWarp $0 $3d $4b $2 $4
-	m_StandardWarp $0 $43 $20 $3 $4
+	;m_StandardWarp $0 $43 $20 $3 $4 ; BALLADE: l'île des Échos (1:40-74)
 	m_StandardWarp $0 $45 $3f $3 $4
 	m_StandardWarp $0 $4d $33 $3 $4
-	m_StandardWarp $0 $51 $15 $2 $4
+	;m_StandardWarp $0 $51 $15 $2 $4 ; BALLADE: l'île des Échos (1:40-74)
 	m_StandardWarp $0 $55 $07 $2 $4
 	m_StandardWarp $0 $56 $3d $2 $4
 	m_StandardWarp $0 $57 $06 $2 $4
 	m_PointerWarp     $58 warpSource7852
 	m_StandardWarp $0 $5a $3f $2 $4
 	m_StandardWarp $0 $66 $3d $3 $4
-	m_PointerWarp     $70 warpSource7862
-	m_StandardWarp $0 $71 $1e $5 $4
-	m_StandardWarp $0 $72 $1b $5 $4
-	m_StandardWarp $0 $74 $1a $5 $4
+	;m_PointerWarp     $70 warpSource7862 ; BALLADE: l'île des Échos (1:40-74)
+	;m_StandardWarp $0 $71 $1e $5 $4 ; BALLADE: l'île des Échos (1:40-74)
+	;m_StandardWarp $0 $72 $1b $5 $4 ; BALLADE: l'île des Échos (1:40-74)
+	;m_StandardWarp $0 $74 $1a $5 $4 ; BALLADE: l'île des Échos (1:40-74)
 	m_StandardWarp $0 $79 $02 $2 $4
 	m_StandardWarp $0 $9a $1a $3 $4 ; BALLADE: porte de l'auberge de Port-Veille -> 3:9e
 	m_StandardWarp $0 $9b $11 $3 $4 ; BALLADE: porte de la boutique de Port-Veille -> 3:5e
@@ -275,7 +277,7 @@ group1WarpSources:
 	m_StandardWarp $0 $da $38 $5 $4
 	m_StandardWarp $0 $db $39 $5 $4
 	m_StandardWarp $0 $dd $6a $5 $4
-	m_PointerWarp     $41 warpSource784a
+	;m_PointerWarp     $41 warpSource784a ; BALLADE: l'île des Échos (1:40-74)
 	;m_StandardWarp $0 $27 $48 $1 $2 ; BALLADE: la Lagune des Serments (1:04-37)
 	m_StandardWarp $0 $e2 $19 $1 $2
 	m_StandardWarp $0 $e0 $42 $5 $2
@@ -460,6 +462,9 @@ group3WarpSources:
 	m_StandardWarp $8 $23 $50 $1 $3
 	m_StandardWarp $4 $24 $51 $1 $3
 	m_StandardWarp $8 $24 $51 $1 $3
+	; BALLADE: l'île des Échos : sortie de la cabane du fossoyeur
+	m_StandardWarp $4 $25 $56 $1 $3
+	m_StandardWarp $8 $25 $56 $1 $3
 	m_PointerWarp     $9f warpSource7abe
 	m_StandardWarp $0 $a1 $60 $5 $4
 	m_StandardWarp $0 $ae $1d $3 $2

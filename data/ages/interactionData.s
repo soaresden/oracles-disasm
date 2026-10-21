@@ -878,6 +878,13 @@ interactionedSubidData:
 	m_InteractionSubidData $5b $00 $22 ; $16 Pinceau dans le Songe
 	m_InteractionSubidData $2a $00 $32 ; $17 un musicien des Cuivres
 	m_InteractionSubidData $42 $00 $22 ; $18 le marchand de copies
+	m_InteractionSubidData $41 $10 $02 ; $19 Bêche, le fossoyeur (le vieil homme d'Ages)
+	m_InteractionSubidData $3e $10 $12 ; $1a Noé
+	m_InteractionSubidData $42 $10 $12 ; $1b la grand-mère de Noé (dans le Songe)
+	m_InteractionSubidData $5c $00 $32 ; $1c la veuve Marée
+	m_InteractionSubidData $4f $10 $22 ; $1d le sonneur
+	m_InteractionSubidData $00 $00 $00 ; $1e la clé enterrée (invisible)
+	m_InteractionSubidData $00 $00 $00 ; $1f la grille de la cathédrale (invisible)
 	m_InteractionSubidDataEnd
 
 interactiond4SubidData:

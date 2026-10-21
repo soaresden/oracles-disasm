@@ -11,11 +11,8 @@ group0Map47ObjectData:
 group0Map4aObjectData:
 group0Map4eObjectData:
 group0Map4fObjectData:
-group0Map52ObjectData:
-group0Map53ObjectData:
 group0Map5eObjectData:
 group0Map5fObjectData:
-group0Map61ObjectData:
 group0Map69ObjectData:
 group0Map6eObjectData:
 group0Map6fObjectData:
@@ -113,12 +110,9 @@ group1Map2eObjectData:
 group1Map2fObjectData:
 group1Map3eObjectData:
 group1Map3fObjectData:
-group1Map40ObjectData:
 group1Map4aObjectData:
 group1Map4eObjectData:
 group1Map4fObjectData:
-group1Map50ObjectData:
-group1Map52ObjectData:
 group1Map56ObjectData:
 group1Map59ObjectData:
 group1Map5aObjectData:
@@ -450,7 +444,6 @@ group3Map1bObjectData:
 group3Map1cObjectData:
 group3Map1dObjectData:
 group3Map1eObjectData:
-group3Map25ObjectData:
 group3Map26ObjectData:
 group3Map27ObjectData:
 group3Map28ObjectData:
@@ -879,23 +872,18 @@ group0Map3dObjectData:
 	obj_Pointer group0Map3dEnemyObjectData
 	obj_End
 
-group0Map40ObjectData:
 	obj_Pointer group0Map40EnemyObjectData
 	obj_End
 
-group0Map41ObjectData:
 	obj_Interaction $e1 $00 $28 $78
 	obj_End
 
-group0Map42ObjectData:
 	obj_Pointer group0Map42EnemyObjectData
 	obj_End
 
-group0Map43ObjectData:
 	obj_Pointer group0Map43EnemyObjectData
 	obj_End
 
-group0Map44ObjectData:
 	obj_Pointer group0Map44EnemyObjectData
 	obj_End
 
@@ -931,15 +919,12 @@ group0Map4dObjectData:
 	obj_Pointer group0Map4dEnemyObjectData
 	obj_End
 
-group0Map50ObjectData:
 	obj_Interaction $83 $00 $28 $68
 	obj_End
 
-group0Map51ObjectData:
 	obj_Interaction $e1 $00 $48 $48
 	obj_End
 
-group0Map54ObjectData:
 	obj_Interaction $6b $0f $68 $88
 	obj_End
 
@@ -985,21 +970,17 @@ group0Map5dObjectData:
 	obj_Pointer group0Map5dEnemyObjectData
 	obj_End
 
-group0Map60ObjectData:
 	obj_Pointer group0Map60EnemyObjectData
 	obj_End
 
-group0Map62ObjectData:
 	obj_Pointer group0Map62EnemyObjectData
 	obj_End
 
-group0Map63ObjectData:
 	obj_Interaction $71 $0a
 	obj_Interaction $67 $05
 	obj_Pointer group0Map63EnemyObjectData
 	obj_End
 
-group0Map64ObjectData:
 	obj_Interaction $dc $08 $67 $02
 	obj_Pointer group0Map64EnemyObjectData
 	obj_End
@@ -1055,24 +1036,19 @@ group0Map6dObjectData:
 	obj_Pointer group0Map6dEnemyObjectData
 	obj_End
 
-group0Map70ObjectData:
 	obj_Interaction $49 $0b $48 $48
 	obj_End
 
-group0Map71ObjectData:
 	obj_Interaction $49 $07 $28 $58
 	obj_End
 
-group0Map72ObjectData:
 	obj_Interaction $49 $0c $38 $48
 	obj_End
 
-group0Map73ObjectData:
 	obj_Interaction $71 $0b
 	obj_Pointer group0Map73EnemyObjectData
 	obj_End
 
-group0Map74ObjectData:
 	obj_Pointer group0Map74EnemyObjectData
 	obj_End
 
@@ -1477,21 +1453,17 @@ objectData5f9d: ; UNUSED?
 	obj_Pointer objectData4597
 	obj_End
 
-group1Map41ObjectData:
 	obj_Interaction $e1 $00 $28 $78
 	obj_Interaction $9e $00 $68 $58
 	obj_Interaction $9e $01 $68 $38
 	obj_End
 
-group1Map42ObjectData:
 	obj_Pointer group1Map42EnemyObjectData
 	obj_End
 
-group1Map43ObjectData:
 	obj_Pointer group1Map43EnemyObjectData
 	obj_End
 
-group1Map44ObjectData:
 	obj_Pointer group1Map44EnemyObjectData
 	obj_End
 
@@ -1530,15 +1502,12 @@ group1Map4bObjectData:
 	obj_Pointer group1Map4bEnemyObjectData
 	obj_End
 
-group1Map51ObjectData:
 	obj_Interaction $e1 $00 $48 $48
 	obj_End
 
-group1Map53ObjectData:
 	obj_Pointer group1Map53EnemyObjectData
 	obj_End
 
-group1Map54ObjectData:
 	obj_Pointer group1Map54EnemyObjectData
 	obj_End
 
@@ -1569,23 +1538,18 @@ group1Map5dObjectData:
 	obj_Pointer group1Map5dEnemyObjectData
 	obj_End
 
-group1Map60ObjectData:
 	obj_Pointer group1Map60EnemyObjectData
 	obj_End
 
-group1Map61ObjectData:
 	obj_SpecificEnemyA $00 $62 $01 $00 $00
 	obj_End
 
-group1Map62ObjectData:
 	obj_Pointer group1Map62EnemyObjectData
 	obj_End
 
-group1Map63ObjectData:
 	obj_Pointer group1Map63EnemyObjectData
 	obj_End
 
-group1Map64ObjectData:
 	obj_Pointer group1Map64EnemyObjectData
 	obj_End
 
@@ -1621,24 +1585,19 @@ group1Map6dObjectData:
 	obj_Pointer group1Map6dEnemyObjectData
 	obj_End
 
-group1Map70ObjectData:
 	obj_Interaction $ce $06 $58 $38
 	obj_Pointer group1Map70EnemyObjectData
 	obj_End
 
-group1Map71ObjectData:
 	obj_Pointer group1Map71EnemyObjectData
 	obj_End
 
-group1Map72ObjectData:
 	obj_Interaction $40 $00 $58 $28 $00
 	obj_End
 
-group1Map73ObjectData:
 	obj_Interaction $40 $00 $18 $18 $01
 	obj_End
 
-group1Map74ObjectData:
 	obj_Interaction $45 $00 $58 $38
 	obj_End
 
@@ -4840,6 +4799,67 @@ group0Map3bObjectData:
 group0Map3cObjectData:
 	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
 	obj_End
+group0Map40ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map41ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map42ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map43ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map44ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map50ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map51ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map52ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map53ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map54ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map60ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map61ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map62ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $1b $38 $68
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map63ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map64ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map70ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map71ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map72ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map73ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map74ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
 group0Map79ObjectData:
 	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
 	obj_End
@@ -5012,6 +5032,54 @@ group1Map3bObjectData:
 	obj_End
 group1Map3cObjectData:
 	obj_End
+group1Map40ObjectData:
+	obj_End
+group1Map41ObjectData:
+	obj_End
+group1Map42ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $1f $48 $48
+	obj_End
+group1Map43ObjectData:
+	obj_End
+group1Map44ObjectData:
+	obj_End
+group1Map50ObjectData:
+	obj_End
+group1Map51ObjectData:
+	obj_End
+group1Map52ObjectData:
+	obj_End
+group1Map53ObjectData:
+	obj_End
+group1Map54ObjectData:
+	obj_End
+group1Map60ObjectData:
+	obj_End
+group1Map61ObjectData:
+	obj_End
+group1Map62ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $1a $38 $68
+	obj_End
+group1Map63ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $1d $38 $48
+	obj_End
+group1Map64ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $1e $58 $58
+	obj_Interaction INTERAC_BALLADE_OBJECT $01 $08 $08
+	obj_End
+group1Map70ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $00 $68 $58
+	obj_Interaction INTERAC_BALLADE_OBJECT $01 $08 $08
+	obj_End
+group1Map71ObjectData:
+	obj_End
+group1Map72ObjectData:
+	obj_End
+group1Map73ObjectData:
+	obj_End
+group1Map74ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $1c $28 $68
+	obj_End
 group1Map79ObjectData:
 	obj_End
 group1Map7aObjectData:
@@ -5087,6 +5155,9 @@ group3Map23ObjectData:
 	obj_End
 group3Map24ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $0f $48 $38
+	obj_End
+group3Map25ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $19 $48 $38
 	obj_End
 group3Map5eObjectData:
 	obj_Interaction $47 $01 $28 $80

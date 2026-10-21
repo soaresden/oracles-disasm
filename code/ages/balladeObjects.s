@@ -29,6 +29,13 @@
 ; @subid_16{Pinceau dans le Songe (0:19) : il peint la mer, et donne le tableau}
 ; @subid_17{Un musicien des Cuivres, la fanfare goron (1:2a)}
 ; @subid_18{Le marchand de copies (1:3a)}
+; @subid_19{Bêche, le fossoyeur (l'île des Échos, 3:25) : la Pelle}
+; @subid_1a{Noé, l'enfant de la place du silence (1:62)}
+; @subid_1b{La grand-mère de Noé, dans le Songe (0:62) : où est la clé ; le quart de cœur}
+; @subid_1c{La veuve Marée, sur son rocher (1:74)}
+; @subid_1d{Le sonneur (la chapelle, 1:63)}
+; @subid_1e{Invisible : la clé de la cathédrale enterrée (1:64) ; la Pelle la déterre}
+; @subid_1f{Invisible : la grille de la cathédrale des Échos (1:42) ; la clé l'ouvre}
 ; ==================================================================================================
 
 ;;
@@ -61,6 +68,13 @@ main:
 	.dw dreamPainter
 	.dw villager
 	.dw villager
+	.dw gravedigger
+	.dw villager
+	.dw grandma
+	.dw villager
+	.dw villager
+	.dw buriedKey
+	.dw cathedralGate
 
 
 ;;
@@ -157,6 +171,8 @@ arrivalTalk:
 	.db $05, $b1, <TX_5a7a, $ff ; la grotte des amoureux
 	.db $01, $36, <TX_5a7b, $ff ; devant le Récif Murmurant
 	.db $01, $38, <TX_5a80, $ff ; Mont-Braise, le ponton
+	.db $01, $70, <TX_5a90, $ff ; l'île des Échos, le ponton
+	.db $01, $64, <TX_5a91, $ff ; le cimetière de l'est : la tombe fleurie
 	.db $ff
 
 
@@ -346,7 +362,7 @@ jetties:
 	.db $01, $31, $43 ; 2. Hameau-Grelot (la jetée)
 	.db $01, $24, $33 ; 3. la Lagune des Serments (le ponton)
 	.db $01, $38, $44 ; 4. Mont-Braise (le ponton)
-	.db $01, $99, $52 ; 5.
+	.db $01, $70, $44 ; 5. l'île des Échos (le ponton)
 	.db $01, $99, $52 ; 6.
 	.db $01, $99, $52 ; 7.
 	.db $01, $99, $52 ; 8.
@@ -1135,6 +1151,9 @@ villager:
 	.db $15, $08, <TX_5a84, <TX_5a85 ; Pinceau, le peintre (dans le Réel)
 	.db $17, $08, <TX_5a88, <TX_5a89 ; un musicien des Cuivres
 	.db $18, $08, <TX_5a8a, <TX_5a8b ; le marchand de copies
+	.db $1a, $10, <TX_5a94, <TX_5a95 ; Noé
+	.db $1c, $10, <TX_5a9a, <TX_5a9b ; la veuve Marée
+	.db $1d, $10, <TX_5a9c, <TX_5a9d ; le sonneur
 
 
 ; ==================================================================================================
@@ -1570,3 +1589,199 @@ dreamPainter:
 	inc a
 	ld (de),a
 	ret
+
+
+; ==================================================================================================
+; Bêche, le fossoyeur de l'île des Échos (subid $19, sa cabane 3:25) : il prête la Pelle pour
+; « déterrer ce qui doit l'être ».
+; ==================================================================================================
+gravedigger:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw npcInit
+	.dw @idle
+	.dw npcWaitText
+	.dw @gift
+
+@idle:
+	call interactionAnimateAsNpc
+	call npcCheckTalk
+	ret z
+	ld a,TREASURE_SHOVEL
+	call checkTreasureObtained
+	ld bc,TX_5a93
+	jr c,@say
+	ld a,$03
+	ld bc,TX_5a92
+	jp npcSay
+@say:
+	ld a,$02
+	jp npcSay
+
+@gift:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	ldbc TREASURE_SHOVEL, $00
+	call giveTreasureAtLink
+	xor a
+	ld (wDisabledObjects),a
+	ld e,Interaction.state
+	inc a
+	ld (de),a
+	ret
+
+
+; ==================================================================================================
+; La grand-mère de Noé, dans le Songe (subid $1b, la place du silence 0:62). Elle dit où est
+; enterrée la clé de la cathédrale ; quand Link l'a trouvée, elle lui donne le quart de cœur caché
+; dans sa boîte à couture (une seule fois : drapeau ROOMFLAG_ITEM de 0:62).
+; ==================================================================================================
+grandma:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw npcInit
+	.dw @idle
+	.dw npcWaitText
+	.dw @gift
+
+@idle:
+	call interactionAnimateAsNpc
+	call npcCheckTalk
+	ret z
+	ld a,TREASURE_GRAVEYARD_KEY
+	call checkTreasureObtained
+	ld bc,TX_5a96
+	jr nc,@say
+	call getThisRoomFlags
+	and ROOMFLAG_ITEM
+	ld bc,TX_5a98
+	jr nz,@say
+	ld a,$03
+	ld bc,TX_5a97
+	jp npcSay
+@say:
+	ld a,$02
+	jp npcSay
+
+@gift:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	call getThisRoomFlags
+	set 5,(hl) ; ROOMFLAG_ITEM
+	ldbc TREASURE_HEART_PIECE, $00
+	call giveTreasureAtLink
+	xor a
+	ld (wDisabledObjects),a
+	ld e,Interaction.state
+	inc a
+	ld (de),a
+	ret
+
+
+; ==================================================================================================
+; La clé de la cathédrale, enterrée (subid $1e, invisible, le cimetière de l'est 1:64, devant la
+; tombe fleurie). Quand la Pelle creuse sa case (la brique change), la clé du cimetière apparaît.
+; Le drapeau $40 de la salle s'en souvient.
+; ==================================================================================================
+buriedKey:
+	ld e,Interaction.state
+	ld a,(de)
+	or a
+	jr nz,@watch
+	call getThisRoomFlags
+	bit 6,a
+	jp nz,interactionDelete
+	ld a,TREASURE_GRAVEYARD_KEY
+	call checkTreasureObtained
+	jp c,interactionDelete
+	call interactionIncState
+	; var30 = la brique d'origine
+	call objectGetTileAtPosition
+	ld e,Interaction.var30
+	ld (de),a
+	ret
+
+@watch:
+	call objectGetTileAtPosition
+	ld b,a
+	ld e,Interaction.var30
+	ld a,(de)
+	cp b
+	ret z
+	; Creusée : la clé sort de terre (donnée tout de suite, avec son texte : le trésor d'Ages
+	; tomberait par terre, à ramasser)
+	call getThisRoomFlags
+	set 6,(hl)
+	ld a,SND_GETITEM
+	call playSound
+	ld a,TREASURE_GRAVEYARD_KEY
+	ld c,$00
+	call giveTreasure
+	ld bc,TX_0023
+	call showText
+	jp interactionDelete
+
+
+; ==================================================================================================
+; La grille de la cathédrale des Échos (subid $1f, invisible, posée sur la grille : 1:42). Avec la
+; clé du cimetière, A (ou B) devant elle : elle s'ouvre (une entrée, dd). Le drapeau $40 de la salle
+; s'en souvient.
+; ==================================================================================================
+cathedralGate:
+	ld e,Interaction.state
+	ld a,(de)
+	or a
+	jr nz,@idle
+	call waitRoomReady
+	ret nz
+	call interactionIncState
+	call getThisRoomFlags
+	bit 6,a
+	ret z
+	jr @open
+
+@idle:
+	ld a,(wTextIsActive)
+	ld b,a
+	ld a,(wDisabledObjects)
+	or b
+	ret nz
+	ld a,(wGameKeysJustPressed)
+	and BTN_A|BTN_B
+	ret z
+	; Link juste en dessous, tourné vers le haut
+	ld a,(w1Link.direction)
+	or a
+	ret nz
+	call objectGetShortPosition
+	add $10
+	ld b,a
+	ld a,(w1Link.yh)
+	and $f0
+	ld c,a
+	ld a,(w1Link.xh)
+	swap a
+	and $0f
+	or c
+	cp b
+	ret nz
+	ld a,TREASURE_GRAVEYARD_KEY
+	call checkTreasureObtained
+	jr c,+
+	ld bc,TX_5a99
+	jp showText
++
+	call getThisRoomFlags
+	set 6,(hl)
+	ld a,SND_OPENCHEST
+	call playSound
+@open:
+	call objectGetShortPosition
+	ld c,a
+	ld a,$dd
+	call setTile
+	jp interactionDelete

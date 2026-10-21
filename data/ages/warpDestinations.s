@@ -188,6 +188,7 @@ group1WarpDestTable:
 	m_WarpDest $36 $44 $0 $1 ; $53 : devant la bouche du Récif Murmurant
 	m_WarpDest $28 $23 $0 $1 ; $54 : devant la mine abandonnée (Mont-Braise)
 	m_WarpDest $0a $24 $0 $1 ; $55 : devant la bouche du cratère (la Forge Endormie)
+	m_WarpDest $61 $24 $0 $1 ; $56 : devant la cabane du fossoyeur (l'île des Échos)
 
 group2WarpDestTable:
 	m_WarpDest $90 $45 $0 $e
@@ -347,6 +348,7 @@ group3WarpDestTable:
 	; BALLADE: la Lagune des Serments
 	m_WarpDest $23 $ff $9 $3 ; $46 : la maison d'Héloïse et Gaspard, par le bas
 	m_WarpDest $24 $ff $9 $3 ; $47 : le club de plongée, par le bas
+	m_WarpDest $25 $ff $9 $3 ; $48 : la cabane du fossoyeur, par le bas
 
 group4WarpDestTable:
 	m_WarpDest $04 $ff $9 $3
