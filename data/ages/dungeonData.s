@@ -49,7 +49,7 @@ dungeonData06:
 	; BALLADE: la Spirale Céleste, dans le Nid des Vents (un seul étage, en spirale)
 	m_DungeonData >wGroup4RoomFlags, $3c, dungeon06LayoutSpirale, $01, $03, $01, $00, $00
 dungeonData07:
-	m_DungeonData >wGroup5RoomFlags, $56, dungeon07Layout, $03, $03, $00, $00, $00
+	m_DungeonData >wGroup4RoomFlags, $55, dungeon07LayoutPalais, $01, $03, $01, $00, $00 ; BALLADE: le Palais Givré
 dungeonData08:
 	m_DungeonData >wGroup5RoomFlags, $aa, dungeon08Layout, $04, $00, $00, $00, $00
 dungeonData09:

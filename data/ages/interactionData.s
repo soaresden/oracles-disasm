@@ -900,6 +900,7 @@ interactionedSubidData:
 	m_InteractionSubidData $4f $10 $12 ; $2c le roi dans le Songe
 	m_InteractionSubidData $00 $00 $00 ; $2d la porte gelée du palais (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $2e le cristal du Songe (invisible)
+	m_InteractionSubidData $41 $10 $12 ; $2f un garde endormi debout (le Palais Givré)
 	m_InteractionSubidDataEnd
 
 interactiond4SubidData:

@@ -4697,3 +4697,10 @@ paletteDataOmbre:
 	m_RGB16 $15 $12 $1a
 	m_RGB16 $09 $06 $0e
 	m_RGB16 $02 $01 $04
+
+; BALLADE: Givrolin (PALH_GIVROLIN)
+paletteDataGivrolin:
+	m_RGB16 $1f $1f $1f
+	m_RGB16 $17 $1c $1f
+	m_RGB16 $09 $10 $19
+	m_RGB16 $02 $03 $09

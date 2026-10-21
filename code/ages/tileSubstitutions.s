@@ -208,6 +208,8 @@ replaceToggleBlocks:
 ;;
 ; Does the necessary tile changes if underwater in jabu-jabu.
 replaceJabuTilesIfUnderwater:
+	; BALLADE: le donjon 7 est le Palais Givré (pas d'eau qui monte)
+	ret
 	ld a,(wDungeonIndex)
 	cp $07
 	ret nz

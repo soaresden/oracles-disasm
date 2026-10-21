@@ -96,7 +96,11 @@ interactionCode20:
 	.dw mainScripts.dungeonScript_minibossDeath
 	.dw mainScripts.dungeonScript_bossDeath ; BALLADE: l'Ombre de Marine (la Spirale Céleste)
 @dungeon7:
+	; BALLADE: le Palais Givré
+	.dw mainScripts.dungeonScript_minibossDeath
 	.dw mainScripts.dungeonScript_bossDeath
+	.dw mainScripts.moonlitGrottoScript_spawnChestWhen2TorchesLit
+	.dw mainScripts.dungeonScript_spawnChestOnTriggerBit0
 @dungeon8:
 	.dw mainScripts.dungeonScript_minibossDeath
 	.dw mainScripts.dungeonScript_bossDeath

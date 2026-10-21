@@ -60,6 +60,13 @@ chestGroup4Data:
 	m_ChestData $15, $46, TREASURE_OBJECT_SMALL_KEY_03  ; le Grappin-Écho puis un saut : la petite clé 2
 	m_ChestData $8b, $4d, TREASURE_OBJECT_BOSS_KEY_03   ; l'îlot (le pont du cristal de 4c) : la clé du boss
 	m_ChestData $57, $50, TREASURE_OBJECT_FEATHER_03    ; le cœur de la spirale : la Cape de Roc
+	; BALLADE: le Palais Givré (story/salles/palais.txt)
+	m_ChestData $87, $5b, TREASURE_OBJECT_SMALL_KEY_03  ; les deux torches allumées en biais : la petite clé 1
+	m_ChestData $72, $5c, TREASURE_OBJECT_MAP_02        ; le champ de glace : la carte
+	m_ChestData $37, $5a, TREASURE_OBJECT_FLUTE_03      ; le Chevalier Gelé battu : la Clochette d'Aube
+	m_ChestData $87, $60, TREASURE_OBJECT_SMALL_KEY_03  ; le cristal frappé en biais : la petite clé 2
+	m_ChestData $67, $61, TREASURE_OBJECT_COMPASS_02    ; l'îlot (le Grappin-Écho) : la boussole
+	m_ChestData $53, $5f, TREASURE_OBJECT_BOSS_KEY_03   ; les deux torches entourées de trous : la clé du boss
 	; BALLADE: la Forge Endormie (story/salles/forge.txt)
 	m_ChestData $57, $b1, TREASURE_OBJECT_CANE_OF_SOMARIA_00 ; les Copies battues : la Canne des Songes
 	m_ChestData $5b, $b2, TREASURE_OBJECT_MAP_02        ; la carte

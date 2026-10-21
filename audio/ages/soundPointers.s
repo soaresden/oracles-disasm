@@ -23,13 +23,13 @@ soundPointers:
 	/* 0x13 */ m_soundPointer musBalladeEchos ; BALLADE: l'île des Échos (au lieu du Tombeau des Esprits)
 	/* 0x14 */ m_soundPointer musBalladeSpirale ; BALLADE: la Spirale Céleste (au lieu du Donjon des Ailes)
 	/* 0x15 */ m_soundPointer musBalladeNid ; BALLADE: le Nid des Vents (au lieu de la Grotte Lunaire)
-	/* 0x16 */ m_soundPointer musSkullDungeon
+	/* 0x16 */ m_soundPointer musBalladePalais ; BALLADE: le Palais Givré (au lieu du Donjon du Crâne)
 	/* 0x17 */ m_soundPointer musBalladeForge ; BALLADE: la Forge Endormie (au lieu du Donjon de la Couronne)
 	/* 0x18 */ m_soundPointer musBalladeRecif ; BALLADE: le Récif Murmurant (au lieu de la Grotte des Sirènes)
 	/* 0x19 */ m_soundPointer musBalladeTarkin ; BALLADE: la maison de Tarkin, le village des Mouettes de LADX (au lieu de Jabu-Jabu)
 	/* 0x1a */ m_soundPointer musBalladeCathedrale ; BALLADE: la Cathédrale des Échos (au lieu du Tombeau Ancien)
 	/* 0x1b */ m_soundPointer musFinalDungeon
-	/* 0x1c */ m_soundPointer musOnoxCastle
+	/* 0x1c */ m_soundPointer musBalladeSommeil ; BALLADE: l'île du Grand Sommeil (au lieu du Château d'Onox)
 	/* 0x1d */ m_soundPointer musRoomOfRites
 	/* 0x1e */ m_soundPointer musMakuTree
 	/* 0x1f */ m_soundPointer musSadness

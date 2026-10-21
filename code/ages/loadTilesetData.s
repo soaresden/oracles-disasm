@@ -161,6 +161,8 @@ checkTilesetOverride:
 	ret
 
 @checkJabuFlooded:
+	; BALLADE: le donjon 7 est le Palais Givré (pas le ventre de Jabu-Jabu et ses étages inondés)
+	jr @@noChange
 	ld a,(wDungeonIndex)
 	cp $07
 	jr nz,@@noChange

@@ -182,6 +182,7 @@ treasureObjectData0e:
 	m_TreasureSubid $0a, $0b, $3b, $23, TREASURE_OBJECT_FLUTE_00
 	m_TreasureSubid $0a, $0c, $3b, $23, TREASURE_OBJECT_FLUTE_01
 	m_TreasureSubid $0a, $0d, $3b, $23, TREASURE_OBJECT_FLUTE_02
+	m_TreasureSubid $38, $00, $3b, $23, TREASURE_OBJECT_FLUTE_03 ; BALLADE: la Clochette d'Aube, dans un coffre (la flûte étrange)
 
 treasureObjectData11:
 	m_BeginTreasureSubids TREASURE_HARP

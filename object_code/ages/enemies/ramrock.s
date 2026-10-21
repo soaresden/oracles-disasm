@@ -27,7 +27,7 @@ enemyCode07:
 
 ramrock_state0:
 	ld a,ENEMY_RAMROCK
-	ld b,PALH_83
+	ld b,PALH_GIVROLIN ; BALLADE: Givrolin, en glace
 	call enemyBoss_initializeRoom
 	ld a,SPEED_100
 	call ecom_setSpeedAndState8
@@ -118,7 +118,7 @@ ramrock_state8_substate3:
 	call playSound
 	ld l,Enemy.subid
 	inc (hl)
-	ld a,PALH_83
+	ld a,PALH_GIVROLIN ; BALLADE: Givrolin, en glace
 	jp loadPaletteHeader
 
 ramrock_state8_substate4:
@@ -505,7 +505,7 @@ label_10_248:
 	ret nz
 	ld l,Enemy.angle
 	ld (hl),$08
-	ld a,PALH_83
+	ld a,PALH_GIVROLIN ; BALLADE: Givrolin, en glace
 	call loadPaletteHeader
 	ld a,SND_SWORD_OBTAINED
 	jp playSound
@@ -686,7 +686,7 @@ ramrock_glovePhase_substate2:
 	jr z,++
 	ld a,SND_SWORD_OBTAINED
 	call playSound
-	ld a,PALH_83
+	ld a,PALH_GIVROLIN ; BALLADE: Givrolin, en glace
 	call loadPaletteHeader
 ++
 	call enemyAnimate

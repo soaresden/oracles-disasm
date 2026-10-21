@@ -476,13 +476,13 @@ debugEntries:
 	.dw debugNone
 	.db $1c, $01, $b1, $44 ; le village gelé
 	.dw debugNone
-	.db $ff, $00, $00, $00
+	.db $1d, $04, $55, $97 ; le Palais Givré, l'entrée (le Lance-Graines, la porte dégelée)
 	.dw debugNone
-	.db $ff, $00, $00, $00
+	.db $1d, $04, $59, $55 ; le carrefour de l'ouest, à coté du Chevalier Gelé (la Clochette d'Aube)
 	.dw debugNone
-	.db $ff, $00, $00, $00
-	.dw debugNone
-	.db $ff, $00, $00, $00
+	.db $1f, $04, $63, $97 ; l'antichambre, avec la clé du boss
+	.dw debugPalaisBossKey
+	.db $20, $01, $b1, $44 ; le village gelé, l'essence en poche : la fin du chapitre 7
 	.dw debugNone
 	; 8. Œil de l'Insomnis (seul le boss en rythme existe, dans sa salle de test)
 	.db $ff, $00, $00, $00
@@ -611,8 +611,27 @@ debugMilestones:
 	.db DBG_FULLHEALTH
 	.db DBG_END
 	; 28. La fin du chapitre 6 a été vue (le village des plumes) : l'île du Grand Sommeil est repérée
-	.db DBG_ROOMFLAG, $01, $67, $20
+	.db DBG_ROOMFLAG, $01, $67, $40
 	.db DBG_GLOBALFLAG, GLOBALFLAG_BALLADE_ISLAND7
+	.db DBG_END
+	; 29. Le veilleur : le Lance-Graines (la sacoche, 20 graines de feu) ; la porte du palais dégelée
+	.db DBG_TREASURE, TREASURE_SEED_SATCHEL, $01
+	.db DBG_TREASURE, TREASURE_EMBER_SEEDS, $20
+	.db DBG_TREASURE, TREASURE_SHOOTER, $00
+	.db DBG_ROOMFLAG, $01, $b2, $80
+	.db DBG_END
+	; 30. Le Chevalier Gelé est battu : la Clochette d'Aube
+	.db DBG_ROOMFLAG, $04, $5a, $80
+	.db DBG_TREASURE, TREASURE_FLUTE, $00
+	.db DBG_END
+	; 31. Les gardes endormis du cœur et du couloir sont partis
+	.db DBG_ROOMFLAG, $04, $57, $40
+	.db DBG_ROOMFLAG, $04, $5d, $40
+	.db DBG_END
+	; 32. Givrolin est battu : l'essence (le 7e couplet), un cœur de plus
+	.db DBG_TREASURE, TREASURE_ESSENCE, $06
+	.db DBG_TREASURE, TREASURE_HEART_CONTAINER, $04
+	.db DBG_FULLHEALTH
 	.db DBG_END
 
 debugNone:
@@ -628,6 +647,12 @@ debugSpiraleBossKey:
 	.db DBG_OR
 	.dw wDungeonBossKeys
 	.db $40
+	.db DBG_END
+
+debugPalaisBossKey:
+	.db DBG_OR
+	.dw wDungeonBossKeys
+	.db $80
 	.db DBG_END
 
 debugCathBossKey:

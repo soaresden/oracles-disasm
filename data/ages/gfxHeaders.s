@@ -30,7 +30,7 @@
 ; copy the data quickly enough to fit within vblank. If you need to draw stuff while the screen is
 ; on, see the "queueDmaTransfer" function or "data/{game}/uniqueGfxHeaders.s".
 
-.define NUM_GFX_HEADERS $cf ; BALLADE: +2 (GFXH_FILM, GFXH_TITLE), +12 (menus en français), +6 (noms des donjons 1-6 en français)
+.define NUM_GFX_HEADERS $d0 ; BALLADE: +2 (GFXH_FILM, GFXH_TITLE), +12 (menus en français), +7 (noms des donjons 1-7 en français)
 
 gfxHeaderTable:
 	.repeat NUM_GFX_HEADERS index COUNT
@@ -1117,6 +1117,11 @@ m_GfxHeaderStart $ce, GFXH_DUNGEON_6_BLURB_FR
 	m_GfxHeader gfx_blurb_d6_fr, $8c00
 	m_GfxHeaderEnd
 
+; ... et celui du Palais Givré
+m_GfxHeaderStart $cf, GFXH_DUNGEON_7_BLURB_FR
+	m_GfxHeader gfx_blurb_d7_fr, $8c00
+	m_GfxHeaderEnd
+
 ; Anglais -> français (liste terminée par $00)
 balladeLangGfxHeaders:
 	.db GFXH_FILE_MENU_WITH_MESSAGE_SPEED,	GFXH_FILE_MENU_WITH_MESSAGE_SPEED_FR
@@ -1137,4 +1142,5 @@ balladeLangGfxHeaders:
 	.db GFXH_DUNGEON_4_BLURB,		GFXH_DUNGEON_4_BLURB_FR
 	.db GFXH_DUNGEON_5_BLURB,		GFXH_DUNGEON_5_BLURB_FR
 	.db GFXH_DUNGEON_6_BLURB,		GFXH_DUNGEON_6_BLURB_FR
+	.db GFXH_DUNGEON_7_BLURB,		GFXH_DUNGEON_7_BLURB_FR
 	.db $00

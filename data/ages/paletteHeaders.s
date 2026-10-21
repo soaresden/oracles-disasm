@@ -7,7 +7,7 @@
 ; - PALH_SPR:     Loads sprite palettes only
 ; - PALH:         If none of the above, could load both sprite & bg palettes (or not yet categorized)
 
-.define NUM_PALETTE_HEADERS $d9 ; BALLADE: + film, Songe, titre
+.define NUM_PALETTE_HEADERS $da ; BALLADE: + film, Songe, titre
 
 paletteHeaderTable:
 	.repeat NUM_PALETTE_HEADERS index COUNT
@@ -872,6 +872,11 @@ m_PaletteHeaderStart $d8, PALH_PALAIS
 ; BALLADE: l'Ombre de Marine (le Swoop de la Spirale Céleste) : violet presque noir, palette 6 des sprites
 m_PaletteHeaderStart $d5, PALH_OMBRE
 	m_PaletteHeaderSpr 6, 1, paletteDataOmbre
+	m_PaletteHeaderEnd
+
+; BALLADE: Givrolin (le Ramrock d'Ages, au Palais Givré) : en glace, palette 6 des sprites
+m_PaletteHeaderStart $d9, PALH_GIVROLIN
+	m_PaletteHeaderSpr 6, 1, paletteDataGivrolin
 	m_PaletteHeaderEnd
 
 ; BALLADE: l'écran titre de Gulls of Life (tools/make_title.py) ; sprites : ceux d'Ages (PRESS START)

@@ -46,6 +46,7 @@
 ; @subid_2c{Le roi dans le Songe (0:d2) : il dit où frapper le cristal}
 ; @subid_2d{Invisible : la porte gelée du Palais Givré (1:b2)}
 ; @subid_2e{Invisible : le cristal du Songe (0:b2) : frappé, il dégèle la porte du Réel}
+; @subid_2f{Un garde endormi debout (le Palais Givré) : la Clochette d'Aube le réveille, il s'en va}
 ; ==================================================================================================
 
 ;;
@@ -100,6 +101,7 @@ main:
 	.dw villager
 	.dw frozenGate
 	.dw dreamCrystal
+	.dw standingSleeper
 
 
 ;;
@@ -219,6 +221,8 @@ arrivalTalk:
 	.db $04, $54, <TX_5ab9, $ff ; l'Ombre de Marine, Marine lui répond
 	.db $01, $d1, <TX_5abc, $ff ; l'île du Grand Sommeil, le ponton
 	.db $01, $b2, <TX_5acd, $ff ; le Palais Givré : la porte gelée
+	.db $04, $55, <TX_5ace, $ff ; le Palais Givré, l'entrée : ça glisse
+	.db $04, $64, <TX_5ad1, $ff ; Givrolin menace, Marine répond
 	.db $ff
 
 
@@ -895,6 +899,10 @@ giveCarnet:
 essenceSpawner:
 	ld a,(wDungeonIndex)
 	ld b,a
+	cp $07
+	ld a,(wGroup4RoomFlags+$64)
+	jr z,+
+	ld a,b
 	cp $06
 	ld a,(wGroup4RoomFlags+$54)
 	jr z,+
@@ -1150,6 +1158,8 @@ chapterEnding:
 	.dw @bellsSing
 	.db $01, $67, $00, $20
 	.dw @windSings
+	.db $01, $b1, $00, $40
+	.dw @frostMelts
 	.db $ff
 
 ; Chapitre 2 : Lila se réveille ; la place du Grelot ; Marine lit le vent (la Lagune des Serments)
@@ -1227,6 +1237,20 @@ chapterEnding:
 	.db END_WAIT, 40
 	.db END_TEXT, <TX_5abb
 	.db END_FLAG, GLOBALFLAG_BALLADE_ISLAND7
+	.db END_WAIT, 30
+	.db END_TEXT, <TX_5a31
+	.db END_DONE
+
+; Chapitre 7 : au village gelé, la neige fond, tout le monde se réveille ; Marine lit le vent (l'Œil de
+; l'Insomnis : une tour noire au milieu de la mer)
+@frostMelts:
+	.db END_WAIT, 40
+	.db END_SOUND, SND_SOLVEPUZZLE_2
+	.db END_WAIT, 60
+	.db END_TEXT, <TX_5ad2
+	.db END_WAIT, 40
+	.db END_TEXT, <TX_5ad3
+	.db END_FLAG, GLOBALFLAG_BALLADE_ISLAND8
 	.db END_WAIT, 30
 	.db END_TEXT, <TX_5a31
 	.db END_DONE
@@ -2246,4 +2270,56 @@ dreamCrystal:
 	call playSound
 	ld bc,TX_5acc
 	call showText
+	jp interactionDelete
+
+
+; ==================================================================================================
+; Un garde endormi debout (subid $2f, le Palais Givré) : il bouche un passage. La Clochette d'Aube
+; (la flûte, wLinkPlayingInstrument non nul) jouée à moins de deux cases le réveille : il s'excuse
+; et s'en va (drapeau $40 de la salle : il n'est plus là en revenant).
+; ==================================================================================================
+standingSleeper:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw @init
+	.dw @idle
+	.dw npcWaitText
+	.dw @leave
+
+@init:
+	call getThisRoomFlags
+	bit 6,a
+	jp nz,interactionDelete
+	jp npcInit
+
+@idle:
+	ld a,(wLinkPlayingInstrument)
+	or a
+	jr z,+
+	ld c,$28
+	call objectCheckLinkWithinDistance
+	jr nc,+
+	call getThisRoomFlags
+	set 6,(hl)
+	ld a,SND_SOLVEPUZZLE
+	call playSound
+	ld bc,TX_5ad0
+	ld a,$03
+	jp npcSay
++
+	call npcCheckTalk
+	ret z
+	ld bc,TX_5acf
+	ld a,$02
+	jp npcSay
+
+@leave:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	xor a
+	ld (wDisabledObjects),a
+	call objectCreatePuff
+	call objectUnmarkSolidPosition
 	jp interactionDelete

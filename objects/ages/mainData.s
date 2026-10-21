@@ -2720,87 +2720,71 @@ group4Map49ObjectData:
 	obj_Pointer group4Map54EnemyObjectData
 	obj_End
 
-group4Map55ObjectData:
 	obj_Interaction $20 $02 $48 $c8
 	obj_Pointer objectData_makeAllTorchesLightable
 	obj_Pointer group4Map55EnemyObjectData
 	obj_End
 
-group4Map56ObjectData:
 	obj_Interaction $21 $0a
 	obj_Pointer group4Map56EnemyObjectData
 	obj_End
 
-group4Map57ObjectData:
 	obj_Interaction $1e $08 $08 $00
 	obj_Pointer group4Map57EnemyObjectData
 	obj_End
 
-group4Map58ObjectData:
 	obj_Interaction $12 $02 $58 $98
 	obj_Pointer group4Map58EnemyObjectData
 	obj_End
 
-group4Map59ObjectData:
 	obj_Interaction $24 $02 $01 $01
 	obj_Interaction $1e $06 $a3 $00
 	obj_Pointer objectData_makeAllTorchesLightable
 	obj_Pointer group4Map59EnemyObjectData
 	obj_End
 
-group4Map5aObjectData:
 	obj_Pointer group4Map5aEnemyObjectData
 	obj_End
 
-group4Map5bObjectData:
 	obj_Interaction $1e $0b $50 $00
 	obj_Interaction $1e $0a $a7 $00
 	obj_Pointer group4Map5bEnemyObjectData
 	obj_End
 
-group4Map5cObjectData:
 	obj_Pointer group4Map5cEnemyObjectData
 	obj_End
 
-group4Map5dObjectData:
 	obj_Interaction $21 $0d
 	obj_Part $24 $10 $23
 	obj_Pointer group4Map5dEnemyObjectData
 	obj_End
 
-group4Map5eObjectData:
 	obj_Interaction $21 $0c
 	obj_Part $09 $00 $19
 	obj_End
 
-group4Map5fObjectData:
 	obj_Interaction $21 $0d
 	obj_Part $24 $20 $33
 	obj_Pointer group4Map5fEnemyObjectData
 	obj_End
 
-group4Map60ObjectData:
 	obj_End
 
-group4Map61ObjectData:
 	obj_Interaction $21 $0d
 	obj_Interaction $21 $0e $58 $b8
 	obj_Part $24 $40 $57
 	obj_Pointer group4Map61EnemyObjectData
 	obj_End
 
-group4Map62ObjectData:
 	obj_Interaction $1e $09 $5e $00
 	obj_Pointer group4Map62EnemyObjectData
 	obj_End
 
-group4Map63ObjectData:
 	obj_Interaction $21 $0d
 	obj_Part $24 $80 $77
 	obj_Pointer group4Map63EnemyObjectData
 	obj_End
 
-group4Map64ObjectData:
 	obj_Interaction $21 $09 $68 $b8
 	obj_End
 
@@ -5177,6 +5161,7 @@ group1MapacObjectData:
 group1Mapb0ObjectData:
 	obj_End
 group1Mapb1ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $0a $08 $08 ; la fin du chapitre 7 (la neige fond)
 	obj_End
 group1Mapb2ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $2d $28 $58
@@ -5459,6 +5444,61 @@ group4Map54ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $01 $08 $08
 	obj_Interaction INTERAC_BALLADE_OBJECT $08 $38 $78
 	obj_BeforeEvent group4Map34BeforeEventObjectData
+	obj_End
+group4Map55ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $09 $08 $08
+	obj_Interaction INTERAC_BALLADE_OBJECT $01 $08 $08
+	obj_End
+group4Map56ObjectData:
+	obj_RandomEnemy $30 ENEMY_KEESE $00
+	obj_End
+group4Map57ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $2f $18 $78
+	obj_End
+group4Map58ObjectData:
+	obj_End
+group4Map59ObjectData:
+	obj_RandomEnemy $30 ENEMY_KEESE $00
+	obj_End
+group4Map5aObjectData:
+	obj_Interaction $1e $09 $5e $00
+	obj_Interaction $20 $00 $58 $78
+	obj_Interaction $12 $02 $38 $78
+	obj_BeforeEvent group4Mapb4BeforeEventObjectData
+	obj_End
+group4Map5bObjectData:
+	obj_Interaction $20 $02 $88 $78
+	obj_Pointer objectData_makeAllTorchesLightable
+	obj_End
+group4Map5cObjectData:
+	obj_End
+group4Map5dObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $2f $58 $78
+	obj_End
+group4Map5eObjectData:
+	obj_RandomEnemy $40 ENEMY_KEESE $00
+	obj_End
+group4Map5fObjectData:
+	obj_Interaction $20 $02 $58 $38
+	obj_Pointer objectData_makeAllTorchesLightable
+	obj_End
+group4Map60ObjectData:
+	obj_Part $05 $01 $37
+	obj_Interaction $24 $01 $00 $00
+	obj_Interaction $20 $03 $88 $78
+	obj_End
+group4Map61ObjectData:
+	obj_End
+group4Map62ObjectData:
+	obj_End
+group4Map63ObjectData:
+	obj_End
+group4Map64ObjectData:
+	obj_Interaction $1e $0a $a7 $00
+	obj_Interaction $20 $01 $58 $78
+	obj_Interaction INTERAC_BALLADE_OBJECT $01 $08 $08
+	obj_Interaction INTERAC_BALLADE_OBJECT $08 $38 $78
+	obj_BeforeEvent group5Map78BeforeEventObjectData
 	obj_End
 group4MapaeObjectData:
 	obj_Part $09 $80 $34
