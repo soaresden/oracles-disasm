@@ -268,9 +268,19 @@ main:
 	ld (wWarpDestRoom),a
 	ld a,(wTmpcbb3+2)
 	ld (wWarpDestPos),a
-	xor a
+	; case $ff : l'entrée d'un donjon, comme par sa porte (transition $93, départ « instantané » :
+	; le nom du donjon s'affiche, le donjon s'initialise)
+	ld b,$03 ; fondu
+	inc a
+	ld a,$00
+	jr nz,+
+	ld b,TRANSITION_SRC_INSTANT
+	ld a,$93
++
 	ld (wWarpTransition),a
-	ld a,$03 ; fondu
+	ld a,b
+	ld (wTmpcbb3+3),a
+	ld a,(wTmpcbb3+3)
 	ld (wWarpTransition2),a
 	xor a
 	ld (wDisabledObjects),a
@@ -401,13 +411,13 @@ debugEntries:
 	.dw debugNone
 	.db $05, $01, $11, $44 ; la place du Grelot
 	.dw debugNone
-	.db $ff, $00, $00, $00
+	.db $07, $04, $39, $97 ; l'entrée du Coffre à Jouets (bombes, Marine les porte, Lila dort)
 	.dw debugNone
-	.db $ff, $00, $00, $00
+	.db $08, $04, $2c, $5c ; le Soldat de Plomb (avec le boomerang)
 	.dw debugNone
-	.db $ff, $00, $00, $00
-	.dw debugNone
-	.db $ff, $00, $00, $00
+	.db $08, $04, $2e, $96 ; l'antichambre de Pantin-Sans-Fil, avec la clé du boss
+	.dw debugCoffreBossKey
+	.db $09, $03, $21, $46 ; chez Lila, l'essence en poche : la fin du chapitre 2
 	.dw debugNone
 	; 3. Lagune des Serments
 	.db $ff, $00, $00, $00
@@ -516,6 +526,22 @@ debugMilestones:
 	.dw wNumRupees+1
 	.db $01
 	.db DBG_END
+	; 6. Les bombes de Pépin ; Marine sait les porter (la grotte de la Boîte)
+	.db DBG_TREASURE, TREASURE_BOMBS, $10
+	.db DBG_GLOBALFLAG, GLOBALFLAG_BALLADE_MARINE_BOMB
+	.db DBG_ROOMFLAG, $05, $b0, $40
+	.db DBG_END
+	; 7. Sire Bouchon rendu : Lila dort, son rêve est ouvert
+	.db DBG_GLOBALFLAG, GLOBALFLAG_BALLADE_LILA_ASLEEP
+	.db DBG_END
+	; 8. Le Boomerang-Toupie
+	.db DBG_TREASURE, TREASURE_BOOMERANG, $01
+	.db DBG_END
+	; 9. Pantin-Sans-Fil est battu : l'essence (le 2e couplet), un cœur de plus
+	.db DBG_TREASURE, TREASURE_ESSENCE, $01
+	.db DBG_TREASURE, TREASURE_HEART_CONTAINER, $04
+	.db DBG_FULLHEALTH
+	.db DBG_END
 
 debugNone:
 	.db DBG_END
@@ -524,6 +550,12 @@ debugPhareBossKey:
 	.db DBG_OR
 	.dw wDungeonBossKeys
 	.db $02
+	.db DBG_END
+
+debugCoffreBossKey:
+	.db DBG_OR
+	.dw wDungeonBossKeys
+	.db $04
 	.db DBG_END
 
 debugRhythmTest:

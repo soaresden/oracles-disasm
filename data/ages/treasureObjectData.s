@@ -159,6 +159,7 @@ treasureObjectData06:
 	m_TreasureSubid $10, $01, $22, $1c, TREASURE_OBJECT_BOOMERANG_01
 	m_TreasureSubid $02, $01, $22, $1c, TREASURE_OBJECT_BOOMERANG_02
 	m_TreasureSubid $38, $02, <TX_00_GET_MAGICBOOMERANG, $7f, TREASURE_OBJECT_BOOMERANG_03
+	m_TreasureSubid $38, $01, $22, $1c, TREASURE_OBJECT_BOOMERANG_04 ; BALLADE: le Boomerang-Toupie, dans un coffre
 
 treasureObjectData0a:
 	m_BeginTreasureSubids TREASURE_SWITCH_HOOK

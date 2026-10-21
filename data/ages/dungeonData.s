@@ -34,7 +34,8 @@ dungeonData01:
 	; BALLADE: le Phare Éteint, sur un seul étage (tout en hauteur)
 	m_DungeonData >wGroup4RoomFlags, $24, dungeon01LayoutPhare, $01, $03, $01, $00, $00
 dungeonData02:
-	m_DungeonData >wGroup4RoomFlags, $46, dungeon02Layout, $02, $02, $01, $00, $00
+	; BALLADE: le Coffre à Jouets (dans le rêve de Lila), sur un seul étage
+	m_DungeonData >wGroup4RoomFlags, $39, dungeon02LayoutCoffre, $01, $03, $01, $00, $00
 dungeonData03:
 	m_DungeonData >wGroup4RoomFlags, $66, dungeon03Layout, $02, $02, $00, $00, $00
 dungeonData04:

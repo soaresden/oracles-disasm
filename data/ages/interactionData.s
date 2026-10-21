@@ -861,6 +861,8 @@ interactionedSubidData:
 	m_InteractionSubidData $3f $00 $22 ; $05 Lila dans son rêve
 	m_InteractionSubidData $e3 $08 $32 ; $06 le Coffre à Jouets (dans le rêve de Lila)
 	m_InteractionSubidData $00 $00 $00 ; $07 rattrapage du Carnet des Rêves (invisible)
+	m_InteractionSubidData $00 $00 $00 ; $08 l'essence du donjon 2 apparaît après le boss (invisible)
+	m_InteractionSubidData $00 $00 $00 ; $09 l'entrée d'un donjon : son nom (invisible)
 	m_InteractionSubidDataEnd
 
 interactiond4SubidData:

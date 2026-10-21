@@ -340,7 +340,8 @@ interaction7f_subid00:
 .ifdef ROM_AGES
 	; BALLADE: le Phare Éteint ramène sur le cap (1:7b), où Marine conclut le chapitre
 	.db $81, $7b, $44, TRANSITION_DEST_SET_RESPAWN
-	.db $81, $83, $25, TRANSITION_DEST_SET_RESPAWN
+	; BALLADE: le Coffre à Jouets ramène chez Lila (3:21) : on se réveille
+	.db $83, $21, $46, TRANSITION_DEST_SET_RESPAWN
 	.db $80, $ba, $55, TRANSITION_DEST_SET_RESPAWN
 	.db $80, $03, $35, TRANSITION_DEST_X_SHIFTED
 	.db $80, $0a, $17, TRANSITION_DEST_SET_RESPAWN

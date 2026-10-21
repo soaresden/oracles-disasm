@@ -508,7 +508,8 @@ warpSource7ac6:
 
 group4WarpSources:
 	m_StandardWarp $4 $24 $4a $1 $3 ; BALLADE: sortie du Phare Éteint -> le cap (1:7b)
-	m_StandardWarp $4 $46 $01 $1 $3
+	;m_StandardWarp $4 $46 $01 $1 $3 ; BALLADE: plus l'entrée du 2e donjon
+	m_StandardWarp $4 $39 $4f $2 $3 ; BALLADE: sortie du Coffre à Jouets -> le rêve de Lila (2:21)
 	m_StandardWarp $4 $66 $02 $0 $3
 	m_StandardWarp $4 $91 $03 $0 $3
 	m_StandardWarp $4 $bb $04 $0 $3
@@ -519,8 +520,8 @@ group4WarpSources:
 	m_StandardWarp $0 $07 $1d $1 $4
 	m_StandardWarp $0 $01 $26 $0 $4
 	m_StandardWarp $0 $1b $01 $6 $2
-	m_StandardWarp $0 $32 $02 $6 $2
-	m_PointerWarp     $37 warpSource7b8e
+	;m_StandardWarp $0 $32 $02 $6 $2 ; BALLADE: 4:32 est au Coffre à Jouets
+	;m_PointerWarp     $37 warpSource7b8e ; BALLADE: 4:37 est au Coffre à Jouets
 	m_StandardWarp $0 $47 $03 $6 $2
 	m_StandardWarp $0 $48 $04 $6 $2
 	m_StandardWarp $0 $6c $08 $6 $2

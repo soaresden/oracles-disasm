@@ -11,6 +11,9 @@
 ; @subid_05{Lila dans son rêve (2:21)}
 ; @subid_06{Le Coffre à Jouets, dans le rêve de Lila : l'entrée du donjon 2}
 ; @subid_07{Invisible, à l'auberge : parties de la v1.0/1.1 : l'aubergiste donne le Carnet des Rêves}
+; @subid_08{Invisible, l'antichambre du donjon 2 : l'essence apparaît quand le boss est vaincu}
+; @subid_09{Invisible, l'entrée d'un donjon : en arrivant par l'arche du bas, le donjon s'initialise
+;           et son nom s'affiche (comme INTERAC_DUNGEON_STUFF $00, qui ne marche qu'au chargement)}
 ; ==================================================================================================
 
 ;;
@@ -26,6 +29,8 @@ main:
 	.dw dreamLila
 	.dw toyChest
 	.dw carnetCatchUp
+	.dw essenceSpawner
+	.dw dungeonEntrance
 
 
 ;;
@@ -116,6 +121,8 @@ arrivalTalk:
 	.db $01, $31, <TX_5a55, $ff ; Hameau-Grelot, la jetée
 	.db $01, $32, <TX_5a57, $ff ; devant la falaise de la grotte de la Boîte
 	.db $05, $b0, <TX_5a56, GLOBALFLAG_BALLADE_MARINE_BOMB ; la grotte : Marine porte les bombes
+	.db $04, $34, <TX_5a62, $ff ; le Coffre à Jouets : encore un grelot
+	.db $04, $2b, <TX_5a63, $ff ; Pantin-Sans-Fil menace, Marine répond
 	.db $ff
 
 
@@ -384,8 +391,10 @@ bell:
 @state2:
 	ret
 
-; Les cases du pont de cette salle (groupe 5)
+; Les cases du pont de cette salle
 @makeBridge:
+	ld a,(wActiveGroup)
+	ld c,a
 	ld a,(wActiveRoom)
 	ld b,a
 	ld hl,@bridges
@@ -393,10 +402,17 @@ bell:
 	ldi a,(hl)
 	cp $ff
 	ret z
-	cp b
+	cp c
+	jr nz,@skipRoom
 	ld a,(hl)
+	cp b
+	jr nz,@skipRoom
 	inc hl
-	jr z,@found
+	ldi a,(hl)
+	jr @found
+@skipRoom:
+	inc hl
+	inc hl
 -
 	ldi a,(hl)
 	or a
@@ -417,9 +433,10 @@ bell:
 	pop hl
 	jr -
 
-; salle, brique du pont, cases (0 = fin)
+; groupe, salle, brique du pont, cases (0 = fin)
 @bridges:
-	.db $b0, $ef, $37, $47, $57, $67, $00 ; la grotte de la Boîte (5:b0)
+	.db $05, $b0, $ef, $37, $47, $57, $67, $00 ; la grotte de la Boîte (5:b0)
+	.db $04, $34, $a0, $56, $57, $58, $59, $00 ; le Coffre à Jouets, le grelot (4:34)
 	.db $ff
 
 
@@ -604,9 +621,9 @@ toyChest:
 	ld (wWarpDestGroup),a
 	ldi a,(hl)
 	ld (wWarpDestRoom),a
-	ld a,(hl)
+	ldi a,(hl)
 	ld (wWarpDestPos),a
-	xor a
+	ld a,(hl)
 	ld (wWarpTransition),a
 	ld a,$03 ; fondu
 	ld (wWarpTransition2),a
@@ -616,9 +633,10 @@ toyChest:
 @done:
 	ret
 
-; groupe, salle, case : l'entrée du Coffre à Jouets (donjon 2)
+; groupe, salle, case, transition : l'entrée du Coffre à Jouets (donjon 2), sur l'arche du bas
+; (le nom du donjon : INTERAC_BALLADE_OBJECT $09)
 @dungeonEntrance:
-	.db $04, $24, $97
+	.db $04, $39, $97, $00
 
 
 ; ==================================================================================================
@@ -711,3 +729,37 @@ giveCarnet:
 	ld a,(w1Link.xh)
 	ld (hl),a
 	ret
+
+
+; ==================================================================================================
+; L'essence du Coffre à Jouets (subid $08, dans l'antichambre 4:2e) : elle apparaît (INTERAC_ESSENCE)
+; quand Pantin-Sans-Fil est vaincu (drapeau $80 de sa salle, 4:2b, posé par le script de sa mort).
+; ==================================================================================================
+essenceSpawner:
+	ld a,(wGroup4RoomFlags+$2b)
+	rlca
+	ret nc
+	ldbc INTERAC_ESSENCE, $00
+	call objectCreateInteraction
+	jp interactionDelete
+
+
+; ==================================================================================================
+; L'entrée d'un donjon (subid $09) : quand Link arrive par l'arche du bas (y >= $80), comme
+; INTERAC_DUNGEON_STUFF $00 : les blocs, cristaux et tourniquets du donjon reviennent à zéro, le
+; point de retour (en cas de chute ou de mort) est l'entrée, et le nom du donjon s'affiche.
+; ==================================================================================================
+dungeonEntrance:
+	call waitRoomReady
+	ret nz
+	ld a,(w1Link.yh)
+	cp $80
+	jp c,interactionDelete
+	call initializeDungeonStuff
+	call setDeathRespawnPoint
+	ld a,(wDungeonIndex)
+	add <TX_0200
+	ld c,a
+	ld b,>TX_0200
+	call showText
+	jp interactionDelete

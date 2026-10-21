@@ -125,14 +125,23 @@ groups:
   - name: TX_000f
     index: 0x0f
     text: |-
-      \pos(2)\slow()You got the
-      \col(1)Ancient Wood\col(0), an
-      Essence of Time!\stop
-      It whispers only
-      truth to closed
-      ears from out of
-      the stillness.
-
+      \pos(2)\slow()Le Pantin n'a
+      plus de fils.
+      Les jouets de
+      Lila dansent!\stop
+      Tu as trouvé le
+      \col(1)deuxième couplet\col(0)
+      de la chanson de
+      Marine!\stop
+      \col(1)Marine\col(0): Deux
+      couplets...\stop
+      Celui-là parle
+      d'une petite
+      fille qui rêve
+      d'un chevalier.\stop
+      ...Il te
+      ressemble un
+      peu, non?
   - name: TX_0010
     index: 0x10
     text: |-
@@ -302,12 +311,14 @@ groups:
   - name: TX_0022
     index: 0x22
     text: |-
-      You got a
-      \col(1)Boomerang\col(0)!
-      Use it to stop
-      enemies in their
-      tracks!
-
+      Le \col(1)Boomerang-
+      Toupie\col(0)! Il
+      frappe de loin
+      et revient!\stop
+      Il atteint les
+      cristaux qu'on
+      ne touche pas
+      à l'épée.
   - name: TX_0023
     index: 0x23
     text: |-
@@ -1597,10 +1608,9 @@ groups:
        Phare Éteint
   - name: TX_0202
     index: 0x02
-    text: |2-
-       Level 2
-        Wing Dungeon
-
+    text: |-
+       Niveau 2
+       Coffre à Jouets
   - name: TX_0203
     index: 0x03
     text: |2-
@@ -3941,11 +3951,10 @@ groups:
   - name: TX_0902
     index: 0x02
     text: |-
-      Ancient Wood
-      It speaks only
-      truth to closed
-      ears.
-
+      Deuxième couplet
+      Une fille qui
+      rêve d'un
+      chevalier.
   - name: TX_0903
     index: 0x03
     text: |-
@@ -4198,10 +4207,10 @@ groups:
   - name: TX_0927
     index: 0x27
     text: |-
-      Boomerang
-      Always comes
-      back to you.
-
+      Boomerang-Toupie
+      Il frappe de
+      loin, et
+      revient.
   - name: TX_0928
     index: 0x28
     text: |-
@@ -14286,20 +14295,20 @@ groups:
   - name: TX_2f01
     index: 0x01
     text: |-
-      \pos(1)My mighty sword
-      and mighty
-      shield shall
-      crush you!
-
+      \pos(1)Garde à vous!
+      Épée de plomb,
+      bouclier de
+      plomb!\stop
+      Je suis le
+      \col(1)Soldat de Plomb\col(0)!
+      Nul ne passe!
   - name: TX_2f02
     index: 0x02
     text: |-
-      NO!\stop
-      My mighty sword
-      is broken...
-      You'll pay for
-      this!!!
-
+      NON!\stop
+      Mon épée de
+      plomb... cassée!
+      Rompez!
   - name: TX_2f03
     index: 0x03
     text: |-
@@ -23175,6 +23184,47 @@ groups:
       invente des
       chevaliers. Les
       enfants jouent!
+
+  # Le Coffre à Jouets : Marine devant le grelot (4:34)
+  - name: TX_5a62
+    index: 0x62
+    text: |-
+      \col(1)Marine\col(0): Encore
+      un grelot, de
+      l'autre coté du
+      trou!\stop
+      Tu sais ce qu'il
+      faut faire: une
+      bombe, et
+      \col(1)SELECT\col(0)!
+
+  # Pantin-Sans-Fil (le boss, 4:2b) menace ; Marine répond
+  - name: TX_5a63
+    index: 0x63
+    text: |-
+      \col(2)Pantin\col(0): Qui
+      tient mes fils?
+      Personne!\stop
+      Alors je danse
+      tout seul...
+      et je t'écrase!\stop
+      \col(1)Marine\col(0): Tu
+      danses mal.\stop
+      Link, il est
+      trop haut pour
+      toi. Mets-toi
+      dessous, une
+      bombe, \col(1)SELECT\col(0):
+      je la lui fais
+      avaler!\stop
+      Mais il faut
+      qu'il soit
+      \col(1)rouge\col(0) quand
+      j'arrive!\stop
+      Tiens la bombe
+      prête, et lance-
+      moi dès qu'il
+      devient violet!
 
   # Le menu de test caché (code/ages/balladeDebug.s ; HAUT tenu 5 s à l'écran titre) :
   # la langue, l'île, le moment, et dans le donjon l'endroit. Le même dans les deux fichiers.

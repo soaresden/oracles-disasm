@@ -130,14 +130,22 @@ groups:
   - name: TX_000f
     index: 0x0f
     text: |-
-      \pos(2)\slow()You got the
-      \col(1)Ancient Wood\col(0), an
-      Essence of Time!\stop
-      It whispers only
-      truth to closed
-      ears from out of
-      the stillness.
-
+      \pos(2)\slow()The Puppet's
+      strings are cut.
+      Lila's toys
+      dance again!\stop
+      You found the
+      \col(1)second verse\col(0) of
+      Marin's song!\stop
+      \col(1)Marin\col(0): Two
+      verses...\stop
+      This one's about
+      a little girl
+      who dreams of a
+      knight.\stop
+      ...He looks a
+      bit like you,
+      doesn't he?
   - name: TX_0010
     index: 0x10
     text: |-
@@ -316,12 +324,13 @@ groups:
   - name: TX_0022
     index: 0x22
     text: |-
-      You got a
-      \col(1)Boomerang\col(0)!
-      Use it to stop
-      enemies in their
-      tracks!
-
+      The \col(1)Spinning
+      Boomerang\col(0)! It
+      hits from afar
+      and comes back!\stop
+      It reaches the
+      crystals your
+      sword can't.
   - name: TX_0023
     index: 0x23
     text: |-
@@ -1614,10 +1623,9 @@ groups:
       Dark Lighthouse
   - name: TX_0202
     index: 0x02
-    text: |2-
+    text: |-
        Level 2
-        Wing Dungeon
-
+        Toy Chest
   - name: TX_0203
     index: 0x03
     text: |2-
@@ -3956,11 +3964,10 @@ groups:
   - name: TX_0902
     index: 0x02
     text: |-
-      Ancient Wood
-      It speaks only
-      truth to closed
-      ears.
-
+      Second Verse
+      A girl who
+      dreams of a
+      knight.
   - name: TX_0903
     index: 0x03
     text: |-
@@ -4213,10 +4220,9 @@ groups:
   - name: TX_0927
     index: 0x27
     text: |-
-      Boomerang
-      Always comes
-      back to you.
-
+      Spin Boomerang
+      Hits from afar,
+      then comes back.
   - name: TX_0928
     index: 0x28
     text: |-
@@ -14308,20 +14314,19 @@ groups:
   - name: TX_2f01
     index: 0x01
     text: |-
-      \pos(1)My mighty sword
-      and mighty
-      shield shall
-      crush you!
-
+      \pos(1)Attention!
+      Lead sword, lead
+      shield!\stop
+      I am the
+      \col(1)Tin Soldier\col(0)!
+      None shall pass!
   - name: TX_2f02
     index: 0x02
     text: |-
       NO!\stop
-      My mighty sword
-      is broken...
-      You'll pay for
-      this!!!
-
+      My lead sword...
+      broken!
+      Dismissed!
   - name: TX_2f03
     index: 0x03
     text: |-
@@ -23174,6 +23179,43 @@ groups:
       makes up
       knights. The
       kids play again!
+
+  # The Toy Chest: Marin in front of the bell (4:34)
+  - name: TX_5a62
+    index: 0x62
+    text: |-
+      \col(1)Marin\col(0): Another
+      bell, across
+      the pit!\stop
+      You know what
+      to do: a bomb,
+      and \col(1)SELECT\col(0)!
+
+  # Stringless Puppet (the boss, 4:2b) threatens; Marin answers
+  - name: TX_5a63
+    index: 0x63
+    text: |-
+      \col(2)Puppet\col(0): Who
+      holds my
+      strings? Nobody!\stop
+      So I dance on
+      my own... and I
+      crush you!\stop
+      \col(1)Marin\col(0): You
+      dance badly.\stop
+      Link, he's too
+      high for you.
+      Stand under
+      him, a bomb,
+      \col(1)SELECT\col(0): I'll
+      make him eat it!\stop
+      But he has to
+      be \col(1)red\col(0) when I
+      get there!\stop
+      Hold the bomb
+      ready, and send
+      me as soon as he
+      turns purple!
 
   # Le menu de test caché (code/ages/balladeDebug.s ; HAUT tenu 5 s à l'écran titre) :
   # la langue, l'île, le moment, et dans le donjon l'endroit. Le même dans les deux fichiers.

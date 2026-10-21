@@ -264,6 +264,7 @@ group2WarpDestTable:
 	; BALLADE
 	m_WarpDest $9e $ff $9 $3 ; $4d : Songe, entrée de l'auberge par le bas
 	m_WarpDest $21 $ff $9 $3 ; $4e : Songe, entrée de la maison de Lila par le bas
+	m_WarpDest $21 $56 $0 $1 ; $4f : le rêve de Lila, à coté du Coffre à Jouets (en sortant du donjon)
 
 group3WarpDestTable:
 	m_WarpDest $0f $f4 $9 $3

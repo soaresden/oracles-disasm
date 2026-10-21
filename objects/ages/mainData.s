@@ -2701,7 +2701,6 @@ group4Map2aObjectData:
 	obj_Pointer group4Map2aEnemyObjectData
 	obj_End
 
-group4Map2bObjectData:
 	obj_Interaction $20 $03 $58 $78
 	obj_Interaction $a4 $00 $00 $00
 	obj_Interaction $a4 $01 $00 $00
@@ -2709,15 +2708,12 @@ group4Map2bObjectData:
 	obj_BeforeEvent group4Map2bBeforeEventObjectData
 	obj_End
 
-group4Map2cObjectData:
 	obj_Pointer group4Map2cEnemyObjectData
 	obj_End
 
-group4Map2dObjectData:
 	obj_Pointer group4Map2dEnemyObjectData
 	obj_End
 
-group4Map2eObjectData:
 	obj_Interaction $21 $01 $48 $58
 	obj_Interaction $15 $00
 	obj_Pointer group4Map2eEnemyObjectData
@@ -2738,11 +2734,9 @@ group4Map30ObjectData:
 	obj_Pointer group4Map30EnemyObjectData
 	obj_End
 
-group4Map31ObjectData:
 	obj_Pointer group4Map31EnemyObjectData
 	obj_End
 
-group4Map32ObjectData:
 	obj_Interaction $1e $07 $30 $00
 	obj_Interaction $1e $05 $5e $00
 	obj_Interaction $15 $00
@@ -2750,11 +2744,9 @@ group4Map32ObjectData:
 	obj_Pointer group4Map32EnemyObjectData
 	obj_End
 
-group4Map33ObjectData:
 	obj_Pointer group4Map33EnemyObjectData
 	obj_End
 
-group4Map34ObjectData:
 	obj_Interaction $1e $0a $a7 $00
 	obj_Interaction $1e $09 $3e $00
 	obj_Interaction $1e $09 $7e $00
@@ -2771,7 +2763,6 @@ group4Map36ObjectData:
 	obj_Pointer group4Map36EnemyObjectData
 	obj_End
 
-group4Map37ObjectData:
 	obj_Pointer group4Map37EnemyObjectData
 	obj_End
 
@@ -2779,16 +2770,13 @@ group4Map38ObjectData:
 	obj_Interaction $7f $00 $28 $78
 	obj_End
 
-group4Map39ObjectData:
 	obj_Interaction $12 $01 $58 $78
 	obj_Pointer group4Map39EnemyObjectData
 	obj_End
 
-group4Map3aObjectData:
 	obj_Pointer group4Map3aEnemyObjectData
 	obj_End
 
-group4Map3bObjectData:
 	obj_Interaction $15 $00
 	obj_Interaction $21 $07 $79 $20
 	obj_Interaction $1b $25 $78 $b0
@@ -5072,6 +5060,59 @@ group4Map1fObjectData:
 group4Map24ObjectData:
 	; « Niveau 1 - Phare Éteint » en entrant (INTERAC_DUNGEON_STUFF $00, texte TX_0201)
 	obj_Interaction $12 $00 $88 $78
+	obj_End
+group4Map2bObjectData:
+	obj_Interaction $20 $03 $58 $78
+	obj_Interaction $a4 $00 $00 $00
+	obj_Interaction $a4 $01 $00 $00
+	obj_Interaction $a4 $02 $00 $00
+	obj_Interaction INTERAC_BALLADE_OBJECT $01 $08 $08
+	obj_BeforeEvent group4Map2bBeforeEventObjectData
+	obj_End
+group4Map2cObjectData:
+	obj_Interaction $1e $09 $5e $00
+	obj_Interaction $20 $02 $58 $78
+	obj_Interaction $12 $02 $58 $78
+	obj_BeforeEvent group4Map80BeforeEventObjectData
+	obj_End
+group4Map2dObjectData:
+	obj_Part $05 $01 $23
+	obj_Interaction $24 $01 $00 $00
+	obj_Interaction $1e $07 $50 $00
+	obj_RandomEnemy $20 ENEMY_KEESE $00
+	obj_End
+group4Map2eObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $08 $58 $78
+	obj_End
+group4Map31ObjectData:
+	obj_Interaction $1e $09 $5e $00
+	obj_Interaction $12 $02 $58 $78
+	obj_SpecificEnemyA $00 ENEMY_STALFOS $00 $38 $48
+	obj_SpecificEnemyA     ENEMY_STALFOS $00 $38 $a8
+	obj_SpecificEnemyA     ENEMY_STALFOS $00 $78 $78
+	obj_End
+group4Map32ObjectData:
+	obj_SpecificEnemyA $00 ENEMY_STALFOS $00 $38 $78
+	obj_SpecificEnemyA     ENEMY_STALFOS $00 $78 $78
+	obj_End
+group4Map33ObjectData:
+	obj_RandomEnemy $20 ENEMY_ROPE $00
+	obj_End
+group4Map34ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $03 $58 $b8
+	obj_Interaction INTERAC_BALLADE_OBJECT $01 $08 $08
+	obj_End
+group4Map37ObjectData:
+	obj_RandomEnemy $60 ENEMY_ZOL $00
+	obj_Interaction $12 $01 $58 $78
+	obj_End
+group4Map39ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $09 $08 $08
+	obj_End
+group4Map3aObjectData:
+	obj_RandomEnemy $30 ENEMY_KEESE $00
+	obj_End
+group4Map3bObjectData:
 	obj_End
 group4Map4aObjectData:
 	obj_Interaction INTERAC_BALLADE_RHYTHM $00 $58 $78

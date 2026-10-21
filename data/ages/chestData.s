@@ -52,6 +52,12 @@ chestGroup3Data:
 	.db $ff
 
 chestGroup4Data:
+	; BALLADE: le Coffre à Jouets (story/salles/coffre.txt)
+	m_ChestData $57, $31, TREASURE_OBJECT_BOOMERANG_04  ; le Boomerang-Toupie (quand les soldats sont battus)
+	m_ChestData $2c, $34, TREASURE_OBJECT_SMALL_KEY_03  ; le grelot : la petite clé 2
+	m_ChestData $57, $3a, TREASURE_OBJECT_COMPASS_02    ; la boussole
+	m_ChestData $57, $3b, TREASURE_OBJECT_MAP_02        ; la carte
+	m_ChestData $57, $2c, TREASURE_OBJECT_BOSS_KEY_03   ; le Soldat de Plomb : la clé du boss
 	; BALLADE: le Phare Éteint (story/salles/phare.txt ; un coffre par salle, le premier compte)
 	m_ChestData $57, $1e, TREASURE_OBJECT_SMALL_KEY_03   ; les Zols (quand ils sont battus)
 	m_ChestData $8c, $1f, TREASURE_OBJECT_RUPEES_04      ; la statue sur le bouton : 30 rubis

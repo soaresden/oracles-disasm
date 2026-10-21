@@ -231,6 +231,13 @@ checkBombPower:
 	ld l,Interaction.direction
 	ld a,(w1Link.direction)
 	ld (hl),a
+	; En défilement latéral (Link ne regarde qu'à gauche ou à droite) : Marine monte (le boss du
+	; Coffre à Jouets, Pantin-Sans-Fil, est hors de portée au-dessus de Link)
+	ld a,(wTilesetFlags)
+	and TILESETFLAG_SIDESCROLL
+	jr z,+
+	ld (hl),DIR_UP
++
 	ld a,$ff
 	ld (wBalladeSelectTimer),a
 	ret
@@ -288,6 +295,15 @@ bombCarrier:
 	ld a,(de)
 	add (hl)
 	ld (de),a
+	; En défilement latéral, elle monte plus vite (3 pixels par image : Pantin-Sans-Fil)
+	ld a,(wTilesetFlags)
+	and TILESETFLAG_SIDESCROLL
+	jr z,+
+	ld e,Interaction.yh
+	ld a,(de)
+	dec a
+	ld (de),a
++
 	call objectCheckWithinRoomBoundary
 	jr nc,@release
 	; La bombe pend sous Marine
