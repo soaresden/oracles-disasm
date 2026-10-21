@@ -450,13 +450,13 @@ debugEntries:
 	.dw debugNone
 	.db $12, $01, $62, $55 ; la place du silence
 	.dw debugNone
-	.db $ff, $00, $00, $00
+	.db $13, $05, $aa, $97 ; la Cathédrale des Échos, l'entrée (la grille ouverte)
 	.dw debugNone
-	.db $ff, $00, $00, $00
+	.db $14, $05, $83, $97 ; la croisée : le Gardien des Cloches (le Grappin-Écho)
 	.dw debugNone
-	.db $ff, $00, $00, $00
-	.dw debugNone
-	.db $ff, $00, $00, $00
+	.db $15, $05, $7d, $97 ; le déambulatoire, avec la clé du chœur (pas de boss)
+	.dw debugCathBossKey
+	.db $16, $01, $62, $55 ; la place du silence, l'essence en poche : la fin du chapitre 5
 	.dw debugNone
 	; 6. Nid des Vents
 	.db $ff, $00, $00, $00
@@ -582,6 +582,16 @@ debugMilestones:
 	.db DBG_ROOMFLAG, $01, $64, $40
 	.db DBG_ROOMFLAG, $01, $42, $40
 	.db DBG_END
+	; 20. La nef : le Grappin-Écho
+	.db DBG_TREASURE, TREASURE_SWITCH_HOOK, $01
+	.db DBG_END
+	; 21. Le Gardien des Cloches est battu (la croisée)
+	.db DBG_ROOMFLAG, $05, $83, $80
+	.db DBG_END
+	; 22. Le souvenir : l'essence (le 5e couplet ; pas de boss, pas de cœur)
+	.db DBG_ROOMFLAG, $01, $26, $80
+	.db DBG_TREASURE, TREASURE_ESSENCE, $04
+	.db DBG_END
 
 debugNone:
 	.db DBG_END
@@ -590,6 +600,12 @@ debugPhareBossKey:
 	.db DBG_OR
 	.dw wDungeonBossKeys
 	.db $02
+	.db DBG_END
+
+debugCathBossKey:
+	.db DBG_OR
+	.dw wDungeonBossKeys
+	.db $20
 	.db DBG_END
 
 debugCoffreCrystal:

@@ -43,7 +43,8 @@ dungeonData04:
 	; BALLADE: la Forge Endormie, dans le cratère de Mont-Braise (un seul étage)
 	m_DungeonData >wGroup4RoomFlags, $bb, dungeon04LayoutForge, $01, $03, $01, $00, $00
 dungeonData05:
-	m_DungeonData >wGroup4RoomFlags, $bb, dungeon05Layout, $02, $02, $01, $00, $00
+	; BALLADE: la Cathédrale des Échos, au sommet de l'île des Échos (un seul étage, en croix)
+	m_DungeonData >wGroup5RoomFlags, $aa, dungeon05LayoutCathedrale, $01, $03, $01, $00, $00
 dungeonData06:
 	m_DungeonData >wGroup5RoomFlags, $26, dungeon06Layout, $01, $03, $07, $00, $00
 dungeonData07:

@@ -5,6 +5,12 @@
 ;   var30: Copied to counter2?
 ;   var31: Nonzero if initialization has occurred? (spawner only)
 ; ==================================================================================================
+.ifdef ROM_AGES
+; BALLADE: la résurrection de Ganon (la fin du jeu lié) n'existe pas dans la Ballade : sa place
+; dans la banque 0e sert aux Veilleurs de la Cathédrale des Échos (ambiGuard.s).
+enemyCode60:
+	jp enemyDelete
+.else
 enemyCode60:
 	ld e,Enemy.subid
 	ld a,(de)
@@ -167,3 +173,4 @@ ganonRevivalCutscene_spawnShadow:
 	.db $b8 $20 $05
 	.db $90 $f0 $18
 	.db $40 $00 $06
+.endif

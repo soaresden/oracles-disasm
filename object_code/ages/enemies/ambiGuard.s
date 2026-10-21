@@ -211,9 +211,41 @@ ambiGuard_tossesLinkOut_state10:
 	call objectCheckLinkWithinDistance
 	jp nc,ecom_applyVelocityForSideviewEnemyNoHoles
 ++
+	; BALLADE: dans la Cathédrale des Échos (donjon 5), les Veilleurs de l'Insomnis ne jettent
+	; pas Link dehors : il se réveille à l'entrée de la salle (là où il y est entré).
+	ld a,(wDungeonIndex)
+	cp $05
+	jr z,ambiGuard_balladeWakeLink
 	ld a,CUTSCENE_BOOTED_FROM_PALACE
 	ld (wCutsceneTrigger),a
 	ret
+
+ambiGuard_balladeWakeLink:
+	ld e,Enemy.state
+	ld a,$11
+	ld (de),a
+	xor a
+	ld (wMenuDisabled),a
+	ld (wDisabledObjects),a
+	ld (wDisableScreenTransitions),a
+	ld (wWarpTransition),a
+	ld a,(wActiveRoom)
+	ld (wWarpDestRoom),a
+	ld a,(wLinkLocalRespawnY)
+	and $f0
+	ld b,a
+	ld a,(wLinkLocalRespawnX)
+	swap a
+	and $0f
+	or b
+	ld (wWarpDestPos),a
+	ld a,$03 ; fondu
+	ld (wWarpTransition2),a
+	ld a,(wActiveGroup)
+	or $80
+	ld (wWarpDestGroup),a
+	ld a,SND_TELEPORT
+	jp playSound
 
 
 ambiGuard_tossesLinkOut_state11:
@@ -777,6 +809,15 @@ ambiGuard_tossesLinkOut_scriptTable:
 	.dw @subid0a
 	.dw @subid0b
 	.dw @subid0c
+	; BALLADE: les Veilleurs de la Cathédrale des Échos (story/salles/cathedrale.txt)
+	.dw @subid0d
+	.dw @subid0e
+	.dw @subid0f
+	.dw @subid10
+	.dw @subid11
+	.dw @subid12
+	.dw @subid13
+	.dw @subid14
 
 @subid00:
 	.db SPEED_c0
@@ -938,6 +979,101 @@ ambiGuard_tossesLinkOut_scriptTable:
 	.db DIR_LEFT
 @@loop:
 	ms_wait  127
+	ms_loop  @@loop
+
+; BALLADE: la chapelle des cierges (5:8f) : va et vient sur la ligne 5 (départ : $58 $28)
+@subid0d:
+	.db SPEED_80
+	.db DIR_RIGHT
+@@loop:
+	ms_right $c8
+	ms_wait  50
+	ms_left  $28
+	ms_wait  50
+	ms_loop  @@loop
+
+; BALLADE: la nef basse (5:90) : immobile au centre ($58 $78), il regarde en bas, à gauche, en
+; haut, à droite
+@subid0e:
+	.db SPEED_80
+	.db DIR_DOWN
+@@loop:
+	ms_down  $58
+	ms_wait  80
+	ms_left  $78
+	ms_wait  80
+	ms_up    $58
+	ms_wait  80
+	ms_right $78
+	ms_wait  80
+	ms_loop  @@loop
+
+; BALLADE: la nef (5:8d) : la ligne 3 (départ : $38 $18) et la ligne 7 (départ : $78 $d8)
+@subid0f:
+	.db SPEED_c0
+	.db DIR_RIGHT
+@@loop:
+	ms_right $d8
+	ms_wait  40
+	ms_left  $18
+	ms_wait  40
+	ms_loop  @@loop
+
+@subid10:
+	.db SPEED_c0
+	.db DIR_LEFT
+@@loop:
+	ms_left  $18
+	ms_wait  40
+	ms_right $d8
+	ms_wait  40
+	ms_loop  @@loop
+
+; BALLADE: la chapelle du silence (5:91) : la ligne 3 (départ : $38 $28) et la ligne 7 (départ :
+; $78 $c8)
+@subid11:
+	.db SPEED_80
+	.db DIR_RIGHT
+@@loop:
+	ms_right $c8
+	ms_wait  30
+	ms_left  $28
+	ms_wait  30
+	ms_loop  @@loop
+
+@subid12:
+	.db SPEED_80
+	.db DIR_LEFT
+@@loop:
+	ms_left  $28
+	ms_wait  30
+	ms_right $c8
+	ms_wait  30
+	ms_loop  @@loop
+
+; BALLADE: la galerie des échos (5:81) : sur l'île, la colonne 7 (départ : $18 $78)
+@subid13:
+	.db SPEED_80
+	.db DIR_DOWN
+@@loop:
+	ms_down  $98
+	ms_wait  40
+	ms_up    $18
+	ms_wait  40
+	ms_loop  @@loop
+
+; BALLADE: la chapelle des cloches (5:86) : immobile ($58 $b8), il regarde à gauche, en haut, en
+; bas
+@subid14:
+	.db SPEED_80
+	.db DIR_LEFT
+@@loop:
+	ms_left  $b8
+	ms_wait  90
+	ms_up    $58
+	ms_wait  60
+	ms_down  $58
+	ms_wait  60
 	ms_loop  @@loop
 
 

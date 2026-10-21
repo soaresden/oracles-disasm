@@ -346,7 +346,8 @@ interaction7f_subid00:
 	.db $81, $35, $34, TRANSITION_DEST_SET_RESPAWN
 	; BALLADE: la Forge Endormie ramène au village goron (1:2a)
 	.db $81, $2a, $55, TRANSITION_DEST_SET_RESPAWN
-	.db $80, $0a, $17, TRANSITION_DEST_SET_RESPAWN
+	; BALLADE: la Cathédrale des Échos ramène sur la place du silence (1:62)
+	.db $81, $62, $55, TRANSITION_DEST_SET_RESPAWN
 	.db $83, $0f, $16, TRANSITION_DEST_SET_RESPAWN
 	.db $82, $90, $45, TRANSITION_DEST_X_SHIFTED
 	.db $81, $5c, $15, TRANSITION_DEST_X_SHIFTED

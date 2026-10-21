@@ -75,6 +75,7 @@ main:
 	.dw villager
 	.dw buriedKey
 	.dw cathedralGate
+	.dw tarkin
 
 
 ;;
@@ -111,6 +112,19 @@ arrivalTalk:
 	or a
 	jr nz,@waitText
 	call waitRoomReady
+	ret nz
+	; Le nom du donjon s'affiche peut-être (l'entrée de la Cathédrale) : Marine parle après
+	; (quelques images d'attente : le nom n'est pas encore ouvert à la première)
+	ld e,Interaction.counter2
+	ld a,(de)
+	cp 8
+	jr nc,+
+	inc a
+	ld (de),a
+	ret
++
+	ld a,(wTextIsActive)
+	or a
 	ret nz
 	call getThisRoomFlags
 	bit 6,(hl)
@@ -173,6 +187,8 @@ arrivalTalk:
 	.db $01, $38, <TX_5a80, $ff ; Mont-Braise, le ponton
 	.db $01, $70, <TX_5a90, $ff ; l'île des Échos, le ponton
 	.db $01, $64, <TX_5a91, $ff ; le cimetière de l'est : la tombe fleurie
+	.db $05, $aa, <TX_5a9e, $ff ; la Cathédrale des Échos : les Veilleurs
+	.db $05, $7b, <TX_5a9f, $ff ; le chœur : l'escalier vers le souvenir
 	.db $ff
 
 
@@ -800,6 +816,10 @@ giveCarnet:
 essenceSpawner:
 	ld a,(wDungeonIndex)
 	ld b,a
+	cp $05
+	ld a,(wPastRoomFlags+$26)
+	jr z,+
+	ld a,b
 	cp $04
 	ld a,(wGroup4RoomFlags+$bf)
 	jr z,+
@@ -1043,6 +1063,8 @@ chapterEnding:
 	.dw @vowsHouse
 	.db $01, $2a, $00, $08
 	.dw @forgeAwake
+	.db $01, $62, $00, $10
+	.dw @bellsSing
 	.db $ff
 
 ; Chapitre 2 : Lila se réveille ; la place du Grelot ; Marine lit le vent (la Lagune des Serments)
@@ -1092,6 +1114,20 @@ chapterEnding:
 	.db END_WAIT, 40
 	.db END_TEXT, <TX_5a8e
 	.db END_FLAG, GLOBALFLAG_BALLADE_ISLAND5
+	.db END_WAIT, 30
+	.db END_TEXT, <TX_5a31
+	.db END_DONE
+
+; Chapitre 5 : sur la place du silence, les cloches chantent la chanson de Mamie Rose ; Marine lit
+; le vent (le Nid des Vents)
+@bellsSing:
+	.db END_WAIT, 40
+	.db END_SOUND, SND_TUNE_OF_ECHOES
+	.db END_WAIT, 90
+	.db END_TEXT, <TX_5aa4
+	.db END_WAIT, 40
+	.db END_TEXT, <TX_5aa5
+	.db END_FLAG, GLOBALFLAG_BALLADE_ISLAND6
 	.db END_WAIT, 30
 	.db END_TEXT, <TX_5a31
 	.db END_DONE
@@ -1785,3 +1821,61 @@ cathedralGate:
 	ld a,$dd
 	call setTile
 	jp interactionDelete
+
+
+; ==================================================================================================
+; Tarkin (subid $20), dans le souvenir : la maison de Marine à Mabe (3:26, sous le chœur de la
+; Cathédrale des Échos). Il met trois assiettes ; Marine lui chante le cinquième couplet. Le
+; souvenir fini (drapeau $80 de la salle), l'essence apparaît dans le chœur (essenceSpawner).
+; ==================================================================================================
+tarkin:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw npcInit
+	.dw @idle
+	.dw npcWaitText
+	.dw @marine
+	.dw @song
+	.dw @done
+
+@idle:
+	call interactionAnimateAsNpc
+	call npcCheckTalk
+	ret z
+	call getThisRoomFlags
+	and $80
+	ld bc,TX_5aa3
+	ld a,$02
+	jp nz,npcSay
+	ld a,$03
+	ld bc,TX_5aa0
+	jp npcSay
+
+@marine:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	ld a,$04
+	ld bc,TX_5aa1
+	jp npcSay
+
+@song:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	ld a,SND_TUNE_OF_ECHOES
+	call playSound
+	ld a,$05
+	ld bc,TX_5aa2
+	jp npcSay
+
+@done:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	call getThisRoomFlags
+	set 7,(hl)
+	ld a,SND_SOLVEPUZZLE
+	call playSound
+	jp npcWaitText

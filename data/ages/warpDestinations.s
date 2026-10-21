@@ -189,6 +189,7 @@ group1WarpDestTable:
 	m_WarpDest $28 $23 $0 $1 ; $54 : devant la mine abandonnée (Mont-Braise)
 	m_WarpDest $0a $24 $0 $1 ; $55 : devant la bouche du cratère (la Forge Endormie)
 	m_WarpDest $61 $24 $0 $1 ; $56 : devant la cabane du fossoyeur (l'île des Échos)
+	m_WarpDest $42 $54 $0 $1 ; $57 : devant la grille de la cathédrale (l'île des Échos)
 
 group2WarpDestTable:
 	m_WarpDest $90 $45 $0 $e
@@ -349,6 +350,7 @@ group3WarpDestTable:
 	m_WarpDest $23 $ff $9 $3 ; $46 : la maison d'Héloïse et Gaspard, par le bas
 	m_WarpDest $24 $ff $9 $3 ; $47 : le club de plongée, par le bas
 	m_WarpDest $25 $ff $9 $3 ; $48 : la cabane du fossoyeur, par le bas
+	m_WarpDest $26 $ff $9 $3 ; $49 : le souvenir (la maison de Marine à Mabe), par le bas
 
 group4WarpDestTable:
 	m_WarpDest $04 $ff $9 $3
@@ -547,6 +549,8 @@ group5WarpDestTable:
 	m_WarpDest $b1 $87 $0 $4 ; $6e : la grotte des amoureux, au-dessus de l'escalier
 	m_WarpDest $44 $97 $0 $4 ; $6f : le Récif Murmurant, l'entrée (sous l'arche)
 	m_WarpDest $b2 $87 $0 $4 ; $70 : la mine abandonnée, au-dessus de l'escalier
+	m_WarpDest $aa $97 $0 $4 ; $71 : la Cathédrale des Échos, l'entrée (sous l'arche)
+	m_WarpDest $7b $37 $0 $4 ; $72 : le chœur, devant l'escalier (au retour du souvenir)
 
 group6WarpDestTable:
 	m_WarpDest $05 $02 $f $3

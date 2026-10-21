@@ -453,7 +453,7 @@ tilesetData:
 	.db $27, $05, $15
 
 	; 0x40
-	.db $28, $88
+	.db $25, $88 ; BALLADE: la Cathédrale des Échos (donjon 5 ; dans Ages, $28 : le Tombeau Ancien)
 	.db UNIQUE_GFXH_NONE
 	.db GFXH_TILESET_ANCIENT_TOMB
 	.db PALH_TILESET_ANCIENT_TOMB

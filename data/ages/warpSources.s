@@ -230,6 +230,7 @@ group1WarpSources:
 	m_StandardWarp $0 $28 $70 $5 $4 ; BALLADE: entrée de la mine abandonnée -> 5:b2
 	; BALLADE: l'île des Échos (1:40-74) : la cabane du fossoyeur
 	m_StandardWarp $0 $61 $48 $3 $4 ; BALLADE: porte de la cabane du fossoyeur -> 3:25
+	m_StandardWarp $0 $42 $71 $5 $4 ; BALLADE: la grille ouverte -> la Cathédrale des Échos (5:aa)
 	m_StandardWarp $0 $0a $4e $4 $4 ; BALLADE: la bouche du grand visage du cratère -> la Forge Endormie (4:bb)
 	;m_StandardWarp $0 $13 $67 $5 $4 ; BALLADE: 1:13 est la plage aux châteaux de sable
 	;m_StandardWarp $0 $14 $16 $3 $4 ; BALLADE: la Lagune des Serments (1:04-37)
@@ -465,6 +466,9 @@ group3WarpSources:
 	; BALLADE: l'île des Échos : sortie de la cabane du fossoyeur
 	m_StandardWarp $4 $25 $56 $1 $3
 	m_StandardWarp $8 $25 $56 $1 $3
+	; BALLADE: la Cathédrale des Échos : la porte du souvenir (la maison de Marine) ramène au chœur
+	m_StandardWarp $4 $26 $72 $5 $3
+	m_StandardWarp $8 $26 $72 $5 $3
 	m_PointerWarp     $9f warpSource7abe
 	m_StandardWarp $0 $a1 $60 $5 $4
 	m_StandardWarp $0 $ae $1d $3 $2
@@ -657,7 +661,8 @@ group5WarpSources:
 	m_StandardWarp $0 $4c $12 $7 $2
 	m_StandardWarp $0 $4d $13 $7 $2
 	m_StandardWarp $0 $4e $14 $7 $2
-	m_StandardWarp $4 $aa $02 $1 $3
+	m_StandardWarp $4 $aa $57 $1 $3 ; BALLADE: sortie de la Cathédrale des Échos -> devant la grille (1:42)
+	m_StandardWarp $0 $7b $49 $3 $4 ; BALLADE: l'escalier du chœur -> le souvenir (3:26)
 	m_PointerWarp     $79 warpSource7e06
 	m_StandardWarp $0 $7e $1a $7 $2
 	m_StandardWarp $0 $84 $19 $7 $2

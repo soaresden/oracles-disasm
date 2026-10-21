@@ -342,3 +342,15 @@ dungeon04LayoutForge:
 	.db $00 $00 $00 $00 $00 $00 $00 $00
 	.db $00 $00 $00 $00 $00 $00 $00 $00
 	.db $00 $00 $00 $00 $00 $00 $00 $00
+
+; BALLADE: la Cathédrale des Échos (donjon 5), un seul étage, en forme de croix. Voir
+; story/salles/cathedrale.txt dans le dépôt ZeldaGullsOfLife.
+dungeon05LayoutCathedrale:
+	.db $00 $00 $00 $00 $00 $00 $00 $00
+	.db $00 $00 $00 $7b $00 $00 $00 $00
+	.db $00 $00 $7c $7d $7f $00 $00 $00
+	.db $80 $81 $82 $83 $85 $86 $89 $00
+	.db $00 $00 $8b $8d $8e $00 $00 $00
+	.db $00 $00 $8f $90 $91 $00 $00 $00
+	.db $00 $00 $92 $aa $93 $00 $00 $00
+	.db $00 $00 $00 $00 $00 $00 $00 $00

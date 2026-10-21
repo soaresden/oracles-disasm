@@ -885,6 +885,7 @@ interactionedSubidData:
 	m_InteractionSubidData $4f $10 $22 ; $1d le sonneur
 	m_InteractionSubidData $00 $00 $00 ; $1e la clé enterrée (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $1f la grille de la cathédrale (invisible)
+	m_InteractionSubidData $46 $1c $12 ; $20 Tarkin, le père de Marine (le moustachu d'Ages)
 	m_InteractionSubidDataEnd
 
 interactiond4SubidData:

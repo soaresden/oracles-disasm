@@ -127,6 +127,16 @@ chestGroup4Data:
 	.db $ff
 
 chestGroup5Data:
+	; BALLADE: la Cathédrale des Échos (story/salles/cathedrale.txt)
+	m_ChestData $53, $92, TREASURE_OBJECT_MAP_02        ; le bas-côté sud-ouest : la carte
+	m_ChestData $57, $93, TREASURE_OBJECT_COMPASS_02    ; les Stalfos battus : la boussole
+	m_ChestData $37, $8b, TREASURE_OBJECT_SMALL_KEY_03  ; la sacristie : la petite clé 1
+	m_ChestData $37, $8e, TREASURE_OBJECT_RUPEES_05     ; le reliquaire : des rubis
+	m_ChestData $12, $8d, TREASURE_OBJECT_SWITCH_HOOK_00 ; la nef : le Grappin-Écho
+	m_ChestData $54, $80, TREASURE_OBJECT_SMALL_KEY_03  ; le bout ouest : la petite clé 2
+	m_ChestData $37, $7c, TREASURE_OBJECT_RUPEES_04     ; la tribune ouest : des rubis
+	m_ChestData $5a, $89, TREASURE_OBJECT_BOSS_KEY_03   ; le bout est : la clé du chœur
+	m_ChestData $37, $7f, TREASURE_OBJECT_RUPEES_04     ; la tribune est : des rubis
 	m_ChestData $1c, $b0, TREASURE_OBJECT_TRADEITEM_0c ; BALLADE: la grotte de la Boîte : Sire Bouchon, le jouet de Lila
 	m_ChestData $17, $b1, TREASURE_OBJECT_RUPEES_05 ; BALLADE: la grotte des amoureux : des rubis
 	m_ChestData $1b, $b2, TREASURE_OBJECT_RUPEES_05 ; BALLADE: la mine abandonnée (Mont-Braise) : des rubis
