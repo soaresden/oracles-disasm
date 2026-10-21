@@ -209,6 +209,39 @@ musBalladeForge:
 	.dw musBalladeForgeChannel6
 	.db $ff
 
+musBalladeEchos:
+	.db $00
+	.dw musBalladeEchosChannel0
+	.db $01
+	.dw musBalladeEchosChannel1
+	.db $04
+	.dw musBalladeEchosChannel4
+	.db $06
+	.dw musBalladeEchosChannel6
+	.db $ff
+
+musBalladeCathedrale:
+	.db $00
+	.dw musBalladeCathedraleChannel0
+	.db $01
+	.dw musBalladeCathedraleChannel1
+	.db $04
+	.dw musBalladeCathedraleChannel4
+	.db $06
+	.dw musBalladeCathedraleChannel6
+	.db $ff
+
+musBalladeTarkin:
+	.db $00
+	.dw musBalladeTarkinChannel0
+	.db $01
+	.dw musBalladeTarkinChannel1
+	.db $04
+	.dw musBalladeTarkinChannel4
+	.db $06
+	.dw musBalladeTarkinChannel6
+	.db $ff
+
 sndBalladeGull:
 	.db $02
 	.dw sndBalladeGullChannel2

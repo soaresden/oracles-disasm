@@ -18043,6 +18043,859 @@ musBalladeForgeChannel6Loop:
 
 .ends
 
+m_section_superfree Ballade_musBalladeEchos
+
+musBalladeEchosStart:
+
+musBalladeEchosChannel0:
+	vibrato $00
+	env $0 $00
+	duty $02
+	cmdfd $00
+	vol $0
+	duty $02
+	vibrato $00
+	cmdfd $00
+	rest $ff
+	rest $51
+musBalladeEchosChannel0Loop:
+	vol $0
+	duty $02
+	vibrato $00
+	cmdfd $00
+	vol $2
+	duty $01
+	vibrato $41
+	rest $2a
+	note e5   $26
+	rest $04
+	note d5   $0d
+	rest $01
+	note c5   $19
+	rest $03
+	note b4   $26
+	rest $04
+	note a4   $26
+	rest $04
+	note c5   $19
+	rest $03
+	note d5   $0d
+	rest $01
+	note e5   $26
+	rest $04
+	note g5   $4c
+	rest $08
+	note f5   $26
+	rest $04
+	note e5   $0d
+	rest $01
+	note d5   $19
+	rest $03
+	note c5   $26
+	rest $04
+	note b4   $26
+	rest $04
+	note a4   $19
+	rest $03
+	note b4   $0d
+	rest $01
+	note c5   $19
+	rest $03
+	note b4   $0d
+	rest $01
+	note a4   $26
+	rest $04
+	vol $2
+	rest $2a
+	note g5   $26
+	rest $04
+	note e5   $0d
+	rest $01
+	note c5   $19
+	rest $03
+	note d5   $26
+	rest $04
+	note g4   $26
+	rest $04
+	note a4   $19
+	rest $03
+	note b4   $0d
+	rest $01
+	note c5   $19
+	rest $03
+	note d5   $0d
+	rest $01
+	note e5   $4c
+	rest $08
+	note f5   $26
+	rest $04
+	note d5   $0d
+	rest $01
+	note a4   $19
+	rest $03
+	note g4   $26
+	rest $04
+	note c5   $26
+	rest $04
+	note b4   $19
+	rest $03
+	note a4   $0d
+	rest $01
+	note gs4  $19
+	rest $03
+	note b4   $0d
+	rest $01
+	note a4   $26
+	rest $04
+	goto musBalladeEchosChannel0Loop
+	cmdff
+
+musBalladeEchosChannel1:
+	vibrato $00
+	env $0 $00
+	duty $02
+	cmdfd $00
+	vol $0
+	duty $02
+	vibrato $00
+	cmdfd $00
+	rest $ff
+	rest $51
+musBalladeEchosChannel1Loop:
+	vol $0
+	duty $02
+	vibrato $00
+	cmdfd $00
+	vol $5
+	duty $02
+	vibrato $41
+	note e5   $26
+	rest $04
+	note d5   $0d
+	rest $01
+	note c5   $19
+	rest $03
+	note b4   $26
+	rest $04
+	note a4   $26
+	rest $04
+	note c5   $19
+	rest $03
+	note d5   $0d
+	rest $01
+	note e5   $26
+	rest $04
+	note g5   $4c
+	rest $08
+	note f5   $26
+	rest $04
+	note e5   $0d
+	rest $01
+	note d5   $19
+	rest $03
+	note c5   $26
+	rest $04
+	note b4   $26
+	rest $04
+	note a4   $19
+	rest $03
+	note b4   $0d
+	rest $01
+	note c5   $19
+	rest $03
+	note b4   $0d
+	rest $01
+	note a4   $4c
+	rest $08
+	vol $6
+	note g5   $26
+	rest $04
+	note e5   $0d
+	rest $01
+	note c5   $19
+	rest $03
+	note d5   $26
+	rest $04
+	note g4   $26
+	rest $04
+	note a4   $19
+	rest $03
+	note b4   $0d
+	rest $01
+	note c5   $19
+	rest $03
+	note d5   $0d
+	rest $01
+	note e5   $4c
+	rest $08
+	note f5   $26
+	rest $04
+	note d5   $0d
+	rest $01
+	note a4   $19
+	rest $03
+	note g4   $26
+	rest $04
+	note c5   $26
+	rest $04
+	note b4   $19
+	rest $03
+	note a4   $0d
+	rest $01
+	note gs4  $19
+	rest $03
+	note b4   $0d
+	rest $01
+	note a4   $4c
+	rest $08
+	goto musBalladeEchosChannel1Loop
+	cmdff
+
+musBalladeEchosChannel4:
+	vibrato $00
+	cmdfd $00
+	duty $0e
+	vibrato $00
+	note a2   $54
+	rest $54
+	note e2   $54
+	rest $54
+musBalladeEchosChannel4Loop:
+	duty $0e
+	vibrato $00
+	note a2   $54
+	note e2   $54
+	note a2   $54
+	note g2   $54
+	note d2   $54
+	note a2   $54
+	note f2   $2a
+	note e2   $2a
+	note a2   $54
+	note c3   $54
+	note g2   $54
+	note f2   $54
+	note c3   $54
+	note d2   $54
+	note e2   $54
+	note e2   $54
+	note a2   $54
+	goto musBalladeEchosChannel4Loop
+	cmdff
+
+musBalladeEchosChannel6:
+	rest $ff
+	rest $51
+musBalladeEchosChannel6Loop:
+	rest $ff
+	rest $ff
+	rest $ff
+	rest $ff
+	rest $ff
+	rest $45
+	goto musBalladeEchosChannel6Loop
+	cmdff
+
+.ends
+
+m_section_superfree Ballade_musBalladeCathedrale
+
+musBalladeCathedraleStart:
+
+musBalladeCathedraleChannel0:
+	vibrato $00
+	env $0 $00
+	duty $02
+	cmdfd $00
+	vol $0
+	duty $02
+	vibrato $00
+	cmdfd $00
+	rest $b0
+musBalladeCathedraleChannel0Loop:
+	vol $0
+	duty $02
+	vibrato $00
+	cmdfd $00
+	vol $2
+	note d4   $58
+	note d4   $58
+	note cs4  $58
+	note cs4  $58
+	note as3  $58
+	note as3  $58
+	note a3   $58
+	note a3   $58
+	vol $2
+	note g3   $58
+	note g3   $58
+	note a3   $58
+	note a3   $58
+	note f3   $58
+	note f3   $58
+	note e3   $58
+	note e3   $58
+	rest $b0
+	goto musBalladeCathedraleChannel0Loop
+	cmdff
+
+musBalladeCathedraleChannel1:
+	vibrato $00
+	env $0 $00
+	duty $02
+	cmdfd $00
+	vol $0
+	duty $02
+	vibrato $00
+	cmdfd $00
+	rest $b0
+musBalladeCathedraleChannel1Loop:
+	vol $0
+	duty $02
+	vibrato $00
+	cmdfd $00
+	vol $5
+	vibrato $00
+	rest $58
+	note a4   $08
+	rest $0e
+	note as4  $08
+	rest $92
+	note g4   $08
+	rest $0e
+	note a4   $08
+	rest $92
+	note d5   $0f
+	rest $07
+	note cs5  $0f
+	rest $8b
+	note e4   $1f
+	rest $39
+	vol $6
+	note f5   $08
+	rest $0e
+	note e5   $08
+	rest $92
+	note g5   $08
+	rest $0e
+	note f5   $08
+	rest $0e
+	note e5   $08
+	rest $7c
+	note d5   $0f
+	rest $1d
+	note a4   $0f
+	rest $75
+	note cs5  $2e
+	rest $ff
+	rest $33
+	goto musBalladeCathedraleChannel1Loop
+	cmdff
+
+musBalladeCathedraleChannel4:
+	vibrato $00
+	cmdfd $00
+	duty $0e
+	vibrato $00
+	rest $58
+	note d2   $04
+	rest $28
+	note a1   $04
+	rest $28
+musBalladeCathedraleChannel4Loop:
+	duty $0e
+	vibrato $00
+	note d2   $04
+	rest $28
+	note a1   $04
+	rest $28
+	note d2   $04
+	rest $28
+	note a1   $04
+	rest $28
+	note cs2  $04
+	rest $28
+	note a1   $04
+	rest $28
+	note cs2  $04
+	rest $28
+	note a1   $04
+	rest $28
+	note as1  $04
+	rest $28
+	note f1   $04
+	rest $28
+	note as1  $04
+	rest $28
+	note f1   $04
+	rest $28
+	note a1   $04
+	rest $28
+	note e1   $04
+	rest $28
+	note a1   $04
+	rest $28
+	note cs2  $04
+	rest $28
+	note g1   $04
+	rest $28
+	note d2   $04
+	rest $28
+	note g1   $04
+	rest $28
+	note d2   $04
+	rest $28
+	note a1   $04
+	rest $28
+	note e2   $04
+	rest $28
+	note a1   $04
+	rest $28
+	note e2   $04
+	rest $28
+	note as1  $04
+	rest $28
+	note f1   $04
+	rest $28
+	note as1  $04
+	rest $28
+	note f1   $04
+	rest $28
+	note a1   $04
+	rest $28
+	note e1   $04
+	rest $ff
+	rest $31
+	goto musBalladeCathedraleChannel4Loop
+	cmdff
+
+musBalladeCathedraleChannel6:
+	vol $2
+	note $2a  $0b
+	rest $21
+	vol $1
+	note $2a  $0b
+	rest $21
+	vol $2
+	note $2a  $0b
+	rest $21
+	vol $1
+	note $2a  $0b
+	rest $21
+musBalladeCathedraleChannel6Loop:
+	vol $1
+	vol $2
+	note $2a  $0b
+	rest $21
+	vol $1
+	note $2a  $0b
+	rest $21
+	vol $2
+	note $2a  $0b
+	rest $21
+	vol $1
+	note $2a  $0b
+	rest $21
+	vol $2
+	note $2a  $0b
+	rest $21
+	vol $1
+	note $2a  $0b
+	rest $21
+	vol $2
+	note $2a  $0b
+	rest $21
+	vol $1
+	note $2a  $0b
+	rest $21
+	vol $2
+	note $2a  $0b
+	rest $21
+	vol $1
+	note $2a  $0b
+	rest $21
+	vol $2
+	note $2a  $0b
+	rest $21
+	vol $1
+	note $2a  $0b
+	rest $21
+	vol $2
+	note $2a  $0b
+	rest $21
+	vol $1
+	note $2a  $0b
+	rest $21
+	vol $2
+	note $2a  $0b
+	rest $21
+	vol $1
+	note $2a  $0b
+	rest $21
+	vol $2
+	note $2a  $0b
+	rest $21
+	vol $1
+	note $2a  $0b
+	rest $21
+	vol $2
+	note $2a  $0b
+	rest $21
+	vol $1
+	note $2a  $0b
+	rest $21
+	vol $2
+	note $2a  $0b
+	rest $21
+	vol $1
+	note $2a  $0b
+	rest $21
+	vol $2
+	note $2a  $0b
+	rest $21
+	vol $1
+	note $2a  $0b
+	rest $21
+	vol $2
+	note $2a  $0b
+	rest $21
+	vol $1
+	note $2a  $0b
+	rest $21
+	vol $2
+	note $2a  $0b
+	rest $21
+	vol $1
+	note $2a  $0b
+	rest $21
+	vol $2
+	note $2a  $0b
+	rest $21
+	vol $1
+	note $2a  $0b
+	rest $79
+	vol $1
+	note $2a  $0b
+	rest $21
+	note $2a  $0b
+	rest $21
+	vol $1
+	note $2a  $0b
+	rest $21
+	note $2a  $0b
+	rest $21
+	goto musBalladeCathedraleChannel6Loop
+	cmdff
+
+.ends
+
+m_section_superfree Ballade_musBalladeTarkin
+
+musBalladeTarkinStart:
+
+musBalladeTarkinChannel0:
+	vibrato $00
+	env $0 $00
+	duty $02
+	cmdfd $00
+musBalladeTarkinChannel0Loop:
+	vol $4
+	duty $02
+	vibrato $00
+	cmdfd $00
+	note g4   $0e
+	rest $0a
+	note d5   $0e
+	rest $0a
+	note g4   $0e
+	rest $0a
+	note d5   $0e
+	rest $0a
+	note g4   $0e
+	rest $0a
+	note e5   $0e
+	rest $0a
+	note g4   $0e
+	rest $0a
+	note e5   $0e
+	rest $0a
+	note g4   $0e
+	rest $0a
+	note fs5  $0e
+	rest $0a
+	note g4   $0e
+	rest $0a
+	note fs5  $0e
+	rest $0a
+	note g4   $0e
+	rest $0a
+	note e5   $0e
+	rest $0a
+	note g4   $0e
+	rest $0a
+	note e5   $0e
+	rest $0a
+	note g4   $0e
+	rest $0a
+	note d5   $0e
+	rest $0a
+	note g4   $0e
+	rest $0a
+	note d5   $0e
+	rest $0a
+	note g4   $0e
+	rest $0a
+	note ds5  $0e
+	rest $0a
+	note g4   $0e
+	rest $0a
+	note ds5  $0e
+	rest $0a
+	note a4   $0e
+	rest $0a
+	note e5   $0e
+	rest $0a
+	note a4   $0e
+	rest $0a
+	note e5   $0e
+	rest $0a
+	note d5   $0e
+	rest $0a
+	note d4   $0e
+	rest $0a
+	note e4   $0e
+	rest $0a
+	note d4   $0e
+	rest $0a
+	note c4   $0e
+	rest $0a
+	note g4   $0e
+	rest $0a
+	note c4   $0e
+	rest $0a
+	note g4   $0e
+	rest $0a
+	note c4   $0e
+	rest $0a
+	note a4   $0e
+	rest $0a
+	note c4   $0e
+	rest $0a
+	note a4   $0e
+	rest $0a
+	note b3   $0e
+	rest $0a
+	note a4   $0e
+	rest $0a
+	note b3   $0e
+	rest $0a
+	note a4   $0e
+	rest $0a
+	note e4   $0e
+	rest $0a
+	note b4   $0e
+	rest $0a
+	note e4   $0e
+	rest $0a
+	note b4   $0e
+	rest $0a
+	note a3   $0e
+	rest $0a
+	note e4   $0e
+	rest $0a
+	note a3   $0e
+	rest $0a
+	note e4   $0e
+	rest $0a
+	note a3   $0e
+	rest $0a
+	note ds4  $0e
+	rest $0a
+	note d4   $0e
+	rest $0a
+	note c4   $0e
+	rest $0a
+	vol $3
+	note d4   $56
+	rest $0a
+	note c4   $56
+	rest $0a
+	note b3   $56
+	rest $0a
+	note a3   $41
+	rest $07
+	vol $4
+	note d4   $0e
+	rest $0a
+	goto musBalladeTarkinChannel0Loop
+	cmdff
+
+musBalladeTarkinChannel1:
+	vibrato $00
+	env $0 $00
+	duty $02
+	cmdfd $00
+musBalladeTarkinChannel1Loop:
+	vol $7
+	duty $02
+	vibrato $00
+	cmdfd $00
+	note d6   $29
+	rest $07
+	note g5   $29
+	rest $07
+	note a5   $3d
+	rest $0b
+	note b5   $0a
+	rest $02
+	note c6   $0a
+	rest $02
+	note d6   $14
+	rest $04
+	note d6   $14
+	rest $04
+	note g5   $14
+	rest $04
+	note g5   $14
+	rest $04
+	note a5   $3d
+	rest $0b
+	note b5   $0a
+	rest $02
+	note c6   $0a
+	rest $02
+	note b5   $14
+	rest $04
+	note d6   $14
+	rest $04
+	note a6   $3d
+	rest $0b
+	note g6   $14
+	rest $04
+	note a6   $14
+	rest $04
+	note g6   $14
+	rest $04
+	note d6   $14
+	rest $04
+	note c6   $0a
+	rest $02
+	note b5   $0a
+	rest $02
+	note a5   $29
+	rest $07
+	vol $4
+	note fs5  $29
+	rest $07
+	vol $7
+	rest $0c
+	note b5   $0a
+	rest $02
+	note c6   $0a
+	rest $02
+	note d6   $0a
+	rest $02
+	note e6   $29
+	rest $07
+	note g5   $29
+	rest $07
+	note fs5  $3d
+	rest $0b
+	note a5   $0a
+	rest $02
+	note e6   $0a
+	rest $02
+	note d6   $14
+	rest $04
+	note d6   $14
+	rest $04
+	note fs5  $14
+	rest $04
+	note fs5  $14
+	rest $04
+	note g5   $3d
+	rest $0b
+	note g5   $0a
+	rest $02
+	note fs5  $0a
+	rest $02
+	note e5   $14
+	rest $04
+	note g5   $14
+	rest $04
+	note b5   $3d
+	rest $0b
+	note a5   $14
+	rest $04
+	note g5   $14
+	rest $04
+	note ds5  $14
+	rest $04
+	note d5   $14
+	rest $04
+	note d6   $14
+	rest $04
+	note d5   $14
+	rest $04
+	note d6   $14
+	rest $04
+	note d5   $14
+	rest $04
+	note d6   $14
+	rest $04
+	note d5   $14
+	rest $04
+	note d6   $14
+	rest $04
+	note d6   $14
+	rest $04
+	note d7   $14
+	rest $04
+	note d6   $14
+	rest $04
+	note d7   $14
+	rest $04
+	note d6   $14
+	rest $04
+	note d7   $14
+	rest $04
+	note d6   $14
+	rest $04
+	note d7   $14
+	rest $04
+	goto musBalladeTarkinChannel1Loop
+	cmdff
+
+musBalladeTarkinChannel4:
+	vibrato $00
+	cmdfd $00
+musBalladeTarkinChannel4Loop:
+	duty $0e
+	vibrato $00
+	rest $ff
+	rest $ff
+	rest $ff
+	rest $ff
+	rest $ff
+	rest $ff
+	rest $c6
+	goto musBalladeTarkinChannel4Loop
+	cmdff
+
+musBalladeTarkinChannel6:
+musBalladeTarkinChannel6Loop:
+	rest $ff
+	rest $ff
+	rest $ff
+	rest $ff
+	rest $ff
+	rest $ff
+	rest $c6
+	goto musBalladeTarkinChannel6Loop
+	cmdff
+
+.ends
+
 m_section_superfree Ballade_sndGull
 
 sndBalladeGullStart:
