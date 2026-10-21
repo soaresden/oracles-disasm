@@ -424,13 +424,13 @@ debugEntries:
 	.dw debugNone
 	.db $0a, $01, $06, $44 ; devant la maison d'Héloïse et Gaspard
 	.dw debugNone
-	.db $ff, $00, $00, $00
+	.db $0b, $05, $44, $97 ; le Récif Murmurant, l'entrée (les Palmes)
 	.dw debugNone
-	.db $ff, $00, $00, $00
+	.db $0b, $05, $37, $97 ; Vire (la petite clé 1 utilisée)
 	.dw debugNone
-	.db $ff, $00, $00, $00
-	.dw debugNone
-	.db $ff, $00, $00, $00
+	.db $0c, $05, $38, $87 ; l'antichambre (les Écailles, la clé du boss)
+	.dw debugRecifBossKey
+	.db $0d, $01, $35, $34 ; la plage des bouteilles, l'essence en poche : la fin du chapitre 3
 	.dw debugNone
 	; 4. Mont-Braise
 	.db $ff, $00, $00, $00
@@ -549,6 +549,14 @@ debugMilestones:
 	; 11. Gaspard a eu sa bouteille : les Palmes de Zora
 	.db DBG_TREASURE, TREASURE_FLIPPERS, $00
 	.db DBG_END
+	; 12. Vire est battu : les Écailles de Sirène
+	.db DBG_TREASURE, TREASURE_MERMAID_SUIT, $00
+	.db DBG_END
+	; 13. La Murène du Silence est battue : l'essence (le 3e couplet), un cœur de plus
+	.db DBG_TREASURE, TREASURE_ESSENCE, $02
+	.db DBG_TREASURE, TREASURE_HEART_CONTAINER, $04
+	.db DBG_FULLHEALTH
+	.db DBG_END
 
 debugNone:
 	.db DBG_END
@@ -569,6 +577,12 @@ debugCoffreBossKey:
 	.db DBG_OR
 	.dw wDungeonBossKeys
 	.db $04
+	.db DBG_END
+
+debugRecifBossKey:
+	.db DBG_OR
+	.dw wDungeonBossKeys
+	.db $08
 	.db DBG_END
 
 debugRhythmTest:

@@ -37,7 +37,8 @@ dungeonData02:
 	; BALLADE: le Coffre à Jouets (dans le rêve de Lila), sur un seul étage
 	m_DungeonData >wGroup4RoomFlags, $39, dungeon02LayoutCoffre, $01, $03, $01, $00, $00
 dungeonData03:
-	m_DungeonData >wGroup4RoomFlags, $66, dungeon03Layout, $02, $02, $00, $00, $00
+	; BALLADE: le Récif Murmurant, sous la Lagune des Serments (B1 sous l'eau, 1F au sec)
+	m_DungeonData >wGroup5RoomFlags, $44, dungeon03LayoutRecif, $02, $02, $03, $00, $00
 dungeonData04:
 	m_DungeonData >wGroup4RoomFlags, $91, dungeon04Layout, $02, $02, $07, $00, $00
 dungeonData05:

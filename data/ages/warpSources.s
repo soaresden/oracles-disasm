@@ -225,6 +225,7 @@ group1WarpSources:
 	m_StandardWarp $0 $06 $46 $3 $4 ; BALLADE: porte de la maison d'Héloïse et Gaspard -> 3:23
 	m_StandardWarp $0 $17 $47 $3 $4 ; BALLADE: porte du club de plongée -> 3:24
 	m_StandardWarp $0 $27 $6e $5 $4 ; BALLADE: grotte des amoureux -> 5:b1
+	m_StandardWarp $0 $36 $6f $5 $4 ; BALLADE: la bouche du visage de corail -> le Récif Murmurant (5:44)
 	;m_StandardWarp $0 $13 $67 $5 $4 ; BALLADE: 1:13 est la plage aux châteaux de sable
 	;m_StandardWarp $0 $14 $16 $3 $4 ; BALLADE: la Lagune des Serments (1:04-37)
 	m_StandardWarp $0 $18 $55 $5 $4
@@ -640,9 +641,9 @@ group5WarpSources:
 	m_StandardWarp $4 $26 $06 $1 $3
 	m_StandardWarp $0 $20 $0e $7 $2
 	m_StandardWarp $0 $25 $0d $7 $2
-	m_StandardWarp $4 $44 $03 $3 $3
+	m_StandardWarp $4 $44 $53 $1 $3 ; BALLADE: sortie du Récif Murmurant -> devant la bouche (1:36)
 	m_StandardWarp $0 $33 $10 $7 $2
-	m_StandardWarp $0 $35 $0f $7 $2
+	;m_StandardWarp $0 $35 $0f $7 $2 ; BALLADE: le Récif Murmurant (donjon 3)
 	m_StandardWarp $4 $56 $00 $2 $3
 	m_StandardWarp $0 $4b $11 $7 $2
 	m_StandardWarp $0 $4c $12 $7 $2

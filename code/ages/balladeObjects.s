@@ -23,6 +23,7 @@
 ; @subid_10{Le facteur des bouteilles (la plage des bouteilles, 1:35)}
 ; @subid_11{Gaspard (3:23) : la bouteille contre les Palmes de Zora}
 ; @subid_12{La bouteille à la mer, sur l'îlot de la lagune (1:15, 0:15)}
+; @subid_13{Invisible : les coquillages-échos du Récif Murmurant (5:39)}
 ; ==================================================================================================
 
 ;;
@@ -49,6 +50,7 @@ main:
 	.dw villager
 	.dw gaspard
 	.dw bottle
+	.dw echoShells
 
 
 ;;
@@ -667,9 +669,10 @@ toyChest:
 
 ; ==================================================================================================
 ; Le Carnet des Rêves (ITEM_12, harpFluteParent.s) : une page selon le nombre d'îles sauvées
-; (les essences, à la suite) : TX_5a60 (la Brume), TX_5a61 (Hameau-Grelot)...
+; (les essences, à la suite) : @pages (TX_5a60 la Brume, TX_5a61 Hameau-Grelot, TX_5a7f la
+; Lagune...)
 ; ==================================================================================================
-.define CARNET_PAGES 2
+.define CARNET_PAGES 3
 
 readCarnet:
 	ld a,(wTextIsActive)
@@ -695,10 +698,15 @@ readCarnet:
 	jr c,+
 	ld a,CARNET_PAGES-1
 +
-	add <TX_5a60
-	ld c,a
+	ld hl,@pages
+	rst_addAToHl
+	ld c,(hl)
 	ld b,>TX_5a60
 	jp showText
+
+; Une page par nombre d'îles sauvées (chacune reprend les précédentes)
+@pages:
+	.db <TX_5a60, <TX_5a61, <TX_5a7f
 
 
 
@@ -758,11 +766,17 @@ giveCarnet:
 
 
 ; ==================================================================================================
-; L'essence du Coffre à Jouets (subid $08, dans l'antichambre 4:2e) : elle apparaît (INTERAC_ESSENCE)
-; quand Pantin-Sans-Fil est vaincu (drapeau $80 de sa salle, 4:2b, posé par le script de sa mort).
+; L'essence (subid $08) : elle apparaît (INTERAC_ESSENCE) quand le boss est vaincu (drapeau $80 de sa
+; salle) : Pantin-Sans-Fil (4:2b, l'essence dans l'antichambre 4:2e), la Murène du Silence (Octogon,
+; 5:36 : dans sa salle).
 ; ==================================================================================================
 essenceSpawner:
+	ld a,(wDungeonIndex)
+	cp $03
 	ld a,(wGroup4RoomFlags+$2b)
+	jr nz,+
+	ld a,(wGroup5RoomFlags+$36)
++
 	rlca
 	ret nc
 	ldbc INTERAC_ESSENCE, $00
@@ -991,6 +1005,10 @@ chapterEnding:
 	.dw @lilaWakes
 	.db $01, $11, $11, $00
 	.dw @grelotSquare
+	.db $01, $35, $00, $04
+	.dw @reefReturn
+	.db $03, $23, $21, $00
+	.dw @vowsHouse
 	.db $ff
 
 ; Chapitre 2 : Lila se réveille ; la place du Grelot ; Marine lit le vent (la Lagune des Serments)
@@ -1007,6 +1025,24 @@ chapterEnding:
 	.db END_WAIT, 40
 	.db END_TEXT, <TX_5a67
 	.db END_FLAG, GLOBALFLAG_BALLADE_ISLAND3
+	.db END_STEP, $00
+	.db END_WAIT, 30
+	.db END_TEXT, <TX_5a31
+	.db END_DONE
+
+; Chapitre 3 : Link ressort du Récif Murmurant, sur la plage des bouteilles où Marine l'attendait ; chez Héloïse et Gaspard ;
+; Marine lit le vent (Mont-Braise)
+@reefReturn:
+	.db END_WAIT, 40
+	.db END_TEXT, <TX_5a7c
+	.db END_STEP, $21
+	.db END_WARP, $03, $23, $57
+@vowsHouse:
+	.db END_WAIT, 30
+	.db END_TEXT, <TX_5a7d
+	.db END_WAIT, 40
+	.db END_TEXT, <TX_5a7e
+	.db END_FLAG, GLOBALFLAG_BALLADE_ISLAND4
 	.db END_STEP, $00
 	.db END_WAIT, 30
 	.db END_TEXT, <TX_5a31
@@ -1176,3 +1212,206 @@ bottle:
 	ldbc TREASURE_TRADEITEM, $01
 	call giveTreasureAtLink
 	jp interactionDelete
+
+
+; ==================================================================================================
+; Les coquillages-échos (subid $13, invisible, le lobe droit du Récif Murmurant, 5:39). Le grand
+; coquillage (brique $11, @master) chante trois airs (les flûtes de Ricky, Dimitri et Moosh) dans
+; un ordre (@order) ; les trois petits (@shells) chantent chacun le leur quand Link les touche (A
+; ou B face à eux). Dans le bon ordre : le coffre de la clé du boss apparaît (@chest). Le drapeau
+; $40 de la salle s'en souvient.
+;   var30 : combien de bons coquillages à la suite ; var31 : l'air que le grand chante ;
+;   counter1 : attente entre deux airs
+; ==================================================================================================
+.define ECHO_PAUSE 80
+
+echoShells:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw @init
+	.dw @idle
+	.dw @singing
+	.dw @solved
+
+@init:
+	call waitRoomReady
+	ret nz
+	call interactionIncState
+	call getThisRoomFlags
+	bit 6,(hl)
+	ret z
+	; Déjà résolue : le coffre (ouvert ou non)
+	ld e,Interaction.state
+	ld a,$03
+	ld (de),a
+	jp @showChest
+
+@idle:
+	ld a,(wTextIsActive)
+	ld b,a
+	ld a,(wDisabledObjects)
+	or b
+	ret nz
+	ld a,(wGameKeysJustPressed)
+	and BTN_A|BTN_B
+	ret z
+	call @tileInFrontOfLink
+	ld b,a
+	ld a,(@master)
+	cp b
+	jr z,@startSong
+	; Un des petits coquillages ?
+	ld hl,@shells
+	ld c,$00
+-
+	ldi a,(hl)
+	cp b
+	jr z,@touched
+	inc c
+	ld a,c
+	cp $03
+	jr c,-
+	ret
+
+; Le coquillage c chante ; on compare avec l'ordre du grand
+@touched:
+	ld a,c
+	ld hl,@sounds
+	rst_addAToHl
+	ld a,(hl)
+	push bc
+	call playSound
+	pop bc
+	ld h,d
+	ld l,Interaction.var30
+	ld a,(hl)
+	push hl
+	ld hl,@order
+	rst_addAToHl
+	ld a,(hl)
+	pop hl
+	cp c
+	jr z,+
+	; Raté : on recommence (le bon premier coquillage compte quand même)
+	ld (hl),$00
+	ld a,(@order)
+	cp c
+	ret nz
+	inc (hl)
+	ret
++
+	inc (hl)
+	ld a,(hl)
+	cp $03
+	ret c
+	; Résolue
+	ld e,Interaction.state
+	ld a,$03
+	ld (de),a
+	ld e,Interaction.counter1
+	ld a,ECHO_PAUSE
+	ld (de),a
+	call getThisRoomFlags
+	set 6,(hl)
+	ret
+
+; Le grand coquillage chante les trois airs, l'un après l'autre
+@startSong:
+	ld h,d
+	ld l,Interaction.var30
+	xor a
+	ldi (hl),a
+	ld (hl),a ; var31 : premier air
+	ld l,Interaction.counter1
+	ld (hl),$01
+	ld l,Interaction.state
+	ld (hl),$02
+	ld a,$91
+	ld (wDisabledObjects),a
+	ret
+
+@singing:
+	ld h,d
+	ld l,Interaction.counter1
+	dec (hl)
+	ret nz
+	ld (hl),ECHO_PAUSE
+	ld l,Interaction.var31
+	ld a,(hl)
+	cp $03
+	jr nc,@songDone
+	inc (hl)
+	ld hl,@order
+	rst_addAToHl
+	ld a,(hl)
+	ld hl,@sounds
+	rst_addAToHl
+	ld a,(hl)
+	jp playSound
+@songDone:
+	xor a
+	ld (wDisabledObjects),a
+	ld e,Interaction.state
+	ld a,$01
+	ld (de),a
+	ret
+
+@solved:
+	ld e,Interaction.counter1
+	ld a,(de)
+	or a
+	ret z
+	dec a
+	ld (de),a
+	ret nz
+	ld a,SND_SOLVEPUZZLE
+	call playSound
+@showChest:
+	; Le coffre : fermé, ou ouvert si on l'a déjà pris (ROOMFLAG_ITEM)
+	call getThisRoomFlags
+	and ROOMFLAG_ITEM
+	ld a,TILEINDEX_CHEST
+	jr z,+
+	ld a,TILEINDEX_CHEST_OPENED
++
+	ld hl,@chest
+	ld c,(hl)
+	jp setTile
+
+;;
+; @param[out]	a	La case juste devant Link (YX), selon sa direction
+@tileInFrontOfLink:
+	ld a,(w1Link.direction)
+	add a
+	ld hl,@frontOffsets
+	rst_addAToHl
+	ld a,(w1Link.yh)
+	add (hl)
+	and $f0
+	ld b,a
+	inc hl
+	ld a,(w1Link.xh)
+	add (hl)
+	swap a
+	and $0f
+	or b
+	ret
+
+; y, x à ajouter à la position de Link (haut, droite, bas, gauche)
+@frontOffsets:
+	.db $f4, $00
+	.db $00, $0c
+	.db $0c, $00
+	.db $00, $f4
+
+@master:
+	.db $27 ; le grand coquillage (ligne 2, colonne 7)
+@shells:
+	.db $53, $57, $5b ; les trois petits (ligne 5 : colonnes 3, 7, 11)
+@sounds:
+	.db SND_FLUTE_RICKY, SND_FLUTE_DIMITRI, SND_FLUTE_MOOSH
+@order:
+	.db $01, $02, $00 ; Dimitri, Moosh, Ricky
+@chest:
+	.db $8b ; le coffre de la clé du boss (ligne 8, colonne 11)

@@ -145,15 +145,15 @@ groups:
   - name: TX_0010
     index: 0x10
     text: |-
-      \pos(2)\slow()You got the
-      \col(1)Echoing Howl\col(0), an
-      Essence of Time!\stop
-      It echoes far
-      across the
-      plains to speak
-      to insolent
-      hearts.
-
+      \pos(2)\slow()La Murène a
+      rendu les mots
+      doux qu'elle
+      avait avalés.\stop
+      Tu as trouvé le
+      \col(1)troisième
+      couplet\col(0) de la
+      chanson de
+      Marine!
   - name: TX_0011
     index: 0x11
     text: |-
@@ -494,14 +494,12 @@ groups:
   - name: TX_0036
     index: 0x36
     text: |-
-      You got a
-      \col(1)Mermaid Suit\col(0)!
-      Now you can swim
-      in deep waters.
-      Press \col(0x84)\item(0x00)\col(0) to swim,
-      \bbtn to dive and
-      \abtn to use items.
-
+      Les \col(1)Écailles de
+      Sirène\col(0)!\stop
+      Tu nages dans
+      l'eau profonde,
+      et \bbtn: tu
+      plonges!
   - name: TX_0037
     index: 0x37
     text: |-
@@ -1607,15 +1605,14 @@ groups:
        Phare Éteint
   - name: TX_0202
     index: 0x02
-    text: |-
+    text: |2-
        Niveau 2
        Coffre à Jouets
   - name: TX_0203
     index: 0x03
     text: |2-
-       Level 3
-        Moonlit Grotto
-
+       Niveau 3
+       Récif Murmurant
   - name: TX_0204
     index: 0x04
     text: |2-
@@ -3957,12 +3954,10 @@ groups:
   - name: TX_0903
     index: 0x03
     text: |-
-      Echoing Howl
-      It echoes far
-      across plains
-      to speak to
-      insolent hearts.
-
+      Troisième
+      couplet
+      Quelqu'un qui
+      attend.
   - name: TX_0904
     index: 0x04
     text: |-
@@ -4407,10 +4402,9 @@ groups:
   - name: TX_0945
     index: 0x45
     text: |-
-      Mermaid Suit
-      The skin of the
-      mythical beast.
-
+      Écailles de
+      Sirène
+      Pour plonger.
   - name: TX_0946
     index: 0x46
     text: |-
@@ -14424,68 +14418,58 @@ groups:
     - 0x11
     - 0x12
     text: |-
-      \pos(2)I am \col(3)Vire\col(0),
-      \col(3)Veran's\col(0) loyal
-      henchman! I
-      heard someone
-      was trying to
-      stop \col(3)Veran\col(0), so
-      I came here. But
-      it's just some
-      kid!\stop
-      Fine! I can
-      handle you!
-
+      \pos(2)Hi hi hi! Un
+      petit chevalier,
+      tout seul? Sans
+      sa mouette?\stop
+      Les rêves d'ici,
+      on les a déjà
+      mangés! Viens
+      jouer!
   - name: TX_2f13
     index: 0x13
     text: |-
-      \pos(2)I'm amazed
-      you've come so
-      far. I thought
-      you a harmless
-      turtle, but I
-      miscalculated.
-      ...At any rate,
-      I'll finish this
-      soon!!!
-
+      \pos(2)Hi hi hi! Un
+      petit chevalier,
+      tout seul? Sans
+      sa mouette?\stop
+      Les rêves d'ici,
+      on les a déjà
+      mangés! Viens
+      jouer!
   - name: TX_2f14
     index: 0x14
     text: |-
-      \slow()OUCH! Pesky kid!
-      Take this!
-
+      \slow()AÏE! Sale
+      gamin! Tiens!
   - name: TX_2f15
     index: 0x15
     text: |-
-      \slow()Bully! That's
-      it! I'm serious!
-
+      \slow()Brute! Cette
+      fois, c'est
+      sérieux!
   - name: TX_2f16
     index: 0x16
     text: |-
-      \slow()Fine! Goodbye!
-
+      \slow()Bon! Adieu!
   - name: TX_2f17
     index: 0x17
     text: |-
-      \slow()OUCH..!\stop
-      I paid for my
-      overconfidence,
-      but I'll report
-      this to \col(3)Veran\col(0)!
-      Gar har har!
-
+      \slow()AÏE..!\stop
+      Trop sûr de
+      moi... Celui qui
+      ne dort jamais
+      le saura!
+      Hi hi hi!
   - name: TX_2f18
     index: 0x18
     text: |-
-      \slow()Im...impossible!
-      Not once, but
-      twice! \col(3)Veran\col(0)...
-      \col(3)Onox\col(0)...
-      I'm sorry...
-      Goodbye!
-
+      \slow()AÏE..!\stop
+      Trop sûr de
+      moi... Celui qui
+      ne dort jamais
+      le saura!
+      Hi hi hi!
   - name: TX_2f19
     index: 0x19
     text: |-
@@ -23549,6 +23533,74 @@ groups:
       Je t'attends
       ici, \Link.
       Reviens vite.
+
+  # Fin du chapitre 3 : la plage des bouteilles (1:35), Marine attendait
+  # Le Carnet des Rêves, après la Lagune des Serments (3 îles sauvées)
+  - name: TX_5a7f
+    index: 0x7f
+    text: |-
+      \col(1)Carnet des
+      Rêves\col(0)\stop
+      \col(1)Brume\col(0): la
+      dame dort, le
+      vieux ne compte
+      plus. Rendus!\stop
+      \col(1)Grelot\col(0): Lila
+      invente des
+      chevaliers. Les
+      enfants jouent!\stop
+      \col(1)Lagune\col(0):
+      Héloïse et
+      Gaspard se
+      souviennent.
+      Mariés tous les
+      matins!
+
+  - name: TX_5a7c
+    index: 0x7c
+    text: |-
+      \col(1)Marine\col(0): \Link!\stop
+      Tu as été long.
+      Ne refais jamais
+      ça.\stop
+      ...Tu sais quoi?
+      C'est ce que dit
+      le troisième
+      couplet. Mot
+      pour mot.\stop
+      Viens. Ça parle,
+      chez Gaspard!
+
+  # Chez Héloïse et Gaspard (3:23)
+  - name: TX_5a7d
+    index: 0x7d
+    text: |-
+      \col(1)Héloïse\col(0):
+      Gaspard!
+      Tu as mis tes
+      palmes pour
+      danser, ce jour-
+      là...\stop
+      \col(1)Gaspard\col(0): Et
+      toi, tu as
+      pleuré de rire.
+      Bonjour, ma
+      femme.
+
+  - name: TX_5a7e
+    index: 0x7e
+    text: |-
+      \col(1)Marine\col(0): Chut...
+      le vent a
+      tourné.\stop
+      Il sent la
+      fumée et le fer
+      chaud.\stop
+      Une montagne qui
+      fume, au nord...
+      On y entend
+      cogner.
+
 
   # Le menu de test caché (code/ages/balladeDebug.s ; HAUT tenu 5 s à l'écran titre) :
   # la langue, l'île, le moment, et dans le donjon l'endroit. Le même dans les deux fichiers.

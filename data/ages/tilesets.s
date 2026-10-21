@@ -433,14 +433,14 @@ tilesetData:
 	.db $26, $05, $10
 
 	; 0x3c
-	.db $2c, $88
+	.db $23, $88 ; BALLADE: le Récif Murmurant (donjon 3 ; dans Ages, $2c : la Grotte des Sirènes, passé)
 	.db UNIQUE_GFXH_NONE
 	.db GFXH_TILESET_MERMAIDS_CAVE
 	.db PALH_TILESET_MERMAIDS_CAVE_PAST
 	.db $26, $05, $10
 
 	; 0x3d
-	.db $2c, $c8
+	.db $23, $c8 ; BALLADE: le Récif Murmurant, sous l'eau (donjon 3)
 	.db UNIQUE_GFXH_NONE
 	.db GFXH_TILESET_MERMAIDS_CAVE
 	.db PALH_TILESET_MERMAIDS_CAVE_PAST_UNDERWATER

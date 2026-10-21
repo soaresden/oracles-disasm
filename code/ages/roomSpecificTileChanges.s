@@ -145,7 +145,8 @@ roomTileChangerCodeGroup4Data:
 	.db $00
 roomTileChangerCodeGroup5Data:
 	.db $f5 $00
-	.db $38 $0a
+	; BALLADE: 5:38 est l'antichambre du Récif Murmurant (sans le pont de la Grotte des Sirènes)
+	;.db $38 $0a
 	.db $25 $0b
 	.db $43 $0c
 	.db $4c $0d

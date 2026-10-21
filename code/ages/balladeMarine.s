@@ -7,6 +7,10 @@
 
 ;;
 marineTalk:
+	; Dans le Récif Murmurant (donjon 3), Link est seul : Marine l'attend dehors
+	ld a,(wDungeonIndex)
+	cp $03
+	ret z
 	; Dans le Songe (groupes 0 et 2, pas les donjons), Marine propose de réveiller Link
 	; (INTERAC_MARINE $01)
 	ld a,(wActiveGroup)
@@ -188,6 +192,9 @@ drawNoctambuleTimer:
 ; Link tient une bombe : Marine (INTERAC_MARINE $06) l'emporte ; wBalladeSelectTimer passe à $ff
 ; (ni carte, ni parole pour cet appui).
 checkBombPower:
+	ld a,(wDungeonIndex)
+	cp $03
+	ret z
 	ld a,GLOBALFLAG_BALLADE_MARINE_BOMB
 	call checkGlobalFlag
 	ret z

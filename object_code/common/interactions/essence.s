@@ -342,7 +342,8 @@ interaction7f_subid00:
 	.db $81, $7b, $44, TRANSITION_DEST_SET_RESPAWN
 	; BALLADE: le Coffre à Jouets ramène chez Lila (3:21) : on se réveille
 	.db $83, $21, $46, TRANSITION_DEST_SET_RESPAWN
-	.db $80, $ba, $55, TRANSITION_DEST_SET_RESPAWN
+	; BALLADE: le Récif Murmurant ramène sur la plage des bouteilles (1:35), où Marine attend
+	.db $81, $35, $34, TRANSITION_DEST_SET_RESPAWN
 	.db $80, $03, $35, TRANSITION_DEST_X_SHIFTED
 	.db $80, $0a, $17, TRANSITION_DEST_SET_RESPAWN
 	.db $83, $0f, $16, TRANSITION_DEST_SET_RESPAWN

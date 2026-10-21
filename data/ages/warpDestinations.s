@@ -185,6 +185,7 @@ group1WarpDestTable:
 	m_WarpDest $06 $44 $0 $1 ; $50 : devant la maison d'Héloïse et Gaspard (la Lagune)
 	m_WarpDest $17 $36 $0 $1 ; $51 : devant le club de plongée
 	m_WarpDest $27 $46 $0 $1 ; $52 : devant la grotte des amoureux
+	m_WarpDest $36 $44 $0 $1 ; $53 : devant la bouche du Récif Murmurant
 
 group2WarpDestTable:
 	m_WarpDest $90 $45 $0 $e
@@ -538,6 +539,7 @@ group5WarpDestTable:
 	; BALLADE: Hameau-Grelot
 	m_WarpDest $b0 $87 $0 $4 ; $6d : la grotte de la Boîte, au-dessus de l'escalier
 	m_WarpDest $b1 $87 $0 $4 ; $6e : la grotte des amoureux, au-dessus de l'escalier
+	m_WarpDest $44 $97 $0 $4 ; $6f : le Récif Murmurant, l'entrée (sous l'arche)
 
 group6WarpDestTable:
 	m_WarpDest $05 $02 $f $3

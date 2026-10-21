@@ -548,3 +548,4 @@
 	m_GfxData gfx_save_fr
 	m_GfxData gfx_blurb_d1_fr
 	m_GfxData gfx_blurb_d2_fr
+	m_GfxData gfx_blurb_d3_fr

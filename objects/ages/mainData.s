@@ -3760,7 +3760,6 @@ group5Map2dObjectData:
 	obj_BeforeEvent group5Map2dBeforeEventObjectData
 	obj_End
 
-group5Map2eObjectData:
 	obj_Pointer group5Map2eEnemyObjectData
 	obj_End
 
@@ -3768,7 +3767,6 @@ group5Map2fObjectData:
 	obj_Pointer group5Map2fEnemyObjectData
 	obj_End
 
-group5Map30ObjectData:
 	obj_Pointer group5Map30EnemyObjectData
 	obj_End
 
@@ -3789,11 +3787,9 @@ group5Map34ObjectData:
 	obj_Pointer group5Map34EnemyObjectData
 	obj_End
 
-group5Map35ObjectData:
 	obj_Pointer group5Map35EnemyObjectData
 	obj_End
 
-group5Map36ObjectData:
 	obj_Interaction $1e $0a $a7 $00
 	obj_Interaction $1e $09 $5e $00
 	obj_Interaction $20 $00 $58 $78
@@ -3801,12 +3797,10 @@ group5Map36ObjectData:
 	obj_BeforeEvent group5Map36BeforeEventObjectData
 	obj_End
 
-group5Map37ObjectData:
 	obj_Interaction $7f $00 $28 $78
 	obj_Pointer group5Map37EnemyObjectData
 	obj_End
 
-group5Map38ObjectData:
 	obj_Interaction $20 $01
 	obj_Interaction $90 $0f
 	obj_Part $33 $1a $58 $28 $01
@@ -3816,27 +3810,22 @@ group5Map38ObjectData:
 	obj_Pointer group5Map38EnemyObjectData
 	obj_End
 
-group5Map39ObjectData:
 	obj_Interaction $7d $00 $68 $01
 	obj_Pointer group5Map39EnemyObjectData
 	obj_End
 
-group5Map3aObjectData:
 	obj_Interaction $90 $08
 	obj_Pointer group5Map3aEnemyObjectData
 	obj_End
 
-group5Map3bObjectData:
 	obj_Interaction $1e $09 $4e $00
 	obj_Pointer group5Map3bEnemyObjectData
 	obj_End
 
-group5Map3cObjectData:
 	obj_Interaction $12 $02 $58 $58
 	obj_Pointer group5Map3cEnemyObjectData
 	obj_End
 
-group5Map3dObjectData:
 	obj_Interaction $1e $04 $07 $02
 	obj_Interaction $20 $02
 	obj_Part $09 $80 $45
@@ -3844,11 +3833,9 @@ group5Map3dObjectData:
 	obj_Pointer group5Map3dEnemyObjectData
 	obj_End
 
-group5Map3eObjectData:
 	obj_Pointer group5Map3eEnemyObjectData
 	obj_End
 
-group5Map3fObjectData:
 	obj_Interaction $1e $09 $5e $00
 	obj_Interaction $12 $02 $58 $38
 	obj_Interaction $22 $00 $58 $78
@@ -3856,7 +3843,6 @@ group5Map3fObjectData:
 	obj_Pointer group5Map3fEnemyObjectData
 	obj_End
 
-group5Map40ObjectData:
 	obj_Pointer group5Map40EnemyObjectData
 	obj_End
 
@@ -3873,7 +3859,6 @@ group5Map43ObjectData:
 	obj_Pointer group5Map43EnemyObjectData
 	obj_End
 
-group5Map44ObjectData:
 	obj_Interaction $12 $00 $88 $78
 	obj_Interaction $e2 $01
 	obj_Interaction $90 $09
@@ -4965,6 +4950,7 @@ group1Map34ObjectData:
 	obj_End
 group1Map35ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $10 $28 $68
+	obj_Interaction INTERAC_BALLADE_OBJECT $0a $08 $08
 	obj_End
 group1Map36ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $01 $08 $08
@@ -5042,6 +5028,7 @@ group3Map22ObjectData:
 group3Map23ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $11 $48 $38
 	obj_Interaction INTERAC_BALLADE_OBJECT $0e $48 $68
+	obj_Interaction INTERAC_BALLADE_OBJECT $0a $08 $08 ; la suite de la fin du chapitre 3
 	obj_End
 group3Map24ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $0f $48 $38
@@ -5179,6 +5166,58 @@ group4Map3bObjectData:
 	obj_End
 group4Map4aObjectData:
 	obj_Interaction INTERAC_BALLADE_RHYTHM $00 $58 $78
+	obj_End
+group5Map2eObjectData:
+	obj_RandomEnemy $20 ENEMY_BARI $00
+	obj_End
+group5Map30ObjectData:
+	obj_RandomEnemy $20 ENEMY_BARI $00
+	obj_End
+group5Map35ObjectData:
+	obj_RandomEnemy $20 ENEMY_BARI $00
+	obj_End
+group5Map36ObjectData:
+	obj_Interaction $1e $0a $a7 $00
+	obj_Interaction $20 $01 $58 $78
+	obj_Interaction INTERAC_BALLADE_OBJECT $08 $48 $78
+	obj_BeforeEvent group5Map36BeforeEventObjectData
+	obj_End
+group5Map37ObjectData:
+	obj_Interaction $1e $0a $a7 $00
+	obj_Interaction $20 $00 $58 $78
+	obj_Interaction $12 $02 $58 $78
+	obj_BeforeEvent group5Map12BeforeEventObjectData
+	obj_End
+group5Map38ObjectData:
+	obj_Interaction $90 $0f
+	obj_End
+group5Map39ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $13 $08 $08
+	obj_End
+group5Map3aObjectData:
+	obj_RandomEnemy $40 ENEMY_COLOR_CHANGING_GEL $00
+	obj_End
+group5Map3bObjectData:
+	obj_RandomEnemy $30 ENEMY_KEESE $00
+	obj_End
+group5Map3cObjectData:
+	obj_RandomEnemy $40 ENEMY_BARI $00
+	obj_End
+group5Map3dObjectData:
+	obj_RandomEnemy $40 ENEMY_ROPE $00
+	obj_End
+group5Map3eObjectData:
+	obj_RandomEnemy $60 ENEMY_ROPE $00
+	obj_Interaction $12 $01 $58 $78
+	obj_End
+group5Map3fObjectData:
+	obj_RandomEnemy $40 ENEMY_BARI $00
+	obj_End
+group5Map40ObjectData:
+	obj_RandomEnemy $40 ENEMY_KEESE $00
+	obj_End
+group5Map44ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $09 $08 $08
 	obj_End
 group5Mapb0ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $03 $18 $78
