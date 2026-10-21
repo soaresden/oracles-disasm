@@ -241,7 +241,8 @@ setChapter2Flags:
 ; Le Bateau-Rondin (subid $00). Il n'est là qu'une fois réparé (GLOBALFLAG_BALLADE_RAFT, à la fin
 ; du chapitre 1). A devant lui : Marine propose les îles déjà repérées (les îles se découvrent
 ; dans l'ordre : GLOBALFLAG_BALLADE_ISLAND2, 3...), puis on part : fondu, et Link arrive sur le
-; ponton de l'île choisie.
+; ponton de l'île choisie. Plus de 4 îles : deux pages (la Brume, Grelot, la Lagune ou « Suite »,
+; puis Mont-Braise, les Échos...) : une boîte de texte n'a que deux lignes.
 ; ==================================================================================================
 raft:
 	ld e,Interaction.state
@@ -251,6 +252,8 @@ raft:
 	.dw @state1
 	.dw @state2
 	.dw @state3
+	.dw @state4
+	.dw @state5
 
 @state0:
 	ld a,GLOBALFLAG_BALLADE_RAFT
@@ -277,20 +280,62 @@ raft:
 	ld (wDisabledObjects),a
 	; Le texte qui propose autant d'îles qu'on en a repéré (2 au moins : on vient d'une île)
 	call countDiscoveredIslands
+	cp $05
+	jr nc,@twoPages
 	sub $02
 	add <TX_5a50
 	ld c,a
 	ld b,>TX_5a50
 	jp showText
 
-; Le choix : l'île (0 = la Brume...)
+@twoPages:
+	; La première page : la Brume, Grelot, la Lagune, ou « Suite » (état 4)
+	ld e,Interaction.state
+	ld a,$04
+	ld (de),a
+	ld bc,TX_5aa8
+	jp showText
+
+; Le choix : l'île (0 = la Brume)
 @state2:
 	ld a,(wTextIsActive)
 	or a
 	ret nz
+	ld a,(wSelectedTextOption)
+	jr @chosen
+
+; La première page : l'option 3 est « Suite »
+@state4:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	ld a,(wSelectedTextOption)
+	cp $03
+	jr nz,@chosen
+	ld e,Interaction.state
+	ld a,$05
+	ld (de),a
+	call countDiscoveredIslands
+	sub $05
+	add <TX_5aa9
+	ld c,a
+	ld b,>TX_5aa9
+	jp showText
+
+; La deuxième page : Mont-Braise (3), les Échos (4)...
+@state5:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	ld a,(wSelectedTextOption)
+	add $03
+
+; @param	a	L'île choisie (0 = la Brume)
+@chosen:
+	push af
 	call findCurrentIsland
 	ld b,a
-	ld a,(wSelectedTextOption)
+	pop af
 	cp b
 	jr nz,@go
 	; On y est déjà
@@ -303,7 +348,11 @@ raft:
 	jp showText
 
 @go:
-	call interactionIncState
+	ld b,a
+	ld e,Interaction.state
+	ld a,$03
+	ld (de),a
+	ld a,b
 	; Destination : groupe, salle, case de la ligne (île) de @jetties
 	ld hl,jetties
 	ld b,a
@@ -715,7 +764,7 @@ toyChest:
 ; (les essences, à la suite) : @pages (TX_5a60 la Brume, TX_5a61 Hameau-Grelot, TX_5a7f la
 ; Lagune...)
 ; ==================================================================================================
-.define CARNET_PAGES 3
+.define CARNET_PAGES 5
 
 readCarnet:
 	ld a,(wTextIsActive)
@@ -749,7 +798,7 @@ readCarnet:
 
 ; Une page par nombre d'îles sauvées (chacune reprend les précédentes)
 @pages:
-	.db <TX_5a60, <TX_5a61, <TX_5a7f
+	.db <TX_5a60, <TX_5a61, <TX_5a7f, <TX_5aa6, <TX_5aa7
 
 
 
