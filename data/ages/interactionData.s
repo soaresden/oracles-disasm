@@ -891,6 +891,15 @@ interactionedSubidData:
 	m_InteractionSubidData $3e $00 $22 ; $23 Zéphyr dans le Songe
 	m_InteractionSubidData $4f $00 $32 ; $24 un meunier
 	m_InteractionSubidData $42 $10 $22 ; $25 Mère Plume
+	m_InteractionSubidData $4f $10 $12 ; $26 le roi d'une nuit (endormi)
+	m_InteractionSubidData $41 $00 $12 ; $27 le veilleur
+	m_InteractionSubidData $3e $00 $12 ; $28 la petite sœur
+	m_InteractionSubidData $3f $00 $12 ; $29 la chanteuse
+	m_InteractionSubidData $5c $00 $22 ; $2a la mère (endormie)
+	m_InteractionSubidData $4f $00 $22 ; $2b le père (endormi)
+	m_InteractionSubidData $4f $10 $12 ; $2c le roi dans le Songe
+	m_InteractionSubidData $00 $00 $00 ; $2d la porte gelée du palais (invisible)
+	m_InteractionSubidData $00 $00 $00 ; $2e le cristal du Songe (invisible)
 	m_InteractionSubidDataEnd
 
 interactiond4SubidData:

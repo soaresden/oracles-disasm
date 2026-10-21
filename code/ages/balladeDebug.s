@@ -472,9 +472,9 @@ debugEntries:
 	.db $1b, $01, $67, $44 ; le village des plumes, l'essence en poche : la fin du chapitre 6
 	.dw debugNone
 	; 7. Grand Sommeil
-	.db $ff, $00, $00, $00
+	.db $1c, $01, $d1, $44 ; le ponton, en arrivant (la fin du chapitre 6 vue)
 	.dw debugNone
-	.db $ff, $00, $00, $00
+	.db $1c, $01, $b1, $44 ; le village gelé
 	.dw debugNone
 	.db $ff, $00, $00, $00
 	.dw debugNone
@@ -609,6 +609,10 @@ debugMilestones:
 	.db DBG_TREASURE, TREASURE_ESSENCE, $05
 	.db DBG_TREASURE, TREASURE_HEART_CONTAINER, $04
 	.db DBG_FULLHEALTH
+	.db DBG_END
+	; 28. La fin du chapitre 6 a été vue (le village des plumes) : l'île du Grand Sommeil est repérée
+	.db DBG_ROOMFLAG, $01, $67, $20
+	.db DBG_GLOBALFLAG, GLOBALFLAG_BALLADE_ISLAND7
 	.db DBG_END
 
 debugNone:

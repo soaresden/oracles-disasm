@@ -191,6 +191,10 @@ group1WarpDestTable:
 	m_WarpDest $61 $24 $0 $1 ; $56 : devant la cabane du fossoyeur (l'île des Échos)
 	m_WarpDest $42 $54 $0 $1 ; $57 : devant la grille de la cathédrale (l'île des Échos)
 	m_WarpDest $48 $34 $0 $1 ; $58 : devant l'entrée du Nid (le Nid des Vents)
+	m_WarpDest $c2 $37 $0 $1 ; $59 : devant la maison du veilleur (l'île du Grand Sommeil)
+	m_WarpDest $b1 $32 $0 $1 ; $5a : devant la maison de la famille
+	m_WarpDest $b3 $37 $0 $1 ; $5b : devant la maison de la chanteuse
+	m_WarpDest $b2 $35 $0 $1 ; $5c : devant la porte du Palais Givré
 
 group2WarpDestTable:
 	m_WarpDest $90 $45 $0 $e
@@ -352,6 +356,10 @@ group3WarpDestTable:
 	m_WarpDest $24 $ff $9 $3 ; $47 : le club de plongée, par le bas
 	m_WarpDest $25 $ff $9 $3 ; $48 : la cabane du fossoyeur, par le bas
 	m_WarpDest $26 $ff $9 $3 ; $49 : le souvenir (la maison de Marine à Mabe), par le bas
+	; BALLADE: l'île du Grand Sommeil
+	m_WarpDest $27 $ff $9 $3 ; $4a : la maison du veilleur, par le bas
+	m_WarpDest $28 $ff $9 $3 ; $4b : la maison de la famille, par le bas
+	m_WarpDest $29 $ff $9 $3 ; $4c : la maison de la chanteuse, par le bas
 
 group4WarpDestTable:
 	m_WarpDest $04 $ff $9 $3
@@ -436,6 +444,8 @@ group4WarpDestTable:
 	m_WarpDest $bb $97 $0 $4 ; $4e : la Forge Endormie, l'entrée (sous l'arche)
 	; BALLADE: le Nid des Vents
 	m_WarpDest $3c $97 $0 $4 ; $4f : la Spirale Céleste, l'entrée (sous l'arche)
+	; BALLADE: l'île du Grand Sommeil
+	m_WarpDest $55 $97 $0 $4 ; $50 : le Palais Givré, l'entrée (sous l'arche)
 
 group5WarpDestTable:
 	m_WarpDest $26 $ff $9 $3

@@ -4546,6 +4546,99 @@ paletteDataSpirale: ; Songe : paletteData5090 en bleuté
 	m_RGB16 $07 $04 $08
 	m_RGB16 $01 $02 $06
 
+paletteDataGivre: ; Songe : paletteData4a60 en bleuté
+	m_RGB16 $1a $19 $1c
+	m_RGB16 $14 $15 $16
+	m_RGB16 $0c $0c $0f
+	m_RGB16 $02 $03 $08
+
+	m_RGB16 $14 $14 $16
+	m_RGB16 $14 $15 $16
+	m_RGB16 $0c $0c $0f
+	m_RGB16 $02 $03 $08
+
+	m_RGB16 $1a $19 $1c
+	m_RGB16 $14 $14 $16
+	m_RGB16 $0c $0c $10
+	m_RGB16 $02 $03 $08
+
+	m_RGB16 $1c $1c $1e
+	m_RGB16 $15 $16 $19
+	m_RGB16 $0e $0e $12
+	m_RGB16 $05 $05 $0a
+
+	m_RGB16 $1c $1e $1e
+	m_RGB16 $11 $11 $17
+	m_RGB16 $0b $0b $11
+	m_RGB16 $02 $03 $08
+
+	m_RGB16 $1c $1c $1d
+	m_RGB16 $15 $14 $18
+	m_RGB16 $0b $09 $0f
+	m_RGB16 $06 $07 $0c
+
+paletteDataSongeGivre: ; Songe : paletteData4a60 en bleuté
+	m_RGB16 $14 $17 $1e
+	m_RGB16 $10 $13 $19
+	m_RGB16 $0a $0c $12
+	m_RGB16 $03 $05 $0a
+
+	m_RGB16 $10 $13 $19
+	m_RGB16 $10 $13 $19
+	m_RGB16 $0a $0c $12
+	m_RGB16 $03 $05 $0a
+
+	m_RGB16 $14 $17 $1e
+	m_RGB16 $10 $13 $19
+	m_RGB16 $0a $0c $12
+	m_RGB16 $03 $05 $0a
+
+	m_RGB16 $15 $1a $1f
+	m_RGB16 $11 $14 $1b
+	m_RGB16 $0b $0e $14
+	m_RGB16 $05 $06 $0c
+
+	m_RGB16 $16 $1b $1f
+	m_RGB16 $0e $11 $18
+	m_RGB16 $09 $0b $12
+	m_RGB16 $03 $05 $0a
+
+	m_RGB16 $15 $19 $1e
+	m_RGB16 $10 $13 $1a
+	m_RGB16 $09 $0a $11
+	m_RGB16 $06 $08 $0e
+
+paletteDataPalais: ; Songe : paletteData50c0 en bleuté
+	m_RGB16 $1c $1d $1c
+	m_RGB16 $19 $1a $1d
+	m_RGB16 $0d $0e $13
+	m_RGB16 $02 $03 $08
+
+	m_RGB16 $17 $17 $19
+	m_RGB16 $0f $0f $12
+	m_RGB16 $06 $05 $0a
+	m_RGB16 $02 $03 $08
+
+	m_RGB16 $1c $1d $1c
+	m_RGB16 $14 $14 $16
+	m_RGB16 $0d $0d $11
+	m_RGB16 $02 $03 $08
+
+	m_RGB16 $1c $1e $1d
+	m_RGB16 $17 $1a $1b
+	m_RGB16 $0b $0c $0f
+	m_RGB16 $02 $03 $08
+
+	m_RGB16 $1c $1e $1d
+	m_RGB16 $13 $12 $14
+	m_RGB16 $08 $07 $0b
+	m_RGB16 $02 $03 $08
+
+	m_RGB16 $1c $1d $1c
+	m_RGB16 $02 $03 $08
+	m_RGB16 $11 $14 $16
+	m_RGB16 $1c $1d $1d
+
 ; BALLADE-SONGE-FIN
 
 ; BALLADE-TITRE-DEBUT (tools/make_title.py)

@@ -40,6 +40,7 @@ chestGroup2Data:
 	m_ChestData $34, $f4, TREASURE_OBJECT_RING_19
 	m_ChestData $18, $4f, TREASURE_OBJECT_RING_22
 	m_ChestData $14, $c0, TREASURE_OBJECT_GASHA_SEED_01
+	m_ChestData $11, $c1, TREASURE_OBJECT_RUPEES_05 ; BALLADE: le lac de glace (1:c1) : des rubis
 	.db $ff
 
 chestGroup3Data:

@@ -36,6 +36,16 @@
 ; @subid_1d{Le sonneur (la chapelle, 1:63)}
 ; @subid_1e{Invisible : la clé de la cathédrale enterrée (1:64) ; la Pelle la déterre}
 ; @subid_1f{Invisible : la grille de la cathédrale des Échos (1:42) ; la clé l'ouvre}
+; (...)
+; @subid_26{Le roi d'une nuit, endormi (l'île du Grand Sommeil, 1:d2)}
+; @subid_27{Le veilleur (3:27) : le Lance-Graines}
+; @subid_28{La petite sœur (3:28), la seule réveillée de sa famille}
+; @subid_29{La chanteuse (3:29) : la Clochette d'Aube la réveille ; un quart de cœur}
+; @subid_2a{La mère, endormie (3:28)}
+; @subid_2b{Le père, endormi (3:28)}
+; @subid_2c{Le roi dans le Songe (0:d2) : il dit où frapper le cristal}
+; @subid_2d{Invisible : la porte gelée du Palais Givré (1:b2)}
+; @subid_2e{Invisible : le cristal du Songe (0:b2) : frappé, il dégèle la porte du Réel}
 ; ==================================================================================================
 
 ;;
@@ -81,6 +91,15 @@ main:
 	.dw villager
 	.dw villager
 	.dw motherPlume
+	.dw sleeper
+	.dw watchman
+	.dw villager
+	.dw singer
+	.dw sleeper
+	.dw sleeper
+	.dw villager
+	.dw frozenGate
+	.dw dreamCrystal
 
 
 ;;
@@ -198,6 +217,8 @@ arrivalTalk:
 	.db $01, $57, <TX_5aae, $ff ; le pont de nuages : dans le Songe, rien ne tombe
 	.db $04, $3c, <TX_5ab8, $ff ; la Spirale Céleste : ne pas regarder en bas
 	.db $04, $54, <TX_5ab9, $ff ; l'Ombre de Marine, Marine lui répond
+	.db $01, $d1, <TX_5abc, $ff ; l'île du Grand Sommeil, le ponton
+	.db $01, $b2, <TX_5acd, $ff ; le Palais Givré : la porte gelée
 	.db $ff
 
 
@@ -438,7 +459,7 @@ jetties:
 	.db $01, $38, $44 ; 4. Mont-Braise (le ponton)
 	.db $01, $70, $44 ; 5. l'île des Échos (le ponton)
 	.db $01, $75, $44 ; 6. le Nid des Vents (le courant ascendant)
-	.db $01, $99, $52 ; 7.
+	.db $01, $d1, $44 ; 7. l'île du Grand Sommeil (le ponton)
 	.db $01, $99, $52 ; 8.
 
 
@@ -1225,13 +1246,14 @@ villager:
 
 @idle:
 	call interactionAnimateAsNpc
+villagerTalk:
 	call npcCheckTalk
 	ret z
 	; La ligne de l'habitant dans @texts
 	ld e,Interaction.subid
 	ld a,(de)
 	ld c,a
-	ld hl,@texts
+	ld hl,villagerTexts
 -
 	ldi a,(hl)
 	cp c
@@ -1255,7 +1277,7 @@ villager:
 	jp npcSay
 
 ; sous-type, masque d'essence de l'île, texte avant, texte après
-@texts:
+villagerTexts:
 	.db $0b, $02, <TX_5a68, <TX_5a69 ; un enfant de la place du Grelot
 	.db $0c, $02, <TX_5a6a, <TX_5a6b ; un autre enfant
 	.db $0d, $02, <TX_5a6c, <TX_5a6d ; Mme Bonnet, la maîtresse
@@ -1272,6 +1294,11 @@ villager:
 	.db $22, $20, <TX_5ab1, <TX_5ab2 ; Zéphyr
 	.db $23, $20, <TX_5ab3, <TX_5ab3 ; Zéphyr dans le Songe
 	.db $24, $20, <TX_5ab4, <TX_5ab5 ; un meunier
+	.db $26, $40, <TX_5abd, <TX_5abe ; le roi d'une nuit (endormi : sleeper)
+	.db $28, $40, <TX_5ac1, <TX_5ac2 ; la petite sœur
+	.db $2a, $40, <TX_5ac3, <TX_5ac4 ; la mère (sleeper)
+	.db $2b, $40, <TX_5ac5, <TX_5ac6 ; le père (sleeper)
+	.db $2c, $40, <TX_5aca, <TX_5aca ; le roi dans le Songe
 
 
 ; ==================================================================================================
@@ -2001,3 +2028,222 @@ motherPlume:
 	inc a
 	ld (de),a
 	ret
+
+
+; ==================================================================================================
+; L'île du Grand Sommeil (île 7). Les dormeurs (subids $26, $2a, $2b) : des habitants à deux
+; répliques (villagerTexts) qui ne bougent pas tant que l'île n'est pas sauvée (l'essence 7).
+; ==================================================================================================
+sleeper:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw npcInit
+	.dw @idle
+	.dw npcWaitText
+
+@idle:
+	ld a,(wEssencesObtained)
+	and $40
+	call nz,interactionAnimateAsNpc
+	jp villagerTalk
+
+
+; ==================================================================================================
+; Le veilleur (subid $27), dans sa maison (3:27) : le seul qui ne dort pas. Il donne le
+; Lance-Graines (et la sacoche, 20 graines de feu) ; ensuite, il remplit la sacoche si elle est
+; presque vide, et dit que dans les rêves il n'y a pas de glace.
+; ==================================================================================================
+watchman:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw npcInit
+	.dw @idle
+	.dw npcWaitText
+	.dw @gift
+
+@idle:
+	call interactionAnimateAsNpc
+	call npcCheckTalk
+	ret z
+	ld a,TREASURE_SHOOTER
+	call checkTreasureObtained
+	jr nc,@first
+	; Moins de 10 graines : il remplit la sacoche (20)
+	ld a,(wNumEmberSeeds)
+	cp $10
+	jr nc,+
+	ld a,$20
+	ld (wNumEmberSeeds),a
++
+	ld bc,TX_5ac0
+	ld a,$02
+	jp npcSay
+@first:
+	ld bc,TX_5abf
+	ld a,$03
+	jp npcSay
+
+@gift:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	ld a,TREASURE_SEED_SATCHEL
+	ld c,$01
+	call giveTreasure
+	ld a,TREASURE_EMBER_SEEDS
+	ld c,$20
+	call giveTreasure
+	ld a,$20
+	ld (wNumEmberSeeds),a
+	ldbc TREASURE_SHOOTER, $00
+	call giveTreasureAtLink
+	xor a
+	ld (wDisabledObjects),a
+	ld e,Interaction.state
+	inc a
+	ld (de),a
+	ret
+
+
+; ==================================================================================================
+; La chanteuse (subid $29), dans sa maison (3:29) : elle chante en dormant. La Clochette d'Aube
+; (la flûte d'Ages) jouée tout près la réveille (drapeau $01 de la salle 1:b3, pas de 3:29 : les
+; salles 3:XX partagent leurs drapeaux avec 1:XX) ; elle donne alors un quart de cœur (drapeau $02).
+; ==================================================================================================
+singer:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw npcInit
+	.dw @idle
+	.dw npcWaitText
+	.dw @gift
+
+@idle:
+	call @flags
+	bit 0,a
+	jr z,@asleep
+	call interactionAnimateAsNpc
+	call npcCheckTalk
+	ret z
+	call @flags
+	bit 1,a
+	ld bc,TX_5ac9
+	ld a,$02
+	jp nz,npcSay
+	ld bc,TX_5ac8
+	ld a,$03
+	jp npcSay
+
+@asleep:
+	; La Clochette (wLinkPlayingInstrument non nul) jouée à moins de deux cases
+	ld a,(wLinkPlayingInstrument)
+	or a
+	jr z,+
+	ld bc,$2828
+	call objectCheckLinkWithinDistance
+	jr nc,+
+	call @flags
+	set 0,(hl)
+	ld a,SND_SOLVEPUZZLE
+	jp playSound
++
+	call npcCheckTalk
+	ret z
+	ld bc,TX_5ac7
+	ld a,$02
+	jp npcSay
+
+@gift:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	call @flags
+	set 1,(hl)
+	ldbc TREASURE_HEART_PIECE, $00
+	call giveTreasureAtLink
+	xor a
+	ld (wDisabledObjects),a
+	ld e,Interaction.state
+	inc a
+	ld (de),a
+	ret
+
+@flags:
+	ld hl,wGroup1RoomFlags+$b3
+	ld a,(hl)
+	ret
+
+
+; ==================================================================================================
+; La porte gelée du Palais Givré (subid $2d, sur la porte, 1:b2) : elle reste un mur (f6) tant que
+; le cristal du Songe n'a pas été frappé (drapeau $80 de la salle) ; A devant : « prise dans la
+; glace ». Ouverte : la porte (de -> le Palais Givré).
+; ==================================================================================================
+frozenGate:
+	ld e,Interaction.state
+	ld a,(de)
+	or a
+	jr nz,@idle
+	call waitRoomReady
+	ret nz
+	call interactionIncState
+	call getThisRoomFlags
+	bit 7,a
+	ret z
+	call objectGetShortPosition
+	ld c,a
+	ld a,$de
+	call setTile
+	jp interactionDelete
+
+@idle:
+	ld a,(wTextIsActive)
+	ld b,a
+	ld a,(wDisabledObjects)
+	or b
+	ret nz
+	ld a,(wGameKeysJustPressed)
+	and BTN_A
+	ret z
+	; Link juste en dessous, tourné vers le haut
+	ld a,(w1Link.direction)
+	or a
+	ret nz
+	call objectGetShortPosition
+	add $10
+	ld b,a
+	ld a,(w1Link.yh)
+	and $f0
+	ld c,a
+	ld a,(w1Link.xh)
+	swap a
+	and $0f
+	or c
+	cp b
+	ret nz
+	ld bc,TX_5acb
+	jp showText
+
+
+; ==================================================================================================
+; Le cristal du Songe (subid $2e, 0:b2) : le cristal (PART_SWITCH, bit 6 de wSwitchState) est sur un
+; îlot de l'étang, qui n'est pas gelé dans le rêve. Frappé (une graine en biais), il dégèle la
+; porte du Réel : drapeau $80 de 1:b2, une fois ; Marine le remarque.
+; ==================================================================================================
+dreamCrystal:
+	ld a,(wGroup1RoomFlags+$b2)
+	bit 7,a
+	jp nz,interactionDelete
+	ld a,(wSwitchState)
+	and $40
+	ret z
+	ld hl,wGroup1RoomFlags+$b2
+	set 7,(hl)
+	ld a,SND_SOLVEPUZZLE
+	call playSound
+	ld bc,TX_5acc
+	call showText
+	jp interactionDelete

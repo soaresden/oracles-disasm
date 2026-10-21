@@ -92,7 +92,7 @@ group0WarpSources:
 	m_StandardWarp $0 $79 $18 $2 $4
 	m_StandardWarp $0 $7c $05 $2 $4
 	m_StandardWarp $0 $89 $17 $2 $4
-	m_StandardWarp $0 $a3 $38 $3 $4
+	;m_StandardWarp $0 $a3 $38 $3 $4 ; BALLADE: l'île du Grand Sommeil (0:a0-d4, le Songe)
 	m_StandardWarp $0 $bd $31 $2 $4
 	m_StandardWarp $0 $c5 $27 $3 $4
 	m_StandardWarp $0 $cd $29 $2 $4
@@ -110,7 +110,7 @@ group0WarpSources:
 	;m_StandardWarp $0 $2b $4e $5 $4 ; BALLADE: Mont-Braise (1:08-3c)
 	;m_StandardWarp $0 $3c $05 $1 $4 ; BALLADE: Mont-Braise (1:08-3c)
 	m_StandardWarp $0 $5b $28 $5 $4
-	m_StandardWarp $0 $a0 $33 $5 $4
+	;m_StandardWarp $0 $a0 $33 $5 $4 ; BALLADE: l'île du Grand Sommeil (0:a0-d4, le Songe)
 	m_StandardWarp $0 $a5 $3e $5 $4
 	m_WarpListEndNoDefault
 
@@ -232,6 +232,11 @@ group1WarpSources:
 	m_StandardWarp $0 $61 $48 $3 $4 ; BALLADE: porte de la cabane du fossoyeur -> 3:25
 	m_StandardWarp $0 $42 $71 $5 $4 ; BALLADE: la grille ouverte -> la Cathédrale des Échos (5:aa)
 	m_StandardWarp $0 $48 $4f $4 $4 ; BALLADE: l'entrée du Nid -> la Spirale Céleste (4:3c)
+	; BALLADE: l'île du Grand Sommeil (1:a0-d4) : le veilleur, la famille, la chanteuse, le palais
+	m_StandardWarp $0 $c2 $4a $3 $4 ; BALLADE: porte de la maison du veilleur -> 3:27
+	m_StandardWarp $0 $b1 $4b $3 $4 ; BALLADE: porte de la maison de la famille -> 3:28
+	m_StandardWarp $0 $b3 $4c $3 $4 ; BALLADE: porte de la maison de la chanteuse -> 3:29
+	m_StandardWarp $0 $b2 $50 $4 $4 ; BALLADE: la porte dégelée -> le Palais Givré (4:55)
 	m_StandardWarp $0 $0a $4e $4 $4 ; BALLADE: la bouche du grand visage du cratère -> la Forge Endormie (4:bb)
 	;m_StandardWarp $0 $13 $67 $5 $4 ; BALLADE: 1:13 est la plage aux châteaux de sable
 	;m_StandardWarp $0 $14 $16 $3 $4 ; BALLADE: la Lagune des Serments (1:04-37)
@@ -264,7 +269,7 @@ group1WarpSources:
 	m_StandardWarp $0 $9b $11 $3 $4 ; BALLADE: porte de la boutique de Port-Veille -> 3:5e
 	m_StandardWarp $0 $7b $02 $4 $4 ; BALLADE: porte du Phare Éteint (cap) -> hall du phare (4:24)
 	m_StandardWarp $0 $91 $19 $5 $4
-	m_StandardWarp $0 $a3 $39 $3 $4
+	;m_StandardWarp $0 $a3 $39 $3 $4 ; BALLADE: l'île du Grand Sommeil (1:a0-d4)
 	m_StandardWarp $0 $a5 $57 $5 $4
 	m_PointerWarp     $a7 warpSource785a
 	m_StandardWarp $0 $ad $30 $2 $4
@@ -467,6 +472,13 @@ group3WarpSources:
 	; BALLADE: l'île des Échos : sortie de la cabane du fossoyeur
 	m_StandardWarp $4 $25 $56 $1 $3
 	m_StandardWarp $8 $25 $56 $1 $3
+	; BALLADE: l'île du Grand Sommeil : sorties des maisons du veilleur, de la famille, de la chanteuse
+	m_StandardWarp $4 $27 $59 $1 $3
+	m_StandardWarp $8 $27 $59 $1 $3
+	m_StandardWarp $4 $28 $5a $1 $3
+	m_StandardWarp $8 $28 $5a $1 $3
+	m_StandardWarp $4 $29 $5b $1 $3
+	m_StandardWarp $8 $29 $5b $1 $3
 	; BALLADE: la Cathédrale des Échos : la porte du souvenir (la maison de Marine) ramène au chœur
 	m_StandardWarp $4 $26 $72 $5 $3
 	m_StandardWarp $8 $26 $72 $5 $3
@@ -535,6 +547,7 @@ group4WarpSources:
 	;m_StandardWarp $4 $46 $01 $1 $3 ; BALLADE: plus l'entrée du 2e donjon
 	m_StandardWarp $4 $39 $4f $2 $3 ; BALLADE: sortie du Coffre à Jouets -> le rêve de Lila (2:21)
 	m_StandardWarp $4 $3c $58 $1 $3 ; BALLADE: sortie de la Spirale Céleste -> devant l'entrée du Nid (1:48)
+	m_StandardWarp $4 $55 $5c $1 $3 ; BALLADE: sortie du Palais Givré -> devant la porte du palais (1:b2)
 	m_StandardWarp $4 $66 $02 $0 $3
 	m_StandardWarp $4 $91 $03 $0 $3
 	m_StandardWarp $4 $bb $55 $1 $3 ; BALLADE: sortie de la Forge Endormie -> devant la bouche du cratère (1:0a)
