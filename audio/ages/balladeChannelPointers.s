@@ -165,6 +165,28 @@ musBalladeCoffre:
 	.dw musBalladeCoffreChannel6
 	.db $ff
 
+musBalladeLagune:
+	.db $00
+	.dw musBalladeLaguneChannel0
+	.db $01
+	.dw musBalladeLaguneChannel1
+	.db $04
+	.dw musBalladeLaguneChannel4
+	.db $06
+	.dw musBalladeLaguneChannel6
+	.db $ff
+
+musBalladeRecif:
+	.db $00
+	.dw musBalladeRecifChannel0
+	.db $01
+	.dw musBalladeRecifChannel1
+	.db $04
+	.dw musBalladeRecifChannel4
+	.db $06
+	.dw musBalladeRecifChannel6
+	.db $ff
+
 sndBalladeGull:
 	.db $02
 	.dw sndBalladeGullChannel2
