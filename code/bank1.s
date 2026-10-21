@@ -378,6 +378,15 @@ screenTransitionState2:
 	jr c,@fail
 
 .ifdef ROM_AGES
+	; BALLADE: dehors (groupes 0 et 1), jamais de changement d'écran sur la mer profonde ($fc),
+	; même avec les Écailles de Sirène : les îles ne se rejoignent qu'en Bateau-Rondin
+	ld a,(wActiveGroup)
+	cp $02
+	jr nc,+
+	ld a,(wObjectTileIndex)
+	cp TILEINDEX_DEEP_WATER
+	jr z,@fail
++
 	ld a,TREASURE_MERMAID_SUIT
 	call checkTreasureObtained
 	ret c
