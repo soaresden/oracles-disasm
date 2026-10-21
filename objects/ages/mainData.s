@@ -4979,6 +4979,8 @@ group1MapacObjectData:
 	obj_Interaction INTERAC_BALLADE_CREUSE $00 $08 $08
 	obj_End
 group2Map21ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $05 $48 $38
+	obj_Interaction INTERAC_BALLADE_OBJECT $06 $58 $78
 	obj_End
 group2Map9eObjectData:
 	obj_Interaction INTERAC_BALLADE_NPC $07 $28 $68
@@ -4989,6 +4991,7 @@ group3Map20ObjectData:
 	obj_Interaction $46 $00 $58 $88
 	obj_End
 group3Map21ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $04 $48 $38
 	obj_End
 group3Map22ObjectData:
 	obj_End
@@ -5000,6 +5003,7 @@ group3Map5eObjectData:
 group3Map9eObjectData:
 	obj_Interaction INTERAC_BALLADE_NPC $00 $48 $38
 	obj_Interaction INTERAC_MARINE $05 $08 $08 ; la fin du chapitre 1 : le tour du village
+	obj_Interaction INTERAC_BALLADE_OBJECT $07 $08 $08 ; parties de la v1.0/1.1 : le Carnet des Rêves
 	obj_End
 group3Map9fObjectData:
 	obj_Interaction INTERAC_BALLADE_DEBUG $00 $08 $08

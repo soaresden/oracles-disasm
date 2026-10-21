@@ -37,7 +37,7 @@ itemUsageParameterTable:
 	.db $43, <wGameKeysJustPressed  ; ITEM_SHOOTER
 	.db $00, <wGameKeysJustPressed  ; ITEM_10
 	.db $05, <wGameKeysJustPressed  ; ITEM_HARP
-	.db $00, <wGameKeysJustPressed  ; ITEM_12
+	.db $05, <wGameKeysJustPressed  ; ITEM_12 BALLADE: le Carnet des Rêves
 	.db $43, <wGameKeysJustPressed  ; ITEM_SLINGSHOT
 	.db $00, <wGameKeysJustPressed  ; ITEM_14
 	.db $13, <wGameKeysJustPressed  ; ITEM_SHOVEL
@@ -80,7 +80,7 @@ linkItemAnimationTable:
 	.db $c6, LINK_ANIM_MODE_21      ; ITEM_SHOOTER
 	.db $80, LINK_ANIM_MODE_NONE    ; ITEM_10
 	.db $70, LINK_ANIM_MODE_HARP_2  ; ITEM_HARP
-	.db $80, LINK_ANIM_MODE_NONE    ; ITEM_12
+	.db $00, LINK_ANIM_MODE_NONE    ; ITEM_12 BALLADE: le Carnet des Rêves
 	.db $c6, LINK_ANIM_MODE_21      ; ITEM_SLINGSHOT
 	.db $80, LINK_ANIM_MODE_NONE    ; ITEM_14
 	.db $b0, LINK_ANIM_MODE_DIG_2   ; ITEM_SHOVEL

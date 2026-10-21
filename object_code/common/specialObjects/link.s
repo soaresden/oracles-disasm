@@ -5051,7 +5051,14 @@ checkLinkPushingAgainstBed:
 	; « Dormir un peu ? » (INTERAC_MARINE $03, qui endort Link)
 	ld a,(wActiveRoom)
 	cp <ROOM_AGES_39e
+	jr z,+
+	; la maison de Lila (3:21, même disposition), quand elle dort : on rejoint son rêve
+	cp $21
 	jr nz,@notA
+	ld a,GLOBALFLAG_BALLADE_LILA_ASLEEP
+	call checkGlobalFlag
+	jr z,@notA
++
 	ld a,(wGameKeysJustPressed)
 	and BTN_A
 	jr z,@notA

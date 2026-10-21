@@ -416,7 +416,7 @@ parentItemUpdate:
 	.dw parentItemCode_shooter		; ITEM_SHOOTER
 	.dw clearParentItem			; ITEM_10
 	.dw parentItemCode_harp			; ITEM_HARP
-	.dw clearParentItem			; ITEM_12
+	.dw parentItemCode_carnet		; ITEM_12 BALLADE: le Carnet des Rêves
 	.dw parentItemCode_slingshot		; ITEM_SLINGSHOT
 	.dw clearParentItem			; ITEM_14
 	.dw parentItemCode_shovel		; ITEM_SHOVEL

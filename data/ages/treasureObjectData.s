@@ -44,7 +44,7 @@ treasureObjectData:
 	/* $0f */ m_TreasureSubid   $38, $01, $2e, $21, TREASURE_OBJECT_SHOOTER_00
 	/* $10 */ m_TreasureSubid   $00, $00, $ff, $00, TREASURE_OBJECT_10_00
 	/* $11 */ m_TreasurePointer treasureObjectData11
-	/* $12 */ m_TreasureSubid   $00, $00, $ff, $00, TREASURE_OBJECT_12_00
+	/* $12 */ m_TreasureSubid   $0a, $00, $72, $69, TREASURE_OBJECT_12_00 ; BALLADE: le Carnet des Rêves
 	/* $13 */ m_TreasurePointer treasureObjectData13
 	/* $14 */ m_TreasureSubid   $00, $00, $ff, $00, TREASURE_OBJECT_14_00
 	/* $15 */ m_TreasurePointer treasureObjectData15
@@ -377,6 +377,7 @@ treasureObjectData41:
 	m_TreasureSubid $0a, $09, $63, $79, TREASURE_OBJECT_TRADEITEM_09
 	m_TreasureSubid $0a, $0a, $64, $7a, TREASURE_OBJECT_TRADEITEM_0a
 	m_TreasureSubid $0a, $0b, $65, $7b, TREASURE_OBJECT_TRADEITEM_0b
+	m_TreasureSubid $38, $00, $5a, $70, TREASURE_OBJECT_TRADEITEM_0c ; BALLADE: Sire Bouchon, dans un coffre
 
 treasureObjectData45:
 	m_BeginTreasureSubids TREASURE_OLD_MERMAID_KEY

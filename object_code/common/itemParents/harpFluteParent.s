@@ -240,3 +240,9 @@ parentItemCode_harp:
 	ret z
 	ld l,<wSelectedHarpSong
 	ret
+
+;;
+; BALLADE: ITEM_12, le Carnet des Rêves : on le lit (code/ages/balladeObjects.s)
+parentItemCode_carnet:
+	callab balladeObjects.readCarnet
+	jp clearParentItem

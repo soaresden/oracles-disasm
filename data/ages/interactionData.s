@@ -361,7 +361,7 @@ interactiond7SubidData:
 	m_InteractionSubidData $7f $0e $13
 	m_InteractionSubidData $7f $12 $53
 	m_InteractionSubidData $7e $16 $21 ; BALLADE: la Lanterne des Songes (au lieu de la harpe), flamme bleue
-	m_InteractionSubidData $7e $06 $03
+	m_InteractionSubidData $7e $06 $33 ; BALLADE: le Carnet des Rêves (palette 3)
 	m_InteractionSubidData $7e $0e $33
 	m_InteractionSubidData $7e $16 $13
 	m_InteractionSubidData $00 $00 $00
@@ -850,13 +850,17 @@ interactione8SubidData:
 	m_InteractionSubidData $42 $00 $12 ; le forain (le vieux, autres couleurs)
 	m_InteractionSubidDataEnd
 
-; BALLADE: les objets de nos îles (INTERAC_BALLADE_OBJECT) : spr_ballade_objects ($e3), objet n =
-; tuiles 2n et 2n+1 ; palette + animation (2 = image fixe des villageois, sans les animer)
+; BALLADE: les objets de nos îles (INTERAC_BALLADE_OBJECT) : spr_ballade_objects ($e3), image n =
+; tuiles 4n à 4n+3 (deux sprites 8 x 16) ; palette + animation (2 = image fixe des villageois, sans les animer)
 interactionedSubidData:
 	m_InteractionSubidData $e3 $00 $32 ; $00 le Bateau-Rondin (palette 3 : bois orange, voile crème)
 	m_InteractionSubidData $00 $00 $00 ; $01 Marine parle en arrivant (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $02 Marine lit le vent, rattrapage (invisible)
-	m_InteractionSubidData $e3 $02 $32 ; $03 le grelot de la grotte (palette 3)
+	m_InteractionSubidData $e3 $04 $32 ; $03 le grelot de la grotte (palette 3)
+	m_InteractionSubidData $3f $00 $22 ; $04 Lila (la dame aux cheveux longs d'Ages, en rouge)
+	m_InteractionSubidData $3f $00 $22 ; $05 Lila dans son rêve
+	m_InteractionSubidData $e3 $08 $32 ; $06 le Coffre à Jouets (dans le rêve de Lila)
+	m_InteractionSubidData $00 $00 $00 ; $07 rattrapage du Carnet des Rêves (invisible)
 	m_InteractionSubidDataEnd
 
 interactiond4SubidData:

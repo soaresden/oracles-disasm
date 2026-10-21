@@ -87,7 +87,7 @@ treasureDisplayData_standard:
 	.db $00,                         $88, $00, $00, $00, $ff, <TX_0940 ; X TREASURE_SHOOTER (0x0f)
 	.db $00,                         $00, $00, $00, $00, $ff, <TX_0900 ; TREASURE_10 (0x10)
 	.db TREASURE_HARP,               $00, $00, $00, $00, $05, <TX_0941 ; X TREASURE_HARP (0x11)
-	.db $00,                         $00, $00, $00, $00, $ff, <TX_0900 ; TREASURE_12 (0x12)
+	.db $00,                         $a3, $03, $a4, $03, $ff, <TX_0942 ; TREASURE_12 (0x12) BALLADE: le Carnet des Rêves
 	.db $00,                         $07, $00, $07, $00, $ff, <TX_0900 ; TREASURE_SLINGSHOT (0x13)
 	.db $00,                         $00, $00, $00, $00, $ff, <TX_0900 ; TREASURE_14 (0x14)
 	.db $00,                         $9b, $04, $00, $00, $ff, <TX_092a ; TREASURE_SHOVEL (0x15)

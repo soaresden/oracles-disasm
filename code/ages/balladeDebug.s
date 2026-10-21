@@ -502,8 +502,9 @@ debugMilestones:
 	.db DBG_TREASURE, TREASURE_HEART_CONTAINER, $04
 	.db DBG_FULLHEALTH
 	.db DBG_END
-	; 4. La fin du chapitre 1 a été vue (le cap)
+	; 4. La fin du chapitre 1 a été vue (le cap) ; l'aubergiste a donné le Carnet des Rêves
 	.db DBG_ROOMFLAG, $01, $7b, $40
+	.db DBG_TREASURE, TREASURE_12, $00
 	.db DBG_END
 	; 5. Marine a lu le vent : le Bateau-Rondin, Hameau-Grelot ; 100 rubis (ceux du Phare)
 	.db DBG_GLOBALFLAG, GLOBALFLAG_BALLADE_RAFT
