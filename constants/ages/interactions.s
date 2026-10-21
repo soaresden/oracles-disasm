@@ -1403,6 +1403,7 @@
 ; @subid_01{Invisible : dans le Songe, demande à Link s'il veut se réveiller (Select)}
 ; @subid_02{Invisible : après le Phare, sur fond noir, Marine parle puis « À suivre... »}
 ; @subid_03{Invisible : à l'auberge, A devant le lit -> « Dormir un peu ? » (oui : Link s'endort)}
+; @subid_06{Elle sort de la tunique et emporte au loin la bombe que Link tient (Select)}
 .define INTERAC_MARINE $e7
 
 ;;
@@ -1437,3 +1438,11 @@
 ; BALLADE: le menu de test caché (code/ages/balladeDebug.s), dans la salle 3:9f. Invisible : des
 ; boîtes de choix (langue, île, moment), puis Link part avec les objets et drapeaux de l'histoire.
 .define INTERAC_BALLADE_DEBUG $ec
+
+;;
+; BALLADE: les objets de nos îles (code/ages/balladeObjects.s ; images art/objets.txt).
+; @subid_00{Le Bateau-Rondin, au ponton de chaque île : A -> on choisit l'île où aller}
+; @subid_01{Invisible : Marine parle la première fois qu'on entre dans la salle}
+; @subid_02{Invisible : parties de la v1.0/1.1 sauvées après le chapitre 1 : Marine lit le vent}
+; @subid_03{Le grelot de la grotte de la Boîte : une bombe le fait sonner, un pont apparaît}
+.define INTERAC_BALLADE_OBJECT $ed

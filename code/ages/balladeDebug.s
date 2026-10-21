@@ -22,6 +22,7 @@
 	DBG_ROOMFLAG	db ; groupe, salle, masque
 	DBG_RHYTHM	db ; (rien) : le boss en rythme lancé comme par son code secret
 	DBG_FULLHEALTH	db ; (rien) : cœurs remplis
+	DBG_GLOBALFLAG	db ; drapeau global (GLOBALFLAG_*) mis à 1
 .ende
 
 ;;
@@ -297,6 +298,7 @@ runList:
 	.dw @roomFlag
 	.dw @rhythm
 	.dw @fullHealth
+	.dw @globalFlag
 
 @treasure:
 	pop hl
@@ -359,6 +361,14 @@ runList:
 	pop hl
 	jr runList
 
+@globalFlag:
+	pop hl
+	ldi a,(hl)
+	push hl
+	call setGlobalFlag
+	pop hl
+	jr runList
+
 ; @param	hl	L'adresse (2 octets)
 ; @param[out]	de	L'adresse
 @readAddress:
@@ -387,9 +397,9 @@ debugEntries:
 	.db $03, $01, $7b, $58 ; le cap : l'essence est là, la fin du chapitre 1
 	.dw debugNone
 	; 2. Hameau-Grelot
-	.db $ff, $00, $00, $00
+	.db $05, $01, $31, $44 ; la jetée, en arrivant avec le Bateau-Rondin
 	.dw debugNone
-	.db $ff, $00, $00, $00
+	.db $05, $01, $11, $44 ; la place du Grelot
 	.dw debugNone
 	.db $ff, $00, $00, $00
 	.dw debugNone
@@ -494,6 +504,16 @@ debugMilestones:
 	.db DBG_END
 	; 4. La fin du chapitre 1 a été vue (le cap)
 	.db DBG_ROOMFLAG, $01, $7b, $40
+	.db DBG_END
+	; 5. Marine a lu le vent : le Bateau-Rondin, Hameau-Grelot ; 100 rubis (ceux du Phare)
+	.db DBG_GLOBALFLAG, GLOBALFLAG_BALLADE_RAFT
+	.db DBG_GLOBALFLAG, GLOBALFLAG_BALLADE_ISLAND2
+	.db DBG_WRITE
+	.dw wNumRupees
+	.db $00
+	.db DBG_WRITE
+	.dw wNumRupees+1
+	.db $01
 	.db DBG_END
 
 debugNone:

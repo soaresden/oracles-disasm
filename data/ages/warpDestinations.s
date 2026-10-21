@@ -98,6 +98,7 @@ group0WarpDestTable:
 	m_WarpDest $f1 $43 $0 $1
 	; BALLADE
 	m_WarpDest $9a $45 $0 $1 ; $4d : Songe, devant la porte de l'auberge
+	m_WarpDest $21 $44 $0 $1 ; $4e : Songe, devant la porte de la maison de Lila
 
 group1WarpDestTable:
 	m_WarpDest $48 $21 $0 $1
@@ -177,6 +178,10 @@ group1WarpDestTable:
 	m_WarpDest $9a $45 $0 $1 ; $49 : devant la porte de l'auberge de Port-Veille
 	m_WarpDest $7b $44 $0 $1 ; $4a : devant la porte du Phare Éteint, sur le cap
 	m_WarpDest $9b $42 $0 $1 ; $4b : devant la porte de la boutique de Port-Veille
+	m_WarpDest $12 $44 $0 $1 ; $4c : devant la boutique de Pépin (Hameau-Grelot)
+	m_WarpDest $21 $44 $0 $1 ; $4d : devant la maison de Lila
+	m_WarpDest $22 $44 $0 $1 ; $4e : devant l'école des Bonnets
+	m_WarpDest $32 $34 $0 $1 ; $4f : devant la grotte de la Boîte
 
 group2WarpDestTable:
 	m_WarpDest $90 $45 $0 $e
@@ -258,6 +263,7 @@ group2WarpDestTable:
 	m_WarpDest $ff $48 $0 $4
 	; BALLADE
 	m_WarpDest $9e $ff $9 $3 ; $4d : Songe, entrée de l'auberge par le bas
+	m_WarpDest $21 $ff $9 $3 ; $4e : Songe, entrée de la maison de Lila par le bas
 
 group3WarpDestTable:
 	m_WarpDest $0f $f4 $9 $3
@@ -327,6 +333,10 @@ group3WarpDestTable:
 	m_WarpDest $fd $ff $9 $3
 	m_WarpDest $fe $ff $9 $3
 	m_WarpDest $ff $ff $9 $3
+	; BALLADE: Hameau-Grelot
+	m_WarpDest $20 $ff $9 $3 ; $43 : la boutique de Pépin, par le bas
+	m_WarpDest $21 $ff $9 $3 ; $44 : la maison de Lila, par le bas
+	m_WarpDest $22 $ff $9 $3 ; $45 : l'école des Bonnets, par le bas
 
 group4WarpDestTable:
 	m_WarpDest $04 $ff $9 $3
@@ -518,6 +528,8 @@ group5WarpDestTable:
 	m_WarpDest $f7 $ff $9 $3
 	m_WarpDest $f9 $ff $9 $3
 	m_WarpDest $fb $17 $0 $4
+	; BALLADE: Hameau-Grelot
+	m_WarpDest $b0 $87 $0 $4 ; $6d : la grotte de la Boîte, au-dessus de l'escalier
 
 group6WarpDestTable:
 	m_WarpDest $05 $02 $f $3

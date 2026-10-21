@@ -43,14 +43,11 @@ shopItemState0:
 	ld (de),a
 ++
 	; If this is 10 bombs, delete self if Link doesn't have bombs
+	; BALLADE: chez nous, les premières bombes s'achètent (la boutique de Pépin)
 	ld a,(de)
 	cp $04
-	jr nz,++
-	ld a,TREASURE_BOMBS
-	call checkTreasureObtained
-	jp nc,shopItemPopStackAndDeleteSelf
-	jr @checkFlutePurchasable
-++
+	jr z,@checkFlutePurchasable
+
 .else
 	ld a,TREASURE_SWORD
 	call checkTreasureObtained

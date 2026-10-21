@@ -234,6 +234,9 @@ interactionAnimationTable:
 	.dw interactione8Animations ; BALLADE
 	.dw interactione4Animations ; BALLADE: $e9 (rien à afficher)
 	.dw interactione4Animations ; BALLADE: $ea (rien à afficher)
+	.dw interactione4Animations ; BALLADE: $eb (rien à afficher)
+	.dw interactione4Animations ; BALLADE: $ec (rien à afficher)
+	.dw interactione8Animations ; BALLADE: $ed, les objets (images fixes des villageois)
 
 interactionOamDataTable: ; 0x59a23
 	.dw interaction00OamDataPointers
@@ -471,6 +474,9 @@ interactionOamDataTable: ; 0x59a23
 	.dw interactione8OamDataPointers ; BALLADE
 	.dw interactione4OamDataPointers ; BALLADE: $e9
 	.dw interactione4OamDataPointers ; BALLADE: $ea
+	.dw interactione4OamDataPointers ; BALLADE: $eb
+	.dw interactione4OamDataPointers ; BALLADE: $ec
+	.dw interactione8OamDataPointers ; BALLADE: $ed
 
 interaction00Animations:
 interaction01Animations:

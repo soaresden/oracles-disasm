@@ -4,7 +4,6 @@ group0Map0fObjectData:
 group0Map1cObjectData:
 group0Map1eObjectData:
 group0Map1fObjectData:
-group0Map23ObjectData:
 group0Map28ObjectData:
 group0Map2dObjectData:
 group0Map2eObjectData:
@@ -109,7 +108,6 @@ group0MapfcObjectData:
 group0MapfdObjectData:
 group0MapfeObjectData:
 group0MapffObjectData:
-group1Map00ObjectData:
 group1Map0bObjectData:
 group1Map0cObjectData:
 group1Map0dObjectData:
@@ -123,7 +121,6 @@ group1Map2aObjectData:
 group1Map2bObjectData:
 group1Map2eObjectData:
 group1Map2fObjectData:
-group1Map30ObjectData:
 group1Map3aObjectData:
 group1Map3cObjectData:
 group1Map3eObjectData:
@@ -258,7 +255,6 @@ group2Map1bObjectData:
 group2Map1cObjectData:
 group2Map1dObjectData:
 group2Map20ObjectData:
-group2Map21ObjectData:
 group2Map22ObjectData:
 group2Map23ObjectData:
 group2Map24ObjectData:
@@ -466,9 +462,6 @@ group3Map1bObjectData:
 group3Map1cObjectData:
 group3Map1dObjectData:
 group3Map1eObjectData:
-group3Map20ObjectData:
-group3Map21ObjectData:
-group3Map22ObjectData:
 group3Map23ObjectData:
 group3Map24ObjectData:
 group3Map25ObjectData:
@@ -688,13 +681,11 @@ group5MapfeObjectData:
 group5MapffObjectData:
 	obj_End
 
-group0Map12ObjectData:
 	obj_Interaction $80 $09 $5e $20
 	obj_Interaction $80 $0a $58 $20
 	obj_Pointer group0Map12EnemyObjectData
 	obj_End
 
-group0Map13ObjectData:
 	obj_Interaction $dc $03 $48 $28
 	obj_Interaction $dc $04 $48 $78
 	obj_Interaction $e1 $00 $48 $28
@@ -718,19 +709,15 @@ group0Mapc1ObjectData:
 	obj_SpecificEnemyA $00 $5a $38 $00 $00
 	obj_End
 
-group0Map00ObjectData:
 	obj_Pointer group0Map00EnemyObjectData
 	obj_End
 
-group0Map01ObjectData:
 	obj_Pointer group0Map01EnemyObjectData
 	obj_End
 
-group0Map02ObjectData:
 	obj_Pointer group0Map02EnemyObjectData
 	obj_End
 
-group0Map03ObjectData:
 	obj_Interaction $8a $00 $00 $00 $05
 	obj_Pointer group0Map03EnemyObjectData
 	obj_End
@@ -775,11 +762,9 @@ group0Map0dObjectData:
 	obj_Interaction $dc $07 $38 $78
 	obj_End
 
-group0Map10ObjectData:
 	obj_Pointer group0Map10EnemyObjectData
 	obj_End
 
-group0Map11ObjectData:
 	obj_Interaction $dc $07 $58 $48
 	obj_Pointer group0Map11EnemyObjectData
 	obj_End
@@ -820,16 +805,13 @@ group0Map1dObjectData:
 	obj_Pointer group0Map1dEnemyObjectData
 	obj_End
 
-group0Map20ObjectData:
 	obj_Interaction $e1 $00 $28 $48
 	obj_Pointer group0Map20EnemyObjectData
 	obj_End
 
-group0Map21ObjectData:
 	obj_Pointer group0Map21EnemyObjectData
 	obj_End
 
-group0Map22ObjectData:
 	obj_Interaction $71 $0d $10 $38
 	obj_Pointer group0Map22EnemyObjectData
 	obj_End
@@ -876,20 +858,16 @@ group0Map2cObjectData:
 	obj_Pointer group0Map2cEnemyObjectData
 	obj_End
 
-group0Map30ObjectData:
 	obj_Interaction $b6 $02 $58 $28
 	obj_Pointer group0Map30EnemyObjectData
 	obj_End
 
-group0Map31ObjectData:
 	obj_Pointer group0Map31EnemyObjectData
 	obj_End
 
-group0Map32ObjectData:
 	obj_Pointer group0Map32EnemyObjectData
 	obj_End
 
-group0Map33ObjectData:
 	obj_Pointer group0Map33EnemyObjectData
 	obj_End
 
@@ -1411,31 +1389,24 @@ group1Mapc1ObjectData:
 	obj_SpecificEnemyA $00 $5a $3e $00 $00
 	obj_End
 
-group1Map01ObjectData:
 	obj_Interaction $1f $00 $18 $00
 	obj_Interaction $b6 $08 $28 $38
 	obj_Pointer group1Map01EnemyObjectData
 	obj_End
 
-group1Map10ObjectData:
 	obj_Pointer group1Map10EnemyObjectData
 	obj_End
 
-group1Map11ObjectData:
 	obj_Pointer group1Map11EnemyObjectData
 	obj_End
 
-group1Map13ObjectData:
 	obj_Interaction $80 $09 $1e $50
 	obj_Interaction $80 $0a $18 $50
-group1Map02ObjectData:
 group1Map04ObjectData:
-group1Map12ObjectData:
 group1Map14ObjectData:
 	obj_Interaction $dc $05
 	obj_End
 
-group1Map03ObjectData:
 	obj_Interaction $dc $13
 	obj_Interaction $dc $06 $18 $50
 	obj_Interaction $bf $0c $68 $50
@@ -1496,21 +1467,17 @@ group1Map1bObjectData:
 	obj_Pointer group1Map1bEnemyObjectData
 	obj_End
 
-group1Map20ObjectData:
 	obj_Interaction $e1 $00 $28 $18
 	obj_Interaction $37 $0b $38 $a8
 	obj_Pointer group1Map20EnemyObjectData
 	obj_End
 
-group1Map21ObjectData:
 	obj_Pointer group1Map21EnemyObjectData
 	obj_End
 
-group1Map22ObjectData:
 	obj_Pointer group1Map22EnemyObjectData
 	obj_End
 
-group1Map23ObjectData:
 	obj_Interaction $90 $10
 	obj_Pointer group1Map23EnemyObjectData
 	obj_End
@@ -1536,15 +1503,12 @@ group1Map2dObjectData:
 	obj_Interaction $4e $04 $38 $88
 	obj_End
 
-group1Map31ObjectData:
 	obj_Pointer group1Map31EnemyObjectData
 	obj_End
 
-group1Map32ObjectData:
 	obj_Pointer group1Map32EnemyObjectData
 	obj_End
 
-group1Map33ObjectData:
 	obj_Pointer group1Map33EnemyObjectData
 	obj_End
 
@@ -4686,7 +4650,6 @@ group5MapdfObjectData:
 	obj_Pointer group5MapdfEnemyObjectData
 	obj_End
 
-group5Mapb0ObjectData:
 	obj_Pointer group5Mapb0EnemyObjectData
 	obj_End
 
@@ -4835,6 +4798,54 @@ group5MapfbObjectData:
 ; BALLADE: objets des salles de nos îles (générés par tools/make_rooms.py depuis
 ; story/salles/objets.txt)
 ; ==================================================================================================
+group0Map00ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map01ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map02ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map03ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map10ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map11ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map12ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map13ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map20ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map21ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map22ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map23ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map30ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map31ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map32ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map33ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
 group0Map79ObjectData:
 	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
 	obj_End
@@ -4883,6 +4894,41 @@ group0MapabObjectData:
 group0MapacObjectData:
 	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
 	obj_End
+group1Map00ObjectData:
+	obj_End
+group1Map01ObjectData:
+	obj_End
+group1Map02ObjectData:
+	obj_End
+group1Map03ObjectData:
+	obj_End
+group1Map10ObjectData:
+	obj_End
+group1Map11ObjectData:
+	obj_End
+group1Map12ObjectData:
+	obj_End
+group1Map13ObjectData:
+	obj_End
+group1Map20ObjectData:
+	obj_End
+group1Map21ObjectData:
+	obj_End
+group1Map22ObjectData:
+	obj_End
+group1Map23ObjectData:
+	obj_End
+group1Map30ObjectData:
+	obj_End
+group1Map31ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $00 $48 $18
+	obj_Interaction INTERAC_BALLADE_OBJECT $01 $08 $08
+	obj_End
+group1Map32ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $01 $08 $08
+	obj_End
+group1Map33ObjectData:
+	obj_End
 group1Map79ObjectData:
 	obj_End
 group1Map7aObjectData:
@@ -4901,6 +4947,8 @@ group1Map8bObjectData:
 group1Map8cObjectData:
 	obj_End
 group1Map99ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $00 $48 $18
+	obj_Interaction INTERAC_BALLADE_OBJECT $02 $08 $08 ; parties de la v1.0/1.1 : Marine lit le vent
 	obj_End
 group1Map9aObjectData:
 	obj_Interaction INTERAC_BALLADE_NPC $06 $58 $78
@@ -4909,6 +4957,7 @@ group1Map9bObjectData:
 	obj_Interaction INTERAC_BALLADE_NPC $04 $58 $28
 	obj_Interaction INTERAC_BALLADE_NPC $05 $58 $78
 	obj_Interaction INTERAC_MARINE $05 $08 $08 ; la fin du chapitre 1 : le tour du village
+	obj_Interaction INTERAC_BALLADE_OBJECT $02 $08 $08 ; parties de la v1.0/1.1 : Marine lit le vent
 	obj_End
 group1Map9cObjectData:
 	obj_Interaction INTERAC_BALLADE_NPC $02 $38 $38
@@ -4923,13 +4972,25 @@ group1MapaaObjectData:
 group1MapabObjectData:
 	obj_Interaction INTERAC_BALLADE_NPC $01 $38 $58
 	obj_Interaction INTERAC_MARINE $05 $08 $08 ; la fin du chapitre 1 : le tour du village
+	obj_Interaction INTERAC_BALLADE_OBJECT $02 $08 $08 ; parties de la v1.0/1.1 : Marine lit le vent
 	obj_End
 group1MapacObjectData:
 	obj_Interaction INTERAC_BALLADE_NPC $08 $38 $78
 	obj_Interaction INTERAC_BALLADE_CREUSE $00 $08 $08
 	obj_End
+group2Map21ObjectData:
+	obj_End
 group2Map9eObjectData:
 	obj_Interaction INTERAC_BALLADE_NPC $07 $28 $68
+	obj_End
+group3Map20ObjectData:
+	obj_Interaction $47 $04 $28 $80
+	obj_Interaction $47 $01 $28 $60
+	obj_Interaction $46 $00 $58 $88
+	obj_End
+group3Map21ObjectData:
+	obj_End
+group3Map22ObjectData:
 	obj_End
 group3Map5eObjectData:
 	obj_Interaction $47 $01 $28 $80
@@ -5010,4 +5071,8 @@ group4Map24ObjectData:
 	obj_End
 group4Map4aObjectData:
 	obj_Interaction INTERAC_BALLADE_RHYTHM $00 $58 $78
+	obj_End
+group5Mapb0ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $03 $18 $78
+	obj_Interaction INTERAC_BALLADE_OBJECT $01 $08 $08
 	obj_End

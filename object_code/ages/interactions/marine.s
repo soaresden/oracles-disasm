@@ -5,6 +5,13 @@
 ; ce code se contente de l'afficher et de l'animer.
 ; ==================================================================================================
 interactionCodee7:
+	; Sous-type $06 : elle emporte une bombe (code/ages/balladeMarine.s)
+	ld e,Interaction.subid
+	ld a,(de)
+	cp $06
+	jr nz,+
+	jpab balladeMarine.bombCarrier
++
 	call checkInteractionState
 	jr nz,@state1
 

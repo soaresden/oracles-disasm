@@ -520,6 +520,7 @@
 	; BALLADE
 	m_GfxData spr_marine_gull
 	m_GfxData spr_marine_human
+	m_GfxData spr_ballade_objects
 	m_GfxData spr_film
 	m_GfxData gfx_film_bg
 	m_GfxData map_film_bg

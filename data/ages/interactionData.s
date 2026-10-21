@@ -249,6 +249,7 @@ interactionData:
 	/* $ea */ m_InteractionData $00 $00 $00 ; BALLADE: boss en rythme (rien à afficher)
 	/* $eb */ m_InteractionData $00 $00 $00 ; BALLADE: le Creuse-Rubis (rien à afficher)
 	/* $ec */ m_InteractionData $00 $00 $00 ; BALLADE: le menu de test caché (rien à afficher)
+	/* $ed */ m_InteractionData interactionedSubidData ; BALLADE: les objets de nos îles
 
 interaction60SubidData:
 interaction63SubidData:
@@ -847,6 +848,15 @@ interactione8SubidData:
 	m_InteractionSubidData $4f $10 $12 ; l'ado
 	m_InteractionSubidData $e2 $00 $32 ; Marine humaine (spr_marine_human) : cheveux orange, robe jaune pâle
 	m_InteractionSubidData $42 $00 $12 ; le forain (le vieux, autres couleurs)
+	m_InteractionSubidDataEnd
+
+; BALLADE: les objets de nos îles (INTERAC_BALLADE_OBJECT) : spr_ballade_objects ($e3), objet n =
+; tuiles 2n et 2n+1 ; palette + animation (2 = image fixe des villageois, sans les animer)
+interactionedSubidData:
+	m_InteractionSubidData $e3 $00 $32 ; $00 le Bateau-Rondin (palette 3 : bois orange, voile crème)
+	m_InteractionSubidData $00 $00 $00 ; $01 Marine parle en arrivant (invisible)
+	m_InteractionSubidData $00 $00 $00 ; $02 Marine lit le vent, rattrapage (invisible)
+	m_InteractionSubidData $e3 $02 $32 ; $03 le grelot de la grotte (palette 3)
 	m_InteractionSubidDataEnd
 
 interactiond4SubidData:

@@ -21,8 +21,9 @@ singleTileChangeGroupTable:
 singleTileChangeGroup0Data:
 	.db $39 $40 $22 $d7
 	.db $83 $80 $43 $1c
-	.db $13 $02 $42 $d7
-	.db $13 $04 $47 $d7
+	; BALLADE: 0:13 est la plage aux châteaux du Songe (Hameau-Grelot) : sans les changements d'Ages
+	;.db $13 $02 $42 $d7
+	;.db $13 $04 $47 $d7
 	.db $0a $80 $17 $ee
 	.db $48 $f0 $28 $64
 	.db $47 $f2 $36 $f2

@@ -233,3 +233,4 @@ objectGfxHeaderTable:
 	; BALLADE
 	/* $e1 */ m_ObjectGfxHeader spr_marine_gull
 	/* $e2 */ m_ObjectGfxHeader spr_marine_human
+	/* $e3 */ m_ObjectGfxHeader spr_ballade_objects

@@ -103,6 +103,17 @@
 	GLOBALFLAG_4e				db ; $4e
 	GLOBALFLAG_4f				db ; $4f
 
+	; BALLADE: Gulls of Life
+	GLOBALFLAG_BALLADE_RAFT			db ; $50: le Bateau-Rondin est prêt (fin du chapitre 1)
+	GLOBALFLAG_BALLADE_ISLAND2		db ; $51: Marine a repéré Hameau-Grelot (on peut y aller)
+	GLOBALFLAG_BALLADE_ISLAND3		db ; $52: ... la Lagune des Serments
+	GLOBALFLAG_BALLADE_ISLAND4		db ; $53: ... Mont-Braise
+	GLOBALFLAG_BALLADE_ISLAND5		db ; $54: ... l'île des Échos
+	GLOBALFLAG_BALLADE_ISLAND6		db ; $55: ... le Nid des Vents
+	GLOBALFLAG_BALLADE_ISLAND7		db ; $56: ... l'île du Grand Sommeil
+	GLOBALFLAG_BALLADE_ISLAND8		db ; $57: ... l'Œil de l'Insomnis
+	GLOBALFLAG_BALLADE_MARINE_BOMB		db ; $58: Marine sait porter une bombe (Select en la tenant)
+
 .else; ROM_SEASONS
 
 	GLOBALFLAG_DATING_ROSA			db ; $0b

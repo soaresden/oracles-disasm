@@ -268,7 +268,10 @@ marineEndingScript:
 @harbour:
 	showtext TX_5a42
 	wait 40
-	showtext TX_5a31
+	; Marine lit le vent : une île au nord ; le rondin de Link fera un radeau (le Bateau-Rondin)
+	showtext TX_5a54
+	setglobalflag GLOBALFLAG_BALLADE_RAFT
+	setglobalflag GLOBALFLAG_BALLADE_ISLAND2
 	writememory wBalladeEnding, $00
 	enablemenu
 	enableinput

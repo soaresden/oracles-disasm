@@ -4391,6 +4391,37 @@ paletteDataSongeAuberge: ; Songe : paletteData5600 en bleuté
 	m_RGB16 $06 $0a $10
 	m_RGB16 $01 $02 $06
 
+paletteDataSongeGrelot: ; Songe : paletteData4a30 en bleuté
+	m_RGB16 $15 $18 $15
+	m_RGB16 $0f $16 $12
+	m_RGB16 $08 $0e $0c
+	m_RGB16 $01 $02 $06
+
+	m_RGB16 $10 $10 $10
+	m_RGB16 $0f $16 $12
+	m_RGB16 $08 $0e $0c
+	m_RGB16 $01 $02 $06
+
+	m_RGB16 $15 $18 $15
+	m_RGB16 $10 $10 $10
+	m_RGB16 $0b $0b $0c
+	m_RGB16 $01 $02 $06
+
+	m_RGB16 $13 $15 $1a
+	m_RGB16 $0d $11 $16
+	m_RGB16 $07 $0a $0f
+	m_RGB16 $04 $04 $07
+
+	m_RGB16 $17 $1c $1d
+	m_RGB16 $09 $12 $1a
+	m_RGB16 $04 $0a $12
+	m_RGB16 $01 $02 $06
+
+	m_RGB16 $10 $15 $17
+	m_RGB16 $09 $0f $13
+	m_RGB16 $07 $07 $0f
+	m_RGB16 $03 $05 $0a
+
 ; BALLADE-SONGE-FIN
 
 ; BALLADE-TITRE-DEBUT (tools/make_title.py)

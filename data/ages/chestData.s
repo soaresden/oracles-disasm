@@ -114,6 +114,7 @@ chestGroup4Data:
 	.db $ff
 
 chestGroup5Data:
+	m_ChestData $1c, $b0, TREASURE_OBJECT_RUPEES_04 ; BALLADE: la grotte de la Boîte (provisoire : Sire Bouchon)
 	m_ChestData $17, $13, TREASURE_OBJECT_MERMAID_SUIT_00
 	m_ChestData $25, $14, TREASURE_OBJECT_SMALL_KEY_03
 	m_ChestData $53, $1b, TREASURE_OBJECT_SMALL_KEY_03

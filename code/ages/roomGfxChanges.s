@@ -149,6 +149,7 @@ applyRoomSpecificTileChangesAfterGfxLoad:
 	.db $00
 @group3:
 	.db $5e $04 ; BALLADE: la boutique de Port-Veille
+	.db $20 $04 ; BALLADE: la boutique de Pépin (Hameau-Grelot)
 	.db $ed $04
 	.db $fe $04
 @group4:

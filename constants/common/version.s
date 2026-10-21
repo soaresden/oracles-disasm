@@ -89,6 +89,8 @@
 ; écrit BALLADE_DEBUG_CODE en SRAM $bff2 ; la partie suivante commence dans la salle du menu
 .define BALLADE_DEBUG_HOLD_FRAMES 300
 .define BALLADE_DEBUG_CODE $d7
+; Marine emporte une bombe (balladeMarine.bombCarrier) : images de vol (2 pixels par image)
+.define BALLADE_CARRY_FRAMES 40
 
 
 ; Define to help with building directory strings, maybe other stuff

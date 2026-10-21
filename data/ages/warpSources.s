@@ -62,9 +62,10 @@ group0WarpSources:
 	m_StandardWarp $0 $ba $04 $4 $4
 	m_StandardWarp $0 $03 $05 $4 $4
 	m_PointerWarp     $0a warpSource76aa
-	m_StandardWarp $0 $02 $18 $3 $4
+	;m_StandardWarp $0 $02 $18 $3 $4 ; BALLADE: 0:02 = manège du Songe
 	m_StandardWarp $0 $04 $34 $3 $4
-	m_StandardWarp $0 $12 $35 $3 $4
+	;m_StandardWarp $0 $12 $35 $3 $4 ; BALLADE: 0:12 = boutique du Songe (fermée)
+	m_StandardWarp $0 $21 $4e $2 $4 ; BALLADE: Songe, porte de la maison de Lila -> 2:21
 	m_StandardWarp $0 $14 $36 $3 $4
 	m_StandardWarp $0 $06 $2d $2 $4
 	m_PointerWarp     $09 warpSource769a
@@ -205,7 +206,7 @@ group1WarpSources:
 	m_StandardWarp $2 $48 $04 $1 $3
 	m_StandardWarp $0 $0e $00 $5 $4
 	m_StandardWarp $4 $0e $2a $0 $3
-	m_StandardWarp $0 $02 $13 $3 $4
+	;m_StandardWarp $0 $02 $13 $3 $4 ; BALLADE: 1:02 est le manège de Hameau-Grelot
 	m_StandardWarp $0 $05 $3f $5 $4
 	m_StandardWarp $0 $06 $41 $5 $4
 	m_StandardWarp $0 $07 $43 $5 $4
@@ -214,13 +215,17 @@ group1WarpSources:
 	m_StandardWarp $0 $0c $0b $3 $4
 	m_StandardWarp $0 $0d $47 $2 $4
 	m_StandardWarp $0 $04 $14 $3 $4
-	m_StandardWarp $0 $12 $15 $3 $4
-	m_StandardWarp $0 $13 $67 $5 $4
+	; BALLADE: Hameau-Grelot (1:00-33) : la boutique de Pépin, la maison de Lila, l'école, la grotte
+	m_StandardWarp $0 $12 $43 $3 $4 ; BALLADE: porte de la boutique de Pépin -> 3:20
+	m_StandardWarp $0 $21 $44 $3 $4 ; BALLADE: porte de la maison de Lila -> 3:21
+	m_StandardWarp $0 $22 $45 $3 $4 ; BALLADE: porte de l'école des Bonnets -> 3:22
+	m_StandardWarp $0 $32 $6d $5 $4 ; BALLADE: grotte de la Boîte -> 5:b0 (après la bombe)
+	;m_StandardWarp $0 $13 $67 $5 $4 ; BALLADE: 1:13 est la plage aux châteaux de sable
 	m_StandardWarp $0 $14 $16 $3 $4
 	m_StandardWarp $0 $18 $55 $5 $4
 	m_StandardWarp $0 $1c $07 $3 $4
 	m_StandardWarp $0 $1d $31 $3 $4
-	m_StandardWarp $0 $23 $22 $3 $4
+	;m_StandardWarp $0 $23 $22 $3 $4 ; BALLADE: 1:23 est le jardin des toupies
 	m_StandardWarp $0 $28 $2f $5 $4
 	m_StandardWarp $0 $2b $4c $5 $4
 	m_StandardWarp $0 $2d $42 $2 $4
@@ -329,6 +334,9 @@ group2WarpSources:
 	m_StandardWarp $0 $8f $52 $5 $2
 	; BALLADE: 2:9e devient l'auberge du Songe ; sa sortie ramène devant l'auberge du Songe (0:9a)
 	m_StandardWarp $4 $9e $4d $0 $3
+	; BALLADE: la maison de Lila du Songe (2:21) : sa sortie ramène devant sa porte (0:21)
+	m_StandardWarp $4 $21 $4e $0 $3
+	m_StandardWarp $8 $21 $4e $0 $3
 	m_StandardWarp $0 $9f $1d $2 $2
 	m_StandardWarp $4 $9f $0e $0 $3
 	m_StandardWarp $8 $9f $0f $0 $3
@@ -431,6 +439,13 @@ group3WarpSources:
 	; BALLADE: 3:9e devient l'auberge de Port-Veille ; sa sortie ramène devant l'auberge (1:9a),
 	; et l'escalier de la maison de Nayru ne mène plus nulle part.
 	m_StandardWarp $4 $9e $49 $1 $3
+	; BALLADE: Hameau-Grelot : sorties de la boutique de Pépin, de la maison de Lila, de l'école
+	m_StandardWarp $4 $20 $4c $1 $3
+	m_StandardWarp $8 $20 $4c $1 $3
+	m_StandardWarp $4 $21 $4d $1 $3
+	m_StandardWarp $8 $21 $4d $1 $3
+	m_StandardWarp $4 $22 $4e $1 $3
+	m_StandardWarp $8 $22 $4e $1 $3
 	m_PointerWarp     $9f warpSource7abe
 	m_StandardWarp $0 $a1 $60 $5 $4
 	m_StandardWarp $0 $ae $1d $3 $2
@@ -633,7 +648,7 @@ group5WarpSources:
 	m_StandardWarp $0 $f1 $18 $5 $2
 	m_StandardWarp $0 $f4 $27 $0 $2
 	m_StandardWarp $0 $f5 $16 $5 $2
-	m_StandardWarp $0 $b0 $35 $1 $4
+	m_StandardWarp $0 $b0 $4f $1 $4 ; BALLADE: grotte de la Boîte -> devant l'entrée (1:32)
 	m_StandardWarp $0 $b2 $32 $1 $4
 	m_StandardWarp $0 $b3 $31 $1 $4
 	m_PointerWarp     $b4 warpSource7dba

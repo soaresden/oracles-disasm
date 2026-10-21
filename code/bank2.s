@@ -3070,6 +3070,14 @@ b2_updateMenus:
 
 	; Select enfoncé
 	ld a,(hl)
+	or a
+	jr nz,+
+	; Première image de l'appui : si Link tient une bombe, Marine l'emporte (et c'est tout)
+	push hl
+	callab balladeMarine.checkBombPower
+	pop hl
+	ld a,(hl)
++
 	inc a
 	ret z ; Marine a déjà parlé pendant cet appui
 	ld (hl),a
