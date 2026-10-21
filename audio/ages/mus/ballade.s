@@ -17802,43 +17802,35 @@ musBalladeForgeChannel0:
 	cmdfd $00
 	vol $2
 	duty $02
-	vibrato $00
+	vibrato $41
 	cmdfd $00
-	note d4   $50
-	note d4   $50
+	note d4   $60
+	note c4   $60
 musBalladeForgeChannel0Loop:
 	vol $2
 	duty $02
-	vibrato $00
+	vibrato $41
 	cmdfd $00
 	vol $2
-	note d4   $50
-	note d4   $50
-	note d4   $50
-	note d4   $50
-	note d4   $50
-	note d4   $50
-	note c4   $50
-	note a3   $50
-	vol $2
-	note d4   $50
-	note d4   $50
-	note d4   $50
-	note d4   $50
-	note d4   $50
-	note d4   $50
-	note c4   $50
-	note a3   $50
+	note d4   $60
+	note as3  $60
+	note d4   $60
+	note as3  $60
+	note d4   $60
+	note as3  $60
+	note c4   $30
+	note a3   $30
+	note as3  $60
 	vol $3
-	note d4   $50
-	note c4   $50
-	note d4   $50
-	note f4   $50
-	note g4   $50
-	note f4   $50
-	note f4   $28
-	note d4   $28
-	note d4   $50
+	note d4   $60
+	note ds4  $60
+	note ds4  $60
+	note f4   $60
+	note d4   $60
+	note d4   $60
+	note c4   $30
+	note fs4  $30
+	note d4   $60
 	goto musBalladeForgeChannel0Loop
 	cmdff
 
@@ -17848,162 +17840,102 @@ musBalladeForgeChannel1:
 	duty $02
 	cmdfd $00
 	vol $0
-	duty $01
+	duty $02
 	vibrato $00
 	cmdfd $00
-	rest $a0
+	rest $c0
 musBalladeForgeChannel1Loop:
 	vol $0
-	duty $01
+	duty $02
 	vibrato $00
 	cmdfd $00
 	vol $4
 	vibrato $41
-	note g4   $0e
-	rest $06
-	note as4  $0e
-	rest $06
-	note a4   $0e
-	rest $06
-	note g4   $07
-	rest $03
-	note fs4  $07
-	rest $03
-	note g4   $2a
-	rest $26
-	note g4   $0e
-	rest $06
-	note as4  $0e
-	rest $06
-	note a4   $0e
-	rest $06
-	note g4   $07
-	rest $03
-	note fs4  $07
-	rest $03
-	note g4   $2a
-	rest $26
-	note g4   $0e
-	rest $06
-	note as4  $0e
-	rest $06
-	note a4   $0e
-	rest $06
-	note g4   $07
-	rest $03
-	note fs4  $07
-	rest $03
-	note g4   $2a
-	rest $26
-	note g4   $0e
-	rest $06
-	note as4  $0e
-	rest $06
-	note a4   $0e
-	rest $06
-	note g4   $07
-	rest $03
-	note fs4  $07
-	rest $03
-	note d4   $2a
-	rest $26
-	vol $4
-	vibrato $41
-	note g4   $0e
-	rest $06
-	note as4  $0e
-	rest $06
-	note a4   $0e
-	rest $06
-	note g4   $07
-	rest $03
-	note fs4  $07
-	rest $03
-	note g4   $2a
-	rest $26
-	note g4   $0e
-	rest $06
-	note as4  $0e
-	rest $06
-	note a4   $0e
-	rest $06
-	note g4   $07
-	rest $03
-	note fs4  $07
-	rest $03
-	note g4   $2a
-	rest $26
-	note g4   $0e
-	rest $06
-	note as4  $0e
-	rest $06
-	note a4   $0e
-	rest $06
-	note g4   $07
-	rest $03
-	note fs4  $07
-	rest $03
-	note g4   $2a
-	rest $26
-	note g4   $0e
-	rest $06
-	note as4  $0e
-	rest $06
-	note a4   $0e
-	rest $06
-	note g4   $07
-	rest $03
-	note fs4  $07
-	rest $03
-	note d4   $2a
-	rest $26
+	note d5   $20
+	rest $04
+	note c5   $0b
+	rest $01
+	note as4  $16
+	rest $02
+	note a4   $16
+	rest $02
+	note g4   $41
+	rest $1f
+	note as4  $20
+	rest $04
+	note a4   $0b
+	rest $01
+	note g4   $16
+	rest $02
+	note f4   $16
+	rest $02
+	note g4   $41
+	rest $1f
+	note d5   $20
+	rest $04
+	note c5   $0b
+	rest $01
+	note as4  $16
+	rest $02
+	note a4   $16
+	rest $02
+	note g4   $41
+	rest $1f
+	note as4  $20
+	rest $04
+	note a4   $0b
+	rest $01
+	note g4   $16
+	rest $02
+	note fs4  $16
+	rest $02
+	note g4   $41
+	rest $1f
 	vol $5
-	note g4   $0e
-	rest $06
-	note as4  $0e
-	rest $06
-	note c5   $0e
-	rest $06
-	note d5   $0e
-	rest $06
-	note ds5  $1c
-	rest $0c
-	note d5   $0e
-	rest $06
-	note c5   $0e
-	rest $06
-	note as4  $0e
-	rest $06
-	note c5   $0e
-	rest $06
-	note d5   $0e
-	rest $06
-	note f5   $0e
-	rest $06
-	note f5   $2a
-	rest $26
-	note ds5  $0e
-	rest $06
-	note d5   $0e
-	rest $06
-	note c5   $0e
-	rest $06
-	note as4  $0e
-	rest $06
-	note c5   $1c
-	rest $0c
-	note a4   $0e
-	rest $06
-	note f4   $0e
-	rest $06
-	note as4  $2a
-	rest $12
-	note a4   $07
-	rest $03
-	note g4   $07
-	rest $03
-	note g4   $38
-	rest $18
+	note as4  $20
+	rest $04
+	note c5   $0b
+	rest $01
+	note d5   $16
+	rest $02
+	note f5   $16
+	rest $02
+	note ds5  $41
+	rest $07
+	note d5   $16
+	rest $02
+	note c5   $20
+	rest $04
+	note d5   $0b
+	rest $01
+	note as4  $16
+	rest $02
+	note g4   $16
+	rest $02
+	note a4   $41
+	rest $1f
+	note as4  $20
+	rest $04
+	note c5   $0b
+	rest $01
+	note d5   $16
+	rest $02
+	note g5   $16
+	rest $02
+	note f5   $2b
+	rest $05
+	note d5   $2b
+	rest $05
+	note ds5  $20
+	rest $04
+	note d5   $0b
+	rest $01
+	note c5   $16
+	rest $02
+	note a4   $16
+	rest $02
+	note g4   $56
+	rest $0a
 	goto musBalladeForgeChannel1Loop
 	cmdff
 
@@ -18012,504 +17944,100 @@ musBalladeForgeChannel4:
 	cmdfd $00
 	duty $0e
 	vibrato $00
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g2   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g2   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g2   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g2   $05
-	rest $05
-	note g1   $05
-	rest $05
+	note g1   $56
+	rest $0a
+	note f1   $56
+	rest $0a
 musBalladeForgeChannel4Loop:
 	duty $0e
 	vibrato $00
-	note g1   $05
+	note g1   $2b
 	rest $05
-	note g1   $05
+	note d2   $2b
 	rest $05
-	note g2   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g2   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g2   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g2   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g2   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g2   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g2   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g2   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g2   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g2   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g2   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g2   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note d2   $05
-	rest $05
-	note d2   $05
-	rest $05
-	note d3   $05
-	rest $05
-	note d2   $05
-	rest $05
-	note d2   $05
-	rest $05
-	note d2   $05
-	rest $05
-	note d3   $05
-	rest $05
-	note d2   $05
-	rest $05
-	note d2   $05
-	rest $05
-	note d2   $05
-	rest $05
-	note d3   $05
-	rest $05
-	note d2   $05
-	rest $05
-	note c2   $05
-	rest $05
-	note c2   $05
-	rest $05
-	note a1   $05
-	rest $05
-	note a1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g2   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g2   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g2   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g2   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g2   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g2   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g2   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g2   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g2   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g2   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g2   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note g2   $05
-	rest $05
-	note g1   $05
-	rest $05
-	note d2   $05
-	rest $05
-	note d2   $05
-	rest $05
-	note d3   $05
-	rest $05
-	note d2   $05
-	rest $05
-	note d2   $05
-	rest $05
-	note d2   $05
-	rest $05
-	note d3   $05
-	rest $05
-	note d2   $05
-	rest $05
-	note d2   $05
-	rest $05
-	note d2   $05
-	rest $05
-	note d3   $05
-	rest $05
-	note d2   $05
-	rest $05
-	note c2   $05
-	rest $05
-	note c2   $05
-	rest $05
-	note a1   $05
-	rest $05
-	note a1   $05
-	rest $05
-	note as1  $0a
+	note g1   $56
 	rest $0a
-	note f2   $0a
+	note ds1  $2b
+	rest $05
+	note as1  $2b
+	rest $05
+	note g1   $56
 	rest $0a
-	note as1  $0a
+	note g1   $2b
+	rest $05
+	note d2   $2b
+	rest $05
+	note g1   $56
 	rest $0a
-	note f2   $0a
+	note c2   $2b
+	rest $05
+	note d2   $2b
+	rest $05
+	note g1   $56
 	rest $0a
-	note c2   $0a
+	note as1  $2b
+	rest $05
+	note f2   $2b
+	rest $05
+	note ds1  $2b
+	rest $05
+	note as1  $2b
+	rest $05
+	note c2   $2b
+	rest $05
+	note g2   $2b
+	rest $05
+	note f1   $2b
+	rest $05
+	note c2   $2b
+	rest $05
+	note as1  $2b
+	rest $05
+	note f2   $2b
+	rest $05
+	note as1  $56
 	rest $0a
-	note g2   $0a
+	note c2   $2b
+	rest $05
+	note d2   $2b
+	rest $05
+	note g1   $56
 	rest $0a
-	note c2   $0a
-	rest $0a
-	note g2   $0a
-	rest $0a
-	note as1  $0a
-	rest $0a
-	note f2   $0a
-	rest $0a
-	note as1  $0a
-	rest $0a
-	note f2   $0a
-	rest $0a
-	note f2   $0a
-	rest $0a
-	note c3   $0a
-	rest $0a
-	note f2   $0a
-	rest $0a
-	note a2   $0a
-	rest $0a
-	note ds2  $0a
-	rest $0a
-	note as2  $0a
-	rest $0a
-	note ds2  $0a
-	rest $0a
-	note g2   $0a
-	rest $0a
-	note f2   $0a
-	rest $0a
-	note c3   $0a
-	rest $0a
-	note f2   $0a
-	rest $0a
-	note a2   $0a
-	rest $0a
-	note as1  $0a
-	rest $0a
-	note f2   $0a
-	rest $0a
-	note d2   $0a
-	rest $0a
-	note d2   $0a
-	rest $0a
-	note g1   $0a
-	rest $0a
-	note d2   $0a
-	rest $0a
-	note g1   $14
-	rest $14
 	goto musBalladeForgeChannel4Loop
 	cmdff
 
 musBalladeForgeChannel6:
-	vol $3
-	note $2e  $28
-	vol $2
-	note $2e  $28
-	vol $3
-	note $2e  $28
-	vol $2
-	note $2e  $14
-	note $2e  $14
+	vol $1
+	note $2e  $0c
+	rest $b4
 musBalladeForgeChannel6Loop:
-	vol $2
-	vol $3
-	note $2e  $28
-	vol $2
-	note $2e  $28
-	vol $3
-	note $2e  $28
-	vol $2
-	note $2e  $28
-	vol $3
-	note $2e  $28
-	vol $2
-	note $2e  $28
-	vol $3
-	note $2e  $28
-	vol $2
-	note $2e  $28
-	vol $3
-	note $2e  $28
-	vol $2
-	note $2e  $28
-	vol $3
-	note $2e  $28
-	vol $2
-	note $2e  $28
-	vol $3
-	note $2e  $28
-	vol $2
-	note $2e  $28
-	vol $3
-	note $2e  $14
-	note $2e  $14
-	note $2e  $0a
-	note $2e  $0a
-	note $2e  $14
-	vol $3
-	note $2e  $28
-	vol $2
-	note $2e  $28
-	vol $3
-	note $2e  $28
-	vol $2
-	note $2e  $28
-	vol $3
-	note $2e  $28
-	vol $2
-	note $2e  $28
-	vol $3
-	note $2e  $28
-	vol $2
-	note $2e  $28
-	vol $3
-	note $2e  $28
-	vol $2
-	note $2e  $28
-	vol $3
-	note $2e  $28
-	vol $2
-	note $2e  $28
-	vol $3
-	note $2e  $28
-	vol $2
-	note $2e  $28
-	vol $3
-	note $2e  $14
-	note $2e  $14
-	note $2e  $0a
-	note $2e  $0a
-	note $2e  $14
-	vol $3
-	note $2e  $14
 	vol $1
-	note $2a  $14
-	vol $2
-	note $2e  $14
 	vol $1
-	note $2a  $14
-	vol $3
-	note $2e  $14
+	note $2e  $0c
+	rest $b4
 	vol $1
-	note $2a  $14
-	vol $2
-	note $2e  $14
+	note $2e  $0c
+	rest $b4
 	vol $1
-	note $2a  $14
-	vol $3
-	note $2e  $14
+	note $2e  $0c
+	rest $b4
 	vol $1
-	note $2a  $14
-	vol $2
-	note $2e  $14
+	note $2e  $0c
+	rest $b4
 	vol $1
-	note $2a  $14
-	vol $3
-	note $2e  $14
+	note $2e  $0c
+	rest $b4
 	vol $1
-	note $2a  $14
-	vol $2
-	note $2e  $14
+	note $2e  $0c
+	rest $b4
 	vol $1
-	note $2a  $14
-	vol $3
-	note $2e  $14
+	note $2e  $0c
+	rest $b4
 	vol $1
-	note $2a  $14
-	vol $2
-	note $2e  $14
-	vol $1
-	note $2a  $14
-	vol $3
-	note $2e  $14
-	vol $1
-	note $2a  $14
-	vol $2
-	note $2e  $14
-	vol $1
-	note $2a  $14
-	vol $3
-	note $2e  $14
-	vol $1
-	note $2a  $14
-	vol $2
-	note $2e  $14
-	vol $1
-	note $2a  $14
-	vol $3
-	note $2e  $0a
-	note $2e  $0a
-	note $2e  $0a
-	note $2e  $0a
-	note $2e  $28
+	note $2e  $0c
+	rest $24
+	note $2e  $0c
+	rest $84
 	goto musBalladeForgeChannel6Loop
 	cmdff
 
