@@ -751,7 +751,40 @@ loadTreasureDisplayData:
 
 	ld l,a
 	ld h,>wc600Block
-	ld d,(hl)
+	ld a,(hl)
+	or a
+	jr nz,++
+
+	; FR: items whose sub-table starts at level 1 (pointer "- 7") would show the
+	; row before it with level 0 (a feather shown as a slingshot): show level 1.
+	ld a,d
+	cp TREASURE_SWORD
+	jr z,+++
+	cp TREASURE_SHIELD
+	jr z,+++
+	cp TREASURE_BRACELET
+	jr z,+++
+	cp TREASURE_FEATHER
+	jr z,+++
+	cp TREASURE_BOOMERANG
+	jr z,+++
+	cp TREASURE_SWITCH_HOOK
+	jr z,+++
+	xor a
+	jr ++
++++
+	; If Link has it, repair the level as well (shown as "L-1", used by the item)
+	push bc
+	push de
+	ld a,d
+	call checkTreasureObtained
+	pop de
+	pop bc
+	ld a,$01
+	jr nc,++
+	ld (hl),a
+++
+	ld d,a
 +
 	ret
 
