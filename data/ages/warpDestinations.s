@@ -190,6 +190,7 @@ group1WarpDestTable:
 	m_WarpDest $0a $24 $0 $1 ; $55 : devant la bouche du cratère (la Forge Endormie)
 	m_WarpDest $61 $24 $0 $1 ; $56 : devant la cabane du fossoyeur (l'île des Échos)
 	m_WarpDest $42 $54 $0 $1 ; $57 : devant la grille de la cathédrale (l'île des Échos)
+	m_WarpDest $48 $34 $0 $1 ; $58 : devant l'entrée du Nid (le Nid des Vents)
 
 group2WarpDestTable:
 	m_WarpDest $90 $45 $0 $e
@@ -433,6 +434,8 @@ group4WarpDestTable:
 	m_WarpDest $fd $52 $0 $4
 	; BALLADE: Mont-Braise
 	m_WarpDest $bb $97 $0 $4 ; $4e : la Forge Endormie, l'entrée (sous l'arche)
+	; BALLADE: le Nid des Vents
+	m_WarpDest $3c $97 $0 $4 ; $4f : la Spirale Céleste, l'entrée (sous l'arche)
 
 group5WarpDestTable:
 	m_WarpDest $26 $ff $9 $3

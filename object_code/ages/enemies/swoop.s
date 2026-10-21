@@ -33,7 +33,7 @@ enemyCode71:
 
 swoop_state_uninitialized:
 	ld a,ENEMY_SWOOP
-	ld b,$00
+	ld b,PALH_OMBRE ; BALLADE: l'Ombre de Marine (palette 6, violet presque noir)
 	call enemyBoss_initializeRoom
 	call ecom_setSpeedAndState8
 	ld b,$01

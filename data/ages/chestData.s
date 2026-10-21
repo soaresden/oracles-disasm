@@ -52,6 +52,13 @@ chestGroup3Data:
 	.db $ff
 
 chestGroup4Data:
+	; BALLADE: la Spirale Céleste (story/salles/spirale.txt)
+	m_ChestData $47, $3f, TREASURE_OBJECT_SMALL_KEY_03  ; l'îlot (le Grappin-Écho) : la petite clé 1
+	m_ChestData $5a, $42, TREASURE_OBJECT_MAP_02        ; le carrelage bleu : la carte
+	m_ChestData $85, $43, TREASURE_OBJECT_COMPASS_02    ; les chauves-souris battues : la boussole
+	m_ChestData $15, $46, TREASURE_OBJECT_SMALL_KEY_03  ; le Grappin-Écho puis un saut : la petite clé 2
+	m_ChestData $8b, $4d, TREASURE_OBJECT_BOSS_KEY_03   ; l'îlot (le pont du cristal de 4c) : la clé du boss
+	m_ChestData $57, $50, TREASURE_OBJECT_FEATHER_03    ; le cœur de la spirale : la Cape de Roc
 	; BALLADE: la Forge Endormie (story/salles/forge.txt)
 	m_ChestData $57, $b1, TREASURE_OBJECT_CANE_OF_SOMARIA_00 ; les Copies battues : la Canne des Songes
 	m_ChestData $5b, $b2, TREASURE_OBJECT_MAP_02        ; la carte

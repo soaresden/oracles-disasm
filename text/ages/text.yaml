@@ -192,15 +192,19 @@ groups:
   - name: TX_0013
     index: 0x13
     text: |-
-      \pos(2)\slow()You got the
-      \col(1)Bereft Peak\col(0), an
-      Essence of Time!\stop
-      It is a proud,
-      lonely spirit
-      that remains
-      stalwart, even
-      in trying times.
-
+      \pos(2)\slow()The Shadow has
+      flown away. The
+      wind is back!\stop
+      You found the
+      \col(1)sixth verse\col(0)
+      of Marin's song!\stop
+      \col(1)Marin\col(0): "Open
+      your arms: the
+      wind knows the
+      way."\stop
+      ...The wind
+      whispered that
+      one to me.
   - name: TX_0014
     index: 0x14
     text: |-
@@ -1083,12 +1087,10 @@ groups:
   - name: TX_00_GET_ROCSCAPE
     index: auto
     text: |-
-      You got \col(1)Roc's
-      Cape\col(0)! Press and
-      hold the button
-      to do a double
-      jump!
-
+      \col(1)Roc's Cape\col(0)!\stop
+      Jump, then press
+      again: you jump
+      a second time!
   - name: TX_00_GET_RODOFSEASONS
     index: auto
     text: |-
@@ -1648,9 +1650,8 @@ groups:
     - 0x06
     - 0x0c
     text: |2-
-       Level 6
-        Mermaid's Cave
-
+         Level 6
+        Sky Spiral
   - name: TX_0207
     index: 0x07
     text: |2-
@@ -3986,12 +3987,9 @@ groups:
   - name: TX_0906
     index: 0x06
     text: |-
-      Lonely Peak
-      A proud spirit
-      that remains
-      stalwart in
-      trying times.
-
+      Sixth verse
+      The wind knows
+      the way.
   - name: TX_0907
     index: 0x07
     text: |-
@@ -4633,9 +4631,8 @@ groups:
     index: auto
     text: |-
       Roc's Cape
-      A wind-riding
-      cape.
-
+      For a double
+      jump.
   - name: TX_09_RODOFSEASONS
     index: auto
     text: |-
@@ -24316,6 +24313,66 @@ groups:
       one.\stop
       The sky catches
       those who jump.
+
+  # The Sky Spiral: the entrance (4:3c), the first time
+  - name: TX_5ab8
+    index: 0xb8
+    text: |-
+      \col(1)Marin\col(0): A
+      spiral... We go
+      around the heart
+      of the nest.\stop
+      Holes
+      everywhere.
+      Don't look down:
+      jump!
+
+  # Marin's Shadow (4:54): it speaks with Marin's voice; Marin answers
+  - name: TX_5ab9
+    index: 0xb9
+    text: |-
+      \col(1)Shadow\col(0): Stay
+      asleep, \Link.\stop
+      Stay with me.
+      Here, nobody
+      ever leaves.\stop
+      \col(1)Marin\col(0): ...No.\stop
+      I sing so he'll
+      wake up.
+
+  # End of chapter 6: the feather village (1:67), the wind comes back
+  - name: TX_5aba
+    index: 0xba
+    text: |-
+      \col(1)Miller\col(0): It's
+      turning! The
+      mills are
+      turning!\stop
+      \col(1)Zephyr\col(0): The
+      wind is back.
+      I'm jumping!\stop
+      ...He's gliding!
+      Gliding all the
+      way to the
+      mills!\stop
+      \col(1)Rito\col(0): Thank
+      you! I'm going
+      home!
+
+  - name: TX_5abb
+    index: 0xbb
+    text: |-
+      \col(1)Marin\col(0): Shh...
+      the wind has
+      turned.\stop
+      It's cold. It
+      smells of
+      snow... and of
+      sleep.\stop
+      An island where
+      everyone sleeps.
+      Without waking.
+
 
 
 

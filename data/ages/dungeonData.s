@@ -46,7 +46,8 @@ dungeonData05:
 	; BALLADE: la Cathédrale des Échos, au sommet de l'île des Échos (un seul étage, en croix)
 	m_DungeonData >wGroup5RoomFlags, $aa, dungeon05LayoutCathedrale, $01, $03, $01, $00, $00
 dungeonData06:
-	m_DungeonData >wGroup5RoomFlags, $26, dungeon06Layout, $01, $03, $07, $00, $00
+	; BALLADE: la Spirale Céleste, dans le Nid des Vents (un seul étage, en spirale)
+	m_DungeonData >wGroup4RoomFlags, $3c, dungeon06LayoutSpirale, $01, $03, $01, $00, $00
 dungeonData07:
 	m_DungeonData >wGroup5RoomFlags, $56, dungeon07Layout, $03, $03, $00, $00, $00
 dungeonData08:

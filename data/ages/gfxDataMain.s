@@ -551,3 +551,4 @@
 	m_GfxData gfx_blurb_d3_fr
 	m_GfxData gfx_blurb_d4_fr
 	m_GfxData gfx_blurb_d5_fr
+	m_GfxData gfx_blurb_d6_fr

@@ -7,7 +7,7 @@
 ; - PALH_SPR:     Loads sprite palettes only
 ; - PALH:         If none of the above, could load both sprite & bg palettes (or not yet categorized)
 
-.define NUM_PALETTE_HEADERS $d4 ; BALLADE: + film, Songe, titre
+.define NUM_PALETTE_HEADERS $d6 ; BALLADE: + film, Songe, titre
 
 paletteHeaderTable:
 	.repeat NUM_PALETTE_HEADERS index COUNT
@@ -851,7 +851,16 @@ m_PaletteHeaderStart $d3, PALH_SONGE_NID
 	m_PaletteHeaderBg  2, 6, paletteDataSongeNid
 	m_PaletteHeaderEnd
 
+m_PaletteHeaderStart $d4, PALH_SPIRALE
+	m_PaletteHeaderBg  2, 6, paletteDataSpirale
+	m_PaletteHeaderEnd
+
 ; BALLADE-SONGE-FIN
+
+; BALLADE: l'Ombre de Marine (le Swoop de la Spirale Céleste) : violet presque noir, palette 6 des sprites
+m_PaletteHeaderStart $d5, PALH_OMBRE
+	m_PaletteHeaderSpr 6, 1, paletteDataOmbre
+	m_PaletteHeaderEnd
 
 ; BALLADE: l'écran titre de Gulls of Life (tools/make_title.py) ; sprites : ceux d'Ages (PRESS START)
 m_PaletteHeaderStart $cf, PALH_TITLE

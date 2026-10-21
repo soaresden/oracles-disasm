@@ -354,3 +354,15 @@ dungeon05LayoutCathedrale:
 	.db $00 $00 $8f $90 $91 $00 $00 $00
 	.db $00 $00 $92 $aa $93 $00 $00 $00
 	.db $00 $00 $00 $00 $00 $00 $00 $00
+
+; BALLADE: la Spirale Céleste (donjon 6), un seul étage, en spirale. Voir story/salles/spirale.txt
+; dans le dépôt ZeldaGullsOfLife.
+dungeon06LayoutSpirale:
+	.db $00 $00 $00 $00 $00 $00 $00 $00
+	.db $00 $44 $45 $46 $47 $48 $00 $00
+	.db $00 $43 $52 $53 $54 $4b $00 $00
+	.db $00 $42 $51 $50 $4f $4c $00 $00
+	.db $00 $41 $00 $00 $4e $4d $00 $00
+	.db $00 $40 $3f $3e $3d $3c $00 $00
+	.db $00 $00 $00 $00 $00 $00 $00 $00
+	.db $00 $00 $00 $00 $00 $00 $00 $00

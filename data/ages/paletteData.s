@@ -4515,6 +4515,37 @@ paletteDataSongeNid: ; Songe : paletteData4d00 en bleuté
 	m_RGB16 $09 $08 $0d
 	m_RGB16 $01 $02 $06
 
+paletteDataSpirale: ; Songe : paletteData5090 en bleuté
+	m_RGB16 $0d $10 $10
+	m_RGB16 $12 $15 $1b
+	m_RGB16 $0a $0b $10
+	m_RGB16 $01 $02 $06
+
+	m_RGB16 $10 $12 $16
+	m_RGB16 $0b $0d $12
+	m_RGB16 $08 $08 $0d
+	m_RGB16 $01 $02 $06
+
+	m_RGB16 $0d $10 $10
+	m_RGB16 $08 $0a $0b
+	m_RGB16 $06 $08 $09
+	m_RGB16 $01 $02 $06
+
+	m_RGB16 $17 $1b $1a
+	m_RGB16 $15 $16 $15
+	m_RGB16 $0c $0b $0e
+	m_RGB16 $01 $02 $06
+
+	m_RGB16 $17 $1b $1a
+	m_RGB16 $07 $0e $18
+	m_RGB16 $04 $08 $0f
+	m_RGB16 $01 $02 $06
+
+	m_RGB16 $17 $1b $1a
+	m_RGB16 $10 $07 $0d
+	m_RGB16 $07 $04 $08
+	m_RGB16 $01 $02 $06
+
 ; BALLADE-SONGE-FIN
 
 ; BALLADE-TITRE-DEBUT (tools/make_title.py)
@@ -4566,3 +4597,10 @@ paletteDataTitleSpr: ; écran titre : sprites
 	m_RGB16 $1d $05 $09
 	m_RGB16 $1f $1f $1f
 ; BALLADE-TITRE-FIN
+
+; BALLADE: l'Ombre de Marine (PALH_OMBRE)
+paletteDataOmbre:
+	m_RGB16 $1f $1f $1f
+	m_RGB16 $15 $12 $1a
+	m_RGB16 $09 $06 $0e
+	m_RGB16 $02 $01 $04

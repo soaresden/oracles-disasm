@@ -231,6 +231,7 @@ group1WarpSources:
 	; BALLADE: l'île des Échos (1:40-74) : la cabane du fossoyeur
 	m_StandardWarp $0 $61 $48 $3 $4 ; BALLADE: porte de la cabane du fossoyeur -> 3:25
 	m_StandardWarp $0 $42 $71 $5 $4 ; BALLADE: la grille ouverte -> la Cathédrale des Échos (5:aa)
+	m_StandardWarp $0 $48 $4f $4 $4 ; BALLADE: l'entrée du Nid -> la Spirale Céleste (4:3c)
 	m_StandardWarp $0 $0a $4e $4 $4 ; BALLADE: la bouche du grand visage du cratère -> la Forge Endormie (4:bb)
 	;m_StandardWarp $0 $13 $67 $5 $4 ; BALLADE: 1:13 est la plage aux châteaux de sable
 	;m_StandardWarp $0 $14 $16 $3 $4 ; BALLADE: la Lagune des Serments (1:04-37)
@@ -533,6 +534,7 @@ group4WarpSources:
 	m_StandardWarp $4 $24 $4a $1 $3 ; BALLADE: sortie du Phare Éteint -> le cap (1:7b)
 	;m_StandardWarp $4 $46 $01 $1 $3 ; BALLADE: plus l'entrée du 2e donjon
 	m_StandardWarp $4 $39 $4f $2 $3 ; BALLADE: sortie du Coffre à Jouets -> le rêve de Lila (2:21)
+	m_StandardWarp $4 $3c $58 $1 $3 ; BALLADE: sortie de la Spirale Céleste -> devant l'entrée du Nid (1:48)
 	m_StandardWarp $4 $66 $02 $0 $3
 	m_StandardWarp $4 $91 $03 $0 $3
 	m_StandardWarp $4 $bb $55 $1 $3 ; BALLADE: sortie de la Forge Endormie -> devant la bouche du cratère (1:0a)

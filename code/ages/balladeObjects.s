@@ -196,6 +196,8 @@ arrivalTalk:
 	.db $05, $7b, <TX_5a9f, $ff ; le chœur : l'escalier vers le souvenir
 	.db $01, $75, <TX_5aad, $ff ; le Nid des Vents, le courant ascendant
 	.db $01, $57, <TX_5aae, $ff ; le pont de nuages : dans le Songe, rien ne tombe
+	.db $04, $3c, <TX_5ab8, $ff ; la Spirale Céleste : ne pas regarder en bas
+	.db $04, $54, <TX_5ab9, $ff ; l'Ombre de Marine, Marine lui répond
 	.db $ff
 
 
@@ -872,6 +874,10 @@ giveCarnet:
 essenceSpawner:
 	ld a,(wDungeonIndex)
 	ld b,a
+	cp $06
+	ld a,(wGroup4RoomFlags+$54)
+	jr z,+
+	ld a,b
 	cp $05
 	ld a,(wPastRoomFlags+$26)
 	jr z,+
@@ -1121,6 +1127,8 @@ chapterEnding:
 	.dw @forgeAwake
 	.db $01, $62, $00, $10
 	.dw @bellsSing
+	.db $01, $67, $00, $20
+	.dw @windSings
 	.db $ff
 
 ; Chapitre 2 : Lila se réveille ; la place du Grelot ; Marine lit le vent (la Lagune des Serments)
@@ -1184,6 +1192,20 @@ chapterEnding:
 	.db END_WAIT, 40
 	.db END_TEXT, <TX_5aa5
 	.db END_FLAG, GLOBALFLAG_BALLADE_ISLAND6
+	.db END_WAIT, 30
+	.db END_TEXT, <TX_5a31
+	.db END_DONE
+
+; Chapitre 6 : au village des plumes, le vent revient : les moulins tournent, Zéphyr saute, le Rito
+; rentre chez lui ; Marine lit le vent (l'île du Grand Sommeil)
+@windSings:
+	.db END_WAIT, 40
+	.db END_SOUND, SND_TUNE_OF_CURRENTS
+	.db END_WAIT, 90
+	.db END_TEXT, <TX_5aba
+	.db END_WAIT, 40
+	.db END_TEXT, <TX_5abb
+	.db END_FLAG, GLOBALFLAG_BALLADE_ISLAND7
 	.db END_WAIT, 30
 	.db END_TEXT, <TX_5a31
 	.db END_DONE

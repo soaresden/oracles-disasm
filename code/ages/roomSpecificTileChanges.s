@@ -134,11 +134,11 @@ roomTileChangerCodeGroup3Data:
 roomTileChangerCodeGroup4Data:
 	; BALLADE: salle réutilisée par Gulls of Life, sans le changement de cases d'Ages
 	;.db $1b $01
-	.db $4c $03
-	.db $4e $04
+	;.db $4c $03 ; BALLADE: la Spirale Céleste (sans le changement de cases d'Ages)
+	;.db $4e $04 ; BALLADE: la Spirale Céleste (sans le changement de cases d'Ages)
 	.db $59 $05
 	.db $60 $06
-	.db $52 $07
+	;.db $52 $07 ; BALLADE: la Spirale Céleste (sans le changement de cases d'Ages)
 	.db $c7 $2d
 	.db $c9 $2e
 	.db $ea $33

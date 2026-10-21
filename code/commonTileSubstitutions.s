@@ -202,12 +202,16 @@ replaceSwitchTiles:
 		.db $1c $01 $a0 $57 ; BALLADE: le pont de la douve du Phare
 		.db $1c $01 $a0 $58 ; BALLADE: le pont de la douve du Phare
 		.db $1c $01 $a0 $59 ; BALLADE: le pont de la douve du Phare
+		; BALLADE: la Spirale Céleste : le cristal de 4:4c (bit $04) jette un pont vers l'îlot de la clé du boss (4:4d)
+		.db $4d $04 $a0 $98
+		.db $4d $04 $a0 $99
+		.db $4d $04 $a0 $9a
 		.db $2f $02 $0b $79
 		.db $2f $02 $5a $6c
 		.db $3b $20 $af $79
-		.db $4c $01 $0b $38
-		.db $4e $02 $0b $68
-		.db $53 $04 $0b $6a
+		;.db $4c $01 $0b $38 ; BALLADE: salle de la Spirale Céleste
+		;.db $4e $02 $0b $68 ; BALLADE: salle de la Spirale Céleste
+		;.db $53 $04 $0b $6a ; BALLADE: salle de la Spirale Céleste
 		.db $72 $01 $af $8d
 		.db $89 $04 $0b $62
 		.db $89 $04 $5d $67

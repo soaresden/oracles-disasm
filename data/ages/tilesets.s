@@ -414,11 +414,7 @@ tilesetData:
 	.db $25, $04, $10
 
 	; 0x3b
-	.db $26, $08
-	.db UNIQUE_GFXH_NONE
-	.db GFXH_TILESET_MERMAIDS_CAVE
-	.db PALH_TILESET_MERMAIDS_CAVE_PRESENT
-	.db $26, $05, $10
+	.db $26, $88, UNIQUE_GFXH_NONE, GFXH_TILESET_WING_DUNGEON, PALH_SPIRALE, $22, $04, $10 ; Tileset 0x3b BALLADE: Songe
 
 	; 0x3c
 	.db $23, $88 ; BALLADE: le Récif Murmurant (donjon 3 ; dans Ages, $2c : la Grotte des Sirènes, passé)

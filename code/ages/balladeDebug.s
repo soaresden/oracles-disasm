@@ -463,13 +463,13 @@ debugEntries:
 	.dw debugNone
 	.db $17, $01, $67, $44 ; le village des plumes
 	.dw debugNone
-	.db $ff, $00, $00, $00
+	.db $18, $04, $3c, $97 ; la Spirale Céleste, l'entrée (la Plume de Roc)
 	.dw debugNone
-	.db $ff, $00, $00, $00
+	.db $19, $04, $52, $97 ; le Fouisseur (la Cape de Roc)
 	.dw debugNone
-	.db $ff, $00, $00, $00
-	.dw debugNone
-	.db $ff, $00, $00, $00
+	.db $1a, $04, $53, $52 ; devant la porte du boss, avec la clé du boss
+	.dw debugSpiraleBossKey
+	.db $1b, $01, $67, $44 ; le village des plumes, l'essence en poche : la fin du chapitre 6
 	.dw debugNone
 	; 7. Grand Sommeil
 	.db $ff, $00, $00, $00
@@ -596,6 +596,20 @@ debugMilestones:
 	.db DBG_ROOMFLAG, $01, $62, $40
 	.db DBG_GLOBALFLAG, GLOBALFLAG_BALLADE_ISLAND6
 	.db DBG_END
+	; 24. Mère Plume : la Plume de Roc
+	.db DBG_TREASURE, TREASURE_FEATHER, $01
+	.db DBG_END
+	; 25. Le cœur de la spirale : la Cape de Roc (la plume, niveau 2)
+	.db DBG_TREASURE, TREASURE_FEATHER, $02
+	.db DBG_END
+	; 26. Le Fouisseur est battu
+	.db DBG_ROOMFLAG, $04, $52, $80
+	.db DBG_END
+	; 27. L'Ombre de Marine est battue : l'essence (le 6e couplet), un cœur de plus
+	.db DBG_TREASURE, TREASURE_ESSENCE, $05
+	.db DBG_TREASURE, TREASURE_HEART_CONTAINER, $04
+	.db DBG_FULLHEALTH
+	.db DBG_END
 
 debugNone:
 	.db DBG_END
@@ -604,6 +618,12 @@ debugPhareBossKey:
 	.db DBG_OR
 	.dw wDungeonBossKeys
 	.db $02
+	.db DBG_END
+
+debugSpiraleBossKey:
+	.db DBG_OR
+	.dw wDungeonBossKeys
+	.db $40
 	.db DBG_END
 
 debugCathBossKey:

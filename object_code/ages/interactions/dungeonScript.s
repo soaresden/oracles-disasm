@@ -94,6 +94,7 @@ interactionCode20:
 	.dw mainScripts.crownDungeonScript_spawnChestWhen3TriggersActive
 @dungeon6:
 	.dw mainScripts.dungeonScript_minibossDeath
+	.dw mainScripts.dungeonScript_bossDeath ; BALLADE: l'Ombre de Marine (la Spirale Céleste)
 @dungeon7:
 	.dw mainScripts.dungeonScript_bossDeath
 @dungeon8:

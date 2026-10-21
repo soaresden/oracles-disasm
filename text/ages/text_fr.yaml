@@ -197,15 +197,21 @@ groups:
   - name: TX_0013
     index: 0x13
     text: |-
-      \pos(2)\slow()You got the
-      \col(1)Bereft Peak\col(0), an
-      Essence of Time!\stop
-      It is a proud,
-      lonely spirit
-      that remains
-      stalwart, even
-      in trying times.
-
+      \pos(2)\slow()L'Ombre s'est
+      envolée. Le vent
+      est revenu!\stop
+      Tu as trouvé le
+      \col(1)sixième
+      couplet\col(0) de la
+      chanson de
+      Marine!\stop
+      \col(1)Marine\col(0): "Ouvre
+      les bras: le
+      vent sait le
+      chemin."\stop
+      ...Celui-là, le
+      vent me l'a
+      soufflé.
   - name: TX_0014
     index: 0x14
     text: |-
@@ -1083,12 +1089,12 @@ groups:
   - name: TX_00_GET_ROCSCAPE
     index: auto
     text: |-
-      You got \col(1)Roc's
-      Cape\col(0)! Press and
-      hold the button
-      to do a double
-      jump!
-
+      La \col(1)Cape de
+      Roc\col(0)!\stop
+      Saute, puis
+      appuie encore:
+      tu sautes une
+      deuxième fois!
   - name: TX_00_GET_RODOFSEASONS
     index: auto
     text: |-
@@ -1649,9 +1655,8 @@ groups:
     - 0x06
     - 0x0c
     text: |2-
-       Level 6
-        Mermaid's Cave
-
+       Niveau 6
+       Spirale Céleste
   - name: TX_0207
     index: 0x07
     text: |2-
@@ -3993,12 +3998,9 @@ groups:
   - name: TX_0906
     index: 0x06
     text: |-
-      Lonely Peak
-      A proud spirit
-      that remains
-      stalwart in
-      trying times.
-
+      Sixième couplet
+      Le vent sait le
+      chemin.
   - name: TX_0907
     index: 0x07
     text: |-
@@ -4639,10 +4641,9 @@ groups:
   - name: TX_09_ROCSCAPE
     index: auto
     text: |-
-      Roc's Cape
-      A wind-riding
-      cape.
-
+      Cape de Roc
+      Pour sauter deux
+      fois.
   - name: TX_09_RODOFSEASONS
     index: auto
     text: |-
@@ -24392,6 +24393,66 @@ groups:
       Le ciel
       rattrape ceux
       qui sautent.
+
+  # La Spirale Céleste : l'entrée (4:3c), la première fois
+  - name: TX_5ab8
+    index: 0xb8
+    text: |-
+      \col(1)Marine\col(0): Une
+      spirale... On
+      tourne autour du
+      cœur du nid.\stop
+      Des trous
+      partout. Ne
+      regarde pas en
+      bas: saute!
+
+  # L'Ombre de Marine (4:54) : elle parle avec la voix de Marine ; Marine lui répond
+  - name: TX_5ab9
+    index: 0xb9
+    text: |-
+      \col(1)L'Ombre\col(0): Reste
+      endormi, \Link.\stop
+      Reste avec moi.
+      Ici, personne ne
+      s'en va jamais.\stop
+      \col(1)Marine\col(0): ...Non.\stop
+      Moi, je chante
+      pour qu'il se
+      réveille.
+
+  # Fin du chapitre 6 : le village des plumes (1:67), le vent revient
+  - name: TX_5aba
+    index: 0xba
+    text: |-
+      \col(1)Meunier\col(0): Ça
+      tourne! Les
+      moulins
+      tournent!\stop
+      \col(1)Zéphyr\col(0): Le vent
+      est revenu. Je
+      saute!\stop
+      ...Il plane! Il
+      plane jusqu'aux
+      moulins!\stop
+      \col(1)Rito\col(0): Merci!
+      Je rentre chez
+      moi!
+
+  - name: TX_5abb
+    index: 0xbb
+    text: |-
+      \col(1)Marine\col(0): Chut...
+      le vent a
+      tourné.\stop
+      Il est froid. Il
+      sent la neige...
+      et le sommeil.\stop
+      Une île où tout
+      le monde dort.
+      Sans se
+      réveiller.
+
 
 
 
