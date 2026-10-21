@@ -248,6 +248,7 @@ interactionData:
 	/* $e9 */ m_InteractionData $00 $00 $00 ; BALLADE: ondulation du Songe (rien à afficher)
 	/* $ea */ m_InteractionData $00 $00 $00 ; BALLADE: boss en rythme (rien à afficher)
 	/* $eb */ m_InteractionData $00 $00 $00 ; BALLADE: le Creuse-Rubis (rien à afficher)
+	/* $ec */ m_InteractionData $00 $00 $00 ; BALLADE: le menu de test caché (rien à afficher)
 
 interaction60SubidData:
 interaction63SubidData:

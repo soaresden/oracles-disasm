@@ -3375,6 +3375,8 @@ initializeGame:
 +++
 	; BALLADE: code secret de l'écran titre -> la salle de test du boss en rythme
 	callab balladeRhythm.checkTestStart
+	; BALLADE: menu de test caché (HAUT tenu 5 s à l'écran titre) -> la salle du menu
+	callab balladeDebug.checkStart
 	ld a,(wFileIsLinkedGame)
 	ld (wIsLinkedGame),a
 	ld hl,wDeathRespawnBuffer

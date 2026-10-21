@@ -1432,3 +1432,8 @@
 ; BALLADE: le Creuse-Rubis, le mini-jeu du forain (code/ages/balladeCreuse.s). Invisible : il
 ; surveille le champ de sable de la salle 1:ac.
 .define INTERAC_BALLADE_CREUSE $eb
+
+;;
+; BALLADE: le menu de test caché (code/ages/balladeDebug.s), dans la salle 3:9f. Invisible : des
+; boîtes de choix (langue, île, moment), puis Link part avec les objets et drapeaux de l'histoire.
+.define INTERAC_BALLADE_DEBUG $ec

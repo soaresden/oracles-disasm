@@ -578,7 +578,6 @@ group3Map9aObjectData:
 group3Map9bObjectData:
 group3Map9cObjectData:
 group3Map9dObjectData:
-group3Map9fObjectData:
 group3Mapa1ObjectData:
 group3Mapa2ObjectData:
 group3Mapa3ObjectData:
@@ -4940,6 +4939,9 @@ group3Map5eObjectData:
 group3Map9eObjectData:
 	obj_Interaction INTERAC_BALLADE_NPC $00 $48 $38
 	obj_Interaction INTERAC_MARINE $05 $08 $08 ; la fin du chapitre 1 : le tour du village
+	obj_End
+group3Map9fObjectData:
+	obj_Interaction INTERAC_BALLADE_DEBUG $00 $08 $08
 	obj_End
 group4Map12ObjectData:
 	obj_RandomEnemy $40 ENEMY_GHINI $00

@@ -2856,7 +2856,9 @@ wBalladeCreuseDug: ; $cdfa
 wBalladeCreuseLeft: ; $cdfd
 	db
 
-; $cdfe-$cdff unused?
+; BALLADE: menu de test caché : images où HAUT est tenu à l'écran titre (code/ages/balladeDebug.s)
+wBalladeDebugHold: ; $cdfe
+	dw
 
 .endif ; ROM_AGES
 .ENDS

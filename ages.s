@@ -222,6 +222,11 @@ specialObjectLoadAnimationFrameToBuffer:
 		.include "code/ages/balladeCreuse.s"
 	.ends
 
+	 ; BALLADE: le menu de test caché (HAUT tenu 5 s à l'écran titre)
+	 m_section_superfree Ballade_Debug namespace balladeDebug
+		.include "code/ages/balladeDebug.s"
+	.ends
+
 	 ; This section can't be superfree, since it must be in the same bank as section
 	 ; "Bank_7_Data".
 	 m_section_free Enemy_Part_Collisions namespace bank7
@@ -739,6 +744,7 @@ m_section_free Ages_Interactions_Bank10 NAMESPACE agesInteractionsBank10
 	.include "object_code/ages/interactions/balladeDreamFx.s" ; BALLADE
 	.include "object_code/ages/interactions/balladeRhythm.s" ; BALLADE
 	.include "object_code/ages/interactions/balladeCreuse.s" ; BALLADE
+	.include "object_code/ages/interactions/balladeDebug.s" ; BALLADE
 .ends
 
 

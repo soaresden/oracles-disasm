@@ -85,6 +85,10 @@
 ; code secret de l'écran titre (Select tenu + Start) écrit en SRAM $bff1 : la partie suivante
 ; commence dans la salle de test du boss en rythme (balladeRhythm.checkTestStart)
 .define BALLADE_RHYTHM_TEST_CODE $a5
+; menu de test caché (code/ages/balladeDebug.s) : HAUT tenu ce nombre d'images à l'écran titre
+; écrit BALLADE_DEBUG_CODE en SRAM $bff2 ; la partie suivante commence dans la salle du menu
+.define BALLADE_DEBUG_HOLD_FRAMES 300
+.define BALLADE_DEBUG_CODE $d7
 
 
 ; Define to help with building directory strings, maybe other stuff
