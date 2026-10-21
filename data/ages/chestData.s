@@ -121,6 +121,7 @@ chestGroup4Data:
 
 chestGroup5Data:
 	m_ChestData $1c, $b0, TREASURE_OBJECT_TRADEITEM_0c ; BALLADE: la grotte de la Boîte : Sire Bouchon, le jouet de Lila
+	m_ChestData $17, $b1, TREASURE_OBJECT_RUPEES_05 ; BALLADE: la grotte des amoureux : des rubis
 	m_ChestData $17, $13, TREASURE_OBJECT_MERMAID_SUIT_00
 	m_ChestData $25, $14, TREASURE_OBJECT_SMALL_KEY_03
 	m_ChestData $53, $1b, TREASURE_OBJECT_SMALL_KEY_03

@@ -18,6 +18,11 @@
 ; @subid_0b{Un enfant de la place du Grelot (avant / après le Coffre à Jouets)}
 ; @subid_0c{Un autre enfant de la place du Grelot}
 ; @subid_0d{Mme Bonnet, la maîtresse (l'école)}
+; @subid_0e{Héloïse (la Lagune, 3:23 ; avant / après le Récif Murmurant)}
+; @subid_0f{Bulle, la monitrice du club de plongée (3:24)}
+; @subid_10{Le facteur des bouteilles (la plage des bouteilles, 1:35)}
+; @subid_11{Gaspard (3:23) : la bouteille contre les Palmes de Zora}
+; @subid_12{La bouteille à la mer, sur l'îlot de la lagune (1:15, 0:15)}
 ; ==================================================================================================
 
 ;;
@@ -39,6 +44,11 @@ main:
 	.dw villager
 	.dw villager
 	.dw villager
+	.dw villager
+	.dw villager
+	.dw villager
+	.dw gaspard
+	.dw bottle
 
 
 ;;
@@ -131,6 +141,9 @@ arrivalTalk:
 	.db $05, $b0, <TX_5a56, GLOBALFLAG_BALLADE_MARINE_BOMB ; la grotte : Marine porte les bombes
 	.db $04, $34, <TX_5a62, $ff ; le Coffre à Jouets : encore un grelot
 	.db $04, $2b, <TX_5a63, $ff ; Pantin-Sans-Fil menace, Marine répond
+	.db $01, $24, <TX_5a70, $ff ; la Lagune des Serments, le ponton
+	.db $05, $b1, <TX_5a7a, $ff ; la grotte des amoureux
+	.db $01, $36, <TX_5a7b, $ff ; devant le Récif Murmurant
 	.db $ff
 
 
@@ -318,7 +331,7 @@ findCurrentIsland:
 jetties:
 	.db $01, $99, $43 ; 1. la Brume (le Ponton)
 	.db $01, $31, $43 ; 2. Hameau-Grelot (la jetée)
-	.db $01, $99, $52 ; 3. (pas encore construite)
+	.db $01, $24, $33 ; 3. la Lagune des Serments (le ponton)
 	.db $01, $99, $52 ; 4.
 	.db $01, $99, $52 ; 5.
 	.db $01, $99, $52 ; 6.
@@ -1042,3 +1055,124 @@ villager:
 	.db $02, <TX_5a68, <TX_5a69 ; $0b un enfant de la place du Grelot
 	.db $02, <TX_5a6a, <TX_5a6b ; $0c un autre enfant
 	.db $02, <TX_5a6c, <TX_5a6d ; $0d Mme Bonnet, la maîtresse
+	.db $04, <TX_5a74, <TX_5a75 ; $0e Héloïse
+	.db $04, <TX_5a76, <TX_5a77 ; $0f Bulle, la monitrice du club de plongée
+	.db $04, <TX_5a78, <TX_5a79 ; $10 le facteur des bouteilles
+
+
+; ==================================================================================================
+; Gaspard (subid $11), dans sa maison de la Lagune (3:23). Il a jeté une bouteille à la mer (l'objet
+; d'échange 1, sur l'îlot de la lagune : subid $12) ; quand Link la lui rapporte, il se souvient
+; d'Héloïse et donne les Palmes de Zora.
+; ==================================================================================================
+gaspard:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw npcInit
+	.dw @idle
+	.dw npcWaitText
+	.dw @gift
+
+@idle:
+	call interactionAnimateAsNpc
+	call npcCheckTalk
+	ret z
+	ld a,TREASURE_FLIPPERS
+	call checkTreasureObtained
+	ld bc,TX_5a73
+	jr c,@say
+	call hasBottle
+	ld bc,TX_5a71
+	jr nc,@say
+	ld a,$03
+	ld bc,TX_5a72
+	jp npcSay
+@say:
+	ld a,$02
+	jp npcSay
+
+; Il reprend la bouteille, et les Palmes de Zora apparaissent au-dessus de la tête de Link
+@gift:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	ld a,TREASURE_TRADEITEM
+	call loseTreasure
+	ldbc TREASURE_FLIPPERS, $00
+	call giveTreasureAtLink
+	xor a
+	ld (wDisabledObjects),a
+	ld e,Interaction.state
+	inc a
+	ld (de),a
+	ret
+
+;;
+; @param[out]	cflag	c si Link a la bouteille (l'objet d'échange 1)
+hasBottle:
+	ld a,TREASURE_TRADEITEM
+	call checkTreasureObtained
+	ret nc
+	ld a,(wTradeItem)
+	cp $01
+	scf
+	ret z
+	xor a
+	ret
+
+;;
+; Un trésor apparaît au-dessus de la tête de Link (comme la commande « giveitem »)
+; @param	b	Le trésor (TREASURE_*)
+; @param	c	Son sous-type
+giveTreasureAtLink:
+	call getFreeInteractionSlot
+	ret nz
+	ld (hl),INTERAC_TREASURE
+	inc l
+	ld (hl),b
+	inc l
+	ld (hl),c
+	ld l,Interaction.yh
+	ld a,(w1Link.yh)
+	ld (hl),a
+	ld l,Interaction.xh
+	ld a,(w1Link.xh)
+	ld (hl),a
+	ret
+
+
+; ==================================================================================================
+; La bouteille à la mer (subid $12), sur l'îlot de la lagune (1:15 et 0:15). Dans le Réel, on la voit
+; sans pouvoir l'atteindre (la lagune est profonde) ; dans le Songe, la mer s'écarte (0:15) : A
+; devant elle -> l'objet d'échange 1. Elle n'est plus là quand Link l'a, ou a les Palmes.
+; ==================================================================================================
+bottle:
+	ld e,Interaction.state
+	ld a,(de)
+	or a
+	jr nz,@idle
+	call hasBottle
+	jp c,interactionDelete
+	ld a,TREASURE_FLIPPERS
+	call checkTreasureObtained
+	jp c,interactionDelete
+	call interactionInitGraphics
+	call interactionIncState
+	ld h,d
+	ld l,Interaction.collisionRadiusY
+	ld (hl),$06
+	inc l
+	ld (hl),$06
+	ld e,Interaction.pressedAButton
+	call objectAddToAButtonSensitiveObjectList
+	jp objectSetVisible82
+
+@idle:
+	ld e,Interaction.pressedAButton
+	ld a,(de)
+	or a
+	ret z
+	ldbc TREASURE_TRADEITEM, $01
+	call giveTreasureAtLink
+	jp interactionDelete

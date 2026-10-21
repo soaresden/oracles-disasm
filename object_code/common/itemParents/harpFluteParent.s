@@ -142,6 +142,20 @@ parentItemCode_harp:
 	; BALLADE: dedans, « La Lanterne ne brille pas, ici. » (TX_5110)
 	jp nz,@tuneEchoesInVain
 
+	; BALLADE: ni au fond de la mer ouverte du Songe (briques $1a, $1b) : dans le Réel, c'est l'eau
+	; profonde (comme le réveil du noctambule, balladeDreamFx.s)
+	ld a,(wActiveGroup)
+	or a
+	jr nz,++
+	ld a,(wActiveTilePos)
+	ld l,a
+	ld h,>wRoomLayout
+	ld a,(hl)
+	and $fe
+	cp $1a
+	jp z,@tuneEchoesInVain
+++
+
 	; BALLADE: la Lanterne des Songes. Dehors, n'importe quel air fait passer du Réel (groupe 1) au
 	; Songe (groupe 0) et retour : un fondu, puis l'arrivée du voyage dans le temps d'Ages (le
 	; rayon de lumière ; si la case d'arrivée est bloquée, Link est renvoyé d'où il vient). Sans la

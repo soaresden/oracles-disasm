@@ -182,6 +182,9 @@ group1WarpDestTable:
 	m_WarpDest $21 $44 $0 $1 ; $4d : devant la maison de Lila
 	m_WarpDest $22 $44 $0 $1 ; $4e : devant l'école des Bonnets
 	m_WarpDest $32 $34 $0 $1 ; $4f : devant la grotte de la Boîte
+	m_WarpDest $06 $44 $0 $1 ; $50 : devant la maison d'Héloïse et Gaspard (la Lagune)
+	m_WarpDest $17 $36 $0 $1 ; $51 : devant le club de plongée
+	m_WarpDest $27 $46 $0 $1 ; $52 : devant la grotte des amoureux
 
 group2WarpDestTable:
 	m_WarpDest $90 $45 $0 $e
@@ -338,6 +341,9 @@ group3WarpDestTable:
 	m_WarpDest $20 $ff $9 $3 ; $43 : la boutique de Pépin, par le bas
 	m_WarpDest $21 $ff $9 $3 ; $44 : la maison de Lila, par le bas
 	m_WarpDest $22 $ff $9 $3 ; $45 : l'école des Bonnets, par le bas
+	; BALLADE: la Lagune des Serments
+	m_WarpDest $23 $ff $9 $3 ; $46 : la maison d'Héloïse et Gaspard, par le bas
+	m_WarpDest $24 $ff $9 $3 ; $47 : le club de plongée, par le bas
 
 group4WarpDestTable:
 	m_WarpDest $04 $ff $9 $3
@@ -531,6 +537,7 @@ group5WarpDestTable:
 	m_WarpDest $fb $17 $0 $4
 	; BALLADE: Hameau-Grelot
 	m_WarpDest $b0 $87 $0 $4 ; $6d : la grotte de la Boîte, au-dessus de l'escalier
+	m_WarpDest $b1 $87 $0 $4 ; $6e : la grotte des amoureux, au-dessus de l'escalier
 
 group6WarpDestTable:
 	m_WarpDest $05 $02 $f $3

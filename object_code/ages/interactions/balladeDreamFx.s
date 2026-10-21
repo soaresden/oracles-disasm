@@ -104,6 +104,11 @@ interactionCodee9:
 	ld a,(wDisabledObjects)
 	or b
 	ret nz
+	; Ni pendant que l'écran défile vers la salle voisine (la case sous Link n'est pas encore la
+	; bonne : il pourrait se réveiller dans l'eau profonde)
+	ld a,(wScrollMode)
+	rrca
+	ret nc
 	ld hl,wBalladeNoctambule
 	ldi a,(hl)
 	or (hl)

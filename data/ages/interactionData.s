@@ -867,6 +867,11 @@ interactionedSubidData:
 	m_InteractionSubidData $3e $00 $02 ; $0b un enfant de la place du Grelot
 	m_InteractionSubidData $3e $10 $32 ; $0c un autre enfant
 	m_InteractionSubidData $5c $00 $12 ; $0d Mme Bonnet, la maîtresse (en bleu)
+	m_InteractionSubidData $42 $10 $32 ; $0e Héloïse (la vieille dame d'Ages)
+	m_InteractionSubidData $44 $00 $12 ; $0f Bulle, la monitrice (une Zora)
+	m_InteractionSubidData $41 $00 $22 ; $10 le facteur des bouteilles (le facteur d'Ages)
+	m_InteractionSubidData $42 $00 $02 ; $11 Gaspard (le vieux monsieur)
+	m_InteractionSubidData $e3 $0c $32 ; $12 la bouteille à la mer (palette 3)
 	m_InteractionSubidDataEnd
 
 interactiond4SubidData:

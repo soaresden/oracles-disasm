@@ -63,19 +63,19 @@ group0WarpSources:
 	m_StandardWarp $0 $03 $05 $4 $4
 	m_PointerWarp     $0a warpSource76aa
 	;m_StandardWarp $0 $02 $18 $3 $4 ; BALLADE: 0:02 = manège du Songe
-	m_StandardWarp $0 $04 $34 $3 $4
+	;m_StandardWarp $0 $04 $34 $3 $4 ; BALLADE: la Lagune des Serments (1:04-37)
 	;m_StandardWarp $0 $12 $35 $3 $4 ; BALLADE: 0:12 = boutique du Songe (fermée)
 	m_StandardWarp $0 $21 $4e $2 $4 ; BALLADE: Songe, porte de la maison de Lila -> 2:21
-	m_StandardWarp $0 $14 $36 $3 $4
-	m_StandardWarp $0 $06 $2d $2 $4
+	;m_StandardWarp $0 $14 $36 $3 $4 ; BALLADE: la Lagune des Serments (1:04-37)
+	;m_StandardWarp $0 $06 $2d $2 $4 ; BALLADE: la Lagune des Serments (1:04-37)
 	m_PointerWarp     $09 warpSource769a
 	m_PointerWarp     $0b warpSource76b2
 	m_StandardWarp $0 $0c $09 $3 $4
 	m_PointerWarp     $1b warpSource76ce
 	m_PointerWarp     $1c warpSource76d6
 	m_PointerWarp     $1d warpSource76de
-	m_StandardWarp $0 $27 $39 $2 $4
-	m_StandardWarp $0 $37 $3e $2 $4
+	;m_StandardWarp $0 $27 $39 $2 $4 ; BALLADE: la Lagune des Serments (1:04-37)
+	;m_StandardWarp $0 $37 $3e $2 $4 ; BALLADE: la Lagune des Serments (1:04-37)
 	m_PointerWarp     $3d warpSource76f6
 	m_StandardWarp $0 $45 $3e $3 $4
 	m_PointerWarp     $47 warpSource76fe
@@ -207,21 +207,26 @@ group1WarpSources:
 	m_StandardWarp $0 $0e $00 $5 $4
 	m_StandardWarp $4 $0e $2a $0 $3
 	;m_StandardWarp $0 $02 $13 $3 $4 ; BALLADE: 1:02 est le manège de Hameau-Grelot
-	m_StandardWarp $0 $05 $3f $5 $4
-	m_StandardWarp $0 $06 $41 $5 $4
-	m_StandardWarp $0 $07 $43 $5 $4
+	;m_StandardWarp $0 $05 $3f $5 $4 ; BALLADE: la Lagune des Serments (1:04-37)
+	;m_StandardWarp $0 $06 $41 $5 $4 ; BALLADE: la Lagune des Serments (1:04-37)
+	;m_StandardWarp $0 $07 $43 $5 $4 ; BALLADE: la Lagune des Serments (1:04-37)
 	m_StandardWarp $0 $09 $62 $5 $4
 	m_PointerWarp     $0b warpSource7836
 	m_StandardWarp $0 $0c $0b $3 $4
 	m_StandardWarp $0 $0d $47 $2 $4
-	m_StandardWarp $0 $04 $14 $3 $4
+	;m_StandardWarp $0 $04 $14 $3 $4 ; BALLADE: la Lagune des Serments (1:04-37)
 	; BALLADE: Hameau-Grelot (1:00-33) : la boutique de Pépin, la maison de Lila, l'école, la grotte
 	m_StandardWarp $0 $12 $43 $3 $4 ; BALLADE: porte de la boutique de Pépin -> 3:20
 	m_StandardWarp $0 $21 $44 $3 $4 ; BALLADE: porte de la maison de Lila -> 3:21
 	m_StandardWarp $0 $22 $45 $3 $4 ; BALLADE: porte de l'école des Bonnets -> 3:22
 	m_StandardWarp $0 $32 $6d $5 $4 ; BALLADE: grotte de la Boîte -> 5:b0 (après la bombe)
+	; BALLADE: la Lagune des Serments (1:04-37) : la maison d'Héloïse et Gaspard, le club de plongée,
+	; la grotte des amoureux
+	m_StandardWarp $0 $06 $46 $3 $4 ; BALLADE: porte de la maison d'Héloïse et Gaspard -> 3:23
+	m_StandardWarp $0 $17 $47 $3 $4 ; BALLADE: porte du club de plongée -> 3:24
+	m_StandardWarp $0 $27 $6e $5 $4 ; BALLADE: grotte des amoureux -> 5:b1
 	;m_StandardWarp $0 $13 $67 $5 $4 ; BALLADE: 1:13 est la plage aux châteaux de sable
-	m_StandardWarp $0 $14 $16 $3 $4
+	;m_StandardWarp $0 $14 $16 $3 $4 ; BALLADE: la Lagune des Serments (1:04-37)
 	m_StandardWarp $0 $18 $55 $5 $4
 	m_StandardWarp $0 $1c $07 $3 $4
 	m_StandardWarp $0 $1d $31 $3 $4
@@ -267,7 +272,7 @@ group1WarpSources:
 	m_StandardWarp $0 $db $39 $5 $4
 	m_StandardWarp $0 $dd $6a $5 $4
 	m_PointerWarp     $41 warpSource784a
-	m_StandardWarp $0 $27 $48 $1 $2
+	;m_StandardWarp $0 $27 $48 $1 $2 ; BALLADE: la Lagune des Serments (1:04-37)
 	m_StandardWarp $0 $e2 $19 $1 $2
 	m_StandardWarp $0 $e0 $42 $5 $2
 	m_WarpListEndNoDefault
@@ -446,6 +451,11 @@ group3WarpSources:
 	m_StandardWarp $8 $21 $4d $1 $3
 	m_StandardWarp $4 $22 $4e $1 $3
 	m_StandardWarp $8 $22 $4e $1 $3
+	; BALLADE: la Lagune des Serments : sorties de la maison d'Héloïse et Gaspard, du club de plongée
+	m_StandardWarp $4 $23 $50 $1 $3
+	m_StandardWarp $8 $23 $50 $1 $3
+	m_StandardWarp $4 $24 $51 $1 $3
+	m_StandardWarp $8 $24 $51 $1 $3
 	m_PointerWarp     $9f warpSource7abe
 	m_StandardWarp $0 $a1 $60 $5 $4
 	m_StandardWarp $0 $ae $1d $3 $2
@@ -650,6 +660,7 @@ group5WarpSources:
 	m_StandardWarp $0 $f4 $27 $0 $2
 	m_StandardWarp $0 $f5 $16 $5 $2
 	m_StandardWarp $0 $b0 $4f $1 $4 ; BALLADE: grotte de la Boîte -> devant l'entrée (1:32)
+	m_StandardWarp $0 $b1 $52 $1 $4 ; BALLADE: grotte des amoureux -> devant l'entrée (1:27)
 	m_StandardWarp $0 $b2 $32 $1 $4
 	m_StandardWarp $0 $b3 $31 $1 $4
 	m_PointerWarp     $b4 warpSource7dba

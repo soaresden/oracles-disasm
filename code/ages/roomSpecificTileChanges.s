@@ -103,7 +103,8 @@ roomTileChangerCodeGroup0Data:
 	.db $61 $21
 	.db $51 $22
 	.db $54 $23
-	.db $25 $24
+	; BALLADE: la Lagune des Serments (1:04-37), sans le changement de cases d'Ages
+	;.db $25 $24
 	.db $3a $25
 	.db $0b $26
 	.db $e0 $30
@@ -115,7 +116,8 @@ roomTileChangerCodeGroup0Data:
 	.db $00
 roomTileChangerCodeGroup1Data:
 	.db $38 $09
-	.db $27 $28
+	; BALLADE: la Lagune des Serments (1:04-37), sans le changement de cases d'Ages
+	;.db $27 $28
 	; BALLADE: salle réutilisée par Gulls of Life, sans le changement de cases d'Ages
 	;.db $8c $2c
 	.db $58 $34

@@ -420,9 +420,9 @@ debugEntries:
 	.db $09, $03, $21, $46 ; chez Lila, l'essence en poche : la fin du chapitre 2
 	.dw debugNone
 	; 3. Lagune des Serments
-	.db $ff, $00, $00, $00
+	.db $0a, $01, $24, $33 ; le ponton, en arrivant (la fin du chapitre 2 vue)
 	.dw debugNone
-	.db $ff, $00, $00, $00
+	.db $0a, $01, $06, $44 ; devant la maison d'Héloïse et Gaspard
 	.dw debugNone
 	.db $ff, $00, $00, $00
 	.dw debugNone
@@ -541,6 +541,13 @@ debugMilestones:
 	.db DBG_TREASURE, TREASURE_ESSENCE, $01
 	.db DBG_TREASURE, TREASURE_HEART_CONTAINER, $04
 	.db DBG_FULLHEALTH
+	.db DBG_END
+	; 10. La fin du chapitre 2 a été vue (chez Lila, la place) : la Lagune des Serments est repérée
+	.db DBG_ROOMFLAG, $03, $21, $40
+	.db DBG_GLOBALFLAG, GLOBALFLAG_BALLADE_ISLAND3
+	.db DBG_END
+	; 11. Gaspard a eu sa bouteille : les Palmes de Zora
+	.db DBG_TREASURE, TREASURE_FLIPPERS, $00
 	.db DBG_END
 
 debugNone:
