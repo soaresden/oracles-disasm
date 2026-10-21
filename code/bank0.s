@@ -7957,7 +7957,20 @@ seasonsToAgesItemCountsLevelsTable:
 	.db $ba $be ; wNumGashaSeeds
 	.db $15 $15 ; wObtainedRingBox
 	.db $16 $16 ; wRingsObtained
+	; FR: all 8 bytes of wRingsObtained and the 5 ring box slots (only the first
+	; one was copied: rings 8-63 and the other box slots were lost)
+	.db $17 $17
+	.db $18 $18
+	.db $19 $19
+	.db $1a $1a
+	.db $1b $1b
+	.db $1c $1c
+	.db $1d $1d
 	.db $c0 $c6 ; wRingBoxContents
+	.db $c1 $c7
+	.db $c2 $c8
+	.db $c3 $c9
+	.db $c4 $ca
 	.db $c5 $cb ; wActiveRing
 	.db $c6 $cc ; wRingBoxLevel
 	.db $c7 $cd ; wNumUnappraisedRingsBcd
@@ -8066,6 +8079,12 @@ saveSeasonsTreasureDataForAges:
 	jr --
 ++
 
+	; FR: unappraised rings (the count is copied below, the list was not)
+	ld hl,wUnappraisedRings-wFileStart+SEASONS_BACKUP
+	ld de,wUnappraisedRings
+	ld b,$40
+	call copyMemory
+
 	; copy item counts
 	ld hl,seasonsToAgesItemCountsLevelsTable
 	ld b,$00
@@ -8133,6 +8152,12 @@ saveAgesTreasureDataForSeasons:
 	call unsetFlag
 	jr --
 ++
+
+	; FR: unappraised rings (the count is copied below, the list was not)
+	ld hl,wUnappraisedRings-wFileStart+AGES_BACKUP
+	ld de,wUnappraisedRings
+	ld b,$40
+	call copyMemory
 
 	; copy item counts
 	ld hl,seasonsToAgesItemCountsLevelsTable
