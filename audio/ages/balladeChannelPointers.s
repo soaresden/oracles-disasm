@@ -187,6 +187,28 @@ musBalladeRecif:
 	.dw musBalladeRecifChannel6
 	.db $ff
 
+musBalladeBraise:
+	.db $00
+	.dw musBalladeBraiseChannel0
+	.db $01
+	.dw musBalladeBraiseChannel1
+	.db $04
+	.dw musBalladeBraiseChannel4
+	.db $06
+	.dw musBalladeBraiseChannel6
+	.db $ff
+
+musBalladeForge:
+	.db $00
+	.dw musBalladeForgeChannel0
+	.db $01
+	.dw musBalladeForgeChannel1
+	.db $04
+	.dw musBalladeForgeChannel4
+	.db $06
+	.dw musBalladeForgeChannel6
+	.db $ff
+
 sndBalladeGull:
 	.db $02
 	.dw sndBalladeGullChannel2

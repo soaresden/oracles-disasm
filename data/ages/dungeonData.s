@@ -40,7 +40,8 @@ dungeonData03:
 	; BALLADE: le Récif Murmurant, sous la Lagune des Serments (B1 sous l'eau, 1F au sec)
 	m_DungeonData >wGroup5RoomFlags, $44, dungeon03LayoutRecif, $02, $02, $03, $00, $00
 dungeonData04:
-	m_DungeonData >wGroup4RoomFlags, $91, dungeon04Layout, $02, $02, $07, $00, $00
+	; BALLADE: la Forge Endormie, dans le cratère de Mont-Braise (un seul étage)
+	m_DungeonData >wGroup4RoomFlags, $bb, dungeon04LayoutForge, $01, $03, $01, $00, $00
 dungeonData05:
 	m_DungeonData >wGroup4RoomFlags, $bb, dungeon05Layout, $02, $02, $01, $00, $00
 dungeonData06:

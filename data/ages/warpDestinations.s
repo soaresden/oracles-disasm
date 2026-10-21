@@ -187,6 +187,7 @@ group1WarpDestTable:
 	m_WarpDest $27 $46 $0 $1 ; $52 : devant la grotte des amoureux
 	m_WarpDest $36 $44 $0 $1 ; $53 : devant la bouche du Récif Murmurant
 	m_WarpDest $28 $23 $0 $1 ; $54 : devant la mine abandonnée (Mont-Braise)
+	m_WarpDest $0a $24 $0 $1 ; $55 : devant la bouche du cratère (la Forge Endormie)
 
 group2WarpDestTable:
 	m_WarpDest $90 $45 $0 $e
@@ -426,6 +427,8 @@ group4WarpDestTable:
 	m_WarpDest $fb $5c $0 $4
 	m_WarpDest $fe $ff $9 $3
 	m_WarpDest $fd $52 $0 $4
+	; BALLADE: Mont-Braise
+	m_WarpDest $bb $97 $0 $4 ; $4e : la Forge Endormie, l'entrée (sous l'arche)
 
 group5WarpDestTable:
 	m_WarpDest $26 $ff $9 $3

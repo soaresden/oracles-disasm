@@ -52,6 +52,13 @@ chestGroup3Data:
 	.db $ff
 
 chestGroup4Data:
+	; BALLADE: la Forge Endormie (story/salles/forge.txt)
+	m_ChestData $57, $b1, TREASURE_OBJECT_CANE_OF_SOMARIA_00 ; les Copies battues : la Canne des Songes
+	m_ChestData $5b, $b2, TREASURE_OBJECT_MAP_02        ; la carte
+	m_ChestData $22, $b0, TREASURE_OBJECT_SMALL_KEY_03  ; un bloc de la Canne sur le bouton : la petite clé 2
+	m_ChestData $27, $af, TREASURE_OBJECT_RUPEES_04     ; des rubis
+	m_ChestData $77, $ae, TREASURE_OBJECT_BOSS_KEY_03   ; les deux boutons : la clé du boss
+	m_ChestData $53, $b9, TREASURE_OBJECT_COMPASS_02    ; la boussole
 	; BALLADE: le Coffre à Jouets (story/salles/coffre.txt)
 	m_ChestData $57, $31, TREASURE_OBJECT_BOOMERANG_04  ; le Boomerang-Toupie (quand les soldats sont battus)
 	m_ChestData $2c, $34, TREASURE_OBJECT_SMALL_KEY_03  ; le grelot : la petite clé 2

@@ -779,10 +779,15 @@ giveCarnet:
 ; ==================================================================================================
 ; L'essence (subid $08) : elle apparaît (INTERAC_ESSENCE) quand le boss est vaincu (drapeau $80 de sa
 ; salle) : Pantin-Sans-Fil (4:2b, l'essence dans l'antichambre 4:2e), la Murène du Silence (Octogon,
-; 5:36 : dans sa salle).
+; 5:36 : dans sa salle), Copiator (Smog, 4:bf : dans sa salle).
 ; ==================================================================================================
 essenceSpawner:
 	ld a,(wDungeonIndex)
+	ld b,a
+	cp $04
+	ld a,(wGroup4RoomFlags+$bf)
+	jr z,+
+	ld a,b
 	cp $03
 	ld a,(wGroup4RoomFlags+$2b)
 	jr nz,+
@@ -1020,6 +1025,8 @@ chapterEnding:
 	.dw @reefReturn
 	.db $03, $23, $21, $00
 	.dw @vowsHouse
+	.db $01, $2a, $00, $08
+	.dw @forgeAwake
 	.db $ff
 
 ; Chapitre 2 : Lila se réveille ; la place du Grelot ; Marine lit le vent (la Lagune des Serments)
@@ -1055,6 +1062,20 @@ chapterEnding:
 	.db END_TEXT, <TX_5a7e
 	.db END_FLAG, GLOBALFLAG_BALLADE_ISLAND4
 	.db END_STEP, $00
+	.db END_WAIT, 30
+	.db END_TEXT, <TX_5a31
+	.db END_DONE
+
+; Chapitre 4 : la Forge s'est réveillée ; le village goron fête ça ; Marine lit le vent (l'île des
+; Échos)
+@forgeAwake:
+	.db END_WAIT, 40
+	.db END_TEXT, <TX_5a8c
+	.db END_WAIT, 30
+	.db END_TEXT, <TX_5a8d
+	.db END_WAIT, 40
+	.db END_TEXT, <TX_5a8e
+	.db END_FLAG, GLOBALFLAG_BALLADE_ISLAND5
 	.db END_WAIT, 30
 	.db END_TEXT, <TX_5a31
 	.db END_DONE

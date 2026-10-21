@@ -24,7 +24,7 @@ soundPointers:
 	/* 0x14 */ m_soundPointer musWingDungeon
 	/* 0x15 */ m_soundPointer musMoonlitGrotto
 	/* 0x16 */ m_soundPointer musSkullDungeon
-	/* 0x17 */ m_soundPointer musCrownDungeon
+	/* 0x17 */ m_soundPointer musBalladeForge ; BALLADE: la Forge Endormie (au lieu du Donjon de la Couronne)
 	/* 0x18 */ m_soundPointer musBalladeRecif ; BALLADE: le Récif Murmurant (au lieu de la Grotte des Sirènes)
 	/* 0x19 */ m_soundPointer musJabuJabusBelly
 	/* 0x1a */ m_soundPointer musAncientTomb
@@ -39,7 +39,7 @@ soundPointers:
 	/* 0x23 */ m_soundPointer musPirates
 	/* 0x24 */ m_soundPointer musSymmetryPresent
 	/* 0x25 */ m_soundPointer musBalladeLagune ; BALLADE: la Lagune des Serments (au lieu de Symétrie, passé)
-	/* 0x26 */ m_soundPointer musTokayHouse
+	/* 0x26 */ m_soundPointer musBalladeBraise ; BALLADE: Mont-Braise (au lieu de la maison des Tokays)
 	/* 0x27 */ m_soundPointer musRosaDate
 	/* 0x28 */ m_soundPointer musBlackTower
 	/* 0x29 */ m_soundPointer musCredits1

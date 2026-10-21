@@ -330,3 +330,15 @@ dungeon03LayoutRecif:
 	.db $00 $00 $00 $00 $00 $00 $00 $00
 	.db $00 $00 $00 $00 $00 $00 $00 $00
 	.db $00 $00 $00 $00 $00 $00 $00 $00
+
+; BALLADE: la Forge Endormie (donjon 4), un seul étage, en forme d'enclume. Voir
+; story/salles/forge.txt dans le dépôt ZeldaGullsOfLife.
+dungeon04LayoutForge:
+	.db $00 $00 $00 $00 $00 $00 $00 $00
+	.db $00 $ae $af $b0 $b1 $b2 $00 $00
+	.db $00 $00 $be $bf $b6 $00 $00 $00
+	.db $00 $b9 $ba $bb $bc $bd $00 $00
+	.db $00 $00 $00 $00 $00 $00 $00 $00
+	.db $00 $00 $00 $00 $00 $00 $00 $00
+	.db $00 $00 $00 $00 $00 $00 $00 $00
+	.db $00 $00 $00 $00 $00 $00 $00 $00

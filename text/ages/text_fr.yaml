@@ -157,16 +157,23 @@ groups:
   - name: TX_0011
     index: 0x11
     text: |-
-      \pos(2)\slow()You got the
-      \col(1)Burning Flame\col(0),
-      an Essence of
-      Time!\stop
-      It reignites
-      wavering hearts
-      with a hero's
-      burning
-      passion.
-
+      \pos(2)\slow()La Forge s'est
+      réveillée. Plus
+      deux épées
+      pareilles!\stop
+      Tu as trouvé le
+      \col(1)quatrième
+      couplet\col(0) de la
+      chanson de
+      Marine!\stop
+      \col(1)Marine\col(0):
+      "Invente-moi un
+      chemin que
+      personne n'a
+      pris."\stop
+      ...C'est joli,
+      hein? C'est de
+      moi!
   - name: TX_0012
     index: 0x12
     text: |-
@@ -928,11 +935,13 @@ groups:
   - name: TX_0073
     index: 0x73
     text: |-
-      You got the
-      \col(1)Cane of Somaria\col(0)!
-      Use it to create
-      blocks.
-
+      La \col(1)Canne des
+      Songes\col(0)!\stop
+      Elle fait
+      apparaître un
+      bloc devant toi.
+      Un seul à la
+      fois!
   - name: TX_0074
     index: 0x74
     text: |-
@@ -1618,9 +1627,8 @@ groups:
   - name: TX_0204
     index: 0x04
     text: |2-
-       Level 4
-        Skull Dungeon
-
+       Niveau 4
+       Forge Endormie
   - name: TX_0205
     index: 0x05
     text: |2-
@@ -3963,12 +3971,11 @@ groups:
   - name: TX_0904
     index: 0x04
     text: |-
-      Burning Flame
-      It reignites a
-      hero's passion
-      deep in wavering
-      hearts.
-
+      Quatrième
+      couplet
+      Un chemin que
+      personne n'a
+      pris.
   - name: TX_0905
     index: 0x05
     text: |-
@@ -4339,10 +4346,9 @@ groups:
   - name: TX_093c
     index: 0x3c
     text: |-
-      Cane of Somaria
-      Used to create
-      blocks.
-
+      Canne des Songes
+      Un bloc, rien
+      qu'un.
   - name: TX_093d
     index: 0x3d
     text: |-
@@ -14572,20 +14578,22 @@ groups:
   - name: TX_2f26
     index: 0x26
     text: |-
-      \pos(2)It's time for
-      our little game!
-      I break apart.
-      If you can
-      force me back
-      together and
-      blow me away,
-      it ends!
-      But before you
-      do, I shall
-      take a bit of
-      your soul!!!
-      Now begin!
-
+      \pos(2)Montre-moi. Tout
+      ce que tu fais,
+      je le refais.
+      En mieux.\stop
+      \col(1)Marine\col(0): Et
+      ça, tu sais le
+      faire?\stop
+      La la laaa...
+      la la LAAA!\stop
+      \col(1)Copiator\col(0): ...!\stop
+      Je me coupe en
+      morceaux!
+      Rassemble-moi,
+      puis souffle-
+      moi... si tu
+      peux!
   - name: TX_2f27
     index: 0x27
     text: |-
@@ -23794,6 +23802,47 @@ groups:
       Tant mieux!
       J'en ai marre
       de recopier.
+
+  # Fin du chapitre 4 : le village goron (1:2a), l'essence de la Forge Endormie
+  - name: TX_5a8c
+    index: 0x8c
+    text: |-
+      \col(1)Marine\col(0): Écoute!
+      Ça ne cogne plus
+      pareil. Bong!
+      Bing! Badaboum!\stop
+      Le volcan s'est
+      réveillé... mais
+      en douceur.
+
+  - name: TX_5a8d
+    index: 0x8d
+    text: |-
+      \col(1)Brasia\col(0): Une
+      épée-vague! Une
+      épée-nuage! Une
+      épée-mouette!\stop
+      \col(1)Les Cuivres\col(0):
+      Pouet-tagada-
+      boum-pouet!\stop
+      \col(1)Marine\col(0): Une
+      épée-mouette?
+      Ça me plaît!
+
+  - name: TX_5a8e
+    index: 0x8e
+    text: |-
+      \col(1)Marine\col(0): Chut...
+      le vent a
+      tourné.\stop
+      Il sent la
+      cloche, le
+      vieux papier...\stop
+      Une île, à
+      l'ouest, où tout
+      se répète deux
+      fois. Deux fois.
+
 
 
 # ==============================================================================

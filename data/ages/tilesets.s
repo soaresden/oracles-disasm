@@ -415,7 +415,7 @@ tilesetData:
 	.db $24, $04, $10
 
 	; 0x3a
-	.db $25, $08
+	.db $24, $08 ; BALLADE: la Forge Endormie (donjon 4 ; dans Ages, $25 : le Donjon de la Couronne)
 	.db UNIQUE_GFXH_NONE
 	.db GFXH_TILESET_CROWN_DUNGEON
 	.db PALH_TILESET_CROWN_DUNGEON

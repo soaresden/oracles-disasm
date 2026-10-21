@@ -3335,24 +3335,19 @@ group4MapadObjectData:
 	obj_Pointer group4MapadEnemyObjectData
 	obj_End
 
-group4MapaeObjectData:
 	obj_Pointer group4MapaeEnemyObjectData
 	obj_End
 
-group4MapafObjectData:
 	obj_Pointer group4MapafEnemyObjectData
 	obj_End
 
-group4Mapb0ObjectData:
 	obj_Part $03 $00 $57
 	obj_Pointer group4Mapb0EnemyObjectData
 	obj_End
 
-group4Mapb1ObjectData:
 	obj_Pointer group4Mapb1EnemyObjectData
 	obj_End
 
-group4Mapb2ObjectData:
 	obj_Pointer group4Mapb2EnemyObjectData
 	obj_End
 
@@ -3372,7 +3367,6 @@ group4Mapb5ObjectData:
 	obj_Pointer group4Mapb5EnemyObjectData
 	obj_End
 
-group4Mapb6ObjectData:
 	obj_Interaction $1e $08 $07 $00
 	obj_Pointer group4Mapb6EnemyObjectData
 	obj_End
@@ -3385,12 +3379,10 @@ group4Mapb8ObjectData:
 	obj_Interaction $7f $00 $28 $78
 	obj_End
 
-group4Mapb9ObjectData:
 	obj_Part $03 $00 $63
 	obj_Pointer group4Mapb9EnemyObjectData
 	obj_End
 
-group4MapbaObjectData:
 	obj_Interaction $20 $02 $58 $78
 	obj_Part $46 $00 $37
 	obj_Part $46 $01 $65
@@ -3398,14 +3390,12 @@ group4MapbaObjectData:
 	obj_Pointer group4MapbaEnemyObjectData
 	obj_End
 
-group4MapbbObjectData:
 	obj_Interaction $12 $00 $88 $78
 	obj_Interaction $e2 $01
 	obj_Interaction $7e $00
 	obj_Pointer group4MapbbEnemyObjectData
 	obj_End
 
-group4MapbcObjectData:
 	obj_Interaction $21 $17 $57 $0f
 	obj_Part $09 $80 $34
 	obj_Part $09 $81 $3a
@@ -3414,15 +3404,12 @@ group4MapbcObjectData:
 	obj_Pointer group4MapbcEnemyObjectData
 	obj_End
 
-group4MapbdObjectData:
 	obj_Pointer group4MapbdEnemyObjectData
 	obj_End
 
-group4MapbeObjectData:
 	obj_Pointer group4MapbeEnemyObjectData
 	obj_End
 
-group4MapbfObjectData:
 	obj_Interaction $33 $ff $58 $78
 	obj_Interaction $20 $01 $58 $78
 	obj_Interaction $1e $08 $07 $00
@@ -4984,6 +4971,7 @@ group1Map2aObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $14 $38 $28
 	obj_Interaction INTERAC_BALLADE_OBJECT $17 $38 $78
 	obj_Interaction INTERAC_BALLADE_OBJECT $17 $48 $88
+	obj_Interaction INTERAC_BALLADE_OBJECT $0a $08 $08 ; la fin du chapitre 4 (l'essence de la Forge)
 	obj_End
 group1Map2bObjectData:
 	obj_End
@@ -5233,6 +5221,57 @@ group4Map3bObjectData:
 	obj_End
 group4Map4aObjectData:
 	obj_Interaction INTERAC_BALLADE_RHYTHM $00 $58 $78
+	obj_End
+group4MapaeObjectData:
+	obj_Part $09 $80 $34
+	obj_Part $09 $81 $3a
+	obj_Interaction $21 $17 $77 $03
+	obj_End
+group4MapafObjectData:
+	obj_RandomEnemy $30 ENEMY_KEESE $00
+	obj_End
+group4Mapb0ObjectData:
+	obj_Part $09 $80 $83
+	obj_Interaction $21 $17 $22 $01
+	obj_End
+group4Mapb1ObjectData:
+	obj_Interaction $1e $0a $a7 $00
+	obj_Interaction $1e $0b $50 $00
+	obj_Interaction $1e $09 $5e $00
+	obj_Interaction $20 $00 $58 $78
+	obj_Interaction $12 $02 $58 $78
+	obj_BeforeEvent group4Mapc8EnemyObjectData
+	obj_End
+group4Mapb2ObjectData:
+	obj_RandomEnemy $40 ENEMY_ROPE $00
+	obj_End
+group4Mapb6ObjectData:
+	obj_RandomEnemy $30 ENEMY_KEESE $00
+	obj_End
+group4Mapb9ObjectData:
+	obj_RandomEnemy $40 ENEMY_COLOR_CHANGING_GEL $00
+	obj_End
+group4MapbaObjectData:
+	obj_RandomEnemy $40 ENEMY_STALFOS $00
+	obj_End
+group4MapbbObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $09 $08 $08
+	obj_End
+group4MapbcObjectData:
+	obj_RandomEnemy $40 ENEMY_STALFOS $00
+	obj_End
+group4MapbdObjectData:
+	obj_RandomEnemy $60 ENEMY_ROPE $00
+	obj_Interaction $12 $01 $58 $78
+	obj_End
+group4MapbeObjectData:
+	obj_End
+group4MapbfObjectData:
+	obj_Interaction $33 $ff $58 $78
+	obj_Interaction $20 $01 $58 $78
+	obj_Interaction $1e $0b $50 $00
+	obj_Interaction INTERAC_BALLADE_OBJECT $08 $78 $38
+	obj_BeforeEvent group4MapbfBeforeEventObjectData
 	obj_End
 group5Map2eObjectData:
 	obj_RandomEnemy $20 ENEMY_BARI $00

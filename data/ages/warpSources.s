@@ -228,6 +228,7 @@ group1WarpSources:
 	m_StandardWarp $0 $36 $6f $5 $4 ; BALLADE: la bouche du visage de corail -> le Récif Murmurant (5:44)
 	; BALLADE: Mont-Braise (1:08-3c) : la mine abandonnée
 	m_StandardWarp $0 $28 $70 $5 $4 ; BALLADE: entrée de la mine abandonnée -> 5:b2
+	m_StandardWarp $0 $0a $4e $4 $4 ; BALLADE: la bouche du grand visage du cratère -> la Forge Endormie (4:bb)
 	;m_StandardWarp $0 $13 $67 $5 $4 ; BALLADE: 1:13 est la plage aux châteaux de sable
 	;m_StandardWarp $0 $14 $16 $3 $4 ; BALLADE: la Lagune des Serments (1:04-37)
 	;m_StandardWarp $0 $18 $55 $5 $4 ; BALLADE: Mont-Braise (1:08-3c)
@@ -525,7 +526,7 @@ group4WarpSources:
 	m_StandardWarp $4 $39 $4f $2 $3 ; BALLADE: sortie du Coffre à Jouets -> le rêve de Lila (2:21)
 	m_StandardWarp $4 $66 $02 $0 $3
 	m_StandardWarp $4 $91 $03 $0 $3
-	m_StandardWarp $4 $bb $04 $0 $3
+	m_StandardWarp $4 $bb $55 $1 $3 ; BALLADE: sortie de la Forge Endormie -> devant la bouche du cratère (1:0a)
 	m_StandardWarp $4 $ce $05 $0 $3
 	m_StandardWarp $4 $04 $00 $0 $3
 	m_StandardWarp $4 $0d $00 $1 $3

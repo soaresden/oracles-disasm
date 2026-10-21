@@ -437,13 +437,13 @@ debugEntries:
 	.dw debugNone
 	.db $0e, $01, $2a, $55 ; le village goron
 	.dw debugNone
-	.db $ff, $00, $00, $00
+	.db $0f, $04, $bb, $97 ; la Forge Endormie, l'entrée (le Bracelet)
 	.dw debugNone
-	.db $ff, $00, $00, $00
+	.db $0f, $04, $b1, $97 ; les Copies (la petite clé 1 utilisée)
 	.dw debugNone
-	.db $ff, $00, $00, $00
-	.dw debugNone
-	.db $ff, $00, $00, $00
+	.db $10, $04, $be, $97 ; l'antichambre (la Canne, la clé du boss)
+	.dw debugForgeBossKey
+	.db $11, $01, $2a, $55 ; le village goron, l'essence en poche : la fin du chapitre 4
 	.dw debugNone
 	; 5. Île des Échos
 	.db $ff, $00, $00, $00
@@ -564,6 +564,14 @@ debugMilestones:
 	; 15. Brasia a eu son idée : le Bracelet de force
 	.db DBG_TREASURE, TREASURE_BRACELET, $01
 	.db DBG_END
+	; 16. Les Copies sont battues : la Canne des Songes
+	.db DBG_TREASURE, TREASURE_CANE_OF_SOMARIA, $00
+	.db DBG_END
+	; 17. Copiator est battu : l'essence (le 4e couplet), un cœur de plus
+	.db DBG_TREASURE, TREASURE_ESSENCE, $03
+	.db DBG_TREASURE, TREASURE_HEART_CONTAINER, $04
+	.db DBG_FULLHEALTH
+	.db DBG_END
 
 debugNone:
 	.db DBG_END
@@ -590,6 +598,12 @@ debugRecifBossKey:
 	.db DBG_OR
 	.dw wDungeonBossKeys
 	.db $08
+	.db DBG_END
+
+debugForgeBossKey:
+	.db DBG_OR
+	.dw wDungeonBossKeys
+	.db $10
 	.db DBG_END
 
 debugRhythmTest:
