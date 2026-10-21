@@ -289,7 +289,10 @@ treasureCollectionBehaviourTable:
 	.db SND_GETITEM
 
 	; TREASURE_MAP (0x33)
-	.db $86
+	; FR: was a hard-coded $86 (Ages' original wDungeonMaps); with the crossworld
+	; layout $c686 is the first inventory slot, so getting a dungeon map ORed the
+	; dungeon's bit into that item (shovel $15 -> feather $17 in dungeon 1).
+	.db <wDungeonMaps
 	.db $86
 	.db SND_GETITEM
 
