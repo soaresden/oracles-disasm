@@ -802,11 +802,14 @@ sounda1Channel2:
  m_section_free "FR_Data" ALIGN $10
 	m_GfxDataSimple gfx_fr_hud_icon
 	m_GfxDataSimple gfx_fr_door_icons
+	m_GfxDataSimple gfx_fr_map_heart
 
 	.include "code/crossworldSecrets.s"
 	.include "code/crossworldMapMarkers.s"
 	.include "code/crossworldSecretList.s"
 	.include "code/crossworldSecretNames.s"
+	.include "code/crossworldCompletion.s"
+	.include "code/crossworldCompletionData.s"
 .ends
 
 .BANK $42 SLOT 1

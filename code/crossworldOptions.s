@@ -22,6 +22,8 @@
 	.db $01	; OPT_REWARD_MARKERS
 	.db $01	; OPT_SECRETS_TRACKER
 	.db $00	; OPT_GBA_SHOP
-	.dsb 6 $00
+	.db $01	; OPT_MAP_HEARTS
+	.db $01	; OPT_COMPLETION
+	.dsb 4 $00
 
 .ENDS

@@ -25,10 +25,14 @@
 .define OPT_REWARD_MARKERS		$3ff7
 .define OPT_SECRETS_TRACKER		$3ff8
 .define OPT_GBA_SHOP			$3ff9
+.define OPT_MAP_HEARTS			$3ffa
+.define OPT_COMPLETION			$3ffb
 
 ; FR: wSubmenuState value marking Farore's secret list (menu $0a) as the
 ; secrets tracker opened from the inventory (openMenu clears it otherwise)
 .define FR_TRACKER_MARK			$ff
+; FR: same for the completion menu (OPT_COMPLETION), opened from the heart pieces
+.define FR_COMPLETION_MARK		$fe
 
 ; FR: wFrHudPhase values (see frHudBottomVblank)
 .define FRHUD_PHASE_GAME		1

@@ -71,6 +71,11 @@ frSecretList_state1:
 	or a
 	ret nz
 
+	call frCompletion_isOpen
+	jr nz,+
+	call frCompletion_input
+	ret c
++
 	ld a,(wKeysJustPressed)
 	and (BTN_START|BTN_SELECT|BTN_B)
 	jp nz,frSecretList_close
@@ -198,6 +203,8 @@ frSecretList_printSecret:
 	ld c,a
 	call frTracker_isOpen
 	jr z,@tracker
+	call frCompletion_isOpen
+	jp z,frCompletion_printBox
 
 	ld a,c
 	call frSecretList_getSecretData
@@ -280,6 +287,8 @@ frSecretList_loadAllNames:
 	ld de,$8a00
 	call frTracker_isOpen
 	jp z,frTracker_loadRows
+	call frCompletion_isOpen
+	jp z,frCompletion_loadRows
 
 	ld b,$00
 @nextSecret:

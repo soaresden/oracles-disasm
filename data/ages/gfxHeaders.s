@@ -262,6 +262,7 @@ gfxHeader0d:
 	m_GfxHeader         gfx_minimap_tiles_present_2  $9601           $1f|$80
 	m_GfxHeader         spr_minimap_icons            $8000           $6b|$80
 	m_GfxHeader         gfx_minimap_tiles_dungeon    $8800           $3f|$80
+	m_GfxHeader         gfx_fr_map_heart       $86c0           $01|$80 ; FR: map heart (heart pieces)
 	m_GfxHeaderDestRam  map_present_minimap          w4TileMap       $23|$80
 	m_GfxHeaderDestRam  flg_present_minimap          w4AttributeMap  $23
 gfxHeader0e:
@@ -270,6 +271,7 @@ gfxHeader0e:
 	m_GfxHeader         gfx_minimap_tiles_past_2   $9601           $1f|$80
 	m_GfxHeader         spr_minimap_icons          $8000           $6b|$80
 	m_GfxHeader         gfx_minimap_tiles_dungeon  $8800           $3f|$80
+	m_GfxHeader         gfx_fr_map_heart       $86c0           $01|$80 ; FR: map heart (heart pieces)
 	m_GfxHeaderDestRam  map_past_minimap           w4TileMap       $23|$80
 	m_GfxHeaderDestRam  flg_past_minimap           w4AttributeMap  $23
 gfxHeader0f:

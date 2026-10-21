@@ -4169,13 +4169,18 @@ _inventoryMenuState1:
 	cp $02
 	jr z,@saveButton
 
-	; FR: A on the top icon opens Farore's secret list as the secrets tracker
+	; FR: A on the top icon opens Farore's secret list as the secrets tracker,
+	; A on the heart pieces as the completion menu
+	ld b,FR_TRACKER_MARK
 	or a
-	jr nz,+
 	ld a,(OPT_SECRETS_TRACKER)
+	jr z,++
+	dec b
+	ld a,(OPT_COMPLETION)
+++
 	or a
 	jr z,+
-	ld a,FR_TRACKER_MARK
+	ld a,b
 	ld (wSubmenuState),a
 	ld a,$0a-1
 
