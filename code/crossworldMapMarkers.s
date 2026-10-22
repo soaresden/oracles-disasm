@@ -194,6 +194,25 @@ frRewardReceiverSquares:
 ; the room's own tree gfx (frRestoreHudIcon in bank $3f puts it back after
 ; those). Seasons' caravan (tree gfx 2) uses the whole slot.
 frRestoreHudIconOnRoomLoad:
+	; Vasu's shop: the icons above the doors ($93a0, OPT_DOOR_ICONS) are in the
+	; same slot. Put them back, and mark the slot as free so that the next shop
+	; reloads its own graphics there.
+	ld a,(OPT_DOOR_ICONS)
+	or a
+	jr z,++
+	ld a,(wActiveGroup)
+	cp VASU_GROUP
+	jr nz,++
+	ld a,(wActiveRoom)
+	cp VASU_ROOM
+	jr nz,++
+	xor a
+	ld (wLoadedTreeGfxActive),a
+	ld hl,gfx_fr_door_icons
+	ld de,$93a0
+	ldbc $03, :gfx_fr_door_icons
+	call queueDmaTransfer
+++
 	ld a,(OPT_HUD_GAME_ICON)
 	or a
 	ret z
