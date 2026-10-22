@@ -901,6 +901,9 @@ interactionedSubidData:
 	m_InteractionSubidData $00 $00 $00 ; $2d la porte gelée du palais (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $2e le cristal du Songe (invisible)
 	m_InteractionSubidData $41 $10 $12 ; $2f un garde endormi debout (le Palais Givré)
+	m_InteractionSubidData $00 $00 $00 ; $30 la porte de la Tour Sans-Nuit (invisible)
+	m_InteractionSubidData $00 $00 $00 ; $31 la Lune qui tombe (invisible)
+	m_InteractionSubidData $00 $00 $00 ; $32 l'escalier d'un étage de la tour (invisible)
 	m_InteractionSubidDataEnd
 
 interactiond4SubidData:

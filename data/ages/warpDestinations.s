@@ -195,6 +195,7 @@ group1WarpDestTable:
 	m_WarpDest $b1 $32 $0 $1 ; $5a : devant la maison de la famille
 	m_WarpDest $b3 $37 $0 $1 ; $5b : devant la maison de la chanteuse
 	m_WarpDest $b2 $35 $0 $1 ; $5c : devant la porte du Palais Givré
+	m_WarpDest $c9 $54 $0 $1 ; $5d : devant la porte de la Tour Sans-Nuit (l'Œil de l'Insomnis)
 
 group2WarpDestTable:
 	m_WarpDest $90 $45 $0 $e
@@ -564,6 +565,12 @@ group5WarpDestTable:
 	m_WarpDest $b2 $87 $0 $4 ; $70 : la mine abandonnée, au-dessus de l'escalier
 	m_WarpDest $aa $97 $0 $4 ; $71 : la Cathédrale des Échos, l'entrée (sous l'arche)
 	m_WarpDest $7b $37 $0 $4 ; $72 : le chœur, devant l'escalier (au retour du souvenir)
+	; BALLADE: la Tour Sans-Nuit
+	m_WarpDest $c0 $97 $0 $4 ; $73 : l'entrée (sous l'arche)
+	m_WarpDest $c2 $87 $0 $4 ; $74 : 2F, l'arrivée
+	m_WarpDest $c5 $87 $0 $4 ; $75 : 3F, l'arrivée
+	m_WarpDest $c8 $87 $0 $4 ; $76 : 4F, l'arrivée
+	m_WarpDest $cb $87 $0 $4 ; $77 : 5F, l'arrivée
 
 group6WarpDestTable:
 	m_WarpDest $05 $02 $f $3

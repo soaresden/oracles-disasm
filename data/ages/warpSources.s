@@ -59,7 +59,7 @@ group0WarpSources:
 	m_StandardWarp $2 $48 $07 $0 $3
 	m_PointerWarp     $48 warpSource7706
 	m_PointerWarp     $8d warpSource7716
-	m_StandardWarp $0 $ba $04 $4 $4
+	;m_StandardWarp $0 $ba $04 $4 $4 ; BALLADE: l'Œil de l'Insomnis (0:b8-da, le Songe)
 	m_StandardWarp $0 $03 $05 $4 $4
 	;m_PointerWarp     $0a warpSource76aa ; BALLADE: Mont-Braise (1:08-3c)
 	;m_StandardWarp $0 $02 $18 $3 $4 ; BALLADE: 0:02 = manège du Songe
@@ -96,7 +96,7 @@ group0WarpSources:
 	m_StandardWarp $0 $bd $31 $2 $4
 	m_StandardWarp $0 $c5 $27 $3 $4
 	m_StandardWarp $0 $cd $29 $2 $4
-	m_StandardWarp $0 $da $3a $3 $4
+	;m_StandardWarp $0 $da $3a $3 $4 ; BALLADE: l'Œil de l'Insomnis (0:b8-da, le Songe)
 	m_StandardWarp $0 $dd $08 $2 $4
 	;m_StandardWarp $0 $3a $1a $3 $4 ; BALLADE: Mont-Braise (1:08-3c)
 	;m_PointerWarp     $38 warpSource76e6 ; BALLADE: Mont-Braise (1:08-3c)
@@ -237,6 +237,8 @@ group1WarpSources:
 	m_StandardWarp $0 $b1 $4b $3 $4 ; BALLADE: porte de la maison de la famille -> 3:28
 	m_StandardWarp $0 $b3 $4c $3 $4 ; BALLADE: porte de la maison de la chanteuse -> 3:29
 	m_StandardWarp $0 $b2 $50 $4 $4 ; BALLADE: la porte dégelée -> le Palais Givré (4:55)
+	; BALLADE: l'Œil de l'Insomnis (1:b8-da) : la tour
+	m_StandardWarp $0 $c9 $73 $5 $4 ; BALLADE: la porte de la tour -> la Tour Sans-Nuit (5:c0)
 	m_StandardWarp $0 $0a $4e $4 $4 ; BALLADE: la bouche du grand visage du cratère -> la Forge Endormie (4:bb)
 	;m_StandardWarp $0 $13 $67 $5 $4 ; BALLADE: 1:13 est la plage aux châteaux de sable
 	;m_StandardWarp $0 $14 $16 $3 $4 ; BALLADE: la Lagune des Serments (1:04-37)
@@ -273,15 +275,15 @@ group1WarpSources:
 	m_StandardWarp $0 $a5 $57 $5 $4
 	m_PointerWarp     $a7 warpSource785a
 	m_StandardWarp $0 $ad $30 $2 $4
-	m_StandardWarp $0 $ba $6b $5 $4
+	;m_StandardWarp $0 $ba $6b $5 $4 ; BALLADE: l'Œil de l'Insomnis (1:b8-da)
 	m_StandardWarp $0 $bb $5b $5 $4
 	m_StandardWarp $0 $bc $36 $5 $4
 	m_StandardWarp $0 $bd $2c $2 $4
 	m_StandardWarp $0 $c5 $28 $3 $4
 	m_StandardWarp $0 $cb $34 $5 $4
 	m_PointerWarp     $cd warpSource786a
-	m_StandardWarp $0 $d9 $51 $5 $4
-	m_StandardWarp $0 $da $38 $5 $4
+	;m_StandardWarp $0 $d9 $51 $5 $4 ; BALLADE: l'Œil de l'Insomnis (1:b8-da)
+	;m_StandardWarp $0 $da $38 $5 $4 ; BALLADE: l'Œil de l'Insomnis (1:b8-da)
 	m_StandardWarp $0 $db $39 $5 $4
 	m_StandardWarp $0 $dd $6a $5 $4
 	;m_PointerWarp     $41 warpSource784a ; BALLADE: l'île des Échos (1:40-74)
@@ -699,17 +701,17 @@ group5WarpSources:
 	m_StandardWarp $0 $bb $2b $5 $2
 	m_PointerWarp     $bc warpSource7dce
 	m_StandardWarp $0 $be $36 $0 $4
-	m_StandardWarp $4 $c0 $19 $0 $3
-	m_PointerWarp     $c0 warpSource7dde
-	m_StandardWarp $0 $c1 $25 $5 $2
-	m_PointerWarp     $c2 warpSource7de6
-	m_StandardWarp $8 $c3 $1a $1 $3
-	m_StandardWarp $0 $c4 $32 $5 $2
-	m_StandardWarp $0 $c5 $56 $5 $2
-	m_StandardWarp $0 $c6 $30 $5 $2
-	m_StandardWarp $4 $c7 $40 $0 $3
-	m_StandardWarp $4 $cc $40 $1 $3
-	m_PointerWarp     $cc warpSource7dee
+	;m_StandardWarp $4 $c0 $19 $0 $3 ; BALLADE: la Tour Sans-Nuit (5:c0-cc)
+	;m_PointerWarp     $c0 warpSource7dde ; BALLADE: la Tour Sans-Nuit (5:c0-cc)
+	;m_StandardWarp $0 $c1 $25 $5 $2 ; BALLADE: la Tour Sans-Nuit (5:c0-cc)
+	;m_PointerWarp     $c2 warpSource7de6 ; BALLADE: la Tour Sans-Nuit (5:c0-cc)
+	;m_StandardWarp $8 $c3 $1a $1 $3 ; BALLADE: la Tour Sans-Nuit (5:c0-cc)
+	;m_StandardWarp $0 $c4 $32 $5 $2 ; BALLADE: la Tour Sans-Nuit (5:c0-cc)
+	;m_StandardWarp $0 $c5 $56 $5 $2 ; BALLADE: la Tour Sans-Nuit (5:c0-cc)
+	;m_StandardWarp $0 $c6 $30 $5 $2 ; BALLADE: la Tour Sans-Nuit (5:c0-cc)
+	;m_StandardWarp $4 $c7 $40 $0 $3 ; BALLADE: la Tour Sans-Nuit (5:c0-cc)
+	;m_StandardWarp $4 $cc $40 $1 $3 ; BALLADE: la Tour Sans-Nuit (5:c0-cc)
+	;m_PointerWarp     $cc warpSource7dee ; BALLADE: la Tour Sans-Nuit (5:c0-cc)
 	m_StandardWarp $4 $cd $44 $1 $3
 	m_StandardWarp $8 $cd $45 $1 $3
 	m_PointerWarp     $cd warpSource7df6
@@ -747,7 +749,7 @@ group5WarpSources:
 	m_StandardWarp $4 $ee $17 $0 $3
 	m_StandardWarp $8 $ee $18 $0 $3
 	m_StandardWarp $0 $ee $0f $3 $2
-	m_StandardWarp $8 $ca $3c $1 $3
+	;m_StandardWarp $8 $ca $3c $1 $3 ; BALLADE: la Tour Sans-Nuit (5:c0-cc)
 	m_StandardWarp $0 $ab $5e $5 $2
 	m_StandardWarp $4 $ac $1c $2 $3
 	m_StandardWarp $0 $ac $5c $5 $2
@@ -759,6 +761,12 @@ group5WarpSources:
 	m_StandardWarp $4 $f7 $46 $1 $3
 	m_StandardWarp $4 $f9 $3b $1 $3
 	m_StandardWarp $0 $fb $07 $7 $2
+	; BALLADE: la Tour Sans-Nuit : la sortie (l'arche), les escaliers d'un étage à l'autre
+	m_StandardWarp $4 $c0 $5d $1 $3 ; BALLADE: sortie de la tour -> le parvis (1:c9)
+	m_StandardWarp $0 $c1 $74 $5 $4 ; BALLADE: 1F -> 2F
+	m_StandardWarp $0 $c4 $75 $5 $4 ; BALLADE: 2F -> 3F
+	m_StandardWarp $0 $c7 $76 $5 $4 ; BALLADE: 3F -> 4F
+	m_StandardWarp $0 $ca $77 $5 $4 ; BALLADE: 4F -> 5F
 	m_WarpListEndNoDefault
 
 warpSource7dba:

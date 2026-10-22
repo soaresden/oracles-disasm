@@ -7,7 +7,7 @@
 ; - PALH_SPR:     Loads sprite palettes only
 ; - PALH:         If none of the above, could load both sprite & bg palettes (or not yet categorized)
 
-.define NUM_PALETTE_HEADERS $da ; BALLADE: + film, Songe, titre
+.define NUM_PALETTE_HEADERS $dc ; BALLADE: + film, Songe, titre
 
 paletteHeaderTable:
 	.repeat NUM_PALETTE_HEADERS index COUNT
@@ -865,6 +865,14 @@ m_PaletteHeaderStart $d7, PALH_SONGE_GIVRE
 
 m_PaletteHeaderStart $d8, PALH_PALAIS
 	m_PaletteHeaderBg  2, 6, paletteDataPalais
+	m_PaletteHeaderEnd
+
+m_PaletteHeaderStart $da, PALH_SONGE_TOUR
+	m_PaletteHeaderBg  2, 6, paletteDataSongeTour
+	m_PaletteHeaderEnd
+
+m_PaletteHeaderStart $db, PALH_TOUR
+	m_PaletteHeaderBg  2, 6, paletteDataTour
 	m_PaletteHeaderEnd
 
 ; BALLADE-SONGE-FIN

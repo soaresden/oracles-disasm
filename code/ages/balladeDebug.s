@@ -484,18 +484,19 @@ debugEntries:
 	.dw debugPalaisBossKey
 	.db $20, $01, $b1, $44 ; le village gelé, l'essence en poche : la fin du chapitre 7
 	.dw debugNone
-	; 8. Œil de l'Insomnis (seul le boss en rythme existe, dans sa salle de test)
-	.db $ff, $00, $00, $00
+	; 8. L'Œil de l'Insomnis (le prototype du boss en rythme, dans sa salle de test 4:4a : son code
+	; secret, SELECT + START à l'écran titre)
+	.db $21, $01, $d9, $44 ; le ponton, en arrivant (la fin du chapitre 7 vue)
 	.dw debugNone
-	.db $ff, $00, $00, $00
+	.db $21, $01, $c9, $74 ; le parvis de la tour (la porte s'ouvre : les sept couplets)
 	.dw debugNone
-	.db $ff, $00, $00, $00
+	.db $22, $05, $c0, $97 ; la Tour Sans-Nuit, l'entrée (la porte ouverte)
 	.dw debugNone
-	.db $ff, $00, $00, $00
+	.db $23, $05, $c5, $87 ; 3F, l'arrivée (la Lune et Dark Link vaincus)
 	.dw debugNone
-	.db $03, $04, $4a, $77 ; le boss en rythme (prototype)
-	.dw debugRhythmTest
-	.db $ff, $00, $00, $00
+	.db $24, $05, $cb, $87 ; 5F, l'arrivée (devant l'Insomnis)
+	.dw debugNone
+	.db $ff, $00, $00, $00 ; (la fin : à écrire)
 	.dw debugNone
 
 ; Les étapes de l'histoire, dans l'ordre du jeu (chacune finit par DBG_END)
@@ -632,6 +633,21 @@ debugMilestones:
 	.db DBG_TREASURE, TREASURE_ESSENCE, $06
 	.db DBG_TREASURE, TREASURE_HEART_CONTAINER, $04
 	.db DBG_FULLHEALTH
+	.db DBG_END
+	; 33. La fin du chapitre 7 a été vue (le village gelé) : l'Œil de l'Insomnis est repéré
+	.db DBG_ROOMFLAG, $01, $b1, $40
+	.db DBG_GLOBALFLAG, GLOBALFLAG_BALLADE_ISLAND8
+	.db DBG_END
+	; 34. La porte de la tour est ouverte (Marine a chanté les sept couplets)
+	.db DBG_ROOMFLAG, $01, $c9, $80
+	.db DBG_END
+	; 35. 1F et 2F : la Lune et Dark Link vaincus (les escaliers)
+	.db DBG_ROOMFLAG, $05, $c1, $80
+	.db DBG_ROOMFLAG, $05, $c4, $80
+	.db DBG_END
+	; 36. 3F et 4F : Ganon et le Cauchemar vaincus (les escaliers)
+	.db DBG_ROOMFLAG, $05, $c7, $80
+	.db DBG_ROOMFLAG, $05, $ca, $80
 	.db DBG_END
 
 debugNone:

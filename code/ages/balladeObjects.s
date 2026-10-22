@@ -47,6 +47,9 @@
 ; @subid_2d{Invisible : la porte gelée du Palais Givré (1:b2)}
 ; @subid_2e{Invisible : le cristal du Songe (0:b2) : frappé, il dégèle la porte du Réel}
 ; @subid_2f{Un garde endormi debout (le Palais Givré) : la Clochette d'Aube le réveille, il s'en va}
+; @subid_30{Invisible : la porte de la Tour Sans-Nuit (1:c9) : Marine chante les sept couplets}
+; @subid_31{Invisible : la Lune qui tombe (5:c1) : quatre torches allumées peu de temps ; l'escalier}
+; @subid_32{Invisible : l'escalier d'un étage de la tour, quand l'étage est vaincu (plus d'ennemis)}
 ; ==================================================================================================
 
 ;;
@@ -102,6 +105,9 @@ main:
 	.dw frozenGate
 	.dw dreamCrystal
 	.dw standingSleeper
+	.dw towerDoor
+	.dw moonTorches
+	.dw floorStairs
 
 
 ;;
@@ -223,6 +229,12 @@ arrivalTalk:
 	.db $01, $b2, <TX_5acd, $ff ; le Palais Givré : la porte gelée
 	.db $04, $55, <TX_5ace, $ff ; le Palais Givré, l'entrée : ça glisse
 	.db $04, $64, <TX_5ad1, $ff ; Givrolin menace, Marine répond
+	.db $01, $d9, <TX_5ad4, $ff ; l'Œil de l'Insomnis, le ponton
+	.db $05, $c0, <TX_5ad8, $ff ; la Tour Sans-Nuit, l'entrée : un battement
+	.db $05, $c1, <TX_5ad9, $ff ; 1F : la lune tombe
+	.db $05, $c4, <TX_5ada, $ff ; 2F : Dark Link
+	.db $05, $c7, <TX_5adb, $ff ; 3F : Ganon
+	.db $05, $ca, <TX_5adc, $ff ; 4F : « TU ME RECONNAIS ? »
 	.db $ff
 
 
@@ -464,7 +476,7 @@ jetties:
 	.db $01, $70, $44 ; 5. l'île des Échos (le ponton)
 	.db $01, $75, $44 ; 6. le Nid des Vents (le courant ascendant)
 	.db $01, $d1, $44 ; 7. l'île du Grand Sommeil (le ponton)
-	.db $01, $99, $52 ; 8.
+	.db $01, $d9, $44 ; 8. l'Œil de l'Insomnis (le ponton)
 
 
 ; ==================================================================================================
@@ -2322,4 +2334,201 @@ standingSleeper:
 	ld (wDisabledObjects),a
 	call objectCreatePuff
 	call objectUnmarkSolidPosition
+	jp interactionDelete
+
+
+; ==================================================================================================
+; La porte de la Tour Sans-Nuit (subid $30, sur la porte, 1:c9 ; la porte fait deux cases : df et
+; ed, des murs 82 tant qu'elle est close). A devant : sept marques, comme des notes. Avec les sept
+; essences, quand Link s'approche : Marine chante les sept couplets et la porte s'ouvre (drapeau $80
+; de la salle).
+; ==================================================================================================
+towerDoor:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw @init
+	.dw @idle
+	.dw @sing
+	.dw @opened
+
+@init:
+	call waitRoomReady
+	ret nz
+	call interactionIncState
+	call getThisRoomFlags
+	bit 7,a
+	ret z
+	call @setDoor
+	jp interactionDelete
+
+@idle:
+	ld a,(wTextIsActive)
+	ld b,a
+	ld a,(wDisabledObjects)
+	or b
+	ret nz
+	ld a,(wEssencesObtained)
+	and $7f
+	cp $7f
+	jr nz,@closed
+	ld c,$30
+	call objectCheckLinkWithinDistance
+	ret nc
+	ld a,$91
+	ld (wDisabledObjects),a
+	ld a,SND_TUNE_OF_AGES
+	call playSound
+	call interactionIncState
+	ld l,Interaction.counter1
+	ld (hl),120
+	ld bc,TX_5ad6
+	jp showText
+
+@closed:
+	ld a,(wGameKeysJustPressed)
+	and BTN_A
+	ret z
+	; Link juste en dessous, tourné vers le haut
+	ld a,(w1Link.direction)
+	or a
+	ret nz
+	call objectGetShortPosition
+	add $10
+	ld b,a
+	ld a,(w1Link.yh)
+	and $f0
+	ld c,a
+	ld a,(w1Link.xh)
+	swap a
+	and $0f
+	or c
+	cp b
+	ret nz
+	ld bc,TX_5ad5
+	jp showText
+
+@sing:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	call interactionDecCounter1
+	ret nz
+	call getThisRoomFlags
+	set 7,(hl)
+	call @setDoor
+	ld a,SND_SOLVEPUZZLE_2
+	call playSound
+	call interactionIncState
+	ld bc,TX_5ad7
+	jp showText
+
+@opened:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	xor a
+	ld (wDisabledObjects),a
+	jp interactionDelete
+
+@setDoor:
+	call objectGetShortPosition
+	ld c,a
+	push bc
+	ld a,$df
+	call setTile
+	pop bc
+	inc c
+	ld a,$ed
+	jp setTile
+
+
+; ==================================================================================================
+; La Lune qui tombe (subid $31, sur la case de l'escalier, 5:c1) : quatre torches autour du centre
+; (3,7) (5,5) (5,9) (7,7), qui ne restent allumées que 300 images (PART_LIGHTABLE_TORCH $01) ; les
+; quatre ensemble : l'escalier apparaît ici (drapeau $80 de la salle).
+; ==================================================================================================
+moonTorches:
+	ld e,Interaction.state
+	ld a,(de)
+	or a
+	jr nz,@watch
+	call waitRoomReady
+	ret nz
+	call interactionIncState
+	call getThisRoomFlags
+	bit 7,a
+	jr nz,floorStairs_setStairs
+	ld hl,@torches
+-
+	ldi a,(hl)
+	or a
+	ret z
+	ld c,a
+	push hl
+	call getFreePartSlot
+	jr nz,+
+	ld (hl),PART_LIGHTABLE_TORCH
+	inc l
+	ld (hl),$01
+	ld l,Part.counter2
+	ld (hl),75
+	ld l,Part.yh
+	call setShortPosition_paramC
++
+	pop hl
+	jr -
+
+@watch:
+	ld a,(wNumTorchesLit)
+	cp $04
+	ret nz
+	ld bc,TX_5add
+	call showText
+	jr floorStairs_solved
+
+@torches:
+	.db $37, $55, $59, $77, $00
+
+
+; ==================================================================================================
+; L'escalier d'un étage de la tour (subid $32, sur la case de l'escalier) : il apparaît quand il n'y
+; a plus d'ennemis (le cauchemar de l'étage est vaincu) ; drapeau $80 de la salle.
+; ==================================================================================================
+floorStairs:
+	ld e,Interaction.state
+	ld a,(de)
+	or a
+	jr nz,@watch
+	call waitRoomReady
+	ret nz
+	call interactionIncState
+	ld l,Interaction.counter1
+	ld (hl),60
+	call getThisRoomFlags
+	bit 7,a
+	jr nz,floorStairs_setStairs
+	ret
+
+@watch:
+	; (les ennemis arrivent avec la salle ; une seconde de marge)
+	call interactionDecCounter1
+	ret nz
+	inc (hl)
+	ld a,(wNumEnemies)
+	or a
+	ret nz
+
+floorStairs_solved:
+	call getThisRoomFlags
+	set 7,(hl)
+	ld a,SND_SOLVEPUZZLE
+	call playSound
+	call objectCreatePuff
+
+floorStairs_setStairs:
+	call objectGetShortPosition
+	ld c,a
+	ld a,$45
+	call setTile
 	jp interactionDelete

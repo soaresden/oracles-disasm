@@ -51,7 +51,7 @@ dungeonData06:
 dungeonData07:
 	m_DungeonData >wGroup4RoomFlags, $55, dungeon07LayoutPalais, $01, $03, $01, $00, $00 ; BALLADE: le Palais Givré
 dungeonData08:
-	m_DungeonData >wGroup5RoomFlags, $aa, dungeon08Layout, $04, $00, $00, $00, $00
+	m_DungeonData >wGroup5RoomFlags, $c0, dungeon08LayoutTour, $05, $03, $1f, $00, $00 ; BALLADE: la Tour Sans-Nuit
 dungeonData09:
 	m_DungeonData >wGroup4RoomFlags, $01, dungeon09Layout, $01, $03, $00, $00, $00
 dungeonData0a:
