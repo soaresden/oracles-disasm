@@ -609,16 +609,16 @@ _insertIndexIntoLoadedObjectGfx:
 ; FR: the tree gfx slot ($9200-$93ff) also holds the status bar game icon (tile
 ; $3f at $93f0, OPT_HUD_GAME_ICON), past the end of all its graphics but
 ; Seasons' caravan: put the icon back after loading something there.
+; Same size in both games: bank 0 calls functions of this bank at fixed
+; addresses (index 2 is an unused dummy in Ages).
 ; @param	e	Tree gfx index
 frRestoreHudIcon:
 	ld a,(OPT_HUD_GAME_ICON)
 	or a
 	ret z
-.ifdef ROM_SEASONS
 	ld a,e
-	cp $02 ; spr_caravan uses the whole slot
+	cp $02 ; Seasons: spr_caravan uses the whole slot
 	ret z
-.endif
 	ld hl,gfx_fr_hud_icon
 	ld de,$93f0
 	ldbc $00, :gfx_fr_hud_icon
