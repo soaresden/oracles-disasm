@@ -22,6 +22,12 @@ parseObjectData:
 	call generateRandomBuffer
 
 .ifdef ROM_AGES
+	; BALLADE: après la fin, Marine suit Link partout (code/ages/balladeFin.s)
+	ld a,(wBalladeMarineFollow)
+	or a
+	jr z,+
+	callab balladeFin.followRoomLoad
++
 	callab getObjectDataAddress
 .else; ROM_SEASONS
 	ld a,(wActiveGroup)

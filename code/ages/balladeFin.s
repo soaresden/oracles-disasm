@@ -32,8 +32,12 @@ towerEnding:
 	.dw @fadeOut
 	.dw @done
 
-; L'Insomnis battu (wBalladeRhythmStage = 3), un moment
+; L'Insomnis battu (wBalladeRhythmStage = 3), un moment (une seule fois : après la fin, quand
+; on refait la tour, rien)
 @waitBoss:
+	ld a,GLOBALFLAG_BALLADE_FIN
+	call checkGlobalFlag
+	jp nz,interactionDelete
 	ld a,(wBalladeRhythmStage)
 	cp $03
 	ret nz
@@ -322,12 +326,21 @@ islandMarine:
 	.dw @idle
 	.dw @menu
 	.dw @talk
+	.dw @comes
 
 @init:
 	ld a,GLOBALFLAG_BALLADE_FIN
 	call checkGlobalFlag
 	jp z,interactionDelete
+	; (elle est avec Link : c'est elle qui le suit, $19)
+	ld a,(wBalladeMarineFollow)
+	or a
+	jp nz,interactionDelete
 	call npcLikeInit
+	; elle chantera dans une vingtaine de secondes
+	ld h,d
+	ld l,Interaction.var34
+	ld (hl),$05
 	ret
 
 @idle:
@@ -341,12 +354,15 @@ islandMarine:
 	res 7,(hl)
 	ret
 +
+	; de temps en temps, elle chante la Ballade du Poisson-Rêve
+	call islandSinging
 	ld e,Interaction.pressedAButton
 	ld a,(de)
 	or a
 	ret z
 	xor a
 	ld (de),a
+	call stopSinging
 	call interactionIncState
 	ld bc,TX_5b10
 	jp showText
@@ -368,7 +384,16 @@ islandMarine:
 	jp showText
 +
 	dec a
+	jr z,@chat
+	dec a
 	jr nz,@back
+	; « Viens ! » : elle prend son épée et suit Link
+	ld e,Interaction.state
+	ld a,$04
+	ld (de),a
+	ld bc,TX_5b24
+	jp showText
+@chat:
 	; parler : une de ses phrases, au hasard
 	call interactionIncState
 	call getRandomNumber
@@ -386,6 +411,26 @@ islandMarine:
 	ld a,$01
 	ld (de),a
 	ret
+
+; Elle vient : celle qui suit Link ($19) prend sa place
+@comes:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	ld a,$01
+	ld (wBalladeMarineFollow),a
+	call objectUnmarkSolidPosition
+	ld e,Interaction.start
+	call objectRemoveFromAButtonSensitiveObjectList
+	ld h,d
+	ld l,Interaction.yh
+	ld a,(hl)
+	ld l,Interaction.xh
+	ld l,(hl)
+	ld h,a
+	ld b,$19
+	call createFinObjectAt
+	jp interactionDelete
 
 
 ;;
@@ -981,4 +1026,614 @@ findBallX:
 	jr c,-
 	pop hl
 	or $01
+	ret
+
+
+; ==================================================================================================
+; Marine suit Link partout après la fin, avec son épée (Denis : « on lui donne une épée et elle joue
+; avec nous ») : $19 Marine qui suit, $1a (plus utilisé : followRoomLoad la fait venir dans chaque
+; salle), $1b son coup d'épée. wBalladeMarineFollow : 1 quand elle suit Link.
+; ==================================================================================================
+
+;;
+; Elle arrive avec Link dans la salle ($1a)
+followSpawner:
+	ld a,(wBalladeMarineFollow)
+	or a
+	jp z,interactionDelete
+	ld a,(w1Link.yh)
+	ld h,a
+	ld a,(w1Link.xh)
+	ld l,a
+	ld b,$19
+	call createFinObjectAt
+	jp interactionDelete
+
+;;
+; Marine qui suit Link ($19) : elle marche vers lui quand il s'éloigne ; quand l'épée de Link sort,
+; elle frappe aussi ($1b) ; quand Link ne fait rien, elle chante. Chez elle (3:2a), elle reste là.
+; var30 son attente entre deux coups, var31 sa direction (0 bas, 1 haut, 2 gauche, 3 droite : ses
+; dessins), var32 son premier dessin
+follower:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw @init
+	.dw @follow
+	.dw @atHome
+
+@init:
+	ld a,(wBalladeMarineFollow)
+	or a
+	jp z,interactionDelete
+	call interactionInitGraphics
+	call interactionIncState
+	ld h,d
+	ld l,Interaction.collisionRadiusY
+	ld (hl),$06
+	inc l
+	ld (hl),$06
+	ld e,Interaction.oamTileIndexBase
+	ld a,(de)
+	ld e,Interaction.var32
+	ld (de),a
+	call followPlace
+	call objectSetVisiblec2
+	; chez elle (sa maison, 3:2a) : elle reste là, Link reviendra la chercher sur la plage
+	ld a,(wActiveGroup)
+	cp $03
+	ret nz
+	ld a,(wActiveRoom)
+	cp $2a
+	ret nz
+	xor a
+	ld (wBalladeMarineFollow),a
+	call interactionIncState
+	; elle chantera dans quelques secondes
+	ld h,d
+	ld l,Interaction.var34
+	ld (hl),$01
+	ld bc,TX_5b25
+	jp showText
+
+@follow:
+	ld a,(wBalladeMarineFollow)
+	or a
+	jp z,@home
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	call @idle
+	call @walk
+	jp @sword
+
+; Quand Link ne fait rien (10 secondes sans bouger ni toucher un bouton), elle chante ; dès qu'il
+; bouge, elle s'arrête. var38-var39 : où était Link ; var3a-var3b : depuis combien de temps
+@idle:
+	call singNotes
+	ld a,(wGameKeysPressed)
+	or a
+	jr nz,@busy
+	ld h,d
+	ld l,Interaction.var38
+	ld a,(w1Link.yh)
+	cp (hl)
+	jr nz,@busy
+	inc l
+	ld a,(w1Link.xh)
+	cp (hl)
+	jr nz,@busy
+	ld l,Interaction.var3a
+	inc (hl)
+	jr nz,+
+	inc l
+	inc (hl)
++
+	ld l,Interaction.var3b
+	ld a,(hl)
+	cp >600
+	ret c
+	dec l
+	ld a,(hl)
+	cp <600
+	ret c
+	jp startSinging
+@busy:
+	ld h,d
+	ld l,Interaction.var38
+	ld a,(w1Link.yh)
+	ldi (hl),a
+	ld a,(w1Link.xh)
+	ldi (hl),a
+	xor a
+	ldi (hl),a
+	ld (hl),a
+	jp stopSinging
+
+; Chez elle : elle reste là, et chante de temps en temps
+@atHome:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	jp islandSinging
+
+@home:
+	call stopSinging
+	; elle rentre chez elle (un nuage)
+	ld h,d
+	ld l,Interaction.yh
+	ld a,(hl)
+	ld l,Interaction.xh
+	ld l,(hl)
+	ld h,a
+	call createFinPuffAt
+	jp interactionDelete
+
+; Elle marche vers Link quand il est à plus de 20 pixels
+@walk:
+	ld h,d
+	ld l,Interaction.yh
+	ld a,(w1Link.yh)
+	sub (hl)
+	ld b,a			; dy
+	ld l,Interaction.xh
+	ld a,(w1Link.xh)
+	sub (hl)
+	ld c,a			; dx
+	ld a,b
+	call finAbs
+	ld e,a
+	ld a,c
+	call finAbs
+	add e
+	cp 20
+	ret c
+	; un pas sur chaque axe (pas plus d'un pixel par image)
+	ld l,Interaction.yh
+	ld a,b
+	or a
+	jr z,++
+	bit 7,a
+	jr nz,+
+	inc (hl)
+	jr ++
++
+	dec (hl)
+++
+	ld l,Interaction.xh
+	ld a,c
+	or a
+	jr z,++
+	bit 7,a
+	jr nz,+
+	inc (hl)
+	jr ++
++
+	dec (hl)
+++
+	; son dessin : face, dos, profil (le plus grand des deux écarts)
+	ld a,b
+	call finAbs
+	ld e,a
+	ld a,c
+	call finAbs
+	cp e
+	jr nc,@sideways
+	bit 7,b
+	ld a,$00		; vers le bas : de face
+	jr z,@setDir
+	ld a,$01		; vers le haut : de dos
+	jr @setDir
+@sideways:
+	bit 7,c
+	ld a,$03		; vers la droite
+	jr z,@setDir
+	ld a,$02		; vers la gauche
+@setDir:
+	ld l,Interaction.var31
+	ld (hl),a
+	add a
+	add a
+	ld l,Interaction.var32
+	add (hl)
+	ld l,Interaction.oamTileIndexBase
+	ld (hl),a
+	ret
+
+; Quand l'épée de Link sort, elle frappe aussi, devant elle
+@sword:
+	ld h,d
+	ld l,Interaction.var30
+	ld a,(hl)
+	or a
+	jr z,+
+	dec (hl)
+	ret
++
+	ld a,(w1WeaponItem.enabled)
+	or a
+	ret z
+	ld (hl),30
+	ld l,Interaction.var31
+	ld a,(hl)
+	add a
+	ld hl,@swordOffsets
+	rst_addAToHl
+	ld b,(hl)
+	inc hl
+	ld c,(hl)
+	ld h,d
+	ld l,Interaction.yh
+	ld a,(hl)
+	add b
+	ld b,a
+	ld l,Interaction.xh
+	ld a,(hl)
+	add c
+	ld c,a
+	ld l,Interaction.var31
+	ld a,(hl)
+	push af
+	ld h,b
+	ld l,c
+	ld b,$1b
+	call createFinObjectAt
+	pop bc			; b = sa direction
+	ret nz
+	ld l,Interaction.var30	; (le coup d'épée : sa direction)
+	ld (hl),b
+	ld a,SND_SWORDSLASH
+	jp playSound
+
+@swordOffsets:
+	.db $0e $00, $f2 $00, $00 $f2, $00 $0e	; bas, haut, gauche, droite
+
+;;
+; Le coup d'épée de Marine ($1b) : un instant ; chaque ennemi qu'il touche perd 2 points de vie (une
+; fois par coup : var31-var32, un bit par emplacement) ; les gros ennemis et les boss tiennent
+marineSword:
+	ld e,Interaction.state
+	ld a,(de)
+	or a
+	jr nz,@run
+	inc a
+	ld (de),a
+	call interactionInitGraphics
+	call objectSetVisible81
+	; sa direction (var30) : bas, haut (l'épée verticale, retournée en bas), gauche, droite
+	; (horizontale)
+	ld e,Interaction.var30
+	ld a,(de)
+	ld b,a
+	ld h,d
+	ld l,Interaction.oamTileIndexBase
+	cp $02
+	jr c,+
+	ld a,(hl)
+	add $04
+	ld (hl),a
++
+	ld l,Interaction.oamFlags
+	ld a,b
+	or a
+	jr nz,+
+	set 6,(hl)		; vers le bas : retournée
++
+	cp $02
+	jr nz,+
+	set 5,(hl)		; vers la gauche : retournée
++
+	ld l,Interaction.counter1
+	ld (hl),12
+	ret
+
+@run:
+	; les ennemis tout près tombent
+	ld h,FIRST_ENEMY_INDEX
+-
+	ld l,Enemy.enabled
+	ld a,(hl)
+	or a
+	jr z,+
+	ld l,Enemy.yh
+	ld a,(hl)
+	ld e,Interaction.yh
+	ld b,a
+	ld a,(de)
+	sub b
+	call finAbs
+	cp $0e
+	jr nc,+
+	ld l,Enemy.xh
+	ld a,(hl)
+	ld e,Interaction.xh
+	ld b,a
+	ld a,(de)
+	sub b
+	call finAbs
+	cp $0e
+	jr nc,+
+	; déjà touché par ce coup ?
+	push hl
+	ld a,h
+	sub FIRST_ENEMY_INDEX
+	ld b,a
+	srl a
+	srl a
+	srl a
+	add Interaction.var31
+	ld e,a
+	ld a,b
+	and $07
+	ld c,$01
+	jr z,++
+--
+	sla c
+	dec a
+	jr nz,--
+++
+	ld a,(de)
+	and c
+	pop hl
+	jr nz,+
+	ld a,(de)
+	or c
+	ld (de),a
+	ld l,Enemy.health
+	ld a,(hl)
+	sub $02
+	jr nc,++
+	xor a
+++
+	ld (hl),a
+	ld a,SND_BOSS_DAMAGE
+	call playSound
++
+	inc h
+	ld a,h
+	cp LAST_ENEMY_INDEX+1
+	jp c,-
+	call interactionDecCounter1
+	ret nz
+	jp interactionDelete
+
+
+;;
+; Marine arrive avec Link dans la salle (appelé au chargement des objets de chaque salle, quand elle
+; le suit : code/objectLoading.s), juste derrière lui
+followRoomLoad:
+	ld a,(w1Link.yh)
+	ld h,a
+	ld a,(w1Link.xh)
+	ld l,a
+	ld b,$19
+	jp createFinObjectAt
+
+;;
+; Marine se place derrière Link (à sa première image dans la salle : au chargement de la salle, Link
+; n'est pas encore à sa place)
+followPlace:
+	ld a,(w1Link.direction)
+	and $03
+	add a
+	ld hl,@behind
+	rst_addAToHl
+	ld a,(w1Link.yh)
+	add (hl)
+	ld b,a
+	inc hl
+	ld a,(w1Link.xh)
+	add (hl)
+	ld c,a
+	; derrière lui, c'est hors de l'écran (en entrant par le bord) : sur lui
+	ld a,(wRoomEdgeY)
+	dec a
+	cp b
+	jr c,+
+	ld a,(wRoomEdgeX)
+	dec a
+	cp c
+	jr nc,++
++
+	ld a,(w1Link.yh)
+	ld b,a
+	ld a,(w1Link.xh)
+	ld c,a
+++
+	ld h,d
+	ld l,Interaction.yh
+	ld (hl),b
+	ld l,Interaction.xh
+	ld (hl),c
+	ret
+
+@behind:
+	.db $10 $00, $00 $f0, $f0 $00, $00 $10	; Link regarde en haut, à droite, en bas, à gauche
+
+;;
+; Après la fin, en revenant dans un donjon (son nom s'affiche : INTERAC_DUNGEON_STUFF $00) : il est
+; comme neuf. Ses portes à clé, ses énigmes, ses boss et ses coffres reviennent (les drapeaux de
+; ses salles, sauf « visitée » ; dans la salle du boss, on garde le réceptacle déjà pris), ses
+; petites clés et sa clé du boss repartent à zéro. (La Fosse de Bulle, $09, n'en fait pas partie.)
+resetDungeon:
+	ld a,GLOBALFLAG_BALLADE_FIN
+	call checkGlobalFlag
+	ret z
+	ld a,(wDungeonIndex)
+	cp $09
+	ret z
+	cp $0f
+	ret nc
+	push de
+	; les petites clés, la clé du boss
+	ld hl,wDungeonSmallKeys
+	rst_addAToHl
+	ld (hl),$00
+	ld a,(wDungeonIndex)
+	ld hl,wDungeonBossKeys
+	call unsetFlag
+	; les salles du donjon (w2DungeonLayout, banque 2 de la WRAM)
+	ld c,$00
+@nextRoom:
+	ld a,($ff00+R_SVBK)
+	push af
+	ld a,:w2DungeonLayout
+	ld ($ff00+R_SVBK),a
+	ld b,>w2DungeonLayout
+	ld a,(bc)
+	ld b,a
+	pop af
+	ld ($ff00+R_SVBK),a
+	ld a,b
+	or a
+	jr z,@skip
+	; la salle du boss garde son réceptacle (le drapeau $20)
+	push bc
+	call getRoomDungeonProperties
+	ld a,b
+	pop bc
+	and DUNGEONROOMPROPERTY_BOSS
+	ld e,$10		; on garde : visitée
+	jr z,+
+	ld e,$30		; (la salle du boss : visitée, le réceptacle pris)
++
+	ld a,(wDungeonFlagsAddressH)
+	ld h,a
+	ld l,b
+	ld a,(hl)
+	and e
+	ld (hl),a
+@skip:
+	inc c
+	jr nz,@nextRoom
+	pop de
+	ret
+
+;;
+; Après la fin, un coffre qui donne un objet déjà eu (pas une clé, une carte, une boussole, des
+; rubis ni un quart de cœur) donne 30 rubis à la place
+; @param	bc	Le contenu du coffre (le trésor, son sous-type) ; modifié
+postGameChest:
+	ld a,b
+	or a
+	ret z
+	cp TREASURE_RUPEES
+	ret z
+	cp TREASURE_HEART_PIECE
+	ret z
+	cp TREASURE_SMALL_KEY
+	ret z
+	cp TREASURE_BOSS_KEY
+	ret z
+	cp TREASURE_COMPASS
+	ret z
+	cp TREASURE_MAP
+	ret z
+	push bc
+	ld a,GLOBALFLAG_BALLADE_FIN
+	call checkGlobalFlag
+	pop bc
+	ret z
+	ld a,b
+	push bc
+	call checkTreasureObtained
+	pop bc
+	ret nc
+	ld bc,TREASURE_OBJECT_RUPEES_04
+	ret
+
+
+;;
+; Marine chante la Ballade du Poisson-Rêve (MUS_TITLESCREEN : la Ballade chantée par Marine) ; des
+; notes s'envolent. var35 la musique d'avant, var36 elle chante, var37 le temps avant la note
+startSinging:
+	ld e,Interaction.var36
+	ld a,(de)
+	or a
+	ret nz
+	inc a
+	ld (de),a
+	ld a,(wActiveMusic)
+	ld e,Interaction.var35
+	ld (de),a
+	; (la musique en cours : en changeant d'écran, le jeu remet celle de l'écran)
+	ld a,MUS_TITLESCREEN
+	ld (wActiveMusic),a
+	jp playSound
+
+stopSinging:
+	ld e,Interaction.var36
+	ld a,(de)
+	or a
+	ret z
+	xor a
+	ld (de),a
+	ld e,Interaction.var35
+	ld a,(de)
+	ld (wActiveMusic),a
+	jp playSound
+
+; Pendant qu'elle chante : une note qui s'envole, de temps en temps
+singNotes:
+	ld e,Interaction.var36
+	ld a,(de)
+	or a
+	ret z
+	ld h,d
+	ld l,Interaction.var37
+	ld a,(hl)
+	or a
+	jr z,+
+	dec (hl)
+	ret
++
+	ld (hl),40
+	call getRandomNumber
+	and $01
+	ld bc,$f800
+	jp objectCreateFloatingMusicNote
+
+;;
+; Marine sur son île : de temps en temps, elle chante (var33-var34 : le temps qui reste avant de
+; chanter, ou de s'arrêter)
+islandSinging:
+	call singNotes
+	ld h,d
+	ld l,Interaction.var33
+	ld a,(hl)
+	inc l
+	or (hl)
+	jr nz,@wait
+	; le moment de chanter, ou de s'arrêter
+	ld e,Interaction.var36
+	ld a,(de)
+	or a
+	jr nz,@stop
+	call startSinging
+	ld h,d
+	ld l,Interaction.var33
+	ld (hl),<600
+	inc l
+	ld (hl),>600
+	ret
+@stop:
+	call stopSinging
+	; la prochaine fois : dans 20 à 40 secondes
+	call getRandomNumber
+	and $07
+	add $05
+	ld h,d
+	ld l,Interaction.var34
+	ld (hl),a
+	dec l
+	ld (hl),$00
+	ret
+@wait:
+	ld l,Interaction.var33
+	ld a,(hl)
+	sub $01
+	ldi (hl),a
+	ld a,(hl)
+	sbc $00
+	ld (hl),a
 	ret

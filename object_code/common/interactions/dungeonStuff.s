@@ -31,6 +31,10 @@ interactionCode12:
 	jp c,interactionDelete
 
 	call interactionIncState
+.ifdef ROM_AGES
+	; BALLADE: après la fin, un donjon où l'on revient est comme neuf (code/ages/balladeFin.s)
+	callab balladeFin.resetDungeon
+.endif
 	ld a,$08
 	call objectSetCollideRadius
 	call initializeDungeonStuff

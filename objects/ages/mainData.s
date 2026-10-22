@@ -4036,6 +4036,9 @@ group1Map6bObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $00 $68 $58 ; le Bateau-Rondin
 	obj_End
 group1Map6cObjectData:
+	obj_SpecificEnemyA $00 ENEMY_OCTOROK $00 $28 $28
+	obj_SpecificEnemyA     ENEMY_OCTOROK $00 $38 $58
+	obj_SpecificEnemyA     ENEMY_OCTOROK $00 $18 $48
 	obj_End
 group1Map70ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $00 $68 $58

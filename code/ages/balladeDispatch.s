@@ -31,6 +31,9 @@ dispatch:
 	.dw @volley
 	.dw @volleyBall
 	.dw @volleyMarine
+	.dw @follower		; $19-$1b Marine suit Link, avec son épée (balladeFin.s)
+	.dw @followSpawner
+	.dw @marineSword
 
 @creuse:
 	jpab balladeCreuse.main
@@ -82,3 +85,9 @@ dispatch:
 	jpab balladeFin.volleyBall
 @volleyMarine:
 	jpab balladeFin.volleyMarine
+@follower:
+	jpab balladeFin.follower
+@followSpawner:
+	jpab balladeFin.followSpawner
+@marineSword:
+	jpab balladeFin.marineSword

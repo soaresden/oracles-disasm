@@ -319,8 +319,9 @@ wBalladeVolleyMarineJump: ; $c4bd
 	db
 wBalladeVolleyBallHeight: ; $c4be
 	db
-
-; $c4bf unused?
+; Marine suit Link sur son île (1), avec son épée
+wBalladeMarineFollow: ; $c4bf
+	db
 
 .ENDS
 

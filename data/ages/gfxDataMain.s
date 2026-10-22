@@ -524,6 +524,7 @@
 	m_GfxData spr_ballade_ghost
 	m_GfxData spr_ballade_terrier
 	m_GfxData spr_ballade_rex
+	m_GfxData spr_ballade_ile
 	m_GfxData spr_film
 	m_GfxData gfx_film_bg
 	m_GfxData map_film_bg

@@ -109,6 +109,12 @@ nextToChestTile:
 	jr ++
 +
 	call getChestData
+.ifdef ROM_AGES
+	; BALLADE: après la fin, un objet déjà eu devient des rubis (code/ages/balladeFin.s)
+	push de
+	callab balladeFin.postGameChest
+	pop de
+.endif
 ++
 	ld a,b
 	or a

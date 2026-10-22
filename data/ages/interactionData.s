@@ -881,6 +881,9 @@ interactionebSubidData:
 	m_InteractionSubidData $00 $00 $00 ; $16 le volley : le terrain (invisible)
 	m_InteractionSubidData $e4 $1c $20 ; $17 le ballon de volley
 	m_InteractionSubidData $e2 $00 $30 ; $18 Marine sur le terrain de volley
+	m_InteractionSubidData $e2 $00 $30 ; $19 Marine qui suit Link (son île)
+	m_InteractionSubidData $00 $00 $00 ; $1a elle arrive avec Link dans la salle (invisible)
+	m_InteractionSubidData $e7 $00 $30 ; $1b son coup d'épée (spr_ballade_ile)
 	m_InteractionSubidDataEnd
 
 ; BALLADE: les objets de nos îles (INTERAC_BALLADE_OBJECT) : spr_ballade_objects ($e3), image n =
