@@ -300,6 +300,8 @@ raft:
 	.dw @state3
 	.dw @state4
 	.dw @state5
+	.dw @state6
+	.dw @state7
 
 @state0:
 	ld a,GLOBALFLAG_BALLADE_RAFT
@@ -358,6 +360,17 @@ raft:
 	ld a,(wSelectedTextOption)
 	cp $03
 	jr nz,@chosen
+	call countDiscoveredIslands
+	cp $08
+	jr nz,+
+	; Huit îles : la deuxième page a aussi « Suite » (Braise, Échos, Nid, Suite), puis une troisième
+	; (Sommeil, Œil)
+	ld e,Interaction.state
+	ld a,$06
+	ld (de),a
+	ld bc,TX_5aac
+	jp showText
++
 	ld e,Interaction.state
 	ld a,$05
 	ld (de),a
@@ -375,6 +388,30 @@ raft:
 	ret nz
 	ld a,(wSelectedTextOption)
 	add $03
+	jr @chosen
+
+@state6:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	ld a,(wSelectedTextOption)
+	cp $03
+	jr nz,@state5Chosen
+	ld e,Interaction.state
+	ld a,$07
+	ld (de),a
+	ld bc,TX_5ade
+	jp showText
+@state5Chosen:
+	add $03
+	jr @chosen
+
+@state7:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	ld a,(wSelectedTextOption)
+	add $06
 
 ; @param	a	L'île choisie (0 = la Brume)
 @chosen:
