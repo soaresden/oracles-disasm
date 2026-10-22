@@ -15,9 +15,15 @@
 ; in code/crossworldCompletionData.s. The mode is kept in wSecretListMenu.cbb4
 ; (0 = summary, k+1 = list of category k), cleared when the menu opens.
 
+; FR_COMP_NO_SECRETS: separate games (no secret exchanges between the games, see
+; ZeldaOracleCombinedFR/oracles-hud): no secrets row, no secrets tracker.
+.ifdef FR_COMP_NO_SECRETS
+.define FR_COMP_NUM_CATEGORIES	5
+.else
 .define FR_COMP_NUM_CATEGORIES	6
-.define FR_COMP_CAT_TRADE	4
 .define FR_COMP_CAT_SECRETS	5
+.endif
+.define FR_COMP_CAT_TRADE	4
 .define FR_COMP_ROWS		11
 
 ;;
@@ -41,18 +47,24 @@ frCompletion_input:
 	bit BTN_BIT_A,b
 	ret z
 	ld a,(wSecretListMenu.cursorIndex)
+.ifdef FR_COMP_NO_SECRETS
+	cp FR_COMP_NUM_CATEGORIES
+.else
 	cp FR_COMP_CAT_SECRETS
 	jr z,@secrets
+.endif
 	ret nc
 	inc a
 	ld (wSecretListMenu.cbb4),a
 	xor a
 	jr @setPage
 
+.ifndef FR_COMP_NO_SECRETS
 @secrets:
 	ld a,FR_TRACKER_MARK
 	ld (wSubmenuState),a
 	jr @reload
+.endif
 
 @list:
 	; B: back to the summary
@@ -327,6 +339,7 @@ frCompletion_printBox:
 ; Computes the trading sequence and secret exchange bits (wFrCompTrade,
 ; wFrCompSecrets) read by the data entries.
 frCompletion_prepare:
+.ifndef FR_COMP_NO_SECRETS
 	; Secret exchanges: bit i = exchange i complete
 	xor a
 	ld hl,wFrCompSecrets
@@ -347,6 +360,7 @@ frCompletion_prepare:
 	ld a,c
 	cp $0a
 	jr c,@nextSecret
+.endif
 
 	; Noble sword (bit 12)
 .ifdef ROM_AGES

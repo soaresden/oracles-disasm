@@ -201,8 +201,10 @@ frSecretList_printSecret:
 	jr z,@end
 
 	ld c,a
+.ifndef FR_COMP_NO_SECRETS
 	call frTracker_isOpen
 	jr z,@tracker
+.endif
 	call frCompletion_isOpen
 	jp z,frCompletion_printBox
 
@@ -230,6 +232,7 @@ frSecretList_printSecret:
 	ld a,UNCMP_GFXH_35
 	jp loadUncompressedGfxHeader
 
+.ifndef FR_COMP_NO_SECRETS
 @tracker:
 	call frTracker_isAvailable
 	ld a,FR_TRACKER_TXT_FINISH
@@ -253,6 +256,7 @@ frSecretList_printSecret:
 	ld a,$ff
 	ld (wFileSelect.fontXor),a
 	jr @copyText
+.endif
 
 @getSecretText:
 	ld a,b
@@ -285,8 +289,10 @@ frSecretList_loadAllNames:
 	ld ($ff00+R_VBK),a
 
 	ld de,$8a00
+.ifndef FR_COMP_NO_SECRETS
 	call frTracker_isOpen
 	jp z,frTracker_loadRows
+.endif
 	call frCompletion_isOpen
 	jp z,frCompletion_loadRows
 
@@ -474,6 +480,7 @@ frCopyTextCharacters:
 	ret
 
 
+.ifndef FR_COMP_NO_SECRETS
 ; ==============================================================================
 ; Secrets tracker
 ; ==============================================================================
@@ -664,3 +671,4 @@ frTrackerAgesNames:	; King Zora, Fairy, Troy, Plen, Library, Tokay, Mamamu, Ting
 	.db $10 $11 $15 $13 $14 $12 $16 $17 $18 $19
 frTrackerSeasonsNames:	; Clock shop, Graveyard, Subrosian, Diver, Smith, Pirate, Temple, Deku, Biggoron, Ruul
 	.db $06 $07 $08 $09 $0a $0b $0c $0d $0e $0f
+.endif
