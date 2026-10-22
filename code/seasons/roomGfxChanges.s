@@ -45,6 +45,8 @@ gashaSpotRooms:
 
 ;;
 applyRoomSpecificTileChangesAfterGfxLoad:
+	; FR: put the status bar game icon back (see frRestoreHudIconOnRoomLoad)
+	callab frRestoreHudIconOnRoomLoad
 	ld a,(wActiveRoom)
 	ld hl,@tileChangesGroupTable
 	call findRoomSpecificData

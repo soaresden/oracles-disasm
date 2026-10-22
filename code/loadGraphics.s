@@ -578,25 +578,51 @@ _insertIndexIntoLoadedObjectGfx:
 	jr c,@object
 
 @tree:
+	push de
 	ld b,$92
 	ld hl,treeGfxHeaderTable
-	jr ++
+	call @load
+	pop de
+	call frRestoreHudIcon
+	jr @end
 
 @object:
 	sub <wLoadedObjectGfx
 	or $80
 	ld b,a
 	ld hl,objectGfxHeaderTable
-++
-	ld d,$00
-	add hl,de
-	add hl,de
-	add hl,de
-	call loadObjectGfx
+	call @load
+@end:
 	pop hl
 	pop de
 	pop bc
 	ret
+
+@load:
+	ld d,$00
+	add hl,de
+	add hl,de
+	add hl,de
+	jp loadObjectGfx
+
+;;
+; FR: the tree gfx slot ($9200-$93ff) also holds the status bar game icon (tile
+; $3f at $93f0, OPT_HUD_GAME_ICON), past the end of all its graphics but
+; Seasons' caravan: put the icon back after loading something there.
+; @param	e	Tree gfx index
+frRestoreHudIcon:
+	ld a,(OPT_HUD_GAME_ICON)
+	or a
+	ret z
+.ifdef ROM_SEASONS
+	ld a,e
+	cp $02 ; spr_caravan uses the whole slot
+	ret z
+.endif
+	ld hl,gfx_fr_hud_icon
+	ld de,$93f0
+	ldbc $00, :gfx_fr_hud_icon
+	jp queueDmaTransfer
 
 ;;
 ; Mark a particular object gfx index as used. This doesn't insert the index into

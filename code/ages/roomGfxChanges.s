@@ -64,6 +64,8 @@ func_02_7a77:
 ; only (not visual changes).
 ;
 applyRoomSpecificTileChangesAfterGfxLoad:
+	; FR: put the status bar game icon back (see frRestoreHudIconOnRoomLoad)
+	callab frRestoreHudIconOnRoomLoad
 	ld a,(wActiveRoom)
 	ld hl,@tileChangesGroupTable
 	call findRoomSpecificData

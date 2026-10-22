@@ -187,6 +187,25 @@ frRewardReceiverSquares:
 	.db $00 $c8	; 9 Ruul (mayor's house)
 .endif
 
+;;
+; FR: the status bar game icon (tile $3f at $93f0, OPT_HUD_GAME_ICON) shares the
+; tree gfx slot ($9200-$93ff): shops load the inventory graphics there, and
+; nothing reloaded the icon after leaving. Called on every room load, before
+; the room's own tree gfx (frRestoreHudIcon in bank $3f puts it back after
+; those). Seasons' caravan (tree gfx 2) uses the whole slot.
+frRestoreHudIconOnRoomLoad:
+	ld a,(OPT_HUD_GAME_ICON)
+	or a
+	ret z
+.ifdef ROM_SEASONS
+	ld a,(wLoadedTreeGfxActive)
+	cp $02
+	ret z
+.endif
+	ld hl,gfx_fr_hud_icon
+	ld de,$93f0
+	ldbc $00, :gfx_fr_hud_icon
+	jp queueDmaTransfer
 
 ;;
 ; FR: blinking hearts on the overworld map where a heart piece is still
