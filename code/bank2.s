@@ -3110,7 +3110,8 @@ _updateStatusBar:
 
 	; Update item sprites
 	ld e,$10
-	ld bc,$1038
+	ld c,$38
+	call frGetStatusBarItemsY ; FR: $10, or $90 with the status bar at the bottom
 	rrca
 	jr nc,+
 	ld c,$30
@@ -3178,7 +3179,8 @@ _updateStatusBar:
 	ld hl,wOam
 	ld de,@oamData
 	ld b,$10
-	jp copyMemoryReverse
+	call copyMemoryReverse
+	jp frFixStatusBarItemsY
 
 @oamData:
 	.db $10 $18 $78 $0b ; B Item
@@ -10811,6 +10813,37 @@ _runFakeReset:
 	inc (hl)
 	jp fadeoutToWhite
 
+
+;;
+; FR: y-position of the A/B item sprites (wOam 0-3) on the status bar
+; @param[out]	b	$10 on top, $90 at the bottom
+frGetStatusBarItemsY:
+	push af
+	ld b,$10
+	ld a,(wFrHudBottom)
+	or a
+	jr z,+
+	ld b,$90
++
+	pop af
+	ret
+
+;;
+; FR: moves the A/B item sprites (wOam 0-3, written at the top) to the bottom
+; status bar if needed
+frFixStatusBarItemsY:
+	ld a,(wFrHudBottom)
+	or a
+	ret z
+	ld hl,wOam
+	ld de,$0004
+	ld b,e
+-
+	ld (hl),$90
+	add hl,de
+	dec b
+	jr nz,-
+	ret
 
 .ifdef ROM_AGES
 

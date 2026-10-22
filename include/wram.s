@@ -329,8 +329,20 @@ wObjectsToDraw: ; $c500
 ; priority). Each entry is 2 bytes, consisting of the address of high byte of the object's
 ; y-position.
 	dsb $40
+wObjectsToDrawEnd: ; $c540
+; FR: the priority lists actually go up to $c57f (see objectQueueDraw)
+	dsb $40
 
-; $c540-$c5af unused?
+wFrHudBottom: ; $c580
+; FR: 1 while the status bar is drawn at the bottom of the screen this frame
+; (see frHudBottomVblank): 1 in gameplay, 2 in a menu
+	db
+
+wFrHudPhase: ; $c581
+; FR: next LCD interrupt event with the status bar at the bottom (FRHUD_PHASE_*)
+	db
+
+; $c582-$c5af unused?
 
 .ENDS
 

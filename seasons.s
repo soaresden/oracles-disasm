@@ -777,6 +777,13 @@ oamData_15_4e0c:
 
 .ends
 
+.BANK $40 SLOT 1
+.ORG 0
+
+.SECTION "FR_HudBottom"
+	.include "code/hudBottom40.s"
+.ENDS
+
 ; Text moved to bank $43 (the European text is bigger than the American one; the
 ; ROM is 2 MB like the European version), as in the crossworld hack.
 .BANK $43 SLOT 1

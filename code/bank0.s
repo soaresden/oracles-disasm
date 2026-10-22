@@ -2050,6 +2050,7 @@ vblankInterrupt:
 	ld ($ff00+R_WX),a
 	ldi a,(hl)
 	ld ($ff00+R_LYC),a
+	call frHudBottomVblank
 
 	; increment wVBlankChecker
 	inc (hl)
@@ -2351,6 +2352,9 @@ updateDirtyPalettes:
 
 ;;
 lcdInterrupt:
+	ld a,(wFrHudBottom)
+	or a
+	jp nz,frHudBottomLcd
 	ldh a,(<hLcdInterruptBehaviour)
 	cp $02
 	jr nc,@behaviour2OrHigher
@@ -2779,6 +2783,7 @@ addSpritesToOam:
 ; @param	bc	Sprite offset
 ; @param	hl	OAM data
 addSpritesToOam_withOffset:
+	call frMenuSpriteYOffset
 	ldh a,(<hOamTail)
 	cp $a0
 	ret nc
@@ -3303,8 +3308,7 @@ _drawObjectTerrainEffects:
 _getObjectPositionOnScreen:
 	ldh a,(<hCameraX)
 	ld c,a
-	ldh a,(<hCameraY)
-	ld b,a
+	call frGetSpriteCameraY
 
 	; Object.yh
 	ldi a,(hl)
@@ -3355,8 +3359,7 @@ _getObjectPositionOnScreen:
 _label_00_152:
 	ldh a,(<hCameraX)
 	ld c,a
-	ldh a,(<hCameraY)
-	ld b,a
+	call frGetSpriteCameraY
 	ldi a,(hl)
 	sub b
 	add $10
@@ -3389,8 +3392,7 @@ _getObjectPositionOnScreen_duringScreenTransition:
 
 	; Read Object.yh
 	ld d,$00
-	ldi a,(hl)
-	add $10
+	call frLdiYAddHudOffset
 	ld c,a
 	ld a,d
 	adc a
@@ -14245,5 +14247,122 @@ func_3ee4:
 
 .endif
 
+
+
+;;
+; FR: status bar at the bottom of the screen, like Link's Awakening (ported from
+; ZeldaOracleCombinedFR). Most of it is in bank $40 (code/hudBottom40.s); bank 0
+; keeps the hooks, the wave effect (one interrupt per line) and small helpers.
+.define FRHUD_PHASE_GAME		1
+.define FRHUD_PHASE_LCDC_A7		2
+.define FRHUD_PHASE_RING_TEXT		3
+.define FRHUD_PHASE_RING_END		4
+.define FRHUD_PHASE_WAVE		5
+.define FRHUD_PHASE_STATUS		6
+
+;;
+; Called by vblankInterrupt (keeps hl and bc).
+frHudBottomVblank:
+	ld a,:frHudBottomVblank_body
+	ld ($2222),a
+	call frHudBottomVblank_body
+
+;;
+; Back to the bank in use, like the end of vblankInterrupt.
+frHudRestoreBank:
+	push hl
+	ld hl,hFFB7
+	ldh a,(<hRomBank)
+	bit 0,(hl)
+	jr z,+
+	ldh a,(<hSoundDataBaseBank2)
++
+	ld ($2222),a
+	pop hl
+	ret
+
+;;
+; LCD interrupt with the status bar at the bottom (see frHudBottomVblank_body).
+frHudBottomLcd:
+	push bc
+	ld a,($ff00+R_LY)
+	inc a
+	ld b,a
+	ld a,(wFrHudPhase)
+	cp FRHUD_PHASE_WAVE
+	jr nz,@wait
+
+	; Wave effect: SCX for line b-1 (which was line b+$0f), then the next line
+	ld a,b
+	cp $7f
+	ld a,FRHUD_PHASE_WAVE
+	jr nc,@far
+	ld a,b
+	add $0f
+	ld l,a
+	ld h,>wBigBuffer
+	ld a,(hl)
+	ld ($ff00+R_SCX),a
+	ld a,b
+	ld ($ff00+R_LYC),a
+	jp _lcdInterruptEnd
+
+@wait:
+	; Wait for hblank, like lcdInterrupt
+	ld c,a
+-
+	ld a,($ff00+R_STAT)
+	and $03
+	jr nz,-
+	ld a,c
+@far:
+	ld c,a
+	ld a,:frHudRunPhase
+	ld ($2222),a
+	ld a,c
+	call frHudRunPhase
+	call frHudRestoreBank
+	jp _lcdInterruptEnd
+
+;;
+; FR: menu sprites (addSpritesToOam) 16 pixels higher in the inventory with the
+; status bar at the bottom
+; @param	b	Y offset, adjusted
+frMenuSpriteYOffset:
+	ld a,(wFrHudBottom)
+	cp $02
+	ret nz
+	ld a,b
+	sub $10
+	ld b,a
+	ret
+
+;;
+; FR: camera y-position used to place objects on the screen; 16 pixels lower
+; with the status bar at the bottom.
+; @param[out]	b	Camera y-position
+frGetSpriteCameraY:
+	ld a,(wFrHudBottom)
+	or a
+	ldh a,(<hCameraY)
+	jr z,+
+	add $10
++
+	ld b,a
+	ret
+
+;;
+; FR: object y-position (ldi from hl) plus the status bar's height if it's on top
+; @param[out]	cflag	Carry of the addition
+frLdiYAddHudOffset:
+	ld a,(wFrHudBottom)
+	or a
+	ld c,$10
+	jr z,+
+	ld c,$00
++
+	ldi a,(hl)
+	add c
+	ret
 
 .ENDS
