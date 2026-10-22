@@ -1454,6 +1454,18 @@ oamData_7249:
 
 .ends
 
+.BANK $38 SLOT 1
+.ORG 0
+
+.SECTION "FR_HudExtras"
+	m_GfxDataSimple gfx_fr_map_heart
+	.include "code/hudMapHearts.s"
+	.include "code/crossworldSecretList.s"
+	.include "code/crossworldSecretNames.s"
+	.include "code/crossworldCompletion.s"
+	.include "code/crossworldCompletionData.s"
+.ENDS
+
 .BANK $40 SLOT 1
 .ORG 0
 

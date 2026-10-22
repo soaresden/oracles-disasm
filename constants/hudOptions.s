@@ -5,3 +5,9 @@
 .define OPT_GBA_SHOP			$3ff1
 .define OPT_MAP_HEARTS			$3ff2
 .define OPT_COMPLETION			$3ff3
+
+; wSubmenuState value marking Farore's secret list (menu $0a) as the completion
+; menu opened from the heart pieces (openMenu clears it otherwise)
+.define FR_COMPLETION_MARK		$fe
+; Completion menu without the secret exchanges between the games
+.define FR_COMP_NO_SECRETS

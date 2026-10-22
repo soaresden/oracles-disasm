@@ -4213,8 +4213,20 @@ _inventoryMenuState1:
 
 	ld a,(wInventory.submenu2CursorPos2)
 	cp $02
-	jr nz,+
+	jr z,@saveButton
 
+	; FR: A on the heart pieces opens Farore's secret list as the completion
+	; menu (OPT_COMPLETION, code/crossworldCompletion.s)
+	dec a
+	jr nz,+
+	ld a,(OPT_COMPLETION)
+	or a
+	jr z,+
+	ld a,FR_COMPLETION_MARK
+	ld (wSubmenuState),a
+	ld a,$0a-1
+
+@saveButton:
 	; Save button selected
 	inc a
 	ld (wOpenedMenuType),a
@@ -7442,6 +7454,9 @@ _mapMenu_drawSprites:
 	or a
 	jp nz,_mapMenu_drawWarpSites
 
+	; FR: heart pieces still waiting (code/hudMapHearts.s)
+	callab frDrawMapHearts
+
 .ifdef ROM_AGES
 	jp _mapMenu_drawTimePortal
 
@@ -10415,6 +10430,8 @@ _saveQuitMenu_drawSprites:
 ; Run the secret list menu from farore's book.
 ;
 _runSecretListMenu:
+	; FR: moved to bank $38 with the completion menu (code/crossworldSecretList.s)
+	jpab frRunSecretListMenu
 	call clearOam
 	ld a,TEXT_BANK
 	ld ($ff00+R_SVBK),a

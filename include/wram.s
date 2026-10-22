@@ -342,7 +342,27 @@ wFrHudPhase: ; $c581
 ; FR: next LCD interrupt event with the status bar at the bottom (FRHUD_PHASE_*)
 	db
 
-; $c582-$c5af unused?
+; FR: completion menu (OPT_COMPLETION, code/crossworldCompletion.s)
+wFrCompPage: ; $c582
+; In a list of missing things: index of the first one shown
+	db
+wFrCompRowEntries: ; $c583
+; In a list of missing things: entry shown on each row ($ff = none)
+	dsb 11
+wFrCompTrade: ; $c58e
+; Trading sequence steps done (bit i = item i obtained, bit 12 = noble sword)
+	dsb 2
+wFrCompSecrets: ; $c590
+; (unused in the separate games)
+	dsb 2
+wFrCompRowBuffer: ; $c592
+; Characters of the row being built
+	dsb 16
+wFrCompDone: ; $c5a2
+; Total of things done (completion percentage)
+	db
+
+; $c5a3-$c5af unused?
 
 .ENDS
 

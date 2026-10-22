@@ -260,12 +260,14 @@ gfxHeader0d: ; $6be6
 	m_GfxHeader gfx_minimap_tiles_holodrum_2 $9001 $7f|$80
 	m_GfxHeader spr_minimap_icons $8000 $6b|$80
 	m_GfxHeader gfx_minimap_tiles_dungeon $8800 $3f|$80
+	m_GfxHeader gfx_fr_map_heart $86c0 $01|$80 ; FR: map heart (heart pieces)
 	m_GfxHeader map_holodrum_minimap $d004 $23|$80
 	m_GfxHeader flg_holodrum_minimap $d404 $23
 gfxHeader0e: ; $6c0a
 	m_GfxHeader gfx_minimap_tiles_subrosia $9001 $72|$80
 	m_GfxHeader spr_minimap_icons $8000 $6b|$80
 	m_GfxHeader gfx_minimap_tiles_dungeon $8800 $3f|$80
+	m_GfxHeader gfx_fr_map_heart $86c0 $01|$80 ; FR: map heart (heart pieces)
 	m_GfxHeader map_subrosia_minimap $d004 $23|$80
 	m_GfxHeader flg_subrosia_minimap $d404 $23
 gfxHeader0f: ; $6c28
