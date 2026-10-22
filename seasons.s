@@ -743,10 +743,11 @@ oamData_15_4e0c:
 	;   Ages:    1d:4000
 	;   Seasons: 1c:5c00
 
-	.include "build/textData.s"
+.BANK $1c
+.ORGA $5c00
 
-	.REDEFINE DATA_ADDR TEXT_END_ADDR
-	.REDEFINE DATA_BANK TEXT_END_BANK
+	.REDEFINE DATA_ADDR $5c00
+	.REDEFINE DATA_BANK $1c
 
 	.include "build/data/roomLayoutData.s"
 	.include "build/data/gfxDataMain.s"
@@ -775,3 +776,10 @@ oamData_15_4e0c:
 	.include "build/data/treasureDisplayData.s"
 
 .ends
+
+; Text moved to bank $43 (the European text is bigger than the American one; the
+; ROM is 2 MB like the European version), as in the crossworld hack.
+.BANK $43 SLOT 1
+.ORG 0
+
+	.include "build/textData.s"
