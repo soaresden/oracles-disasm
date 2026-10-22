@@ -353,7 +353,26 @@ wBalladeMamonoTmp: ; $c59c
 wBalladeMamonoBanned: ; $c59d
 	dsb 3
 
-; $c5a0-$c5af unused?
+; BALLADE: le Labyrinthe des Lynels (code/ages/balladePac.s) : l'état (0 rien, 1 en jeu, 2 gagné,
+; 3 perdu, 4 on rentre), les rubis qui restent, la peur des Lynels (images / 2), les Lynels mangés
+; d'affilée, un Lynel a attrapé Link, les compteurs « gemme » et « tout le monde à l'enclos » (chaque
+; Lynel compare au sien)
+wBalladePacState: ; $c5a0
+	db
+wBalladePacLeft: ; $c5a1
+	db
+wBalladePacPower: ; $c5a2
+	db
+wBalladePacCombo: ; $c5a3
+	db
+wBalladePacCaught: ; $c5a4
+	db
+wBalladePacPowerGen: ; $c5a5
+	db
+wBalladePacResetGen: ; $c5a6
+	db
+
+; $c5a7-$c5af unused?
 
 .ENDS
 

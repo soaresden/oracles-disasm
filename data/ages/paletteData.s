@@ -4773,6 +4773,48 @@ paletteDataPhoto: ; les photos de Cocolint : le sépia de l'album de LADX
 	m_RGB16 $0e $0a $06
 	m_RGB16 $09 $05 $02
 
+paletteDataLabyrinthe: ; le Labyrinthe des Lynels : murs, rubis, gemme, gemme qui brille, porte, murs
+	m_RGB16 $00 $00 $00
+	m_RGB16 $03 $04 $14
+	m_RGB16 $08 $0c $1f
+	m_RGB16 $14 $18 $1f
+
+	m_RGB16 $00 $00 $00
+	m_RGB16 $02 $0a $02
+	m_RGB16 $06 $18 $04
+	m_RGB16 $16 $1f $10
+
+	m_RGB16 $00 $00 $00
+	m_RGB16 $0c $00 $02
+	m_RGB16 $1c $04 $06
+	m_RGB16 $1f $16 $14
+
+	m_RGB16 $00 $00 $00
+	m_RGB16 $16 $08 $0c
+	m_RGB16 $1f $14 $16
+	m_RGB16 $1f $1f $1f
+
+	m_RGB16 $00 $00 $00
+	m_RGB16 $10 $08 $10
+	m_RGB16 $1f $10 $18
+	m_RGB16 $1f $18 $1c
+
+	m_RGB16 $00 $00 $00
+	m_RGB16 $03 $04 $14
+	m_RGB16 $08 $0c $1f
+	m_RGB16 $14 $18 $1f
+
+paletteDataLabyrintheSpr: ; les Lynels qui ont peur (bleu nuit, traits pâles) ; le Lynel rose
+	m_RGB16 $1f $1f $1f
+	m_RGB16 $1f $1a $1a
+	m_RGB16 $04 $06 $1c
+	m_RGB16 $10 $14 $1f
+
+	m_RGB16 $1f $1f $1f
+	m_RGB16 $00 $00 $00
+	m_RGB16 $1f $0c $16
+	m_RGB16 $1f $1a $11
+
 paletteDataGivrolin:
 	m_RGB16 $1f $1f $1f
 	m_RGB16 $17 $1c $1f

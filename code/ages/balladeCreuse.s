@@ -75,16 +75,45 @@ main:
 	xor a
 	ld (de),a
 	dec b
-	jp nz,@offer		; le niveau vient d'être choisi
-	; Le jeu : 0 le Creuse-Rubis, 1 le Mamono, 2 non
+	jr z,@gameChosen
+	dec b
+	jp z,@offer		; le niveau vient d'être choisi
+	; Le Labyrinthe des Lynels (TX_5a4c) : « J'y vais » -> la salle 5:e9 (code/ages/balladePac.s)
+	ld a,(wSelectedTextOption)
+	or a
+	ret nz
+	ld a,$85
+	ld (wWarpDestGroup),a
+	ld a,$e9
+	ld (wWarpDestRoom),a
+	ld a,$77
+	ld (wWarpDestPos),a
+	xor a
+	ld (wWarpTransition),a
+	ld a,$03 ; fondu
+	ld (wWarpTransition2),a
+	ld a,SND_ENTERCAVE
+	jp playSound
+
+@gameChosen:
+	; Le jeu : 0 le Creuse-Rubis, 1 le Mamono, 2 le Labyrinthe des Lynels, 3 non
 	ld a,(wSelectedTextOption)
 	cp $02
+	jr z,@lynels
 	ret nc
 	ld (wBalladeCreuseMode),a
 	ld bc,TX_5a4b
 	call showText
 	ld e,Interaction.var30
 	ld a,$02
+	ld (de),a
+	ret
+
+@lynels:
+	ld bc,TX_5a4c
+	call showText
+	ld e,Interaction.var30
+	ld a,$03
 	ld (de),a
 	ret
 

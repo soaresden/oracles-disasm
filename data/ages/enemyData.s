@@ -172,6 +172,12 @@ enemy0dSubidData:
 	m_EnemySubidData $17 $20
 	m_EnemySubidData $1b $10
 	m_EnemySubidData $3f $30
+	; BALLADE: les Lynels du Labyrinthe (code/ages/balladePac.s) : rouge, rose (palette 7 des
+	; sprites, PALH_LABYRINTHE), bleu, orange
+	m_EnemySubidData $17 $20
+	m_EnemySubidData $17 $70
+	m_EnemySubidData $17 $10
+	m_EnemySubidData $17 $30
 	m_EnemySubidDataEnd
 
 enemy0eSubidData:

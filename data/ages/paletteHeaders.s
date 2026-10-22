@@ -7,7 +7,7 @@
 ; - PALH_SPR:     Loads sprite palettes only
 ; - PALH:         If none of the above, could load both sprite & bg palettes (or not yet categorized)
 
-.define NUM_PALETTE_HEADERS $de ; BALLADE: + film, Songe, titre
+.define NUM_PALETTE_HEADERS $df ; BALLADE: + film, Songe, titre
 
 paletteHeaderTable:
 	.repeat NUM_PALETTE_HEADERS index COUNT
@@ -895,6 +895,13 @@ m_PaletteHeaderStart $dd, PALH_FANTOME
 ; BALLADE: les photos de Cocolint (code/ages/cutscenes/photos.s) : le sépia de l'album de LADX
 m_PaletteHeaderStart $dc, PALH_PHOTO
 	m_PaletteHeaderBg  2, 1, paletteDataPhoto
+	m_PaletteHeaderEnd
+
+; BALLADE: le Labyrinthe des Lynels (5:e9, décor $69, tools/make_pacman.py) : fond noir, murs bleus,
+; rubis, gemme, porte rose ; sprites : 6 les Lynels qui ont peur, 7 le Lynel rose
+m_PaletteHeaderStart $de, PALH_LABYRINTHE
+	m_PaletteHeaderBg  2, 6, paletteDataLabyrinthe
+	m_PaletteHeaderSpr 6, 2, paletteDataLabyrintheSpr
 	m_PaletteHeaderEnd
 
 ; BALLADE: l'écran titre de Gulls of Life (tools/make_title.py) ; sprites : ceux d'Ages (PRESS START)

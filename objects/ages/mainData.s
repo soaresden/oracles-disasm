@@ -3414,10 +3414,6 @@ group5Mape8ObjectData:
 	obj_Part $09 $80 $45
 	obj_End
 
-group5Mape9ObjectData:
-	obj_Interaction $48 $1d $20 $c8
-	obj_Pointer group5Mape9EnemyObjectData
-	obj_End
 
 group5MapecObjectData:
 	obj_Interaction $52 $03 $58 $c0
@@ -4766,4 +4762,11 @@ group5Mapd3ObjectData:
 group5Mapd4ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $34 $08 $08
 	obj_Interaction INTERAC_BALLADE_OBJECT $35 $58 $78
+	obj_End
+group5Mape9ObjectData:
+	obj_Interaction INTERAC_BALLADE_CREUSE $01 $08 $08
+	obj_SpecificEnemyA $00 ENEMY_LYNEL $03 $38 $78
+	obj_SpecificEnemyA     ENEMY_LYNEL $04 $58 $78
+	obj_SpecificEnemyA     ENEMY_LYNEL $05 $58 $68
+	obj_SpecificEnemyA     ENEMY_LYNEL $06 $58 $88
 	obj_End

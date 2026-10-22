@@ -227,6 +227,11 @@ specialObjectLoadAnimationFrameToBuffer:
 		.include "code/ages/balladeCreuse.s"
 	.ends
 
+	 ; BALLADE: le Labyrinthe des Lynels, le 3e jeu du forain (INTERAC_BALLADE_CREUSE $01, les Lynels $03-$06)
+	 m_section_superfree Ballade_Pac namespace balladePac
+		.include "code/ages/balladePac.s"
+	.ends
+
 	 ; BALLADE: le menu de test caché (HAUT tenu 5 s à l'écran titre)
 	 m_section_superfree Ballade_Debug namespace balladeDebug
 		.include "code/ages/balladeDebug.s"

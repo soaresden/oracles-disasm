@@ -6,6 +6,15 @@
 ;          bits set = more likely).
 ; ==================================================================================================
 enemyCode0d:
+.ifdef ROM_AGES
+	; BALLADE: les Lynels du Labyrinthe (sous-types $03-$06, code/ages/balladePac.s)
+	ld e,Enemy.subid
+	ld a,(de)
+	cp $03
+	jr c,+
+	jpab balladePac.lynel
++
+.endif
 	call ecom_checkHazards
 	jr z,@normalStatus
 	sub ENEMYSTATUS_NO_HEALTH

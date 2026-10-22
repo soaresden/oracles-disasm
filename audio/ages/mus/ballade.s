@@ -23907,6 +23907,861 @@ musBalladeQuizChannel6Loop:
 
 .ends
 
+m_section_superfree Ballade_musBalladeLynels
+
+musBalladeLynelsStart:
+
+musBalladeLynelsChannel0:
+	vibrato $00
+	env $0 $00
+	duty $02
+	cmdfd $00
+	vol $0
+	duty $01
+	vibrato $00
+	cmdfd $00
+	rest $c0
+musBalladeLynelsChannel0Loop:
+	vol $0
+	duty $01
+	vibrato $00
+	cmdfd $00
+	vol $2
+	duty $01
+	note e4   $5b
+	rest $05
+	note c4   $5b
+	rest $05
+	note e4   $5b
+	rest $05
+	note c4   $5b
+	rest $05
+	note f4   $5b
+	rest $05
+	note d4   $2e
+	rest $02
+	note b3   $2e
+	rest $02
+	note e4   $5b
+	rest $05
+	note e4   $2e
+	rest $02
+	note gs3  $2e
+	rest $02
+	vol $2
+	duty $02
+	rest $0c
+	note a5   $08
+	rest $04
+	note e5   $11
+	rest $07
+	note c5   $11
+	rest $07
+	note a5   $11
+	rest $13
+	note a5   $08
+	rest $04
+	note e5   $11
+	rest $07
+	note c5   $11
+	rest $07
+	note a5   $11
+	rest $13
+	note a5   $08
+	rest $04
+	note e5   $11
+	rest $07
+	note c5   $11
+	rest $07
+	note a5   $11
+	rest $13
+	note a5   $08
+	rest $04
+	note e5   $11
+	rest $07
+	note c5   $11
+	rest $07
+	note a5   $11
+	rest $13
+	note a5   $08
+	rest $04
+	note f5   $11
+	rest $07
+	note d5   $11
+	rest $07
+	note a5   $11
+	rest $13
+	note a5   $08
+	rest $04
+	note f5   $11
+	rest $07
+	note d5   $11
+	rest $07
+	note g5   $11
+	rest $13
+	note g5   $08
+	rest $04
+	note e5   $11
+	rest $07
+	note c5   $11
+	rest $07
+	note g5   $11
+	rest $13
+	note g5   $08
+	rest $04
+	note e5   $11
+	rest $07
+	note c5   $11
+	rest $07
+	note b4   $11
+	rest $07
+	goto musBalladeLynelsChannel0Loop
+	cmdff
+
+musBalladeLynelsChannel1:
+	vibrato $00
+	env $0 $00
+	duty $02
+	cmdfd $00
+	vol $0
+	duty $02
+	vibrato $00
+	cmdfd $00
+	rest $c0
+musBalladeLynelsChannel1Loop:
+	vol $0
+	duty $02
+	vibrato $00
+	cmdfd $00
+	vol $5
+	duty $02
+	note a4   $0a
+	rest $02
+	note e4   $14
+	rest $04
+	note c4   $14
+	rest $04
+	note a4   $1f
+	rest $05
+	note a4   $0a
+	rest $02
+	note e4   $14
+	rest $04
+	note c4   $14
+	rest $04
+	note a4   $1f
+	rest $05
+	note a4   $0a
+	rest $02
+	note e4   $14
+	rest $04
+	note c4   $14
+	rest $04
+	note a4   $1f
+	rest $05
+	note a4   $0a
+	rest $02
+	note e4   $14
+	rest $04
+	note c4   $14
+	rest $04
+	note a4   $1f
+	rest $05
+	note a4   $0a
+	rest $02
+	note f4   $14
+	rest $04
+	note d4   $14
+	rest $04
+	note a4   $1f
+	rest $05
+	note a4   $0a
+	rest $02
+	note f4   $14
+	rest $04
+	note d4   $14
+	rest $04
+	note g4   $1f
+	rest $05
+	note g4   $0a
+	rest $02
+	note e4   $14
+	rest $04
+	note c4   $14
+	rest $04
+	note g4   $1f
+	rest $05
+	note g4   $0a
+	rest $02
+	note e4   $14
+	rest $04
+	note c4   $14
+	rest $04
+	note e4   $0a
+	rest $02
+	note gs4  $14
+	rest $04
+	note a4   $0a
+	rest $02
+	note e4   $14
+	rest $04
+	note c4   $14
+	rest $04
+	note a4   $1f
+	rest $05
+	note a4   $0a
+	rest $02
+	note e4   $14
+	rest $04
+	note c4   $14
+	rest $04
+	note a4   $1f
+	rest $05
+	note a4   $0a
+	rest $02
+	note e4   $14
+	rest $04
+	note c4   $14
+	rest $04
+	note a4   $1f
+	rest $05
+	note a4   $0a
+	rest $02
+	note e4   $14
+	rest $04
+	note c4   $14
+	rest $04
+	note a4   $1f
+	rest $05
+	note a4   $0a
+	rest $02
+	note f4   $14
+	rest $04
+	note d4   $14
+	rest $04
+	note a4   $1f
+	rest $05
+	note a4   $0a
+	rest $02
+	note f4   $14
+	rest $04
+	note d4   $14
+	rest $04
+	note g4   $1f
+	rest $05
+	note g4   $0a
+	rest $02
+	note e4   $14
+	rest $04
+	note c4   $14
+	rest $04
+	note g4   $1f
+	rest $05
+	note g4   $0a
+	rest $02
+	note e4   $14
+	rest $04
+	note c4   $14
+	rest $04
+	note e4   $0a
+	rest $02
+	note gs4  $14
+	rest $04
+	goto musBalladeLynelsChannel1Loop
+	cmdff
+
+musBalladeLynelsChannel4:
+	vibrato $00
+	cmdfd $00
+	duty $0e
+	vibrato $00
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+musBalladeLynelsChannel4Loop:
+	duty $0e
+	vibrato $00
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note d2   $07
+	rest $05
+	note d3   $07
+	rest $05
+	note d2   $07
+	rest $05
+	note d3   $07
+	rest $05
+	note d2   $07
+	rest $05
+	note d3   $07
+	rest $05
+	note d2   $07
+	rest $05
+	note d3   $07
+	rest $05
+	note d2   $07
+	rest $05
+	note d3   $07
+	rest $05
+	note d2   $07
+	rest $05
+	note d3   $07
+	rest $05
+	note g2   $07
+	rest $05
+	note g3   $07
+	rest $05
+	note g2   $07
+	rest $05
+	note g3   $07
+	rest $05
+	note c2   $07
+	rest $05
+	note c3   $07
+	rest $05
+	note c2   $07
+	rest $05
+	note c3   $07
+	rest $05
+	note c2   $07
+	rest $05
+	note c3   $07
+	rest $05
+	note c2   $07
+	rest $05
+	note c3   $07
+	rest $05
+	note c2   $07
+	rest $05
+	note c3   $07
+	rest $05
+	note c2   $07
+	rest $05
+	note c3   $07
+	rest $05
+	note e2   $07
+	rest $05
+	note e3   $07
+	rest $05
+	note e2   $07
+	rest $05
+	note e3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note a2   $07
+	rest $05
+	note a3   $07
+	rest $05
+	note d2   $07
+	rest $05
+	note d3   $07
+	rest $05
+	note d2   $07
+	rest $05
+	note d3   $07
+	rest $05
+	note d2   $07
+	rest $05
+	note d3   $07
+	rest $05
+	note d2   $07
+	rest $05
+	note d3   $07
+	rest $05
+	note d2   $07
+	rest $05
+	note d3   $07
+	rest $05
+	note d2   $07
+	rest $05
+	note d3   $07
+	rest $05
+	note g2   $07
+	rest $05
+	note g3   $07
+	rest $05
+	note g2   $07
+	rest $05
+	note g3   $07
+	rest $05
+	note c2   $07
+	rest $05
+	note c3   $07
+	rest $05
+	note c2   $07
+	rest $05
+	note c3   $07
+	rest $05
+	note c2   $07
+	rest $05
+	note c3   $07
+	rest $05
+	note c2   $07
+	rest $05
+	note c3   $07
+	rest $05
+	note c2   $07
+	rest $05
+	note c3   $07
+	rest $05
+	note c2   $07
+	rest $05
+	note c3   $07
+	rest $05
+	note e2   $07
+	rest $05
+	note e3   $07
+	rest $05
+	note e2   $07
+	rest $05
+	note e3   $07
+	rest $05
+	goto musBalladeLynelsChannel4Loop
+	cmdff
+
+musBalladeLynelsChannel6:
+	vol $6
+	note $24  $0c
+	vol $1
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $2
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $1
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $2
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $2
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $4
+	note $2e  $0c
+	note $2e  $0c
+musBalladeLynelsChannel6Loop:
+	vol $4
+	vol $6
+	note $24  $0c
+	vol $1
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $6
+	note $24  $0c
+	vol $1
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $6
+	note $24  $0c
+	vol $1
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $6
+	note $24  $0c
+	vol $1
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $6
+	note $24  $0c
+	vol $1
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $6
+	note $24  $0c
+	vol $1
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $6
+	note $24  $0c
+	vol $1
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $6
+	note $24  $0c
+	vol $1
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $6
+	note $24  $0c
+	vol $1
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $6
+	note $24  $0c
+	vol $1
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $6
+	note $24  $0c
+	vol $1
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $6
+	note $24  $0c
+	vol $1
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $6
+	note $24  $0c
+	vol $1
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $6
+	note $24  $0c
+	vol $1
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $6
+	note $24  $0c
+	vol $1
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $6
+	note $24  $0c
+	vol $1
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $6
+	note $24  $0c
+	vol $2
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $6
+	note $24  $0c
+	vol $2
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $6
+	note $24  $0c
+	vol $2
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $6
+	note $24  $0c
+	vol $2
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $6
+	note $24  $0c
+	vol $2
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $6
+	note $24  $0c
+	vol $2
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $6
+	note $24  $0c
+	vol $2
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $6
+	note $24  $0c
+	vol $2
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $6
+	note $24  $0c
+	vol $2
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $6
+	note $24  $0c
+	vol $2
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $6
+	note $24  $0c
+	vol $2
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $6
+	note $24  $0c
+	vol $2
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $6
+	note $24  $0c
+	vol $2
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $6
+	note $24  $0c
+	vol $2
+	note $2a  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $6
+	note $24  $0c
+	vol $3
+	note $2e  $0c
+	vol $4
+	note $2e  $0c
+	note $2e  $0c
+	vol $5
+	note $2e  $0c
+	note $2e  $0c
+	goto musBalladeLynelsChannel6Loop
+	cmdff
+
+.ends
+
 m_section_superfree Ballade_sndGull
 
 sndBalladeGullStart:
