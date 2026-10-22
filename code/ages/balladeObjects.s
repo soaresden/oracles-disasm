@@ -3380,7 +3380,8 @@ ghostVeil:
 ; questions sur Link's Awakening (@questions : le texte, la bonne réponse ; $ff = pas notée : sa
 ; mère, Marine raconte), la blague de Tarkin (Mario) et sa tirade (« ne joue pas avec mon cœur »).
 ; Tout juste : un bisou (GLOBALFLAG_BALLADE_QUIZ) ; sinon, on recommence à la prochaine visite.
-; Musique : MUS_BALLADE_QUIZ (music/quiz.txt, « Qui veut gagner des millions »), puis l'auberge.
+; Musique : MUS_BALLADE_QUIZ (music/quiz.txt, « Qui veut gagner des millions »), lancée sur
+; « QUESTION ! » (le début de la première question, Denis), puis celle de l'auberge.
 ; var30 : la question ; var31 : les bonnes réponses ; var32 : la tirade est dite.
 ; ==================================================================================================
 .define QUIZ_QUESTIONS 6
@@ -3412,8 +3413,6 @@ marineQuiz:
 	call interactionIncState
 	ld a,$91
 	ld (wDisabledObjects),a
-	ld a,MUS_BALLADE_QUIZ
-	call playSound
 	ld bc,TX_5aee
 	jp showText
 
@@ -3426,6 +3425,13 @@ marineQuiz:
 	ld a,(de)
 	cp QUIZ_QUESTIONS
 	jr nc,@finish
+	; (la musique part sur « QUESTION ! », au début de la première)
+	or a
+	jr nz,+
+	ld a,MUS_BALLADE_QUIZ
+	call playSound
+	xor a
++
 	add a
 	ld hl,@questions
 	rst_addAToHl
