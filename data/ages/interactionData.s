@@ -362,7 +362,7 @@ interactiond7SubidData:
 	m_InteractionSubidData $7f $12 $53
 	m_InteractionSubidData $7e $16 $21 ; BALLADE: la Lanterne des Songes (au lieu de la harpe), flamme bleue
 	m_InteractionSubidData $7e $06 $33 ; BALLADE: le Carnet des Rêves (palette 3)
-	m_InteractionSubidData $7e $0e $33
+	m_InteractionSubidData $7e $0e $33 ; BALLADE: le Sablier (palette 3)
 	m_InteractionSubidData $7e $16 $13
 	m_InteractionSubidData $00 $00 $00
 	m_InteractionSubidData $00 $00 $00
@@ -904,6 +904,7 @@ interactionedSubidData:
 	m_InteractionSubidData $00 $00 $00 ; $30 la porte de la Tour Sans-Nuit (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $31 la Lune qui tombe (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $32 l'escalier d'un étage de la tour (invisible)
+	m_InteractionSubidData $00 $00 $00 ; $33 le Sablier retourné (invisible)
 	m_InteractionSubidDataEnd
 
 interactiond4SubidData:

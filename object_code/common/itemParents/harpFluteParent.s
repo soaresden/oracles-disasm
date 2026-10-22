@@ -267,3 +267,9 @@ parentItemCode_harp:
 parentItemCode_carnet:
 	callab balladeObjects.readCarnet
 	jp clearParentItem
+
+;;
+; BALLADE: ITEM_14, le Sablier : on le retourne, le temps s'arrête (code/ages/balladeObjects.s)
+parentItemCode_sablier:
+	callab balladeObjects.useSablier
+	jp clearParentItem

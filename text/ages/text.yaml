@@ -862,11 +862,15 @@ groups:
   - name: TX_0067
     index: 0x67
     text: |-
-      \pos(2)You got \col(1)Ricky's
-      Gloves\col(0)! Take
-      them to their
-      owner.
-
+      The \col(1)Hourglass\col(0)!\stop
+      Turn it over:
+      time stops for a
+      moment.\stop
+      Every blow you
+      strike meanwhile
+      bursts out at
+      the end, louder
+      and louder!
   - name:
     - TX_0068
     - TX_0069
@@ -4372,10 +4376,9 @@ groups:
   - name: TX_0943
     index: 0x43
     text: |-
-      Tune of Currents
-      Moves from past
-      to present.
-
+      Hourglass
+      Stops time;
+      blows build up.
   - name: TX_0944
     index: 0x44
     text: |-
@@ -24772,7 +24775,8 @@ groups:
       The moon is
       going back
       up...\stop
-      Stairs!
+      It dropped
+      something!
 
 
 

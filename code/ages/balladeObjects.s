@@ -50,6 +50,7 @@
 ; @subid_30{Invisible : la porte de la Tour Sans-Nuit (1:c9) : Marine chante les sept couplets}
 ; @subid_31{Invisible : la Lune qui tombe (5:c1) : quatre torches allumées peu de temps ; l'escalier}
 ; @subid_32{Invisible : l'escalier d'un étage de la tour, quand l'étage est vaincu (plus d'ennemis)}
+; @subid_33{Invisible : le Sablier retourné (le temps arrêté, puis les coups en crescendo)}
 ; ==================================================================================================
 
 ;;
@@ -108,6 +109,7 @@ main:
 	.dw towerDoor
 	.dw moonTorches
 	.dw floorStairs
+	.dw sablier
 
 
 ;;
@@ -931,11 +933,18 @@ carnetCatchUp:
 ;;
 ; Le Carnet des Rêves apparaît au-dessus de la tête de Link (comme la commande « giveitem »)
 giveCarnet:
+	ld a,TREASURE_12
+
+;;
+; Un objet apparaît au-dessus de la tête de Link (sa sous-ligne $00 de treasureObjectData)
+; @param	a	TREASURE_*
+giveTreasureAboveLink:
+	ld b,a
 	call getFreeInteractionSlot
 	ret nz
 	ld (hl),INTERAC_TREASURE
 	inc l
-	ld (hl),TREASURE_12
+	ld (hl),b
 	inc l
 	ld (hl),$00
 	ld l,Interaction.yh
@@ -2490,13 +2499,16 @@ towerDoor:
 ; ==================================================================================================
 ; La Lune qui tombe (subid $31, sur la case de l'escalier, 5:c1) : quatre torches autour du centre
 ; (3,7) (5,5) (5,9) (7,7), qui ne restent allumées que 300 images (PART_LIGHTABLE_TORCH $01) ; les
-; quatre ensemble : l'escalier apparaît ici (drapeau $80 de la salle).
+; quatre ensemble : la lune remonte et laisse tomber le Sablier (un clin d'œil à Majora's Mask),
+; l'escalier apparaît ici (drapeau $80 de la salle).
 ; ==================================================================================================
 moonTorches:
 	ld e,Interaction.state
 	ld a,(de)
-	or a
-	jr nz,@watch
+	dec a
+	jr z,@watch
+	dec a
+	jr z,@sablier
 	call waitRoomReady
 	ret nz
 	call interactionIncState
@@ -2527,8 +2539,18 @@ moonTorches:
 	ld a,(wNumTorchesLit)
 	cp $04
 	ret nz
+	call interactionIncState
 	ld bc,TX_5add
-	call showText
+	jp showText
+
+@sablier:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	ld a,TREASURE_14
+	call checkTreasureObtained
+	ld a,TREASURE_14
+	call nc,giveTreasureAboveLink
 	jr floorStairs_solved
 
 @torches:
@@ -2628,3 +2650,336 @@ surfInstructor:
 	ld bc,TX_5ae0
 	ld a,$02
 	jp npcSay
+
+
+; ==================================================================================================
+; Le Sablier (ITEM_14, harpFluteParent.s ; la Lune qui tombe le laisse en 5:c1). On le retourne : le
+; temps s'arrête 3 secondes (les ennemis et leurs tirs figés, le décor assombri, un tic-tac) et Link
+; frappe à volonté (figés, ils ne le blessent pas : Enemy.stunCounter). À la fin, tous les coups
+; éclatent en crescendo (idée de Denis) : la terre tremble de plus en plus, une grande explosion, et
+; chaque coup compte de plus en plus (le k-ième coup reçu par un ennemi ajoute k-1 de dégâts). Puis le
+; sable retombe (8 secondes) avant qu'on puisse le retourner encore.
+; L'interaction (subid $33) garde, pour chaque ennemi ($d0-$df) : ses coups reçus (var30-var3f) et
+; sa vie (y-relatedObj2, $0a-$19 : inutiles pour un objet invisible).
+; ==================================================================================================
+.define SABLIER_SUBID $33
+.define SABLIER_FRAMES 180
+.define SABLIER_RECHARGE 8 ; secondes
+.define SABLIER_HITS Interaction.var30
+.define SABLIER_HEALTH Interaction.y
+.define SABLIER_FROZEN DISABLE_ENEMIES|DISABLE_8
+
+;;
+; Le bouton du Sablier (appelé par l'objet parent, parentItemCode_sablier)
+useSablier:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	; (un seul à la fois : déjà retourné, ou le sable n'est pas retombé)
+	ld h,FIRST_INTERACTION_INDEX
+-
+	ld l,Interaction.enabled
+	ld a,(hl)
+	or a
+	jr z,+
+	inc l
+	ld a,(hl)
+	cp INTERAC_BALLADE_OBJECT
+	jr nz,+
+	inc l
+	ld a,(hl)
+	cp SABLIER_SUBID
+	jr nz,+
+	ld a,SND_ERROR
+	jp playSound
++
+	inc h
+	ld a,h
+	cp LAST_INTERACTION_INDEX+1
+	jr c,-
+
+	call getFreeInteractionSlot
+	ret nz
+	ld (hl),INTERAC_BALLADE_OBJECT
+	inc l
+	ld (hl),SABLIER_SUBID
+	ret
+
+;;
+sablier:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw @init
+	.dw @frozen
+	.dw @crescendo
+	.dw @recharge
+
+@init:
+	call interactionIncState
+	ld l,Interaction.counter1
+	ld (hl),SABLIER_FRAMES
+	; La vie de chaque ennemi, aucun coup
+	ld b,$00
+-
+	ld a,b
+	add FIRST_ENEMY_INDEX
+	ld h,a
+	ld l,Enemy.health
+	ld c,(hl)
+	ld a,b
+	add SABLIER_HEALTH
+	ld e,a
+	ld a,c
+	ld (de),a
+	ld a,b
+	add SABLIER_HITS
+	ld e,a
+	xor a
+	ld (de),a
+	inc b
+	bit 4,b
+	jr z,-
+
+	; (on ne sort pas de la salle pendant ce temps)
+	ld a,$01
+	ld (wDisableScreenTransitions),a
+	call sablierHold
+	ld a,SND_TIMEWARP_INITIATED
+	call playSound
+	; Le décor s'assombrit (pas dans une salle sombre : elle l'est déjà)
+	ld a,(wPaletteThread_parameter)
+	or a
+	ret nz
+	ld e,Interaction.var03
+	inc a
+	ld (de),a
+	jp darkenRoomLightly
+
+@frozen:
+	call sablierHold
+	call interactionDecCounter1
+	jr z,@release
+	; le tic-tac
+	ld a,(hl)
+	and $1f
+	ret nz
+	ld a,SND_CLINK2
+	jp playSound
+
+@release:
+	call interactionIncState
+	; Autant de coups de tonnerre que de coups reçus (12 au plus), un toutes les 8 images
+	ld e,SABLIER_HITS
+	ld c,$00
+-
+	ld a,(de)
+	add c
+	ld c,a
+	inc e
+	ld a,e
+	cp SABLIER_HITS+$10
+	jr c,-
+	ld a,c
+	cp 12
+	jr c,+
+	ld a,12
++
+	ld e,Interaction.counter2
+	ld (de),a
+	ld e,Interaction.counter1
+	ld a,$01
+	ld (de),a
+	ret
+
+@crescendo:
+	call sablierHold
+	call interactionDecCounter1
+	ret nz
+	ld (hl),8
+	ld l,Interaction.counter2
+	ld a,(hl)
+	or a
+	jr z,@burst
+	dec (hl)
+	; la terre tremble de plus en plus
+	ld b,a
+	ld a,14
+	sub b
+	add a
+	call setScreenShakeCounter
+	ld a,SND_STRIKE
+	jp playSound
+
+@burst:
+	call interactionIncState
+	ld l,Interaction.counter1
+	ld (hl),60
+	ld l,Interaction.counter2
+	ld (hl),SABLIER_RECHARGE
+	ld a,SND_BIG_EXPLOSION_2
+	call playSound
+	ld a,30
+	call setScreenShakeCounter
+
+	ld b,$00
+--
+	ld a,b
+	add FIRST_ENEMY_INDEX
+	ld h,a
+	; (le tir ou l'ennemi figé par nous redevient dangereux)
+	ld l,Part.stunCounter
+	ld a,(hl)
+	dec a
+	jr nz,+
+	ld (hl),a
++
+	ld l,Enemy.stunCounter
+	ld a,(hl)
+	dec a
+	jr nz,+
+	ld (hl),a
++
+	ld l,Enemy.enabled
+	ld a,(hl)
+	or a
+	jr z,@nextEnemy
+	ld a,b
+	add SABLIER_HITS
+	ld e,a
+	ld a,(de)
+	or a
+	jr z,@nextEnemy
+
+	; Le crescendo : n coups reçus = 1 + 2 + ... + (n-1) de dégâts en plus
+	push bc
+	ld b,a
+	xor a
+-
+	dec b
+	jr z,+
+	add b
+	jr nc,-
+	ld a,$ff
++
+	ld c,a
+	ld l,Enemy.health
+	ld a,(hl)
+	sub c
+	jr nc,+
+	xor a
++
+	ld (hl),a
+	; une explosion sur lui
+	ld l,Enemy.yh
+	ld b,(hl)
+	ld l,Enemy.xh
+	ld c,(hl)
+	call getFreeInteractionSlot
+	jr nz,+
+	ld (hl),INTERAC_EXPLOSION
+	ld l,Interaction.yh
+	ld (hl),b
+	ld l,Interaction.xh
+	ld (hl),c
++
+	pop bc
+@nextEnemy:
+	inc b
+	bit 4,b
+	jr z,--
+
+	; Le temps repart
+	ld hl,wDisabledObjects
+	ld a,(hl)
+	and $ff-SABLIER_FROZEN
+	ld (hl),a
+	xor a
+	ld (wDisableScreenTransitions),a
+	ld e,Interaction.var03
+	ld a,(de)
+	or a
+	ret z
+	jp brightenRoom
+
+@recharge:
+	call interactionDecCounter1
+	ret nz
+	ld (hl),60
+	call interactionDecCounter2
+	ret nz
+	jp interactionDelete
+
+;;
+; Le temps arrêté, une image : les ennemis et leurs tirs restent figés et ne blessent pas Link ; les
+; coups qui portent (la vie qui baisse) sont comptés.
+sablierHold:
+	ld hl,wDisabledObjects
+	ld a,(hl)
+	or SABLIER_FROZEN
+	ld (hl),a
+	ld b,$00
+@next:
+	ld a,b
+	add FIRST_ENEMY_INDEX
+	ld h,a
+	ld l,Part.enabled
+	ld a,(hl)
+	or a
+	jr z,+
+	ld l,Part.stunCounter
+	ld a,(hl)
+	or a
+	jr nz,+
+	inc (hl)
++
+	ld l,Enemy.enabled
+	ld a,(hl)
+	or a
+	jr z,@skip
+	ld l,Enemy.stunCounter
+	ld a,(hl)
+	or a
+	jr nz,+
+	inc (hl)
++
+	; Le coup suivant peut porter (ce que fait updateEnemies, arrêté)
+	ld l,Enemy.var2a
+	res 7,(hl)
+	inc l
+	ld a,(hl)
+	or a
+	jr z,++
+	rlca
+	jr c,+
+	dec (hl)
+	jr ++
++
+	inc (hl)
+++
+	; Un coup qui porte : la vie a baissé
+	ld l,Enemy.health
+	ld c,(hl)
+	ld a,b
+	add SABLIER_HEALTH
+	ld e,a
+	ld a,(de)
+	sub c
+	jr z,@skip
+	ld a,c
+	ld (de),a
+	jr c,@skip
+	ld a,b
+	add SABLIER_HITS
+	ld e,a
+	ld a,(de)
+	cp 15
+	jr nc,@skip
+	inc a
+	ld (de),a
+@skip:
+	inc b
+	bit 4,b
+	jr z,@next
+	ret
+

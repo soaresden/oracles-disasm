@@ -46,7 +46,7 @@ treasureObjectData:
 	/* $11 */ m_TreasurePointer treasureObjectData11
 	/* $12 */ m_TreasureSubid   $0a, $00, $72, $69, TREASURE_OBJECT_12_00 ; BALLADE: le Carnet des Rêves
 	/* $13 */ m_TreasurePointer treasureObjectData13
-	/* $14 */ m_TreasureSubid   $00, $00, $ff, $00, TREASURE_OBJECT_14_00
+	/* $14 */ m_TreasureSubid   $0a, $00, $67, $6a, TREASURE_OBJECT_14_00 ; BALLADE: le Sablier
 	/* $15 */ m_TreasurePointer treasureObjectData15
 	/* $16 */ m_TreasurePointer treasureObjectData16
 	/* $17 */ m_TreasurePointer treasureObjectData17

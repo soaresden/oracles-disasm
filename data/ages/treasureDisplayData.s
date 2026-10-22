@@ -89,7 +89,7 @@ treasureDisplayData_standard:
 	.db TREASURE_HARP,               $00, $00, $00, $00, $05, <TX_0941 ; X TREASURE_HARP (0x11)
 	.db $00,                         $a3, $03, $a4, $03, $ff, <TX_0942 ; TREASURE_12 (0x12) BALLADE: le Carnet des Rêves
 	.db $00,                         $07, $00, $07, $00, $ff, <TX_0900 ; TREASURE_SLINGSHOT (0x13)
-	.db $00,                         $00, $00, $00, $00, $ff, <TX_0900 ; TREASURE_14 (0x14)
+	.db $00,                         $a7, $03, $a8, $03, $ff, <TX_0943 ; TREASURE_14 (0x14) BALLADE: le Sablier
 	.db $00,                         $9b, $04, $00, $00, $ff, <TX_092a ; TREASURE_SHOVEL (0x15)
 	.db TREASURE_BRACELET,           $99, $05, $00, $00, $00, <TX_092b ; X TREASURE_BRACELET (0x16)
 	.db TREASURE_FEATHER,            $96, $04, $00, $00, $ff, <TX_092c ; X TREASURE_FEATHER (0x17)

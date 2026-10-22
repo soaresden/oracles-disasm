@@ -641,8 +641,9 @@ debugMilestones:
 	; 34. La porte de la tour est ouverte (Marine a chanté les sept couplets)
 	.db DBG_ROOMFLAG, $01, $c9, $80
 	.db DBG_END
-	; 35. 1F et 2F : la Lune et Dark Link vaincus (les escaliers)
+	; 35. 1F et 2F : la Lune (le Sablier) et Dark Link vaincus (les escaliers)
 	.db DBG_ROOMFLAG, $05, $c1, $80
+	.db DBG_TREASURE, TREASURE_14, $00
 	.db DBG_ROOMFLAG, $05, $c4, $80
 	.db DBG_END
 	; 36. 3F et 4F : Ganon et le Cauchemar vaincus (les escaliers)

@@ -866,11 +866,15 @@ groups:
   - name: TX_0067
     index: 0x67
     text: |-
-      \pos(2)You got \col(1)Ricky's
-      Gloves\col(0)! Take
-      them to their
-      owner.
-
+      Le \col(1)Sablier\col(0)!\stop
+      Retourne-le: le
+      temps s'arrête
+      un instant.\stop
+      Les coups donnés
+      pendant ce temps
+      éclatent tous à
+      la fin, de plus
+      en plus fort!
   - name:
     - TX_0068
     - TX_0069
@@ -4392,10 +4396,9 @@ groups:
   - name: TX_0943
     index: 0x43
     text: |-
-      Tune of Currents
-      Moves from past
-      to present.
-
+      Sablier
+      Temps arrêté,
+      coups décuplés.
   - name: TX_0944
     index: 0x44
     text: |-
@@ -24866,7 +24869,9 @@ groups:
       \col(1)Marine\col(0): Ouf!
       La lune
       remonte...\stop
-      Un escalier!
+      Elle a laissé
+      tomber quelque
+      chose!
 
 
 
