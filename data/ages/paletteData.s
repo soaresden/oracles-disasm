@@ -4761,6 +4761,12 @@ paletteDataOmbre:
 	m_RGB16 $02 $01 $04
 
 ; BALLADE: Givrolin (PALH_GIVROLIN)
+paletteDataFantome: ; les fantômes du 4F de la Tour : blanc bleuté, contour bleu nuit
+	m_RGB16 $00 $00 $00
+	m_RGB16 $1c $1f $1f
+	m_RGB16 $10 $16 $1f
+	m_RGB16 $04 $06 $10
+
 paletteDataPhoto: ; les photos de Cocolint : le sépia de l'album de LADX
 	m_RGB16 $1f $1b $16
 	m_RGB16 $14 $10 $0b

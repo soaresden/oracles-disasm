@@ -211,10 +211,13 @@ ambiGuard_tossesLinkOut_state10:
 	call objectCheckLinkWithinDistance
 	jp nc,ecom_applyVelocityForSideviewEnemyNoHoles
 ++
-	; BALLADE: dans la Cathédrale des Échos (donjon 5), les Veilleurs de l'Insomnis ne jettent
-	; pas Link dehors : il se réveille à l'entrée de la salle (là où il y est entré).
+	; BALLADE: dans la Cathédrale des Échos (donjon 5) et la Tour Sans-Nuit (8 : les fantômes du
+	; 4F), les Veilleurs de l'Insomnis ne jettent pas Link dehors : il se réveille à l'entrée de la
+	; salle (là où il y est entré).
 	ld a,(wDungeonIndex)
 	cp $05
+	jr z,ambiGuard_balladeWakeLink
+	cp $08
 	jr z,ambiGuard_balladeWakeLink
 	ld a,CUTSCENE_BOOTED_FROM_PALACE
 	ld (wCutsceneTrigger),a

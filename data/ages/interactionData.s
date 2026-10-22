@@ -909,6 +909,7 @@ interactionedSubidData:
 	m_InteractionSubidData $e3 $10 $32 ; $35 l'Épée de Légende plantée dans le sable (palette 3)
 	m_InteractionSubidData $00 $00 $00 ; $36 Ganon ne craint que l'Épée de Légende (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $37 les photos de Cocolint, à l'auberge (invisible)
+	m_InteractionSubidData $00 $00 $00 ; $38 Ghost Babel : les fantômes du 4F de la Tour (invisible)
 	m_InteractionSubidDataEnd
 
 interactiond4SubidData:

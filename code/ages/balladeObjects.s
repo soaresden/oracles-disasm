@@ -55,6 +55,7 @@
 ; @subid_35{L'Épée de Légende, au fond de la Fosse de Bulle (5:d4)}
 ; @subid_36{Invisible : Ganon (5:c7) ne craint que l'Épée de Légende}
 ; @subid_37{Invisible, à l'auberge (3:9e) : après le chapitre 5, Marine trouve les photos}
+; @subid_38{Invisible, le 4F de la Tour (5:c8) : les Veilleurs en fantômes ; vu : « LIIINK! »}
 ; ==================================================================================================
 
 ;;
@@ -118,6 +119,7 @@ main:
 	.dw masterSword
 	.dw ganonGuard
 	.dw photoScene
+	.dw ghostVeil
 
 
 ;;
@@ -251,6 +253,7 @@ arrivalTalk:
 	.db $05, $c4, <TX_5ada, $ff ; 2F : Dark Link
 	.db $05, $c7, <TX_5adb, $ff ; 3F : Ganon
 	.db $05, $f5, <TX_5adb, $ff ; 3F : Ganon (il pose son arène, 5:f5, à la place de 5:c7)
+	.db $05, $c8, <TX_5aed, $ff ; 4F : des fantômes font leur ronde (Ghost Babel)
 	.db $05, $ca, <TX_5adc, $ff ; 4F : « TU ME RECONNAIS ? »
 	.db $ff
 
@@ -3301,4 +3304,70 @@ photoScene:
 	ld a,CUTSCENE_BALLADE_PHOTOS
 	ld (wCutsceneTrigger),a
 	jp interactionDelete
+
+
+; ==================================================================================================
+; Ghost Babel (subid $38, le 4F de la Tour Sans-Nuit 5:c8 ; idée de Denis, comme Metal Gear Solid:
+; Ghost Babel) : les Veilleurs (ENEMY_AMBI_GUARD) y sont des fantômes de cauchemar : palette 6
+; (PALH_FANTOME), ils scintillent ; s'ils voient Link (leur état $0f : le « ! »), Marine crie
+; « Link? Link?! LIIINK! » (TX_5aec, une fois par entrée), puis Link se réveille à l'escalier
+; (ambiGuard.s, donjon 8). var30 : Marine a crié.
+; ==================================================================================================
+ghostVeil:
+	ld e,Interaction.state
+	ld a,(de)
+	or a
+	jr nz,+
+	call interactionIncState
+	ld a,PALH_FANTOME
+	call loadPaletteHeader
++
+	ld h,FIRST_ENEMY_INDEX
+@nextEnemy:
+	ld l,Enemy.enabled
+	ld a,(hl)
+	or a
+	jr z,@skip
+	inc l
+	ld a,(hl)
+	cp ENEMY_AMBI_GUARD
+	jr nz,@skip
+	; leur couleur
+	ld l,Enemy.oamFlagsBackup
+	ld a,(hl)
+	and $f8
+	or $06
+	ldi (hl),a
+	ld (hl),a
+	; ils scintillent (cachés une image sur quatre)
+	ld l,Enemy.visible
+	ld a,(wFrameCounter)
+	and $03
+	jr nz,+
+	res 7,(hl)
+	jr ++
++
+	set 7,(hl)
+++
+	; vu ?
+	ld l,Enemy.state
+	ld a,(hl)
+	cp $0f
+	jr c,@skip
+	ld e,Interaction.var30
+	ld a,(de)
+	or a
+	jr nz,@skip
+	inc a
+	ld (de),a
+	push hl
+	ld bc,TX_5aec
+	call showText
+	pop hl
+@skip:
+	inc h
+	ld a,h
+	cp LAST_ENEMY_INDEX+1
+	jr c,@nextEnemy
+	ret
 

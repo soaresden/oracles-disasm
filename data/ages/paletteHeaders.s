@@ -7,7 +7,7 @@
 ; - PALH_SPR:     Loads sprite palettes only
 ; - PALH:         If none of the above, could load both sprite & bg palettes (or not yet categorized)
 
-.define NUM_PALETTE_HEADERS $dd ; BALLADE: + film, Songe, titre
+.define NUM_PALETTE_HEADERS $de ; BALLADE: + film, Songe, titre
 
 paletteHeaderTable:
 	.repeat NUM_PALETTE_HEADERS index COUNT
@@ -885,6 +885,11 @@ m_PaletteHeaderStart $d5, PALH_OMBRE
 ; BALLADE: Givrolin (le Ramrock d'Ages, au Palais Givré) : en glace, palette 6 des sprites
 m_PaletteHeaderStart $d9, PALH_GIVROLIN
 	m_PaletteHeaderSpr 6, 1, paletteDataGivrolin
+	m_PaletteHeaderEnd
+
+; BALLADE: les fantômes du 4F de la Tour Sans-Nuit (les Veilleurs, ghostVeil) : palette 6 des sprites
+m_PaletteHeaderStart $dd, PALH_FANTOME
+	m_PaletteHeaderSpr 6, 1, paletteDataFantome
 	m_PaletteHeaderEnd
 
 ; BALLADE: les photos de Cocolint (code/ages/cutscenes/photos.s) : le sépia de l'album de LADX

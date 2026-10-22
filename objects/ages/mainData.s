@@ -4731,6 +4731,10 @@ group5Mapc7ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $01 $08 $08
 	obj_End
 group5Mapc8ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $01 $08 $08
+	obj_Interaction INTERAC_BALLADE_OBJECT $38 $08 $08
+	obj_SpecificEnemyA $00 ENEMY_AMBI_GUARD $11 $58 $28
+	obj_SpecificEnemyA $00 ENEMY_AMBI_GUARD $13 $18 $c8
 	obj_End
 group5Mapc9ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $2f $58 $d8
