@@ -17,6 +17,13 @@ parentItemCode_sword:
 
 ; Initialization
 @state0:
+.ifdef ROM_AGES
+	; BALLADE: le contre parfait : le moment où l'épée sort (code/ages/balladeParry.s)
+	ld a,(wFrameCounter)
+	ld (wcde3),a
+	ld a,$01
+	ld (wcde3+1),a
+.endif
 	ld hl,wcc63
 	bit 7,(hl)
 	jr nz,++

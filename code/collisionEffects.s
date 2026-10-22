@@ -488,6 +488,23 @@ collisionEffect03:
 collisionEffect04:
 	ld e,LINKDMG_0c
 ++
+.ifdef ROM_AGES
+	; BALLADE: le contre parfait : un ennemi (pas un projectile) qui touche Link juste après que
+	; l'épée est sortie (code/ages/balladeParry.s)
+	ld a,(wcde3+1)
+	or a
+	jr z,@hit
+	ldh a,(<hActiveObjectType)
+	cp Enemy.start
+	jr nz,@hit
+	ld a,(wFrameCounter)
+	ld hl,wcde3
+	sub (hl)
+	cp BALLADE_PARRY_WINDOW
+	jr nc,@hit
+	jpab balladeParry.counter
+@hit:
+.endif
 	call applyDamageToLink_paramE
 	ld a,ENEMYDMG_1c
 	jp applyDamageToEnemyOrPart

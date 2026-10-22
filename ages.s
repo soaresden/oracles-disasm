@@ -232,6 +232,11 @@ specialObjectLoadAnimationFrameToBuffer:
 		.include "code/ages/balladeObjects.s"
 	.ends
 
+	 ; BALLADE: le contre parfait (comme dans Onimusha)
+	 m_section_superfree Ballade_Parry namespace balladeParry
+		.include "code/ages/balladeParry.s"
+	.ends
+
 	 ; This section can't be superfree, since it must be in the same bank as section
 	 ; "Bank_7_Data".
 	 m_section_free Enemy_Part_Collisions namespace bank7
