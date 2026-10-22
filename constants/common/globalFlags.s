@@ -114,6 +114,7 @@
 	GLOBALFLAG_BALLADE_ISLAND8		db ; $57: ... l'Œil de l'Insomnis
 	GLOBALFLAG_BALLADE_MARINE_BOMB		db ; $58: Marine sait porter une bombe (Select en la tenant)
 	GLOBALFLAG_BALLADE_LILA_ASLEEP		db ; $59: Lila a retrouvé Sire Bouchon et dort (son rêve est ouvert)
+	GLOBALFLAG_BALLADE_SURF			db ; $5a: Bulle a donné sa planche de surf (on nage plus vite)
 
 .else; ROM_SEASONS
 

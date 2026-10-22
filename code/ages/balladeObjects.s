@@ -19,7 +19,7 @@
 ; @subid_0c{Un autre enfant de la place du Grelot}
 ; @subid_0d{Mme Bonnet, la maîtresse (l'école)}
 ; @subid_0e{Héloïse (la Lagune, 3:23 ; avant / après le Récif Murmurant)}
-; @subid_0f{Bulle, la monitrice du club de plongée (3:24)}
+; @subid_0f{Bulle, la monitrice du club de plongée (3:24) ; après le Récif : sa planche de surf}
 ; @subid_10{Le facteur des bouteilles (la plage des bouteilles, 1:35)}
 ; @subid_11{Gaspard (3:23) : la bouteille contre les Palmes de Zora}
 ; @subid_12{La bouteille à la mer, sur l'îlot de la lagune (1:15, 0:15)}
@@ -72,7 +72,7 @@ main:
 	.dw villager
 	.dw villager
 	.dw villager
-	.dw villager
+	.dw surfInstructor
 	.dw villager
 	.dw gaspard
 	.dw bottle
@@ -2569,3 +2569,48 @@ floorStairs_setStairs:
 	ld a,$45
 	call setTile
 	jp interactionDelete
+
+
+; ==================================================================================================
+; Bulle (subid $0f), la monitrice du club de plongée (3:24) : une fois le Récif Murmurant sauvé
+; (l'essence 3), elle donne sa planche de surf (idée de Denis, comme Pikachu qui surfe) :
+; GLOBALFLAG_BALLADE_SURF, on nage bien plus vite (link.s, linkGetSwimmingSpeed). Sinon, ses deux
+; répliques d'habitante (villagerTexts).
+; ==================================================================================================
+surfInstructor:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw npcInit
+	.dw @idle
+	.dw npcWaitText
+	.dw @gift
+
+@idle:
+	ld a,(wEssencesObtained)
+	and $04
+	jr z,+
+	ld a,GLOBALFLAG_BALLADE_SURF
+	call checkGlobalFlag
+	jr nz,+
+	call interactionAnimateAsNpc
+	call npcCheckTalk
+	ret z
+	ld bc,TX_5adf
+	ld a,$03
+	jp npcSay
++
+	call interactionAnimateAsNpc
+	jp villagerTalk
+
+@gift:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	ld a,GLOBALFLAG_BALLADE_SURF
+	call setGlobalFlag
+	ld a,SND_GETITEM
+	call playSound
+	ld bc,TX_5ae0
+	ld a,$02
+	jp npcSay

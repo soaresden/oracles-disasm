@@ -3246,15 +3246,36 @@ linkUpdateDrowning:
 	ld a,LINK_STATE_RESPAWNING
 	jp linkSetState
 
+.ifdef ROM_AGES
+;;
+; BALLADE: la vitesse de nage : la planche de surf de Bulle (GLOBALFLAG_BALLADE_SURF), sinon l'anneau
+; du nageur, sinon la vitesse normale
+linkGetSwimmingSpeed:
+	ld a,GLOBALFLAG_BALLADE_SURF
+	call checkGlobalFlag
+	ld a,SPEED_120
+	ret nz
+	ld a,SWIMMERS_RING
+	call cpActiveRing
+	ld a,SPEED_e0
+	ret z
+	ld a,SPEED_80
+	ret
+.endif
+
 ;;
 ; Sets Link's speed, speedTmp, var12, and var35 variables.
 linkSetSwimmingSpeed:
+.ifdef ROM_AGES
+	call linkGetSwimmingSpeed
+.else
 	ld a,SWIMMERS_RING
 	call cpActiveRing
 	ld a,SPEED_e0
 	jr z,+
 	ld a,SPEED_80
 +
+.endif
 	; Set speed, speedTmp to specified value
 	ld h,d
 	ld l,SpecialObject.speed
@@ -3274,12 +3295,16 @@ linkSetSwimmingSpeed:
 ; Sets the speedTmp variable in the same way as the above function, but doesn't touch any
 ; other variables.
 linkSetSwimmingSpeedTmp:
+.ifdef ROM_AGES
+	call linkGetSwimmingSpeed
+.else
 	ld a,SWIMMERS_RING
 	call cpActiveRing
 	ld a,SPEED_e0
 	jr z,+
 	ld a,SPEED_80
 +
+.endif
 	ld e,SpecialObject.speedTmp
 	ld (de),a
 	ret
@@ -3573,12 +3598,20 @@ linkUpdateVelocity:
 @mermaidSuit:
 	ld c,$98
 	call updateLinkSpeed_withParam
+.ifdef ROM_AGES
+	; BALLADE: la planche de surf de Bulle : on file sur l'eau (plus vite que l'anneau du nageur)
+	ld a,GLOBALFLAG_BALLADE_SURF
+	call checkGlobalFlag
+	ld a,SPEED_200
+	jr nz,@setSwimSpeed
+.endif
 	ld a,(wActiveRing)
 	cp SWIMMERS_RING
 	jr nz,+
 
-	ld e,SpecialObject.speedTmp
 	ld a,SPEED_160
+@setSwimSpeed:
+	ld e,SpecialObject.speedTmp
 	ld (de),a
 +
 	ld h,d
