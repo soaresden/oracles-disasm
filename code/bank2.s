@@ -3478,15 +3478,25 @@ _drawTreasureExtraTiles:
 @val03:
 	ld h,d
 	ld l,e
+.ifdef ROM_AGES
+	; FR: on the status bar, S/N are tiles $30/$31 (gfx_fr_hud_extra), out of the
+	; seed trees' tiles; the inventory keeps $2a/$2b
+	ld b,$2a
+	ld a,c
+	cp $07
+	jr z,+
+	ld b,$30
++
 	ld a,(wMagnetGlovePolarity)
 	and $01
-.ifdef ROM_AGES
-	add $2a
+	add b
 	ld (hl),a
 	ld a,c
 	cp $80
 	ret z
 .else
+	ld a,(wMagnetGlovePolarity)
+	and $01
 	jr z,+
 	ld (hl),$0a
 	jr ++

@@ -224,7 +224,20 @@ frRestoreHudIconOnRoomLoad:
 	ld hl,gfx_fr_hud_icon
 	ld de,$93f0
 	ldbc $00, :gfx_fr_hud_icon
+.ifdef ROM_AGES
+	call queueDmaTransfer
+	; Ages: status bar tiles of the Seasons items (seasons, magnet polarity), also
+	; in the tree gfx slot past the trees' tiles (see gfxHeader20)
+	ld hl,frHudExtraRaw
+	ld de,$92c0
+	ldbc $05, :frHudExtraRaw
+.endif
 	jp queueDmaTransfer
+
+.ifdef ROM_AGES
+frHudExtraRaw:
+	.incbin "gfx/ages/gfx_fr_hud_extra.bin"
+.endif
 
 ;;
 ; FR: blinking hearts on the overworld map where a heart piece is still

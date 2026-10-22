@@ -312,7 +312,12 @@ gfxHeader1e:
 gfxHeader1f:
 	m_GfxHeader gfx_blurb_makupath $8c00 $27
 gfxHeader20:
-	m_GfxHeader gfx_hud $9000 $2f|$80
+	; FR: 32 tiles like the original game: the crossworld hack loaded 48 ($2f), whose
+	; last 16 overwrote the seed trees ($9200-$92bf, see loadTreeGfx). Only 6 of
+	; them are used on the status bar: seasons ($2c-$2f) and magnet polarity S/N
+	; (now $30/$31, out of the trees' tiles $20-$2b).
+	m_GfxHeader gfx_hud $9000 $1f|$80
+	m_GfxHeader gfx_fr_hud_extra $92c0 $05|$80
 	m_GfxHeader gfx_fr_door_icons $93a0 $03|$80 ; FR: icons above Vasu's doors (OPT_DOOR_ICONS)
 	m_GfxHeader gfx_fr_hud_icon $93f0 $00 ; FR: game icon (OPT_HUD_GAME_ICON)
 gfxHeader21:
@@ -401,7 +406,8 @@ gfxHeader3a:
 	m_GfxHeader gfx_inventory_hud_1 $8000 $2f|$80
 	m_GfxHeader gfx_rings $8a00 $3f|$80
 	m_GfxHeader gfx_inventory_hud_2 $8e00 $1f|$80
-	m_GfxHeader gfx_hud $9000 $1f
+	m_GfxHeader gfx_hud $9000 $1f|$80
+	m_GfxHeader gfx_fr_hud_extra $92c0 $05 ; FR: status bar tiles $2c-$31 (see gfxHeader20)
 gfxHeader3b:
 	m_GfxHeader map_10 $d004 $23|$80
 	m_GfxHeader map_0a $d404 $23|$80
@@ -409,7 +415,8 @@ gfxHeader3b:
 	m_GfxHeader spr_quest_items_5 $8400 $1f|$80
 	m_GfxHeader gfx_rings $8a00 $3f|$80
 	m_GfxHeader gfx_inventory_hud_2 $8e00 $1f|$80
-	m_GfxHeader gfx_inventory_hud_1 $9000 $2f
+	m_GfxHeader gfx_inventory_hud_1 $9000 $2f|$80
+	m_GfxHeader gfx_fr_hud_extra $92c0 $05 ; FR: status bar tiles $2c-$31 (see gfxHeader20)
 gfxHeader3c:
 	m_GfxHeader spr_0d1c03 $8000 $3b|$80
 	m_GfxHeader gfx_0d1da4 $8800 $7f|$80
