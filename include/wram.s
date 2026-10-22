@@ -378,8 +378,14 @@ wBalladeMamonoShowPos: ; $c591
 	db
 wBalladeMamonoShowIndex: ; $c592
 	db
-wBalladeMamonoUnused: ; $c593
-	dsb 13
+; BALLADE: la barre d'état en bas (code/ages/balladeHudBas.s) : 1 si elle est en bas pendant cette
+; image (2 dans un menu), 0 sinon ; le prochain événement de l'interruption d'affichage
+wBalladeHudBas: ; $c593
+	db
+wBalladeHudPhase: ; $c594
+	db
+wBalladeMamonoUnused: ; $c595
+	dsb 11
 
 ; BALLADE: le Labyrinthe des Lynels (code/ages/balladePac.s) : l'état (0 rien, 1 en jeu, 2 gagné,
 ; 3 perdu, 4 on rentre), les rubis qui restent, la peur des Lynels (images / 2), les Lynels mangés

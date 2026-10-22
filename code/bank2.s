@@ -3564,7 +3564,8 @@ updateStatusBar_body:
 
 	; Update item sprites
 	ld e,$10
-	ld bc,$1038
+	ld c,$38
+	call balladeHudItemsY ; BALLADE: b = $10, ou $90 avec la barre en bas
 	rrca
 	jr nc,+
 	ld c,$30
@@ -3630,7 +3631,8 @@ updateStatusBar_body:
 	ld hl,wOam
 	ld de,@oamData
 	ld b,$10
-	jp copyMemoryReverse
+	call copyMemoryReverse
+	jp balladeHudFixItemsY ; BALLADE
 
 @oamData:
 	.db $10 $18 $78 $0b ; B Item

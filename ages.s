@@ -23,6 +23,7 @@
 .ORG 0
 
 	.include "code/bank0.s"
+	.include "code/ages/balladeOptions.s" ; BALLADE
 
 
 .BANK $01 SLOT 1
@@ -275,6 +276,11 @@ specialObjectLoadAnimationFrameToBuffer:
 	 ; BALLADE: le contre parfait (comme dans Onimusha)
 	 m_section_superfree Ballade_Parry namespace balladeParry
 		.include "code/ages/balladeParry.s"
+	.ends
+
+	 ; BALLADE: la barre d'état en bas de l'écran (option, comme dans Link's Awakening)
+	 m_section_superfree Ballade_HudBas namespace balladeHudBas
+		.include "code/ages/balladeHudBas.s"
 	.ends
 
 	 ; This section can't be superfree, since it must be in the same bank as section

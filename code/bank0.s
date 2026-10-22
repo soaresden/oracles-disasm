@@ -2019,6 +2019,7 @@ vblankInterrupt:
 	ld ($ff00+R_WX),a
 	ldi a,(hl)
 	ld ($ff00+R_LYC),a
+	call balladeHudBasVblank ; BALLADE: la barre d'état en bas (option)
 
 	; increment wVBlankChecker
 	inc (hl)
@@ -2319,6 +2320,10 @@ updateDirtyPalettes:
 
 ;;
 lcdInterrupt:
+	; BALLADE: la barre d'état en bas (option)
+	ld a,(wBalladeHudBas)
+	or a
+	jp nz,balladeHudBasLcd
 	ldh a,(<hLcdInterruptBehaviour)
 	cp $02
 	jr nc,@behaviour2OrHigher
@@ -2749,6 +2754,7 @@ addSpritesToOam:
 ; @param	bc	Sprite offset
 ; @param	hl	OAM data
 addSpritesToOam_withOffset:
+	call balladeHudMenuSpriteY ; BALLADE
 	ldh a,(<hOamTail)
 	cp $a0
 	ret nc
@@ -3291,8 +3297,7 @@ _drawObjectTerrainEffects:
 _getObjectPositionOnScreen:
 	ldh a,(<hCameraX)
 	ld c,a
-	ldh a,(<hCameraY)
-	ld b,a
+	call balladeHudCameraY ; BALLADE (ldh a,(<hCameraY) / ld b,a)
 
 	; Object.yh
 	ldi a,(hl)
@@ -3343,8 +3348,7 @@ _getObjectPositionOnScreen:
 _label_00_152:
 	ldh a,(<hCameraX)
 	ld c,a
-	ldh a,(<hCameraY)
-	ld b,a
+	call balladeHudCameraY ; BALLADE (ldh a,(<hCameraY) / ld b,a)
 	ldi a,(hl)
 	sub b
 	add $10
@@ -3380,8 +3384,7 @@ _getObjectPositionOnScreen_duringScreenTransition:
 
 	; Read Object.yh
 	ld d,$00
-	ldi a,(hl)
-	add $10
+	call balladeHudLdiY ; BALLADE (ldi a,(hl) / add $10)
 	ld c,a
 	ld a,d
 	adc a
@@ -13914,6 +13917,148 @@ getSomariaBlockIndex:
 	ld b,$f9
 	ret
 .endif
+
+
+
+;;
+; BALLADE: la barre d'état en bas de l'écran (option BALLADE_OPT_HUD_BAS), comme dans Link's
+; Awakening. L'essentiel est dans code/ages/balladeHudBas.s ; la banque 0 garde les points
+; d'accroche, l'ondulation rapide (une interruption par ligne) et les petites routines.
+;
+; Appelé par vblankInterrupt (garde hl et bc).
+balladeHudBasVblank:
+	ld a,:balladeHudBas.vblankBody
+	ld ($2222),a
+	call balladeHudBas.vblankBody
+
+;;
+; BALLADE: revient à la banque en cours, comme la fin de vblankInterrupt
+balladeHudRestoreBank:
+	push hl
+	ld hl,hFFB7
+	ldh a,(<hRomBank)
+	bit 0,(hl)
+	jr z,+
+	ldh a,(<hSoundDataBaseBank2)
++
+	ld ($2222),a
+	pop hl
+	ret
+
+;;
+; BALLADE: l'interruption d'affichage avec la barre en bas (voir balladeHudBas.s)
+balladeHudBasLcd:
+	push bc
+	ld a,($ff00+R_LY)
+	inc a
+	ld b,a
+	ld a,(wBalladeHudPhase)
+	cp BALLADE_HUD_PHASE_WAVE
+	jr nz,@wait
+
+	; Ondulation : SCX de la ligne b-1 (qui était la ligne b+$0f), puis la ligne suivante
+	ld a,b
+	cp $7f
+	ld a,BALLADE_HUD_PHASE_WAVE
+	jr nc,@far
+	ld a,b
+	add $0f
+	ld l,a
+	ld h,>wBigBuffer
+	ld a,(hl)
+	ld ($ff00+R_SCX),a
+	ld a,b
+	ld ($ff00+R_LYC),a
+	jp _lcdInterruptEnd
+
+@wait:
+	; Attendre la hblank, comme lcdInterrupt
+	ld c,a
+-
+	ld a,($ff00+R_STAT)
+	and $03
+	jr nz,-
+	ld a,c
+@far:
+	ld c,a
+	ld a,:balladeHudBas.runPhase
+	ld ($2222),a
+	ld a,c
+	call balladeHudBas.runPhase
+	call balladeHudRestoreBank
+	jp _lcdInterruptEnd
+
+;;
+; BALLADE: les sprites des menus (addSpritesToOam) 16 pixels plus haut dans l'inventaire avec la
+; barre en bas
+; @param	b	Décalage vertical, corrigé
+balladeHudMenuSpriteY:
+	ld a,(wBalladeHudBas)
+	cp $02
+	ret nz
+	ld a,b
+	sub $10
+	ld b,a
+	ret
+
+;;
+; BALLADE: la position verticale de la caméra pour placer les objets à l'écran ; 16 pixels plus
+; bas avec la barre en bas
+; @param[out]	b	Position verticale de la caméra
+balladeHudCameraY:
+	ld a,(wBalladeHudBas)
+	or a
+	ldh a,(<hCameraY)
+	jr z,+
+	add $10
++
+	ld b,a
+	ret
+
+;;
+; BALLADE: la position verticale d'un objet (ldi depuis hl), plus la hauteur de la barre si elle
+; est en haut
+; @param[out]	cflag	Retenue de l'addition
+balladeHudLdiY:
+	ld a,(wBalladeHudBas)
+	or a
+	ld c,$10
+	jr z,+
+	ld c,$00
++
+	ldi a,(hl)
+	add c
+	ret
+
+;;
+; BALLADE: position verticale des icônes A/B (wOam 0-3) sur la barre (updateStatusBar_body)
+; @param[out]	b	$10 en haut, $90 en bas
+balladeHudItemsY:
+	push af
+	ld b,$10
+	ld a,(wBalladeHudBas)
+	or a
+	jr z,+
+	ld b,$90
++
+	pop af
+	ret
+
+;;
+; BALLADE: descend les icônes A/B (wOam 0-3, écrites en haut) sur la barre du bas s'il le faut
+balladeHudFixItemsY:
+	ld a,(wBalladeHudBas)
+	or a
+	ret z
+	ld hl,wOam
+	ld de,$0004
+	ld b,e
+-
+	ld (hl),$90
+	add hl,de
+	dec b
+	jr nz,-
+	ret
 
 
 .include "code/debug.s"

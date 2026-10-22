@@ -69,6 +69,21 @@
 .define BALLADE_NOCTAMBULE_FRAMES 420
 .define BALLADE_NOCTAMBULE_WARNING 120
 
+; BALLADE: les options du jeu (code/ages/balladeOptions.s) : un octet chacune dans la banque 0,
+; après la signature « GULLSOPT » ($3fe0) ; tools/options.py les change dans une ROM ou un patch.
+; 0 = comme d'habitude.
+.define BALLADE_OPTIONS_ADDR		$3fe0
+.define BALLADE_OPT_HUD_BAS		$3ff0 ; 1 = la barre d'état en bas de l'écran
+
+; BALLADE: la barre d'état en bas (code/ages/balladeHudBas.s) : prochain événement de l'interruption
+; d'affichage (wBalladeHudPhase)
+.define BALLADE_HUD_PHASE_GAME		1
+.define BALLADE_HUD_PHASE_LCDC_A7	2
+.define BALLADE_HUD_PHASE_RING_TEXT	3
+.define BALLADE_HUD_PHASE_RING_END	4
+.define BALLADE_HUD_PHASE_WAVE		5
+.define BALLADE_HUD_PHASE_STATUS	6
+
 ; BALLADE: amplitude de l'ondulation de l'écran dans le Songe (en pixels)
 .define BALLADE_DREAM_WAVE 2
 
