@@ -1,8 +1,5 @@
 ; FR: status bar at the bottom of the screen (ported from ZeldaOracleCombinedFR,
-; see frHudBottomVblank in bank 0). Always on.
-
-frHudBottomEnabled:
-	.db $01
+; see frHudBottomVblank in bank 0), option OPT_HUD_BOTTOM.
 
 ;;
 ; FR: status bar at the bottom of the screen (OPT_HUD_BOTTOM), like Link's
@@ -29,7 +26,7 @@ frHudBottomVblank_body:
 	push bc
 	ld hl,wFrHudBottom
 	ld (hl),$00
-	ld a,(frHudBottomEnabled)
+	ld a,(OPT_HUD_BOTTOM)
 	or a
 	jr z,@end
 	ld a,(wGfxRegsFinal.LYC)

@@ -233,8 +233,17 @@ begin:
 	; Check GBA Mode
 	inc a
 	bit 0,b
-	jr z,+
+	jr z,@gbc
 	ld a,$ff
+	jr +
+@gbc:
+	; FR: OPT_GBA_SHOP: $fe opens the advance shops like a GBA (bit 7), but keeps
+	; the GBC palettes (not $ff, which brightens them for the GBA screen)
+	ld a,(OPT_GBA_SHOP)
+	or a
+	ld a,$01
+	jr z,+
+	ld a,$fe
 +
 	ldh (<hGameboyType),a
 	ld a,$37

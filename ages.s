@@ -21,6 +21,7 @@
 .ORG 0
 
 	.include "code/bank0.s"
+	.include "code/hudOptions.s"
 
 .BANK $01 SLOT 1
 .ORG 0

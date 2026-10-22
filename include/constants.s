@@ -9,6 +9,7 @@
 .include "constants/enemyTypes.s"
 .include "constants/gfxHeaders.s"
 .include "constants/globalFlags.s"
+.include "constants/hudOptions.s"
 .include "constants/hardware.s"
 .include "constants/interactionTypes.s"
 .include "constants/itemCollisionTypes.s"
