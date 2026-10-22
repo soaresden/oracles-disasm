@@ -905,6 +905,9 @@ interactionedSubidData:
 	m_InteractionSubidData $00 $00 $00 ; $31 la Lune qui tombe (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $32 l'escalier d'un étage de la tour (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $33 le Sablier retourné (invisible)
+	m_InteractionSubidData $00 $00 $00 ; $34 le souffle, dans la Fosse de Bulle (invisible)
+	m_InteractionSubidData $e3 $10 $32 ; $35 l'Épée de Légende plantée dans le sable (palette 3)
+	m_InteractionSubidData $00 $00 $00 ; $36 Ganon ne craint que l'Épée de Légende (invisible)
 	m_InteractionSubidDataEnd
 
 interactiond4SubidData:

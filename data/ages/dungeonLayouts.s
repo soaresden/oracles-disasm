@@ -258,13 +258,14 @@ dungeon0aLayout:
 
 ; HACK-BASE: This used to point to the same data as "dungeon00Layout". To avoid problems in
 ; LynnaLab, a fresh copy of the data has been created.
+; BALLADE: la Fosse de Bulle (story/salles/fosse.txt) : de la surface (5:d0) au fond (5:d4)
 dungeon09Layout:
 	.db $00 $00 $00 $00 $00 $00 $00 $00
-	.db $00 $00 $00 $01 $00 $00 $00 $00
-	.db $00 $00 $00 $02 $00 $00 $00 $00
-	.db $00 $00 $00 $03 $00 $00 $00 $00
-	.db $00 $00 $00 $04 $00 $00 $00 $00
-	.db $00 $00 $00 $00 $00 $00 $00 $00
+	.db $00 $00 $00 $d0 $00 $00 $00 $00
+	.db $00 $00 $00 $d1 $00 $00 $00 $00
+	.db $00 $00 $00 $d2 $00 $00 $00 $00
+	.db $00 $00 $00 $d3 $00 $00 $00 $00
+	.db $00 $00 $00 $d4 $00 $00 $00 $00
 	.db $00 $00 $00 $00 $00 $00 $00 $00
 	.db $00 $00 $00 $00 $00 $00 $00 $00
 

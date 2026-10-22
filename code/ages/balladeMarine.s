@@ -7,9 +7,12 @@
 
 ;;
 marineTalk:
-	; Dans le Récif Murmurant (donjon 3), Link est seul : Marine l'attend dehors
+	; Dans le Récif Murmurant (donjon 3) et la Fosse de Bulle (9), Link est seul : Marine l'attend
+	; dehors
 	ld a,(wDungeonIndex)
 	cp $03
+	ret z
+	cp $09
 	ret z
 	; Dans le Songe (groupes 0 et 2, pas les donjons), Marine propose de réveiller Link
 	; (INTERAC_MARINE $01)
@@ -196,6 +199,8 @@ drawNoctambuleTimer:
 checkBombPower:
 	ld a,(wDungeonIndex)
 	cp $03
+	ret z
+	cp $09
 	ret z
 	ld a,GLOBALFLAG_BALLADE_MARINE_BOMB
 	call checkGlobalFlag

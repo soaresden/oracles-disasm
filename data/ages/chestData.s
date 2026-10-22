@@ -155,6 +155,10 @@ chestGroup5Data:
 	m_ChestData $1c, $b0, TREASURE_OBJECT_TRADEITEM_0c ; BALLADE: la grotte de la Boîte : Sire Bouchon, le jouet de Lila
 	m_ChestData $17, $b1, TREASURE_OBJECT_RUPEES_05 ; BALLADE: la grotte des amoureux : des rubis
 	m_ChestData $1b, $b2, TREASURE_OBJECT_RUPEES_05 ; BALLADE: la mine abandonnée (Mont-Braise) : des rubis
+	; BALLADE: la Fosse de Bulle (story/salles/fosse.txt)
+	m_ChestData $81, $d1, TREASURE_OBJECT_RUPEES_05      ; profondeur 2 : des rubis
+	m_ChestData $11, $d2, TREASURE_OBJECT_HEART_PIECE_01 ; profondeur 3 : un quart de cœur
+	m_ChestData $4d, $d3, TREASURE_OBJECT_RUPEES_08      ; profondeur 4 : beaucoup de rubis
 	; BALLADE: le Récif Murmurant (story/salles/recif.txt)
 	m_ChestData $53, $3a, TREASURE_OBJECT_COMPASS_02    ; la boussole
 	m_ChestData $2b, $40, TREASURE_OBJECT_MAP_02        ; la carte

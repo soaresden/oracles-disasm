@@ -3296,27 +3296,9 @@ group5MapceObjectData:
 	obj_Interaction $40 $0d $58 $78 $0e
 	obj_End
 
-group5Mapd1ObjectData:
-	obj_Interaction $40 $0d $18 $88 $08
-	obj_Interaction $40 $0d $48 $48 $09
-	obj_Pointer group5Mapd1EnemyObjectData
-	obj_End
 
-group5Mapd2ObjectData:
-	obj_Interaction $40 $0d $58 $58 $0a
-	obj_Interaction $40 $0d $58 $98 $0b
-	obj_End
 
-group5Mapd3ObjectData:
-	obj_Interaction $40 $0d $18 $68 $0c
-	obj_Interaction $40 $0d $18 $88 $0d
-	obj_Pointer group5Mapd3EnemyObjectData
-	obj_End
 
-group5Mapd4ObjectData:
-	obj_Interaction $40 $0d $28 $28 $07
-	obj_Pointer group5Mapd4EnemyObjectData
-	obj_End
 
 group5Mapd5ObjectData:
 	obj_Interaction $40 $0d $38 $78 $0f
@@ -3382,13 +3364,6 @@ group5MapcfObjectData:
 	obj_Interaction $1c $00 $38 $38
 	obj_End
 
-group5Mapd0ObjectData:
-	obj_Interaction $3b $07 $48 $28
-	obj_Interaction $ab $0e $78 $38
-	obj_Interaction $3c $0b $18 $48
-	obj_Interaction $2a $00 $60 $c0
-	obj_Interaction $9a $09 $18 $c8
-	obj_End
 
 group5MapdaObjectData:
 	obj_Pointer group5MapdaEnemyObjectData
@@ -4750,6 +4725,7 @@ group5Mapc6ObjectData:
 	obj_End
 group5Mapc7ObjectData:
 	obj_BeforeEvent balladeTourGanonBeforeEventObjectData
+	obj_Interaction INTERAC_BALLADE_OBJECT $36 $08 $08
 	obj_Interaction INTERAC_BALLADE_OBJECT $32 $58 $78
 	obj_Interaction INTERAC_BALLADE_OBJECT $01 $08 $08
 	obj_End
@@ -4768,4 +4744,20 @@ group5MapcbObjectData:
 	obj_End
 group5MapccObjectData:
 	obj_Interaction INTERAC_BALLADE_RHYTHM $00 $58 $78
+	obj_End
+group5Mapd0ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $34 $08 $08
+	obj_End
+group5Mapd1ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $34 $08 $08
+	obj_End
+group5Mapd2ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $34 $08 $08
+	obj_End
+group5Mapd3ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $34 $08 $08
+	obj_End
+group5Mapd4ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $34 $08 $08
+	obj_Interaction INTERAC_BALLADE_OBJECT $35 $58 $78
 	obj_End

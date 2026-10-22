@@ -51,6 +51,9 @@
 ; @subid_31{Invisible : la Lune qui tombe (5:c1) : quatre torches allumées peu de temps ; l'escalier}
 ; @subid_32{Invisible : l'escalier d'un étage de la tour, quand l'étage est vaincu (plus d'ennemis)}
 ; @subid_33{Invisible : le Sablier retourné (le temps arrêté, puis les coups en crescendo)}
+; @subid_34{Invisible : le souffle, dans la Fosse de Bulle (les cœurs se vident)}
+; @subid_35{L'Épée de Légende, au fond de la Fosse de Bulle (5:d4)}
+; @subid_36{Invisible : Ganon (5:c7) ne craint que l'Épée de Légende}
 ; ==================================================================================================
 
 ;;
@@ -110,6 +113,9 @@ main:
 	.dw moonTorches
 	.dw floorStairs
 	.dw sablier
+	.dw fosseAir
+	.dw masterSword
+	.dw ganonGuard
 
 
 ;;
@@ -939,6 +945,12 @@ giveCarnet:
 ; Un objet apparaît au-dessus de la tête de Link (sa sous-ligne $00 de treasureObjectData)
 ; @param	a	TREASURE_*
 giveTreasureAboveLink:
+	ld c,$00
+
+;;
+; @param	a	TREASURE_*
+; @param	c	sa sous-ligne de treasureObjectData
+giveTreasureAboveLinkSubid:
 	ld b,a
 	call getFreeInteractionSlot
 	ret nz
@@ -946,7 +958,7 @@ giveTreasureAboveLink:
 	inc l
 	ld (hl),b
 	inc l
-	ld (hl),$00
+	ld (hl),c
 	ld l,Interaction.yh
 	ld a,(w1Link.yh)
 	ld (hl),a
@@ -2621,23 +2633,72 @@ surfInstructor:
 	.dw @idle
 	.dw npcWaitText
 	.dw @gift
+	.dw @answer
+	.dw @done
 
 @idle:
 	ld a,(wEssencesObtained)
 	and $04
-	jr z,+
-	ld a,GLOBALFLAG_BALLADE_SURF
-	call checkGlobalFlag
-	jr nz,+
+	jr z,@villager
 	call interactionAnimateAsNpc
 	call npcCheckTalk
 	ret z
+	ld a,GLOBALFLAG_BALLADE_SURF
+	call checkGlobalFlag
+	jr nz,@offer
 	ld bc,TX_5adf
 	ld a,$03
 	jp npcSay
-+
+
+@villager:
 	call interactionAnimateAsNpc
 	jp villagerTalk
+
+	; La Fosse : une plongée ? (une fois l'Épée de Légende trouvée, une offre plus courte)
+@offer:
+	ld bc,TX_5ae1
+	ld a,(wSwordLevel)
+	cp $03
+	jr c,+
+	ld c,<TX_5ae6
++
+	ld a,$04
+	jp npcSay
+
+@answer:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	ld a,(wSelectedTextOption)
+	or a
+	jr z,@dive
+	ld bc,TX_5ae3
+	ld a,$02
+	jp npcSay
+
+@dive:
+	ld e,Interaction.state
+	ld a,$05
+	ld (de),a
+	; (on part le souffle plein)
+	ld a,(wLinkMaxHealth)
+	ld (wLinkHealth),a
+	ld a,$85
+	ld (wWarpDestGroup),a
+	ld a,$d0
+	ld (wWarpDestRoom),a
+	ld a,$17
+	ld (wWarpDestPos),a
+	xor a
+	ld (wWarpTransition),a
+	ld (wDisabledObjects),a
+	ld a,$03 ; fondu
+	ld (wWarpTransition2),a
+	ld a,SND_SPLASH
+	jp playSound
+
+@done:
+	ret
 
 @gift:
 	ld a,(wTextIsActive)
@@ -2850,6 +2911,17 @@ sablier:
 	ld a,(de)
 	or a
 	jr z,@nextEnemy
+	; (Ganon ne craint que l'Épée de Légende : ganonGuard)
+	ld c,a
+	ld l,Enemy.id
+	ld a,(hl)
+	cp ENEMY_GANON
+	jr nz,+
+	ld a,(wSwordLevel)
+	cp $03
+	jr c,@nextEnemy
++
+	ld a,c
 
 	; Le crescendo : n coups reçus = 1 + 2 + ... + (n-1) de dégâts en plus
 	push bc
@@ -2982,4 +3054,198 @@ sablierHold:
 	bit 4,b
 	jr z,@next
 	ret
+
+
+; ==================================================================================================
+; La Fosse de Bulle (5:d0-d4, story/salles/fosse.txt ; idée de Denis, plongeur). Bulle y emmène Link
+; le souffle plein (surfInstructor). Sous l'eau, les cœurs sont le souffle : le souffle (subid $34,
+; dans chaque salle) en retire un quart toutes les FOSSE_FRAMES images ; à une demi-coeur, Bulle tire
+; sur la corde (TX_5ae2) : retour au club (3:24), les cœurs pleins. Plus Link a de cœurs, plus il
+; descend (un quart toutes les 1,5 s : avec 8 cœurs, on atteint le fond) ; l'Épée de
+; Légende (subid $35, 5:d4) demande neuf cœurs pour être dégagée du sable.
+; ==================================================================================================
+.define FOSSE_FRAMES 90 ; (un quart de cœur toutes les 1,5 s)
+
+fosseAir:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw @init
+	.dw @breathe
+	.dw fosseSurface
+
+@init:
+	call interactionIncState
+	ld l,Interaction.counter1
+	ld (hl),FOSSE_FRAMES
+	ret
+
+@breathe:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	; (pas pendant que Link tient un trésor au-dessus de sa tête)
+	ld a,(wDisabledObjects)
+	and $81
+	ret nz
+	call interactionDecCounter1
+	ret nz
+	ld (hl),FOSSE_FRAMES
+	ld hl,wLinkHealth
+	ld a,(hl)
+	cp $03
+	jr c,+
+	dec (hl)
+	ret
++
+	; À bout de souffle
+	call interactionIncState
+	ld bc,TX_5ae2
+	jp showText
+
+;;
+; Attendre la fin du texte, puis Bulle remonte Link : le club de plongée (3:24), devant elle, les
+; cœurs pleins
+fosseSurface:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	ld a,(wLinkMaxHealth)
+	ld (wLinkHealth),a
+	ld a,$83
+	ld (wWarpDestGroup),a
+	ld a,$24
+	ld (wWarpDestRoom),a
+	ld a,$53
+	ld (wWarpDestPos),a
+	xor a
+	ld (wWarpTransition),a
+	ld (wDisabledObjects),a
+	ld a,$03 ; fondu
+	ld (wWarpTransition2),a
+	ld a,SND_SPLASH
+	call playSound
+	jp interactionDelete
+
+
+; ==================================================================================================
+; L'Épée de Légende (subid $35), plantée dans le sable au fond de la Fosse (5:d4) : A devant elle ->
+; elle passe au-dessus de la tête de Link (TREASURE_SWORD, niveau 3, TX_001e), puis Bulle le remonte
+; (TX_5ae4). Partie si Link l'a déjà. Prise dans le sable : il faut neuf cœurs (le souffle) pour la
+; dégager (TX_5ae7 sinon) : avant le donjon 7, on voit le fond sans pouvoir la prendre.
+; ==================================================================================================
+masterSword:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw @init
+	.dw @idle
+	.dw @textOn
+	.dw @textOff
+	.dw @text
+	.dw fosseSurface
+	.dw npcWaitText
+
+@init:
+	ld a,(wSwordLevel)
+	cp $03
+	jp nc,interactionDelete
+	jp npcInit
+
+@idle:
+	call npcCheckTalk
+	ret z
+	; Prise dans le sable : il faut le souffle de neuf cœurs pour la dégager (après le donjon 7)
+	ld a,(wLinkMaxHealth)
+	cp 9*4
+	jr nc,+
+	ld bc,TX_5ae7
+	ld a,$06
+	jp npcSay
++
+	xor a
+	ld (wDisabledObjects),a
+	call interactionIncState
+	call objectSetInvisible
+	call objectUnmarkSolidPosition
+	ld a,TREASURE_SWORD
+	ld c,$02
+	jp giveTreasureAboveLinkSubid
+
+@textOn:
+	; (le texte du trésor commence...)
+	ld a,(wTextIsActive)
+	or a
+	ret z
+	jp interactionIncState
+
+@textOff:
+	; (... et finit)
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	call interactionIncState
+	ld l,Interaction.counter1
+	ld (hl),40
+	ret
+
+@text:
+	call interactionDecCounter1
+	ret nz
+	call interactionIncState
+	ld bc,TX_5ae4
+	jp showText
+
+
+; ==================================================================================================
+; Ganon (subid $36, dans 5:c7 ; il pose son arène 5:f5) ne craint que l'Épée de Légende : sans elle,
+; sa vie revient à chaque coup (SND_CLINK), et la première fois Marine parle de la Fosse (TX_5ae5).
+; var30 : sa vie de départ ; var31 : Marine a parlé.
+; ==================================================================================================
+ganonGuard:
+	ld a,(wSwordLevel)
+	cp $03
+	jp nc,interactionDelete
+	ld h,FIRST_ENEMY_INDEX
+-
+	ld l,Enemy.enabled
+	ld a,(hl)
+	or a
+	jr z,+
+	inc l
+	ld a,(hl)
+	cp ENEMY_GANON
+	jr z,@found
++
+	inc h
+	ld a,h
+	cp LAST_ENEMY_INDEX+1
+	jr c,-
+	ret
+
+@found:
+	ld l,Enemy.health
+	ld e,Interaction.var30
+	ld a,(de)
+	or a
+	jr nz,+
+	ld a,(hl)
+	ld (de),a
+	ret
++
+	ld b,a
+	ld a,(hl)
+	cp b
+	ret nc
+	ld (hl),b
+	ld a,SND_CLINK
+	call playSound
+	ld e,Interaction.var31
+	ld a,(de)
+	or a
+	ret nz
+	inc a
+	ld (de),a
+	ld bc,TX_5ae5
+	jp showText
 

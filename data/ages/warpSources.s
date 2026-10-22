@@ -717,13 +717,13 @@ group5WarpSources:
 	m_PointerWarp     $cd warpSource7df6
 	m_StandardWarp $8 $cf $25 $0 $3
 	m_StandardWarp $0 $cf $4c $0 $4
-	m_StandardWarp $4 $d0 $42 $0 $3
-	m_StandardWarp $4 $d1 $0a $1 $3
-	m_StandardWarp $0 $d1 $44 $5 $2
-	m_StandardWarp $0 $d2 $47 $1 $2
-	m_StandardWarp $4 $d2 $0b $1 $3
-	m_StandardWarp $4 $d3 $0c $1 $3
-	m_StandardWarp $0 $d4 $40 $5 $2
+	;m_StandardWarp $4 $d0 $42 $0 $3 ; BALLADE: la Fosse de Bulle (5:d0-d4)
+	;m_StandardWarp $4 $d1 $0a $1 $3 ; BALLADE: la Fosse de Bulle (5:d0-d4)
+	;m_StandardWarp $0 $d1 $44 $5 $2 ; BALLADE: la Fosse de Bulle (5:d0-d4)
+	;m_StandardWarp $0 $d2 $47 $1 $2 ; BALLADE: la Fosse de Bulle (5:d0-d4)
+	;m_StandardWarp $4 $d2 $0b $1 $3 ; BALLADE: la Fosse de Bulle (5:d0-d4)
+	;m_StandardWarp $4 $d3 $0c $1 $3 ; BALLADE: la Fosse de Bulle (5:d0-d4)
+	;m_StandardWarp $0 $d4 $40 $5 $2 ; BALLADE: la Fosse de Bulle (5:d0-d4)
 	m_StandardWarp $4 $d8 $1f $0 $3
 	m_StandardWarp $4 $da $10 $0 $3
 	m_StandardWarp $8 $db $13 $0 $3

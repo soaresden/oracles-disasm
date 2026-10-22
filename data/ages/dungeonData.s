@@ -53,7 +53,8 @@ dungeonData07:
 dungeonData08:
 	m_DungeonData >wGroup5RoomFlags, $c0, dungeon08LayoutTour, $05, $03, $1f, $00, $00 ; BALLADE: la Tour Sans-Nuit
 dungeonData09:
-	m_DungeonData >wGroup4RoomFlags, $01, dungeon09Layout, $01, $03, $00, $00, $00
+	; BALLADE: la Fosse de Bulle (la plongée), cinq salles sous l'eau l'une sous l'autre
+	m_DungeonData >wGroup5RoomFlags, $d0, dungeon09Layout, $01, $03, $00, $00, $00
 dungeonData0a:
 	m_DungeonData >wGroup5RoomFlags, $f4, dungeon0aLayout, $01, $03, $00, $00, $00
 dungeonData0b:
