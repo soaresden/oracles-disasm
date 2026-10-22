@@ -113,6 +113,10 @@ frCompletion_loadRows:
 	push bc
 	push de
 	call frComp_clearBuffer
+	pop de
+	pop bc
+	push bc
+	push de
 	ld a,b
 	call frComp_writeLabel
 	pop de
