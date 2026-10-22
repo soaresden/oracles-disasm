@@ -3602,6 +3602,7 @@ standardGameState:
 	.dw cutscene1f
 	.dw cutscene20
 	.dw cutscene21
+	.dw cutscene22 ; BALLADE: les photos de Cocolint
 .endif
 
 

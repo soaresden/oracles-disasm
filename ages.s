@@ -192,6 +192,11 @@ specialObjectLoadAnimationFrameToBuffer:
 		.include "code/fileManagement.s"
 	.ends
 
+	 ; BALLADE: les photos de Cocolint (CUTSCENE_BALLADE_PHOTOS)
+	 m_section_superfree Ballade_Photos namespace balladePhotos
+		.include "code/ages/cutscenes/photos.s"
+	.ends
+
 	 ; BALLADE: film d'ouverture (la banque 3 des cinématiques est pleine)
 	 m_section_superfree Ballade_Film namespace balladeFilm
 		.include "code/ages/cutscenes/film.s"

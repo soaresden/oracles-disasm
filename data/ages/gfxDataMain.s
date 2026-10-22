@@ -525,6 +525,19 @@
 	m_GfxData gfx_film_bg
 	m_GfxData map_film_bg
 	m_GfxData flg_film_bg
+	; BALLADE: les photos de Cocolint (tools/make_photos.py)
+	m_GfxData gfx_photo_1
+	m_GfxData gfx_photo_1b
+	m_GfxData map_photo_1
+	m_GfxData flg_photo_1
+	m_GfxData gfx_photo_2
+	m_GfxData gfx_photo_2b
+	m_GfxData map_photo_2
+	m_GfxData flg_photo_2
+	m_GfxData gfx_photo_3
+	m_GfxData gfx_photo_3b
+	m_GfxData map_photo_3
+	m_GfxData flg_photo_3
 	m_GfxData spr_title_gull
 	m_GfxData gfx_title_bg
 	m_GfxData gfx_title_bg_2

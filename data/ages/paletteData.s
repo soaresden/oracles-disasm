@@ -4761,6 +4761,12 @@ paletteDataOmbre:
 	m_RGB16 $02 $01 $04
 
 ; BALLADE: Givrolin (PALH_GIVROLIN)
+paletteDataPhoto: ; les photos de Cocolint : le sépia de l'album de LADX
+	m_RGB16 $1f $1b $16
+	m_RGB16 $14 $10 $0b
+	m_RGB16 $0e $0a $06
+	m_RGB16 $09 $05 $02
+
 paletteDataGivrolin:
 	m_RGB16 $1f $1f $1f
 	m_RGB16 $17 $1c $1f

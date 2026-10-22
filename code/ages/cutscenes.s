@@ -119,3 +119,13 @@ cutscene12:
 
 	call func_3ee4
 	jp func_5d41
+
+;;
+; BALLADE: CUTSCENE_BALLADE_PHOTOS : les photos de Cocolint (code/ages/cutscenes/photos.s) ; elle
+; finit par une téléportation sur place (retour à l'auberge)
+cutscene22:
+	ld a,(wWarpTransition2)
+	or a
+	jp nz,applyWarpTransition2
+	jpab balladePhotos.run
+

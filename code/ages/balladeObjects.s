@@ -54,6 +54,7 @@
 ; @subid_34{Invisible : le souffle, dans la Fosse de Bulle (les cœurs se vident)}
 ; @subid_35{L'Épée de Légende, au fond de la Fosse de Bulle (5:d4)}
 ; @subid_36{Invisible : Ganon (5:c7) ne craint que l'Épée de Légende}
+; @subid_37{Invisible, à l'auberge (3:9e) : après le chapitre 5, Marine trouve les photos}
 ; ==================================================================================================
 
 ;;
@@ -116,6 +117,7 @@ main:
 	.dw fosseAir
 	.dw masterSword
 	.dw ganonGuard
+	.dw photoScene
 
 
 ;;
@@ -3248,4 +3250,55 @@ ganonGuard:
 	ld (de),a
 	ld bc,TX_5ae5
 	jp showText
+
+
+; ==================================================================================================
+; Les photos de Cocolint (subid $37, à l'auberge 3:9e ; idée de Denis) : une fois le chapitre 5 fini
+; (l'essence 5, le souvenir de la maison de Tarkin), Marine fouille la poche de Link et trouve les
+; photos de Link's Awakening (TX_5ae8), une fois (GLOBALFLAG_BALLADE_PHOTOS) ; puis
+; CUTSCENE_BALLADE_PHOTOS (code/ages/cutscenes/photos.s), qui ramène Link sur sa case.
+; ==================================================================================================
+photoScene:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw @init
+	.dw @waitText
+
+@init:
+	call waitRoomReady
+	ret nz
+	ld a,(wEssencesObtained)
+	and $10
+	jp z,interactionDelete
+	ld a,(wBalladeEnding)
+	or a
+	jp nz,interactionDelete
+	ld a,GLOBALFLAG_BALLADE_PHOTOS
+	call checkGlobalFlag
+	jp nz,interactionDelete
+	ld a,GLOBALFLAG_BALLADE_PHOTOS
+	call setGlobalFlag
+	call interactionIncState
+	ld a,$91
+	ld (wDisabledObjects),a
+	ld bc,TX_5ae8
+	jp showText
+
+@waitText:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	; (la case de Link, pour y revenir après les photos)
+	ld a,(w1Link.yh)
+	and $f0
+	ld b,a
+	ld a,(w1Link.xh)
+	swap a
+	and $0f
+	or b
+	ld (wTmpcbbf),a
+	ld a,CUTSCENE_BALLADE_PHOTOS
+	ld (wCutsceneTrigger),a
+	jp interactionDelete
 

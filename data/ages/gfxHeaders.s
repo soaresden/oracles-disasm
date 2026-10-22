@@ -30,7 +30,7 @@
 ; copy the data quickly enough to fit within vblank. If you need to draw stuff while the screen is
 ; on, see the "queueDmaTransfer" function or "data/{game}/uniqueGfxHeaders.s".
 
-.define NUM_GFX_HEADERS $d1 ; BALLADE: +2 (GFXH_FILM, GFXH_TITLE), +12 (menus en français), +8 (noms des donjons 1-8 en français)
+.define NUM_GFX_HEADERS $d4 ; BALLADE: +2 (GFXH_FILM, GFXH_TITLE), +12 (menus en français), +8 (noms des donjons 1-8 en français), +3 (les photos de Cocolint)
 
 gfxHeaderTable:
 	.repeat NUM_GFX_HEADERS index COUNT
@@ -1150,3 +1150,27 @@ balladeLangGfxHeaders:
 	.db GFXH_DUNGEON_7_BLURB,		GFXH_DUNGEON_7_BLURB_FR
 	.db GFXH_DUNGEON_8_BLURB,		GFXH_DUNGEON_8_BLURB_FR
 	.db $00
+
+; BALLADE: les photos de Cocolint (code/ages/cutscenes/photos.s, tools/make_photos.py) : les tuiles en
+; $8800 et $9100 (mode signé ; $9000-$90ff et $9400-$97ff restent au jeu : le fond et les lettres
+; de la boîte de texte), la carte et ses attributs
+m_GfxHeaderStart $d1, GFXH_PHOTO_1
+	m_GfxHeader gfx_photo_1, $8800
+	m_GfxHeader gfx_photo_1b, $9100
+	m_GfxHeader map_photo_1, $9800
+	m_GfxHeader flg_photo_1, $9801
+	m_GfxHeaderEnd
+
+m_GfxHeaderStart $d2, GFXH_PHOTO_2
+	m_GfxHeader gfx_photo_2, $8800
+	m_GfxHeader gfx_photo_2b, $9100
+	m_GfxHeader map_photo_2, $9800
+	m_GfxHeader flg_photo_2, $9801
+	m_GfxHeaderEnd
+
+m_GfxHeaderStart $d3, GFXH_PHOTO_3
+	m_GfxHeader gfx_photo_3, $8800
+	m_GfxHeader gfx_photo_3b, $9100
+	m_GfxHeader map_photo_3, $9800
+	m_GfxHeader flg_photo_3, $9801
+	m_GfxHeaderEnd

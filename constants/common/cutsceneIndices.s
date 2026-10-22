@@ -41,6 +41,7 @@
 	CUTSCENE_BLACK_TOWER_ESCAPE_ATTEMPT	db ; 0x1f: Triggers after Veran phase 2
 	CUTSCENE_FLAME_OF_DESPAIR	db ; 0x20: The final flame is lit
 	CUTSCENE_BLACK_TOWER_COMPLETE	db ; 0x21
+	CUTSCENE_BALLADE_PHOTOS		db ; 0x22: BALLADE: les photos de Cocolint
 .ende
 
 ; Seasons
