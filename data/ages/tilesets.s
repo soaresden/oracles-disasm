@@ -695,7 +695,7 @@ tilesetData:
 
 	; HACK-BASE: Stub tilesets for expanded tilesets patch
 	.db $29, $c8, UNIQUE_GFXH_NONE, GFXH_TILESET_MERMAIDS_CAVE, PALH_TILESET_MERMAIDS_CAVE_PAST_UNDERWATER, $26, $05, $13 ; Tileset 0x67 BALLADE: Réel
-	.db $0f $01 $00 $00 $00 $00 $00 $00 ; Tileset 0x68
+	.db $0f, $81, UNIQUE_GFXH_CRESCENT_ISLAND, GFXH_TILESET_OVERWORLD_PAST, PALH_TILESET_CRESCENT_ISLAND_PAST, $04, $02, $01 ; Tileset 0x68 BALLADE: Réel
 	.db $0f $01 $00 $00 $00 $00 $00 $00 ; Tileset 0x69
 	.db $0f $01 $00 $00 $00 $00 $00 $00 ; Tileset 0x6a
 	.db $0f $01 $00 $00 $00 $00 $00 $00 ; Tileset 0x6b

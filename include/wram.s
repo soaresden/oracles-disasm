@@ -335,7 +335,25 @@ wObjectsToDraw: ; $c500
 ; Must be aligned to $100 bytes.
 	dsb $80
 
-; $c580-$c5af unused?
+; BALLADE: le Mamono du forain (code/ages/balladeCreuse.s) : le niveau du monstre de chaque case
+; (0 = rien), le niveau et l'expérience de Link, les monstres placés (au premier coup de pelle),
+; le jeu choisi (0 Creuse-Rubis, 1 Mamono), un octet de travail, les cases interdites (24 bits)
+wBalladeMamonoLevels: ; $c580
+	dsb 24
+wBalladeMamonoLevel: ; $c598
+	db
+wBalladeMamonoXp: ; $c599
+	db
+wBalladeMamonoPlaced: ; $c59a
+	db
+wBalladeCreuseMode: ; $c59b
+	db
+wBalladeMamonoTmp: ; $c59c
+	db
+wBalladeMamonoBanned: ; $c59d
+	dsb 3
+
+; $c5a0-$c5af unused?
 
 .ENDS
 
