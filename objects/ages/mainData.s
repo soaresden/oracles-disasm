@@ -4079,6 +4079,7 @@ group1Map73ObjectData:
 	obj_End
 group1Map74ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $1c $28 $68
+	obj_Interaction INTERAC_BALLADE_CREUSE $03 $08 $08 ; la carte au trésor (plonger 10 s)
 	obj_End
 group1Map75ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $00 $68 $58

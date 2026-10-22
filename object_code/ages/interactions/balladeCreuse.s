@@ -3,7 +3,7 @@
 ; (code/ages/balladeCreuse.s) : la banque $10 est presque pleine.
 ; ==================================================================================================
 ; Sous-type $01 : le Labyrinthe des Lynels (code/ages/balladePac.s) ; $02 : l'arène du Mamono
-; (code/ages/balladeMamono.s).
+; (code/ages/balladeMamono.s) ; $03 : la carte au trésor (code/ages/balladeTresor.s).
 interactionCodeeb:
 	ld e,Interaction.subid
 	ld a,(de)
@@ -15,4 +15,8 @@ interactionCodeeb:
 	jr nz,+
 	jpab balladePac.main
 +
+	dec a
+	jr nz,+
 	jpab balladeMamono.main
++
+	jpab balladeTresor.main

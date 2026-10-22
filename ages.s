@@ -237,6 +237,11 @@ specialObjectLoadAnimationFrameToBuffer:
 		.include "code/ages/balladeMamono.s"
 	.ends
 
+	 ; BALLADE: la carte au trésor (INTERAC_BALLADE_CREUSE $03, au rocher de la veuve)
+	 m_section_superfree Ballade_Tresor namespace balladeTresor
+		.include "code/ages/balladeTresor.s"
+	.ends
+
 	 ; BALLADE: le menu de test caché (HAUT tenu 5 s à l'écran titre)
 	 m_section_superfree Ballade_Debug namespace balladeDebug
 		.include "code/ages/balladeDebug.s"
