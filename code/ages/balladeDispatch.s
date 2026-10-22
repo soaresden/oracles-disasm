@@ -34,6 +34,13 @@ dispatch:
 	.dw @follower		; $19-$1b Marine suit Link, avec son épée (balladeFin.s)
 	.dw @followSpawner
 	.dw @marineSword
+	.dw @songesNest		; $1c-$22 les Songes des Héros (balladeSonges.s)
+	.dw @songesBubble
+	.dw @songesForest
+	.dw @songesFairy
+	.dw @songesMasks
+	.dw @songesMask
+	.dw @songesSky
 
 @creuse:
 	jpab balladeCreuse.main
@@ -91,3 +98,17 @@ dispatch:
 	jpab balladeFin.followSpawner
 @marineSword:
 	jpab balladeFin.marineSword
+@songesNest:
+	jpab balladeSonges.nest
+@songesBubble:
+	jpab balladeSonges.bubble
+@songesForest:
+	jpab balladeSonges.forest
+@songesFairy:
+	jpab balladeSonges.fairy
+@songesMasks:
+	jpab balladeSonges.masks
+@songesMask:
+	jpab balladeSonges.mask
+@songesSky:
+	jpab balladeSonges.sky

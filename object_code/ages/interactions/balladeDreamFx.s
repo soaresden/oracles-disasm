@@ -8,8 +8,9 @@
 ;   Le mode « vague » de l'interruption d'affichage remplace celui qui affiche les boîtes de texte :
 ;   l'ondulation se met donc en pause tant qu'un texte est à l'écran.
 ; - Sous-type 1 (l'auberge du Songe) : pas d'ondulation.
+; - Sous-type 2 (les Songes des Héros, code/ages/balladeSonges.s) : l'ondulation, sans le noctambule.
 ;
-; Dans les deux cas : le noctambule. Link ne reste qu'un temps dans le Songe
+; Sous-types 0 et 1 : le noctambule. Link ne reste qu'un temps dans le Songe
 ; (BALLADE_NOCTAMBULE_FRAMES, compté dans wBalladeNoctambule, en pause pendant les textes et les
 ; cinématiques) ; Marine prévient peu avant, puis il se réveille là où il est (sauf au fond de la mer
 ; ouverte : il se réveille juste après en être sorti).
@@ -26,6 +27,10 @@ interactionCodee9:
 	call objectSetInvisible
 	call interactionSetAlwaysUpdateBit
 	call interactionIncState
+	ld e,Interaction.subid
+	ld a,(de)
+	cp $02
+	jr z,@waveInit
 
 	; Arrivée dans le Songe (le compteur est à zéro) : le temps du noctambule commence
 	ld hl,wBalladeNoctambule
@@ -40,6 +45,7 @@ interactionCodee9:
 	ld a,(de)
 	or a
 	ret nz
+@waveInit:
 	ld a,(wGfxRegs2.LYC)
 	ld e,Interaction.var30
 	ld (de),a
@@ -47,11 +53,16 @@ interactionCodee9:
 	jp initWaveScrollValues
 
 @state1:
+	ld e,Interaction.subid
+	ld a,(de)
+	cp $02
+	jr z,+
 	call @noctambule
 	ld e,Interaction.subid
 	ld a,(de)
 	or a
 	ret nz
++
 
 	ld a,(wTextIsActive)
 	or a

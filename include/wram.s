@@ -384,8 +384,18 @@ wBalladeHudBas: ; $c593
 	db
 wBalladeHudPhase: ; $c594
 	db
-wBalladeMamonoUnused: ; $c595
-	dsb 11
+; BALLADE: le Sifflet de Marine (code/ages/balladeMarine.s) : Link tombe et elle le rattrape (0 rien,
+; 1 il vient de tomber, 2 elle arrive en volant, 3 elle l'a rattrapé : il réapparaît sans dégâts)
+wBalladeCatch: ; $c595
+	db
+; BALLADE: les Songes des Héros (code/ages/balladeSonges.s) : les masques essayés (un bit chacun),
+; le masque que Link porte (1 à 3, 0 aucun)
+wBalladeSongesMasks: ; $c596
+	db
+wBalladeSongesWorn: ; $c597
+	db
+wBalladeMamonoUnused: ; $c598
+	dsb 8
 
 ; BALLADE: le Labyrinthe des Lynels (code/ages/balladePac.s) : l'état (0 rien, 1 en jeu, 2 gagné,
 ; 3 perdu, 4 on rentre), les rubis qui restent, la peur des Lynels (images / 2), les Lynels mangés

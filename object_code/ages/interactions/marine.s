@@ -12,6 +12,11 @@ interactionCodee7:
 	jr nz,+
 	jpab balladeMarine.bombCarrier
 +
+	; Sous-type $07 : le Sifflet de Marine, elle rattrape Link qui tombe (code/ages/balladeMarine.s)
+	cp $07
+	jr nz,+
+	jpab balladeMarine.catcher
++
 	call checkInteractionState
 	jr nz,@state1
 

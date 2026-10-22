@@ -595,7 +595,6 @@ group5MapbaObjectData:
 group5MapcdObjectData:
 group5Mape5ObjectData:
 group5Mape6ObjectData:
-group5MapebObjectData:
 group5Mapf0ObjectData:
 group5MapfcObjectData:
 group5MapfdObjectData:
@@ -3360,17 +3359,7 @@ group5Mape8ObjectData:
 	obj_End
 
 
-group5MapecObjectData:
-	obj_Interaction $52 $03 $58 $c0
-	obj_Interaction $52 $04 $78 $48
-	obj_Interaction $52 $05 $48 $28
-	obj_Interaction $52 $06 $18 $88
-	obj_End
 
-group5MapedObjectData:
-	obj_Interaction $dc $00 $48 $78
-	obj_Part $08 $00 $50
-	obj_End
 
 group5MapeeObjectData:
 	obj_Pointer group5MapeeEnemyObjectData
@@ -3600,6 +3589,7 @@ group0Map47ObjectData:
 	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
 	obj_End
 group0Map48ObjectData:
+	obj_Interaction INTERAC_BALLADE_CREUSE $1c $08 $08
 	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
 	obj_End
 group0Map50ObjectData:
@@ -4798,4 +4788,17 @@ group5MapeaObjectData:
 	obj_SpecificEnemyA     ENEMY_MASKED_MOBLIN $00 $18 $58
 	obj_SpecificEnemyA     ENEMY_SWORD_DARKNUT $00 $18 $a8
 	obj_SpecificEnemyA     ENEMY_LYNEL $00 $18 $c8
+	obj_End
+group5MapebObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $02
+	obj_Interaction INTERAC_BALLADE_CREUSE $1e $08 $08
+	obj_End
+group5MapecObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $02
+	obj_Interaction INTERAC_BALLADE_CREUSE $20 $08 $08
+	obj_End
+group5MapedObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $02
+	obj_Interaction INTERAC_BALLADE_CREUSE $22 $08 $08
+	obj_Interaction INTERAC_BALLADE_CREUSE $11 $48 $98
 	obj_End

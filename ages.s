@@ -258,6 +258,11 @@ specialObjectLoadAnimationFrameToBuffer:
 		.include "code/ages/balladeFin.s"
 	.ends
 
+	 ; BALLADE: les Songes des Héros, au Nid des Vents (INTERAC_BALLADE_CREUSE $1c-$22)
+	 m_section_superfree Ballade_Songes namespace balladeSonges
+		.include "code/ages/balladeSonges.s"
+	.ends
+
 	 ; BALLADE: INTERAC_BALLADE_CREUSE : le code de chaque sous-type
 	 m_section_superfree Ballade_Dispatch namespace balladeDispatch
 		.include "code/ages/balladeDispatch.s"

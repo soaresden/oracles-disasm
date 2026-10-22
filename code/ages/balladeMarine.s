@@ -427,3 +427,153 @@ bombCarrier:
 	.db $00 $02
 	.db $02 $00
 	.db $00 $fe
+
+
+; ==================================================================================================
+; Le Sifflet de Marine (le 3e Songe des Héros, code/ages/balladeSonges.s) : quand Link tombe dans un
+; trou ou dans le vide, Marine plonge du haut de l'écran et le rattrape, comme l'oiseau du ciel du
+; héros de Célesbourg. Il réapparaît sous elle, sans perdre de cœur. (Pas quand il se noie.)
+; object_code/common/specialObjects/link.s (linkState02) appelle checkSifflet à la fin de la chute,
+; puis siffletUpdate tant que wBalladeCatch vaut 1 ou 2 ; à 3, Link réapparaît sans dégâts.
+; ==================================================================================================
+
+;;
+; Link vient de tomber : Marine va-t-elle le rattraper ?
+checkSifflet:
+	ld a,GLOBALFLAG_BALLADE_SIFFLET
+	call checkGlobalFlag
+	jr nz,+
+	; la première fois : dans le rêve de Célesbourg (5:ed), quand la princesse le pousse
+	ld a,(wActiveGroup)
+	cp $05
+	ret nz
+	ld a,(wActiveRoom)
+	cp $ed
+	ret nz
++
+	; (pas dans les salles vues de côté)
+	ld a,(wTilesetFlags)
+	and TILESETFLAG_SIDESCROLL
+	ret nz
+	ld a,$01
+	ld (wBalladeCatch),a
+	ret
+
+;;
+; Link attend de réapparaître (il est déjà à sa place) : Marine arrive (INTERAC_MARINE $07)
+siffletUpdate:
+	ld a,(wBalladeCatch)
+	cp $01
+	ret nz
+	inc a
+	ld (wBalladeCatch),a
+	call getFreeInteractionSlot
+	jr nz,@noSlot
+	ld (hl),INTERAC_MARINE
+	inc l
+	ld (hl),$07
+	ld l,Interaction.yh
+	ld a,(w1Link.yh)
+	ld (hl),a
+	ld l,Interaction.xh
+	ld a,(w1Link.xh)
+	ld (hl),a
+	ret
+@noSlot:
+	ld a,$03
+	ld (wBalladeCatch),a
+	ret
+
+;;
+; INTERAC_MARINE $07 : Marine plonge du haut de l'écran jusqu'à Link (var30 : où il réapparaît),
+; le tient un instant au-dessus du sol, puis repart vers le ciel
+catcher:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw @init
+	.dw @dive
+	.dw @hold
+	.dw @leave
+
+@init:
+	call interactionInitGraphics
+	call interactionSetAlwaysUpdateBit
+	call interactionIncState
+	ld h,d
+	ld l,Interaction.yh
+	ld a,(hl)
+	ld l,Interaction.var30
+	ld (hl),a
+	; elle part du haut de l'écran (au moins 16 pixels au-dessus de Link)
+	ld b,a
+	ldh a,(<hCameraY)
+	ld c,a
+	ld a,b
+	sub 16
+	jr c,++
+	cp c
+	jr c,+
+	ld a,c
++
+	ld l,Interaction.yh
+	ld (hl),a
+++
+	ld l,Interaction.zh
+	ld (hl),$f4
+	ld a,$03		; en vol
+	call interactionSetAnimation
+	ld a,SND_BALLADE_GULL
+	call playSound
+	jp objectSetVisible80
+
+; Elle plonge, 3 pixels par image
+@dive:
+	call interactionAnimate
+	ld h,d
+	ld l,Interaction.var30
+	ld b,(hl)
+	ld l,Interaction.yh
+	ld a,(hl)
+	add $03
+	ld (hl),a
+	cp b
+	ret c
+	ld (hl),b
+	; elle le tient : il réapparaît sous elle
+	call interactionIncState
+	ld l,Interaction.counter1
+	ld (hl),40
+	ld a,$03
+	ld (wBalladeCatch),a
+	ret
+
+; Elle bat des ailes au-dessus de lui
+@hold:
+	call interactionAnimate
+	ld a,(w1Link.yh)
+	ld e,Interaction.yh
+	ld (de),a
+	ld a,(w1Link.xh)
+	ld e,Interaction.xh
+	ld (de),a
+	call interactionDecCounter1
+	ret nz
+	call interactionIncState
+	ld l,Interaction.counter1
+	ld (hl),60
+	ld a,SND_BALLADE_GULL
+	jp playSound
+
+; Elle remonte vers le ciel, et s'en va
+@leave:
+	call interactionAnimate
+	ld h,d
+	ld l,Interaction.yh
+	dec (hl)
+	dec (hl)
+	ld l,Interaction.xh
+	inc (hl)
+	call interactionDecCounter1
+	ret nz
+	jp interactionDelete

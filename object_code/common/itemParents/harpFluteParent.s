@@ -141,6 +141,11 @@ parentItemCode_harp:
 	and (TILESETFLAG_UNDERWATER|TILESETFLAG_SIDESCROLL|TILESETFLAG_LARGE_INDOORS|TILESETFLAG_DUNGEON|TILESETFLAG_INDOORS|TILESETFLAG_MAKU)
 	; BALLADE: dedans, « La Lanterne ne brille pas, ici. » (TX_5110)
 	jp nz,@tuneEchoesInVain
+	; BALLADE: ni dans les salles à part des groupes 4 et 5 (les jeux du forain, les Songes des
+	; Héros : code/ages/balladeSonges.s)
+	ld a,(wActiveGroup)
+	cp $04
+	jp nc,@tuneEchoesInVain
 
 	; BALLADE: ni au fond de la mer ouverte du Songe (briques $1a, $1b des décors $7d, $7e : la Brume,
 	; la Lagune ; ailleurs c'est du sol) : dans le Réel, c'est l'eau profonde (comme le réveil du

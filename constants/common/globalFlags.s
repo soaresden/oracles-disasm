@@ -118,6 +118,9 @@
 	GLOBALFLAG_BALLADE_PHOTOS		db ; $5b: Marine a trouvé les photos de Cocolint (l'auberge)
 	GLOBALFLAG_BALLADE_QUIZ			db ; $5c: le quiz de Marine réussi (tout juste : le bisou)
 	GLOBALFLAG_BALLADE_FIN			db ; $5d: le jeu est fini (l'Insomnis battu, le générique vu) : l'après-jeu
+	GLOBALFLAG_BALLADE_SIFFLET		db ; $5e: le Sifflet de Marine (le 3e Songe des Héros) : elle rattrape Link quand il tombe
+	GLOBALFLAG_BALLADE_SONGE1		db ; $5f: le 1er Songe des Héros vu (la fée qui parle tout le temps)
+	GLOBALFLAG_BALLADE_SONGE2		db ; $60: le 2e Songe des Héros vu (les masques)
 
 .else; ROM_SEASONS
 

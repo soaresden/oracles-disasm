@@ -1437,7 +1437,11 @@ linkState02:
 
 	ld a,(wActiveTileType)
 	cp TILETYPE_WARPHOLE
+.ifdef ROM_AGES
+	jr nz,@fellInHole
+.else
 	jr nz,@respawn
+.endif
 
 .ifdef ROM_AGES
 	; Check if the current room is the moblin keep with the crumbling floors
@@ -1463,6 +1467,14 @@ linkState02:
 	; This function call will only work in dungeons.
 	jpab bank1.initiateFallDownHoleWarp
 
+.ifdef ROM_AGES
+; BALLADE: tombé dans un trou (pas un passage vers l'étage du dessous) : avec le Sifflet de Marine,
+; elle vient le rattraper (code/ages/balladeMarine.s)
+@fellInHole:
+	push de
+	callab balladeMarine.checkSifflet
+	pop de
+.endif
 @respawn:
 	call specialObjectSetCoordinatesToRespawnYX
 	ld l,SpecialObject.substate
@@ -1500,6 +1512,24 @@ linkState02:
 
 	; Counter has reached 0; make Link reappear, apply damage
 
+.ifdef ROM_AGES
+	; BALLADE: le Sifflet de Marine : on attend qu'elle arrive en volant ; Link réapparaît sous
+	; elle, sans dégâts (code/ages/balladeMarine.s)
+	ld a,(wBalladeCatch)
+	or a
+	jr z,++
+	cp $03
+	jr z,++
+	push de
+	callab balladeMarine.siffletUpdate
+	pop de
+	ld h,d
+	ld l,SpecialObject.counter1
+	ld (hl),$01
+	ret
+++
+.endif
+
 	xor a
 	ld (wLinkInAir),a
 	ld (wLinkSwimmingState),a
@@ -1510,12 +1540,30 @@ linkState02:
 	jr nz,+
 	sra a
 +
+.ifdef ROM_AGES
+	; BALLADE: rattrapé par Marine : pas de dégâts
+	ld b,a
+	ld a,(wBalladeCatch)
+	cp $03
+	ld a,b
+	jr nz,+
+	xor a
+	ld (wBalladeCatch),a
++
+.endif
 	call itemIncSubstate
 
 	ld l,SpecialObject.damageToApply
 	ld (hl),a
 	ld l,SpecialObject.invincibilityCounter
 	ld (hl),$3c
+.ifdef ROM_AGES
+	; BALLADE: rattrapé par Marine (pas de dégâts) : il ne clignote pas
+	or a
+	jr nz,+
+	ld (hl),a
++
+.endif
 
 	ld l,SpecialObject.counter1
 	ld (hl),$10
@@ -1553,7 +1601,7 @@ linkState02:
 	ld a,(de)
 	rlca
 	jp nc,specialObjectAnimate
-	jr @respawn
+	jp @respawn ; BALLADE: jp (le Sifflet de Marine a éloigné @respawn)
 
 .ifdef ROM_AGES
 ;;

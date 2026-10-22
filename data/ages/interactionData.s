@@ -884,6 +884,14 @@ interactionebSubidData:
 	m_InteractionSubidData $e2 $00 $30 ; $19 Marine qui suit Link (son île)
 	m_InteractionSubidData $00 $00 $00 ; $1a elle arrive avec Link dans la salle (invisible)
 	m_InteractionSubidData $e7 $00 $30 ; $1b son coup d'épée (spr_ballade_ile)
+	; les Songes des Héros (code/ages/balladeSonges.s) : spr_ballade_ile ($e7), images 2 à 7
+	m_InteractionSubidData $00 $00 $00 ; $1c au Nid, dans le Songe : Marine explique (invisible)
+	m_InteractionSubidData $e7 $08 $10 ; $1d une bulle de rêve (image 2, palette 1)
+	m_InteractionSubidData $00 $00 $00 ; $1e 1er rêve : la forêt (invisible)
+	m_InteractionSubidData $e7 $0c $10 ; $1f la fée qui parle tout le temps (images 3-4, palette 1)
+	m_InteractionSubidData $00 $00 $00 ; $20 2e rêve : la clairière des masques (invisible)
+	m_InteractionSubidData $e7 $14 $30 ; $21 un masque (images 5-7, palette 3 ; les Eaux : 1)
+	m_InteractionSubidData $00 $00 $00 ; $22 3e rêve : Célesbourg (invisible)
 	m_InteractionSubidDataEnd
 
 ; BALLADE: les objets de nos îles (INTERAC_BALLADE_OBJECT) : spr_ballade_objects ($e3), image n =
