@@ -335,23 +335,41 @@ wObjectsToDraw: ; $c500
 ; Must be aligned to $100 bytes.
 	dsb $80
 
-; BALLADE: le Mamono du forain (code/ages/balladeCreuse.s) : le niveau du monstre de chaque case
-; (0 = rien), le niveau et l'expérience de Link, les monstres placés (au premier coup de pelle),
-; le jeu choisi (0 Creuse-Rubis, 1 Mamono), un octet de travail, les cases interdites (24 bits)
-wBalladeMamonoLevels: ; $c580
-	dsb 24
-wBalladeMamonoLevel: ; $c598
+; BALLADE: le Mamono du forain, dans son arène (5:ea, code/ages/balladeMamono.s) : le niveau et
+; l'expérience de Link, les monstres placés (au premier coup de pelle), les monstres qui restent,
+; l'état (0 rien, 1 en jeu, 2 fini), le monstre montré (compteur, son emplacement d'ennemi, sa case),
+; les emplacements des cinq ennemis modèles (niveaux 1 à 5), la case du premier coup, du travail.
+; Les niveaux cachés des 104 cases : $cfc0-$cff3 (un demi-octet par case, voir balladeMamono.s).
+wBalladeMamonoLevel: ; $c580
 	db
-wBalladeMamonoXp: ; $c599
+wBalladeMamonoXp: ; $c581
 	db
-wBalladeMamonoPlaced: ; $c59a
+wBalladeMamonoPlaced: ; $c582
 	db
-wBalladeCreuseMode: ; $c59b
+wBalladeMamonoLeft: ; $c583
 	db
-wBalladeMamonoTmp: ; $c59c
+wBalladeMamonoState: ; $c584
 	db
-wBalladeMamonoBanned: ; $c59d
+wBalladeMamonoShow: ; $c585
+	db
+wBalladeMamonoShowSlot: ; $c586
+	db
+wBalladeMamonoSlots: ; $c587
+	dsb 5
+wBalladeMamonoFirst: ; $c58c
+	db
+wBalladeMamonoTmp: ; $c58d
 	dsb 3
+; le jeu choisi chez le forain (0 Creuse-Rubis, 1 Mamono)
+wBalladeCreuseMode: ; $c590
+	db
+; Mamono : la case du monstre montré (position YX, numéro)
+wBalladeMamonoShowPos: ; $c591
+	db
+wBalladeMamonoShowIndex: ; $c592
+	db
+wBalladeMamonoUnused: ; $c593
+	dsb 13
 
 ; BALLADE: le Labyrinthe des Lynels (code/ages/balladePac.s) : l'état (0 rien, 1 en jeu, 2 gagné,
 ; 3 perdu, 4 on rentre), les rubis qui restent, la peur des Lynels (images / 2), les Lynels mangés

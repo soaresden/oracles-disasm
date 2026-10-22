@@ -8,18 +8,11 @@
 ; gagné, et la première victoire en Moyen et en Difficile donne un quart de cœur (drapeaux $40 et
 ; $80 de la salle).
 ;
-; Le Mamono (l'autre jeu du forain, comme dans Xplosive Adventures, le jeu de Denis) : chaque
-; case cache peut-être un monstre d'un niveau (1 Keese, 2 Octorok, 3 Moblin, 4 Darknut, 5 Lynel) ;
-; une case vide montre la somme des niveaux des monstres autour (tools/make_mamono.py dessine ces
-; chiffres et ces monstres dans le décor $68 de la plage). Un monstre vaincu donne autant
-; d'expérience que son niveau, et Link monte de niveau ; un monstre plus fort que lui enlève un
-; demi-cœur par niveau d'écart, et tout son niveau s'il est découvert à l'aveugle (aucune case
-; ouverte autour). Gagné quand tous les monstres sont vaincus ; à bout de forces, perdu. Quarts de
-; cœur : drapeaux $04 (Moyen) et $08 (Dur) de la salle.
-;
-; Le forain (INTERAC_BALLADE_NPC $08) propose ses deux jeux (TX_5a43 : Creuse, Mamono, Non) ; ce
-; contrôleur voit ce texte se fermer et lit le choix (wSelectedTextOption), propose le niveau
-; (TX_5a4b), fait payer et prépare le champ. Pendant la partie, la Lanterne ne marche pas
+; Le forain (INTERAC_BALLADE_NPC $08) propose ses trois jeux (TX_5a43 : Creuse, Mamono, Lynels,
+; Non) ; ce contrôleur voit ce texte se fermer et lit le choix (wSelectedTextOption), propose le
+; niveau (TX_5a4b), fait payer et prépare le champ. Le Mamono se joue dans l'arène du forain (5:ea,
+; code/ages/balladeMamono.s) et le Labyrinthe des Lynels en 5:e9 (code/ages/balladePac.s) : ce
+; contrôleur y envoie Link. Pendant la partie, la Lanterne ne marche pas
 ; (wInstrumentsDisabledCounter).
 ; ==================================================================================================
 
@@ -28,8 +21,6 @@
 .define CREUSE_DUG_TILE		$bf	; sable lisse
 .define CREUSE_FIRST_ROW	2
 .define CREUSE_FIRST_COL	1
-.define MAMONO_FIRST_NUMBER	$40	; brique $40 + n : le chiffre n (tools/make_mamono.py)
-.define MAMONO_FIRST_MONSTER	$58	; brique $58 + niveau : le monstre vaincu
 
 ; wBalladeCreuseState : 0 rien, 1 en jeu
 ; Interaction.var30 : 1 pendant que le texte du forain (TX_5a43) est affiché
@@ -151,9 +142,6 @@ main:
 	call @cellIndex
 	ret c			; hors du champ
 	ld b,a			; b = numéro de la case
-	ld a,(wBalladeCreuseMode)
-	or a
-	jp nz,@mamonoDig
 
 	ld hl,wBalladeCreuseDug
 	call @testBit
@@ -203,12 +191,6 @@ main:
 	ld b,$40
 	jr z,+
 	ld b,$80
-+
-	; (le Mamono : drapeaux $04 et $08)
-	ld a,(wBalladeCreuseMode)
-	or a
-	jr z,+
-	swap b
 +
 	call getThisRoomFlags
 	ld a,(hl)
@@ -264,6 +246,9 @@ main:
 +
 	pop af
 	call removeRupeeValue
+	ld a,(wBalladeCreuseMode)
+	or a
+	jp nz,@mamonoGo
 
 	; Le champ : tout est à creuser
 	xor a
@@ -285,10 +270,6 @@ main:
 	pop bc
 	dec b
 	jr nz,-
-
-	ld a,(wBalladeCreuseMode)
-	or a
-	jp nz,@mamonoStart
 
 	; Les bombes, au hasard
 	ld a,(wBalladeCreuseLevel)
@@ -503,323 +484,18 @@ main:
 @mineCounts:
 	.db 4, 6, 8
 
-; ==================================================================================================
-; Le Mamono
-; ==================================================================================================
-
 ;;
-; Une partie de Mamono commence : aucun monstre placé (ils le seront au premier coup de pelle, loin
-; de la case creusée), Link au niveau 1
-@mamonoStart:
-	ld hl,wBalladeMamonoLevels
-	ld b,CREUSE_CELLS
+; Le Mamono : dans l'arène du forain (5:ea, code/ages/balladeMamono.s lit wBalladeCreuseLevel)
+@mamonoGo:
+	ld a,$85
+	ld (wWarpDestGroup),a
+	ld a,$ea
+	ld (wWarpDestRoom),a
+	ld a,$17
+	ld (wWarpDestPos),a
 	xor a
--
-	ldi (hl),a
-	dec b
-	jr nz,-
-	ld (wBalladeMamonoXp),a
-	ld (wBalladeMamonoPlaced),a
-	inc a
-	ld (wBalladeMamonoLevel),a
-	ld (wBalladeCreuseState),a
-	ld bc,TX_5a4a		; le forain explique, Marine conseille
-	jp showText
-
-;;
-; Link creuse la case b (position c)
-@mamonoDig:
-	ld hl,wBalladeCreuseDug
-	call @testBit
-	ret nz			; déjà ouverte
-	ld a,(wBalladeMamonoPlaced)
-	or a
-	call z,@mamonoPlace
-	ld hl,wBalladeCreuseDug
-	ld a,b
-	call @setBit
-
-	ld hl,wBalladeMamonoLevels
-	ld a,b
-	rst_addAToHl
-	ld a,(hl)
-	or a
-	jr nz,@mamonoMonster
-
-	; Pas de monstre : le chiffre, la somme des niveaux autour (rien : le sable lisse)
-	call @mamonoSum
-	or a
-	ld a,CREUSE_DUG_TILE
-	jr z,++
-	ld a,e
-	cp 20
-	jr c,+
-	ld a,19
-+
-	add MAMONO_FIRST_NUMBER
-++
-	push bc
-	call setTile
-	pop bc
-	ld a,SND_DIG
+	ld (wWarpTransition),a
+	ld a,$03 ; fondu
+	ld (wWarpTransition2),a
+	ld a,SND_ENTERCAVE
 	jp playSound
-
-;;
-; Un monstre de niveau a (case b, position c)
-@mamonoMonster:
-	ld (wBalladeMamonoTmp),a
-	ld hl,wBalladeMamonoLevel
-	sub (hl)
-	jr c,@mamonoBeaten
-	jr z,@mamonoBeaten
-	; Plus fort que Link : un demi-cœur par niveau d'écart, tout son niveau s'il est découvert à
-	; l'aveugle (aucune case ouverte autour)
-	ld e,a
-	call @mamonoAnyOpenNeighbour
-	jr nz,+
-	ld a,(wBalladeMamonoTmp)
-	ld e,a
-+
-	ld a,e
-	add a
-	ld e,a			; quarts de cœur
-	ld a,(wLinkHealth)
-	cp e
-	jr z,@mamonoTooHurt
-	jr c,@mamonoTooHurt
-	ld a,e
-	add a			; damageToApply : en huitièmes de cœur
-	cpl
-	inc a
-	ld (w1Link.damageToApply),a
-
-@mamonoBeaten:
-	; Le monstre vaincu reste dessiné dans le sable
-	ld a,(wBalladeMamonoTmp)
-	add MAMONO_FIRST_MONSTER
-	push bc
-	call setTile
-	pop bc
-	ld a,SND_KILLENEMY
-	call playSound
-	; L'expérience : autant que son niveau
-	ld a,(wBalladeMamonoTmp)
-	ld hl,wBalladeMamonoXp
-	add (hl)
-	ld (hl),a
-	call @mamonoCheckLevelUp
-	ld hl,wBalladeCreuseLeft
-	dec (hl)
-	jp z,@win
-	ret
-
-@mamonoTooHurt:
-	; À bout de forces : perdu (Link garde un quart de cœur)
-	ld a,$01
-	ld (wLinkHealth),a
-	xor a
-	ld (wBalladeCreuseState),a
-	ld a,(wBalladeMamonoTmp)
-	add MAMONO_FIRST_MONSTER
-	push bc
-	call setTile
-	pop bc
-	ld a,SND_EXPLOSION
-	call playSound
-	ld bc,TX_5a4d
-	jp showText
-
-;;
-; Le niveau de Link selon son expérience (les seuils du niveau de jeu) ; « Niveau supérieur ! »
-@mamonoCheckLevelUp:
-	push bc
-	ld a,(wBalladeCreuseLevel)
-	ld b,a
-	add a
-	add b
-	add a			; 6 x le niveau de jeu
-	ld hl,@mamonoThresholds
-	rst_addAToHl
-	ld a,(wBalladeMamonoXp)
-	ld c,a
-	ld b,$01
--
-	ldi a,(hl)
-	cp $ff
-	jr z,+
-	cp c
-	jr z,++
-	jr nc,+
-++
-	inc b
-	jr -
-+
-	ld a,(wBalladeMamonoLevel)
-	cp b
-	ld a,b
-	ld (wBalladeMamonoLevel),a
-	pop bc
-	ret nc			; pas de nouveau niveau
-	ld a,SND_GETSEED
-	call playSound
-	ld bc,TX_5a44
-	jp showText
-
-;;
-; Place les monstres, loin de la case b (ni elle ni ses voisines) ; garde bc
-@mamonoPlace:
-	push bc
-	ld a,$01
-	ld (wBalladeMamonoPlaced),a
-	; Les cases interdites : b et ses voisines
-	xor a
-	ld hl,wBalladeMamonoBanned
-	ldi (hl),a
-	ldi (hl),a
-	ld (hl),a
-	ld hl,wBalladeMamonoBanned
-	ld a,b
-	call @setBit
-	ld hl,@neighbourOffsets
--
-	ldi a,(hl)
-	cp $80
-	jr z,+
-	push hl
-	push bc
-	add c
-	ld c,a
-	call @cellIndex
-	jr c,++
-	ld hl,wBalladeMamonoBanned
-	call @setBit
-++
-	pop bc
-	pop hl
-	jr -
-+
-	; Les monstres de chaque niveau : 5 nombres par niveau de jeu
-	ld a,(wBalladeCreuseLevel)
-	ld b,a
-	add a
-	add a
-	add b			; 5 x le niveau de jeu
-	ld hl,@mamonoCounts
-	rst_addAToHl
-	ld c,$01		; le niveau du monstre
-	xor a
-	ld (wBalladeCreuseLeft),a
---
-	ldi a,(hl)
-	push hl
-	ld e,a			; combien de monstres de ce niveau
-	ld hl,wBalladeCreuseLeft
-	add (hl)
-	ld (hl),a
-	inc e
----
-	dec e
-	jr z,+++
--
-	call getRandomNumber
-	and $1f
-	cp CREUSE_CELLS
-	jr nc,-
-	ld b,a
-	ld hl,wBalladeMamonoBanned
-	call @testBit
-	jr nz,-
-	ld hl,wBalladeMamonoLevels
-	ld a,b
-	rst_addAToHl
-	ld a,(hl)
-	or a
-	jr nz,-
-	ld (hl),c
-	jr ---
-+++
-	pop hl
-	inc c
-	ld a,c
-	cp $06
-	jr c,--
-	pop bc
-	ret
-
-;;
-; La somme des niveaux des monstres autour de la position c ; garde bc
-; @param[out]	a, e	La somme
-@mamonoSum:
-	push bc
-	ld e,$00
-	ld hl,@neighbourOffsets
--
-	ldi a,(hl)
-	cp $80
-	jr z,+
-	push hl
-	push bc
-	add c
-	ld c,a
-	call @cellIndex
-	jr c,++
-	ld hl,wBalladeMamonoLevels
-	rst_addAToHl
-	ld a,(hl)
-	add e
-	ld e,a
-++
-	pop bc
-	pop hl
-	jr -
-+
-	pop bc
-	ld a,e
-	ret
-
-;;
-; Une case ouverte autour de la position c ? ; garde bc et e
-; @param[out]	zflag	Set si aucune
-@mamonoAnyOpenNeighbour:
-	push bc
-	push de
-	ld e,$00
-	ld hl,@neighbourOffsets
--
-	ldi a,(hl)
-	cp $80
-	jr z,+
-	push hl
-	push bc
-	add c
-	ld c,a
-	call @cellIndex
-	jr c,++
-	ld b,a
-	ld hl,wBalladeCreuseDug
-	call @testBit
-	jr z,++
-	inc e
-++
-	pop bc
-	pop hl
-	jr -
-+
-	ld a,e
-	pop de
-	pop bc
-	or a
-	ret
-
-; Le nombre de monstres de chaque niveau (1 à 5), selon le niveau de jeu (Facile, Moyen, Dur)
-@mamonoCounts:
-	.db 2, 2, 1, 0, 0
-	.db 3, 2, 2, 0, 0
-	.db 3, 2, 2, 1, 1
-
-; L'expérience pour passer au niveau 2, 3, ... ($ff : plus de niveau), comme dans Xplosive
-; Adventures : pour chaque niveau L, le cumul précédent + 70 % de (monstres de niveau L x L)
-@mamonoThresholds:
-	.db 2, 5, 9, $ff, $ff, $ff
-	.db 3, 6, 12, $ff, $ff, $ff
-	.db 3, 6, 12, 16, 21, $ff

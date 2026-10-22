@@ -232,6 +232,11 @@ specialObjectLoadAnimationFrameToBuffer:
 		.include "code/ages/balladePac.s"
 	.ends
 
+	 ; BALLADE: le Mamono du forain, dans son arène (INTERAC_BALLADE_CREUSE $02)
+	 m_section_superfree Ballade_Mamono namespace balladeMamono
+		.include "code/ages/balladeMamono.s"
+	.ends
+
 	 ; BALLADE: le menu de test caché (HAUT tenu 5 s à l'écran titre)
 	 m_section_superfree Ballade_Debug namespace balladeDebug
 		.include "code/ages/balladeDebug.s"

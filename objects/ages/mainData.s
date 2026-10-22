@@ -600,7 +600,6 @@ group5MapbaObjectData:
 group5MapcdObjectData:
 group5Mape5ObjectData:
 group5Mape6ObjectData:
-group5MapeaObjectData:
 group5MapebObjectData:
 group5Mapf0ObjectData:
 group5MapfcObjectData:
@@ -4769,4 +4768,12 @@ group5Mape9ObjectData:
 	obj_SpecificEnemyA     ENEMY_LYNEL $04 $58 $78
 	obj_SpecificEnemyA     ENEMY_LYNEL $05 $58 $68
 	obj_SpecificEnemyA     ENEMY_LYNEL $06 $58 $88
+	obj_End
+group5MapeaObjectData:
+	obj_Interaction INTERAC_BALLADE_CREUSE $02 $08 $08
+	obj_SpecificEnemyA $00 ENEMY_KEESE $00 $18 $18
+	obj_SpecificEnemyA     ENEMY_OCTOROK $00 $18 $38
+	obj_SpecificEnemyA     ENEMY_MASKED_MOBLIN $00 $18 $58
+	obj_SpecificEnemyA     ENEMY_SWORD_DARKNUT $00 $18 $a8
+	obj_SpecificEnemyA     ENEMY_LYNEL $00 $18 $c8
 	obj_End
