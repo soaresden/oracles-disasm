@@ -308,6 +308,17 @@ musBalladeGerudo:
 	.dw musBalladeGerudoChannel6
 	.db $ff
 
+musBalladeQuiz:
+	.db $00
+	.dw musBalladeQuizChannel0
+	.db $01
+	.dw musBalladeQuizChannel1
+	.db $04
+	.dw musBalladeQuizChannel4
+	.db $06
+	.dw musBalladeQuizChannel6
+	.db $ff
+
 sndBalladeGull:
 	.db $02
 	.dw sndBalladeGullChannel2

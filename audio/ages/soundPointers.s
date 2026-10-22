@@ -11,7 +11,7 @@ soundPointers:
 	/* 0x07 */ m_soundPointer musAmbiPalace
 	/* 0x08 */ m_soundPointer musNayru
 	/* 0x09 */ m_soundPointer musGameover
-	/* 0x0a */ m_soundPointer musLynnaCity
+	/* 0x0a */ m_soundPointer musBalladeQuiz ; BALLADE: le quiz de Marine, façon « Qui veut gagner des millions » (au lieu de la ville de Lynna)
 	/* 0x0b */ m_soundPointer musBalladeGerudo ; BALLADE: la Vallée Gerudo au violon (Taylor Davis), le forain (au lieu du village de Lynna)
 	/* 0x0c */ m_soundPointer musZoraVillage
 	/* 0x0d */ m_soundPointer musEssenceRoom
