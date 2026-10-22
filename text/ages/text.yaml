@@ -14379,18 +14379,18 @@ groups:
   - name: TX_2f0d
     index: 0x0d
     text: |-
-      \pos(2)Gwoh hoh hoh!
-      Gwah hah hah...
-      Destroy...all...
-      Kill ALL!!!
-
+      \pos(2)Gwoh hoh hoh!\stop
+      You again,
+      little hero?\stop
+      In your dreams,
+      I'M the one who
+      wins!
   - name: TX_2f0e
     index: 0x0e
     text: |-
-      \pos(2)Gwoh hoh hoh!
-      I am the Evil
-      King, \col(3)Ganon\col(0)...
-
+      \pos(2)Grrr... You
+      can't... wake up
+      forever...
   - name: TX_2f0f
     index: 0x0f
     text: |-

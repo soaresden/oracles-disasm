@@ -2543,3 +2543,7 @@ group4MapcfEnemyObjectData:
 	obj_SpecificEnemyA     $31 $02 $18 $78
 	obj_EndPointer
 
+; BALLADE: Ganon, au 3e étage de la Tour Sans-Nuit (5:c7), tant qu'il n'est pas vaincu
+balladeTourGanonBeforeEventObjectData:
+	obj_SpecificEnemyA $00 ENEMY_GANON $00 $48 $78
+	obj_EndPointer

@@ -689,7 +689,7 @@ group5WarpSources:
 	m_StandardWarp $0 $8c $16 $7 $2
 	m_StandardWarp $0 $f1 $18 $5 $2
 	m_StandardWarp $0 $f4 $27 $0 $2
-	m_StandardWarp $0 $f5 $16 $5 $2
+	m_StandardWarp $0 $f5 $76 $5 $4 ; BALLADE: l'arène de Ganon (la Tour Sans-Nuit, 3F, 5:c7) -> 4F
 	m_StandardWarp $0 $b0 $4f $1 $4 ; BALLADE: grotte de la Boîte -> devant l'entrée (1:32)
 	m_StandardWarp $0 $b1 $52 $1 $4 ; BALLADE: grotte des amoureux -> devant l'entrée (1:27)
 	m_StandardWarp $0 $b2 $54 $1 $4 ; BALLADE: la mine abandonnée -> devant son entrée (1:28)

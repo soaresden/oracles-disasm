@@ -4749,9 +4749,7 @@ group5Mapc6ObjectData:
 	obj_Interaction $1e $07 $50 $00
 	obj_End
 group5Mapc7ObjectData:
-	obj_Part $08 $00 $00
-	obj_Interaction $1e $09 $5e $00
-	obj_BeforeEvent group4Map4aBeforeEventObjectData
+	obj_BeforeEvent balladeTourGanonBeforeEventObjectData
 	obj_Interaction INTERAC_BALLADE_OBJECT $32 $58 $78
 	obj_Interaction INTERAC_BALLADE_OBJECT $01 $08 $08
 	obj_End

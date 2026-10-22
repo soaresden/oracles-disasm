@@ -20039,128 +20039,296 @@ musBalladePalaisChannel0:
 	env $0 $00
 	duty $02
 	cmdfd $00
-	vol $2
-	duty $00
+	vol $3
+	duty $01
 	vibrato $00
 	cmdfd $00
-	note fs5  $04
-	rest $10
-	note cs6  $04
-	rest $10
-	note a5   $04
-	rest $10
-	note e6   $04
-	rest $10
-	note d5   $04
-	rest $10
-	note a5   $04
-	rest $10
-	note fs5  $04
-	rest $10
-	note cs6  $04
-	rest $10
+	note f4   $04
+	rest $06
+	note c5   $04
+	rest $06
+	note gs4  $04
+	rest $06
+	note c5   $04
+	rest $06
+	note f4   $04
+	rest $06
+	note c5   $04
+	rest $06
+	note gs4  $04
+	rest $06
+	note c5   $04
+	rest $06
+	note f4   $04
+	rest $06
+	note cs5  $04
+	rest $06
+	note gs4  $04
+	rest $06
+	note cs5  $04
+	rest $06
+	note f4   $04
+	rest $06
+	note cs5  $04
+	rest $06
+	note gs4  $04
+	rest $06
+	note cs5  $04
+	rest $06
 musBalladePalaisChannel0Loop:
-	vol $2
-	duty $00
+	vol $3
+	duty $01
 	vibrato $00
 	cmdfd $00
 	vol $2
-	note fs5  $04
-	rest $10
-	note cs6  $04
-	rest $10
-	note a5   $04
-	rest $10
-	note e6   $04
-	rest $10
-	note d5   $04
-	rest $10
-	note a5   $04
-	rest $10
-	note fs5  $04
-	rest $10
-	note cs6  $04
-	rest $10
-	note b4   $04
-	rest $10
-	note fs5  $04
-	rest $10
-	note d5   $04
-	rest $10
-	note a5   $04
-	rest $10
+	note f4   $04
+	rest $06
+	note c5   $04
+	rest $06
+	note gs4  $04
+	rest $06
+	note c5   $04
+	rest $06
+	note f4   $04
+	rest $06
+	note c5   $04
+	rest $06
+	note gs4  $04
+	rest $06
+	note c5   $04
+	rest $06
+	note f4   $04
+	rest $06
 	note cs5  $04
-	rest $10
+	rest $06
+	note gs4  $04
+	rest $06
+	note cs5  $04
+	rest $06
+	note f4   $04
+	rest $06
+	note cs5  $04
+	rest $06
+	note gs4  $04
+	rest $06
+	note cs5  $04
+	rest $06
+	note g4   $04
+	rest $06
+	note ds5  $04
+	rest $06
+	note as4  $04
+	rest $06
+	note ds5  $04
+	rest $06
+	note g4   $04
+	rest $06
+	note ds5  $04
+	rest $06
+	note as4  $04
+	rest $06
+	note ds5  $04
+	rest $06
+	note g4   $04
+	rest $06
+	note c5   $04
+	rest $06
+	note ds4  $04
+	rest $06
+	note c5   $04
+	rest $06
+	note g4   $04
+	rest $06
+	note c5   $04
+	rest $06
+	note ds4  $04
+	rest $06
+	note c5   $04
+	rest $06
+	note f4   $04
+	rest $06
+	note c5   $04
+	rest $06
+	note gs4  $04
+	rest $06
+	note c5   $04
+	rest $06
+	note f4   $04
+	rest $06
+	note c5   $04
+	rest $06
+	note gs4  $04
+	rest $06
+	note c5   $04
+	rest $06
+	note f4   $04
+	rest $06
+	note cs5  $04
+	rest $06
+	note gs4  $04
+	rest $06
+	note cs5  $04
+	rest $06
+	note f4   $04
+	rest $06
+	note cs5  $04
+	rest $06
+	note gs4  $04
+	rest $06
+	note cs5  $04
+	rest $06
+	note g4   $04
+	rest $06
+	note ds5  $04
+	rest $06
+	note as4  $04
+	rest $06
+	note ds5  $04
+	rest $06
+	note g4   $04
+	rest $06
+	note ds5  $04
+	rest $06
+	note as4  $04
+	rest $06
+	note ds5  $04
+	rest $06
+	note g4   $04
+	rest $06
+	note c5   $04
+	rest $06
+	note e4   $04
+	rest $06
+	note c5   $04
+	rest $06
+	note g4   $04
+	rest $06
+	note c5   $04
+	rest $06
+	note e4   $04
+	rest $06
+	note c5   $04
+	rest $06
+	vol $2
+	note gs4  $04
+	rest $06
+	note ds5  $04
+	rest $06
+	note c5   $04
+	rest $06
+	note ds5  $04
+	rest $06
 	note gs5  $04
-	rest $10
-	note e5   $04
-	rest $10
-	note b5   $04
-	rest $10
-	note fs5  $04
-	rest $10
-	note cs6  $04
-	rest $10
-	note a5   $04
-	rest $10
-	note e6   $04
-	rest $10
-	note d5   $04
-	rest $10
-	note a5   $04
-	rest $10
-	note fs5  $04
-	rest $10
-	note cs6  $04
-	rest $10
-	note e5   $04
-	rest $10
-	note b5   $04
-	rest $10
+	rest $06
+	note ds5  $04
+	rest $06
+	note c5   $04
+	rest $06
+	note ds5  $04
+	rest $06
+	note g4   $04
+	rest $06
+	note ds5  $04
+	rest $06
+	note as4  $04
+	rest $06
+	note ds5  $04
+	rest $06
+	note g5   $04
+	rest $06
+	note ds5  $04
+	rest $06
+	note as4  $04
+	rest $06
+	note ds5  $04
+	rest $06
+	note f4   $04
+	rest $06
+	note c5   $04
+	rest $06
+	note gs4  $04
+	rest $06
+	note c5   $04
+	rest $06
+	note f5   $04
+	rest $06
+	note c5   $04
+	rest $06
+	note gs4  $04
+	rest $06
+	note c5   $04
+	rest $06
+	note f4   $04
+	rest $06
+	note cs5  $04
+	rest $06
+	note gs4  $04
+	rest $06
+	note cs5  $04
+	rest $06
+	note f5   $04
+	rest $06
+	note cs5  $04
+	rest $06
+	note gs4  $04
+	rest $06
+	note cs5  $04
+	rest $06
+	note gs4  $04
+	rest $06
+	note ds5  $04
+	rest $06
+	note c5   $04
+	rest $06
+	note ds5  $04
+	rest $06
 	note gs5  $04
-	rest $10
-	note d6   $04
-	rest $10
+	rest $06
+	note ds5  $04
+	rest $06
+	note c5   $04
+	rest $06
+	note ds5  $04
+	rest $06
+	note g4   $04
+	rest $06
+	note ds5  $04
+	rest $06
+	note as4  $04
+	rest $06
+	note ds5  $04
+	rest $06
+	note g5   $04
+	rest $06
+	note ds5  $04
+	rest $06
+	note as4  $04
+	rest $06
+	note ds5  $04
+	rest $06
+	note f4   $04
+	rest $06
+	note c5   $04
+	rest $06
+	note gs4  $04
+	rest $06
+	note c5   $04
+	rest $06
+	note f5   $04
+	rest $06
+	note c5   $04
+	rest $06
+	note gs4  $04
+	rest $06
+	note c5   $04
+	rest $06
 	note cs5  $04
 	rest $10
 	note gs5  $04
 	rest $10
 	note f5   $04
 	rest $10
-	note b5   $04
-	rest $10
-	vol $1
-	note e6   $04
-	rest $10
-	note cs6  $04
-	rest $10
-	note a5   $04
-	rest $10
-	note fs5  $04
-	rest $10
-	note d6   $04
-	rest $10
-	note a5   $04
-	rest $10
-	note fs5  $04
-	rest $10
-	note d5   $04
-	rest $10
-	note b5   $04
-	rest $10
-	note fs5  $04
-	rest $10
-	note d5   $04
-	rest $10
-	note b4   $04
-	rest $10
-	note cs6  $04
-	rest $10
-	note gs5  $04
-	rest $10
-	note f5   $04
-	rest $10
-	note cs5  $04
+	note c6   $04
 	rest $10
 	goto musBalladePalaisChannel0Loop
 	cmdff
@@ -20181,46 +20349,74 @@ musBalladePalaisChannel1Loop:
 	vibrato $41
 	cmdfd $00
 	vol $4
+	duty $02
 	vibrato $41
-	note cs6  $36
-	rest $06
-	note b5   $12
+	note c5   $1a
+	rest $04
+	note c5   $08
 	rest $02
-	note a5   $48
-	rest $08
-	note fs5  $24
+	note gs4  $11
+	rest $03
+	note g4   $11
+	rest $03
+	note f4   $33
+	rest $1d
+	note ds4  $11
+	rest $03
+	note f4   $11
+	rest $03
+	note g4   $11
+	rest $03
+	note gs4  $11
+	rest $03
+	note g4   $44
+	rest $0c
+	note c5   $1a
 	rest $04
-	note a5   $24
-	rest $04
-	note e5   $48
-	rest $08
-	note fs5  $36
-	rest $06
-	note gs5  $12
+	note c5   $08
 	rest $02
-	note a5   $24
+	note cs5  $11
+	rest $03
+	note c5   $11
+	rest $03
+	note gs4  $33
+	rest $1d
+	note as4  $11
+	rest $03
+	note gs4  $11
+	rest $03
+	note g4   $11
+	rest $03
+	note ds4  $11
+	rest $03
+	note f4   $44
+	rest $0c
+	vol $6
+	vibrato $42
+	note ds5  $39
+	rest $03
+	note c5   $13
+	rest $01
+	note as4  $4c
 	rest $04
-	note cs6  $24
-	rest $04
-	note b5   $36
-	rest $06
-	note a5   $12
+	note c5   $26
 	rest $02
-	note gs5  $48
-	rest $08
-	vol $5
-	note a5   $24
+	note ds5  $26
+	rest $02
+	note f5   $4c
 	rest $04
-	note cs6  $24
-	rest $04
-	note e6   $48
-	rest $08
-	note d6   $24
-	rest $04
-	note b5   $24
-	rest $04
-	note cs6  $48
-	rest $08
+	note ds5  $39
+	rest $03
+	note f5   $13
+	rest $01
+	note g5   $26
+	rest $02
+	note f5   $13
+	rest $01
+	note ds5  $13
+	rest $01
+	note c5   $4c
+	rest $54
 	goto musBalladePalaisChannel1Loop
 	cmdff
 
@@ -20229,33 +20425,34 @@ musBalladePalaisChannel4:
 	cmdfd $00
 	duty $0e
 	vibrato $00
-	note fs1  $50
-	note d2   $50
+	note f1   $50
+	note cs2  $50
 musBalladePalaisChannel4Loop:
 	duty $0e
 	vibrato $00
-	note fs1  $50
-	note d2   $50
-	note b1   $50
+	note f1   $50
 	note cs2  $50
-	note fs1  $50
-	note d2   $50
-	note e1   $50
+	note ds2  $50
+	note c2   $50
+	note f1   $50
 	note cs2  $50
-	note a1   $50
-	note d2   $50
-	note b1   $50
+	note ds2  $50
+	note c2   $50
+	note gs1  $50
+	note ds2  $50
+	note f1   $50
+	note cs2  $50
+	note gs1  $50
+	note ds2  $50
+	note f1   $50
 	note cs2  $50
 	goto musBalladePalaisChannel4Loop
 	cmdff
 
 musBalladePalaisChannel6:
-	vol $1
-	note $2a  $0a
-	rest $96
+	rest $a0
 musBalladePalaisChannel6Loop:
 	vol $1
-	vol $1
 	note $2a  $0a
 	rest $96
 	vol $1
@@ -20266,8 +20463,51 @@ musBalladePalaisChannel6Loop:
 	rest $96
 	vol $1
 	note $2a  $0a
-	rest $ff
-	rest $d7
+	rest $96
+	vol $1
+	note $2a  $0a
+	rest $1e
+	note $2a  $0a
+	rest $1e
+	vol $1
+	note $2a  $0a
+	rest $1e
+	note $2a  $0a
+	rest $1e
+	vol $1
+	note $2a  $0a
+	rest $1e
+	note $2a  $0a
+	rest $1e
+	vol $1
+	note $2a  $0a
+	rest $1e
+	note $2a  $0a
+	rest $1e
+	vol $1
+	note $2a  $0a
+	rest $1e
+	note $2a  $0a
+	rest $1e
+	vol $1
+	note $2a  $0a
+	rest $1e
+	note $2a  $0a
+	rest $1e
+	vol $1
+	note $2a  $0a
+	rest $1e
+	note $2a  $0a
+	rest $1e
+	vol $2
+	note $2a  $0a
+	rest $0a
+	note $2a  $0a
+	rest $0a
+	note $2a  $0a
+	note $2a  $0a
+	note $2a  $0a
+	note $2a  $0a
 	goto musBalladePalaisChannel6Loop
 	cmdff
 

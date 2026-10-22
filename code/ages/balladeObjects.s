@@ -173,7 +173,7 @@ arrivalTalk:
 -
 	ldi a,(hl)
 	cp $ff
-	jp z,interactionDelete
+	jr z,@noText
 	cp b
 	jr nz,+
 	ld a,(hl)
@@ -207,6 +207,12 @@ arrivalTalk:
 	jp interactionDelete
 
 ; groupe, salle, texte (groupe $5a), drapeau global mis à 1 ($ff = aucun)
+; Pas de texte pour cette salle : on rend la main (sinon tout reste gelé)
+@noText:
+	xor a
+	ld (wDisabledObjects),a
+	jp interactionDelete
+
 @arrivalTexts:
 	.db $01, $31, <TX_5a55, $ff ; Hameau-Grelot, la jetée
 	.db $01, $32, <TX_5a57, $ff ; devant la falaise de la grotte de la Boîte
@@ -234,6 +240,7 @@ arrivalTalk:
 	.db $05, $c1, <TX_5ad9, $ff ; 1F : la lune tombe
 	.db $05, $c4, <TX_5ada, $ff ; 2F : Dark Link
 	.db $05, $c7, <TX_5adb, $ff ; 3F : Ganon
+	.db $05, $f5, <TX_5adb, $ff ; 3F : Ganon (il pose son arène, 5:f5, à la place de 5:c7)
 	.db $05, $ca, <TX_5adc, $ff ; 4F : « TU ME RECONNAIS ? »
 	.db $ff
 
@@ -2559,6 +2566,13 @@ floorStairs:
 floorStairs_solved:
 	call getThisRoomFlags
 	set 7,(hl)
+	; (Ganon remplace 5:c7 par son arène, 5:f5 : retenir sa victoire dans 5:c7)
+	ld hl,wGroup5RoomFlags+$c7
+	ld a,(wActiveRoom)
+	cp $f5
+	jr nz,+
+	set 7,(hl)
++
 	ld a,SND_SOLVEPUZZLE
 	call playSound
 	call objectCreatePuff

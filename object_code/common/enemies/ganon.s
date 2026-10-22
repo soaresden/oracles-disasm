@@ -170,6 +170,13 @@ ganon_state_uninitialized:
 
 ; Spawning ENEMY_GANON_REVIVAL_CUTSCENE
 ganon_state1:
+.ifdef ROM_AGES
+	; BALLADE: pas de résurrection (ENEMY_GANON_REVIVAL_CUTSCENE n'existe plus) : le signal tout de
+	; suite (Ganon, au 3e étage de la Tour Sans-Nuit)
+	ld e,Enemy.counter1
+	ld a,$01
+	ld (de),a
+.else
 	call getFreeEnemySlot_uncounted
 	ret nz
 	ld (hl),ENEMY_GANON_REVIVAL_CUTSCENE
@@ -177,6 +184,7 @@ ganon_state1:
 	ld (hl),Enemy.start
 	inc l
 	ld (hl),d
+.endif
 
 	call ecom_incState
 	ld l,Enemy.counter2
