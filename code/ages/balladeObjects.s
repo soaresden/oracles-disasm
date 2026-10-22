@@ -56,6 +56,7 @@
 ; @subid_36{Invisible : Ganon (5:c7) ne craint que l'Épée de Légende}
 ; @subid_37{Invisible, à l'auberge (3:9e) : après le chapitre 5, Marine trouve les photos}
 ; @subid_38{Invisible, le 4F de la Tour (5:c8) : les Veilleurs en fantômes ; vu : « LIIINK! »}
+; @subid_39{Invisible, à l'auberge (3:9e) : après les photos, le quiz de Marine sur Cocolint}
 ; ==================================================================================================
 
 ;;
@@ -120,6 +121,7 @@ main:
 	.dw ganonGuard
 	.dw photoScene
 	.dw ghostVeil
+	.dw marineQuiz
 
 
 ;;
@@ -3370,4 +3372,172 @@ ghostVeil:
 	cp LAST_ENEMY_INDEX+1
 	jr c,@nextEnemy
 	ret
+
+
+; ==================================================================================================
+; Le quiz de Marine (subid $39, à l'auberge 3:9e ; idée de Denis) : juste après les photos
+; (GLOBALFLAG_BALLADE_PHOTOS), « on va voir si tu as tout oublié de l'île Cocolint ! » : six
+; questions sur Link's Awakening (@questions : le texte, la bonne réponse ; $ff = pas notée : sa
+; mère, Marine raconte), la blague de Tarkin (Mario) et sa tirade (« ne joue pas avec mon cœur »).
+; Tout juste : un bisou (GLOBALFLAG_BALLADE_QUIZ) ; sinon, on recommence à la prochaine visite.
+; var30 : la question ; var31 : les bonnes réponses ; var32 : la tirade est dite.
+; ==================================================================================================
+.define QUIZ_QUESTIONS 6
+.define QUIZ_SCORED 5
+
+marineQuiz:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw @init
+	.dw @ask
+	.dw @answer
+	.dw @react
+	.dw @kiss
+	.dw @end
+
+@init:
+	call waitRoomReady
+	ret nz
+	ld a,(wBalladeEnding)
+	or a
+	jp nz,interactionDelete
+	ld a,GLOBALFLAG_BALLADE_PHOTOS
+	call checkGlobalFlag
+	jp z,interactionDelete
+	ld a,GLOBALFLAG_BALLADE_QUIZ
+	call checkGlobalFlag
+	jp nz,interactionDelete
+	call interactionIncState
+	ld a,$91
+	ld (wDisabledObjects),a
+	ld bc,TX_5aee
+	jp showText
+
+	; La question suivante, ou la fin
+@ask:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	ld e,Interaction.var30
+	ld a,(de)
+	cp QUIZ_QUESTIONS
+	jr nc,@finish
+	add a
+	ld hl,@questions
+	rst_addAToHl
+	ld c,(hl)
+	ld b,>TX_5aef
+	call interactionIncState
+	jp showText
+
+@finish:
+	ld e,Interaction.var31
+	ld a,(de)
+	cp QUIZ_SCORED
+	ld bc,TX_5a49
+	ld a,$05
+	jr c,+
+	ld bc,TX_5afe
+	ld a,$04
++
+	ld e,Interaction.state
+	ld (de),a
+	jp showText
+
+	; La réponse : bonne, mauvaise, ou pas notée (sa mère : Marine raconte)
+@answer:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	ld e,Interaction.var30
+	ld a,(de)
+	ld c,a
+	inc a
+	ld (de),a
+	ld a,c
+	add a
+	inc a
+	ld hl,@questions
+	rst_addAToHl
+	ld a,(hl)
+	ld b,a
+	ld e,Interaction.state
+	ld a,$03
+	ld (de),a
+	ld a,b
+	cp $ff
+	ld bc,TX_5af8
+	jp z,showText
+	ld a,(wSelectedTextOption)
+	cp (hl)
+	ld bc,TX_5afd
+	jp nz,showText
+	ld e,Interaction.var31
+	ld a,(de)
+	inc a
+	ld (de),a
+	; (Tarkin : la blague de Mario)
+	ld e,Interaction.var30
+	ld a,(de)
+	cp QUIZ_QUESTIONS
+	ld bc,TX_5afa
+	jp z,showText
+	ld bc,TX_5afc
+	jp showText
+
+	; Après la dernière question, la tirade (« comme si ta vie était un jeu ! »)
+@react:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	ld e,Interaction.var30
+	ld a,(de)
+	cp QUIZ_QUESTIONS
+	jr c,@next
+	ld e,Interaction.var32
+	ld a,(de)
+	or a
+	jr nz,@next
+	inc a
+	ld (de),a
+	ld bc,TX_5afb
+	jp showText
+@next:
+	ld e,Interaction.state
+	ld a,$01
+	ld (de),a
+	ret
+
+	; Tout juste : « ferme les yeux »... un bisou
+@kiss:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	ld a,GLOBALFLAG_BALLADE_QUIZ
+	call setGlobalFlag
+	ld a,(wLinkMaxHealth)
+	ld (wLinkHealth),a
+	ld a,SND_FAIRYCUTSCENE
+	call playSound
+	call interactionIncState
+	ld bc,TX_5aff
+	jp showText
+
+@end:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	xor a
+	ld (wDisabledObjects),a
+	jp interactionDelete
+
+; Les questions : le texte (bas), la bonne réponse ($ff : pas notée)
+@questions:
+	.db <TX_5aef, $02 ; le village où Marine a chanté : des Animaux
+	.db <TX_5af4, $01 ; le morse : il a plongé
+	.db <TX_5af5, $00 ; le noble au château : Richard
+	.db <TX_5af6, $00 ; l'animal totem : le Coq Volant
+	.db <TX_5af7, $ff ; sa mère (personne ne le sait)
+	.db <TX_5af9, $00 ; Tarkin fait penser à : Mario
 

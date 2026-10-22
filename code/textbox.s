@@ -1000,22 +1000,33 @@ getTextAddress:
 	ldi a,(hl)
 	ld h,(hl)
 	ld l,a
-	; BALLADE: le texte français (langue 1) a son propre découpage
+	; BALLADE: le texte français (langue 1) a son propre découpage ; et un 3e découpage
+	; (TEXT_OFFSET_3, tools/build/parseText.py) quand le texte dépasse 2 x 64 Ko
 	ld a,(wActiveLanguage)
 	or a
 	ld a,(wTextIndexH)
 	jr nz,@frenchSplit
 	cp TEXT_OFFSET_SPLIT_INDEX
 	jr c,+
+	cp TEXT_OFFSET_SPLIT_INDEX2
+	jr nc,@offset3
 	jr @offset2
 @frenchSplit:
 	cp TEXT_OFFSET_SPLIT_INDEX_FR
 	jr c,+
+	cp TEXT_OFFSET_SPLIT_INDEX2_FR
+	jr c,@offset2
+@offset3:
+	ld a,(wActiveLanguage)
+	add a
+	ld hl,textOffset3Table
+	jr @offsetTable
 @offset2:
 ; Else, text is relative to TEXT_OFFSET_2
 	ld a,(wActiveLanguage)
 	add a
 	ld hl,textOffset2Table
+@offsetTable:
 	rst_addDoubleIndex
 	ldi a,(hl)
 	ld e,a
@@ -1082,6 +1093,24 @@ textOffset2Table:
 	.db 0
 	.db :TEXT_OFFSET_2
 	.dw TEXT_OFFSET_1&$3fff
+	.db 0
+
+; BALLADE: le 3e découpage (TEXT_OFFSET_3)
+textOffset3Table:
+	.db :TEXT_OFFSET_3
+	.dw TEXT_OFFSET_3&$3fff
+	.db 0
+	.db :TEXT_OFFSET_3_FR
+	.dw TEXT_OFFSET_3_FR&$3fff
+	.db 0
+	.db :TEXT_OFFSET_3
+	.dw TEXT_OFFSET_3&$3fff
+	.db 0
+	.db :TEXT_OFFSET_3
+	.dw TEXT_OFFSET_3&$3fff
+	.db 0
+	.db :TEXT_OFFSET_3
+	.dw TEXT_OFFSET_3&$3fff
 	.db 0
 
 textTableTable:

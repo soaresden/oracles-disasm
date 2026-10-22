@@ -28,8 +28,15 @@ with tempfile.TemporaryDirectory() as tmp:
 
 # Same text indices as the first language
 split = re.search(r'\.define TEXT_OFFSET_SPLIT_INDEX (\S+)', defines).group(1)
-ours = defines.split('\n', 2)[2]
-first = open(os.path.join(buildDir, 'textDefines.s')).read().split('\n', 2)[2]
+split2 = re.search(r'\.define TEXT_OFFSET_SPLIT_INDEX2 (\S+)', defines).group(1)
+
+
+def indices(text):
+    return '\n'.join(l for l in text.split('\n') if not l.startswith('.define TEXT_OFFSET_SPLIT'))
+
+
+ours = indices(defines)
+first = indices(open(os.path.join(buildDir, 'textDefines.s')).read())
 if ours != first:
     sys.exit('parseTextLang.py: the text indices differ from the first language')
 
@@ -40,4 +47,5 @@ data = re.sub(r'\bTEXT_OFFSET_(\d)\b', r'TEXT_OFFSET_\1_' + lang, data)
 data = re.sub(r'\b(?!TEXT_END)(\w+?)_ADDR\b', r'\1_' + lang + '_ADDR', data)
 open(outFile, 'w').write(data)
 open(os.path.join(buildDir, 'textDefines' + lang.title() + '.s'), 'w').write(
-    '.define TEXT_OFFSET_SPLIT_INDEX_%s %s\n' % (lang, split))
+    '.define TEXT_OFFSET_SPLIT_INDEX_%s %s\n.define TEXT_OFFSET_SPLIT_INDEX2_%s %s\n'
+    % (lang, split, lang, split2))

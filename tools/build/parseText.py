@@ -329,9 +329,11 @@ parsedGroups = set()
 
 totalTextDataSize = 0
 textOffsetSplitIndex = 0xff # This will be changed if necessary
+# BALLADE: a second split (TEXT_OFFSET_3), the French text outgrew two 64 KB ranges
+textOffsetSplitIndex2 = 0xff
 
 def parseTextFile(textFile, isDictionary):
-    global groupDict, totalTextDataSize, textOffsetSplitIndex
+    global groupDict, totalTextDataSize, textOffsetSplitIndex, textOffsetSplitIndex2
 
     yamlData = yaml.safe_load(textFile)
     textFile.close()
@@ -743,9 +745,12 @@ def parseTextFile(textFile, isDictionary):
             if totalTextDataSize >= 0x10000:
                 #print(hex(textGroup.index)) # Debugging
                 #print(textStruct.getPrimaryName())
-                if textOffsetSplitIndex != 0xff:
-                    raise Exception("Too much text; Drenn needs to add 2nd textOffsetSplitIndex to parser")
-                textOffsetSplitIndex = textGroup.index
+                if textOffsetSplitIndex == 0xff:
+                    textOffsetSplitIndex = textGroup.index
+                elif textOffsetSplitIndex2 == 0xff:
+                    textOffsetSplitIndex2 = textGroup.index
+                else:
+                    raise Exception("Too much text; a 4th text offset is needed")
 
                 # Reset totalTextDataSize to be only the size of this group so far (the new
                 # textOffsetSplitIndex applies to the entire group, not just this entry)
@@ -806,12 +811,15 @@ bank = startAddress//0x4000
 
 textOffset1 = groupDict[0].textStructs[0]
 textOffset2 = groupDict[textOffsetSplitIndex].textStructs[0]
+# (without a second split, TEXT_OFFSET_3 is the same as TEXT_OFFSET_2)
+textOffset3 = groupDict[textOffsetSplitIndex2].textStructs[0] if textOffsetSplitIndex2 != 0xff else textOffset2
 
 # Print defines
 
 definesFile = open(build_dir + '/textDefines.s', 'w')
 
-definesFile.write('.define TEXT_OFFSET_SPLIT_INDEX ' + wlahex(textOffsetSplitIndex, 2) + '\n\n')
+definesFile.write('.define TEXT_OFFSET_SPLIT_INDEX ' + wlahex(textOffsetSplitIndex, 2) + '\n')
+definesFile.write('.define TEXT_OFFSET_SPLIT_INDEX2 ' + wlahex(textOffsetSplitIndex2, 2) + '\n\n')
 
 for group in groupDict.values():
     if group.index >= 4:
@@ -844,8 +852,10 @@ for group in groupDict.values():
 
     if group.index < textOffsetSplitIndex:
         textOffset = 'TEXT_OFFSET_1'
-    else:
+    elif group.index < textOffsetSplitIndex2:
         textOffset = 'TEXT_OFFSET_2'
+    else:
+        textOffset = 'TEXT_OFFSET_3'
 
     for i in range(0, group.lastTextIndex+1):
         textName = group.getTextName(i)
@@ -870,6 +880,8 @@ for group in groupDict.values():
             outFile.write('TEXT_OFFSET_1:\n')
         elif textOffset2 == textStruct:
             outFile.write('TEXT_OFFSET_2:\n')
+        if textOffset3 == textStruct:
+            outFile.write('TEXT_OFFSET_3:\n')
 
         for name in textStruct.names:
             outFile.write(name + '_ADDR:\n')
