@@ -247,7 +247,7 @@ interactionData:
 	/* $e8 */ m_InteractionData interactione8SubidData ; BALLADE: habitants
 	/* $e9 */ m_InteractionData $00 $00 $00 ; BALLADE: ondulation du Songe (rien à afficher)
 	/* $ea */ m_InteractionData $00 $00 $00 ; BALLADE: boss en rythme (rien à afficher)
-	/* $eb */ m_InteractionData $00 $00 $00 ; BALLADE: le Creuse-Rubis (rien à afficher)
+	/* $eb */ m_InteractionData interactionebSubidData ; BALLADE: les jeux du forain, la carte au trésor, Ghost Babel
 	/* $ec */ m_InteractionData $00 $00 $00 ; BALLADE: le menu de test caché (rien à afficher)
 	/* $ed */ m_InteractionData interactionedSubidData ; BALLADE: les objets de nos îles
 
@@ -848,6 +848,21 @@ interactione8SubidData:
 	m_InteractionSubidData $4f $10 $12 ; l'ado
 	m_InteractionSubidData $e2 $00 $32 ; Marine humaine (spr_marine_human) : cheveux orange, robe jaune pâle
 	m_InteractionSubidData $42 $00 $12 ; le forain (le vieux, autres couleurs)
+	m_InteractionSubidDataEnd
+
+; BALLADE: INTERAC_BALLADE_CREUSE : les contrôleurs sont invisibles ; Ghost Babel (code/ages/balladeGhost.s) :
+; spr_ballade_ghost ($e4), image n = tuiles 4n à 4n+3 ; animation 0 = deux sprites, 1 = un seul
+interactionebSubidData:
+	m_InteractionSubidData $00 $00 $00 ; $00 le Creuse-Rubis (invisible)
+	m_InteractionSubidData $00 $00 $00 ; $01 le Labyrinthe des Lynels (invisible)
+	m_InteractionSubidData $00 $00 $00 ; $02 l'arène du Mamono (invisible)
+	m_InteractionSubidData $00 $00 $00 ; $03 la carte au trésor (invisible)
+	m_InteractionSubidData $e4 $04 $30 ; $04 la boîte en carton (palette 3)
+	m_InteractionSubidData $00 $00 $00 ; $05 Ghost Babel : le contrôleur (invisible)
+	m_InteractionSubidData $e4 $0c $21 ; $06 le regard d'un fantôme (un point rouge)
+	m_InteractionSubidData $e4 $08 $30 ; $07 « ? »
+	m_InteractionSubidData $e4 $10 $00 ; $08 le radar (vert)
+	m_InteractionSubidData $e4 $14 $21 ; $09 un point du radar
 	m_InteractionSubidDataEnd
 
 ; BALLADE: les objets de nos îles (INTERAC_BALLADE_OBJECT) : spr_ballade_objects ($e3), image n =

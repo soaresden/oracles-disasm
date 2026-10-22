@@ -234,7 +234,7 @@ interactionAnimationTable:
 	.dw interactione8Animations ; BALLADE
 	.dw interactione4Animations ; BALLADE: $e9 (rien à afficher)
 	.dw interactione4Animations ; BALLADE: $ea (rien à afficher)
-	.dw interactione4Animations ; BALLADE: $eb (rien à afficher)
+	.dw interactionebAnimations ; BALLADE: $eb (Ghost Babel : la boîte, le regard, le radar)
 	.dw interactione4Animations ; BALLADE: $ec (rien à afficher)
 	.dw interactione8Animations ; BALLADE: $ed, les objets (images fixes des villageois)
 
@@ -474,7 +474,7 @@ interactionOamDataTable: ; 0x59a23
 	.dw interactione8OamDataPointers ; BALLADE
 	.dw interactione4OamDataPointers ; BALLADE: $e9
 	.dw interactione4OamDataPointers ; BALLADE: $ea
-	.dw interactione4OamDataPointers ; BALLADE: $eb
+	.dw interactionebOamDataPointers ; BALLADE: $eb
 	.dw interactione4OamDataPointers ; BALLADE: $ec
 	.dw interactione8OamDataPointers ; BALLADE: $ed
 
@@ -781,6 +781,18 @@ interaction4bAnimations:
 	.dw interactionAnimation5a3e9
 interaction4cAnimations:
 interactione3Animations:
+interactionebAnimations: ; BALLADE: Ghost Babel : 0 une image (deux sprites), 1 un seul sprite
+	.dw interactionAnimationBalladeTwo
+	.dw interactionAnimationBalladeOne
+
+interactionAnimationBalladeTwo:
+	.db $7f $00 $00
+	m_AnimationLoop interactionAnimationBalladeTwo
+
+interactionAnimationBalladeOne:
+	.db $7f $02 $00
+	m_AnimationLoop interactionAnimationBalladeOne
+
 interactione7Animations: ; BALLADE: Marine = animations du perroquet
 	.dw interactionAnimation5a460
 	.dw interactionAnimation5a596
@@ -3505,6 +3517,10 @@ interaction4bOamDataPointers: ; 0x5b00c
 
 interaction4cOamDataPointers: ; 0x5b024
 interactione3OamDataPointers: ; 0x5b024
+interactionebOamDataPointers: ; BALLADE: Ghost Babel
+	.dw interactionOamData5020e
+	.dw interactionOamDataBalladeOne
+
 interactione7OamDataPointers: ; BALLADE
 	.dw interactionOamData5020e
 	.dw interactionOamData502f8

@@ -309,6 +309,11 @@ interactionOamData5020e:
 	.db $08 $00 $00 $00
 	.db $08 $08 $02 $00
 
+; BALLADE: un seul sprite (Ghost Babel : un point du regard, du radar)
+interactionOamDataBalladeOne:
+	.db $01
+	.db $08 $04 $00 $00
+
 interactionOamData50217:
 	.db $02
 	.db $08 $00 $00 $03

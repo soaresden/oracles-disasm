@@ -390,7 +390,12 @@ wBalladePacPowerGen: ; $c5a5
 wBalladePacResetGen: ; $c5a6
 	db
 
-; $c5a7-$c5af unused?
+; BALLADE: Ghost Babel (code/ages/balladeGhost.s) : la boîte en carton que Link porte (son
+; emplacement), 0 sinon
+wBalladeGhostBox: ; $c5a7
+	db
+
+; $c5a8-$c5af unused?
 
 .ENDS
 

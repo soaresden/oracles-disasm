@@ -242,6 +242,11 @@ specialObjectLoadAnimationFrameToBuffer:
 		.include "code/ages/balladeTresor.s"
 	.ends
 
+	 ; BALLADE: Ghost Babel au 4F de la Tour (INTERAC_BALLADE_CREUSE $04-$09)
+	 m_section_superfree Ballade_Ghost namespace balladeGhost
+		.include "code/ages/balladeGhost.s"
+	.ends
+
 	 ; BALLADE: le menu de test caché (HAUT tenu 5 s à l'écran titre)
 	 m_section_superfree Ballade_Debug namespace balladeDebug
 		.include "code/ages/balladeDebug.s"

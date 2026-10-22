@@ -4732,6 +4732,9 @@ group5Mapc8ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $38 $08 $08
 	obj_SpecificEnemyA $00 ENEMY_AMBI_GUARD $11 $58 $28
 	obj_SpecificEnemyA $00 ENEMY_AMBI_GUARD $13 $18 $c8
+	obj_Interaction INTERAC_BALLADE_CREUSE $05 $08 $08 ; Ghost Babel : le regard des fantômes, le radar
+	obj_Interaction INTERAC_BALLADE_CREUSE $04 $68 $48 ; une boîte en carton
+	obj_Interaction INTERAC_BALLADE_CREUSE $04 $28 $a8 ; une autre boîte
 	obj_End
 group5Mapc9ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $2f $58 $d8
