@@ -4804,6 +4804,12 @@ paletteDataLabyrinthe: ; le Labyrinthe des Lynels : murs, rubis, gemme, gemme qu
 	m_RGB16 $08 $0c $1f
 	m_RGB16 $14 $18 $1f
 
+paletteDataTerrier: ; la machine possédée : noir, gris acier, la lueur cyan du fantôme
+	m_RGB16 $1f $1f $1f
+	m_RGB16 $00 $00 $00
+	m_RGB16 $0e $0f $11
+	m_RGB16 $12 $1e $1f
+
 paletteDataLabyrintheSpr: ; les Lynels qui ont peur (bleu nuit, traits pâles) ; le Lynel rose
 	m_RGB16 $1f $1f $1f
 	m_RGB16 $1f $1a $1a

@@ -82,6 +82,13 @@ parentItemCode_sword:
 	bit 5,a
 	ret z
 	res 5,(hl)
+.ifdef ROM_AGES
+	; BALLADE: le Bracelet des Âmes (le Terrier des Serpents, code/ages/balladeTerrier.s) : l'épée
+	; lance toujours un rayon
+	ld a,(wBalladeSoulState)
+	bit 1,a
+	jp nz,@createSwordBeam
+.endif
 	ld a,(wSwordLevel)
 	cp $02
 	jp nc,@checkCreateSwordBeam

@@ -235,3 +235,5 @@ objectGfxHeaderTable:
 	/* $e2 */ m_ObjectGfxHeader spr_marine_human
 	/* $e3 */ m_ObjectGfxHeader spr_ballade_objects
 	/* $e4 */ m_ObjectGfxHeader spr_ballade_ghost ; Ghost Babel (art/ghost_babel.txt)
+	/* $e5 */ m_ObjectGfxHeader spr_ballade_terrier ; le Terrier des Serpents (art/terrier.txt)
+	/* $e6 */ m_ObjectGfxHeader spr_ballade_rex ; son boss (art/rex.txt)

@@ -314,6 +314,19 @@ interactionOamDataBalladeOne:
 	.db $01
 	.db $08 $04 $00 $00
 
+; BALLADE: une grande image de 32 x 32 (le boss du Terrier) : quatre carrés de 16 x 16 (haut
+; gauche, haut droite, bas gauche, bas droite)
+interactionOamDataBalladeBig:
+	.db $08
+	.db $00 $f8 $00 $00
+	.db $00 $00 $02 $00
+	.db $00 $08 $04 $00
+	.db $00 $10 $06 $00
+	.db $10 $f8 $08 $00
+	.db $10 $00 $0a $00
+	.db $10 $08 $0c $00
+	.db $10 $10 $0e $00
+
 interactionOamData50217:
 	.db $02
 	.db $08 $00 $00 $03

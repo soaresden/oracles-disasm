@@ -781,9 +781,10 @@ interaction4bAnimations:
 	.dw interactionAnimation5a3e9
 interaction4cAnimations:
 interactione3Animations:
-interactionebAnimations: ; BALLADE: Ghost Babel : 0 une image (deux sprites), 1 un seul sprite
+interactionebAnimations: ; BALLADE: 0 une image (deux sprites), 1 un seul sprite, 2 une grande image (32 x 32)
 	.dw interactionAnimationBalladeTwo
 	.dw interactionAnimationBalladeOne
+	.dw interactionAnimationBalladeBig
 
 interactionAnimationBalladeTwo:
 	.db $7f $00 $00
@@ -792,6 +793,10 @@ interactionAnimationBalladeTwo:
 interactionAnimationBalladeOne:
 	.db $7f $02 $00
 	m_AnimationLoop interactionAnimationBalladeOne
+
+interactionAnimationBalladeBig:
+	.db $7f $04 $00
+	m_AnimationLoop interactionAnimationBalladeBig
 
 interactione7Animations: ; BALLADE: Marine = animations du perroquet
 	.dw interactionAnimation5a460
@@ -3517,9 +3522,10 @@ interaction4bOamDataPointers: ; 0x5b00c
 
 interaction4cOamDataPointers: ; 0x5b024
 interactione3OamDataPointers: ; 0x5b024
-interactionebOamDataPointers: ; BALLADE: Ghost Babel
+interactionebOamDataPointers: ; BALLADE: Ghost Babel, le Terrier des Serpents
 	.dw interactionOamData5020e
 	.dw interactionOamDataBalladeOne
+	.dw interactionOamDataBalladeBig
 
 interactione7OamDataPointers: ; BALLADE
 	.dw interactionOamData5020e

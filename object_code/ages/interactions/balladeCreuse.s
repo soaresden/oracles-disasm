@@ -4,7 +4,7 @@
 ; ==================================================================================================
 ; Sous-type $01 : le Labyrinthe des Lynels (code/ages/balladePac.s) ; $02 : l'arène du Mamono
 ; (code/ages/balladeMamono.s) ; $03 : la carte au trésor (code/ages/balladeTresor.s) ; $04-$09 :
-; Ghost Babel (code/ages/balladeGhost.s).
+; Ghost Babel (code/ages/balladeGhost.s) ; $0a-$0f : le Terrier des Serpents (code/ages/balladeTerrier.s).
 interactionCodeeb:
 	ld e,Interaction.subid
 	ld a,(de)
@@ -45,4 +45,29 @@ interactionCodeeb:
 	jr nz,+
 	jpab balladeGhost.radar
 +
+	dec a
+	jr nz,+
 	jpab balladeGhost.radarDot
++
+	; Le Terrier des Serpents ($0a-$0f)
+	dec a
+	jr nz,+
+	jpab balladeTerrier.controller
++
+	dec a
+	jr nz,+
+	jpab balladeTerrier.soul
++
+	dec a
+	jr nz,+
+	jpab balladeTerrier.rex
++
+	dec a
+	jr nz,+
+	jpab balladeTerrier.gauntlet
++
+	dec a
+	jr nz,+
+	jpab balladeTerrier.jar
++
+	jpab balladeTerrier.ghost

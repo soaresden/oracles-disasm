@@ -58,7 +58,8 @@ dungeonData09:
 dungeonData0a:
 	m_DungeonData >wGroup5RoomFlags, $f4, dungeon0aLayout, $01, $03, $00, $00, $00
 dungeonData0b:
-	m_DungeonData >wGroup4RoomFlags, $ce, dungeon0bLayout, $02, $02, $00, $00, $00
+	; BALLADE: le Terrier des Serpents (story/salles/terrier.txt), un seul étage, en serpent
+	m_DungeonData >wGroup4RoomFlags, $d0, dungeon0bLayout, $01, $03, $01, $00, $00
 dungeonData0c:
 	m_DungeonData >wGroup5RoomFlags, $44, dungeon0cLayout, $02, $02, $00, $00, $00
 dungeonData0d:

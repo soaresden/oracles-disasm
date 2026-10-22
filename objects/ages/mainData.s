@@ -572,9 +572,6 @@ group4Map0eObjectData:
 group4Map0fObjectData:
 group4Map26ObjectData:
 group4Map67ObjectData:
-group4Mapd5ObjectData:
-group4Mapd6ObjectData:
-group4Mapd7ObjectData:
 group4Mapd8ObjectData:
 group4Mapd9ObjectData:
 group4MapdaObjectData:
@@ -1680,30 +1677,10 @@ group4Map0dObjectData:
 	obj_Interaction $e2 $01
 	obj_End
 
-group4Mapd0ObjectData:
-	obj_Interaction $dc $0f $88 $78
-	obj_Pointer group4Mapd0EnemyObjectData
-	obj_End
 
-group4Mapd1ObjectData:
-	obj_Pointer group4Mapd1EnemyObjectData
-	obj_End
 
-group4Mapd2ObjectData:
-	obj_Part $59 $00 $56
-	obj_Part $59 $01 $47
-	obj_Part $59 $02 $58
-	obj_Part $59 $03 $67
-	obj_End
 
-group4Mapd3ObjectData:
-	obj_Pointer group4Mapd3EnemyObjectData
-	obj_End
 
-group4Mapd4ObjectData:
-	obj_SpecificEnemyA $00 $02 $00 $40 $78
-	obj_Pointer objectData_respawningBushBombs
-	obj_End
 
 group4Mape0ObjectData:
 	obj_Interaction $3a $02 $98 $38
@@ -4566,6 +4543,47 @@ group4MapbfObjectData:
 	obj_Interaction $1e $0b $50 $00
 	obj_Interaction INTERAC_BALLADE_OBJECT $08 $78 $38
 	obj_BeforeEvent group4MapbfBeforeEventObjectData
+	obj_End
+group4Mapd0ObjectData:
+	; « Le Terrier des Serpents » en entrant (INTERAC_DUNGEON_STUFF $00, texte TX_020b)
+	obj_Interaction $12 $00 $88 $78
+	obj_Interaction INTERAC_BALLADE_CREUSE $0a $08 $08
+	obj_End
+group4Mapd1ObjectData:
+	obj_Interaction INTERAC_BALLADE_CREUSE $0a $08 $08
+	obj_Interaction INTERAC_BALLADE_CREUSE $0d $58 $78 ; le Gantelet des âmes, sur son socle
+	obj_End
+group4Mapd2ObjectData:
+	obj_Interaction INTERAC_BALLADE_CREUSE $0a $08 $08
+	obj_SpecificEnemyA $00 ENEMY_STALFOS $00 $38 $58
+	obj_SpecificEnemyA     ENEMY_STALFOS $00 $38 $98
+	obj_SpecificEnemyA     ENEMY_STALFOS $00 $78 $78
+	obj_End
+group4Mapd3ObjectData:
+	obj_Interaction INTERAC_BALLADE_CREUSE $0a $08 $08
+	obj_Part $09 $00 $3a
+	obj_Interaction $20 $00 $28 $c8
+	obj_End
+group4Mapd4ObjectData:
+	obj_Interaction INTERAC_BALLADE_CREUSE $0a $08 $08
+	obj_SpecificEnemyA $00 ENEMY_GHINI $00 $38 $48
+	obj_SpecificEnemyA     ENEMY_GHINI $00 $78 $a8
+	obj_End
+group4Mapd5ObjectData:
+	obj_Interaction INTERAC_BALLADE_CREUSE $0a $08 $08
+	obj_Part $08 $00 $00
+	obj_Interaction $1e $14 $5e $00
+	obj_RandomEnemy $20 ENEMY_KEESE $00
+	obj_End
+group4Mapd6ObjectData:
+	obj_Interaction INTERAC_BALLADE_CREUSE $0a $08 $08
+	obj_SpecificEnemyA $00 ENEMY_KEESE $00 $48 $58
+	obj_SpecificEnemyA     ENEMY_KEESE $00 $48 $98
+	obj_End
+group4Mapd7ObjectData:
+	obj_Interaction INTERAC_BALLADE_CREUSE $0a $08 $08
+	obj_SpecificEnemyA $00 ENEMY_GHINI $00 $38 $48
+	obj_SpecificEnemyA     ENEMY_GHINI $00 $78 $a8
 	obj_End
 group5Map2eObjectData:
 	obj_RandomEnemy $20 ENEMY_BARI $00

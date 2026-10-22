@@ -395,7 +395,11 @@ wBalladePacResetGen: ; $c5a6
 wBalladeGhostBox: ; $c5a7
 	db
 
-; $c5a8-$c5af unused?
+; BALLADE: le Terrier des Serpents (code/ages/balladeTerrier.s) : un objet à créer (sous-type, y, x)
+wBalladeTerrierTmp: ; $c5a8
+	dsb 3
+
+; $c5ab-$c5af unused?
 
 .ENDS
 
@@ -818,9 +822,13 @@ wPirateBellState: ; -/$c6bd
 	db
 .endif
 
-wUnusedc6c4:
-; Used to have satchel/shooter selected seeds here
-	dsb 2
+; BALLADE: (Used to have satchel/shooter selected seeds here.) Le Terrier des Serpents
+; (code/ages/balladeTerrier.s) : les âmes absorbées par le gantelet ; bit 0 le Gantelet des âmes,
+; bit 1 le Bracelet des Âmes (le boss battu), bits 2-3 les textes de l'entrée et de l'arène dits
+wBalladeSouls: ; $c6c4
+	db
+wBalladeSoulState: ; $c6c5
+	db
 
 wRingBoxContents: ; $c6c6/$c6c0
 	dsb 5

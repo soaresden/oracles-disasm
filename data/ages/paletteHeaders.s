@@ -7,7 +7,7 @@
 ; - PALH_SPR:     Loads sprite palettes only
 ; - PALH:         If none of the above, could load both sprite & bg palettes (or not yet categorized)
 
-.define NUM_PALETTE_HEADERS $df ; BALLADE: + film, Songe, titre
+.define NUM_PALETTE_HEADERS $e0 ; BALLADE: + film, Songe, titre
 
 paletteHeaderTable:
 	.repeat NUM_PALETTE_HEADERS index COUNT
@@ -899,6 +899,12 @@ m_PaletteHeaderStart $dc, PALH_PHOTO
 
 ; BALLADE: le Labyrinthe des Lynels (5:e9, décor $69, tools/make_pacman.py) : fond noir, murs bleus,
 ; rubis, gemme, porte rose ; sprites : 6 les Lynels qui ont peur, 7 le Lynel rose
+; BALLADE: le Terrier des Serpents (code/ages/balladeTerrier.s) : palette 6 des sprites, la machine
+; possédée (gris acier, la lueur cyan du fantôme)
+m_PaletteHeaderStart $df, PALH_TERRIER
+	m_PaletteHeaderSpr 6, 1, paletteDataTerrier
+	m_PaletteHeaderEnd
+
 m_PaletteHeaderStart $de, PALH_LABYRINTHE
 	m_PaletteHeaderBg  2, 6, paletteDataLabyrinthe
 	m_PaletteHeaderSpr 6, 2, paletteDataLabyrintheSpr

@@ -247,6 +247,11 @@ specialObjectLoadAnimationFrameToBuffer:
 		.include "code/ages/balladeGhost.s"
 	.ends
 
+	 ; BALLADE: le Terrier des Serpents (INTERAC_BALLADE_CREUSE $0a-$0f)
+	 m_section_superfree Ballade_Terrier namespace balladeTerrier
+		.include "code/ages/balladeTerrier.s"
+	.ends
+
 	 ; BALLADE: le menu de test caché (HAUT tenu 5 s à l'écran titre)
 	 m_section_superfree Ballade_Debug namespace balladeDebug
 		.include "code/ages/balladeDebug.s"

@@ -40,7 +40,11 @@ itemCode27:
 
 @state1:
 	call itemUpdateDamageToApply
+.ifdef ROM_AGES
+	jr nz,@hitObject
+.else
 	jr nz,@collision
+.endif
 
 	; No collision with an object?
 
@@ -66,6 +70,20 @@ itemCode27:
 	call objectCheckWithinScreenBoundary
 	ret c
 	jp itemDelete
+
+.ifdef ROM_AGES
+@hitObject:
+	; BALLADE: le Bracelet des Âmes : un ennemi touché rend un quart de cœur à Link
+	ld a,(wBalladeSoulState)
+	bit 1,a
+	jr z,@collision
+	ld hl,wLinkHealth
+	ldi a,(hl)
+	cp (hl)
+	jr nc,@collision
+	dec l
+	inc (hl)
+.endif
 
 @collision:
 	ldbc INTERAC_CLINK, $81

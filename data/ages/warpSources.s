@@ -230,6 +230,7 @@ group1WarpSources:
 	m_StandardWarp $0 $28 $70 $5 $4 ; BALLADE: entrée de la mine abandonnée -> 5:b2
 	; BALLADE: l'île des Échos (1:40-74) : la cabane du fossoyeur
 	m_StandardWarp $0 $61 $48 $3 $4 ; BALLADE: porte de la cabane du fossoyeur -> 3:25
+	m_StandardWarp $0 $60 $51 $4 $4 ; BALLADE: l'ouverture de la falaise -> le Terrier des Serpents (4:d0)
 	m_StandardWarp $0 $42 $71 $5 $4 ; BALLADE: la grille ouverte -> la Cathédrale des Échos (5:aa)
 	m_StandardWarp $0 $48 $4f $4 $4 ; BALLADE: l'entrée du Nid -> la Spirale Céleste (4:3c)
 	; BALLADE: l'île du Grand Sommeil (1:a0-d4) : le veilleur, la famille, la chanteuse, le palais
@@ -550,6 +551,7 @@ group4WarpSources:
 	m_StandardWarp $4 $39 $4f $2 $3 ; BALLADE: sortie du Coffre à Jouets -> le rêve de Lila (2:21)
 	m_StandardWarp $4 $3c $58 $1 $3 ; BALLADE: sortie de la Spirale Céleste -> devant l'entrée du Nid (1:48)
 	m_StandardWarp $4 $55 $5c $1 $3 ; BALLADE: sortie du Palais Givré -> devant la porte du palais (1:b2)
+	m_StandardWarp $4 $d0 $5e $1 $3 ; BALLADE: sortie du Terrier des Serpents -> devant la falaise (1:60)
 	m_StandardWarp $4 $66 $02 $0 $3
 	m_StandardWarp $4 $91 $03 $0 $3
 	m_StandardWarp $4 $bb $55 $1 $3 ; BALLADE: sortie de la Forge Endormie -> devant la bouche du cratère (1:0a)

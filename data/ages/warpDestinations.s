@@ -196,6 +196,7 @@ group1WarpDestTable:
 	m_WarpDest $b3 $37 $0 $1 ; $5b : devant la maison de la chanteuse
 	m_WarpDest $b2 $35 $0 $1 ; $5c : devant la porte du Palais Givré
 	m_WarpDest $c9 $54 $0 $1 ; $5d : devant la porte de la Tour Sans-Nuit (l'Œil de l'Insomnis)
+	m_WarpDest $60 $14 $0 $1 ; $5e : devant l'ouverture du Terrier des Serpents (l'île des Échos)
 
 group2WarpDestTable:
 	m_WarpDest $90 $45 $0 $e
@@ -447,6 +448,8 @@ group4WarpDestTable:
 	m_WarpDest $3c $97 $0 $4 ; $4f : la Spirale Céleste, l'entrée (sous l'arche)
 	; BALLADE: l'île du Grand Sommeil
 	m_WarpDest $55 $97 $0 $4 ; $50 : le Palais Givré, l'entrée (sous l'arche)
+	; BALLADE: l'île des Échos
+	m_WarpDest $d0 $97 $0 $4 ; $51 : le Terrier des Serpents, l'entrée
 
 group5WarpDestTable:
 	m_WarpDest $26 $ff $9 $3

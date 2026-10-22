@@ -89,6 +89,9 @@ chestGroup4Data:
 	m_ChestData $57, $17, TREASURE_OBJECT_SMALL_KEY_03   ; la tour, 3 torches
 	m_ChestData $5a, $19, TREASURE_OBJECT_BOSS_KEY_03    ; le balcon ouest
 	m_ChestData $1c, $1a, TREASURE_OBJECT_RUPEES_06      ; le balcon est : 100 rubis
+	; BALLADE: le Terrier des Serpents (story/salles/terrier.txt)
+	m_ChestData $2c, $d3, TREASURE_OBJECT_SMALL_KEY_03   ; la statue sur le bouton : la petite clé
+	m_ChestData $8d, $d6, TREASURE_OBJECT_RUPEES_05      ; l'antichambre : 50 rubis
 	m_ChestData $57, $08, TREASURE_OBJECT_SMALL_KEY_03
 	m_ChestData $17, $16, TREASURE_OBJECT_SMALL_KEY_03
 	m_ChestData $53, $1d, TREASURE_OBJECT_COMPASS_02
