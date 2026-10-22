@@ -4,7 +4,7 @@
 ; If adding a new waveform, remember to add a reference to it at the end of waveformTable.
 
 
-.define NUM_WAVEFORMS $2f ; BALLADE: +1 (voix du « HEY ! »)
+.define NUM_WAVEFORMS $30 ; BALLADE: +2 (voix du « HEY ! », violon)
 
 ; Table of pointers to waveform data
 waveformTable:
@@ -180,3 +180,8 @@ m_waveform $2d, WF_2d
 ; Phare (music/phare.txt)
 m_waveform $2e, WF_BALLADE_VOIX
 	.db $cf $dc $de $ee $de $ee $dc $df $c8 $55 $44 $41 $01 $44 $45 $58
+
+; BALLADE: un violon (corde frottée : une dent de scie adoucie, les harmoniques 1 à 9 en 1/n, un peu
+; d'éclat sur les premières) : la Vallée Gerudo du forain (music/gerudo.txt)
+m_waveform $2f, WF_BALLADE_VIOLON
+	.db $7c $ca $88 $87 $77 $76 $66 $67 $76 $65 $55 $54 $44 $43 $32 $02
