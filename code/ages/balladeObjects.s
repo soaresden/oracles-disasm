@@ -1243,7 +1243,7 @@ chapterEnding:
 ; rentre chez lui ; Marine lit le vent (l'île du Grand Sommeil)
 @windSings:
 	.db END_WAIT, 40
-	.db END_SOUND, SND_TUNE_OF_CURRENTS
+	.db END_SOUND, MUS_BALLADE_TEMPETES ; le Chant des Tempêtes : les moulins repartent
 	.db END_WAIT, 90
 	.db END_TEXT, <TX_5aba
 	.db END_WAIT, 40

@@ -44,7 +44,7 @@ soundPointers:
 	/* 0x28 */ m_soundPointer musBlackTower
 	/* 0x29 */ m_soundPointer musCredits1
 	/* 0x2a */ m_soundPointer musCredits2
-	/* 0x2b */ m_soundPointer musMapleTheme
+	/* 0x2b */ m_soundPointer musBalladeTempetes ; BALLADE: le Chant des Tempêtes (les moulins du Nid des Vents ; au lieu du thème de Maple)
 	/* 0x2c */ m_soundPointer musMapleGame
 	/* 0x2d */ m_soundPointer musBalladeMiniboss ; BALLADE: (au lieu de musMiniboss)
 	/* 0x2e */ m_soundPointer musBalladeTheme ; BALLADE: le thème du jeu contre les boss (au lieu de musBoss)

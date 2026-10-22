@@ -20273,6 +20273,283 @@ musBalladePalaisChannel6Loop:
 
 .ends
 
+m_section_superfree Ballade_musBalladeTempetes
+
+musBalladeTempetesStart:
+
+musBalladeTempetesChannel0:
+	vibrato $00
+	env $0 $00
+	duty $02
+	cmdfd $00
+musBalladeTempetesChannel0Loop:
+	vol $2
+	duty $00
+	vibrato $00
+	cmdfd $00
+	rest $18
+	note f4   $0e
+	rest $0a
+	note f4   $0e
+	rest $22
+	note f4   $0e
+	rest $0a
+	note f4   $0e
+	rest $22
+	note e4   $0e
+	rest $0a
+	note e4   $0e
+	rest $22
+	note e4   $0e
+	rest $0a
+	note e4   $0e
+	rest $22
+	note f4   $0e
+	rest $0a
+	note f4   $0e
+	rest $22
+	note e4   $0e
+	rest $0a
+	note e4   $0e
+	rest $22
+	note d4   $0e
+	rest $0a
+	note d4   $0e
+	rest $22
+	note cs4  $0e
+	rest $0a
+	note cs4  $0e
+	rest $22
+	note f4   $0e
+	rest $0a
+	note f4   $0e
+	rest $22
+	note f4   $0e
+	rest $0a
+	note f4   $0e
+	rest $22
+	note e4   $0e
+	rest $0a
+	note e4   $0e
+	rest $22
+	note e4   $0e
+	rest $0a
+	note e4   $0e
+	rest $22
+	note f4   $0e
+	rest $0a
+	note f4   $0e
+	rest $22
+	note e4   $0e
+	rest $0a
+	note e4   $0e
+	rest $22
+	note f4   $0e
+	rest $0a
+	note f4   $0e
+	rest $22
+	note a4   $0e
+	rest $0a
+	note a4   $0e
+	rest $0a
+	goto musBalladeTempetesChannel0Loop
+	cmdff
+
+musBalladeTempetesChannel1:
+	vibrato $00
+	env $0 $00
+	duty $02
+	cmdfd $00
+musBalladeTempetesChannel1Loop:
+	vol $5
+	duty $02
+	vibrato $42
+	cmdfd $00
+	note d5   $0b
+	rest $01
+	note f5   $0b
+	rest $01
+	note d6   $2b
+	rest $05
+	note d5   $0b
+	rest $01
+	note f5   $0b
+	rest $01
+	note d6   $2b
+	rest $05
+	note e6   $20
+	rest $04
+	note f6   $0b
+	rest $01
+	note e6   $0b
+	rest $01
+	note f6   $0b
+	rest $01
+	note e6   $0b
+	rest $01
+	note c6   $0b
+	rest $01
+	note a5   $2b
+	rest $05
+	note a5   $16
+	rest $02
+	note d5   $16
+	rest $02
+	note f5   $0b
+	rest $01
+	note g5   $0b
+	rest $01
+	note a5   $41
+	rest $07
+	note a5   $16
+	rest $02
+	note d5   $16
+	rest $02
+	note f5   $0b
+	rest $01
+	note g5   $0b
+	rest $01
+	note e5   $41
+	rest $07
+	note d5   $0b
+	rest $01
+	note f5   $0b
+	rest $01
+	note d6   $2b
+	rest $05
+	note d5   $0b
+	rest $01
+	note f5   $0b
+	rest $01
+	note d6   $2b
+	rest $05
+	note e6   $20
+	rest $04
+	note f6   $0b
+	rest $01
+	note e6   $0b
+	rest $01
+	note f6   $0b
+	rest $01
+	note e6   $0b
+	rest $01
+	note c6   $0b
+	rest $01
+	note a5   $2b
+	rest $05
+	note a5   $16
+	rest $02
+	note d5   $16
+	rest $02
+	note f5   $0b
+	rest $01
+	note g5   $0b
+	rest $01
+	note a5   $2b
+	rest $05
+	note a5   $16
+	rest $02
+	note d5   $41
+	rest $4f
+	goto musBalladeTempetesChannel1Loop
+	cmdff
+
+musBalladeTempetesChannel4:
+	vibrato $00
+	cmdfd $00
+musBalladeTempetesChannel4Loop:
+	duty $0e
+	vibrato $00
+	note d2   $24
+	rest $24
+	note d2   $24
+	rest $24
+	note c2   $24
+	rest $24
+	note a1   $24
+	rest $24
+	note as1  $24
+	rest $24
+	note a1   $24
+	rest $24
+	note g1   $24
+	rest $24
+	note a1   $24
+	rest $24
+	note d2   $24
+	rest $24
+	note d2   $24
+	rest $24
+	note c2   $24
+	rest $24
+	note a1   $24
+	rest $24
+	note as1  $24
+	rest $24
+	note a1   $24
+	rest $24
+	note d2   $24
+	rest $24
+	note d2   $24
+	rest $24
+	goto musBalladeTempetesChannel4Loop
+	cmdff
+
+musBalladeTempetesChannel6:
+musBalladeTempetesChannel6Loop:
+	vol $1
+	note $2a  $18
+	rest $30
+	vol $1
+	note $2a  $18
+	rest $30
+	vol $1
+	note $2a  $18
+	rest $30
+	vol $1
+	note $2a  $18
+	rest $30
+	vol $1
+	note $2a  $18
+	rest $30
+	vol $1
+	note $2a  $18
+	rest $30
+	vol $1
+	note $2a  $18
+	rest $30
+	vol $1
+	note $2a  $18
+	rest $30
+	vol $1
+	note $2a  $18
+	rest $30
+	vol $1
+	note $2a  $18
+	rest $30
+	vol $1
+	note $2a  $18
+	rest $30
+	vol $1
+	note $2a  $18
+	rest $30
+	vol $1
+	note $2a  $18
+	rest $30
+	vol $1
+	note $2a  $18
+	rest $30
+	vol $1
+	note $2a  $18
+	rest $30
+	vol $1
+	note $2a  $18
+	rest $30
+	goto musBalladeTempetesChannel6Loop
+	cmdff
+
+.ends
+
 m_section_superfree Ballade_sndGull
 
 sndBalladeGullStart:

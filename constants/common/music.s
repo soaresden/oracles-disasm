@@ -411,6 +411,7 @@
 .define MUS_BALLADE_RECIF $18 ; le Récif Murmurant (donjon 3 ; au lieu de MUS_MERMAIDS_CAVE)
 .define MUS_BALLADE_BRAISE $26 ; Mont-Braise (île 4 ; au lieu de MUS_TOKAY_HOUSE)
 .define MUS_BALLADE_FORGE $17 ; la Forge Endormie (donjon 4 ; au lieu de MUS_CROWN_DUNGEON)
+.define MUS_BALLADE_TEMPETES $2b ; le Chant des Tempêtes (fin du chapitre 6, les moulins ; au lieu de MUS_MAPLE_THEME)
 ; MUS_BOSS ($2e) joue le thème du jeu (music/theme.txt), MUS_MINIBOSS ($2d) music/miniboss.txt
 .define SND_BALLADE_GULL  $d6
 
