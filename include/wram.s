@@ -311,7 +311,16 @@ wPuddleAnimationPointer: ; $c4ba
 ; every 16 frames.
 	dw
 
-; $c4bb-$c4bf unused?
+; BALLADE: le volley contre Marine (code/ages/balladeFin.s) : le x de Marine sur le terrain
+wBalladeVolleyMarineX: ; $c4bc
+	db
+; la hauteur du saut de Marine, la hauteur du ballon
+wBalladeVolleyMarineJump: ; $c4bd
+	db
+wBalladeVolleyBallHeight: ; $c4be
+	db
+
+; $c4bf unused?
 
 .ENDS
 
@@ -399,7 +408,17 @@ wBalladeGhostBox: ; $c5a7
 wBalladeTerrierTmp: ; $c5a8
 	dsb 3
 
-; $c5ab-$c5af unused?
+; BALLADE: la fin du jeu (code/ages/balladeFin.s) : l'épilogue (1 à venir, sur la plage du
+; réveil ; 2 Zelda s'endort ; 3 le générique est fini) ; le volley contre Marine (l'état, le score
+; de Link et de Marine, qui sert : 1 Link)
+wBalladeEpilogue: ; $c5ab
+	db
+wBalladeVolleyState: ; $c5ac
+	db
+wBalladeVolleyScore: ; $c5ad
+	dsb 2
+wBalladeVolleyServe: ; $c5af
+	db
 
 .ENDS
 

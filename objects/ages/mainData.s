@@ -97,7 +97,6 @@ group1Map5eObjectData:
 group1Map5fObjectData:
 group1Map69ObjectData:
 group1Map6aObjectData:
-group1Map6cObjectData:
 group1Map6eObjectData:
 group1Map6fObjectData:
 group1Map7eObjectData:
@@ -398,7 +397,6 @@ group3Map1bObjectData:
 group3Map1cObjectData:
 group3Map1dObjectData:
 group3Map1eObjectData:
-group3Map2aObjectData:
 group3Map2bObjectData:
 group3Map2cObjectData:
 group3Map2dObjectData:
@@ -710,14 +708,7 @@ group0Map5aObjectData:
 	obj_Interaction $39 $05
 	obj_End
 
-group0Map5bObjectData:
-	obj_Interaction $d0 $04 $68 $60
-	obj_End
 
-group0Map5cObjectData:
-	obj_Interaction $71 $05 $40 $98
-	obj_Interaction $dc $01
-	obj_End
 
 group0Map5dObjectData:
 	obj_Interaction $cb $00 $68 $88
@@ -743,19 +734,7 @@ group0Map6aObjectData:
 	obj_Interaction $71 $03
 	obj_End
 
-group0Map6bObjectData:
-	obj_Interaction $71 $01 $38 $08
-	obj_Interaction $67 $01
-	obj_End
 
-group0Map6cObjectData:
-	obj_Interaction $73 $00 $18 $68
-	obj_Interaction $73 $01 $18 $48
-	obj_Interaction $73 $02 $38 $58
-	obj_Interaction $71 $00 $28 $58
-	obj_Interaction $71 $02 $6d $38
-	obj_Interaction $67 $00
-	obj_End
 
 group0Map6dObjectData:
 	obj_Pointer group0Map6dEnemyObjectData
@@ -1006,14 +985,7 @@ group1Map4bObjectData:
 
 
 
-group1Map5bObjectData:
-	obj_Interaction $82 $02 $50 $48
-	obj_Pointer group1Map5bEnemyObjectData
-	obj_End
 
-group1Map5cObjectData:
-	obj_Interaction $8a $01 $00 $00 $0a
-	obj_End
 
 group1Map5dObjectData:
 	obj_Pointer group1Map5dEnemyObjectData
@@ -1028,9 +1000,6 @@ group1Map5dObjectData:
 
 
 
-group1Map6bObjectData:
-	obj_Pointer group1Map6bEnemyObjectData
-	obj_End
 
 group1Map6dObjectData:
 	obj_Interaction $82 $01 $40 $38
@@ -3660,6 +3629,12 @@ group0Map57ObjectData:
 group0Map58ObjectData:
 	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
 	obj_End
+group0Map5bObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map5cObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
 group0Map60ObjectData:
 	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
 	obj_End
@@ -3687,6 +3662,12 @@ group0Map67ObjectData:
 	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
 	obj_End
 group0Map68ObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map6bObjectData:
+	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
+	obj_End
+group0Map6cObjectData:
 	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
 	obj_End
 group0Map70ObjectData:
@@ -4017,6 +3998,13 @@ group1Map57ObjectData:
 	obj_End
 group1Map58ObjectData:
 	obj_End
+group1Map5bObjectData:
+	obj_Interaction INTERAC_BALLADE_CREUSE $15 $58 $38 ; le coquillage qui appelle Zelda
+	obj_End
+group1Map5cObjectData:
+	obj_Interaction INTERAC_BALLADE_CREUSE $14 $28 $78 ; Marine
+	obj_Interaction INTERAC_BALLADE_CREUSE $16 $08 $08 ; le volley
+	obj_End
 group1Map60ObjectData:
 	obj_End
 group1Map61ObjectData:
@@ -4043,6 +4031,11 @@ group1Map67ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $0a $08 $08 ; la fin du chapitre 6 (le vent revient)
 	obj_End
 group1Map68ObjectData:
+	obj_End
+group1Map6bObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $00 $68 $58 ; le Bateau-Rondin
+	obj_End
+group1Map6cObjectData:
 	obj_End
 group1Map70ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $00 $68 $58
@@ -4118,6 +4111,7 @@ group1Mapa9ObjectData:
 	obj_End
 group1MapaaObjectData:
 	obj_Interaction INTERAC_MARINE $00 $08 $98
+	obj_Interaction INTERAC_BALLADE_CREUSE $12 $08 $08 ; l'épilogue (après la tour) : Marine humaine, le générique
 	obj_End
 group1MapabObjectData:
 	obj_Interaction INTERAC_BALLADE_NPC $01 $38 $58
@@ -4228,6 +4222,8 @@ group3Map28ObjectData:
 	obj_End
 group3Map29ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $29 $48 $58
+	obj_End
+group3Map2aObjectData:
 	obj_End
 group3Map5eObjectData:
 	obj_Interaction $47 $01 $28 $80
@@ -4767,6 +4763,7 @@ group5MapcbObjectData:
 	obj_End
 group5MapccObjectData:
 	obj_Interaction INTERAC_BALLADE_RHYTHM $00 $58 $78
+	obj_Interaction INTERAC_BALLADE_CREUSE $10 $08 $08 ; la fin : Zelda, en rêve (code/ages/balladeFin.s)
 	obj_End
 group5Mapd0ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $34 $08 $08

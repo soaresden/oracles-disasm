@@ -117,6 +117,7 @@
 	GLOBALFLAG_BALLADE_SURF			db ; $5a: Bulle a donné sa planche de surf (on nage plus vite)
 	GLOBALFLAG_BALLADE_PHOTOS		db ; $5b: Marine a trouvé les photos de Cocolint (l'auberge)
 	GLOBALFLAG_BALLADE_QUIZ			db ; $5c: le quiz de Marine réussi (tout juste : le bisou)
+	GLOBALFLAG_BALLADE_FIN			db ; $5d: le jeu est fini (l'Insomnis battu, le générique vu) : l'après-jeu
 
 .else; ROM_SEASONS
 

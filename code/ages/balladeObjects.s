@@ -422,7 +422,12 @@ raft:
 	ld e,Interaction.state
 	ld a,$07
 	ld (de),a
+	; (après la fin : aussi l'île de Marine)
+	ld a,GLOBALFLAG_BALLADE_FIN
+	call checkGlobalFlag
 	ld bc,TX_5ade
+	jp z,showText
+	ld bc,TX_5b0f
 	jp showText
 @state5Chosen:
 	add $03
@@ -519,7 +524,7 @@ findCurrentIsland:
 	inc hl
 	inc b
 	ld a,b
-	cp $08
+	cp $09
 	jr c,-
 	ld b,$00
 +
@@ -536,6 +541,7 @@ jetties:
 	.db $01, $75, $44 ; 6. le Nid des Vents (le courant ascendant)
 	.db $01, $d1, $44 ; 7. l'île du Grand Sommeil (le ponton)
 	.db $01, $d9, $44 ; 8. l'Œil de l'Insomnis (le ponton)
+	.db $01, $6b, $44 ; 9. le Nid de la Mouette, l'île de Marine (après la fin ; le ponton)
 
 
 ; ==================================================================================================
@@ -1381,8 +1387,39 @@ villagerTalk:
 +
 	ld c,a
 	ld b,>TX_5a00
+	; Après la fin du jeu, certains ont compris ce qui s'est passé (villagerFinTexts)
+	push bc
+	ld a,GLOBALFLAG_BALLADE_FIN
+	call checkGlobalFlag
+	pop bc
+	jr z,++
+	ld e,Interaction.subid
+	ld a,(de)
+	ld e,a
+	ld hl,villagerFinTexts
+-
+	ldi a,(hl)
+	cp $ff
+	jr z,++
+	cp e
+	ldi a,(hl)
+	jr nz,-
+	ld c,a
+	ld b,>TX_5b00
+++
 	ld a,$02
 	jp npcSay
+
+; Après la fin : sous-type, texte (groupe 5b)
+villagerFinTexts:
+	.db $0b, <TX_5b1d
+	.db $0e, <TX_5b1e
+	.db $10, <TX_5b1f
+	.db $1a, <TX_5b20
+	.db $1c, <TX_5b21
+	.db $24, <TX_5b22
+	.db $28, <TX_5b23
+	.db $ff
 
 ; sous-type, masque d'essence de l'île, texte avant, texte après
 villagerTexts:

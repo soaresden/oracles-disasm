@@ -395,6 +395,7 @@
 .define MUS_BALLADE_PHARE $41
 .define MUS_BALLADE_ILE   $42
 .define MUS_BALLADE_AUBERGE $43
+.define MUS_BALLADE_GENERIQUE $1d ; le générique de fin (music/generique.txt)
 .define MUS_BALLADE_LYNELS $0c ; le Labyrinthe des Lynels (music/lynels.txt), le générique d'Euro-Mir
 .define MUS_BALLADE_QUIZ $0a ; le quiz de Marine (music/quiz.txt), façon « Qui veut gagner des millions »
 .define MUS_BALLADE_THEME $44

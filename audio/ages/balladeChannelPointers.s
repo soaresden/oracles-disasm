@@ -330,6 +330,17 @@ musBalladeLynels:
 	.dw musBalladeLynelsChannel6
 	.db $ff
 
+musBalladeGenerique:
+	.db $00
+	.dw musBalladeGeneriqueChannel0
+	.db $01
+	.dw musBalladeGeneriqueChannel1
+	.db $04
+	.dw musBalladeGeneriqueChannel4
+	.db $06
+	.dw musBalladeGeneriqueChannel6
+	.db $ff
+
 sndBalladeGull:
 	.db $02
 	.dw sndBalladeGullChannel2

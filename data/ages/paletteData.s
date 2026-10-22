@@ -4804,6 +4804,12 @@ paletteDataLabyrinthe: ; le Labyrinthe des Lynels : murs, rubis, gemme, gemme qu
 	m_RGB16 $08 $0c $1f
 	m_RGB16 $14 $18 $1f
 
+paletteDataZelda: ; Zelda : contour noir, blonde (or), la peau et la robe claires
+	m_RGB16 $1f $1f $1f
+	m_RGB16 $00 $00 $00
+	m_RGB16 $1f $19 $04
+	m_RGB16 $1f $1a $14
+
 paletteDataTerrier: ; la machine possédée : noir, gris acier, la lueur cyan du fantôme
 	m_RGB16 $1f $1f $1f
 	m_RGB16 $00 $00 $00

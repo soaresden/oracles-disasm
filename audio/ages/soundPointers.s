@@ -30,7 +30,7 @@ soundPointers:
 	/* 0x1a */ m_soundPointer musBalladeCathedrale ; BALLADE: la Cathédrale des Échos (au lieu du Tombeau Ancien)
 	/* 0x1b */ m_soundPointer musFinalDungeon
 	/* 0x1c */ m_soundPointer musBalladeSommeil ; BALLADE: l'île du Grand Sommeil (au lieu du Château d'Onox)
-	/* 0x1d */ m_soundPointer musRoomOfRites
+	/* 0x1d */ m_soundPointer musBalladeGenerique ; BALLADE: le générique de fin, au lieu de la Salle des Rites
 	/* 0x1e */ m_soundPointer musMakuTree
 	/* 0x1f */ m_soundPointer musSadness
 	/* 0x20 */ m_soundPointer musTriumphant

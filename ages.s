@@ -252,6 +252,16 @@ specialObjectLoadAnimationFrameToBuffer:
 		.include "code/ages/balladeTerrier.s"
 	.ends
 
+	 ; BALLADE: la fin du jeu et l'après-jeu (INTERAC_BALLADE_CREUSE $10-$18)
+	 m_section_superfree Ballade_Fin namespace balladeFin
+		.include "code/ages/balladeFin.s"
+	.ends
+
+	 ; BALLADE: INTERAC_BALLADE_CREUSE : le code de chaque sous-type
+	 m_section_superfree Ballade_Dispatch namespace balladeDispatch
+		.include "code/ages/balladeDispatch.s"
+	.ends
+
 	 ; BALLADE: le menu de test caché (HAUT tenu 5 s à l'écran titre)
 	 m_section_superfree Ballade_Debug namespace balladeDebug
 		.include "code/ages/balladeDebug.s"

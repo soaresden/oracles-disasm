@@ -197,6 +197,7 @@ group1WarpDestTable:
 	m_WarpDest $b2 $35 $0 $1 ; $5c : devant la porte du Palais Givré
 	m_WarpDest $c9 $54 $0 $1 ; $5d : devant la porte de la Tour Sans-Nuit (l'Œil de l'Insomnis)
 	m_WarpDest $60 $14 $0 $1 ; $5e : devant l'ouverture du Terrier des Serpents (l'île des Échos)
+	m_WarpDest $5b $45 $0 $1 ; $5f : devant la maison de Marine (son île)
 
 group2WarpDestTable:
 	m_WarpDest $90 $45 $0 $e
@@ -362,6 +363,8 @@ group3WarpDestTable:
 	m_WarpDest $27 $ff $9 $3 ; $4a : la maison du veilleur, par le bas
 	m_WarpDest $28 $ff $9 $3 ; $4b : la maison de la famille, par le bas
 	m_WarpDest $29 $ff $9 $3 ; $4c : la maison de la chanteuse, par le bas
+	; BALLADE: l'île de Marine
+	m_WarpDest $2a $ff $9 $3 ; $4d : la maison de Marine, par le bas
 
 group4WarpDestTable:
 	m_WarpDest $04 $ff $9 $3

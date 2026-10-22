@@ -231,6 +231,7 @@ group1WarpSources:
 	; BALLADE: l'île des Échos (1:40-74) : la cabane du fossoyeur
 	m_StandardWarp $0 $61 $48 $3 $4 ; BALLADE: porte de la cabane du fossoyeur -> 3:25
 	m_StandardWarp $0 $60 $51 $4 $4 ; BALLADE: l'ouverture de la falaise -> le Terrier des Serpents (4:d0)
+	m_StandardWarp $0 $5b $4d $3 $4 ; BALLADE: la porte de la maison de Marine (son île) -> 3:2a
 	m_StandardWarp $0 $42 $71 $5 $4 ; BALLADE: la grille ouverte -> la Cathédrale des Échos (5:aa)
 	m_StandardWarp $0 $48 $4f $4 $4 ; BALLADE: l'entrée du Nid -> la Spirale Céleste (4:3c)
 	; BALLADE: l'île du Grand Sommeil (1:a0-d4) : le veilleur, la famille, la chanteuse, le palais
@@ -475,6 +476,9 @@ group3WarpSources:
 	; BALLADE: l'île des Échos : sortie de la cabane du fossoyeur
 	m_StandardWarp $4 $25 $56 $1 $3
 	m_StandardWarp $8 $25 $56 $1 $3
+	; BALLADE: l'île de Marine : sortie de sa maison
+	m_StandardWarp $4 $2a $5f $1 $3
+	m_StandardWarp $8 $2a $5f $1 $3
 	; BALLADE: l'île du Grand Sommeil : sorties des maisons du veilleur, de la famille, de la chanteuse
 	m_StandardWarp $4 $27 $59 $1 $3
 	m_StandardWarp $8 $27 $59 $1 $3

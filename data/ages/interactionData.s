@@ -871,6 +871,16 @@ interactionebSubidData:
 	m_InteractionSubidData $e5 $00 $20 ; $0d le Gantelet des âmes, sur son socle (palette 2)
 	m_InteractionSubidData $e5 $08 $10 ; $0e la jarre des âmes (palette 1)
 	m_InteractionSubidData $e5 $1c $60 ; $0f le fantôme échappé de la machine (palette 6)
+	; la fin du jeu et l'après-jeu (code/ages/balladeFin.s)
+	m_InteractionSubidData $00 $00 $00 ; $10 la fin, en haut de la tour (invisible)
+	m_InteractionSubidData $11 $00 $70 ; $11 Zelda, en rêve (son dessin d'Ages ; palette 7 : blonde, PALH_ZELDA)
+	m_InteractionSubidData $00 $00 $00 ; $12 l'épilogue, sur la plage du réveil (invisible)
+	m_InteractionSubidData $e2 $00 $30 ; $13 Marine humaine, le matin
+	m_InteractionSubidData $e2 $00 $30 ; $14 Marine sur son île
+	m_InteractionSubidData $e4 $18 $30 ; $15 le coquillage qui appelle Zelda
+	m_InteractionSubidData $00 $00 $00 ; $16 le volley : le terrain (invisible)
+	m_InteractionSubidData $e4 $1c $20 ; $17 le ballon de volley
+	m_InteractionSubidData $e2 $00 $30 ; $18 Marine sur le terrain de volley
 	m_InteractionSubidDataEnd
 
 ; BALLADE: les objets de nos îles (INTERAC_BALLADE_OBJECT) : spr_ballade_objects ($e3), image n =
