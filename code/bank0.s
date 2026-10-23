@@ -7925,6 +7925,21 @@ getSomariaBlockIndex:
 	ret
 
 seasonsToAgesItemCountsLevelsTable:
+	; FR: what the game link secret carries (and the crossworld hack didn't copy):
+	; game ID (secrets), Link's name, the kid's name and status ("behavior")
+	.db $01 $01 ; wGameID+1 (wGameID: see the end of the copy routines)
+	.db $02 $02 ; wLinkName
+	.db $03 $03
+	.db $04 $04
+	.db $05 $05
+	.db $06 $06
+	.db $09 $09 ; wKidName
+	.db $0a $0a
+	.db $0b $0b
+	.db $0c $0c
+	.db $0d $0d
+	.db $0e $0e
+	.db $0f $0f ; wChildStatus
 	.db $a9 $af ; wShieldLevel
 	.db $aa $b0 ; wNumBombs
 	.db $ab $b1 ; wMaxBombs
@@ -7946,6 +7961,7 @@ seasonsToAgesItemCountsLevelsTable:
 	.db $f3 $f9 ; wSlingshotSelectedSeeds
 	.db $92+TREASURE_EMBER_SEEDS/8 $9a+TREASURE_EMBER_SEEDS/8 ; wSeedsAndHarpSongsObtained
 	.db $a5 $ad ; wNumRupees
+	.db $a6 $ae ; FR: wNumRupees+1
 	.db $a2 $aa ; wLinkHealth
 	.db $a3 $ab ; wLinkMaxHealth
 	.db $a4 $ac ; wNumHeartPieces
@@ -7976,10 +7992,16 @@ seasonsToAgesItemCountsLevelsTable:
 	.db $c7 $cd ; wNumUnappraisedRingsBcd
 	.db $c8 $ce ; wNumRingsAppraised
 	.db $1e $1e ; wDeathCounter
+	.db $1f $1f ; FR: wDeathCounter+1
 	.db $20 $20 ; wTotalEnemiesKilled
+	.db $21 $21 ; FR: wTotalEnemiesKilled+1
 	.db $22 $22 ; wPlaytimeCounter
+	.db $23 $23 ; FR: wPlaytimeCounter+1
+	.db $24 $24 ; FR: wPlaytimeCounter+2
+	.db $25 $25 ; FR: wPlaytimeCounter+3
 	.db $26 $26 ; wTotalSignsDestroyed
 	.db $27 $27 ; wTotalRupeesCollected
+	.db $28 $28 ; FR: wTotalRupeesCollected+1
 	.db $f4 $c3 ; wNumSlates
 	.db $00
 
@@ -8107,6 +8129,9 @@ saveSeasonsTreasureDataForAges:
 	ld (hl),a
 	jr --
 ++
+	; FR: wGameID low byte (offset 0 would end the table)
+	ld a,($c600-wFileStart+SEASONS_BACKUP)
+	ld ($c600),a
 	ret
 
 saveAgesTreasureDataForSeasons:
@@ -8179,6 +8204,9 @@ saveAgesTreasureDataForSeasons:
 	ld (hl),a
 	jr --
 ++
+	; FR: wGameID low byte (offset 0 would end the table)
+	ld a,($c600-wFileStart+AGES_BACKUP)
+	ld ($c600),a
 	ret
 
 swapGame:
