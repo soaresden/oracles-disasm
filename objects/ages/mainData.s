@@ -3797,12 +3797,14 @@ group0Mapc4ObjectData:
 	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
 	obj_End
 group0Mapc8ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $41 $48 $58
 	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
 	obj_End
 group0Mapc9ObjectData:
 	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
 	obj_End
 group0MapcaObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $42 $48 $48
 	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
 	obj_End
 group0Mapd0ObjectData:
@@ -4161,11 +4163,13 @@ group1Mapc3ObjectData:
 group1Mapc4ObjectData:
 	obj_End
 group1Mapc8ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $41 $48 $58 ; la vasque du soleil
 	obj_End
 group1Mapc9ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $30 $48 $48
 	obj_End
 group1MapcaObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $42 $48 $48 ; la vasque de la lune
 	obj_End
 group1Mapd0ObjectData:
 	obj_End

@@ -638,7 +638,10 @@ debugMilestones:
 	.db DBG_ROOMFLAG, $01, $b1, $40
 	.db DBG_GLOBALFLAG, GLOBALFLAG_BALLADE_ISLAND8
 	.db DBG_END
-	; 34. La porte de la tour est ouverte (Marine a chanté les sept couplets)
+	; 34. Le soleil et la lune allumés (les vasques des paupières), la porte de la tour est ouverte
+	; (Marine a chanté les sept couplets)
+	.db DBG_ROOMFLAG, $01, $c8, $40
+	.db DBG_ROOMFLAG, $00, $ca, $40
 	.db DBG_ROOMFLAG, $01, $c9, $80
 	.db DBG_END
 	; 35. 1F et 2F : la Lune (le Sablier) et Dark Link vaincus (les escaliers)

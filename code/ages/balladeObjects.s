@@ -64,6 +64,8 @@
 ; @subid_3e{Un jumeau caché, dans le Songe de l'île 2 (cinq salles : twinRooms)}
 ; @subid_3f{Le vieux cerf-volant (1:01, 0:01) : coincé dans le Réel ; il parle dans le Songe}
 ; @subid_40{Invisible, le Songe de l'île 2 : Marine parle du jeu de l'oie (0:11), du pont-levis (0:13)}
+; @subid_41{La vasque du soleil (l'Œil, 1:c8 et 0:c8) : une graine de feu l'allume, dans le Réel}
+; @subid_42{La vasque de la lune (1:ca et 0:ca) : une graine de feu l'allume, dans le Songe}
 ; ==================================================================================================
 
 ;;
@@ -136,6 +138,8 @@ main:
 	.dw hidingTwin
 	.dw kite
 	.dw dreamComment
+	.dw brazier
+	.dw brazier
 
 
 ;;
@@ -2604,6 +2608,9 @@ towerDoor:
 	ld c,$30
 	call objectCheckLinkWithinDistance
 	ret nc
+	; Le soleil et la lune doivent briller ensemble (les vasques des paupières : brazier)
+	call checkSunAndMoon
+	jr z,@noLights
 	ld a,$91
 	ld (wDisabledObjects),a
 	ld a,SND_TUNE_OF_AGES
@@ -2634,7 +2641,24 @@ towerDoor:
 	or c
 	cp b
 	ret nz
+	; (les sept essences, mais pas le soleil et la lune : ce qui manque)
+	ld a,(wEssencesObtained)
+	and $7f
+	cp $7f
 	ld bc,TX_5ad5
+	jr nz,+
+	ld bc,TX_5b64
++
+	jp showText
+
+; Les sept essences, mais pas le soleil et la lune : Marine le dit la première fois (drapeau $40 de
+; la salle) ; ensuite, A devant la porte
+@noLights:
+	call getThisRoomFlags
+	bit 6,(hl)
+	jr nz,@closed
+	set 6,(hl)
+	ld bc,TX_5b64
 	jp showText
 
 @sing:
@@ -4006,3 +4030,192 @@ dreamComment:
 	xor a
 	ld (wDisabledObjects),a
 	jp interactionDelete
+
+
+; ==================================================================================================
+; L'Œil de l'Insomnis (île 8) : « la tour n'apparaît que quand le soleil et la lune sont dans le
+; ciel en même temps ». Deux vasques, sur les paupières : le soleil (subid $41, 1:c8) ne s'allume que
+; dans le Réel, la lune ($42, 1:ca) que dans le Songe ; une graine de feu (le Lance-Graines) les
+; allume. Allumées, elles le restent (drapeau $40 de 1:c8 pour le soleil, de 0:ca pour la lune) ; la
+; porte de la tour attend les deux (towerDoor).
+; ==================================================================================================
+
+;;
+; @param[out]	zflag	nz si le soleil et la lune brillent tous les deux
+checkSunAndMoon:
+	ld a,$01
+	ld b,$c8
+	call getRoomFlags
+	and $40
+	ret z
+	xor a
+	ld b,$ca
+	call getRoomFlags
+	and $40
+	ret
+
+;;
+; Une vasque : le soleil ($41) ou la lune ($42)
+brazier:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw @init
+	.dw @idle
+	.dw npcWaitText
+
+@init:
+	call interactionInitGraphics
+	call interactionIncState
+	ld h,d
+	ld l,Interaction.collisionRadiusY
+	ld (hl),$06
+	inc l
+	ld (hl),$06
+	call objectMarkSolidPosition
+	ld e,Interaction.pressedAButton
+	call objectAddToAButtonSensitiveObjectList
+	call @flags
+	and $40
+	call nz,@showLit
+	jp objectSetVisible82
+
+;;
+; @param[out]	a	Les drapeaux de sa salle (le soleil : 1:c8 ; la lune : 0:ca)
+; @param[out]	hl	Leur adresse
+@flags:
+	ld e,Interaction.subid
+	ld a,(de)
+	cp $41
+	ld a,$01
+	ld b,$c8
+	jr z,+
+	xor a
+	ld b,$ca
++
+	jp getRoomFlags
+
+; L'image allumée (l'image suivante de spr_ballade_grelot)
+@showLit:
+	ld h,d
+	ld l,Interaction.oamTileIndexBase
+	ld a,(hl)
+	add $04
+	ld (hl),a
+	ret
+
+@idle:
+	call @flags
+	and $40
+	jr z,@unlit
+	call npcCheckTalk
+	ret z
+	ld e,Interaction.subid
+	ld a,(de)
+	cp $41
+	ld bc,TX_5b5e
+	jr z,@say
+	ld bc,TX_5b60
+@say:
+	ld a,$02
+	jp npcSay
+
+@unlit:
+	call @findEmberSeed
+	jr nz,@seed
+	call npcCheckTalk
+	ret z
+	ld e,Interaction.subid
+	ld a,(de)
+	cp $41
+	ld bc,TX_5b5d
+	jr z,@say
+	ld bc,TX_5b5f
+	jr @say
+
+; Une graine de feu la touche. Dans son monde (le soleil dans le Réel, la lune dans le Songe), elle
+; s'allume ; sinon la flamme s'éteint, et Marine le remarque (une fois par visite)
+@seed:
+	ld e,Interaction.subid
+	ld a,(de)
+	cp $41
+	ld a,(wActiveGroup)
+	jr z,+
+	xor $01
++
+	cp $01
+	jr nz,@wrongWorld
+	call @flags
+	set 6,(hl)
+	call @showLit
+	ld a,SND_LIGHTTORCH
+	call playSound
+	ld a,$91
+	ld (wDisabledObjects),a
+	; Les deux : Marine s'en réjouit
+	call checkSunAndMoon
+	ld bc,TX_5b61
+	jr nz,@say
+	ld e,Interaction.subid
+	ld a,(de)
+	cp $41
+	ld bc,TX_5b5e
+	jr z,@say
+	ld bc,TX_5b60
+	jr @say
+
+@wrongWorld:
+	ld e,Interaction.var30
+	ld a,(de)
+	or a
+	ret nz
+	inc a
+	ld (de),a
+	ld a,SND_ERROR
+	call playSound
+	ld a,$91
+	ld (wDisabledObjects),a
+	ld e,Interaction.subid
+	ld a,(de)
+	cp $41
+	ld bc,TX_5b63
+	jr z,@say
+	ld bc,TX_5b62
+	jr @say
+
+;;
+; @param[out]	zflag	nz si une graine de feu est tout près de la vasque
+@findEmberSeed:
+	ld h,FIRST_ITEM_INDEX
+@nextItem:
+	ld l,Item.enabled
+	ld a,(hl)
+	or a
+	jr z,@notThis
+	ld l,Item.id
+	ld a,(hl)
+	cp ITEM_EMBER_SEED
+	jr nz,@notThis
+	ld l,Item.yh
+	ld e,Interaction.yh
+	ld a,(de)
+	sub (hl)
+	add $0a
+	cp $15
+	jr nc,@notThis
+	ld l,Item.xh
+	ld e,Interaction.xh
+	ld a,(de)
+	sub (hl)
+	add $0a
+	cp $15
+	jr nc,@notThis
+	or $01
+	ret
+@notThis:
+	inc h
+	ld a,h
+	cp LAST_ITEM_INDEX+1
+	jr c,@nextItem
+	xor a
+	ret
