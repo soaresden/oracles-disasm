@@ -3475,7 +3475,12 @@ linkUpdateDiving:
 	ld b,>wRoomLayout
 	ld a,(bc)
 	cp TILEINDEX_DEEP_WATER
-	jp z,checkForUnderwaterTransition@levelDown
+	jr nz,@checkInput
+	; BALLADE: dehors, plonger ne mène nulle part (le « dessous » d'Ages, le groupe 3, ce sont nos
+	; maisons : Link finissait chez le veilleur ; Denis) ; seulement dans un donjon (le Récif)
+	ld a,(wTilesetFlags)
+	and TILESETFLAG_DUNGEON
+	jp nz,checkForUnderwaterTransition@levelDown
 .endif
 
 @checkInput:

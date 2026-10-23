@@ -4537,7 +4537,7 @@ group4Mapb6ObjectData:
 	obj_RandomEnemy $30 ENEMY_KEESE $00
 	obj_End
 group4Mapb9ObjectData:
-	obj_RandomEnemy $40 ENEMY_COLOR_CHANGING_GEL $00
+	obj_RandomEnemy $40 ENEMY_STALFOS $00
 	obj_End
 group4MapbaObjectData:
 	obj_RandomEnemy $40 ENEMY_STALFOS $00
@@ -4632,7 +4632,7 @@ group5Map39ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $13 $08 $08
 	obj_End
 group5Map3aObjectData:
-	obj_RandomEnemy $40 ENEMY_COLOR_CHANGING_GEL $00
+	obj_RandomEnemy $40 ENEMY_ROPE $00
 	obj_End
 group5Map3bObjectData:
 	obj_RandomEnemy $30 ENEMY_KEESE $00

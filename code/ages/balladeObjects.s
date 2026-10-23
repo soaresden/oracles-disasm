@@ -1782,7 +1782,15 @@ echoShells:
 	call interactionIncState
 	call getThisRoomFlags
 	bit 6,(hl)
-	ret z
+	jr nz,+
+	; La première fois : ce que sont ces coquillages (Denis : « pourquoi ça joue de la musique sur
+	; cette jarre ? »), drapeau $80 de la salle
+	bit 7,(hl)
+	ret nz
+	set 7,(hl)
+	ld bc,TX_5b65
+	jp showText
++
 	; Déjà résolue : le coffre (ouvert ou non)
 	ld e,Interaction.state
 	ld a,$03
@@ -1835,8 +1843,14 @@ echoShells:
 	pop hl
 	cp c
 	jr z,+
-	; Raté : on recommence (le bon premier coquillage compte quand même)
+	; Raté : on recommence (le bon premier coquillage compte quand même) ; un petit son d'erreur
 	ld (hl),$00
+	push hl
+	push bc
+	ld a,SND_ERROR
+	call playSound
+	pop bc
+	pop hl
 	ld a,(@order)
 	cp c
 	ret nz
