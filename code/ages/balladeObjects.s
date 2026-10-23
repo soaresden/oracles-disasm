@@ -57,6 +57,7 @@
 ; @subid_37{Invisible, à l'auberge (3:9e) : après le chapitre 5, Marine trouve les photos}
 ; @subid_38{Invisible, le 4F de la Tour (5:c8) : les Veilleurs en fantômes ; vu : « LIIINK! »}
 ; @subid_39{Invisible, à l'auberge (3:9e) : après les photos, le quiz de Marine sur Cocolint}
+; @subid_3a{L'Arbre-Passage, au cœur de chaque île : comme le Bateau-Rondin, sans la mer}
 ; ==================================================================================================
 
 ;;
@@ -122,6 +123,7 @@ main:
 	.dw photoScene
 	.dw ghostVeil
 	.dw marineQuiz
+	.dw passTree
 
 
 ;;
@@ -353,9 +355,21 @@ raft:
 	cp $05
 	jr nc,@twoPages
 	sub $02
+	ld b,a
+	ld e,Interaction.subid
+	ld a,(de)
+	cp $3a
+	ld a,b
+	jr z,+
 	add <TX_5a50
 	ld c,a
 	ld b,>TX_5a50
+	jp showText
++
+	; L'Arbre-Passage : TX_5b4a, 5b4b, 5b4c (comme TX_5a50, 5a51, 5a52)
+	add <TX_5b4a
+	ld c,a
+	ld b,>TX_5b4a
 	jp showText
 
 @twoPages:
@@ -363,7 +377,12 @@ raft:
 	ld e,Interaction.state
 	ld a,$04
 	ld (de),a
+	ld e,Interaction.subid
+	ld a,(de)
+	cp $3a
 	ld bc,TX_5aa8
+	jp nz,showText
+	ld bc,TX_5b4d
 	jp showText
 
 ; Le choix : l'île (0 = la Brume)
@@ -463,9 +482,19 @@ raft:
 	ld a,$03
 	ld (de),a
 	ld a,b
-	; Destination : groupe, salle, case de la ligne (île) de @jetties
+	; Destination : groupe, salle, case de la ligne (île) de @jetties (ou de @trees : par l'arbre)
 	ld hl,jetties
-	ld b,a
+	ld c,SND_SPLASH
+	ld e,Interaction.subid
+	ld a,(de)
+	cp $3a
+	jr nz,+
+	ld hl,trees
+	ld c,SND_TELEPORT
+	ld a,$01
+	ld (wBalladeTreeArrival),a
++
+	ld a,b
 	add a
 	add b
 	rst_addAToHl
@@ -481,7 +510,7 @@ raft:
 	ld (wDisabledObjects),a
 	ld a,$03 ; fondu
 	ld (wWarpTransition2),a
-	ld a,SND_SPLASH
+	ld a,c
 	jp playSound
 
 @state3:
@@ -509,11 +538,21 @@ countDiscoveredIslands:
 	ret
 
 ;;
-; @param[out]	a	L'île où l'on est (0 = la Brume), d'après la salle du ponton
+; @param[out]	a	L'île où l'on est (0 = la Brume), d'après la salle du ponton ou de l'arbre
 findCurrentIsland:
 	ld a,(wActiveRoom)
 	ld c,a
 	ld hl,jetties+1
+	call @scan
+	ret nc
+	ld hl,trees+1
+	call @scan
+	ret nc
+	xor a
+	ret
+
+; @param[out]	cflag	Pas trouvée (sinon a = l'île)
+@scan:
 	ld b,$00
 -
 	ld a,(hl)
@@ -526,9 +565,11 @@ findCurrentIsland:
 	ld a,b
 	cp $09
 	jr c,-
-	ld b,$00
+	scf
+	ret
 +
 	ld a,b
+	or a
 	ret
 
 ; Le ponton de chaque île : groupe, salle (unique : sert aussi à savoir où l'on est), case d'arrivée
@@ -542,6 +583,42 @@ jetties:
 	.db $01, $d1, $44 ; 7. l'île du Grand Sommeil (le ponton)
 	.db $01, $d9, $44 ; 8. l'Œil de l'Insomnis (le ponton)
 	.db $01, $6b, $44 ; 9. le Nid de la Mouette, l'île de Marine (après la fin ; le ponton)
+
+; L'Arbre-Passage de chaque île (au cœur de l'île) : groupe, salle (unique), case juste sous l'arbre
+trees:
+	.db $01, $9b, $24 ; 1. Île de la Brume
+	.db $01, $11, $33 ; 2. Hameau-Grelot
+	.db $01, $07, $52 ; 3. Lagune des Serments
+	.db $01, $2a, $62 ; 4. Mont-Braise
+	.db $01, $52, $67 ; 5. Île des Échos
+	.db $01, $67, $31 ; 6. Nid des Vents
+	.db $01, $b1, $37 ; 7. Île du Grand Sommeil
+	.db $01, $d9, $32 ; 8. Œil de l'Insomnis
+	.db $01, $6c, $43 ; 9. Nid de la Mouette
+
+
+; ==================================================================================================
+; L'Arbre-Passage (subid $3a), au cœur de chaque île (story/salles/objets.txt ; @trees ci-dessus) :
+; il fait comme le Bateau-Rondin (A devant lui : Marine propose les îles repérées), sans la mer :
+; on arrive sous l'arbre de l'île choisie, qui dit son numéro et son nom (TX_5b41 + île).
+; ==================================================================================================
+passTree:
+	ld e,Interaction.state
+	ld a,(de)
+	cp $01
+	jp nz,raft
+	ld a,(wBalladeTreeArrival)
+	or a
+	jp z,raft
+	call waitRoomReady
+	ret nz
+	xor a
+	ld (wBalladeTreeArrival),a
+	call findCurrentIsland
+	add <TX_5b41
+	ld c,a
+	ld b,>TX_5b41
+	jp showText
 
 
 ; ==================================================================================================

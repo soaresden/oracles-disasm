@@ -10,13 +10,13 @@
 ; poursuivent Link, chacun à sa façon (comme les fantômes de Pac-Man) : le rouge vise Link, le rose
 ; trois cases devant lui, le bleu le suit de loin mais retourne dans son coin quand il est trop près,
 ; l'orange hésite. Ils ne font jamais demi-tour, sauf quand Link prend une gemme : ils ont peur
-; (bleu nuit, puis ils clignotent), fuient au hasard, plus lentement, et Link les terrasse en les
-; touchant (5, 10, 20 puis 50 rubis d'affilée) ; ils retournent à l'enclos. Sans gemme, l'épée les
-; traverse. Un Lynel qui attrape Link le laisse à un seul cœur (Denis : « ils devraient presque nous
+; (bleu nuit, puis ils clignotent), fuient au hasard, plus lentement ; Link brille (Denis) et les terrasse
+; d'un coup d'épée (1, 2, 5 puis 10 rubis d'affilée) ; ils retournent à l'enclos. Sans gemme,
+; l'épée les traverse. Pendant le jeu, Link n'a que son épée (balladeCreuse.setSwordLoadout). Un Lynel qui attrape Link le laisse à un seul cœur (Denis : « ils devraient presque nous
 ; one shot ») et tous retournent à l'enclos ; attrapé avec un seul cœur, c'est perdu. Tous les rubis
 ; ramassés : gagné. Deux labyrinthes (Denis) : le 1er (5:e9) gagné, le forain envoie Link dans le
 ; 2e (5:ee, art/labyrinthe2.txt), plus dur : les Lynels vont plus vite, sortent plus tôt de l'enclos,
-; et la gemme fait moins longtemps peur ; le 2e gagné : 50 rubis et, la première fois, un quart de
+; et la gemme fait moins longtemps peur ; le 2e gagné : 20 rubis et, la première fois, un quart de
 ; cœur (drapeau $80 de 5:ee). Perdu, ou le 2e gagné : retour chez le forain.
 ;
 ; Le contrôleur : INTERAC_BALLADE_CREUSE $01 (object_code/ages/interactions/balladeCreuse.s) ; les
@@ -38,6 +38,18 @@ main:
 	; Pas de Lanterne dans le labyrinthe
 	ld a,$02
 	ld (wInstrumentsDisabledCounter),a
+	; En jeu : rien que l'épée (balladeCreuse.setSwordLoadout) ; la partie finie, tout revient
+	push de
+	ld a,(wBalladePacState)
+	cp $01
+	jr nz,+
+	callab balladeCreuse.setSwordLoadout
+	jr ++
++
+	callab balladeCreuse.restoreLoadout
+++
+	pop de
+	call @glow
 	ld e,Interaction.state
 	ld a,(de)
 	rst_jumpTable
@@ -73,6 +85,39 @@ main:
 	ld (wBalladePacState),a
 	ld a,PALH_LABYRINTHE
 	jp loadPaletteHeader
+
+;;
+; Tant que les Lynels ont peur, Link brille (sa palette et l'orange, la palette 3) : il peut les
+; terrasser d'un coup d'épée. Les 2 dernières secondes, plus lentement (comme eux) ; pas pendant
+; qu'il clignote, blessé.
+@glow:
+	ld a,(w1Link.invincibilityCounter)
+	or a
+	ret nz
+	ld a,(w1Link.oamFlagsBackup)
+	ld b,a
+	ld a,(wBalladePacState)
+	cp $01
+	jr nz,@linkPal
+	ld a,(wBalladePacPower)
+	or a
+	jr z,@linkPal
+	ld c,$04
+	cp PAC_FLASH_TIME
+	jr nc,+
+	ld c,$10
++
+	ld a,(wFrameCounter)
+	and c
+	jr z,@linkPal
+	ld a,b
+	and $f8
+	or $03
+	ld b,a
+@linkPal:
+	ld a,b
+	ld (w1Link.oamFlags),a
+	ret
 
 @playing:
 	ld a,(wTextIsActive)
@@ -164,7 +209,7 @@ main:
 	jr nz,+
 	push de
 	ld a,TREASURE_RUPEES
-	ld c,RUPEEVAL_050
+	ld c,RUPEEVAL_020
 	call giveTreasure
 	pop de
 +
@@ -731,9 +776,14 @@ lynel:
 	ret
 
 ;;
-; Link touche le Lynel : s'il a peur, Link le terrasse (carry) ; sinon il attrape Link
+; Link (son épée) contre un Lynel : s'il a peur, un coup d'épée le terrasse (carry) ; sinon, s'il
+; touche Link, il l'attrape. Quand ils ont peur, Link brille (le contrôleur, @glow) : Denis.
 @checkLink:
 	ld h,d
+	ld l,Enemy.var32
+	ld a,(hl)
+	or a
+	jr nz,@checkSword
 	ld l,Enemy.yh
 	ld a,(w1Link.yh)
 	sub (hl)
@@ -746,10 +796,6 @@ lynel:
 	call @abs
 	cp $0b
 	ret nc
-	ld l,Enemy.var32
-	ld a,(hl)
-	or a
-	jr nz,@eaten
 	ld a,(w1Link.invincibilityCounter)
 	or a
 	jr nz,+
@@ -758,11 +804,49 @@ lynel:
 +
 	xor a
 	ret
+
+; Il a peur : l'épée de Link (l'objet ITEM_SWORD, pendant le coup) le touche-t-elle ?
+@checkSword:
+	ld b,FIRST_ITEM_INDEX
+--
+	ld h,b
+	ld l,Item.enabled
+	ld a,(hl)
+	or a
+	jr z,@nextItem
+	ld l,Item.id
+	ld a,(hl)
+	cp ITEM_SWORD
+	jr nz,@nextItem
+	ld l,Item.yh
+	ld c,(hl)
+	ld l,Item.xh
+	ld e,(hl)
+	ld h,d
+	ld l,Enemy.yh
+	ld a,c
+	sub (hl)
+	call @abs
+	cp $0e
+	jr nc,@nextItem
+	ld l,Enemy.xh
+	ld a,e
+	sub (hl)
+	call @abs
+	cp $0e
+	jr c,@eaten
+@nextItem:
+	inc b
+	ld a,b
+	cp FIRST_ITEM_INDEX + $0a
+	jr c,--
+	xor a
+	ret
 @eaten:
 	call objectCreatePuff
 	ld a,SND_KILLENEMY
 	call playSound
-	; 5, 10, 20, puis 50 rubis d'affilée
+	; 1, 2, 5, puis 10 rubis d'affilée (Denis : on gagnait trop)
 	ld hl,wBalladePacCombo
 	ld a,(hl)
 	cp $03
@@ -881,4 +965,4 @@ lynel:
 @aheadOffsets:
 	.db $fd $00, $00 $03, $03 $00, $00 $fd
 @comboRupees:
-	.db RUPEEVAL_005, RUPEEVAL_010, RUPEEVAL_020, RUPEEVAL_050
+	.db RUPEEVAL_001, RUPEEVAL_002, RUPEEVAL_005, RUPEEVAL_010

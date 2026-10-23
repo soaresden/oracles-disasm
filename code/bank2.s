@@ -3013,7 +3013,7 @@ closeMenu:
 b2_updateMenus:
 	ld a,(wOpenedMenuType)
 	or a
-	jr nz,@updateMenu
+	jp nz,@updateMenu ; BALLADE: jp (le code plus bas a grandi)
 
 	; Return if screen is scrolling?
 	ld a,(wScrollMode)
@@ -3100,7 +3100,12 @@ b2_updateMenus:
 @openMenu:
 	xor a
 	ld (wBalladeSelectTimer),a
-	jp openMenu_body
+	; Pendant un jeu du forain (rien que la Pelle ou l'épée) : pas d'inventaire
+	ld a,(wBalladeLoadout)
+	or a
+	jp z,openMenu_body
+	ld a,SND_ERROR
+	jp playSound
 
 .else
 	ld a,(wKeysJustPressed)

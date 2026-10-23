@@ -409,8 +409,11 @@ wBalladeMamonoScan: ; $c59b
 	db
 wBalladeMamonoBudget: ; $c59c
 	db
-wBalladeMamonoUnused: ; $c59d
-	dsb 3
+; BALLADE: Link vient d'arriver par l'Arbre-Passage (balladeObjects.s) : l'arbre dit l'île et son nom
+wBalladeTreeArrival: ; $c59d
+	db
+wBalladeUnused: ; $c59e
+	dsb 2
 
 ; BALLADE: le Labyrinthe des Lynels (code/ages/balladePac.s) : l'état (0 rien, 1 en jeu, 2 gagné,
 ; 3 perdu, 4 on rentre), les rubis qui restent, la peur des Lynels (images / 2), les Lynels mangés
@@ -473,7 +476,17 @@ wSavefileString: ; $c5b2
 ; Ages:    "Z21216-0"
 	dsb 8
 
-; $c5ba-$c5bf unused?
+; BALLADE: pendant les jeux du forain, Link n'a que la Pelle ou son épée (code/ages/balladeCreuse.s,
+; setShovelLoadout) : 0 rien, 1 la Pelle, 2 l'épée ; ses objets d'avant (A, B) sont gardés ici, dans la
+; sauvegarde : ils reviennent en changeant de salle, même après un Game Over
+wBalladeLoadout: ; $c5ba
+	db
+wBalladeLoadoutA: ; $c5bb
+	db
+wBalladeLoadoutB: ; $c5bc
+	db
+
+; $c5bd-$c5bf unused?
 
 .ENDS
 

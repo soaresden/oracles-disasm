@@ -3,8 +3,8 @@
 ;
 ; Un champ de sable de 6 x 4 cases (lignes 2-5, colonnes 1-6 de la salle) cache des bombes. Link
 ; creuse la case devant lui avec A ; chaque case sans bombe montre le nombre de bombes autour (les
-; chiffres 1 à 8 sur le sable, tools/make_mamono.py) et donne un rubis de sa couleur : vert (aucune,
-; 1 rubis), bleu (une, 5), rouge (deux, 20), doré (trois ou plus, 50). Une bombe : BOUM, c'est
+; chiffres 1 à 8 sur le sable, tools/make_mamono.py) et donne un rubis : vert (aucune ou une, 1
+; rubis), bleu (deux, 5), rouge (trois ou plus, 20) ; Denis : on gagnait trop. Une bombe : BOUM, c'est
 ; perdu. Toutes les cases sûres creusées : gagné. Deux niveaux (Denis) : Facile, Difficile ; la
 ; première victoire en Difficile donne un quart de cœur (drapeau $80 de la salle).
 ;
@@ -27,8 +27,79 @@
 ; Interaction.var30 : 1 pendant que le texte du forain (TX_5a43) est affiché
 
 ;;
+; Pendant les jeux du forain (Denis) : rien que la Pelle (sur A ; le Creuse-Rubis, le Mamono : A
+; creuse) ou rien que l'épée (sur B, à son niveau ; les Lynels). Les objets d'avant sont gardés
+; (wBalladeLoadoutA/B) et reviennent la partie finie, ou en changeant de salle (objectLoading.s) ;
+; pas d'inventaire pendant ce temps (bank2.s) et la Pelle ne sert pas (parentItemUsage.s). Appelés
+; à chaque image du jeu ; d est gardé.
+setShovelLoadout:
+	ld b,$01
+	jr setLoadout
+
+setSwordLoadout:
+	ld b,$02
+
+setLoadout:
+	ld hl,wBalladeLoadout
+	ld a,(hl)
+	cp b
+	ret z
+	or a
+	jr nz,+
+	ld a,(wInventoryA)
+	ld (wBalladeLoadoutA),a
+	ld a,(wInventoryB)
+	ld (wBalladeLoadoutB),a
++
+	ld (hl),b
+	dec b
+	jr nz,@sword
+	ld a,ITEM_SHOVEL
+	ld (wInventoryA),a
+	xor a
+	ld (wInventoryB),a
+	jr @refresh
+@sword:
+	xor a
+	ld (wInventoryA),a
+	ld a,TREASURE_SWORD
+	call checkTreasureObtained
+	ld a,ITEM_SWORD
+	jr c,+
+	xor a
++
+	ld (wInventoryB),a
+@refresh:
+	ld a,$ff
+	ld (wStatusBarNeedsRefresh),a
+	ret
+
+;;
+; Les objets d'avant reviennent (s'il y a lieu)
+restoreLoadout:
+	ld hl,wBalladeLoadout
+	ld a,(hl)
+	or a
+	ret z
+	ld (hl),$00
+	ld a,(wBalladeLoadoutA)
+	ld (wInventoryA),a
+	ld a,(wBalladeLoadoutB)
+	ld (wInventoryB),a
+	ld a,$ff
+	ld (wStatusBarNeedsRefresh),a
+	ret
+
+;;
 ; Appelé à chaque image par INTERAC_BALLADE_CREUSE (d = l'interaction)
 main:
+	; En jeu : rien que la Pelle
+	ld a,(wBalladeCreuseState)
+	cp $01
+	call z,setShovelLoadout
+	ld a,(wBalladeCreuseState)
+	cp $01
+	call nz,restoreLoadout
 	ld e,Interaction.state
 	ld a,(de)
 	or a
@@ -484,9 +555,9 @@ main:
 @frontOffsets:
 	.db $f0 $01 $10 $ff ; haut, droite, bas, gauche
 
-; Rubis selon le nombre de bombes autour : vert, bleu, rouge, doré
+; Rubis selon le nombre de bombes autour (0, 1, 2, 3 ou plus) : vert, vert, bleu, rouge
 @rupeeDrops:
-	.db ITEM_DROP_1_RUPEE, ITEM_DROP_5_RUPEES, ITEM_DROP_0a, ITEM_DROP_0b
+	.db ITEM_DROP_1_RUPEE, ITEM_DROP_1_RUPEE, ITEM_DROP_5_RUPEES, ITEM_DROP_0a
 
 ; Facile, Difficile
 @prices:

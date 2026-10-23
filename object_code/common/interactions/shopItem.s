@@ -353,6 +353,16 @@ shopItemGetTilesForRupeeDisplay:
 	ldi a,(hl)
 	cp $ff
 	ret z
+.ifdef ROM_AGES
+	; BALLADE: le prix sous l'objet, où qu'il soit sur le comptoir (deux chiffres de x - 8 à
+	; x + 7 ; trois chiffres : une case plus à gauche, plus bas)
+	ld e,Interaction.xh
+	ld a,(de)
+	srl a
+	srl a
+	srl a
+	add <(w3VramTiles+$5f)
+.endif
 
 	push de
 	ld e,a
@@ -386,6 +396,13 @@ shopItemGetTilesForRupeeDisplay:
 	; digit.
 	dec l
 	inc (hl)
+.ifdef ROM_AGES
+	dec l
+	dec l
+	dec (hl)
+	inc l
+	inc l
+.endif
 	inc l
 	call @drawDigit
 +
@@ -439,7 +456,7 @@ shopItemPrices:
 	/* $00 */ .db RUPEEVAL_300
 	/* $01 */ .db RUPEEVAL_010
 	/* $02 */ .db RUPEEVAL_300
-	/* $03 */ .db RUPEEVAL_030
+	/* $03 */ .db RUPEEVAL_050 ; BALLADE: le bouclier (Port-Veille)
 	/* $04 */ .db RUPEEVAL_020
 .ifdef ROM_AGES
 	/* $05 */ .db RUPEEVAL_300
@@ -457,12 +474,12 @@ shopItemPrices:
 	/* $0e */ .db RUPEEVAL_100
 	/* $0f */ .db RUPEEVAL_100
 	/* $10 */ .db RUPEEVAL_100
-	/* $11 */ .db RUPEEVAL_050
-	/* $12 */ .db RUPEEVAL_080
+	/* $11 */ .db RUPEEVAL_150 ; BALLADE: le bouclier de fer
+	/* $12 */ .db RUPEEVAL_300 ; BALLADE: le bouclier miroir
 	/* $13 */ .db RUPEEVAL_030
 .ifdef ROM_AGES
 	/* $14 */ .db RUPEEVAL_300
-	/* $15 */ .db RUPEEVAL_500
+	/* $15 */ .db RUPEEVAL_300 ; BALLADE: le quart de cœur (Pépin)
 .endif
 
 ;;
@@ -557,7 +574,7 @@ shopItemReplacementTable:
 	/* $00 */ .db <wBoughtShopItems1  $01 $ff $00
 	/* $01 */ .db <wBoughtShopItems2  $08 $0d $04
 	/* $02 */ .db <wBoughtShopItems1  $02 $06 $00
-	/* $03 */ .db <wShieldLevel       $02 $11 $00
+	/* $03 */ .db <wShieldLevel       $03 $11 $00 ; BALLADE: un bouclier : le suivant
 	/* $04 */ .db <wBoughtShopItems1  $00 $ff $00
 	/* $05 */ .db <wBoughtShopItems1  $08 $ff $00
 	/* $06 */ .db <wBoughtShopItems1  $04 $ff $00
@@ -571,12 +588,12 @@ shopItemReplacementTable:
 	/* $0e */ .db <wBoughtShopItems2  $01 $ff $00
 	/* $0f */ .db <wBoughtShopItems2  $02 $ff $00
 	/* $10 */ .db <wBoughtShopItems2  $04 $ff $00
-	/* $11 */ .db <wShieldLevel       $01 $12 $00
-	/* $12 */ .db <wShieldLevel       $00 $ff $00
+	/* $11 */ .db <wShieldLevel       $02 $12 $00 ; BALLADE: (niveau 2 ou 3 : le miroir)
+	/* $12 */ .db <wShieldLevel       $01 $ff $00 ; BALLADE: (niveau 3 : plus rien)
 	/* $13 */ .db <wBoughtShopItems1  $20 $03 $00
 .ifdef ROM_AGES
 	/* $14 */ .db <wBoughtShopItems1  $01 $ff $00
-	/* $15 */ .db <wBoughtShopItems2  $40 $05 $00
+	/* $15 */ .db <wBoughtShopItems2  $40 $ff $00 ; BALLADE: une seule fois
 .endif
 
 

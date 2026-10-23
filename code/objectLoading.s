@@ -32,6 +32,12 @@ parseObjectData:
 	ld a,$ff
 	ld (wStatusBarNeedsRefresh),a
 +
+	; BALLADE: en quittant un jeu du forain, Link retrouve ses objets (code/ages/balladeCreuse.s)
+	ld a,(wBalladeLoadout)
+	or a
+	jr z,+
+	callab balladeCreuse.restoreLoadout
++
 	; BALLADE: après la fin, Marine suit Link partout (code/ages/balladeFin.s)
 	ld a,(wBalladeMarineFollow)
 	or a

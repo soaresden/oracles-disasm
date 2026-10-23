@@ -3837,6 +3837,7 @@ group1Map05ObjectData:
 group1Map06ObjectData:
 	obj_End
 group1Map07ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $3a $48 $28 ; l'Arbre-Passage (île 3)
 	obj_End
 group1Map08ObjectData:
 	obj_End
@@ -3854,6 +3855,7 @@ group1Map11ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $0b $58 $28
 	obj_Interaction INTERAC_BALLADE_OBJECT $0c $58 $98
 	obj_Interaction INTERAC_BALLADE_OBJECT $0a $08 $08
+	obj_Interaction INTERAC_BALLADE_OBJECT $3a $28 $38 ; l'Arbre-Passage (île 2)
 	obj_End
 group1Map12ObjectData:
 	obj_End
@@ -3906,6 +3908,7 @@ group1Map2aObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $17 $38 $78
 	obj_Interaction INTERAC_BALLADE_OBJECT $17 $48 $88
 	obj_Interaction INTERAC_BALLADE_OBJECT $0a $08 $08 ; la fin du chapitre 4 (l'essence de la Forge)
+	obj_Interaction INTERAC_BALLADE_OBJECT $3a $58 $28 ; l'Arbre-Passage (île 4)
 	obj_End
 group1Map2bObjectData:
 	obj_End
@@ -3971,6 +3974,7 @@ group1Map50ObjectData:
 group1Map51ObjectData:
 	obj_End
 group1Map52ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $3a $58 $78 ; l'Arbre-Passage (île 5)
 	obj_End
 group1Map53ObjectData:
 	obj_End
@@ -4016,6 +4020,7 @@ group1Map66ObjectData:
 group1Map67ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $22 $58 $78
 	obj_Interaction INTERAC_BALLADE_OBJECT $0a $08 $08 ; la fin du chapitre 6 (le vent revient)
+	obj_Interaction INTERAC_BALLADE_OBJECT $3a $28 $18 ; l'Arbre-Passage (île 6)
 	obj_End
 group1Map68ObjectData:
 	obj_End
@@ -4026,6 +4031,7 @@ group1Map6cObjectData:
 	obj_SpecificEnemyA $00 ENEMY_OCTOROK $00 $28 $28
 	obj_SpecificEnemyA     ENEMY_OCTOROK $00 $38 $58
 	obj_SpecificEnemyA     ENEMY_OCTOROK $00 $18 $48
+	obj_Interaction INTERAC_BALLADE_OBJECT $3a $38 $38 ; l'Arbre-Passage (île 9)
 	obj_End
 group1Map70ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $00 $68 $58
@@ -4081,6 +4087,7 @@ group1Map9bObjectData:
 	obj_Interaction INTERAC_BALLADE_NPC $05 $58 $78
 	obj_Interaction INTERAC_MARINE $05 $08 $08 ; la fin du chapitre 1 : le tour du village
 	obj_Interaction INTERAC_BALLADE_OBJECT $02 $08 $08 ; parties de la v1.0/1.1 : Marine lit le vent
+	obj_Interaction INTERAC_BALLADE_OBJECT $3a $18 $48 ; l'Arbre-Passage (île 1)
 	obj_End
 group1Map9cObjectData:
 	obj_Interaction INTERAC_BALLADE_NPC $02 $38 $38
@@ -4116,6 +4123,7 @@ group1Mapb0ObjectData:
 	obj_End
 group1Mapb1ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $0a $08 $08 ; la fin du chapitre 7 (la neige fond)
+	obj_Interaction INTERAC_BALLADE_OBJECT $3a $28 $78 ; l'Arbre-Passage (île 7)
 	obj_End
 group1Mapb2ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $2d $28 $58
@@ -4166,6 +4174,7 @@ group1Mapd8ObjectData:
 group1Mapd9ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $00 $68 $58
 	obj_Interaction INTERAC_BALLADE_OBJECT $01 $08 $08
+	obj_Interaction INTERAC_BALLADE_OBJECT $3a $28 $28 ; l'Arbre-Passage (île 8)
 	obj_End
 group1MapdaObjectData:
 	obj_End
@@ -4177,8 +4186,9 @@ group2Map9eObjectData:
 	obj_Interaction INTERAC_BALLADE_NPC $07 $28 $68
 	obj_End
 group3Map20ObjectData:
-	obj_Interaction $47 $04 $28 $80
-	obj_Interaction $47 $01 $28 $60
+	obj_Interaction $47 $15 $28 $50 ; un quart de cœur (300, une fois)
+	obj_Interaction $47 $04 $28 $68 ; 10 bombes (20)
+	obj_Interaction $47 $01 $28 $80 ; 3 cœurs (10)
 	obj_Interaction $46 $00 $58 $88
 	obj_End
 group3Map21ObjectData:
@@ -4216,8 +4226,9 @@ group3Map29ObjectData:
 group3Map2aObjectData:
 	obj_End
 group3Map5eObjectData:
-	obj_Interaction $47 $01 $28 $80
-	obj_Interaction $47 $09 $28 $60
+	obj_Interaction $47 $03 $28 $50 ; le bouclier (50 ; puis le bouclier de fer 150, le miroir 300)
+	obj_Interaction $47 $09 $28 $68 ; la fée en bouteille (60)
+	obj_Interaction $47 $01 $28 $80 ; 3 cœurs (10)
 	obj_Interaction $46 $00 $58 $88
 	obj_End
 group3Map9eObjectData:

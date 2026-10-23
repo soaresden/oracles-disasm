@@ -13,7 +13,7 @@
 ; balladeMarine.drawNoctambuleTimer). Une case sans rien autour découvre ses voisines toute seule
 ; (quatre par image). Gagné quand tous les monstres sont déterrés ; à bout de forces, perdu. Deux
 ; niveaux (Denis) : Facile, Dur ; le gros lot en Dur sans une égratignure (un « perfect » :
-; wBalladeMamonoHurt) : un quart de cœur la première fois (drapeau $80 de l'arène), 100 rubis
+; wBalladeMamonoHurt) : un quart de cœur la première fois (drapeau $80 de l'arène), 30 rubis
 ; ensuite. On sort par le haut, chez le forain.
 ;
 ; Les ennemis modèles : un de chaque niveau dans les objets de la salle (story/salles/objets.txt),
@@ -39,6 +39,17 @@
 main:
 	ld a,$02
 	ld (wInstrumentsDisabledCounter),a
+	; En jeu : rien que la Pelle (balladeCreuse.setShovelLoadout) ; la partie finie, tout revient
+	push de
+	ld a,(wBalladeMamonoState)
+	cp $01
+	jr nz,+
+	callab balladeCreuse.setShovelLoadout
+	jr ++
++
+	callab balladeCreuse.restoreLoadout
+++
+	pop de
 	ld e,Interaction.state
 	ld a,(de)
 	or a
@@ -440,11 +451,11 @@ main:
 	jp nz,showText
 	ld bc,TX_5b3f
 	call showText
-	; Le quart de cœur, la première fois (drapeau $80) ; ensuite, 100 rubis
+	; Le quart de cœur, la première fois (drapeau $80) ; ensuite, 30 rubis
 	call getThisRoomFlags
 	ld a,(hl)
 	and $80
-	ld bc,TREASURE_OBJECT_RUPEES_06	; (100 rubis)
+	ld bc,TREASURE_OBJECT_RUPEES_04	; (30 rubis)
 	jr nz,+
 	set 7,(hl)
 	ldbc TREASURE_HEART_PIECE, $00

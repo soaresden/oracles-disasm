@@ -1522,7 +1522,7 @@ resetDungeon:
 	ret
 
 ;;
-; Un coffre de boussole ou de carte (on les a d'office) donne 30 rubis ; après la fin, un coffre
+; Un coffre de boussole ou de carte (on les a d'office) donne 10 rubis (Denis : moins d'argent) ; après la fin, un coffre
 ; qui donne un objet déjà eu (pas une clé, des rubis ni un quart de cœur) aussi
 ; @param	bc	Le contenu du coffre (le trésor, son sous-type) ; modifié
 postGameChest:
@@ -1553,7 +1553,7 @@ postGameChest:
 	pop bc
 	ret nc
 @rupees:
-	ld bc,TREASURE_OBJECT_RUPEES_04
+	ld bc,TREASURE_OBJECT_RUPEES_02
 	ret
 
 

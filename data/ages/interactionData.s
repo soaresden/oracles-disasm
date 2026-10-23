@@ -956,6 +956,7 @@ interactionedSubidData:
 	m_InteractionSubidData $00 $00 $00 ; $37 les photos de Cocolint, à l'auberge (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $38 Ghost Babel : les fantômes du 4F de la Tour (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $39 le quiz de Marine, à l'auberge (invisible)
+	m_InteractionSubidData $e3 $14 $02 ; $3a l'Arbre-Passage (image 5, palette 0 : le vert)
 	m_InteractionSubidDataEnd
 
 interactiond4SubidData:

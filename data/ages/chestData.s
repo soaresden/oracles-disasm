@@ -40,7 +40,7 @@ chestGroup2Data:
 	m_ChestData $34, $f4, TREASURE_OBJECT_RING_19
 	m_ChestData $18, $4f, TREASURE_OBJECT_RING_22
 	m_ChestData $14, $c0, TREASURE_OBJECT_GASHA_SEED_01
-	m_ChestData $11, $c1, TREASURE_OBJECT_RUPEES_05 ; BALLADE: le lac de glace (1:c1) : des rubis
+	m_ChestData $11, $c1, TREASURE_OBJECT_RUPEES_03 ; BALLADE: le lac de glace (1:c1) : des rubis (20)
 	.db $ff
 
 chestGroup3Data:
@@ -71,7 +71,7 @@ chestGroup4Data:
 	m_ChestData $57, $b1, TREASURE_OBJECT_CANE_OF_SOMARIA_00 ; les Copies battues : la Canne des Songes
 	m_ChestData $5b, $b2, TREASURE_OBJECT_MAP_02        ; la carte
 	m_ChestData $22, $b0, TREASURE_OBJECT_SMALL_KEY_03  ; un bloc de la Canne sur le bouton : la petite clé 2
-	m_ChestData $27, $af, TREASURE_OBJECT_RUPEES_04     ; des rubis
+	m_ChestData $27, $af, TREASURE_OBJECT_RUPEES_02     ; des rubis (10)
 	m_ChestData $77, $ae, TREASURE_OBJECT_BOSS_KEY_03   ; les deux boutons : la clé du boss
 	m_ChestData $53, $b9, TREASURE_OBJECT_COMPASS_02    ; la boussole
 	; BALLADE: le Coffre à Jouets (story/salles/coffre.txt)
@@ -82,16 +82,16 @@ chestGroup4Data:
 	m_ChestData $57, $2c, TREASURE_OBJECT_BOSS_KEY_03   ; le Soldat de Plomb : la clé du boss
 	; BALLADE: le Phare Éteint (story/salles/phare.txt ; un coffre par salle, le premier compte)
 	m_ChestData $57, $1e, TREASURE_OBJECT_SMALL_KEY_03   ; les Zols (quand ils sont battus)
-	m_ChestData $8c, $1f, TREASURE_OBJECT_RUPEES_04      ; la statue sur le bouton : 30 rubis
+	m_ChestData $8c, $1f, TREASURE_OBJECT_RUPEES_02      ; la statue sur le bouton : 10 rubis
 	m_ChestData $57, $15, TREASURE_OBJECT_HARP_02        ; la Lanterne des Songes
-	m_ChestData $2c, $1d, TREASURE_OBJECT_RUPEES_05      ; derrière le mur qui brûle : 50 rubis
+	m_ChestData $2c, $1d, TREASURE_OBJECT_RUPEES_03      ; derrière le mur qui brûle : 20 rubis
 	m_ChestData $53, $1c, TREASURE_OBJECT_SMALL_KEY_03   ; la douve
 	m_ChestData $57, $17, TREASURE_OBJECT_SMALL_KEY_03   ; la tour, 3 torches
 	m_ChestData $5a, $19, TREASURE_OBJECT_BOSS_KEY_03    ; le balcon ouest
-	m_ChestData $1c, $1a, TREASURE_OBJECT_RUPEES_06      ; le balcon est : 100 rubis
+	m_ChestData $1c, $1a, TREASURE_OBJECT_RUPEES_04      ; le balcon est : 30 rubis
 	; BALLADE: le Terrier des Serpents (story/salles/terrier.txt)
 	m_ChestData $2c, $d3, TREASURE_OBJECT_SMALL_KEY_03   ; la statue sur le bouton : la petite clé
-	m_ChestData $8d, $d6, TREASURE_OBJECT_RUPEES_05      ; l'antichambre : 50 rubis
+	m_ChestData $8d, $d6, TREASURE_OBJECT_RUPEES_03      ; l'antichambre : 20 rubis
 	m_ChestData $57, $08, TREASURE_OBJECT_SMALL_KEY_03
 	m_ChestData $17, $16, TREASURE_OBJECT_SMALL_KEY_03
 	m_ChestData $53, $1d, TREASURE_OBJECT_COMPASS_02
@@ -149,19 +149,19 @@ chestGroup5Data:
 	m_ChestData $53, $92, TREASURE_OBJECT_MAP_02        ; le bas-côté sud-ouest : la carte
 	m_ChestData $57, $93, TREASURE_OBJECT_COMPASS_02    ; les Stalfos battus : la boussole
 	m_ChestData $37, $8b, TREASURE_OBJECT_SMALL_KEY_03  ; la sacristie : la petite clé 1
-	m_ChestData $37, $8e, TREASURE_OBJECT_RUPEES_05     ; le reliquaire : des rubis
+	m_ChestData $37, $8e, TREASURE_OBJECT_RUPEES_03     ; le reliquaire : des rubis (20)
 	m_ChestData $12, $8d, TREASURE_OBJECT_SWITCH_HOOK_00 ; la nef : le Grappin-Écho
 	m_ChestData $54, $80, TREASURE_OBJECT_SMALL_KEY_03  ; le bout ouest : la petite clé 2
-	m_ChestData $37, $7c, TREASURE_OBJECT_RUPEES_04     ; la tribune ouest : des rubis
+	m_ChestData $37, $7c, TREASURE_OBJECT_RUPEES_02     ; la tribune ouest : des rubis (10)
 	m_ChestData $5a, $89, TREASURE_OBJECT_BOSS_KEY_03   ; le bout est : la clé du chœur
-	m_ChestData $37, $7f, TREASURE_OBJECT_RUPEES_04     ; la tribune est : des rubis
+	m_ChestData $37, $7f, TREASURE_OBJECT_RUPEES_02     ; la tribune est : des rubis (10)
 	m_ChestData $1c, $b0, TREASURE_OBJECT_TRADEITEM_0c ; BALLADE: la grotte de la Boîte : Sire Bouchon, le jouet de Lila
-	m_ChestData $17, $b1, TREASURE_OBJECT_RUPEES_05 ; BALLADE: la grotte des amoureux : des rubis
-	m_ChestData $1b, $b2, TREASURE_OBJECT_RUPEES_05 ; BALLADE: la mine abandonnée (Mont-Braise) : des rubis
+	m_ChestData $17, $b1, TREASURE_OBJECT_RUPEES_03 ; BALLADE: la grotte des amoureux : des rubis (20)
+	m_ChestData $1b, $b2, TREASURE_OBJECT_RUPEES_03 ; BALLADE: la mine abandonnée (Mont-Braise) : des rubis (20)
 	; BALLADE: la Fosse de Bulle (story/salles/fosse.txt)
-	m_ChestData $81, $d1, TREASURE_OBJECT_RUPEES_05      ; profondeur 2 : des rubis
+	m_ChestData $81, $d1, TREASURE_OBJECT_RUPEES_03      ; profondeur 2 : des rubis (20)
 	m_ChestData $11, $d2, TREASURE_OBJECT_HEART_PIECE_01 ; profondeur 3 : un quart de cœur
-	m_ChestData $4d, $d3, TREASURE_OBJECT_RUPEES_08      ; profondeur 4 : beaucoup de rubis
+	m_ChestData $4d, $d3, TREASURE_OBJECT_RUPEES_05      ; profondeur 4 : beaucoup de rubis (50)
 	; BALLADE: le Récif Murmurant (story/salles/recif.txt)
 	m_ChestData $53, $3a, TREASURE_OBJECT_COMPASS_02    ; la boussole
 	m_ChestData $2b, $40, TREASURE_OBJECT_MAP_02        ; la carte
