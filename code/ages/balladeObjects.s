@@ -669,6 +669,7 @@ bell:
 
 ; Une bombe en train d'exploser, à moins de 24 pixels ?
 @state1:
+	call @sparkle
 	ld h,FIRST_ITEM_INDEX
 @nextItem:
 	ld l,Item.enabled
@@ -714,6 +715,60 @@ bell:
 	jp playSound
 
 @state2:
+	ret
+
+; Tant qu'il n'a pas sonné, une petite étincelle chaque seconde : sur le grelot s'il est à l'écran,
+; sinon au bord de l'écran, de son côté (Denis : on ne savait pas où il était, dans les grandes
+; salles qui défilent)
+@sparkle:
+	ld h,d
+	ld l,Interaction.counter1
+	ld a,(hl)
+	or a
+	jr z,+
+	dec (hl)
+	ret
++
+	ld (hl),60
+	ld l,Interaction.yh
+	ld b,(hl)
+	ld l,Interaction.xh
+	ld c,(hl)
+	; y entre le haut et le bas de l'écran
+	ld a,(wScreenOffsetY)
+	add $0c
+	cp b
+	jr c,+
+	ld b,a
++
+	ld a,(wScreenOffsetY)
+	add $74
+	cp b
+	jr nc,+
+	ld b,a
++
+	; x entre la gauche et la droite de l'écran
+	ld a,(wScreenOffsetX)
+	add $0c
+	cp c
+	jr c,+
+	ld c,a
++
+	ld a,(wScreenOffsetX)
+	add $94
+	cp c
+	jr nc,+
+	ld c,a
++
+	call getFreeInteractionSlot
+	ret nz
+	ld (hl),INTERAC_SPARKLE
+	inc l
+	ld (hl),$00
+	ld l,Interaction.yh
+	ld (hl),b
+	ld l,Interaction.xh
+	ld (hl),c
 	ret
 
 ; Les cases du pont de cette salle
@@ -3384,7 +3439,14 @@ masterSword:
 	ld a,(wSwordLevel)
 	cp $03
 	jp nc,interactionDelete
-	jp npcInit
+	call npcInit
+	; (sous l'eau, Link ne s'approche pas autant : une boîte plus grande pour A)
+	ld h,d
+	ld l,Interaction.collisionRadiusY
+	ld (hl),$0c
+	inc l
+	ld (hl),$08
+	ret
 
 @idle:
 	call npcCheckTalk
