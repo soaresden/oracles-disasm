@@ -3500,125 +3500,115 @@ groups:
   - name: TX_0700
     index: 0x00
     text: |-
-      Ow! Ow! Ow!!!\stop
-      Watch where
-      you're goin'!
-      You just hit
-      \col(3)Maple\col(0), the Great
-      Witch Syrup's
-      apprentice!
-      Thanks to you,
-      all the stuff
-      fell out of my
-      bag! The Great
-      Witch will be
-      mad!
-      And I have to
-      get that \col(1)picture
-      book\col(0). Who could
-      have that \col(0x84)\item(0x09)
-      \col(1)book\col(0)?\stop
-      Well, it's all
-      made me mad! So
-      I'm gonna take
-      your stuff, too!
-
+      Aie! Aie! Aie!!!\stop
+      Regarde où tu
+      vas! Tu viens de
+      percuter \col(3)Maple\col(0),
+      l'apprentie de
+      la grande
+      sorcière Syrup!
+      Par ta faute,
+      tout est tombé
+      de mon sac! La
+      sorcière va être
+      furieuse!
+      Et il me faut ce
+      \col(1)livre d'images\col(0).
+      Qui peut bien
+      avoir ce \col(0x84)\item(0x09)
+      \col(1)livre\col(0)?\stop
+      Bref, ça m'a
+      mise en colère!
+      Alors je prends
+      tes affaires
+      aussi!
   - name: TX_0701
     index: 0x01
     text: |-
-      You again?\stop
-      Thanks to you,
-      everything in my
-      bag flew out!
-      You must be
-      brave to hit
-      \col(3)Maple\col(0) like this!
-      I'll just take
-      your stuff, too!
-      Here goes!
-
+      Encore toi?\stop
+      Par ta faute,
+      tout mon sac
+      s'est vidé!
+      Il faut du
+      courage pour
+      percuter \col(3)Maple\col(0)
+      comme ça!
+      Je prends tes
+      affaires aussi!
+      C'est parti!
   - name: TX_0702
     index: 0x02
     text: |-
-      O-U-C-H-!!!
-      You--AGAIN?
-      Do you have it
-      in for me or
-      what? Thanks to
-      you, all the
-      stuff flew out
-      of my bag! Well,
-      I'll just take
-      your stuff, too!
-
+      A-I-E-!!!
+      ENCORE toi?
+      Tu m'en veux ou
+      quoi? Par ta
+      faute, tout mon
+      sac s'est vidé!
+      Bon, je prends
+      tes affaires
+      aussi!
   - name: TX_0703
     index: 0x03
     text: |-
-      AH! All my stuff
-      flew out of my
-      bag! I'll just
-      take what you
-      dropped, too!
-      This'll show you
-      what happens
-      when you make
-      \col(3)Maple\col(0) mad!
-
+      AH! Toutes mes
+      affaires sont
+      tombées! Je
+      prends aussi ce
+      que tu as fait
+      tomber! Voilà ce
+      qui arrive quand
+      on énerve
+      \col(3)Maple\col(0)!
   - name: TX_0704
     index: 0x04
     text: |-
-      Ouch...
-      Back again?
-      The stuff flew
-      out of my bag!
-      I'll just have
-      to take what you
-      dropped, too!
-
+      Aie...
+      Encore là?
+      Mon sac s'est
+      vidé! Je prends
+      aussi ce que tu
+      as fait tomber!
   - name: TX_0705
     index: 0x05
     text: |-
-      We meet again!
-      You know the
-      drill! Fastest
-      one wins.
-      Ready..? Go!
-
+      On se retrouve!
+      Tu connais la
+      règle! Le plus
+      rapide gagne.
+      Prêt..? Partez!
   - name: TX_0706
     index: 0x06
     text: |-
-      Ah ha ha ha! Now
-      you're sorry! I
-      have more stuff
-      than before!
-      See ya!
-
+      Ha ha ha ha!
+      Tu fais moins le
+      malin! J'ai plus
+      de choses qu'au
+      début!
+      Salut!
   - name: TX_0707
     index: 0x07
     text: |-
-      You little--
-      I'll remember
-      this!
-
+      Espèce de...
+      Je m'en
+      souviendrai!
   - name: TX_0708
     index: 0x08
     text: |-
-      Hmm! Not bad!\stop
-      But that's all
-      you get today.
-
+      Hmm! Pas mal!\stop
+      Mais c'est tout
+      pour aujourd'hui
   - name: TX_0709
     index: 0x09
     text: |-
-      Ouch...\stop
-      Watch where
-      you're goin'!
-      You just hit
-      \col(3)Maple\col(0), the Great
-      Witch Syrup's
-      apprentice!\stop
-      Oh my!
-
+      Aie...\stop
+      Regarde où tu
+      vas! Tu viens de
+      percuter \col(3)Maple\col(0),
+      l'apprentie de
+      la grande
+      sorcière Syrup!\stop
+      Oh là là!
   - name:
     - TX_070a
     - TX_070b
@@ -3626,109 +3616,105 @@ groups:
     - 0x0a
     - 0x0b
     text: |-
-      This makes up
-      for your bumping
-      into me! See ya!
-
+      Ça, c'est pour
+      m'avoir foncé
+      dedans! Salut!
   - name: TX_070c
     index: 0x0c
     text: |-
       Ah!
       . . . . . . . .\stop
-      Bye!\heart
-
+      Salut!\heart
   - name: TX_070d
     index: 0x0d
     text: |-
-      Hey! That book!
-
+      Hé! Ce livre!
   - name: TX_070e
     index: 0x0e
     text: |-
-      That's the \col(0x84)\item(0x09)
-      \col(1)Touching Book\col(0)
-      I need to take
-      to Syrup! Why do
-      you have it? Let
-      me read it!
-
+      C'est le \col(0x84)\item(0x09)
+      \col(1)Livre Touchant\col(0)
+      que je dois
+      rapporter à
+      Syrup! Pourquoi
+      tu l'as? Fais-le
+      moi lire!
   - name: TX_070f
     index: 0x0f
     text: |-
-      What..?\stop
-      Oh, my...\stop
+      Quoi..?\stop
+      Oh là là...\stop
       .........\stop
-      Ooo! ...........
-
+      Ooh! ...........
   - name: TX_0710
     index: 0x10
     text: |-
-      Uh-wahhh!\stop
-      Ahhh...(sniff)
-      How touching!
-
+      Ouiiiinnn!\stop
+      Snif... C'est
+      si touchant!
   - name: TX_0711
     index: 0x11
     text: |-
-      Thanks...(sniff)
-      It was good...
-      Take this. It's
-      the first one I
-      made. Syrup
-      never gave me
-      any compliments
-      on it. I'll keep
-      this book.
-      (Sniff!)
-
+      Merci... (snif)
+      C'était beau...
+      Tiens, prends
+      ça. C'est le
+      premier que j'ai
+      fait. Syrup ne
+      m'a jamais fait
+      un compliment
+      dessus. Je garde
+      ce livre.
+      (Snif!)
   - name: TX_0712
     index: 0x12
     text: |-
-      Ouch...\stop
-      Watch where
-      you're walkin'!
-      I came through
-      this weird
-      tunnel and was
-      flyin' happily
-      along when you
-      run into me! I'm
-      \col(3)Maple\col(0), the Great
-      Witch Syrup's
-      apprentice!
-      Why does this
-      happen to me?
-      The Great Witch
-      is so mean. She
-      even took away
-      my \col(1)picture book\col(0)!
-      Doesn't anyone
-      have that \col(0x84)\item(0x09)
-      \col(1)book\col(0)?\stop
-      Now you come
-      along and make
-      me drop all my
-      stuff!
-      Anyway, it's all
-      got me mad!
-      I'm gonna take
-      your stuff, too!
-
+      Aie...\stop
+      Regarde où tu
+      marches!
+      Je suis passée
+      par un tunnel
+      bizarre, je
+      volais toute
+      contente, et tu
+      me fonces
+      dedans! Je suis
+      \col(3)Maple\col(0),
+      l'apprentie de
+      la grande
+      sorcière Syrup!
+      Pourquoi ça
+      tombe sur moi?
+      La sorcière est
+      si méchante.
+      Elle m'a même
+      pris mon \col(1)livre
+      d'images\col(0)!
+      Personne n'a ce
+      \col(0x84)\item(0x09)\col(1)livre\col(0)?\stop
+      Et toi, tu me
+      fais tout
+      tomber!
+      Bref, ça m'a
+      mise en colère!
+      Je prends tes
+      affaires aussi!
   - name: TX_0713
     index: 0x13
     text: |-
-      Ouch...\stop
-      Watch where
-      you're walkin'!
-      I came through
-      this weird
-      tunnel and was
-      flyin' happily
-      along... What
-      are you doin'
-      here anyway?
-      Well, I'm takin'
-      your stuff, too!
+      Aie...\stop
+      Regarde où tu
+      marches!
+      Je suis passée
+      par un tunnel
+      bizarre, je
+      volais toute
+      contente... Et
+      toi, qu'est-ce
+      que tu fais là?
+      Bon, je prends
+      tes affaires
+      aussi!
 
 - group: 0x08
   data:

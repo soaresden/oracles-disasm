@@ -26,9 +26,11 @@ staticDungeonObjects:
 
 
 dungeon2StaticObjects:
-	.db $03, $33, INTERAC_MINECART, $00, $38, $c8
-	.db $03, $35, INTERAC_MINECART, $00, $68, $b8
-	.db $03, $40, INTERAC_MINECART, $00, $58, $a8
+	; BALLADE: le Coffre à Jouets (index 2) n'a pas de rails : plus de chariots d'Ages (celui de 4:33
+	; s'affichait sans ses images)
+	;.db $03, $33, INTERAC_MINECART, $00, $38, $c8
+	;.db $03, $35, INTERAC_MINECART, $00, $68, $b8
+	;.db $03, $40, INTERAC_MINECART, $00, $58, $a8
 	.db $ff 
 
 dungeon4StaticObjects:

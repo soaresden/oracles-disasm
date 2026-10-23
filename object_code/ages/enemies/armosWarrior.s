@@ -408,8 +408,13 @@ armosWarrior_parent_stateD:
 	ld l,Enemy.enemyCollisionMode
 	ld (hl),ENEMYCOLLISION_STANDARD_MINIBOSS
 
+	; BALLADE: le Soldat de Plomb, 2e phase plus dure (Denis : « trop simple ») : deux fois plus de
+	; vie (20 au lieu de 10), des charges plus rapides, moins de répit
+	ld l,Enemy.health
+	ld (hl),20
+
 	ld l,Enemy.speed
-	ld (hl),SPEED_200
+	ld (hl),SPEED_280
 
 	ld bc,TX_2f02
 	call showText
@@ -472,10 +477,10 @@ armosWarrior_parent_state10:
 	ld (hl),$0e
 
 	ld l,Enemy.speed
-	ld (hl),SPEED_200
+	ld (hl),SPEED_280 ; BALLADE (SPEED_200)
 
 	ld l,Enemy.counter1
-	ld (hl),60
+	ld (hl),36 ; BALLADE (60)
 	ret
 
 

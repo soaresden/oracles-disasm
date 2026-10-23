@@ -53,6 +53,19 @@ parseObjectData:
 	ld (wBalladeNoctambule),a
 	ld (wBalladeNoctambule+1),a
 +
+	; BALLADE: dans un donjon, la carte et la boussole d'office (Denis) ; leurs coffres donnent des
+	; rubis (balladeFin.postGameChest). Nos donjons n'affichent pas leur nom par
+	; INTERAC_DUNGEON_STUFF $00 : balladeFin.resetDungeon n'y passe pas
+	ld a,(wDungeonIndex)
+	cp $10
+	jr nc,+
+	push af
+	ld hl,wDungeonCompasses
+	call setFlag
+	pop af
+	ld hl,wDungeonMaps
+	call setFlag
++
 	callab getObjectDataAddress
 .else; ROM_SEASONS
 	ld a,(wActiveGroup)

@@ -621,6 +621,12 @@ trees:
 passTree:
 	ld e,Interaction.state
 	ld a,(de)
+	or a
+	jr nz,+
+	; (un vrai arbre : on ne passe pas au travers ; Denis, île 3)
+	call raft
+	jp objectMarkSolidPosition
++
 	cp $01
 	jp nz,raft
 	ld a,(wBalladeTreeArrival)
@@ -1671,18 +1677,25 @@ bottle:
 	call interactionIncState
 	ld h,d
 	ld l,Interaction.collisionRadiusY
-	ld (hl),$06
+	ld (hl),$0a
 	inc l
-	ld (hl),$06
+	ld (hl),$0a
 	ld e,Interaction.pressedAButton
 	call objectAddToAButtonSensitiveObjectList
 	jp objectSetVisible82
 
 @idle:
+	; A devant elle, ou Link tout contre (Denis : « faut être bizarrement dessus »)
+	ld c,$0e
+	call objectCheckLinkWithinDistance
+	jr c,+
 	ld e,Interaction.pressedAButton
 	ld a,(de)
 	or a
 	ret z
++
+	ld e,Interaction.start
+	call objectRemoveFromAButtonSensitiveObjectList
 	ldbc TREASURE_TRADEITEM, $01
 	call giveTreasureAtLink
 	jp interactionDelete
@@ -3881,8 +3894,11 @@ twins:
 	ret
 
 ;;
-; Un jumeau caché ($3e), dans le Songe : sa tête dépasse de sa cachette. Là seulement quand le jeu a
-; commencé et qu'il n'a pas encore été trouvé ici. A devant lui : trouvé !
+; Un jumeau caché ($3e), dans le Songe. On ne le voit pas (Denis : « trop visible ») : de temps en
+; temps, un petit mouvement le trahit, des feuilles qui bougent au-dessus d'un buisson ou le bout de
+; son bonnet qui dépasse (twinHints). Là seulement quand le jeu a commencé et qu'il n'a pas encore
+; été trouvé ici. A devant sa cachette : trouvé ! (un petit nuage, il file)
+; var30 : sa hauteur de départ ; var31 : 1 pendant le petit mouvement
 hidingTwin:
 	ld e,Interaction.state
 	ld a,(de)
@@ -3905,15 +3921,102 @@ hidingTwin:
 	ld (hl),$0a
 	inc l
 	ld (hl),$08
+	ld l,Interaction.yh
+	ld a,(hl)
+	ld l,Interaction.var30
+	ld (hl),a
+	; Son indice : des feuilles (image 6, palette 0) ou le bonnet (image 7, palette 1)
+	ld a,(wActiveRoom)
+	ld b,a
+	ld hl,twinHints
+-
+	ldi a,(hl)
+	cp b
+	jr z,+
+	inc hl
+	inc hl
+	jr -
++
+	; (dessiné plus haut, sans bouger la cachette : Interaction.zh)
+	ldi a,(hl)
+	ld e,a
+	ld a,(hl)
+	ld l,e
+	ld e,Interaction.zh
+	ld (de),a
+	ld a,l
+	ld b,$18
+	ld c,$00
+	or a
+	jr z,+
+	ld b,$1c
+	ld c,$01
++
+	ld h,d
+	ld l,Interaction.oamTileIndexBase
+	ld a,(hl)
+	add b
+	ld (hl),a
+	ld l,Interaction.oamFlags
+	ld a,(hl)
+	and $f8
+	or c
+	ld (hl),a
 	ld e,Interaction.pressedAButton
 	call objectAddToAButtonSensitiveObjectList
-	jp objectSetVisible82
+	call objectSetInvisible
+	jr @wait
 
 @idle:
 	call npcCheckTalk
+	jr nz,@foundHere
+	ld h,d
+	ld l,Interaction.counter1
+	dec (hl)
+	jr z,@phase
+	; Pendant le mouvement : il monte d'un pixel toutes les huit images
+	ld l,Interaction.var31
+	ld a,(hl)
+	or a
 	ret z
+	ld l,Interaction.counter1
+	ld a,(hl)
+	and $07
+	ret nz
+	ld l,Interaction.yh
+	dec (hl)
+	ret
+
+; Fin d'une attente : le petit mouvement ; fin du mouvement : on attend de nouveau
+@phase:
+	ld l,Interaction.var31
+	ld a,(hl)
+	xor $01
+	ld (hl),a
+	jr z,@wait
+	ld l,Interaction.var30
+	ld a,(hl)
+	ld l,Interaction.yh
+	ld (hl),a
+	ld l,Interaction.counter1
+	ld (hl),32
+	jp objectSetVisible82
+
+; De 1,5 à 3 secondes sans rien
+@wait:
+	call objectSetInvisible
+	call getRandomNumber
+	and $5f
+	add 90
+	ld e,Interaction.counter1
+	ld (de),a
+	ret
+
+@foundHere:
 	call getThisRoomFlags
 	set 6,(hl)
+	call objectSetInvisible
+	call objectCreatePuff
 	ld a,SND_SOLVEPUZZLE
 	call playSound
 	call countFoundTwins
@@ -3935,8 +4038,16 @@ hidingTwin:
 	ld (wDisabledObjects),a
 	ld e,Interaction.start
 	call objectRemoveFromAButtonSensitiveObjectList
-	call objectCreatePuff
 	jp interactionDelete
+
+; Les cachettes : salle du Songe, son indice (0 : des feuilles qui bougent ; 1 : le bout d'un
+; bonnet qui dépasse), sa hauteur de dessin (zh : le bonnet dépasse du haut de la cachette)
+twinHints:
+	.db $01, $00, $00 ; la colline : le buisson sous l'arbre du cerf-volant
+	.db $10, $00, $00 ; le bois : un buisson
+	.db $23, $00, $00 ; le jardin des toupies : les fleurs
+	.db $02, $01, $f4 ; le manège : derrière le plateau
+	.db $13, $01, $e6 ; l'îlot : derrière le grand château de sable (deux briques de haut)
 
 ;;
 ; Le vieux cerf-volant ($3f), dans l'arbre de la colline (1:01, 0:01). Dans le Réel, il est coincé ;
