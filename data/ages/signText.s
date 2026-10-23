@@ -39,8 +39,10 @@ signTextGroup1Data:
 	; BALLADE: les portes condamnées de la place de Port-Veille (Réel et Songe)
 	.db $32, $9b, <TX_2e1f
 	.db $37, $9b, <TX_2e20
-	.db $54, $39, <TX_2e03
-	.db $53, $33, <TX_2e04
+	; BALLADE: Mont-Braise, le belvédère (la coulée de lave) et la source chaude (à la place de
+	; deux pancartes d'Ages sur des salles qui n'en ont plus)
+	.db $22, $2c, <TX_2e03
+	.db $28, $1b, <TX_2e04
 	.db $24, $1d, <TX_2e08
 	.db $44, $3a, <TX_2e09
 	.db $32, $48, <TX_2e0d

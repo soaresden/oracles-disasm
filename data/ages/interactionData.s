@@ -967,6 +967,9 @@ interactionedSubidData:
 	m_InteractionSubidData $e8 $10 $12 ; $42 la vasque de la lune (image 4, allumée 5 ; palette 1)
 	m_InteractionSubidData $e4 $18 $32 ; $43 un coquillage-écho du Récif (spr_ballade_ghost image 6, palette 3)
 	m_InteractionSubidData $00 $00 $00 ; $44 la tombe de l'entrée du Terrier des Serpents (1:60, invisible)
+	m_InteractionSubidData $e9 $00 $32 ; $45 le cristal de soufre (spr_ballade_braise image 0, palette 3)
+	m_InteractionSubidData $e9 $04 $32 ; $46 le foyer de la forge (image 1, 2 : scintille ; palette 3)
+	m_InteractionSubidData $e9 $0c $22 ; $47 la pierre de lave (image 3, 4 : rougeoie ; palette 2)
 	m_InteractionSubidDataEnd
 
 interactiond4SubidData:

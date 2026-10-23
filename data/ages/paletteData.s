@@ -102,9 +102,9 @@ paletteData4058:
 paletteData4098:
 	; BALLADE: la carte de nos îles (tools/make_minimap.py)
 	m_RGB16 $12 $15 $1d
-	m_RGB16 $0e $10 $16
-	m_RGB16 $09 $0b $0f
-	m_RGB16 $08 $0a $0e
+	m_RGB16 $0a $0c $11
+	m_RGB16 $08 $09 $0d
+	m_RGB16 $08 $09 $0d
 
 	m_RGB16 $14 $17 $1f
 	m_RGB16 $19 $0f $00
@@ -129,24 +129,24 @@ paletteData4098:
 	m_RGB16 $16 $19 $1f
 	m_RGB16 $13 $17 $1f
 	m_RGB16 $13 $16 $1e
-	m_RGB16 $11 $14 $1b
+	m_RGB16 $11 $14 $1c
 
 	m_RGB16 $14 $17 $1f
-	m_RGB16 $12 $14 $1c
+	m_RGB16 $12 $15 $1c
 	m_RGB16 $10 $12 $19
 	m_RGB16 $0e $11 $17
 
-	m_RGB16 $12 $15 $1d
-	m_RGB16 $10 $13 $1a
-	m_RGB16 $0e $11 $17
-	m_RGB16 $09 $0b $10
+	m_RGB16 $12 $15 $1c
+	m_RGB16 $10 $13 $19
+	m_RGB16 $0e $10 $17
+	m_RGB16 $0a $0c $10
 
 paletteData40d8:
 	; BALLADE: la carte de nos îles (tools/make_minimap.py)
 	m_RGB16 $13 $0f $1b
-	m_RGB16 $16 $0b $08
-	m_RGB16 $0b $04 $04
-	m_RGB16 $08 $03 $05
+	m_RGB16 $0f $06 $03
+	m_RGB16 $0a $03 $01
+	m_RGB16 $08 $03 $02
 
 	m_RGB16 $11 $18 $1e
 	m_RGB16 $17 $0a $0a
@@ -170,18 +170,18 @@ paletteData40d8:
 
 	m_RGB16 $15 $19 $1d
 	m_RGB16 $0c $19 $1d
-	m_RGB16 $14 $14 $19
+	m_RGB16 $14 $14 $18
 	m_RGB16 $11 $0f $18
 
-	m_RGB16 $12 $17 $1c
-	m_RGB16 $15 $0f $15
-	m_RGB16 $17 $0e $0b
+	m_RGB16 $12 $16 $1c
+	m_RGB16 $15 $0f $17
+	m_RGB16 $17 $0e $0c
 	m_RGB16 $16 $0c $0a
 
-	m_RGB16 $14 $11 $18
-	m_RGB16 $16 $0e $10
-	m_RGB16 $11 $09 $10
-	m_RGB16 $0a $05 $06
+	m_RGB16 $14 $11 $17
+	m_RGB16 $16 $0d $0f
+	m_RGB16 $0f $09 $12
+	m_RGB16 $0c $05 $05
 
 paletteData4118:
 	m_RGB16 $15 $11 $02
@@ -4424,36 +4424,67 @@ paletteDataSongeGrelot: ; Songe : paletteData4a30 en bleuté
 	m_RGB16 $07 $07 $0f
 	m_RGB16 $03 $05 $0a
 
+paletteDataBraise: ; Réel : paletteData4dc0 aux couleurs du volcan
+	m_RGB16 $1d $0c $04
+	m_RGB16 $15 $09 $02
+	m_RGB16 $0d $03 $01
+	m_RGB16 $00 $00 $00
+
+	m_RGB16 $16 $08 $03
+	m_RGB16 $15 $09 $02
+	m_RGB16 $0d $03 $01
+	m_RGB16 $00 $00 $00
+
+	m_RGB16 $1d $0c $04
+	m_RGB16 $16 $08 $03
+	m_RGB16 $0d $03 $02
+	m_RGB16 $00 $00 $00
+
+	m_RGB16 $1f $1c $08
+	m_RGB16 $1f $10 $02
+	m_RGB16 $16 $04 $00
+	m_RGB16 $08 $00 $00
+
+	m_RGB16 $1f $1f $18
+	m_RGB16 $0e $09 $1c
+	m_RGB16 $0a $04 $14
+	m_RGB16 $00 $00 $00
+
+	m_RGB16 $15 $09 $02
+	m_RGB16 $18 $09 $03
+	m_RGB16 $0d $03 $02
+	m_RGB16 $00 $00 $00
+
 paletteDataSongeBraise: ; Songe : paletteData4dc0 en bleuté
-	m_RGB16 $12 $11 $14
-	m_RGB16 $0d $0f $0f
-	m_RGB16 $09 $08 $0a
-	m_RGB16 $01 $02 $06
+	m_RGB16 $18 $0d $09
+	m_RGB16 $11 $0a $07
+	m_RGB16 $0b $04 $05
+	m_RGB16 $00 $01 $03
 
-	m_RGB16 $0f $0d $10
-	m_RGB16 $0d $0f $0f
-	m_RGB16 $09 $08 $0a
-	m_RGB16 $01 $02 $06
+	m_RGB16 $12 $09 $08
+	m_RGB16 $11 $0a $07
+	m_RGB16 $0b $04 $05
+	m_RGB16 $00 $01 $03
 
-	m_RGB16 $12 $11 $14
-	m_RGB16 $0f $0d $10
-	m_RGB16 $09 $08 $0d
-	m_RGB16 $01 $02 $06
+	m_RGB16 $18 $0d $09
+	m_RGB16 $12 $09 $08
+	m_RGB16 $0b $04 $06
+	m_RGB16 $00 $01 $03
 
-	m_RGB16 $15 $19 $19
-	m_RGB16 $15 $19 $19
-	m_RGB16 $15 $19 $19
-	m_RGB16 $15 $19 $19
+	m_RGB16 $0f $0f $12
+	m_RGB16 $0b $0b $0e
+	m_RGB16 $07 $07 $0a
+	m_RGB16 $02 $02 $05
 
 	m_RGB16 $17 $1c $1d
 	m_RGB16 $0b $0b $17
 	m_RGB16 $08 $07 $11
 	m_RGB16 $01 $02 $06
 
-	m_RGB16 $0d $0f $0f
-	m_RGB16 $0f $0e $11
-	m_RGB16 $09 $08 $0d
-	m_RGB16 $01 $02 $06
+	m_RGB16 $11 $0a $07
+	m_RGB16 $14 $0a $08
+	m_RGB16 $0b $04 $06
+	m_RGB16 $00 $01 $03
 
 paletteDataSongeEchos: ; Songe : paletteData4a90 en bleuté
 	m_RGB16 $14 $10 $0d

@@ -306,7 +306,7 @@ extraEnemyData:
 	.db $08 $08 $fa $12 ; 0x23
 	.db $06 $0c $fc $18 ; 0x24 ; BALLADE: Jack (Pumpkin Head) : 24 points de vie (8 dans Ages ; Denis : trop simple)
 	.db $12 $0f $fc $04 ; 0x25
-	.db $09 $09 $fa $0c ; 0x26
+	.db $09 $09 $fa $08 ; 0x26 ; BALLADE: la Suie (Shadow Hag), mini-boss : 8 points de vie (12 dans Ages), 4 flammes
 	.db $06 $06 $f8 $14 ; 0x27
 	.db $0a $0a $fc $06 ; 0x28
 	.db $06 $06 $fa $14 ; 0x29

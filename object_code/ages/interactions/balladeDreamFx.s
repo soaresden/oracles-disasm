@@ -155,6 +155,18 @@ interactionCodee9:
 	; les décors $7d et $7e (la Brume, la Lagune) en ont une ; ailleurs, $1a et $1b sont du sol
 	ld a,(wTilesetIndex)
 	and $7f
+	; Ni sur la lave froide du Songe de Mont-Braise (décor $06, brique $9f) : dans le Réel, c'est
+	; de la lave (solide)
+	cp $06
+	jr nz,+
+	ld a,(wActiveTilePos)
+	ld l,a
+	ld h,>wRoomLayout
+	ld a,(hl)
+	cp $9f
+	jr z,@notYet
+	jr @wake
++
 	cp $7d
 	jr c,@wake
 	cp $7f

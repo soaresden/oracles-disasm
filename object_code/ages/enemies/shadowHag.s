@@ -153,7 +153,8 @@ shadowHag_state8:
 	call ecom_decCounter1
 	jr nz,@animate
 	call shadowHag_beginReturningToGround
-	call enemyBoss_beginBoss
+	; BALLADE: la Suie est le mini-boss de la Forge Endormie (l'Ombre-Sorcière d'Ages était un boss)
+	call enemyBoss_beginMiniboss
 @animate:
 	jp enemyAnimate
 

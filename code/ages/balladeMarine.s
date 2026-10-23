@@ -686,7 +686,7 @@ praise:
 @texts:
 	.db $04, $13, <TX_5b35	; Jack (le Phare)
 	.db $04, $2b, <TX_5b36	; Pantin-Sans-Fil (le Coffre à Jouets)
-	.db $04, $bf, <TX_5b37	; Copiator (la Forge Endormie)
+	.db $04, $bf, <TX_5b37	; Grisaille (la Forge Endormie)
 	.db $04, $54, <TX_5b38	; l'Ombre de Marine (la Spirale Céleste)
 	.db $04, $64, <TX_5b39	; Givrolin (le Palais Givré)
 	.db $05, $c4, <TX_5b3a	; Dark Link (la Tour, 2F)

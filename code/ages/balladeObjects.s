@@ -25,8 +25,8 @@
 ; @subid_12{La bouteille à la mer, sur l'îlot de la lagune (1:15, 0:15)}
 ; @subid_13{Invisible : les coquillages-échos du Récif Murmurant (5:39)}
 ; @subid_14{Brasia, la forgeronne goron (Mont-Braise, 1:2a) : le tableau contre le Bracelet de force}
-; @subid_15{Pinceau, le peintre (1:19, dans le Réel)}
-; @subid_16{Pinceau dans le Songe (0:19) : il peint la mer, et donne le tableau}
+; @subid_15{Pinceau, le peintre (1:19, dans le Réel) : il lui faut trois couleurs ($44-$46)}
+; @subid_16{Pinceau dans le Songe (0:19) : avec les trois couleurs, il peint la mer et donne le tableau}
 ; @subid_17{Un musicien des Cuivres, la fanfare goron (1:2a)}
 ; @subid_18{Le marchand de copies (1:3a)}
 ; @subid_19{Bêche, le fossoyeur (l'île des Échos, 3:25) : la Pelle}
@@ -67,6 +67,9 @@
 ; @subid_41{La vasque du soleil (l'Œil, 1:c8 et 0:c8) : une graine de feu l'allume, dans le Réel}
 ; @subid_42{La vasque de la lune (1:ca et 0:ca) : une graine de feu l'allume, dans le Songe}
 ; @subid_43{Un coquillage-écho du Récif (5:39) : le dessin, sur la case que regarde echoShells}
+; @subid_45{Le cristal de soufre, au milieu de la source chaude (1:1b) : le jaune de Pinceau}
+; @subid_46{Le foyer de la forge de Brasia (1:2a) : le Boomerang en rapporte une braise (l'orange)}
+; @subid_47{La pierre de lave, sur l'îlot de la coulée du belvédère (1:2c) : le rouge}
 ; ==================================================================================================
 
 ;;
@@ -95,7 +98,7 @@ main:
 	.dw bottle
 	.dw echoShells
 	.dw brasia
-	.dw villager
+	.dw painter
 	.dw dreamPainter
 	.dw villager
 	.dw villager
@@ -143,6 +146,9 @@ main:
 	.dw brazier
 	.dw echoShellSprite
 	.dw terrierTomb
+	.dw sulphurCrystal
+	.dw forgeHearth
+	.dw lavaStone
 
 
 ;;
@@ -1181,7 +1187,7 @@ giveTreasureAboveLinkSubid:
 ; ==================================================================================================
 ; L'essence (subid $08) : elle apparaît (INTERAC_ESSENCE) quand le boss est vaincu (drapeau $80 de sa
 ; salle) : Pantin-Sans-Fil (4:2b, l'essence dans l'antichambre 4:2e), la Murène du Silence (Octogon,
-; 5:36 : dans sa salle), Copiator (Smog, 4:bf : dans sa salle).
+; 5:36 : dans sa salle), Grisaille (Smog, 4:bf : dans sa salle).
 ; ==================================================================================================
 essenceSpawner:
 	ld a,(wDungeonIndex)
@@ -1626,7 +1632,6 @@ villagerTexts:
 	.db $0e, $04, <TX_5a74, <TX_5a75 ; Héloïse
 	.db $0f, $04, <TX_5a76, <TX_5a77 ; Bulle, la monitrice du club de plongée
 	.db $10, $04, <TX_5a78, <TX_5a79 ; le facteur des bouteilles
-	.db $15, $08, <TX_5a84, <TX_5a85 ; Pinceau, le peintre (dans le Réel)
 	.db $17, $08, <TX_5a88, <TX_5a89 ; un musicien des Cuivres
 	.db $18, $08, <TX_5a8a, <TX_5a8b ; le marchand de copies
 	.db $1a, $10, <TX_5a94, <TX_5a95 ; Noé
@@ -2069,8 +2074,68 @@ hasTradeItem:
 
 
 ; ==================================================================================================
-; Pinceau dans le Songe (subid $16, l'atelier 0:19) : dans le rêve, il voit enfin la mer, et la
-; peint ; il donne le tableau (l'objet d'échange 2) à Link, pour Brasia.
+; Pinceau, le peintre (subid $15, l'atelier 1:19, dans le Réel). Ses couleurs ont séché : il lui
+; faut le jaune (le soufre de la source chaude, $45 : à la nage), l'orange (les braises de la forge
+; de Brasia, $46 : le Boomerang les attrape) et le rouge (la lave du belvédère, $47 : par le Songe,
+; où elle dort). Drapeaux de sa salle (1:19) : PAINT_YELLOW, PAINT_ORANGE, PAINT_RED. Avec les
+; trois, il ne voit toujours que le volcan : dans le Songe (dreamPainter), il voit la mer.
+; ==================================================================================================
+.define PAINT_YELLOW	$02
+.define PAINT_ORANGE	$04
+.define PAINT_RED	$80
+.define PAINT_ALL	PAINT_YELLOW | PAINT_ORANGE | PAINT_RED
+
+painter:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw npcInit
+	.dw @idle
+	.dw npcWaitText
+
+@idle:
+	call interactionAnimateAsNpc
+	call npcCheckTalk
+	ret z
+	; Après la Forge Endormie (l'essence 4) : il peint la mer
+	ld a,(wEssencesObtained)
+	and $08
+	ld bc,TX_5a85
+	jr nz,@say
+	; Le tableau peint (Link l'a, ou Brasia l'a eu)
+	ld a,TREASURE_BRACELET
+	call checkTreasureObtained
+	ld bc,TX_5b70
+	jr c,@say
+	ld a,$02
+	call hasTradeItem
+	ld bc,TX_5b70
+	jr c,@say
+	; Aucune couleur : ce qu'il lui faut ; les trois : il ne voit que le volcan ; sinon, celle
+	; qui manque (TX_5b66 le jaune, 5b67 l'orange, 5b68 le rouge)
+	ld a,(wGroup1RoomFlags+$19)
+	and PAINT_ALL
+	ld bc,TX_5a84
+	jr z,@say
+	cp PAINT_ALL
+	ld bc,TX_5b69
+	jr z,@say
+	ld bc,TX_5b66
+	bit 1,a
+	jr z,@say
+	inc c
+	bit 2,a
+	jr z,@say
+	inc c
+@say:
+	ld a,$02
+	jp npcSay
+
+
+; ==================================================================================================
+; Pinceau dans le Songe (subid $16, l'atelier 0:19) : dans le rêve, il voit enfin la mer ; avec les
+; trois couleurs du volcan (painter), il peint le soleil qui s'y couche et donne le tableau (l'objet
+; d'échange 2) à Link, pour Brasia.
 ; ==================================================================================================
 dreamPainter:
 	ld e,Interaction.state
@@ -2094,6 +2159,12 @@ dreamPainter:
 	call hasTradeItem
 	ld bc,TX_5a87
 	jr c,@say
+	; Sans les trois couleurs : sa palette est vide
+	ld a,(wGroup1RoomFlags+$19)
+	and PAINT_ALL
+	cp PAINT_ALL
+	ld bc,TX_5b6a
+	jr nz,@say
 	ld a,$03
 	ld bc,TX_5a86
 	jp npcSay
@@ -4454,6 +4525,196 @@ echoShellSprite:
 	inc l
 	ld (hl),$06
 	jp objectSetVisible82
+
+
+; ==================================================================================================
+; Les trois couleurs de Pinceau (Mont-Braise). Images : spr_ballade_braise (art/braise.txt).
+; ==================================================================================================
+
+;;
+; Le cristal de soufre ($45), au milieu de la source chaude (1:1b) : on l'atteint à la nage (les
+; Palmes de Zora) ; Link tout contre -> le jaune
+sulphurCrystal:
+	ld e,Interaction.state
+	ld a,(de)
+	or a
+	jr nz,@idle
+	ld a,(wGroup1RoomFlags+$19)
+	and PAINT_YELLOW
+	jp nz,interactionDelete
+	call interactionInitGraphics
+	call interactionIncState
+	jp objectSetVisible82
+
+@idle:
+	ld c,$0c
+	call objectCheckLinkWithinDistance
+	ret nc
+	ld hl,wGroup1RoomFlags+$19
+	set 1,(hl)
+	ld a,SND_GETSEED
+	call playSound
+	ld bc,TX_5b6b
+	call showText
+	jp interactionDelete
+
+;;
+; Le foyer de la forge de Brasia ($46, 1:2a). A devant : trop chaud pour les mains ; le Boomerang
+; qui passe dedans rapporte une braise -> l'orange. Les braises scintillent (glowImage).
+forgeHearth:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw @init
+	.dw @idle
+	.dw npcWaitText
+
+@init:
+	call glowInit
+	ld e,Interaction.pressedAButton
+	call objectAddToAButtonSensitiveObjectList
+	jp objectSetVisible82
+
+@idle:
+	call glowImage
+	call objectPreventLinkFromPassing
+	ld a,(wGroup1RoomFlags+$19)
+	and PAINT_ORANGE
+	jr nz,@taken
+	ld b,ITEM_BOOMERANG
+	call findItemNear
+	jr nz,@ember
+	call npcCheckTalk
+	ret z
+	ld bc,TX_5b6c
+@say:
+	ld a,$02
+	jp npcSay
+
+@taken:
+	call npcCheckTalk
+	ret z
+	ld bc,TX_5b6f
+	jr @say
+
+@ember:
+	ld hl,wGroup1RoomFlags+$19
+	set 2,(hl)
+	ld a,SND_GETSEED
+	call playSound
+	ld a,$91
+	ld (wDisabledObjects),a
+	ld bc,TX_5b6d
+	jr @say
+
+;;
+; La pierre de lave ($47), sur l'îlot de la coulée du belvédère (1:2c). L'îlot est entouré de lave
+; (solide) : on y arrive par le Songe (la lave y dort), puis la Lanterne. A devant -> le rouge.
+lavaStone:
+	ld e,Interaction.state
+	ld a,(de)
+	or a
+	jr nz,@idle
+	ld a,(wGroup1RoomFlags+$19)
+	and PAINT_RED
+	jp nz,interactionDelete
+	call glowInit
+	ld e,Interaction.pressedAButton
+	call objectAddToAButtonSensitiveObjectList
+	jp objectSetVisible82
+
+@idle:
+	call glowImage
+	call objectPreventLinkFromPassing
+	ld e,Interaction.pressedAButton
+	ld a,(de)
+	or a
+	ret z
+	ld e,Interaction.start
+	call objectRemoveFromAButtonSensitiveObjectList
+	ld hl,wGroup1RoomFlags+$19
+	set 7,(hl)
+	ld a,SND_GETSEED
+	call playSound
+	ld bc,TX_5b6e
+	call showText
+	jp interactionDelete
+
+;;
+; Un objet qui rougeoie : son image, solide (une case)
+glowInit:
+	call interactionInitGraphics
+	call interactionIncState
+	ld h,d
+	ld l,Interaction.collisionRadiusY
+	ld (hl),$06
+	inc l
+	ld (hl),$06
+	ret
+
+;;
+; Les braises qui scintillent, la lave qui rougeoie : l'image suivante une fois sur deux (toutes les
+; 16 images). En relatif (+4 / -4, var32 = l'image montrée ; pas var31 : c'est pressedAButton) :
+; le jeu recale oamTileIndexBase quand les images changent de place en mémoire vidéo
+; (updateTileIndexBaseForAllObjects)
+glowImage:
+	ld a,(wFrameCounter)
+	swap a
+	and $01
+	ld h,d
+	ld l,Interaction.var32
+	cp (hl)
+	ret z
+	ld (hl),a
+	or a
+	ld l,Interaction.oamTileIndexBase
+	ld a,(hl)
+	jr z,+
+	add $04
+	ld (hl),a
+	ret
++
+	sub $04
+	ld (hl),a
+	ret
+
+;;
+; @param	b	L'objet de Link cherché (ITEM_BOOMERANG...)
+; @param[out]	zflag	nz s'il est tout près (à moins de 12 pixels)
+findItemNear:
+	ld h,FIRST_ITEM_INDEX
+@next:
+	ld l,Item.enabled
+	ld a,(hl)
+	or a
+	jr z,@notThis
+	ld l,Item.id
+	ld a,(hl)
+	cp b
+	jr nz,@notThis
+	ld l,Item.yh
+	ld e,Interaction.yh
+	ld a,(de)
+	sub (hl)
+	add $0c
+	cp $19
+	jr nc,@notThis
+	ld l,Item.xh
+	ld e,Interaction.xh
+	ld a,(de)
+	sub (hl)
+	add $0c
+	cp $19
+	jr nc,@notThis
+	or $01
+	ret
+@notThis:
+	inc h
+	ld a,h
+	cp LAST_ITEM_INDEX+1
+	jr c,@next
+	xor a
+	ret
 
 
 ; ==================================================================================================

@@ -3890,6 +3890,7 @@ group1Map19ObjectData:
 group1Map1aObjectData:
 	obj_End
 group1Map1bObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $45 $48 $50
 	obj_End
 group1Map1cObjectData:
 	obj_End
@@ -3919,6 +3920,7 @@ group1Map29ObjectData:
 	obj_End
 group1Map2aObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $14 $38 $28
+	obj_Interaction INTERAC_BALLADE_OBJECT $46 $38 $18 ; le foyer de sa forge (l'orange de Pinceau)
 	obj_Interaction INTERAC_BALLADE_OBJECT $17 $38 $78
 	obj_Interaction INTERAC_BALLADE_OBJECT $17 $48 $88
 	obj_Interaction INTERAC_BALLADE_OBJECT $0a $08 $08 ; la fin du chapitre 4 (l'essence de la Forge)
@@ -3927,6 +3929,7 @@ group1Map2aObjectData:
 group1Map2bObjectData:
 	obj_End
 group1Map2cObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $47 $38 $68
 	obj_End
 group1Map30ObjectData:
 	obj_End
@@ -4530,7 +4533,7 @@ group4Mapb1ObjectData:
 	obj_Interaction $1e $09 $5e $00
 	obj_Interaction $20 $00 $58 $78
 	obj_Interaction $12 $02 $58 $78
-	obj_BeforeEvent group4Mapc8EnemyObjectData
+	obj_BeforeEvent group4Map4aBeforeEventObjectData
 	obj_End
 group4Mapb2ObjectData:
 	obj_RandomEnemy $40 ENEMY_ROPE $00

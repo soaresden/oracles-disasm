@@ -439,7 +439,7 @@ debugEntries:
 	.dw debugNone
 	.db $0f, $04, $bb, $97 ; la Forge Endormie, l'entrée (le Bracelet)
 	.dw debugNone
-	.db $0f, $04, $b1, $97 ; les Copies (la petite clé 1 utilisée)
+	.db $0f, $04, $b1, $97 ; la Suie (la petite clé 1 utilisée)
 	.dw debugNone
 	.db $10, $04, $be, $97 ; l'antichambre (la Canne, la clé du boss)
 	.dw debugForgeBossKey
@@ -562,13 +562,14 @@ debugMilestones:
 	.db DBG_ROOMFLAG, $01, $35, $40
 	.db DBG_GLOBALFLAG, GLOBALFLAG_BALLADE_ISLAND4
 	.db DBG_END
-	; 15. Brasia a eu son idée : le Bracelet de force
+	; 15. Les trois couleurs de Pinceau (drapeaux de 1:19) ; Brasia a eu son idée : le Bracelet de force
+	.db DBG_ROOMFLAG, $01, $19, $86
 	.db DBG_TREASURE, TREASURE_BRACELET, $01
 	.db DBG_END
-	; 16. Les Copies sont battues : la Canne des Songes
+	; 16. La Suie est battue : la Canne des Songes
 	.db DBG_TREASURE, TREASURE_CANE_OF_SOMARIA, $00
 	.db DBG_END
-	; 17. Copiator est battu : l'essence (le 4e couplet), un cœur de plus
+	; 17. Grisaille est battu : l'essence (le 4e couplet), un cœur de plus
 	.db DBG_TREASURE, TREASURE_ESSENCE, $03
 	.db DBG_TREASURE, TREASURE_HEART_CONTAINER, $04
 	.db DBG_FULLHEALTH

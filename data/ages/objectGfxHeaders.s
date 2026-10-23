@@ -239,3 +239,4 @@ objectGfxHeaderTable:
 	/* $e6 */ m_ObjectGfxHeader spr_ballade_rex ; son boss (art/rex.txt)
 	/* $e7 */ m_ObjectGfxHeader spr_ballade_ile ; l'île de Marine (art/ile_marine.txt)
 	/* $e8 */ m_ObjectGfxHeader spr_ballade_grelot ; Hameau-Grelot, le Songe (art/grelot.txt)
+	/* $e9 */ m_ObjectGfxHeader spr_ballade_braise ; Mont-Braise, les trois couleurs (art/braise.txt)
