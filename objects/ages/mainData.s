@@ -3361,9 +3361,6 @@ group5Mape8ObjectData:
 
 
 
-group5MapeeObjectData:
-	obj_Pointer group5MapeeEnemyObjectData
-	obj_End
 
 group5MapefObjectData:
 	obj_Interaction $b8 $01 $00 $78
@@ -4810,4 +4807,11 @@ group5MapedObjectData:
 	obj_Interaction INTERAC_BALLADE_DREAM_FX $02
 	obj_Interaction INTERAC_BALLADE_CREUSE $22 $08 $08
 	obj_Interaction INTERAC_BALLADE_CREUSE $11 $48 $98
+	obj_End
+group5MapeeObjectData:
+	obj_Interaction INTERAC_BALLADE_CREUSE $01 $08 $08
+	obj_SpecificEnemyA $00 ENEMY_LYNEL $03 $38 $78
+	obj_SpecificEnemyA     ENEMY_LYNEL $04 $58 $78
+	obj_SpecificEnemyA     ENEMY_LYNEL $05 $58 $68
+	obj_SpecificEnemyA     ENEMY_LYNEL $06 $58 $88
 	obj_End

@@ -14,8 +14,10 @@
 ; touchant (5, 10, 20 puis 50 rubis d'affilée) ; ils retournent à l'enclos. Sans gemme, l'épée les
 ; traverse. Un Lynel qui attrape Link le laisse à un seul cœur (Denis : « ils devraient presque nous
 ; one shot ») et tous retournent à l'enclos ; attrapé avec un seul cœur, c'est perdu. Tous les rubis
-; ramassés : gagné (50 rubis de plus ; la première fois, un quart de cœur : drapeau $80 de la
-; salle). Dans les deux cas, retour chez le forain.
+; ramassés : gagné. Deux labyrinthes (Denis) : le 1er (5:e9) gagné, le forain envoie Link dans le
+; 2e (5:ee, art/labyrinthe2.txt), plus dur : les Lynels vont plus vite, sortent plus tôt de l'enclos,
+; et la gemme fait moins longtemps peur ; le 2e gagné : 50 rubis et, la première fois, un quart de
+; cœur (drapeau $80 de 5:ee). Perdu, ou le 2e gagné : retour chez le forain.
 ;
 ; Le contrôleur : INTERAC_BALLADE_CREUSE $01 (object_code/ages/interactions/balladeCreuse.s) ; les
 ; Lynels : object_code/common/enemies/lynel.s appelle « lynel » ci-dessous.
@@ -26,6 +28,8 @@
 .define PAC_GEM		$a4
 .define PAC_GEM_FLASH	$a5
 .define PAC_POWER_TIME	210	; la peur : 210 x 2 images (7 secondes)
+.define PAC_POWER_TIME_HARD 120	; dans le 2e labyrinthe : 4 secondes
+.define PAC_HARD_ROOM	$ee	; le 2e labyrinthe
 .define PAC_FLASH_TIME	60	; ses 2 dernières secondes : ils clignotent
 
 ;;
@@ -118,7 +122,12 @@ main:
 	; Une gemme de force : les Lynels ont peur
 	ld a,PAC_FLOOR
 	call setTile
+	ld a,(wActiveRoom)
+	cp PAC_HARD_ROOM
 	ld a,PAC_POWER_TIME
+	jr nz,+
+	ld a,PAC_POWER_TIME_HARD
++
 	ld (wBalladePacPower),a
 	xor a
 	ld (wBalladePacCombo),a
@@ -150,20 +159,29 @@ main:
 	ld e,Interaction.counter1
 	ld a,40
 	ld (de),a
+	ld a,(wActiveRoom)
+	cp PAC_HARD_ROOM
+	jr nz,+
 	push de
 	ld a,TREASURE_RUPEES
 	ld c,RUPEEVAL_050
 	call giveTreasure
 	pop de
++
 	ld a,SND_SOLVEPUZZLE
 	jp playSound
 
 @winText:
 	call @wait
 	ret nz
+	; Le 1er labyrinthe : place au 2e
+	ld a,(wActiveRoom)
+	cp PAC_HARD_ROOM
+	ld bc,TX_5b40
+	jp nz,showText
 	ld bc,TX_5a4e
 	call showText
-	; La première victoire : un quart de cœur (drapeau $80 du labyrinthe)
+	; Le 2e, la première fois : un quart de cœur (drapeau $80 du 2e labyrinthe)
 	call getThisRoomFlags
 	bit 7,(hl)
 	ret nz
@@ -225,12 +243,31 @@ main:
 	ret
 
 @ending:
-	; Le texte lu : retour chez le forain (1:ac, au-dessus de lui)
+	; Le texte lu : retour chez le forain (1:ac, au-dessus de lui) ; le 1er gagné : le 2e
 	ld a,(wTextIsActive)
 	or a
 	ret nz
 	ld a,$03
 	ld (de),a
+	ld a,(wBalladePacState)
+	cp $02
+	jr nz,@toBarker
+	ld a,(wActiveRoom)
+	cp PAC_HARD_ROOM
+	jr z,@toBarker
+	ld a,$85
+	ld (wWarpDestGroup),a
+	ld a,PAC_HARD_ROOM
+	ld (wWarpDestRoom),a
+	ld a,$77
+	ld (wWarpDestPos),a
+	xor a
+	ld (wWarpTransition),a
+	ld a,$03 ; fondu
+	ld (wWarpTransition2),a
+	ld a,SND_ENTERCAVE
+	jp playSound
+@toBarker:
 	ld a,$81
 	ld (wWarpDestGroup),a
 	ld a,$ac
@@ -436,7 +473,14 @@ lynel:
 	cp 20
 	jr c,@step
 +
+	ld a,(wActiveRoom)
+	cp PAC_HARD_ROOM
 	ld a,b
+	jr nz,+
+	and $07
+	jp z,@animation
+	jr @step
++
 	and $03
 	jp z,@animation
 @step:
@@ -803,6 +847,13 @@ lynel:
 	ld e,Enemy.counter1
 	ldi a,(hl)
 	ld (de),a
+	ld a,(wActiveRoom)
+	cp PAC_HARD_ROOM
+	jr nz,+
+	ld a,(de)
+	srl a
+	ld (de),a
++
 	ld e,Enemy.angle
 	ld a,(hl)
 	ld (de),a
