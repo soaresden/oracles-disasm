@@ -196,7 +196,7 @@ group1WarpDestTable:
 	m_WarpDest $b3 $37 $0 $1 ; $5b : devant la maison de la chanteuse
 	m_WarpDest $b2 $35 $0 $1 ; $5c : devant la porte du Palais Givré
 	m_WarpDest $c9 $54 $0 $1 ; $5d : devant la porte de la Tour Sans-Nuit (l'Œil de l'Insomnis)
-	m_WarpDest $60 $14 $0 $1 ; $5e : devant l'ouverture du Terrier des Serpents (l'île des Échos)
+	m_WarpDest $60 $47 $0 $1 ; $5e : sous l'escalier du Terrier des Serpents (la tombe poussée ; l'île des Échos)
 	m_WarpDest $5b $45 $0 $1 ; $5f : devant la maison de Marine (son île)
 
 group2WarpDestTable:

@@ -48,6 +48,7 @@ signTextGroup1Data:
 	.db $31, $57, <TX_2e17
 	.db $23, $89, <TX_2e18
 	.db $31, $49, <TX_2e1e
+	.db $28, $60, <TX_2e1e ; BALLADE: le cimetière de l'ouest (l'entrée du Terrier des Serpents)
 	.db $00
 
 signTextGroup2Data:

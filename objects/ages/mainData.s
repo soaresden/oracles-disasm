@@ -3644,6 +3644,7 @@ group0Map63ObjectData:
 	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
 	obj_End
 group0Map64ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $1e $58 $58
 	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
 	obj_End
 group0Map65ObjectData:
@@ -4010,6 +4011,7 @@ group1Map5cObjectData:
 	obj_Interaction INTERAC_BALLADE_CREUSE $16 $08 $08 ; le volley
 	obj_End
 group1Map60ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $44 $38 $78
 	obj_End
 group1Map61ObjectData:
 	obj_End
@@ -4566,6 +4568,8 @@ group4Mapd0ObjectData:
 	; « Le Terrier des Serpents » en entrant (INTERAC_DUNGEON_STUFF $00, texte TX_020b)
 	obj_Interaction $12 $00 $88 $78
 	obj_Interaction INTERAC_BALLADE_CREUSE $0a $08 $08
+	obj_SpecificEnemyA $00 ENEMY_ROPE $00 $38 $38
+	obj_SpecificEnemyA     ENEMY_ROPE $00 $38 $b8
 	obj_End
 group4Mapd1ObjectData:
 	obj_Interaction INTERAC_BALLADE_CREUSE $0a $08 $08
@@ -4573,12 +4577,14 @@ group4Mapd1ObjectData:
 	obj_End
 group4Mapd2ObjectData:
 	obj_Interaction INTERAC_BALLADE_CREUSE $0a $08 $08
-	obj_SpecificEnemyA $00 ENEMY_STALFOS $00 $38 $58
-	obj_SpecificEnemyA     ENEMY_STALFOS $00 $38 $98
-	obj_SpecificEnemyA     ENEMY_STALFOS $00 $78 $78
+	obj_SpecificEnemyA $00 ENEMY_ROPE $00 $38 $58
+	obj_SpecificEnemyA     ENEMY_ROPE $00 $38 $98
+	obj_SpecificEnemyA     ENEMY_ROPE $00 $78 $78
 	obj_End
 group4Mapd3ObjectData:
 	obj_Interaction INTERAC_BALLADE_CREUSE $0a $08 $08
+	obj_SpecificEnemyA $00 ENEMY_ROPE $00 $78 $38
+	obj_SpecificEnemyA     ENEMY_ROPE $00 $28 $78
 	obj_Part $09 $00 $3a
 	obj_Interaction $20 $00 $28 $c8
 	obj_End
@@ -4601,8 +4607,8 @@ group4Mapd6ObjectData:
 group4Mapd7ObjectData:
 	obj_Interaction INTERAC_MARINE $08 $08 $08 ; Marine félicite Link quand le boss est battu
 	obj_Interaction INTERAC_BALLADE_CREUSE $0a $08 $08
-	obj_SpecificEnemyA $00 ENEMY_GHINI $00 $38 $48
-	obj_SpecificEnemyA     ENEMY_GHINI $00 $78 $a8
+	obj_SpecificEnemyA $00 ENEMY_ROPE $00 $38 $48
+	obj_SpecificEnemyA     ENEMY_ROPE $00 $78 $a8
 	obj_End
 group5Map2eObjectData:
 	obj_RandomEnemy $20 ENEMY_BARI $00

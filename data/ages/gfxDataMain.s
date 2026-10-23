@@ -572,3 +572,5 @@
 	m_GfxData gfx_blurb_d6_fr
 	m_GfxData gfx_blurb_d7_fr
 	m_GfxData gfx_blurb_d8_fr
+	m_GfxData gfx_blurb_terrier
+	m_GfxData gfx_blurb_terrier_fr

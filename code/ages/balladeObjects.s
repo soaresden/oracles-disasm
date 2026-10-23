@@ -142,6 +142,7 @@ main:
 	.dw brazier
 	.dw brazier
 	.dw echoShellSprite
+	.dw terrierTomb
 
 
 ;;
@@ -4453,3 +4454,38 @@ echoShellSprite:
 	inc l
 	ld (hl),$06
 	jp objectSetVisible82
+
+
+; ==================================================================================================
+; L'entrée du Terrier des Serpents (subid $44, invisible, le cimetière de l'ouest 1:60) : la
+; tombe-chapelle de travers (d9, en $37 ; la pancarte : « Une tombe n'est pas à sa place ici. »).
+; Poussée, elle découvre l'escalier (dc) du Terrier (comme dans Ages : pushableTiles.s) ; le drapeau
+; $40 de la salle s'en souvient, et en revenant, la tombe est poussée (au-dessus) et l'escalier
+; ouvert. (C'est la seule tombe-chapelle du jeu : ailleurs, l'escalier n'irait nulle part.)
+; ==================================================================================================
+terrierTomb:
+	ld e,Interaction.state
+	ld a,(de)
+	or a
+	jr nz,@watch
+	call waitRoomReady
+	ret nz
+	call interactionIncState
+	call getThisRoomFlags
+	bit 6,a
+	ret z
+	ld c,$27
+	ld a,$02
+	call setTile
+	ld c,$37
+	ld a,$dc
+	call setTile
+	jp interactionDelete
+
+@watch:
+	ld a,(wRoomLayout+$37)
+	cp $dc
+	ret nz
+	call getThisRoomFlags
+	set 6,(hl)
+	jp interactionDelete

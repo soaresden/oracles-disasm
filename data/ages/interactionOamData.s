@@ -327,6 +327,53 @@ interactionOamDataBalladeBig:
 	.db $10 $08 $0c $00
 	.db $10 $10 $0e $00
 
+; BALLADE: le boss du Terrier qui marche (spr_ballade_rex, art/rex.txt) : le haut (avec blindage
+; tuiles $00-$07, sans $08-$0f) sur les pattes (pas A $10-$17, pas B $18-$1f)
+; avec blindage, pas A
+interactionOamDataRexA:
+	.db $08
+	.db $00 $f8 $00 $00
+	.db $00 $00 $02 $00
+	.db $00 $08 $04 $00
+	.db $00 $10 $06 $00
+	.db $10 $f8 $10 $00
+	.db $10 $00 $12 $00
+	.db $10 $08 $14 $00
+	.db $10 $10 $16 $00
+; avec blindage, pas B
+interactionOamDataRexB:
+	.db $08
+	.db $00 $f8 $00 $00
+	.db $00 $00 $02 $00
+	.db $00 $08 $04 $00
+	.db $00 $10 $06 $00
+	.db $10 $f8 $18 $00
+	.db $10 $00 $1a $00
+	.db $10 $08 $1c $00
+	.db $10 $10 $1e $00
+; sans blindage, pas A
+interactionOamDataRexHurtA:
+	.db $08
+	.db $00 $f8 $08 $00
+	.db $00 $00 $0a $00
+	.db $00 $08 $0c $00
+	.db $00 $10 $0e $00
+	.db $10 $f8 $10 $00
+	.db $10 $00 $12 $00
+	.db $10 $08 $14 $00
+	.db $10 $10 $16 $00
+; sans blindage, pas B
+interactionOamDataRexHurtB:
+	.db $08
+	.db $00 $f8 $08 $00
+	.db $00 $00 $0a $00
+	.db $00 $08 $0c $00
+	.db $00 $10 $0e $00
+	.db $10 $f8 $18 $00
+	.db $10 $00 $1a $00
+	.db $10 $08 $1c $00
+	.db $10 $10 $1e $00
+
 interactionOamData50217:
 	.db $02
 	.db $08 $00 $00 $03

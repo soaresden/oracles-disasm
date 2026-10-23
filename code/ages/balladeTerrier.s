@@ -6,20 +6,25 @@
 ;   wBalladeSoulState). Ensuite, chaque ennemi battu laisse une âme ($0b) qui vole jusqu'à Link :
 ;   le gantelet l'absorbe (wBalladeSouls). Une jarre ($0e), dans le coin de l'écran, se remplit.
 ; - Le contrôleur de chaque salle ($0a) : les âmes des ennemis qui meurent ; les ennemis qui
-;   reviennent toujours (@config) ; les portes des âmes (le volet du haut, $07) qui s'ouvrent à 6, 12
-;   et 18 âmes ; dans l'arène (4:d7), à 24 âmes, le boss.
+;   reviennent toujours (@config) ; les portes des âmes (le volet du haut, $07) qui s'ouvrent à 4, 8
+;   et 12 âmes ; dans l'arène (4:d7), à 16 âmes, le boss (Denis : « tu demandes 16 âmes et j'en fais
+;   à peine 8 » : c'était 6, 12, 18 et 24). Les serpents (ENEMY_ROPE) sont gris (la palette 6) et
+;   tiennent quatre coups d'épée.
 ; - Le boss ($0c) : une machine de guerre à deux pattes (clin d'œil à Metal Gear REX), possédée
-;   par un fantôme (art/rex.txt). Chaque coup d'épée lui arrache une âme ; à moitié, son blindage
-;   tombe, il « maigrit », va plus vite et s'efface (il clignote) ; à zéro, le fantôme ($0f) s'en
-;   échappe, très vite ; trois coups, et le gantelet absorbe son âme : il devient une relique, le
-;   Bracelet des Âmes (bit 1) : l'épée lance toujours un rayon, et chaque ennemi touché rend un
-;   peu de vie à Link (object_code/common/itemParents/swordParent.s, items/swordBeam.s).
+;   par un fantôme (art/rex.txt : il marche, deux images de pattes). Chaque coup d'épée lui arrache
+;   une âme ; à moitié, son blindage tombe, il va plus vite et s'efface (il clignote) ; à zéro, le
+;   fantôme ($0f) s'en échappe, très vite ; trois coups, et le gantelet absorbe son âme : il devient
+;   une relique, le Bracelet des Âmes (bit 1) : l'épée lance toujours un rayon, et chaque ennemi
+;   touché rend un peu de vie à Link (object_code/common/itemParents/swordParent.s,
+;   items/swordBeam.s). Puis Link revient à l'entrée du Terrier (Denis : pas tout le chemin à
+;   l'envers).
 ; ==================================================================================================
 
-.define TERRIER_BOSS_SOULS	24	; les âmes qu'il faut pour que le boss apparaisse
+.define TERRIER_BOSS_SOULS	16	; les âmes qu'il faut pour que le boss apparaisse
 .define TERRIER_BOSS_HP		12
 .define TERRIER_GHOST_HP	3
-.define TERRIER_RESPAWN		150	; un ennemi revient toutes les 150 images (s'il en manque)
+.define TERRIER_RESPAWN		100	; un ennemi revient toutes les 100 images (s'il en manque)
+.define TERRIER_SNAKE_HP	8	; un serpent : quatre coups d'épée (l'épée L-1 enlève 2)
 
 ;;
 ; Le contrôleur d'une salle du Terrier (d = le contrôleur). var31 l'ennemi qui revient, var32
@@ -124,6 +129,7 @@ controller:
 	ld a,(wTextIsActive)
 	or a
 	ret nz
+	call @snakes
 	call @absorb
 	call @respawn
 	call @gate
@@ -131,6 +137,43 @@ controller:
 	cp $d7
 	ret nz
 	jp @arena
+
+;;
+; Les serpents du Terrier : gris (la palette 6, PALH_TERRIER) et solides (TERRIER_SNAKE_HP), une
+; fois qu'ils sont initialisés (Enemy.state non nul ; la palette 6 dit qu'ils sont déjà réglés)
+@snakes:
+	ld h,FIRST_ENEMY_INDEX
+-
+	ld l,Enemy.enabled
+	ld a,(hl)
+	or a
+	jr z,+
+	inc l
+	ld a,(hl)
+	cp ENEMY_ROPE
+	jr nz,+
+	ld l,Enemy.state
+	ld a,(hl)
+	or a
+	jr z,+
+	ld l,Enemy.oamFlagsBackup
+	ld a,(hl)
+	and $07
+	cp $06
+	jr z,+
+	ld a,(hl)
+	and $f8
+	or $06
+	ldi (hl),a		; oamFlagsBackup, puis oamFlags
+	ld (hl),a
+	ld l,Enemy.health
+	ld (hl),TERRIER_SNAKE_HP
++
+	inc h
+	ld a,h
+	cp LAST_ENEMY_INDEX+1
+	jr c,-
+	ret
 
 ;;
 ; Les âmes : chaque ennemi qui meurt laisse une âme, si Link a le gantelet. (Un ennemi battu
@@ -316,8 +359,11 @@ controller:
 	ret nz
 	inc a
 	ld (de),a
-	; (le nombre, en BCD, pour \num1)
-	ld a,b
+	; (combien il en manque encore, en BCD, pour \num1)
+	ld a,(wBalladeSouls)
+	cpl
+	inc a
+	add b
 	call hexToDec
 	ld (wTextNumberSubstitution),a
 	xor a
@@ -378,10 +424,10 @@ controller:
 
 ; salle, l'ennemi qui revient, combien au plus, la porte des âmes (0 : pas de porte)
 @config:
-	.db $d2, ENEMY_STALFOS, 3, 6
-	.db $d4, ENEMY_GHINI, 2, 12
-	.db $d6, ENEMY_KEESE, 3, 18
-	.db $d7, ENEMY_GHINI, 3, 0
+	.db $d2, ENEMY_ROPE, 3, 4
+	.db $d4, ENEMY_GHINI, 2, 8
+	.db $d6, ENEMY_KEESE, 3, 12
+	.db $d7, ENEMY_ROPE, 3, 0
 	.db $ff
 
 
@@ -567,7 +613,7 @@ gauntlet:
 
 ;;
 ; La jarre des âmes ($0e) : fixe à l'écran (en haut à droite), elle se remplit ; pleine à chaque
-; porte des âmes (6, 12, 18) et pour le boss (24). var30 : le dessin de la jarre vide
+; porte des âmes (4, 8, 12) et pour le boss (16). var30 : le dessin de la jarre vide
 jar:
 	ld e,Interaction.state
 	ld a,(de)
@@ -594,12 +640,7 @@ jar:
 	cp TERRIER_BOSS_SOULS
 	ld b,$04
 	jr nc,++
--
-	cp 6
-	jr c,+
-	sub 6
-	jr -
-+
+	and $03
 	ld hl,@fill
 	rst_addAToHl
 	ld b,(hl)
@@ -616,7 +657,7 @@ jar:
 	ret
 
 @fill:
-	.db 0, 0, 1, 2, 2, 3
+	.db 0, 1, 2, 3
 
 
 ;;
@@ -630,6 +671,8 @@ rex:
 	inc a
 	ld (de),a
 	call interactionInitGraphics
+	ld a,$03
+	call interactionSetAnimation
 	call objectSetVisible82
 	ld e,Interaction.var30
 	ld a,TERRIER_BOSS_HP
@@ -641,6 +684,7 @@ rex:
 	ld a,(wTextIsActive)
 	or a
 	ret nz
+	call interactionAnimate
 	ld h,d
 	ld l,Interaction.var31
 	ld a,(hl)
@@ -689,20 +733,23 @@ rex:
 	res 7,(hl)
 	ret
 
-; Il marche vers Link : une image sur deux, puis à chaque image quand il a maigri ; ses pas font
-; trembler le sol
+; Il marche vers Link : trois images sur quatre, puis à chaque image quand il a maigri ; ses pas
+; font trembler le sol. Il va partout dans l'arène (avant, il s'arrêtait à 32 pixels du mur de
+; droite : Denis restait à droite, intouchable)
 @move:
 	ld e,Interaction.var32
 	ld a,(de)
 	or a
 	jr nz,+
 	ld a,(wFrameCounter)
-	rrca
-	ret c
 	and $1f
-	jr nz,+
+	jr nz,++
 	ld a,$06
 	call setScreenShakeCounter
+++
+	ld a,(wFrameCounter)
+	and $03
+	ret z
 +
 	ld h,d
 	ld l,Interaction.yh
@@ -710,25 +757,25 @@ rex:
 	sub $08
 	call @toward
 	ld a,(hl)
-	cp $30
+	cp $18
 	jr nc,+
-	ld (hl),$30
+	ld (hl),$18
 +
-	cp $80
+	cp $88
 	jr c,+
-	ld (hl),$80
+	ld (hl),$88
 +
 	ld l,Interaction.xh
 	ld a,(w1Link.xh)
 	call @toward
 	ld a,(hl)
-	cp $30
+	cp $20
 	jr nc,+
-	ld (hl),$30
+	ld (hl),$20
 +
-	cp $c0
+	cp $d0
 	ret c
-	ld (hl),$c0
+	ld (hl),$d0
 	ret
 
 @toward:
@@ -812,10 +859,8 @@ rex:
 	; Son blindage tombe : le fantôme brille à travers, il va plus vite
 	ld l,Interaction.var32
 	ld (hl),$01
-	ld l,Interaction.oamTileIndexBase
-	ld a,(hl)
-	add $10
-	ld (hl),a
+	ld a,$04
+	call interactionSetAnimation
 	ld a,$10
 	call setScreenShakeCounter
 	ld a,SND_BIG_EXPLOSION
@@ -867,6 +912,8 @@ ghost:
 	ret
 
 @run:
+	cp $02
+	jp z,@leave
 	ld a,(wTextIsActive)
 	or a
 	ret nz
@@ -892,9 +939,9 @@ ghost:
 	ld a,(hl)
 	add b
 	ld (hl),a
-	cp $28
+	cp $20
 	jr c,@bounceY
-	cp $89
+	cp $91
 	jr c,+
 @bounceY:
 	ld l,Interaction.var32
@@ -910,9 +957,9 @@ ghost:
 	ld a,(hl)
 	add b
 	ld (hl),a
-	cp $28
+	cp $20
 	jr c,@bounceX
-	cp $c9
+	cp $d9
 	jr c,+
 @bounceX:
 	ld l,Interaction.var33
@@ -982,4 +1029,40 @@ ghost:
 	call playSound
 	ld bc,TX_5a1d
 	call showText
+	; les textes finis (et la réplique de Marine, INTERAC_MARINE $08), Link revient à l'entrée du
+	; Terrier
+	ld e,Interaction.state
+	ld a,$02
+	ld (de),a
+	ld e,Interaction.counter1
+	ld a,90
+	ld (de),a
+	ld h,d
+	ld l,Interaction.visible
+	res 7,(hl)
+	ret
+
+@leave:
+	ld a,(wTextIsActive)
+	or a
+	jr z,+
+	ld e,Interaction.counter1
+	ld a,90
+	ld (de),a
+	ret
++
+	call interactionDecCounter1
+	ret nz
+	ld a,$84
+	ld (wWarpDestGroup),a
+	ld a,$d0
+	ld (wWarpDestRoom),a
+	ld a,$97
+	ld (wWarpDestPos),a
+	xor a
+	ld (wWarpTransition),a
+	ld a,$03 ; fondu
+	ld (wWarpTransition2),a
+	ld a,SND_TELEPORT
+	call playSound
 	jp interactionDelete

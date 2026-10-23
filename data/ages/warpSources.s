@@ -230,7 +230,7 @@ group1WarpSources:
 	m_StandardWarp $0 $28 $70 $5 $4 ; BALLADE: entrée de la mine abandonnée -> 5:b2
 	; BALLADE: l'île des Échos (1:40-74) : la cabane du fossoyeur
 	m_StandardWarp $0 $61 $48 $3 $4 ; BALLADE: porte de la cabane du fossoyeur -> 3:25
-	m_StandardWarp $0 $60 $51 $4 $4 ; BALLADE: l'ouverture de la falaise -> le Terrier des Serpents (4:d0)
+	m_StandardWarp $0 $60 $51 $4 $4 ; BALLADE: l'escalier sous la tombe -> le Terrier des Serpents (4:d0)
 	m_StandardWarp $0 $5b $4d $3 $4 ; BALLADE: la porte de la maison de Marine (son île) -> 3:2a
 	m_StandardWarp $0 $42 $71 $5 $4 ; BALLADE: la grille ouverte -> la Cathédrale des Échos (5:aa)
 	m_StandardWarp $0 $48 $4f $4 $4 ; BALLADE: l'entrée du Nid -> la Spirale Céleste (4:3c)

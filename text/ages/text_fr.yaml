@@ -14224,8 +14224,9 @@ groups:
   - name: TX_2e1e
     index: 0x1e
     text: |-
-      \left Lynna Village
-
+      Une tombe n'est
+      pas à sa place
+      ici.
   - name: TX_2e1f
     index: 0x1f
     text: |-
@@ -22123,9 +22124,9 @@ groups:
     index: 0x1a
     text: |-
       Une porte des
-      âmes. Elle
-      s'ouvre avec
-      \num1 âmes.
+      âmes. Il lui en
+      faut encore
+      \num1.
 
   - name: TX_5a1b
     index: 0x1b

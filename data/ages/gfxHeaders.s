@@ -30,7 +30,7 @@
 ; copy the data quickly enough to fit within vblank. If you need to draw stuff while the screen is
 ; on, see the "queueDmaTransfer" function or "data/{game}/uniqueGfxHeaders.s".
 
-.define NUM_GFX_HEADERS $d4 ; BALLADE: +2 (GFXH_FILM, GFXH_TITLE), +12 (menus en français), +8 (noms des donjons 1-8 en français), +3 (les photos de Cocolint)
+.define NUM_GFX_HEADERS $d5 ; BALLADE: +2 (GFXH_FILM, GFXH_TITLE), +12 (menus en français), +8 (noms des donjons 1-8 en français), +3 (les photos de Cocolint), +1 (le Terrier en français)
 
 gfxHeaderTable:
 	.repeat NUM_GFX_HEADERS index COUNT
@@ -206,7 +206,7 @@ m_GfxHeaderStart $1a, GFXH_DUNGEON_A_BLURB
 	m_GfxHeaderEnd
 
 m_GfxHeaderStart $1b, GFXH_DUNGEON_B_BLURB
-	m_GfxHeader gfx_blurb_heroscave, $8c00
+	m_GfxHeader gfx_blurb_terrier, $8c00 ; BALLADE: le Terrier des Serpents (tools/make_blurbs.py ; c'était « Ancient Tomb »)
 	m_GfxHeaderEnd
 
 m_GfxHeaderStart $1c, GFXH_DUNGEON_C_BLURB
@@ -1149,6 +1149,7 @@ balladeLangGfxHeaders:
 	.db GFXH_DUNGEON_6_BLURB,		GFXH_DUNGEON_6_BLURB_FR
 	.db GFXH_DUNGEON_7_BLURB,		GFXH_DUNGEON_7_BLURB_FR
 	.db GFXH_DUNGEON_8_BLURB,		GFXH_DUNGEON_8_BLURB_FR
+	.db GFXH_DUNGEON_B_BLURB,		GFXH_DUNGEON_B_BLURB_FR
 	.db $00
 
 ; BALLADE: les photos de Cocolint (code/ages/cutscenes/photos.s, tools/make_photos.py) : les tuiles en
@@ -1173,4 +1174,9 @@ m_GfxHeaderStart $d3, GFXH_PHOTO_3
 	m_GfxHeader gfx_photo_3b, $9100
 	m_GfxHeader map_photo_3, $9800
 	m_GfxHeader flg_photo_3, $9801
+	m_GfxHeaderEnd
+
+; Carte d'un donjon : le nom du Terrier des Serpents en français (tools/make_blurbs.py)
+m_GfxHeaderStart $d4, GFXH_DUNGEON_B_BLURB_FR
+	m_GfxHeader gfx_blurb_terrier_fr, $8c00
 	m_GfxHeaderEnd
