@@ -127,9 +127,9 @@ paletteData4098:
 	m_RGB16 $00 $00 $00
 
 	m_RGB16 $13 $16 $1e
-	m_RGB16 $11 $14 $1b
-	m_RGB16 $0f $12 $19
-	m_RGB16 $0c $0e $13
+	m_RGB16 $11 $14 $1c
+	m_RGB16 $10 $12 $19
+	m_RGB16 $0c $0e $14
 
 	m_RGB16 $16 $19 $1f
 	m_RGB16 $13 $17 $1f
@@ -159,7 +159,7 @@ paletteData40d8:
 	m_RGB16 $00 $00 $00
 
 	m_RGB16 $1c $1b $02
-	m_RGB16 $12 $19 $0a
+	m_RGB16 $11 $19 $0b
 	m_RGB16 $16 $14 $02
 	m_RGB16 $0f $0d $01
 
@@ -168,10 +168,10 @@ paletteData40d8:
 	m_RGB16 $1f $04 $00
 	m_RGB16 $00 $00 $00
 
-	m_RGB16 $15 $12 $18
-	m_RGB16 $16 $0e $13
-	m_RGB16 $18 $0d $0b
-	m_RGB16 $11 $08 $06
+	m_RGB16 $14 $12 $1b
+	m_RGB16 $16 $0f $14
+	m_RGB16 $19 $0d $0b
+	m_RGB16 $12 $08 $06
 
 	m_RGB16 $15 $19 $1d
 	m_RGB16 $0c $19 $1d

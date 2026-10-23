@@ -1456,6 +1456,18 @@ followPlace:
 ; ses salles, sauf « visitée » ; dans la salle du boss, on garde le réceptacle déjà pris), ses
 ; petites clés et sa clé du boss repartent à zéro. (La Fosse de Bulle, $09, n'en fait pas partie.)
 resetDungeon:
+	; (Denis) La boussole et la carte : d'office, dans chaque donjon (leurs coffres donnent des
+	; rubis : postGameChest)
+	ld a,(wDungeonIndex)
+	cp $10
+	jr nc,+
+	push af
+	ld hl,wDungeonCompasses
+	call setFlag
+	pop af
+	ld hl,wDungeonMaps
+	call setFlag
++
 	ld a,GLOBALFLAG_BALLADE_FIN
 	call checkGlobalFlag
 	ret z
@@ -1510,8 +1522,8 @@ resetDungeon:
 	ret
 
 ;;
-; Après la fin, un coffre qui donne un objet déjà eu (pas une clé, une carte, une boussole, des
-; rubis ni un quart de cœur) donne 30 rubis à la place
+; Un coffre de boussole ou de carte (on les a d'office) donne 30 rubis ; après la fin, un coffre
+; qui donne un objet déjà eu (pas une clé, des rubis ni un quart de cœur) aussi
 ; @param	bc	Le contenu du coffre (le trésor, son sous-type) ; modifié
 postGameChest:
 	ld a,b
@@ -1525,10 +1537,11 @@ postGameChest:
 	ret z
 	cp TREASURE_BOSS_KEY
 	ret z
+	; la boussole et la carte : on les a déjà (resetDungeon), toujours des rubis à la place
 	cp TREASURE_COMPASS
-	ret z
+	jr z,@rupees
 	cp TREASURE_MAP
-	ret z
+	jr z,@rupees
 	push bc
 	ld a,GLOBALFLAG_BALLADE_FIN
 	call checkGlobalFlag
@@ -1539,6 +1552,7 @@ postGameChest:
 	call checkTreasureObtained
 	pop bc
 	ret nc
+@rupees:
 	ld bc,TREASURE_OBJECT_RUPEES_04
 	ret
 
