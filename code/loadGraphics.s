@@ -606,18 +606,24 @@ _insertIndexIntoLoadedObjectGfx:
 	jp loadObjectGfx
 
 ;;
-; FR: the tree gfx slot ($9200-$93ff) also holds the status bar game icon (tile
-; $3f at $93f0, OPT_HUD_GAME_ICON), past the end of all its graphics but
-; Seasons' caravan: put the icon back after loading something there.
+; FR: the tree gfx slot ($9200-$93ff) also holds this project's status bar tiles
+; (game icon $3f, OPT_HUD_GAME_ICON; in Ages the Seasons items' tiles $2c-$31,
+; see frRestoreHudIconOnRoomLoad). Loading something there always copies 32
+; tiles, whatever the size of the graphics: put them back afterwards, except
+; for Seasons' caravan (whole slot) and, for $2c-$31, the shops (prices).
 ; Same size in both games: bank 0 calls functions of this bank at fixed
 ; addresses (index 2 is an unused dummy in Ages).
 ; @param	e	Tree gfx index
 frRestoreHudIcon:
-	ld a,(OPT_HUD_GAME_ICON)
-	or a
-	ret z
 	ld a,e
 	cp $02 ; Seasons: spr_caravan uses the whole slot
+	ret z
+	cp $03 ; shops: the inventory graphics (prices) use $2c-$31
+	jr z,+
+	callab frRestoreHudExtras
++
+	ld a,(OPT_HUD_GAME_ICON)
+	or a
 	ret z
 	ld hl,gfx_fr_hud_icon
 	ld de,$93f0

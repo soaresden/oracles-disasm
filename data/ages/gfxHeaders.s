@@ -313,11 +313,11 @@ gfxHeader1f:
 	m_GfxHeader gfx_blurb_makupath $8c00 $27
 gfxHeader20:
 	; FR: 32 tiles like the original game: the crossworld hack loaded 48 ($2f), whose
-	; last 16 overwrote the seed trees ($9200-$92bf, see loadTreeGfx). Only 6 of
-	; them are used on the status bar: seasons ($2c-$2f) and magnet polarity S/N
-	; (now $30/$31, out of the trees' tiles $20-$2b).
+	; last 16 overwrote the seed trees and the shops' prices (tree gfx slot
+	; $9200-$93ff, see loadTreeGfx). The 6 used on the status bar, seasons ($2c-$2f)
+	; and magnet polarity S/N ($30/$31), are put in that slot on each room load,
+	; before the room's own graphics (frRestoreHudIconOnRoomLoad).
 	m_GfxHeader gfx_hud $9000 $1f|$80
-	m_GfxHeader gfx_fr_hud_extra $92c0 $05|$80
 	m_GfxHeader gfx_fr_door_icons $93a0 $03|$80 ; FR: icons above Vasu's doors (OPT_DOOR_ICONS)
 	m_GfxHeader gfx_fr_hud_icon $93f0 $00 ; FR: game icon (OPT_HUD_GAME_ICON)
 gfxHeader21:

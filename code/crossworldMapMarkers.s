@@ -188,15 +188,22 @@ frRewardReceiverSquares:
 .endif
 
 ;;
-; FR: the status bar game icon (tile $3f at $93f0, OPT_HUD_GAME_ICON) shares the
-; tree gfx slot ($9200-$93ff): shops load the inventory graphics there, and
-; nothing reloaded the icon after leaving. Called on every room load, before
-; the room's own tree gfx (frRestoreHudIcon in bank $3f puts it back after
-; those). Seasons' caravan (tree gfx 2) uses the whole slot.
+; FR: the tree gfx slot ($9200-$93ff, see loadTreeGfx) also holds, put there by
+; this project: the status bar game icon (tile $3f, OPT_HUD_GAME_ICON), the icons
+; above Vasu's doors ($3a-$3d, OPT_DOOR_ICONS) and, in Ages, the status bar tiles
+; of the Seasons items ($2c-$31: seasons, magnet polarity). Shops load the
+; inventory graphics there, and the slot stayed marked as loaded after leaving,
+; so that closing a menu reloaded the last shop's graphics anywhere.
+; Called on every room load, before the room's own tree gfx (loaded after this,
+; frRestoreHudIcon in bank $3f puts the game icon back after them): the slot is
+; marked free and this project's tiles are put back.
 frRestoreHudIconOnRoomLoad:
-	; Vasu's shop: the icons above the doors ($93a0, OPT_DOOR_ICONS) are in the
-	; same slot. Put them back, and mark the slot as free so that the next shop
-	; reloads its own graphics there.
+	xor a
+	ld (wLoadedTreeGfxActive),a
+
+	call frRestoreHudExtras
+
+	; Vasu's shop: icons above the doors
 	ld a,(OPT_DOOR_ICONS)
 	or a
 	jr z,++
@@ -206,8 +213,6 @@ frRestoreHudIconOnRoomLoad:
 	ld a,(wActiveRoom)
 	cp VASU_ROOM
 	jr nz,++
-	xor a
-	ld (wLoadedTreeGfxActive),a
 	ld hl,gfx_fr_door_icons
 	ld de,$93a0
 	ldbc $03, :gfx_fr_door_icons
@@ -216,23 +221,23 @@ frRestoreHudIconOnRoomLoad:
 	ld a,(OPT_HUD_GAME_ICON)
 	or a
 	ret z
-.ifdef ROM_SEASONS
-	ld a,(wLoadedTreeGfxActive)
-	cp $02
-	ret z
-.endif
 	ld hl,gfx_fr_hud_icon
 	ld de,$93f0
 	ldbc $00, :gfx_fr_hud_icon
+	jp queueDmaTransfer
+
+;;
+; FR: Ages: status bar tiles of the Seasons items ($2c-$31: seasons, magnet
+; polarity) in the tree gfx slot. Nothing in Seasons.
+frRestoreHudExtras:
 .ifdef ROM_AGES
-	call queueDmaTransfer
-	; Ages: status bar tiles of the Seasons items (seasons, magnet polarity), also
-	; in the tree gfx slot past the trees' tiles (see gfxHeader20)
 	ld hl,frHudExtraRaw
 	ld de,$92c0
 	ldbc $05, :frHudExtraRaw
-.endif
 	jp queueDmaTransfer
+.else
+	ret
+.endif
 
 .ifdef ROM_AGES
 frHudExtraRaw:
