@@ -58,6 +58,7 @@
 ; @subid_38{Invisible, le 4F de la Tour (5:c8) : les Veilleurs en fantômes ; vu : « LIIINK! »}
 ; @subid_39{Invisible, à l'auberge (3:9e) : après les photos, le quiz de Marine sur Cocolint}
 ; @subid_3a{L'Arbre-Passage, au cœur de chaque île : comme le Bateau-Rondin, sans la mer}
+; @subid_3b{Lila endormie dans son lit (3:21), après Sire Bouchon, avant le Coffre à Jouets}
 ; ==================================================================================================
 
 ;;
@@ -124,6 +125,7 @@ main:
 	.dw ghostVeil
 	.dw marineQuiz
 	.dw passTree
+	.dw sleepingLila
 
 
 ;;
@@ -817,23 +819,18 @@ lila:
 	.dw npcWaitText
 
 @idle:
-	; Endormie (Sire Bouchon retrouvé, avant le Coffre à Jouets) : dans son lit, immobile (Denis :
-	; « elle marche toujours »)
+	; Endormie (Sire Bouchon retrouvé, avant le Coffre à Jouets) : elle est dans son lit
+	; (sleepingLila) ; ici, un petit nuage et elle s'en va
 	ld a,(wEssencesObtained)
 	and $02
 	jr nz,+
 	ld a,GLOBALFLAG_BALLADE_LILA_ASLEEP
 	call checkGlobalFlag
 	jr z,+
-	ld h,d
-	ld l,Interaction.yh
-	ld (hl),$1c
-	ld l,Interaction.xh
-	ld (hl),$88
-	jr ++
+	call objectCreatePuff
+	jp interactionDelete
 +
 	call interactionAnimateAsNpc
-++
 	call npcCheckTalk
 	ret z
 	; Après le Coffre à Jouets, elle est réveillée et joue
@@ -873,6 +870,26 @@ lila:
 	ld a,$04
 	ld bc,TX_5a5b
 	jp npcSay
+
+
+; ==================================================================================================
+; Lila endormie (subid $3b), dans son lit de gauche (3:21) : sa tête sur l'oreiller (art/objets.txt,
+; image 6). Là seulement quand elle dort : Sire Bouchon retrouvé, avant le Coffre à Jouets.
+; ==================================================================================================
+sleepingLila:
+	ld e,Interaction.state
+	ld a,(de)
+	or a
+	ret nz
+	ld a,(wEssencesObtained)
+	and $02
+	jp nz,interactionDelete
+	ld a,GLOBALFLAG_BALLADE_LILA_ASLEEP
+	call checkGlobalFlag
+	ret z			; (elle s'endort peut-être pendant qu'on est là)
+	call interactionInitGraphics
+	call interactionIncState
+	jp objectSetVisible83
 
 
 ; ==================================================================================================

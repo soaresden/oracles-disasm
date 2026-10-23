@@ -4193,6 +4193,7 @@ group3Map20ObjectData:
 	obj_End
 group3Map21ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $04 $48 $38
+	obj_Interaction INTERAC_BALLADE_OBJECT $3b $58 $18 ; Lila endormie, dans son lit
 	obj_Interaction INTERAC_BALLADE_OBJECT $0a $08 $08 ; la fin du chapitre 2 (au réveil)
 	obj_End
 group3Map22ObjectData:
