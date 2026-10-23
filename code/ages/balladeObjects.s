@@ -625,10 +625,19 @@ passTree:
 	ld a,(de)
 	or a
 	jr nz,+
-	; (un vrai arbre : on ne passe pas au travers ; Denis, île 3)
+	; (un vrai arbre : on ne passe pas au travers ; Denis, île 3) : la boîte d'un arbre, pas celle
+	; du radeau (40 pixels de large)
 	call raft
-	jp objectMarkSolidPosition
+	ld h,d
+	ld l,Interaction.collisionRadiusY
+	ld (hl),$06
+	inc l
+	ld (hl),$06
+	ret
 +
+	push af
+	call objectPreventLinkFromPassing
+	pop af
 	cp $01
 	jp nz,raft
 	ld a,(wBalladeTreeArrival)
@@ -1863,12 +1872,12 @@ echoShells:
 	ld a,(hl)
 	cp $03
 	ret c
-	; Résolue
+	; Résolue (le son du secret après la flûte du dernier coquillage : sinon, elle le couvre)
 	ld e,Interaction.state
 	ld a,$03
 	ld (de),a
 	ld e,Interaction.counter1
-	ld a,ECHO_PAUSE
+	ld a,150
 	ld (de),a
 	call getThisRoomFlags
 	set 6,(hl)
@@ -1925,6 +1934,22 @@ echoShells:
 	ret nz
 	ld a,SND_SOLVEPUZZLE
 	call playSound
+	; un petit nuage là où le coffre apparaît
+	call getFreeInteractionSlot
+	jr nz,@showChest
+	ld (hl),INTERAC_PUFF
+	ld a,(@chest)
+	ld b,a
+	and $f0
+	add $08
+	ld l,Interaction.yh
+	ld (hl),a
+	ld a,b
+	swap a
+	and $f0
+	add $08
+	ld l,Interaction.xh
+	ld (hl),a
 @showChest:
 	; Le coffre : fermé, ou ouvert si on l'a déjà pris (ROOMFLAG_ITEM)
 	call getThisRoomFlags
@@ -4294,6 +4319,7 @@ brazier:
 	ret
 
 @idle:
+	call objectPreventLinkFromPassing
 	call @flags
 	and $40
 	jr z,@unlit
@@ -4417,9 +4443,13 @@ echoShellSprite:
 	ld e,Interaction.state
 	ld a,(de)
 	or a
-	ret nz
+	jp nz,objectPreventLinkFromPassing
 	inc a
 	ld (de),a
 	call interactionInitGraphics
-	call objectMarkSolidPosition
+	ld h,d
+	ld l,Interaction.collisionRadiusY
+	ld (hl),$06
+	inc l
+	ld (hl),$06
 	jp objectSetVisible82
