@@ -398,8 +398,19 @@ wBalladeSongesWorn: ; $c597
 ; d'état en bas, « NO ITEM » dans les cases B et A, les objets ne servent pas), 0 ailleurs
 wBalladeGhostHud: ; $c598
 	db
-wBalladeMamonoUnused: ; $c599
-	dsb 7
+; BALLADE: le Mamono (code/ages/balladeMamono.s) : Link a été blessé (pas de « perfect »), des
+; cases vides à faire découvrir leurs voisines, la case regardée, les cases qu'on peut encore
+; découvrir à cette image
+wBalladeMamonoHurt: ; $c599
+	db
+wBalladeMamonoFlood: ; $c59a
+	db
+wBalladeMamonoScan: ; $c59b
+	db
+wBalladeMamonoBudget: ; $c59c
+	db
+wBalladeMamonoUnused: ; $c59d
+	dsb 3
 
 ; BALLADE: le Labyrinthe des Lynels (code/ages/balladePac.s) : l'état (0 rien, 1 en jeu, 2 gagné,
 ; 3 perdu, 4 on rentre), les rubis qui restent, la peur des Lynels (images / 2), les Lynels mangés

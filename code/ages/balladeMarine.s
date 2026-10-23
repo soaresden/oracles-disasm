@@ -124,6 +124,31 @@ switchDream:
 ; compteur de clés, qui n'apparaît que dans les donjons). Appelé par updateStatusBar_body
 ; (code/bank2.s), la banque 4 de la WRAM étant sélectionnée.
 drawNoctambuleTimer:
+	; Le Mamono (code/ages/balladeMamono.s) : le niveau de Link, « L-n », à la même place
+	ld a,(wBalladeMamonoState)
+	or a
+	jr z,++
+	ld hl,w4StatusBarTileMap+$0b
+	ld a,(wcbe8)
+	rrca
+	jr nc,+
+	dec l
++
+	ld (hl),$1a		; « L- »
+	inc l
+	ld a,(wBalladeMamonoLevel)
+	add $10
+	ld (hl),a
+	; un niveau nouveau : la barre d'état sera redessinée
+	ld hl,wBalladeNoctambuleShown
+	or $80
+	cp (hl)
+	ret z
+	ld (hl),a
+	ld hl,wStatusBarNeedsRefresh
+	set 4,(hl)
+	ret
+++
 	ld a,(wTilesetFlags)
 	bit TILESETFLAG_BIT_DUNGEON,a
 	ret nz

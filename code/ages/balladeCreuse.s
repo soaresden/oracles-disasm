@@ -2,11 +2,11 @@
 ; BALLADE: le Creuse-Rubis, le mini-jeu du forain (INTERAC_BALLADE_CREUSE, salle 1:ac).
 ;
 ; Un champ de sable de 6 x 4 cases (lignes 2-5, colonnes 1-6 de la salle) cache des bombes. Link
-; creuse la case devant lui avec A ; chaque case sans bombe donne un rubis dont la couleur dit
-; combien de bombes il y a autour : vert (aucune, 1 rubis), bleu (une, 5), rouge (deux, 20),
-; doré (trois ou plus, 50). Une bombe : BOUM, c'est perdu. Toutes les cases sûres creusées :
-; gagné, et la première victoire en Moyen et en Difficile donne un quart de cœur (drapeaux $40 et
-; $80 de la salle).
+; creuse la case devant lui avec A ; chaque case sans bombe montre le nombre de bombes autour (les
+; chiffres 1 à 8 sur le sable, tools/make_mamono.py) et donne un rubis de sa couleur : vert (aucune,
+; 1 rubis), bleu (une, 5), rouge (deux, 20), doré (trois ou plus, 50). Une bombe : BOUM, c'est
+; perdu. Toutes les cases sûres creusées : gagné. Deux niveaux (Denis) : Facile, Difficile ; la
+; première victoire en Difficile donne un quart de cœur (drapeau $80 de la salle).
 ;
 ; Le forain (INTERAC_BALLADE_NPC $08) propose ses trois jeux (TX_5a43 : Creuse, Mamono, Lynels,
 ; Non) ; ce contrôleur voit ce texte se fermer et lit le choix (wSelectedTextOption), propose le
@@ -19,6 +19,7 @@
 .define CREUSE_CELLS		24
 .define CREUSE_UNDUG_TILE	$12	; sable meuble
 .define CREUSE_DUG_TILE		$bf	; sable lisse
+.define CREUSE_FIRST_NUMBER	$40	; brique $40 + n : le chiffre n (1-8), sur le sable
 .define CREUSE_FIRST_ROW	2
 .define CREUSE_FIRST_COL	1
 
@@ -150,18 +151,30 @@ main:
 	ld a,b
 	call @setBit
 
+	ld hl,wBalladeCreuseMines
+	ld a,b
+	call @testBit
+	jr z,+
 	push bc
 	ld a,CREUSE_DUG_TILE
 	call setTile
 	pop bc
-
-	ld hl,wBalladeCreuseMines
-	ld a,b
-	call @testBit
-	jr nz,@boom
-
-	; Pas de bombe : un rubis de la couleur du nombre de bombes autour
+	jp @boom
++
+	; Pas de bombe : sur la case, le nombre de bombes autour ; un rubis de sa couleur
 	call @countNeighbours
+	push af
+	ld a,(wBalladeMamonoTmp+2)
+	or a
+	ld a,CREUSE_DUG_TILE
+	jr z,+
+	ld a,(wBalladeMamonoTmp+2)
+	add CREUSE_FIRST_NUMBER
++
+	push bc
+	call setTile
+	pop bc
+	pop af
 	ld hl,@rupeeDrops
 	rst_addAToHl
 	ld a,(hl)
@@ -183,15 +196,11 @@ main:
 	call playSound
 	ld bc,TX_5a48
 	call showText
-	; Le quart de cœur : Moyen (drapeau $40), Difficile (drapeau $80), la première fois
+	; Le quart de cœur : en Difficile (drapeau $80), la première fois
 	ld a,(wBalladeCreuseLevel)
 	or a
 	ret z
-	dec a
-	ld b,$40
-	jr z,+
 	ld b,$80
-+
 	call getThisRoomFlags
 	ld a,(hl)
 	and b
@@ -224,10 +233,10 @@ main:
 	jp showText
 
 ;;
-; Le forain vient de proposer une partie : le choix (0 Facile, 1 Moyen, 2 Difficile, 3 Non)
+; Le forain vient de proposer une partie : le choix (0 Facile, 1 Difficile, 2 Non)
 @offer:
 	ld a,(wSelectedTextOption)
-	cp $03
+	cp $02
 	ret nc			; « Non » : rien ne change
 	push af
 	xor a
@@ -427,6 +436,7 @@ main:
 	jr -
 @counted:
 	ld a,e
+	ld (wBalladeMamonoTmp+2),a	; (le vrai compte, pour le chiffre)
 	pop de
 	pop bc
 	cp $04
@@ -478,11 +488,11 @@ main:
 @rupeeDrops:
 	.db ITEM_DROP_1_RUPEE, ITEM_DROP_5_RUPEES, ITEM_DROP_0a, ITEM_DROP_0b
 
-; Facile, Moyen, Difficile
+; Facile, Difficile
 @prices:
-	.db RUPEEVAL_010, RUPEEVAL_020, RUPEEVAL_030
+	.db RUPEEVAL_010, RUPEEVAL_030
 @mineCounts:
-	.db 4, 6, 8
+	.db 4, 8
 
 ;;
 ; Le Mamono : dans l'arène du forain (5:ea, code/ages/balladeMamono.s lit wBalladeCreuseLevel)

@@ -12,9 +12,10 @@
 ; l'orange hésite. Ils ne font jamais demi-tour, sauf quand Link prend une gemme : ils ont peur
 ; (bleu nuit, puis ils clignotent), fuient au hasard, plus lentement, et Link les terrasse en les
 ; touchant (5, 10, 20 puis 50 rubis d'affilée) ; ils retournent à l'enclos. Sans gemme, l'épée les
-; traverse. Un Lynel qui attrape Link lui prend un cœur et tous retournent à l'enclos ; s'il ne
-; reste qu'un cœur à Link, c'est perdu. Tous les rubis ramassés : gagné (50 rubis de plus). Dans les
-; deux cas, retour chez le forain.
+; traverse. Un Lynel qui attrape Link le laisse à un seul cœur (Denis : « ils devraient presque nous
+; one shot ») et tous retournent à l'enclos ; attrapé avec un seul cœur, c'est perdu. Tous les rubis
+; ramassés : gagné (50 rubis de plus ; la première fois, un quart de cœur : drapeau $80 de la
+; salle). Dans les deux cas, retour chez le forain.
 ;
 ; Le contrôleur : INTERAC_BALLADE_CREUSE $01 (object_code/ages/interactions/balladeCreuse.s) ; les
 ; Lynels : object_code/common/enemies/lynel.s appelle « lynel » ci-dessous.
@@ -161,7 +162,17 @@ main:
 	call @wait
 	ret nz
 	ld bc,TX_5a4e
-	jp showText
+	call showText
+	; La première victoire : un quart de cœur (drapeau $80 du labyrinthe)
+	call getThisRoomFlags
+	bit 7,(hl)
+	ret nz
+	set 7,(hl)
+	ldbc TREASURE_HEART_PIECE, $00
+	call createTreasure
+	ret nz
+	ld de,w1Link.yh
+	jp objectCopyPosition_rawAddress
 
 @lostText:
 	call @wait
@@ -195,7 +206,11 @@ main:
 	ld a,(wLinkHealth)
 	cp $05
 	jr c,@lost
-	ld a,$f8
+	; il ne lui reste qu'un cœur (damageToApply : en huitièmes de cœur)
+	sub $04
+	add a
+	cpl
+	inc a
 	ld (w1Link.damageToApply),a
 	ret
 @lost:

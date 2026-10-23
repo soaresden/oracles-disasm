@@ -6,11 +6,15 @@
 ; Darknut, Lynel). Link creuse la case devant lui avec A. Une case vide montre la somme des niveaux
 ; des monstres qui l'entourent (les chiffres de 1 à 40 : tools/make_mamono.py, décor $6a). Un
 ; monstre déterré apparaît, figé sur sa case (le vrai ennemi), puis s'en va en fumée et laisse son
-; chiffre : s'il n'est pas plus fort que Link, Link le bat ; sinon Link perd un demi-cœur par niveau
-; d'écart, et tout son niveau si le monstre est découvert à l'aveugle (aucune case creusée autour).
-; Chaque monstre battu donne autant d'expérience que son niveau, et Link monte de niveau. Gagné
-; quand tous les monstres sont déterrés ; à bout de forces, perdu. Quart de cœur la première fois en
-; Moyen et en Dur (drapeaux $40 et $80 de l'arène). On sort par le haut, chez le forain.
+; niveau dans un cadre (on voit qu'il y avait là un monstre, pour continuer à compter) : s'il n'est
+; pas plus fort que Link, Link le bat ; sinon Link perd un demi-cœur par niveau d'écart, et tout son
+; niveau si le monstre est découvert à l'aveugle (aucune case creusée autour). Chaque monstre battu
+; donne autant d'expérience que son niveau, et Link monte de niveau (« L-n » dans la barre d'état,
+; balladeMarine.drawNoctambuleTimer). Une case sans rien autour découvre ses voisines toute seule
+; (quatre par image). Gagné quand tous les monstres sont déterrés ; à bout de forces, perdu. Deux
+; niveaux (Denis) : Facile, Dur ; le gros lot en Dur sans une égratignure (un « perfect » :
+; wBalladeMamonoHurt) : un quart de cœur la première fois (drapeau $80 de l'arène), 100 rubis
+; ensuite. On sort par le haut, chez le forain.
 ;
 ; Les ennemis modèles : un de chaque niveau dans les objets de la salle (story/salles/objets.txt),
 ; pour que leurs images soient chargées ; après quelques images, ce contrôleur les cache, coupe leurs
@@ -22,6 +26,8 @@
 .define MAMONO_UNDUG		$12	; sable à creuser
 .define MAMONO_SAND		$bf	; sable lisse : rien autour
 .define MAMONO_FIRST_NUMBER	$40	; brique $40 + n : le chiffre n (1-40)
+.define MAMONO_FIRST_BOXED	$68	; brique $68 + n : un monstre vaincu de niveau n, dans un cadre
+.define MAMONO_FLOOD_PER_FRAME	4
 .define MAMONO_ROWS		8
 .define MAMONO_COLS		13
 .define MAMONO_CELLS		104
@@ -40,6 +46,17 @@ main:
 	; Les monstres restent figés
 	ld hl,wDisabledObjects
 	set 2,(hl)		; DISABLE_ENEMIES
+	; et leurs objets à part ne reviennent pas (l'épée du Darknut, recréée quand on le montre)
+	ld h,FIRST_ENEMY_INDEX
+-
+	ld l,Part.enabled
+	ld (hl),$00
+	inc h
+	ld a,h
+	cp LAST_ENEMY_INDEX+1
+	jr c,-
+	ld e,Interaction.state
+	ld a,(de)
 	; On sort par le haut : chez le forain
 	cp $04
 	ret z
@@ -127,6 +144,8 @@ main:
 	ld (wBalladeMamonoPlaced),a
 	ld (wBalladeMamonoLeft),a
 	ld (wBalladeMamonoShow),a
+	ld (wBalladeMamonoHurt),a
+	ld (wBalladeMamonoFlood),a
 	inc a
 	ld (wBalladeMamonoLevel),a
 	ld (wBalladeMamonoState),a
@@ -173,8 +192,9 @@ main:
 	call playSound
 	ld a,(wBalladeMamonoShowPos)
 	ld c,a
-	ld a,(wBalladeMamonoShowIndex)
-	jp @reveal
+	ld a,(wBalladeMamonoTmp)
+	add MAMONO_FIRST_BOXED
+	jp setTile
 
 @playing:
 	ld a,(wBalladeMamonoState)
@@ -186,6 +206,9 @@ main:
 	ld a,(wBalladeMamonoShow)
 	or a
 	ret nz
+	ld a,(wBalladeMamonoFlood)
+	or a
+	jp nz,@flood
 	ld a,(wGameKeysJustPressed)
 	and BTN_A
 	ret z
@@ -238,16 +261,87 @@ main:
 	ld a,b
 
 ;;
-; La case c (numéro a) montre son chiffre (la somme des niveaux autour)
+; La case c (numéro a) montre son chiffre (la somme des niveaux autour) ; rien autour : ses voisines
+; se découvriront toutes seules (@flood)
 @reveal:
 	call @sum
 	or a
+	jr nz,+
+	ld a,$01
+	ld (wBalladeMamonoFlood),a
 	ld a,MAMONO_SAND
-	jr z,+
+	jp setTile
++
 	ld a,(wBalladeMamonoTmp+2)
 	add MAMONO_FIRST_NUMBER
-+
 	jp setTile
+
+;;
+; Les cases sans rien autour (le sable lisse) découvrent leurs voisines, quelques-unes par image ;
+; un tour sans rien à découvrir : c'est fini
+@flood:
+	xor a
+	ld (wBalladeMamonoScan),a
+	ld a,MAMONO_FLOOD_PER_FRAME
+	ld (wBalladeMamonoBudget),a
+@floodCell:
+	ld a,(wBalladeMamonoScan)
+	call @positionOf
+	ld h,>wRoomLayout
+	ld l,a
+	ld a,(hl)
+	cp MAMONO_SAND
+	jr nz,@floodNextCell
+	ld a,(wBalladeMamonoScan)
+	call @rowCol
+	ld d,$ff
+@floodRow:
+	ld e,$ff
+@floodCol:
+	call @neighbourIndex
+	jr c,@floodNext
+	push bc
+	ld (wBalladeMamonoTmp+1),a
+	call @positionOf
+	ld c,a
+	ld h,>wRoomLayout
+	ld l,a
+	ld a,(hl)
+	cp MAMONO_UNDUG
+	jr nz,@floodSkip
+	push de
+	ld a,(wBalladeMamonoTmp+1)
+	call @reveal
+	pop de
+	pop bc
+	ld hl,wBalladeMamonoBudget
+	dec (hl)
+	ret z
+	jr @floodNext
+@floodSkip:
+	pop bc
+@floodNext:
+	inc e
+	ld a,e
+	cp $02
+	jr nz,@floodCol
+	inc d
+	ld a,d
+	cp $02
+	jr nz,@floodRow
+@floodNextCell:
+	ld hl,wBalladeMamonoScan
+	inc (hl)
+	ld a,(hl)
+	cp MAMONO_CELLS
+	jr c,@floodCell
+	; un tour entier sans rien découvrir : plus rien à faire
+	ld a,(wBalladeMamonoBudget)
+	cp MAMONO_FLOOD_PER_FRAME
+	ret nz
+	xor a
+	ld (wBalladeMamonoFlood),a
+	ret
 
 ;;
 ; Un monstre déterré (a = son niveau, b = sa case, c = sa position)
@@ -309,6 +403,8 @@ main:
 	cpl
 	inc a
 	ld (w1Link.damageToApply),a
+	ld a,$01
+	ld (wBalladeMamonoHurt),a
 	ld a,SND_DAMAGE_LINK
 	call playSound
 	jr @defeated
@@ -333,25 +429,26 @@ main:
 	ld (wBalladeMamonoState),a
 	ld a,SND_SOLVEPUZZLE
 	call playSound
-	ld bc,TX_5a48
-	call showText
-	; Le quart de cœur : Moyen (drapeau $40), Dur (drapeau $80), la première fois
+	; En Dur, sans une égratignure : le gros lot ; blessé : presque !
 	ld a,(wBalladeCreuseLevel)
 	or a
-	ret z
-	dec a
-	ld b,$40
-	jr z,+
-	ld b,$80
-+
+	ld bc,TX_5a48
+	jp z,showText
+	ld a,(wBalladeMamonoHurt)
+	or a
+	ld bc,TX_5b3e
+	jp nz,showText
+	ld bc,TX_5b3f
+	call showText
+	; Le quart de cœur, la première fois (drapeau $80) ; ensuite, 100 rubis
 	call getThisRoomFlags
 	ld a,(hl)
-	and b
-	ret nz
-	ld a,(hl)
-	or b
-	ld (hl),a
+	and $80
+	ld bc,TREASURE_OBJECT_RUPEES_06	; (100 rubis)
+	jr nz,+
+	set 7,(hl)
 	ldbc TREASURE_HEART_PIECE, $00
++
 	call createTreasure
 	ret nz
 	ld de,w1Link.yh
@@ -709,13 +806,11 @@ main:
 @monsterIds:
 	.db ENEMY_KEESE, ENEMY_OCTOROK, ENEMY_MASKED_MOBLIN, ENEMY_SWORD_DARKNUT, ENEMY_LYNEL
 
-; Combien de monstres de chaque niveau (1 à 5) : Facile, Moyen, Dur
+; Combien de monstres de chaque niveau (1 à 5) : Facile, Dur
 @counts:
 	.db 6, 4, 3, 1, 0
-	.db 7, 5, 4, 2, 1
 	.db 8, 6, 5, 3, 2
-; L'expérience pour passer aux niveaux 2, 3, 4, 5 : Facile, Moyen, Dur
+; L'expérience pour passer aux niveaux 2, 3, 4, 5 : Facile, Dur
 @thresholds:
 	.db 5, 12, 20, $ff
-	.db 6, 14, 25, 38
 	.db 7, 16, 28, 44
