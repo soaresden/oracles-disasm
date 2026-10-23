@@ -1707,49 +1707,43 @@ groups:
   - name: TX_0302
     index: 0x02
     text: |-
-      Talus Peaks
-
+      Jingle Hamlet
   - name: TX_0303
     index: 0x03
     text: |-
-      Symmetry Village
-
+      Lagoon of
+      Vows
   - name: TX_0304
     index: 0x04
     text: |-
-      Nuun Highlands
-
+      Ember Peak
   - name: TX_0305
     index: 0x05
     text: |-
-      Rolling Ridge
-
+      Isle of
+      Echoes
   - name: TX_0306
     index: 0x06
     text: |-
-      Rolling Ridge
-      Base
-
+      Nest of Winds
   - name: TX_0307
     index: 0x07
     text: |-
-      Lynna City
-
+      Isle of the
+      Great Sleep
   - name: TX_0308
     index: 0x08
     text: |-
-      Forest of Time
-
+      Eye of
+      Insomnis
   - name: TX_0309
     index: 0x09
     text: |-
-      Yoll Graveyard
-
+      Gull's Nest
   - name: TX_030a
     index: 0x0a
     text: |-
-      Fairies' Woods
-
+      The sea
   - name: TX_030b
     index: 0x0b
     text: |-

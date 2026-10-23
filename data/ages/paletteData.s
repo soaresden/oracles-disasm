@@ -100,12 +100,13 @@ paletteData4058:
 	m_RGB16 $13 $0a $00
 
 paletteData4098:
-	m_RGB16 $0e $08 $00
-	m_RGB16 $1f $07 $00
-	m_RGB16 $1f $15 $00
-	m_RGB16 $00 $00 $00
+	; BALLADE: la carte de nos îles (tools/make_minimap.py)
+	m_RGB16 $12 $15 $1d
+	m_RGB16 $0f $11 $17
+	m_RGB16 $0a $0b $10
+	m_RGB16 $09 $0a $0f
 
-	m_RGB16 $00 $10 $1e
+	m_RGB16 $14 $17 $1f
 	m_RGB16 $19 $0f $00
 	m_RGB16 $0e $08 $00
 	m_RGB16 $00 $00 $00
@@ -115,38 +116,39 @@ paletteData4098:
 	m_RGB16 $02 $02 $06
 	m_RGB16 $00 $00 $00
 
-	m_RGB16 $1f $15 $00
-	m_RGB16 $19 $0f $00
-	m_RGB16 $0e $08 $00
-	m_RGB16 $00 $00 $00
+	m_RGB16 $11 $14 $1c
+	m_RGB16 $11 $13 $1a
+	m_RGB16 $0e $11 $17
+	m_RGB16 $0b $0d $12
 
-	m_RGB16 $1f $1f $1f
-	m_RGB16 $00 $10 $1e
+	m_RGB16 $19 $1d $1f
+	m_RGB16 $14 $17 $1f
 	m_RGB16 $00 $03 $0f
 	m_RGB16 $00 $00 $00
 
-	m_RGB16 $1f $15 $00
-	m_RGB16 $00 $10 $1e
-	m_RGB16 $0e $08 $00
-	m_RGB16 $00 $00 $00
+	m_RGB16 $13 $16 $1e
+	m_RGB16 $11 $14 $1b
+	m_RGB16 $0f $12 $19
+	m_RGB16 $0c $0e $13
 
-	m_RGB16 $1f $15 $00
-	m_RGB16 $04 $1a $00
-	m_RGB16 $0e $08 $00
-	m_RGB16 $00 $00 $00
+	m_RGB16 $16 $19 $1f
+	m_RGB16 $13 $17 $1f
+	m_RGB16 $13 $16 $1e
+	m_RGB16 $11 $14 $1c
 
-	m_RGB16 $1a $08 $1e
-	m_RGB16 $10 $08 $1f
-	m_RGB16 $04 $00 $12
-	m_RGB16 $00 $00 $00
+	m_RGB16 $14 $17 $1f
+	m_RGB16 $12 $14 $1c
+	m_RGB16 $0f $12 $18
+	m_RGB16 $0e $11 $17
 
 paletteData40d8:
-	m_RGB16 $0f $07 $08
-	m_RGB16 $1f $04 $00
-	m_RGB16 $1e $0f $0f
-	m_RGB16 $00 $00 $00
+	; BALLADE: la carte de nos îles (tools/make_minimap.py)
+	m_RGB16 $13 $0f $1b
+	m_RGB16 $13 $0c $0d
+	m_RGB16 $0c $05 $05
+	m_RGB16 $08 $04 $06
 
-	m_RGB16 $0e $02 $1f
+	m_RGB16 $11 $18 $1e
 	m_RGB16 $17 $0a $0a
 	m_RGB16 $0e $06 $07
 	m_RGB16 $00 $00 $00
@@ -156,30 +158,30 @@ paletteData40d8:
 	m_RGB16 $06 $04 $07
 	m_RGB16 $00 $00 $00
 
-	m_RGB16 $1e $0f $0f
-	m_RGB16 $17 $0a $0a
-	m_RGB16 $0e $06 $07
-	m_RGB16 $00 $00 $00
+	m_RGB16 $1c $1b $02
+	m_RGB16 $12 $19 $0a
+	m_RGB16 $16 $14 $02
+	m_RGB16 $0f $0d $01
 
-	m_RGB16 $19 $17 $1c
-	m_RGB16 $0e $02 $1f
+	m_RGB16 $1f $1f $1f
+	m_RGB16 $11 $18 $1e
 	m_RGB16 $1f $04 $00
 	m_RGB16 $00 $00 $00
 
-	m_RGB16 $1e $0f $0f
-	m_RGB16 $0e $02 $1f
-	m_RGB16 $0e $06 $07
-	m_RGB16 $00 $00 $00
+	m_RGB16 $15 $12 $18
+	m_RGB16 $16 $0e $13
+	m_RGB16 $18 $0d $0b
+	m_RGB16 $11 $08 $06
 
-	m_RGB16 $1e $0f $0f
-	m_RGB16 $0f $12 $00
-	m_RGB16 $0e $06 $07
-	m_RGB16 $00 $00 $00
+	m_RGB16 $15 $19 $1d
+	m_RGB16 $0c $19 $1d
+	m_RGB16 $14 $14 $18
+	m_RGB16 $12 $0f $19
 
-	m_RGB16 $0e $0e $17
-	m_RGB16 $0f $16 $00
-	m_RGB16 $06 $0b $0b
-	m_RGB16 $00 $00 $00
+	m_RGB16 $12 $17 $19
+	m_RGB16 $15 $0f $15
+	m_RGB16 $16 $0e $0b
+	m_RGB16 $16 $0c $0a
 
 paletteData4118:
 	m_RGB16 $15 $11 $02

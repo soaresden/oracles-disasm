@@ -6734,6 +6734,8 @@ mapMenu_state0:
 	jr nz,@past
 
 @present:
+	; BALLADE: notre carte (tools/make_minimap.py) n'a pas les changements de celle d'Ages
+	jr @noSubstitutions
 	; If the companion is not ricky, perform appropriate minimap tile substitutions.
 	ld a,(wAnimalCompanion)
 	sub SPECIALOBJECT_DIMITRI
@@ -6746,12 +6748,14 @@ mapMenu_state0:
 	call c,mapMenu_performTileSubstitutions
 
 @past:
+	jr @noSubstitutions ; BALLADE
 	; Check the position of the stone in talus peaks which changes water flow
 	ld a,(wPastRoomFlags+$41)
 	rrca
 	ld a,$06
 	call c,mapMenu_performTileSubstitutions
 
+@noSubstitutions:
 	call mapMenu_clearUnvisitedTiles
 	ld a,(wMapMenu.currentRoom)
 	ld (wMapMenu.cursorIndex),a
