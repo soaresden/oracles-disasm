@@ -5,7 +5,9 @@
 ; creuse la case devant lui avec A ; chaque case sans bombe montre le nombre de bombes autour (les
 ; chiffres 1 à 8 sur le sable, tools/make_mamono.py) et donne un rubis : vert (aucune ou une, 1
 ; rubis), bleu (deux, 5), rouge (trois ou plus, 20) ; Denis : on gagnait trop. Une bombe : BOUM, c'est
-; perdu. Toutes les cases sûres creusées : gagné. Deux niveaux (Denis) : Facile, Difficile ; la
+; perdu. Toutes les cases sûres creusées : gagné. Denis : les bombes ne se placent qu'au premier coup,
+; jamais sur cette case ni autour, ni dans les quatre coins ; une case sans bombe autour découvre
+; ses voisines toute seule (@flood, 4 par image ; leurs rubis vont droit dans la bourse). Deux niveaux (Denis) : Facile, Difficile ; la
 ; première victoire en Difficile donne un quart de cœur (drapeau $80 de la salle).
 ;
 ; Le forain (INTERAC_BALLADE_NPC $08) propose ses trois jeux (TX_5a43 : Creuse, Mamono, Lynels,
@@ -40,6 +42,10 @@ setSwordLoadout:
 	ld b,$02
 
 setLoadout:
+	; On ne quitte pas la partie (Denis : on pouvait s'en aller avec la Pelle)
+	ld a,$01
+	ld (wDisableScreenTransitions),a
+	ld (wWarpsDisabled),a
 	ld hl,wBalladeLoadout
 	ld a,(hl)
 	cp b
@@ -82,6 +88,9 @@ restoreLoadout:
 	or a
 	ret z
 	ld (hl),$00
+	xor a
+	ld (wDisableScreenTransitions),a
+	ld (wWarpsDisabled),a
 	ld a,(wBalladeLoadoutA)
 	ld (wInventoryA),a
 	ld a,(wBalladeLoadoutB)
@@ -192,6 +201,9 @@ main:
 	ld a,(wTextIsActive)
 	or a
 	ret nz
+	ld a,(wBalladeMamonoFlood)
+	or a
+	jp nz,@flood
 	ld a,(wGameKeysJustPressed)
 	and BTN_A
 	ret z
@@ -218,12 +230,18 @@ main:
 	ld hl,wBalladeCreuseDug
 	call @testBit
 	ret nz			; déjà creusée
+	; Le premier coup : les bombes se placent maintenant
+	ld hl,wBalladeCreuseDug
+	ldi a,(hl)
+	or (hl)
+	inc hl
+	or (hl)
+	call z,@placeMines
 	ld hl,wBalladeCreuseDug
 	ld a,b
 	call @setBit
 
 	ld hl,wBalladeCreuseMines
-	ld a,b
 	call @testBit
 	jr z,+
 	push bc
@@ -232,31 +250,13 @@ main:
 	pop bc
 	jp @boom
 +
-	; Pas de bombe : sur la case, le nombre de bombes autour ; un rubis de sa couleur
-	call @countNeighbours
-	push af
-	ld a,(wBalladeMamonoTmp+2)
-	or a
-	ld a,CREUSE_DUG_TILE
-	jr z,+
-	ld a,(wBalladeMamonoTmp+2)
-	add CREUSE_FIRST_NUMBER
-+
-	push bc
-	call setTile
-	pop bc
-	pop af
-	ld hl,@rupeeDrops
-	rst_addAToHl
-	ld a,(hl)
-	push bc
-	call @dropAt
-	pop bc
+	; Pas de bombe : le chiffre, un rubis qui tombe
+	ld e,$01
+	call @reveal
 	ld a,SND_DIG
 	call playSound
-
-	ld hl,wBalladeCreuseLeft
-	dec (hl)
+	ld a,(wBalladeCreuseLeft)
+	or a
 	ret nz
 
 	; Gagné : toutes les cases sûres sont creusées
@@ -284,6 +284,188 @@ main:
 	ret nz
 	ld de,w1Link.yh
 	jp objectCopyPosition_rawAddress
+
+;;
+; Découvre la case b (position c), qui n'a pas de bombe : le nombre de bombes autour (sable lisse
+; s'il n'y en a pas : ses voisines se découvriront toutes seules, @flood), un rubis
+; @param	e	1 : le rubis tombe sur la case ; 0 : il va droit dans la bourse
+@reveal:
+	call @countNeighbours
+	push af
+	ld a,(wBalladeMamonoTmp+2)
+	or a
+	jr nz,+
+	ld a,$01
+	ld (wBalladeMamonoFlood),a
+	ld a,CREUSE_DUG_TILE
+	jr ++
++
+	add CREUSE_FIRST_NUMBER
+++
+	push bc
+	push de
+	call setTile
+	pop de
+	pop bc
+	pop af
+	dec e
+	jr nz,+
+	ld hl,@rupeeDrops
+	rst_addAToHl
+	ld a,(hl)
+	push bc
+	call @dropAt
+	pop bc
+	jr ++
++
+	ld hl,@rupeeValues
+	rst_addAToHl
+	push bc
+	ld c,(hl)
+	ld a,TREASURE_RUPEES
+	call giveTreasure
+	pop bc
+++
+	ld hl,wBalladeCreuseLeft
+	dec (hl)
+	ret
+
+;;
+; Les cases vides découvrent leurs voisines (au plus 4 par image : setTile)
+@flood:
+	ld a,$04
+	ld (wBalladeMamonoBudget),a
+	ld b,$00
+@floodCell:
+	push bc
+	ld hl,wBalladeCreuseDug
+	call @testBit
+	jr z,@floodNext
+	ld hl,wBalladeCreuseMines
+	call @testBit
+	jr nz,@floodNext
+	ld a,b
+	call @cellPosition
+	call @countNeighbours
+	ld a,(wBalladeMamonoTmp+2)
+	or a
+	jr nz,@floodNext
+	ld hl,@neighbourOffsets
+@floodNeighbour:
+	ldi a,(hl)
+	cp $80
+	jr z,@floodNext
+	push hl
+	push bc
+	add c
+	ld c,a
+	call @cellIndex
+	jr c,@floodSkip
+	ld b,a
+	ld hl,wBalladeCreuseDug
+	call @testBit
+	jr nz,@floodSkip
+	ld hl,wBalladeCreuseDug
+	ld a,b
+	call @setBit
+	ld e,$00
+	call @reveal
+	ld hl,wBalladeMamonoBudget
+	dec (hl)
+	jr nz,@floodSkip
+	; La suite à la prochaine image
+	pop bc
+	pop hl
+	pop bc
+	ret
+@floodSkip:
+	pop bc
+	pop hl
+	jr @floodNeighbour
+@floodNext:
+	pop bc
+	inc b
+	ld a,b
+	cp CREUSE_CELLS
+	jr c,@floodCell
+	; Plus rien à découvrir
+	xor a
+	ld (wBalladeMamonoFlood),a
+	ld a,(wBalladeCreuseLeft)
+	or a
+	ret nz
+	jp @win
+
+;;
+; Le premier coup (case b) : les bombes, au hasard, jamais sur cette case ni autour, ni dans les
+; coins (bc gardés)
+@placeMines:
+	push bc
+	ld a,b
+	ld (wBalladeMamonoTmp),a
+	ld a,(wBalladeCreuseLevel)
+	ld hl,@mineCounts
+	rst_addAToHl
+	ld c,(hl)
+--
+	call getRandomNumber
+	and $1f
+	cp CREUSE_CELLS
+	jr nc,--
+	or a
+	jr z,--
+	cp $05
+	jr z,--
+	cp CREUSE_CELLS - 6
+	jr z,--
+	cp CREUSE_CELLS - 1
+	jr z,--
+	ld b,a
+	call @nearFirst
+	jr z,--
+	ld hl,wBalladeCreuseMines
+	call @testBit
+	jr nz,--
+	ld hl,wBalladeCreuseMines
+	ld a,b
+	call @setBit
+	dec c
+	jr nz,--
+	pop bc
+	ret
+
+;;
+; @param	a	Une case
+; @param[out]	zflag	Set si c'est la case du premier coup (wBalladeMamonoTmp) ou une voisine
+; (bc, de gardés)
+@nearFirst:
+	push bc
+	push de
+	call @cellPosition
+	ld e,c
+	ld a,(wBalladeMamonoTmp)
+	call @cellPosition
+	ld a,e
+	sub c
+	jr z,@nearYes
+	ld b,a
+	ld hl,@neighbourOffsets
+-
+	ldi a,(hl)
+	cp $80
+	jr z,@nearNo
+	cp b
+	jr nz,-
+@nearYes:
+	pop de
+	pop bc
+	xor a
+	ret
+@nearNo:
+	pop de
+	pop bc
+	or a
+	ret
 
 @boom:
 	; Une bombe : l'explosion, deux cœurs en moins, perdu
@@ -351,29 +533,16 @@ main:
 	dec b
 	jr nz,-
 
-	; Les bombes, au hasard
+	; Les bombes : au premier coup (@placeMines)
 	ld a,(wBalladeCreuseLevel)
 	ld hl,@mineCounts
 	rst_addAToHl
-	ld a,(hl)
-	ld c,a
+	ld c,(hl)
 	ld a,CREUSE_CELLS
 	sub c
 	ld (wBalladeCreuseLeft),a
---
-	call getRandomNumber
-	and $1f
-	cp CREUSE_CELLS
-	jr nc,--
-	ld b,a
-	ld hl,wBalladeCreuseMines
-	call @testBit
-	jr nz,--
-	ld hl,wBalladeCreuseMines
-	ld a,b
-	call @setBit
-	dec c
-	jr nz,--
+	xor a
+	ld (wBalladeMamonoFlood),a
 
 	ld a,$01
 	ld (wBalladeCreuseState),a
@@ -558,6 +727,9 @@ main:
 ; Rubis selon le nombre de bombes autour (0, 1, 2, 3 ou plus) : vert, vert, bleu, rouge
 @rupeeDrops:
 	.db ITEM_DROP_1_RUPEE, ITEM_DROP_1_RUPEE, ITEM_DROP_5_RUPEES, ITEM_DROP_0a
+; (les mêmes, droit dans la bourse : les cases découvertes toutes seules)
+@rupeeValues:
+	.db RUPEEVAL_001, RUPEEVAL_001, RUPEEVAL_005, RUPEEVAL_020
 
 ; Facile, Difficile
 @prices:

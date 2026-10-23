@@ -349,16 +349,12 @@ groups:
   - name: TX_0024
     index: 0x24
     text: |-
-      You got \col(1)Bombs\col(0)!
-      Use them to blow
-      open false
-      walls. Press \abtn
-      or \bbtn to set a
-      \col(1)Bomb\col(0). If you
-      also press \col(0x84)\item(0x00)\col(0),
-      you can throw
-      the \col(1)Bomb\col(0).
-
+      Tu as eu des
+      \col(1)bombes\col(0)! Elles
+      font sauter les
+      murs fissurés.
+      Pose-en une
+      avec \abtn ou \bbtn.
   - name: TX_0025
     index: 0x25
     text: |-
@@ -397,58 +393,43 @@ groups:
   - name: TX_0029
     index: 0x29
     text: |-
-      You got \col(1)Scent
-      Seeds\col(0)! Their
-      smell attracts
-      monsters. Open
-      your \col(1)Seed
-      Satchel\col(0) to use
-      them.
-
+      Tu as eu des
+      \col(1)graines
+      odorantes\col(0)!
+      Leur odeur
+      attire les
+      monstres.
   - name: TX_002a
     index: 0x2a
     text: |-
-      You got \col(1)Mystery
-      Seeds\col(0)! What they
-      do is a mystery!
-      Try them on
-      many things!
-      Open your \col(1)Seed
-      Satchel\col(0) to use
-      them.
-
+      Tu as eu des
+      \col(1)graines
+      mystère\col(0)! Leur
+      effet est un
+      mystère...
   - name: TX_002b
     index: 0x2b
     text: |-
-      You got \col(1)Pegasus
-      Seeds\col(0)! They'll
-      make you as
-      quick as the
-      legendary steed!
-      Open your \col(1)Seed
-      Satchel\col(0) to use
-      them.
-
+      Tu as eu des
+      \col(1)graines
+      Pégase\col(0)! Elles
+      te rendent vif
+      comme le vent!
   - name: TX_002c
     index: 0x2c
     text: |-
-      You got \col(1)Gale
-      Seeds\col(0)! Their
-      gust can take
-      you where you
-      want to go.
-      Open your \col(1)Seed
-      Satchel\col(0) to
-      use them.
-
+      Tu as eu des
+      \col(1)graines de
+      vent\col(0)! Leur
+      bourrasque
+      t'emporte.
   - name: TX_002d
     index: 0x2d
     text: |-
-      \pos(2)You got a \col(1)Seed
-      Satchel\col(0)! And it
-      has 20 \col(1)Ember
-      Seeds\col(0)!
-
+      \pos(2)Tu as eu une
+      \col(1)sacoche\col(0)! Et
+      20 \col(1)graines de
+      feu\col(0) dedans!
   - name: TX_002e
     index: 0x2e
     text: |-
@@ -654,11 +635,10 @@ groups:
   - name: TX_0049
     index: 0x49
     text: |-
-      You got four
-      \col(1)Pieces of Heart\col(0)!
-      That makes one
-      \col(1)Heart Container\col(0)!
-
+      Quatre \col(1)quarts
+      de cœur\col(0)! Ça
+      fait un \col(1)cœur
+      de plus\col(0)!
   - name: TX_004a
     index: 0x4a
     text: |-
@@ -691,15 +671,13 @@ groups:
   - name: TX_004f
     index: 0x4f
     text: |-
-      You got four
-      \col(1)Ember Seeds\col(0)!
-
+      Tu as eu quatre
+      \col(1)graines de feu\col(0)!
   - name: TX_0050
     index: 0x50
     text: |-
-      You got ten
-      \col(1)Pegasus Seeds\col(0)!
-
+      Tu as eu dix
+      \col(1)graines Pégase\col(0)!
   - name: TX_0051
     index: 0x51
     text: |-
@@ -1039,9 +1017,8 @@ groups:
   - name: TX_007e
     index: 0x7e
     text: |-
-      You got
-      \col(1)20 Bombs\col(0)!
-
+      Tu as eu
+      \col(1)20 bombes\col(0)!
   - name: TX_007f
     index: 0x7f
     text: |-
@@ -26060,3 +26037,11 @@ groups:
       Où va-t-on?\stop
        \opt()Brume \opt()Grelot
        \opt()Lagune \opt()Suite
+
+  # Le bip des cœurs, 15 secondes sans rien faire : Marine fait un bisou (balladeMarine.kissCheck)
+  - name: TX_5b4e
+    index: 0x4e
+    text: |-
+      \col(1)Marine\col(0): C'est
+      chiant ce bruit!?\stop
+      Tiens, un bisou!

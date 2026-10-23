@@ -817,7 +817,23 @@ lila:
 	.dw npcWaitText
 
 @idle:
+	; Endormie (Sire Bouchon retrouvé, avant le Coffre à Jouets) : dans son lit, immobile (Denis :
+	; « elle marche toujours »)
+	ld a,(wEssencesObtained)
+	and $02
+	jr nz,+
+	ld a,GLOBALFLAG_BALLADE_LILA_ASLEEP
+	call checkGlobalFlag
+	jr z,+
+	ld h,d
+	ld l,Interaction.yh
+	ld (hl),$1c
+	ld l,Interaction.xh
+	ld (hl),$88
+	jr ++
++
 	call interactionAnimateAsNpc
+++
 	call npcCheckTalk
 	ret z
 	; Après le Coffre à Jouets, elle est réveillée et joue

@@ -5140,9 +5140,6 @@ checkLinkPushingAgainstBed:
 	call checkGlobalFlag
 	jr z,@notA
 +
-	ld a,(wGameKeysJustPressed)
-	and BTN_A
-	jr z,@notA
 	ld a,(wTextIsActive)
 	or a
 	ret nz
@@ -5161,6 +5158,26 @@ checkLinkPushingAgainstBed:
 	jr nz,@nextSpot
 	cp c
 	jr nz,@nextSpot
+	ld a,(wGameKeysJustPressed)
+	and BTN_A
+	jr nz,@askSleep
+	; Chez Lila : aussi en poussant contre le lit une demi-seconde (Denis n'y arrivait pas avec
+	; A : l'épée sur A). L'auberge : le lit d'Ages, plus bas (90 images)
+	ld a,(wActiveRoom)
+	cp $21
+	jr nz,@notA
+	call checkLinkPushingAgainstWall
+	ld hl,wLinkPushingAgainstBedCounter
+	jr nz,+
+	ld (hl),$00
+	ret
++
+	inc (hl)
+	ld a,(hl)
+	cp 30
+	ret c
+	ld (hl),$00
+@askSleep:
 	call getFreeInteractionSlot
 	ret nz
 	ld (hl),INTERAC_MARINE

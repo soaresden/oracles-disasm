@@ -231,6 +231,10 @@ main:
 	bit 7,(hl)
 	ret nz
 	set 7,(hl)
+	; (@ending attend que Link l'ait ramassé, et son texte lu, avant de partir : var31)
+	ld e,Interaction.var31
+	ld a,$01
+	ld (de),a
 	ldbc TREASURE_HEART_PIECE, $00
 	call createTreasure
 	ret nz
@@ -292,6 +296,31 @@ main:
 	ld a,(wTextIsActive)
 	or a
 	ret nz
+	; Un quart de cœur donné (var31) : Link le ramasse et lit son texte avant de partir (90
+	; images sans texte ; Denis ne savait pas ce qu'il avait gagné)
+	ld e,Interaction.var31
+	ld a,(de)
+	or a
+	jr z,++
+	cp $01
+	jr nz,+
+	inc a
+	ld (de),a
+	ld e,Interaction.counter2
+	ld a,90
+	ld (de),a
+	ret
++
+	ld e,Interaction.counter2
+	ld a,(de)
+	dec a
+	ld (de),a
+	ret nz
+	ld e,Interaction.var31
+	xor a
+	ld (de),a
+++
+	ld e,Interaction.state
 	ld a,$03
 	ld (de),a
 	ld a,(wBalladePacState)

@@ -412,8 +412,12 @@ wBalladeMamonoBudget: ; $c59c
 ; BALLADE: Link vient d'arriver par l'Arbre-Passage (balladeObjects.s) : l'arbre dit l'île et son nom
 wBalladeTreeArrival: ; $c59d
 	db
-wBalladeUnused: ; $c59e
-	dsb 2
+; BALLADE: le bip des cœurs (balladeMarine.kissCheck) : depuis combien de bips (toutes les 64
+; images) Link ne fait rien
+wBalladeBeepIdle: ; $c59e
+	db
+wBalladeUnused: ; $c59f
+	db
 
 ; BALLADE: le Labyrinthe des Lynels (code/ages/balladePac.s) : l'état (0 rien, 1 en jeu, 2 gagné,
 ; 3 perdu, 4 on rentre), les rubis qui restent, la peur des Lynels (images / 2), les Lynels mangés

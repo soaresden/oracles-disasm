@@ -3306,6 +3306,10 @@ playHeartBeepAtInterval:
 	ld a,(w1Link.id)
 	dec a
 	ret z
+.ifdef ROM_AGES
+	; BALLADE: 15 secondes de bip sans rien faire : Marine fait un bisou (balladeMarine.s)
+	callab balladeMarine.kissCheck
+.endif
 
 	ld a,(wFrameCounter)
 	and $3f

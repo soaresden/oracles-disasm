@@ -68,12 +68,18 @@ main:
 	jr c,-
 	ld e,Interaction.state
 	ld a,(de)
-	; On sort par le haut : chez le forain
+	; On sort par le haut : chez le forain ; pas pendant la partie (Denis : on s'en allait)
 	cp $04
 	ret z
 	ld a,(w1Link.yh)
 	cp $0c
-	jp c,@leave
+	jr nc,+
+	ld a,(wBalladeMamonoState)
+	cp $01
+	jp nz,@leave
+	ld a,$0c
+	ld (w1Link.yh),a
++
 	ld a,(de)
 	dec a
 	jr z,@arrival
@@ -421,7 +427,8 @@ main:
 	jr @defeated
 
 @beaten:
-	ld a,SND_SWORDSLASH
+	; (pas le bruit de l'épée : Link n'a que la Pelle ; Denis)
+	ld a,SND_KILLENEMY
 	call playSound
 
 @defeated:
@@ -501,7 +508,7 @@ main:
 	jp showText
 
 ;;
-; Cache les monstres (a = la première case creusée : ni elle ni ses voisines)
+; Cache les monstres (a = la première case creusée : ni elle ni ses voisines, ni les quatre coins)
 @place:
 	ld (wBalladeMamonoFirst),a
 	ld hl,MAMONO_LEVELS
@@ -533,6 +540,15 @@ main:
 	and $7f
 	cp MAMONO_CELLS
 	jr nc,--
+	; jamais dans les coins (Denis)
+	or a
+	jr z,--
+	cp MAMONO_COLS - 1
+	jr z,--
+	cp MAMONO_CELLS - MAMONO_COLS
+	jr z,--
+	cp MAMONO_CELLS - 1
+	jr z,--
 	ld (wBalladeMamonoTmp),a
 	call @nearFirst
 	jr c,--

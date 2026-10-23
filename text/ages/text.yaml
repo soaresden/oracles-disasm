@@ -25921,3 +25921,12 @@ groups:
       Where to?\stop
        \opt()Mist \opt()Jingle
        \opt()Lagoon \opt()More
+
+  # The heart beep, 15 seconds idle: Marin gives a kiss (balladeMarine.kissCheck)
+  - name: TX_5b4e
+    index: 0x4e
+    text: |-
+      \col(1)Marin\col(0): That
+      beeping is SO
+      annoying!\stop
+      Here, a kiss!

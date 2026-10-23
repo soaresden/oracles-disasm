@@ -694,3 +694,68 @@ praise:
 	.db $05, $ca, <TX_5b3c	; le Cauchemar de Cocolint (la Tour, 4F)
 	.db $04, $d7, <TX_5b3d	; la machine possédée (le Terrier des Serpents)
 	.db $ff
+
+
+;;
+; Le bip des cœurs (Denis) : quand il bippe (presque plus de vie : comme playHeartBeepAtInterval,
+; bank2.s) et que Link ne fait rien depuis 15 secondes (aucun bouton), Marine en a assez : « C'est
+; chiant ce bruit ! Tiens, un bisou » (TX_5b4e), et Link a juste assez de vie pour que ça ne bippe
+; plus. Pas pendant un texte, un menu, une scène, ni un jeu du forain (on y garde un seul cœur
+; exprès). Appelé à chaque image.
+kissCheck:
+	ld hl,wBalladeBeepIdle
+	; Ça bippe ? (4 x (vie - 1) < vie maximum)
+	ld a,(wLinkHealth)
+	dec a
+	add a
+	jr c,@reset
+	add a
+	ld b,a
+	ld a,(wLinkMaxHealth)
+	dec a
+	cp b
+	jr c,@reset
+	; Link ne fait rien, rien d'autre en cours
+	ld a,(wKeysPressed)
+	ld b,a
+	ld a,(wTextIsActive)
+	or b
+	ld b,a
+	ld a,(wDisabledObjects)
+	or b
+	ld b,a
+	ld a,(wMenuDisabled)
+	or b
+	ld b,a
+	ld a,(wOpenedMenuType)
+	or b
+	ld b,a
+	ld a,(wBalladeLoadout)
+	or b
+	ld b,a
+	ld a,(wBalladePacState)
+	or b
+	jr nz,@reset
+	ld a,(wFrameCounter)
+	and $3f
+	ret nz
+	inc (hl)
+	ld a,(hl)
+	cp 14			; 14 bips : 15 secondes
+	ret c
+	; Le bisou : juste assez de vie (le quart de la vie maximum, arrondi, plus un quart de cœur)
+	ld (hl),$00
+	ld a,(wLinkMaxHealth)
+	add $03
+	srl a
+	srl a
+	inc a
+	ld (wLinkHealth),a
+	ld a,SND_GAINHEART
+	call playSound
+	ld bc,TX_5b4e
+	jp showText
+
+@reset:
+	ld (hl),$00
+	ret
