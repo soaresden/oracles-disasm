@@ -44,6 +44,15 @@ parseObjectData:
 	jr z,+
 	callab balladeFin.followRoomLoad
 +
+	; BALLADE: dans une maison du Songe (groupe 2), le temps du noctambule se recharge : en
+	; ressortant, Link a de nouveau tout son temps (INTERAC_BALLADE_DREAM_FX le recompte à zéro)
+	ld a,(wActiveGroup)
+	cp $02
+	jr nz,+
+	xor a
+	ld (wBalladeNoctambule),a
+	ld (wBalladeNoctambule+1),a
++
 	callab getObjectDataAddress
 .else; ROM_SEASONS
 	ld a,(wActiveGroup)
