@@ -121,6 +121,8 @@
 	GLOBALFLAG_BALLADE_SIFFLET		db ; $5e: le Sifflet de Marine (le 3e Songe des Héros) : elle rattrape Link quand il tombe
 	GLOBALFLAG_BALLADE_SONGE1		db ; $5f: le 1er Songe des Héros vu (la fée qui parle tout le temps)
 	GLOBALFLAG_BALLADE_SONGE2		db ; $60: le 2e Songe des Héros vu (les masques)
+	GLOBALFLAG_BALLADE_CONTRE		db ; $61: Bulle a appris le contre parfait à Link (code/ages/balladeParry.s)
+	GLOBALFLAG_BALLADE_CONTRE_PRET		db ; $62: Link est descendu à la 3e profondeur de la Fosse (Bulle le lui apprendra)
 
 .else; ROM_SEASONS
 

@@ -2685,6 +2685,26 @@ surfInstructor:
 	and $04
 	jr z,@villager
 	call interactionAnimateAsNpc
+	; Link remonte de la 3e profondeur (ou plus bas) : Bulle lui apprend le contre parfait
+	ld a,GLOBALFLAG_BALLADE_CONTRE
+	call checkGlobalFlag
+	jr nz,++
+	ld a,GLOBALFLAG_BALLADE_CONTRE_PRET
+	call checkGlobalFlag
+	jr z,++
+	ld a,(wScrollMode)
+	and $01
+	ret z
+	ld a,GLOBALFLAG_BALLADE_CONTRE
+	call setGlobalFlag
+	ld a,$91
+	ld (wDisabledObjects),a
+	ld a,SND_GETITEM
+	call playSound
+	ld bc,TX_5b34
+	ld a,$02
+	jp npcSay
+++
 	call npcCheckTalk
 	ret z
 	ld a,GLOBALFLAG_BALLADE_SURF
@@ -2759,7 +2779,7 @@ surfInstructor:
 
 ; ==================================================================================================
 ; Le Sablier (ITEM_14, harpFluteParent.s ; la Lune qui tombe le laisse en 5:c1). On le retourne : le
-; temps s'arrête 3 secondes (les ennemis et leurs tirs figés, le décor assombri, un tic-tac) et Link
+; temps s'arrête 5 secondes (les ennemis et leurs tirs figés, le décor assombri, un tic-tac) et Link
 ; frappe à volonté (figés, ils ne le blessent pas : Enemy.stunCounter). À la fin, tous les coups
 ; éclatent en crescendo (idée de Denis) : la terre tremble de plus en plus, une grande explosion, et
 ; chaque coup compte de plus en plus (le k-ième coup reçu par un ennemi ajoute k-1 de dégâts). Puis le
@@ -2768,7 +2788,7 @@ surfInstructor:
 ; sa vie (y-relatedObj2, $0a-$19 : inutiles pour un objet invisible).
 ; ==================================================================================================
 .define SABLIER_SUBID $33
-.define SABLIER_FRAMES 180
+.define SABLIER_FRAMES 300 ; 5 secondes (Denis) : deux fois 150 images (counter1, counter2)
 .define SABLIER_RECHARGE 8 ; secondes
 .define SABLIER_HITS Interaction.var30
 .define SABLIER_HEALTH Interaction.y
@@ -2823,7 +2843,9 @@ sablier:
 @init:
 	call interactionIncState
 	ld l,Interaction.counter1
-	ld (hl),SABLIER_FRAMES
+	ld (hl),SABLIER_FRAMES/2
+	ld l,Interaction.counter2
+	ld (hl),$02
 	; La vie de chaque ennemi, aucun coup
 	ld b,$00
 -
@@ -2864,7 +2886,13 @@ sablier:
 @frozen:
 	call sablierHold
 	call interactionDecCounter1
+	jr nz,+
+	ld (hl),SABLIER_FRAMES/2
+	ld l,Interaction.counter2
+	dec (hl)
 	jr z,@release
+	ld l,Interaction.counter1
++
 	; le tic-tac
 	ld a,(hl)
 	and $1f
@@ -3122,7 +3150,12 @@ fosseAir:
 	call interactionIncState
 	ld l,Interaction.counter1
 	ld (hl),FOSSE_FRAMES
-	ret
+	; À la 3e profondeur (5:d2), Link a trouvé le calme : Bulle lui apprendra le contre parfait
+	ld a,(wActiveRoom)
+	cp $d2
+	ret c
+	ld a,GLOBALFLAG_BALLADE_CONTRE_PRET
+	jp setGlobalFlag
 
 @breathe:
 	ld a,(wTextIsActive)

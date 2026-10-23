@@ -88,6 +88,13 @@ checkUseItems:
 	or a
 	jp nz,checkShopInput
 
+.ifdef ROM_AGES
+	; BALLADE: Ghost Babel (le 4F de la Tour) : Link n'a rien en main (code/ages/balladeGhost.s)
+	ld a,(wBalladeGhostHud)
+	or a
+	jr nz,@updateParentItems
+.endif
+
 	; Set carry flag if in a spinner or bit 7 of wInAir is set.
 	ld a,(wcc95)
 	ld b,a

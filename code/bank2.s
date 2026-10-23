@@ -3666,13 +3666,13 @@ loadEquippedItemGfx:
 	rlca
 	ret c
 
-	ld a,(wInventoryB)
+	call balladeGhostInventoryB ; BALLADE: Ghost Babel : « NO ITEM »
 	ld de,wBItemTreasure
 	call loadEquippedItemSpriteData
 	ld e,<w4ItemIconGfx+$00
 	call c,loadItemIconGfx
 
-	ld a,(wInventoryA)
+	call balladeGhostInventoryA ; BALLADE: Ghost Babel : « NO ITEM »
 	ld de,wAItemTreasure
 	call loadEquippedItemSpriteData
 	ld e,<w4ItemIconGfx+$40
@@ -3811,10 +3811,10 @@ drawItemTilesOnStatusBar:
 
 	ld a,$04
 	ld ($ff00+R_SVBK),a
-	ld a,(wInventoryB)
+	call balladeGhostInventoryB ; BALLADE: Ghost Babel : « NO ITEM »
 	ld de,wBItemTreasure
 	call loadEquippedItemSpriteData
-	ld a,(wInventoryA)
+	call balladeGhostInventoryA ; BALLADE: Ghost Babel : « NO ITEM »
 	ld de,wAItemTreasure
 	call loadEquippedItemSpriteData
 	call func_02_52f6

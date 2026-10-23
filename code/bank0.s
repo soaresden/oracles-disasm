@@ -14016,6 +14016,25 @@ balladeHudCameraY:
 	ret
 
 ;;
+; BALLADE: Ghost Babel (le 4F de la Tour, code/ages/balladeGhost.s) : Link n'a rien en main
+; (« NO ITEM ») ; sinon l'objet du bouton B (A)
+balladeGhostInventoryB:
+	ld a,(wBalladeGhostHud)
+	or a
+	ld a,(wInventoryB)
+	ret z
+	xor a
+	ret
+
+balladeGhostInventoryA:
+	ld a,(wBalladeGhostHud)
+	or a
+	ld a,(wInventoryA)
+	ret z
+	xor a
+	ret
+
+;;
 ; BALLADE: la position verticale d'un objet (ldi depuis hl), plus la hauteur de la barre si elle
 ; est en haut
 ; @param[out]	cflag	Retenue de l'addition

@@ -118,6 +118,14 @@ controller:
 	jr nz,@watch
 	inc a
 	ld (de),a
+	; L'écran de Ghost Babel : la barre d'état en bas, « NO ITEM » dans les cases B et A (Link entre
+	; sans rien en main : seulement les boîtes)
+	ld a,$01
+	ld (wBalladeGhostHud),a
+	ld a,$ff
+	ld (wStatusBarNeedsRefresh),a
+	ld bc,$2300
+	call @create
 	; Le radar, et le point de Link
 	ld bc,$0800
 	call @create
@@ -432,3 +440,116 @@ radarDot:
 	ld e,Interaction.xh
 	ld (de),a
 	ret
+
+
+;;
+; « NO ITEM » ($23, invisible) : dans les cases B et A de la barre d'état, à la place des icônes des
+; objets. Le contrôleur vide les cases (wBalladeGhostHud : balladeGhostInventoryB / A, banque 0) ;
+; une fois la barre redessinée (les deux cases vides : wBItemTreasure = $ff), on met « NO ITEM »
+; dans les images des icônes (w4ItemIconGfx), on les fait dessiner (attributs, décalage), on retire
+; la priorité du décor sur ces cases (comme func_02_52f6, banque 2) et on envoie le tout à l'écran.
+; La barre redessinée (un menu, un objet...) : on recommence.
+noItem:
+	ld e,Interaction.state
+	ld a,(de)
+	or a
+	jr nz,+
+	inc a
+	ld (de),a
+	call objectSetInvisible
+	call interactionSetAlwaysUpdateBit
++
+	; La barre montre encore un objet : elle se redessine (sans rien en main)
+	ld a,(wBItemTreasure)
+	ld b,a
+	ld a,(wAItemTreasure)
+	and b
+	inc a
+	jr z,+
+	ld hl,wStatusBarNeedsRefresh
+	set 0,(hl)
+	ret
++
+	; Déjà « NO ITEM » ?
+	ld a,(wBItemSpriteXOffset)
+	cp $08
+	ret z
+
+	; Les icônes de B et A : leurs attributs (palette 0, images en banque 1), deux sprites chacune
+	ld hl,wBItemSpriteAttribute1
+	call @setSprite
+	ld hl,wAItemSpriteAttribute1
+	call @setSprite
+
+	ld a,$04
+	ld ($ff00+R_SVBK),a
+	; Leurs images
+	ld de,w4ItemIconGfx
+	call @copyGfx
+	ld de,w4ItemIconGfx+$40
+	call @copyGfx
+	; Le décor des cases ne passe plus devant les sprites (colonnes 1-2 et 6-7, deux lignes)
+	ld hl,w4StatusBarAttributeMap+$01
+	call @clearTwo
+	ld l,<w4StatusBarAttributeMap+$06
+	call @clearTwo
+	xor a
+	ld ($ff00+R_SVBK),a
+	ld a,UNCMP_GFXH_02
+	jp loadUncompressedGfxHeader
+
+; hl : wB/AItemSpriteAttribute1 -> attributs, décalage du 2e sprite, pas de nombre
+@setSprite:
+	ld a,$08
+	ldi (hl),a
+	ldi (hl),a
+	ldi (hl),a
+	ld (hl),$ff
+	ret
+
+; hl, hl+1, hl+$20, hl+$21 : 0
+@clearTwo:
+	xor a
+	ldi (hl),a
+	ld (hl),a
+	ld a,l
+	add $1f
+	ld l,a
+	xor a
+	ldi (hl),a
+	ld (hl),a
+	ret
+
+@copyGfx:
+	ld hl,@gfx
+	ld b,$40
+-
+	ldi a,(hl)
+	ld (de),a
+	inc de
+	dec b
+	jr nz,-
+	ret
+
+; « NO ITEM » (16 x 16, deux sprites de 8 x 16 : gauche puis droite ; k = couleur 1)
+;   ................
+;   ................
+;   ...k..k..kk.....
+;   ...kk.k.k..k....
+;   ...k.kk.k..k....
+;   ...k..k.k..k....
+;   ...k..k..kk.....
+;   ................
+;   ................
+;   .k.kkk.kkk.k...k
+;   .k..k..k...kk.kk
+;   .k..k..kk..k.k.k
+;   .k..k..k...k...k
+;   .k..k..kkk.k...k
+;   ................
+;   ................
+@gfx:
+	.db $00 $00 $00 $00 $12 $00 $1a $00 $16 $00 $12 $00 $12 $00 $00 $00
+	.db $00 $00 $5d $00 $49 $00 $49 $00 $49 $00 $49 $00 $00 $00 $00 $00
+	.db $00 $00 $00 $00 $60 $00 $90 $00 $90 $00 $90 $00 $60 $00 $00 $00
+	.db $00 $00 $d1 $00 $1b $00 $95 $00 $11 $00 $d1 $00 $00 $00 $00 $00

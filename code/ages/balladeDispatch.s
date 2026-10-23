@@ -41,6 +41,7 @@ dispatch:
 	.dw @songesMasks
 	.dw @songesMask
 	.dw @songesSky
+	.dw @noItem		; $23 Ghost Babel : « NO ITEM » (balladeGhost.s)
 
 @creuse:
 	jpab balladeCreuse.main
@@ -112,3 +113,5 @@ dispatch:
 	jpab balladeSonges.mask
 @songesSky:
 	jpab balladeSonges.sky
+@noItem:
+	jpab balladeGhost.noItem

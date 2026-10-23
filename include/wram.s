@@ -394,8 +394,12 @@ wBalladeSongesMasks: ; $c596
 	db
 wBalladeSongesWorn: ; $c597
 	db
-wBalladeMamonoUnused: ; $c598
-	dsb 8
+; BALLADE: Ghost Babel (le 4F de la Tour, code/ages/balladeGhost.s) : 1 dans sa salle (la barre
+; d'état en bas, « NO ITEM » dans les cases B et A, les objets ne servent pas), 0 ailleurs
+wBalladeGhostHud: ; $c598
+	db
+wBalladeMamonoUnused: ; $c599
+	dsb 7
 
 ; BALLADE: le Labyrinthe des Lynels (code/ages/balladePac.s) : l'état (0 rien, 1 en jeu, 2 gagné,
 ; 3 perdu, 4 on rentre), les rubis qui restent, la peur des Lynels (images / 2), les Lynels mangés

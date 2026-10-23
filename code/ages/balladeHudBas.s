@@ -29,7 +29,10 @@ vblankBody:
 	ld hl,wBalladeHudBas
 	ld (hl),$00
 	ld a,(BALLADE_OPT_HUD_BAS)
-	or a
+	; (et toujours pendant Ghost Babel, comme dans le jeu : code/ages/balladeGhost.s)
+	ld b,a
+	ld a,(wBalladeGhostHud)
+	or b
 	jr z,@end
 	ld a,(wGfxRegsFinal.LYC)
 	cp $18

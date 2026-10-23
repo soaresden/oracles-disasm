@@ -22,6 +22,16 @@ parseObjectData:
 	call generateRandomBuffer
 
 .ifdef ROM_AGES
+	; BALLADE: en quittant la salle de Ghost Babel, la barre d'état redevient comme avant
+	; (code/ages/balladeGhost.s)
+	ld a,(wBalladeGhostHud)
+	or a
+	jr z,+
+	xor a
+	ld (wBalladeGhostHud),a
+	ld a,$ff
+	ld (wStatusBarNeedsRefresh),a
++
 	; BALLADE: après la fin, Marine suit Link partout (code/ages/balladeFin.s)
 	ld a,(wBalladeMarineFollow)
 	or a

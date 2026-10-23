@@ -490,7 +490,10 @@ collisionEffect04:
 ++
 .ifdef ROM_AGES
 	; BALLADE: le contre parfait : un ennemi (pas un projectile) qui touche Link juste après que
-	; l'épée est sortie (code/ages/balladeParry.s)
+	; l'épée est sortie (code/ages/balladeParry.s) ; une fois que Bulle l'a appris à Link (la Fosse)
+	ld a,(wGlobalFlags+(GLOBALFLAG_BALLADE_CONTRE>>3))
+	and 1<<(GLOBALFLAG_BALLADE_CONTRE&7)
+	jr z,@hit
 	ld a,(wcde3+1)
 	or a
 	jr z,@hit

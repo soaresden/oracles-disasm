@@ -892,6 +892,7 @@ interactionebSubidData:
 	m_InteractionSubidData $00 $00 $00 ; $20 2e rêve : la clairière des masques (invisible)
 	m_InteractionSubidData $e7 $14 $30 ; $21 un masque (images 5-7, palette 3 ; les Eaux : 1)
 	m_InteractionSubidData $00 $00 $00 ; $22 3e rêve : Célesbourg (invisible)
+	m_InteractionSubidData $00 $00 $00 ; $23 Ghost Babel : « NO ITEM » sur B et A (invisible : il dessine dans la barre)
 	m_InteractionSubidDataEnd
 
 ; BALLADE: les objets de nos îles (INTERAC_BALLADE_OBJECT) : spr_ballade_objects ($e3), image n =

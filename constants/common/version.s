@@ -107,8 +107,9 @@
 ; Marine emporte une bombe (balladeMarine.bombCarrier) : images de vol (2 pixels par image)
 .define BALLADE_CARRY_FRAMES 40
 ; le contre parfait (code/ages/balladeParry.s) : l'épée sortie moins de ce nombre d'images avant
-; qu'un ennemi touche Link ; un boss perd ce nombre de points de vie
-.define BALLADE_PARRY_WINDOW 12
+; qu'un ennemi touche Link (6 = un dixième de seconde : difficile, comme l'Issen d'Onimusha) ; un
+; boss perd ce nombre de points de vie
+.define BALLADE_PARRY_WINDOW 6
 .define BALLADE_PARRY_BOSS_DAMAGE 8
 
 
