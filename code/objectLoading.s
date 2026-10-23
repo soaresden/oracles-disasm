@@ -66,6 +66,28 @@ parseObjectData:
 	ld hl,wDungeonMaps
 	call setFlag
 +
+	; BALLADE: la boîte à anneaux de 5 places, d'office (Denis) ; les anneaux non identifiés d'avant
+	; (il n'y a pas de Vasu) s'effacent
+	ld a,(wRingBoxLevel)
+	cp $03
+	jr z,+
+	ld a,$03
+	ld (wRingBoxLevel),a
+	ld a,$01
+	ld (wObtainedRingBox),a
+	ld a,GLOBALFLAG_OBTAINED_RING_BOX
+	call setGlobalFlag
++
+	ld a,(wNumUnappraisedRingsBcd)
+	or a
+	jr z,+
+	ld hl,wUnappraisedRings
+	ld b,wUnappraisedRingsEnd-wUnappraisedRings
+	ld a,$ff
+	call fillMemory
+	xor a
+	ld (wNumUnappraisedRingsBcd),a
++
 	callab getObjectDataAddress
 .else; ROM_SEASONS
 	ld a,(wActiveGroup)

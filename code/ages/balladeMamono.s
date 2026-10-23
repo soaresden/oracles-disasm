@@ -455,9 +455,10 @@ main:
 	ld a,(wBalladeMamonoHurt)
 	or a
 	ld bc,TX_5b3e
-	jp nz,showText
+	jp nz,@ringReward
 	ld bc,TX_5b3f
 	call showText
+	call @ring
 	; Le quart de cœur, la première fois (drapeau $80) ; ensuite, 30 rubis
 	call getThisRoomFlags
 	ld a,(hl)
@@ -471,6 +472,14 @@ main:
 	ret nz
 	ld de,w1Link.yh
 	jp objectCopyPosition_rawAddress
+
+; BALLADE: l'Anneau Tornade, la première victoire en Normal ou en Dur (Denis)
+@ringReward:
+	call showText
+@ring:
+	ld a,CHARGE_RING
+	ld bc,TREASURE_OBJECT_RING_2b
+	jp balladeRingReward
 
 @tooHurt:
 	; À bout de forces : perdu (Link garde un quart de cœur)

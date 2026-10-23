@@ -426,6 +426,9 @@ giveTreasure_body:
 
 ; Add a ring to the unappraised ring list.
 @mode9:
+.ifdef ROM_AGES
+	jp balladeGiveRing ; BALLADE: pas de Vasu dans Gulls of Life
+.endif
 	; Setting bit 6 means the ring is unappraised
 	set 6,c
 	call realignUnappraisedRings
@@ -571,7 +574,7 @@ realignUnappraisedRings:
 getNumUnappraisedRings:
 	push de
 	ld hl,wUnappraisedRings
-	ld de,$4000
+	ld de,(wUnappraisedRingsEnd-wUnappraisedRings)<<8 ; BALLADE: $40 -> $3d
 --
 	ldi a,(hl)
 	cp $ff
@@ -591,6 +594,60 @@ getNumUnappraisedRings:
 	ld b,e
 	pop de
 	ret
+
+.ifdef ROM_AGES
+;;
+; BALLADE: un anneau trouvé (TREASURE_RING). Pas de Vasu dans Gulls of Life : il est identifié tout
+; de suite (wRingsObtained) et rangé dans la boîte (cinq places, la boîte donnée d'office) ; on le
+; porte depuis le menu (A sur lui). Seuls nos cinq anneaux existent : les autres (les trophées
+; d'Ages : 1000 monstres, 100 pancartes...) ne donnent rien.
+;
+; @param	c	L'anneau
+balladeGiveRing:
+	ld a,c
+	and $3f
+	ld c,a
+	ld hl,@ours
+	ld b,@oursEnd-@ours
+-
+	cp (hl)
+	jr z,+
+	inc hl
+	dec b
+	jr nz,-
+	ret
++
+	ld hl,wRingsObtained
+	call setFlag
+	; déjà dans la boîte ?
+	ld hl,wRingBoxContents
+	ld b,$05
+-
+	ld a,(hl)
+	cp c
+	ret z
+	inc hl
+	dec b
+	jr nz,-
+	; la première place libre
+	ld hl,wRingBoxContents
+	ld b,$05
+-
+	ld a,(hl)
+	cp $ff
+	jr z,+
+	inc hl
+	dec b
+	jr nz,-
+	ret
++
+	ld (hl),c
+	ret
+
+@ours:
+	.db POWER_RING_L1, ARMOR_RING_L1, CHARGE_RING, BALLADE_CAMELEON_RING, BALLADE_EASTER_RING
+@oursEnd:
+.endif
 
 ;;
 ; @param	hFF8B	Treasure index

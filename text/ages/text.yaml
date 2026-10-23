@@ -717,49 +717,51 @@ groups:
   - name: TX_0054
     index: 0x54
     text: |-
-      You got a \col(1)ring\col(0)!
-      Get it appraised
-      later!
-
+      You got a
+      \col(1)ring\col(0)! It is
+      in your box
+      (menu).
   - name: TX_0055
     index: 0x55
     text: |-
-      You got \col(1)Fairy
-      Powder\col(0)! It
-      removes curses.
-
+      The \col(1)Chameleon
+      Ring\col(0)!\stop
+      Wear it in the
+      menu: you pick
+      your tunic's
+      color!
   - name: TX_0056
     index: 0x56
     text: |-
-      You got the
-      \col(1)Tokay Eyeball\col(0),
-      a treasure of
-      the deep!
-
+      The \col(1)Easter
+      Egg Ring\col(0)!
   - name: TX_0057
     index: 0x57
     text: |-
-      You got a
-      \col(1)L-1 Ring Box\col(0)!
-      It can hold
-      one \col(1)ring\col(0)!
-
+      The \col(1)Power
+      Ring\col(0)!\stop
+      Your sword hits
+      harder, but you
+      take more harm.
+      A in the menu
+      to wear it.
   - name: TX_0058
     index: 0x58
     text: |-
-      You got a
-      \col(1)L-2 Ring Box\col(0)!
-      It can hold
-      three \col(1)rings\col(0)!
-
+      The \col(1)Armor
+      Ring\col(0)!\stop
+      You take less
+      harm, but your
+      sword hits
+      softer.
   - name: TX_0059
     index: 0x59
     text: |-
-      You got a
-      \col(1)L-3 Ring Box\col(0)!
-      It can hold
-      five \col(1)rings\col(0)!
-
+      The \col(1)Charge
+      Ring\col(0)!\stop
+      Your Spin Attack
+      charges much
+      faster.
   - name: TX_005a
     index: 0x5a
     text: |-
@@ -4093,10 +4095,9 @@ groups:
   - name: TX_0917
     index: 0x17
     text: |-
-      Magic Ring
-      Take it in for
-      appraisal.
-
+      Ring
+      Wear it from
+      the menu.
   - name: TX_0918
     index: 0x18
     text: |-
@@ -4130,24 +4131,21 @@ groups:
   - name: TX_091d
     index: 0x1d
     text: |-
-      L-1 Ring Box
-      Holds one
-      seed ring.
-
+      Ring Box
+      A on a ring to
+      wear it.
   - name: TX_091e
     index: 0x1e
     text: |-
-      L-2 Ring Box
-      Holds three
-      seed rings.
-
+      Ring Box
+      A on a ring to
+      wear it.
   - name: TX_091f
     index: 0x1f
     text: |-
-      L-3 Ring Box
-      Holds five
-      seed rings.
-
+      Ring Box
+      A on a ring to
+      wear it.
   - name: TX_0920
     index: 0x20
     text: |-
@@ -15352,8 +15350,7 @@ groups:
   - name: TX_3041
     index: 0x41
     text: |-
-      Power Ring L-1
-
+      Power Ring
   - name: TX_3042
     index: 0x42
     text: |-
@@ -15367,8 +15364,7 @@ groups:
   - name: TX_3044
     index: 0x44
     text: |-
-      Armor Ring L-1
-
+      Armor Ring
   - name: TX_3045
     index: 0x45
     text: |-
@@ -15458,7 +15454,6 @@ groups:
     index: 0x56
     text: |-
       Charge Ring
-
   - name: TX_3057
     index: 0x57
     text: |-
@@ -15602,8 +15597,7 @@ groups:
   - name: TX_3073
     index: 0x73
     text: |-
-      GBA Nature Ring
-
+      Easter Egg Ring
   - name: TX_3074
     index: 0x74
     text: |-
@@ -15627,8 +15621,7 @@ groups:
   - name: TX_3078
     index: 0x78
     text: |-
-      100th Ring
-
+      Chameleon Ring
   - name: TX_3079
     index: 0x79
     text: |-
@@ -15673,9 +15666,8 @@ groups:
   - name: TX_3081
     index: 0x81
     text: |-
-      Sword damage \up
-      Damage taken \up
-
+      Sword \up
+      Damage \up
   - name: TX_3082
     index: 0x82
     text: |-
@@ -15691,9 +15683,8 @@ groups:
   - name: TX_3084
     index: 0x84
     text: |-
-      Damage taken \down
-      Sword damage \down
-
+      Damage \down
+      Sword \down
   - name: TX_3085
     index: 0x85
     text: |-
@@ -15752,8 +15743,8 @@ groups:
     - 0x8e
     - 0xb3
     text: |-
-      Life Advanced!
-
+      Given by
+      Marine.
   - name: TX_308f
     index: 0x8f
     text: |-
@@ -15799,7 +15790,6 @@ groups:
     text: |-
       Spin Attack
       charges quickly
-
   - name: TX_3097
     index: 0x97
     text: |-
@@ -15995,9 +15985,8 @@ groups:
   - name: TX_30b8
     index: 0xb8
     text: |-
-      100 rings
-      appraised
-
+      Your tunic,
+      your color
   - name: TX_30b9
     index: 0xb9
     text: |-
@@ -25297,6 +25286,28 @@ groups:
 
 - group: 0x5b
   data:
+  # Marine on her island, everything done (the four game rings): her ring (Denis)
+  - name: TX_5b72
+    index: 0x72
+    text: |-
+      \col(1)Marine\col(0): You did
+      it all, saw it
+      all, won it all.\stop
+      Here. It's...
+      like an
+      engagement ring.\stop
+      Don't laugh!
+      Keep it on you,
+      always.
+  # The Chameleon Ring, in the menu: setting the tunic color
+  - name: TX_5b71
+    index: 0x71
+    text: |-
+      Up, down: red,
+      green, blue.
+      Left, right:
+      more or less.
+      A: done!
 
   # The ending, on top of the Sleepless Tower (code/ages/balladeFin.s): Zelda, dreaming
   - name: TX_5b00
@@ -26293,3 +26304,6 @@ groups:
       sea... Did you
       show it to
       anyone?
+
+
+# Les anneaux de Gulls of Life (code/treasureAndDrops.s balladeGiveRing)

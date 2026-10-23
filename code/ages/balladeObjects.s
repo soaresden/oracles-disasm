@@ -4061,6 +4061,10 @@ twins:
 	set 5,(hl) ; ROOMFLAG_ITEM
 	ldbc TREASURE_HEART_PIECE, $00
 	call giveTreasureAtLink
+	; et l'Anneau d'Armure (Denis)
+	ld a,ARMOR_RING_L1
+	ld bc,TREASURE_OBJECT_RING_2a
+	call balladeRingReward
 	xor a
 	ld (wDisabledObjects),a
 	ld e,Interaction.state

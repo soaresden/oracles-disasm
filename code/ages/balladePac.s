@@ -222,8 +222,19 @@ main:
 	; Le 1er labyrinthe : place au 2e
 	ld a,(wActiveRoom)
 	cp PAC_HARD_ROOM
+	jr z,++
 	ld bc,TX_5b40
-	jp nz,showText
+	call showText
+	; BALLADE: l'Anneau de Force, la première fois (Link le ramasse avant de partir : var31)
+	ld a,POWER_RING_L1
+	ld bc,TREASURE_OBJECT_RING_29
+	call balladeRingReward
+	ret nz
+	ld e,Interaction.var31
+	ld a,$01
+	ld (de),a
+	ret
+++
 	ld bc,TX_5a4e
 	call showText
 	; Le 2e, la première fois : un quart de cœur (drapeau $80 du 2e labyrinthe)

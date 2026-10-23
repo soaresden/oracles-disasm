@@ -416,7 +416,9 @@ wBalladeTreeArrival: ; $c59d
 ; images) Link ne fait rien
 wBalladeBeepIdle: ; $c59e
 	db
-wBalladeUnused: ; $c59f
+; BALLADE: le réglage de la couleur de la tunique dans le menu (l'Anneau Caméléon) : 0 rien, 1-3 la
+; couleur réglée (rouge, vert, bleu)
+wBalladeTunicEdit: ; $c59f
 	db
 
 ; BALLADE: le Labyrinthe des Lynels (code/ages/balladePac.s) : l'état (0 rien, 1 en jeu, 2 gagné,
@@ -501,10 +503,17 @@ wUnappraisedRings: ; $c5c0
 ; List of unappraised rings. each byte always seems to have bit 6 set, indicating that the
 ; ring is unappraised. It probably gets unset the moment you appraise it, but only for
 ; a moment because then it disappears from this list.
-	dsb $40
+; BALLADE: plus utilisée (les anneaux sont identifiés d'office) ; ses 3 derniers octets gardent la
+; couleur de la tunique
+	dsb $3d
 
-wUnappraisedRingsEnd: ; $c600
+wUnappraisedRingsEnd: ; $c5fd
 	.db
+
+; BALLADE: la couleur de la tunique de Link avec l'Anneau Caméléon : rouge, vert, bleu (0-31 ; $ff :
+; pas encore choisie, le vert d'origine). Réglée dans le menu (code/bank2.s balladeTunicEditor).
+wBalladeTunicRGB: ; $c5fd
+	dsb 3
 
 ; ==================================================================================================
 ; C6xx block: deals largely with inventory, also global flags

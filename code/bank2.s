@@ -3251,6 +3251,9 @@ reloadGraphicsOnExitMenu_body:
 	ld b,$a0
 	call copyMemory
 	call copyW4PaletteDataToW2TilesetBgPalettes_body
+.ifdef ROM_AGES
+	call balladeTunicOnExitMenu ; BALLADE
+.endif
 	ld hl,wGfxRegs4
 	ld de,wGfxRegs1
 	ld b,GfxRegsStruct.size*2
@@ -4478,6 +4481,7 @@ inventoryMenuState0:
 	ld (wInventorySubmenu),a
 	ld (wInventory.cbba),a
 	ld (wInventory.submenu2CursorPos2),a
+	ld (wBalladeTunicEdit),a ; BALLADE
 	dec a
 	ld (wInventory.activeText),a
 .endif
@@ -4562,6 +4566,13 @@ inventoryMenuState1:
 	ld a,(wPaletteThread_mode)
 	or a
 	ret nz
+
+.ifdef ROM_AGES
+	; BALLADE: le réglage de la couleur de la tunique (l'Anneau Caméléon)
+	ld a,(wBalladeTunicEdit)
+	or a
+	jp nz,balladeTunicEditor
+.endif
 
 	ld a,(wKeysJustPressed)
 	bit BTN_BIT_START,a
@@ -4767,6 +4778,11 @@ inventoryMenuState1:
 	ld a,$ff
 +
 	ld (wActiveRing),a
+.ifdef ROM_AGES
+	; BALLADE: l'Anneau Caméléon : on règle la couleur de la tunique
+	cp BALLADE_CAMELEON_RING
+	jp z,balladeTunicEditorStart
+.endif
 	ld a,SND_SELECTITEM
 	jp playSound
 
@@ -11341,5 +11357,262 @@ runFakeReset:
 	ld hl,wMenuLoadState
 	inc (hl)
 	jp fadeoutToWhite
+
+.ifdef ROM_AGES
+; ==================================================================================================
+; BALLADE: l'Anneau Caméléon (Denis : « comme la cape de Symphony of the Night »). En le mettant (A
+; sur lui, 2e page du menu), on règle la couleur de la tunique : haut / bas choisit le rouge, le vert
+; ou le bleu (une case de leur couleur devant), gauche / droite la valeur (0-31), un grand carré
+; montre la couleur en direct ; A ou B : c'est bon. Elle s'applique à la tunique en sortant du menu
+; (balladeTunicOnExitMenu, et bank0.balladeTunicPalette à chaque chargement de palettes).
+;
+; Dans la zone blanche de la page (lignes 3-10 du tilemap) : le carré (tuile pleine $02, palette 6),
+; les cases rouge / vert / bleu (palettes 0, 3, 5 : la zone blanche ne les utilise pas), la flèche
+; (tuile $04) et les deux chiffres ($10+). Les palettes du menu sont rechargées à la fin (PALH_0a).
+; ==================================================================================================
+
+.define TUNIC_EDIT_SQUARE	w4TileMap+$83	; ligne 4, colonne 3 (5 x 5)
+.define TUNIC_EDIT_ROWS		w4TileMap+$8b	; ligne 4, colonne 11 : la case, la flèche, les chiffres
+
+balladeTunicEditorStart:
+	; pas encore choisie : on part du vert d'origine
+	ld hl,wBalladeTunicRGB
+	ld a,(hl)
+	cp $20
+	jr c,+
+	ld (hl),$02
+	inc hl
+	ld (hl),$15
+	inc hl
+	ld (hl),$08
++
+	ld a,$01
+	ld (wBalladeTunicEdit),a
+	ld a,SND_SELECTITEM
+	call playSound
+
+	; la zone blanche, vidée ; le carré
+	ld hl,w4TileMap+$61
+	ld bc,$0812
+	ld de,$0007
+	call fillRectangleInTilemap
+	ld hl,TUNIC_EDIT_SQUARE
+	ld bc,$0505
+	ld de,$0206
+	call fillRectangleInTilemap
+	; les cases rouge, vert, bleu (une ligne sur deux)
+	ld hl,TUNIC_EDIT_ROWS
+	ld de,$0200
+	call @swatch
+	ld de,$0203
+	call @swatch
+	ld de,$0205
+	call @swatch
+
+	; leurs couleurs (la couleur 3 des palettes 0, 3, 5)
+	ld a,$02
+	ld ($ff00+R_SVBK),a
+	ld hl,w2TilesetBgPalettes+0*8+6
+	ld (hl),$1f
+	inc l
+	ld (hl),$00
+	ld l,<(w2TilesetBgPalettes+3*8+6)
+	ld (hl),$e0
+	inc l
+	ld (hl),$03
+	ld l,<(w2TilesetBgPalettes+5*8+6)
+	ld (hl),$00
+	inc l
+	ld (hl),$7c
+	ld a,$04
+	ld ($ff00+R_SVBK),a
+	ldh a,(<hDirtyBgPalettes)
+	or $29
+	ldh (<hDirtyBgPalettes),a
+
+	jr balladeTunicEditorRedraw
+
+; Une case de couleur (d tuile, e attribut) en hl, puis hl deux lignes plus bas
+@swatch:
+	ld (hl),d
+	set 2,h
+	ld (hl),e
+	res 2,h
+	ld a,$40
+	rst_addAToHl
+	ret
+
+;;
+; Les trois valeurs (la flèche devant celle qu'on règle) et la couleur du carré
+balladeTunicEditorRedraw:
+	ld hl,TUNIC_EDIT_ROWS+1
+	ld de,wBalladeTunicRGB
+	ld b,$01
+--
+	push bc
+	; la flèche, ou rien
+	ld a,(wBalladeTunicEdit)
+	cp b
+	ld a,$04
+	jr z,+
+	xor a
++
+	ldi (hl),a
+	; la valeur, en deux chiffres
+	push hl
+	ld a,(de)
+	call hexToDec
+	pop hl
+	ld b,a
+	ld a,c
+	add $10
+	ldi (hl),a
+	ld a,b
+	add $10
+	ld (hl),a
+	inc de
+	ld a,$40-2
+	rst_addAToHl
+	pop bc
+	inc b
+	ld a,b
+	cp $04
+	jr c,--
+
+	; le carré : la couleur 3 de la palette 6
+	call balladeTunicColor
+	ld a,$02
+	ld ($ff00+R_SVBK),a
+	ld hl,w2TilesetBgPalettes+6*8+6
+	ld (hl),c
+	inc l
+	ld (hl),b
+	ld a,$04
+	ld ($ff00+R_SVBK),a
+	ldh a,(<hDirtyBgPalettes)
+	or $40
+	ldh (<hDirtyBgPalettes),a
+	jp func_02_55a8
+
+;;
+; Chaque image, pendant le réglage
+balladeTunicEditor:
+	; ce qu'il faut faire, en bas (une fois)
+	ld a,(wInventory.activeText)
+	cp $fe
+	jr z,+
+	ld a,$fe
+	ld (wInventory.activeText),a
+	ld bc,TX_5b71
+	jp showTextOnInventoryMenu
++
+	ld a,(wKeysJustPressed)
+	and BTN_A|BTN_B|BTN_START
+	jr nz,@done
+	ld a,(wKeysJustPressed)
+	bit BTN_BIT_UP,a
+	jr nz,@up
+	bit BTN_BIT_DOWN,a
+	jr nz,@down
+
+	; gauche / droite : un appui, ou tenu (toutes les 4 images)
+	and BTN_LEFT|BTN_RIGHT
+	jr nz,+
+	ld a,(wKeysPressed)
+	and BTN_LEFT|BTN_RIGHT
+	ret z
+	ld a,(wFrameCounter)
+	and $03
+	ret nz
++
+	ld a,(wKeysPressed)
+	ld c,a
+	ld a,(wBalladeTunicEdit)
+	dec a
+	ld hl,wBalladeTunicRGB
+	rst_addAToHl
+	bit BTN_BIT_RIGHT,c
+	jr z,@minus
+	ld a,(hl)
+	cp $1f
+	ret nc
+	inc (hl)
+	jr @changed
+@minus:
+	ld a,(hl)
+	or a
+	ret z
+	dec (hl)
+@changed:
+	ld a,SND_MENU_MOVE
+	call playSound
+	jp balladeTunicEditorRedraw
+
+@up:
+	ld hl,wBalladeTunicEdit
+	dec (hl)
+	jr nz,@moved
+	ld (hl),$03
+	jr @moved
+@down:
+	ld hl,wBalladeTunicEdit
+	ld a,(hl)
+	inc a
+	cp $04
+	jr c,+
+	ld a,$01
++
+	ld (hl),a
+@moved:
+	ld a,SND_MENU_MOVE
+	call playSound
+	jp balladeTunicEditorRedraw
+
+@done:
+	xor a
+	ld (wBalladeTunicEdit),a
+	ld a,SND_SELECTITEM
+	call playSound
+	ld a,PALH_0a
+	call loadPaletteHeader
+	ld a,$ff
+	ld (wInventory.activeText),a
+	jp func_02_55b2
+
+;;
+; En sortant du menu (les palettes de la salle remises) : la tunique prend la couleur du Caméléon
+; s'il est porté, sinon elle redevient verte (si c'était celle du Caméléon)
+balladeTunicOnExitMenu:
+	ld a,($ff00+R_SVBK)
+	push af
+	ld a,$02
+	ld ($ff00+R_SVBK),a
+	ld a,(wActiveRing)
+	cp BALLADE_CAMELEON_RING
+	jr nz,+
+	call balladeTunicPalette
+	jr @end
++
+	call balladeTunicColor
+	ld hl,w2TilesetSprPalettes+4
+	ld a,(hl)
+	cp c
+	jr nz,@end
+	inc l
+	ld a,(hl)
+	cp b
+	jr nz,@end
+	ld (hl),>BALLADE_TUNIC_GREEN
+	dec l
+	ld (hl),<BALLADE_TUNIC_GREEN
+	ldh a,(<hDirtySprPalettes)
+	or $01
+	ldh (<hDirtySprPalettes),a
+@end:
+	pop af
+	ld ($ff00+R_SVBK),a
+	ret
+.endif
+
 
 .ENDS

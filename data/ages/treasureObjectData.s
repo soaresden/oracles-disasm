@@ -333,6 +333,12 @@ treasureObjectData2d:
 	m_TreasureSubid $38, $12, $54, $0e, TREASURE_OBJECT_RING_26
 	m_TreasureSubid $38, $08, $54, $0e, TREASURE_OBJECT_RING_27
 	m_TreasureSubid $38, $2c, $54, $0e, TREASURE_OBJECT_RING_28
+	; BALLADE: nos anneaux, en récompense (bank0.balladeRingReward) : sur Link, chacun son texte
+	m_TreasureSubid $0a, POWER_RING_L1, $57, $0e, TREASURE_OBJECT_RING_29
+	m_TreasureSubid $0a, ARMOR_RING_L1, $58, $0e, TREASURE_OBJECT_RING_2a
+	m_TreasureSubid $0a, CHARGE_RING, $59, $0e, TREASURE_OBJECT_RING_2b
+	m_TreasureSubid $0a, BALLADE_CAMELEON_RING, $55, $0e, TREASURE_OBJECT_RING_2c
+	m_TreasureSubid $0a, BALLADE_EASTER_RING, $56, $0e, TREASURE_OBJECT_RING_2d
 
 treasureObjectData2e:
 	m_BeginTreasureSubids TREASURE_FLIPPERS

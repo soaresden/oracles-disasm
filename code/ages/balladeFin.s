@@ -363,9 +363,45 @@ islandMarine:
 	xor a
 	ld (de),a
 	call stopSinging
+	; tout fini (les quatre anneaux des jeux) : sa bague, « comme une bague de fiançailles » (Denis)
+	call @allRings
+	jr nz,+
+	ld e,Interaction.state
+	ld a,$03
+	ld (de),a
+	ld bc,TX_5b72
+	call showText
+	ld a,BALLADE_EASTER_RING
+	ld bc,TREASURE_OBJECT_RING_2d
+	jp balladeRingReward
++
 	call interactionIncState
 	ld bc,TX_5b10
 	jp showText
+
+; z : les quatre anneaux des jeux sont là, pas encore la bague
+@allRings:
+	ld hl,@rings
+	ld b,$04
+-
+	ld a,(hl)
+	push hl
+	ld hl,wRingsObtained
+	call checkFlag
+	pop hl
+	jr z,@missing
+	inc hl
+	dec b
+	jr nz,-
+	ld a,BALLADE_EASTER_RING
+	ld hl,wRingsObtained
+	jp checkFlag
+@missing:
+	or $ff
+	ret
+
+@rings:
+	.db POWER_RING_L1, ARMOR_RING_L1, CHARGE_RING, BALLADE_CAMELEON_RING
 
 @menu:
 	ld a,(wTextIsActive)

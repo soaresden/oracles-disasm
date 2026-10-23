@@ -96,7 +96,7 @@ chestGroup4Data:
 	m_ChestData $57, $08, TREASURE_OBJECT_SMALL_KEY_03
 	m_ChestData $17, $16, TREASURE_OBJECT_SMALL_KEY_03
 	m_ChestData $53, $1d, TREASURE_OBJECT_COMPASS_02
-	m_ChestData $73, $1f, TREASURE_OBJECT_RING_04
+	m_ChestData $73, $1f, TREASURE_OBJECT_RUPEES_05 ; BALLADE: plus d'anneaux au hasard (c'était RING_04)
 	m_ChestData $16, $23, TREASURE_OBJECT_BOSS_KEY_03
 	m_ChestData $12, $25, TREASURE_OBJECT_MAP_02
 	m_ChestData $57, $30, TREASURE_OBJECT_SMALL_KEY_03
@@ -220,8 +220,8 @@ chestGroup5Data:
 	m_ChestData $83, $e1, TREASURE_OBJECT_RUPEES_05
 	m_ChestData $22, $e0, TREASURE_OBJECT_GASHA_SEED_01
 	m_ChestData $47, $b3, TREASURE_OBJECT_GASHA_SEED_01
-	m_ChestData $57, $cb, TREASURE_OBJECT_RING_1c
-	m_ChestData $43, $c7, TREASURE_OBJECT_RING_1a
+	m_ChestData $57, $cb, TREASURE_OBJECT_RUPEES_05 ; BALLADE: plus d'anneaux au hasard (RING_1c, RING_1a)
+	m_ChestData $43, $c7, TREASURE_OBJECT_RUPEES_05
 	m_ChestData $12, $ca, TREASURE_OBJECT_GASHA_SEED_01
 	m_ChestData $22, $b8, TREASURE_OBJECT_RING_19
 	m_ChestData $14, $ac, TREASURE_OBJECT_RUPEES_08

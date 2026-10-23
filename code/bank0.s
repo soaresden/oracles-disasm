@@ -1104,6 +1104,7 @@ loadPaletteHeader:
 	pop hl
 	jr c,---
 
+	call balladeTunicPalette ; BALLADE: l'Anneau Caméléon (la WRAM 2 active)
 	pop bc
 	ld a,b
 	setrombank
@@ -14081,5 +14082,103 @@ balladeHudFixItemsY:
 
 
 .include "code/debug.s"
+
+;;
+; BALLADE: un de nos anneaux en récompense, s'il n'est pas déjà eu : il apparaît sur Link (son texte
+; quand il le ramasse)
+;
+; @param	a	L'anneau
+; @param	bc	Son objet (TREASURE_OBJECT_RING_29-2d)
+; @param[out]	zflag	Set si l'anneau est donné
+balladeRingReward:
+	push bc
+	ld hl,wRingsObtained
+	call checkFlag
+	pop bc
+	jr z,+
+	or $ff
+	ret
++
+	call getFreeInteractionSlot
+	ret nz
+	ld (hl),INTERAC_TREASURE
+	inc l
+	ld (hl),b
+	inc l
+	ld (hl),c
+	ld l,Interaction.yh
+	ld a,(w1Link.yh)
+	ld (hl),a
+	ld l,Interaction.xh
+	ld a,(w1Link.xh)
+	ld (hl),a
+	xor a
+	ret
+
+;;
+; BALLADE: l'Anneau Caméléon porté : la tunique de Link (couleur 2 de la palette 0 des sprites) prend
+; la couleur réglée dans le menu (wBalladeTunicRGB). À appeler avec la banque 2 de la WRAM active
+; (fin de loadPaletteHeader ; en sortant du menu, code/bank2.s).
+balladeTunicPalette:
+	push af
+	push bc
+	push hl
+	ld a,(wActiveRing)
+	cp BALLADE_CAMELEON_RING
+	jr nz,+
+	call balladeTunicColor
+	ld hl,w2TilesetSprPalettes+4
+	ld (hl),c
+	inc l
+	ld (hl),b
+	ldh a,(<hDirtySprPalettes)
+	or $01
+	ldh (<hDirtySprPalettes),a
++
+	pop hl
+	pop bc
+	pop af
+	ret
+
+;;
+; BALLADE: la couleur de la tunique en RGB16 (wBalladeTunicRGB ; le vert d'origine si elle n'est pas
+; encore choisie)
+;
+; @param[out]	bc	La couleur
+balladeTunicColor:
+	push de
+	push hl
+	ld hl,wBalladeTunicRGB
+	ld a,(hl)
+	cp $20
+	jr c,+
+	ld bc,BALLADE_TUNIC_GREEN
+	jr ++
++
+	ld c,a
+	inc hl
+	ld a,(hl)
+	ld e,a
+	and $07
+	swap a
+	add a
+	or c
+	ld c,a
+	ld a,e
+	srl a
+	srl a
+	srl a
+	ld b,a
+	inc hl
+	ld a,(hl)
+	add a
+	add a
+	or b
+	ld b,a
+++
+	pop hl
+	pop de
+	ret
+
 
 .ENDS

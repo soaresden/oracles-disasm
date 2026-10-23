@@ -68,6 +68,14 @@
 .ende
 
 
+; BALLADE: les anneaux de Gulls of Life (pas de Vasu : identifiés d'office, la boîte de 5 dès le
+; départ ; code/treasureAndDrops.s balladeGiveRing). Deux anneaux d'Ages sans effet deviennent les
+; nôtres : le Caméléon (la couleur de la tunique, réglée dans le menu : code/bank2.s) et l'Easter
+; Egg (donné par Marine à 100 % : le miroir de sa maison).
+.define BALLADE_CAMELEON_RING	HUNDREDTH_RING
+.define BALLADE_EASTER_RING	GBA_NATURE_RING
+.define BALLADE_TUNIC_GREEN	$02 | ($15<<5) | ($08<<10) ; le vert de la tunique (standardSpritePaletteData)
+
 ; Rings are categorized into tiers when random rings are given.
 .enum 0
 	RING_TIER_0 db ; Class 4 (TourianTourist's naming convention)

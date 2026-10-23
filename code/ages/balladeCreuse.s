@@ -267,6 +267,10 @@ main:
 	call playSound
 	ld bc,TX_5a48
 	call showText
+	; BALLADE: l'Anneau Caméléon, la première victoire (Denis)
+	ld a,BALLADE_CAMELEON_RING
+	ld bc,TREASURE_OBJECT_RING_2c
+	call balladeRingReward
 	; Le quart de cœur : en Difficile (drapeau $80), la première fois
 	ld a,(wBalladeCreuseLevel)
 	or a

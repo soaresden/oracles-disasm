@@ -697,49 +697,53 @@ groups:
   - name: TX_0054
     index: 0x54
     text: |-
-      You got a \col(1)ring\col(0)!
-      Get it appraised
-      later!
-
+      Tu as un
+      \col(1)anneau\col(0)!
+      Il est dans ta
+      boîte (menu).
   - name: TX_0055
     index: 0x55
     text: |-
-      You got \col(1)Fairy
-      Powder\col(0)! It
-      removes curses.
-
+      L'\col(1)Anneau
+      Caméléon\col(0)!\stop
+      Mets-le dans le
+      menu: tu choisis
+      la couleur de ta
+      tunique!
   - name: TX_0056
     index: 0x56
     text: |-
-      You got the
-      \col(1)Tokay Eyeball\col(0),
-      a treasure of
-      the deep!
-
+      La \col(1)bague
+      Easter Egg\col(0)!
   - name: TX_0057
     index: 0x57
     text: |-
-      You got a
-      \col(1)L-1 Ring Box\col(0)!
-      It can hold
-      one \col(1)ring\col(0)!
-
+      L'\col(1)Anneau de
+      Force\col(0)!\stop
+      Ton épée frappe
+      plus fort, mais
+      tu prends plus
+      cher. A dans le
+      menu pour le
+      porter.
   - name: TX_0058
     index: 0x58
     text: |-
-      You got a
-      \col(1)L-2 Ring Box\col(0)!
-      It can hold
-      three \col(1)rings\col(0)!
-
+      L'\col(1)Anneau
+      d'Armure\col(0)!\stop
+      Tu prends moins
+      cher, mais ton
+      épée frappe
+      moins fort.
   - name: TX_0059
     index: 0x59
     text: |-
-      You got a
-      \col(1)L-3 Ring Box\col(0)!
-      It can hold
-      five \col(1)rings\col(0)!
-
+      L'\col(1)Anneau
+      Tornade\col(0)!\stop
+      Ton attaque
+      tourbillon se
+      charge bien plus
+      vite.
   - name: TX_005a
     index: 0x5a
     text: |-
@@ -4071,10 +4075,9 @@ groups:
   - name: TX_0917
     index: 0x17
     text: |-
-      Magic Ring
-      Take it in for
-      appraisal.
-
+      Anneau
+      On le porte
+      depuis le menu.
   - name: TX_0918
     index: 0x18
     text: |-
@@ -4108,24 +4111,21 @@ groups:
   - name: TX_091d
     index: 0x1d
     text: |-
-      L-1 Ring Box
-      Holds one
-      seed ring.
-
+      Boîte à anneaux
+      A sur un anneau
+      pour le porter.
   - name: TX_091e
     index: 0x1e
     text: |-
-      L-2 Ring Box
-      Holds three
-      seed rings.
-
+      Boîte à anneaux
+      A sur un anneau
+      pour le porter.
   - name: TX_091f
     index: 0x1f
     text: |-
-      L-3 Ring Box
-      Holds five
-      seed rings.
-
+      Boîte à anneaux
+      A sur un anneau
+      pour le porter.
   - name: TX_0920
     index: 0x20
     text: |-
@@ -15334,8 +15334,7 @@ groups:
   - name: TX_3041
     index: 0x41
     text: |-
-      Power Ring L-1
-
+      Anneau de Force
   - name: TX_3042
     index: 0x42
     text: |-
@@ -15349,8 +15348,7 @@ groups:
   - name: TX_3044
     index: 0x44
     text: |-
-      Armor Ring L-1
-
+      Anneau d'Armure
   - name: TX_3045
     index: 0x45
     text: |-
@@ -15439,8 +15437,7 @@ groups:
   - name: TX_3056
     index: 0x56
     text: |-
-      Charge Ring
-
+      Anneau Tornade
   - name: TX_3057
     index: 0x57
     text: |-
@@ -15584,8 +15581,7 @@ groups:
   - name: TX_3073
     index: 0x73
     text: |-
-      GBA Nature Ring
-
+      Bague Easter Egg
   - name: TX_3074
     index: 0x74
     text: |-
@@ -15609,8 +15605,7 @@ groups:
   - name: TX_3078
     index: 0x78
     text: |-
-      100th Ring
-
+      Anneau Caméléon
   - name: TX_3079
     index: 0x79
     text: |-
@@ -15655,9 +15650,8 @@ groups:
   - name: TX_3081
     index: 0x81
     text: |-
-      Sword damage \up
-      Damage taken \up
-
+      Épée \up
+      Blessures \up
   - name: TX_3082
     index: 0x82
     text: |-
@@ -15673,9 +15667,8 @@ groups:
   - name: TX_3084
     index: 0x84
     text: |-
-      Damage taken \down
-      Sword damage \down
-
+      Blessures \down
+      Épée \down
   - name: TX_3085
     index: 0x85
     text: |-
@@ -15734,8 +15727,8 @@ groups:
     - 0x8e
     - 0xb3
     text: |-
-      Life Advanced!
-
+      Donnée par
+      Marine.
   - name: TX_308f
     index: 0x8f
     text: |-
@@ -15779,9 +15772,8 @@ groups:
   - name: TX_3096
     index: 0x96
     text: |-
-      Spin Attack
-      charges quickly
-
+      Le tourbillon
+      se charge vite
   - name: TX_3097
     index: 0x97
     text: |-
@@ -15977,9 +15969,8 @@ groups:
   - name: TX_30b8
     index: 0xb8
     text: |-
-      100 rings
-      appraised
-
+      Ta tunique,
+      ta couleur
   - name: TX_30b9
     index: 0xb9
     text: |-
@@ -25389,6 +25380,28 @@ groups:
 
 - group: 0x5b
   data:
+  # Marine sur son île, tout fini (les quatre anneaux des jeux) : sa bague (Denis)
+  - name: TX_5b72
+    index: 0x72
+    text: |-
+      \col(1)Marine\col(0): Tu as
+      tout fait, tout
+      vu, tout gagné.\stop
+      Tiens. C'est...
+      comme une bague
+      de fiançailles.\stop
+      Ne ris pas!
+      Garde-la sur
+      toi, toujours.
+  # L'Anneau Caméléon, dans le menu : le réglage de la couleur de la tunique
+  - name: TX_5b71
+    index: 0x71
+    text: |-
+      Haut, bas:
+      rouge, vert,
+      bleu. Gauche,
+      droite: plus ou
+      moins. A: fini!
 
   # La fin, en haut de la Tour Sans-Nuit (code/ages/balladeFin.s) : Zelda, en rêve
   - name: TX_5b00
@@ -26417,3 +26430,6 @@ groups:
       mer... Tu l'as
       montré à
       quelqu'un?
+
+
+# Les anneaux de Gulls of Life (code/treasureAndDrops.s balladeGiveRing)

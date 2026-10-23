@@ -258,8 +258,14 @@ partCode15:
 @itemDropTreasureTable:
 	.db TREASURE_HEART_PIECE,   $ff            $01 $01
 	.db TREASURE_GASHA_SEED,    $ff            $01 $01
+.ifdef ROM_AGES
+	; BALLADE: plus d'anneaux au hasard (Gulls of Life n'en a que cinq, des récompenses) : des rubis
+	.db TREASURE_RUPEES,        $ff            RUPEEVAL_030 RUPEEVAL_030
+	.db TREASURE_RUPEES,        $ff            RUPEEVAL_050 RUPEEVAL_050
+.else
 	.db TREASURE_RING,          $ff            $01 $01
 	.db TREASURE_RING,          $ff            $02 $02
+.endif
 	.db TREASURE_POTION,        $ff            $01 $01
 	.db TREASURE_EMBER_SEEDS,   $ff            $05 $0a
 	.db TREASURE_SCENT_SEEDS,   $ff            $05 $0a
