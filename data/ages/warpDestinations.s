@@ -300,7 +300,7 @@ group3WarpDestTable:
 	m_WarpDest $4e $52 $0 $4
 	m_WarpDest $4e $27 $0 $4
 	m_WarpDest $4f $ff $9 $3
-	m_WarpDest $5e $ff $9 $3
+	m_WarpDest $5e $65 $0 $1 ; BALLADE: la boutique de Port-Veille : Link arrive face à la sortie (ligne 6, colonne 5 : x $58), pas au milieu (entrer par le bas le mettait en x $50, à cheval)
 	m_WarpDest $5f $ff $9 $3
 	m_WarpDest $6e $ff $9 $3
 	m_WarpDest $6f $ff $9 $3
@@ -351,7 +351,7 @@ group3WarpDestTable:
 	m_WarpDest $fe $ff $9 $3
 	m_WarpDest $ff $ff $9 $3
 	; BALLADE: Hameau-Grelot
-	m_WarpDest $20 $ff $9 $3 ; $43 : la boutique de Pépin, par le bas
+	m_WarpDest $20 $65 $0 $1 ; $43 : la boutique de Pépin, face à la sortie (ligne 6, colonne 5, comme Port-Veille)
 	m_WarpDest $21 $ff $9 $3 ; $44 : la maison de Lila, par le bas
 	m_WarpDest $22 $ff $9 $3 ; $45 : l'école des Bonnets, par le bas
 	; BALLADE: la Lagune des Serments

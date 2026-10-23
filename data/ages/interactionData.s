@@ -360,7 +360,7 @@ interactiond7SubidData:
 	m_InteractionSubidData $7f $0c $02
 	m_InteractionSubidData $7f $0e $13
 	m_InteractionSubidData $7f $12 $53
-	m_InteractionSubidData $7e $16 $21 ; BALLADE: la Lanterne des Songes (au lieu de la harpe), flamme bleue
+	m_InteractionSubidData $7e $16 $13 ; BALLADE: la Lanterne des Songes (au lieu de la harpe), flamme bleue : ses deux moitiés (animation 3), palette 1
 	m_InteractionSubidData $7e $06 $33 ; BALLADE: le Carnet des Rêves (palette 3)
 	m_InteractionSubidData $7e $0e $33 ; BALLADE: le Sablier (palette 3)
 	m_InteractionSubidData $7e $16 $13

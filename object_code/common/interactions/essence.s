@@ -325,7 +325,13 @@ interaction7f_subid00:
 	ld a,$83
 	ld (wWarpTransition2),a
 
+.ifdef ROM_AGES
+	; BALLADE: pas de scène de l'arbre Mojo après : la musique de l'île doit reprendre à
+	; l'arrivée (0 voulait dire « pas de musique » jusqu'à ce qu'une scène la relance)
+	ld a,$ff
+.else
 	xor a
+.endif
 	ld (wActiveMusic),a
 
 	jp clearStaticObjects

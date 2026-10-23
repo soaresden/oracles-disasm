@@ -4237,6 +4237,7 @@ group4Map12ObjectData:
 	obj_RandomEnemy $40 ENEMY_GHINI $00
 	obj_End
 group4Map13ObjectData:
+	obj_Interaction INTERAC_MARINE $08 $08 $08 ; Marine félicite Link quand le boss est battu
 	obj_Interaction $1e $08 $07 $00
 	obj_Interaction $1e $0a $a7 $00
 	obj_Interaction $20 $03 $58 $78
@@ -4299,6 +4300,7 @@ group4Map24ObjectData:
 	obj_Interaction $12 $00 $88 $78
 	obj_End
 group4Map2bObjectData:
+	obj_Interaction INTERAC_MARINE $08 $08 $08 ; Marine félicite Link quand le boss est battu
 	obj_Interaction $20 $03 $58 $78
 	obj_Interaction $a4 $00 $00 $00
 	obj_Interaction $a4 $01 $00 $00
@@ -4421,6 +4423,7 @@ group4Map52ObjectData:
 group4Map53ObjectData:
 	obj_End
 group4Map54ObjectData:
+	obj_Interaction INTERAC_MARINE $08 $08 $08 ; Marine félicite Link quand le boss est battu
 	obj_Interaction $1e $0b $50 $00
 	obj_Interaction $20 $01 $58 $78
 	obj_Interaction INTERAC_BALLADE_OBJECT $01 $08 $08
@@ -4476,6 +4479,7 @@ group4Map62ObjectData:
 group4Map63ObjectData:
 	obj_End
 group4Map64ObjectData:
+	obj_Interaction INTERAC_MARINE $08 $08 $08 ; Marine félicite Link quand le boss est battu
 	obj_Interaction $1e $0a $a7 $00
 	obj_Interaction $20 $01 $58 $78
 	obj_Interaction INTERAC_BALLADE_OBJECT $01 $08 $08
@@ -4527,6 +4531,7 @@ group4MapbdObjectData:
 group4MapbeObjectData:
 	obj_End
 group4MapbfObjectData:
+	obj_Interaction INTERAC_MARINE $08 $08 $08 ; Marine félicite Link quand le boss est battu
 	obj_Interaction $33 $ff $58 $78
 	obj_Interaction $20 $01 $58 $78
 	obj_Interaction $1e $0b $50 $00
@@ -4570,6 +4575,7 @@ group4Mapd6ObjectData:
 	obj_SpecificEnemyA     ENEMY_KEESE $00 $48 $98
 	obj_End
 group4Mapd7ObjectData:
+	obj_Interaction INTERAC_MARINE $08 $08 $08 ; Marine félicite Link quand le boss est battu
 	obj_Interaction INTERAC_BALLADE_CREUSE $0a $08 $08
 	obj_SpecificEnemyA $00 ENEMY_GHINI $00 $38 $48
 	obj_SpecificEnemyA     ENEMY_GHINI $00 $78 $a8
@@ -4716,6 +4722,7 @@ group5Mapc3ObjectData:
 	obj_RandomEnemy $30 ENEMY_KEESE $00
 	obj_End
 group5Mapc4ObjectData:
+	obj_Interaction INTERAC_MARINE $08 $08 $08 ; Marine félicite Link quand le boss est battu
 	obj_Interaction $1e $0b $50 $00
 	obj_SpecificEnemyA $00 $64 $00 $38 $b8
 	obj_SpecificEnemyA $00 $64 $00 $78 $b8
@@ -4729,6 +4736,7 @@ group5Mapc6ObjectData:
 	obj_Interaction $1e $07 $50 $00
 	obj_End
 group5Mapc7ObjectData:
+	obj_Interaction INTERAC_MARINE $08 $08 $08 ; Marine félicite Link quand le boss est battu
 	obj_BeforeEvent balladeTourGanonBeforeEventObjectData
 	obj_Interaction INTERAC_BALLADE_OBJECT $36 $08 $08
 	obj_Interaction INTERAC_BALLADE_OBJECT $32 $58 $78
@@ -4747,6 +4755,7 @@ group5Mapc9ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $2f $58 $d8
 	obj_End
 group5MapcaObjectData:
+	obj_Interaction INTERAC_MARINE $08 $08 $08 ; Marine félicite Link quand le boss est battu
 	obj_Interaction $1e $0b $50 $00
 	obj_BeforeEvent group4Map6bBeforeEventObjectData
 	obj_Interaction INTERAC_BALLADE_OBJECT $32 $88 $78

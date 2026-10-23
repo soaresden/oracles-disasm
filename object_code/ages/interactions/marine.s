@@ -17,6 +17,11 @@ interactionCodee7:
 	jr nz,+
 	jpab balladeMarine.catcher
 +
+	; Sous-type $08 : elle félicite Link quand le boss est battu (code/ages/balladeMarine.s)
+	cp $08
+	jr nz,+
+	jpab balladeMarine.praise
++
 	call checkInteractionState
 	jr nz,@state1
 

@@ -296,7 +296,7 @@ extraEnemyData:
 	.db $06 $06 $f8 $09 ; 0x19
 	.db $06 $06 $fc $0a ; 0x1a
 	.db $06 $06 $f8 $0c ; 0x1b
-	.db $0a $0a $fe $0c ; 0x1c
+	.db $0a $0a $fe $18 ; 0x1c ; BALLADE: le Ghini géant (mini-boss du Phare) : 24 points de vie au lieu de 12 (Denis : trop simple)
 	.db $0a $0a $fc $14 ; 0x1d
 	.db $06 $06 $fc $14 ; 0x1e
 	.db $08 $0a $fc $0c ; 0x1f
@@ -304,7 +304,7 @@ extraEnemyData:
 	.db $06 $06 $fe $12 ; 0x21
 	.db $0c $0c $fc $1e ; 0x22
 	.db $08 $08 $fa $12 ; 0x23
-	.db $06 $0c $fc $0e ; 0x24 ; BALLADE: Jack (Pumpkin Head) : 14 points de vie au lieu de 8
+	.db $06 $0c $fc $18 ; 0x24 ; BALLADE: Jack (Pumpkin Head) : 24 points de vie (8 dans Ages ; Denis : trop simple)
 	.db $12 $0f $fc $04 ; 0x25
 	.db $09 $09 $fa $0c ; 0x26
 	.db $06 $06 $f8 $14 ; 0x27

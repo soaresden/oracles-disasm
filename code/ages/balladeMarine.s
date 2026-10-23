@@ -577,3 +577,95 @@ catcher:
 	call interactionDecCounter1
 	ret nz
 	jp interactionDelete
+
+
+;;
+; INTERAC_MARINE $08 : dans la salle d'un boss, une fois le boss battu (le drapeau $80 de la salle ;
+; au Terrier, le Bracelet des Âmes), et les textes finis depuis un instant, Marine félicite Link :
+; une réplique par boss (Denis : « pour encourager et donner de la valeur au joueur »). Rien si le
+; boss était déjà battu en entrant.
+praise:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw @init
+	.dw @fight
+	.dw @wait
+
+@init:
+	call @isBeaten
+	jp nz,interactionDelete
+	call objectSetInvisible
+	jp interactionIncState
+
+@fight:
+	call @isBeaten
+	ret z
+	call interactionIncState
+	ld l,Interaction.counter1
+	ld (hl),45
+	ret
+
+; nz : le boss de cette salle est battu
+@isBeaten:
+	ld a,(wActiveGroup)
+	cp $04
+	jr nz,+
+	ld a,(wActiveRoom)
+	cp $d7
+	jr nz,+
+	ld a,(wBalladeSoulState)
+	and $02
+	ret
++
+	call getThisRoomFlags
+	and $80
+	ret
+
+; Les textes finis (le réceptacle, le boss...) depuis 45 images : Marine parle
+@wait:
+	ld a,(wTextIsActive)
+	or a
+	jr z,+
+	ld e,Interaction.counter1
+	ld a,45
+	ld (de),a
+	ret
++
+	call interactionDecCounter1
+	ret nz
+	; sa réplique : selon la salle
+	ld a,(wActiveGroup)
+	ld b,a
+	ld a,(wActiveRoom)
+	ld c,a
+	ld hl,@texts
+-
+	ldi a,(hl)
+	cp $ff
+	jp z,interactionDelete
+	cp b
+	ldi a,(hl)
+	jr nz,+
+	cp c
+	jr nz,+
+	ld c,(hl)
+	ld b,>TX_5b35
+	call showText
+	jp interactionDelete
++
+	inc hl
+	jr -
+
+; groupe, salle, texte (TX_5bxx)
+@texts:
+	.db $04, $13, <TX_5b35	; Jack (le Phare)
+	.db $04, $2b, <TX_5b36	; Pantin-Sans-Fil (le Coffre à Jouets)
+	.db $04, $bf, <TX_5b37	; Copiator (la Forge Endormie)
+	.db $04, $54, <TX_5b38	; l'Ombre de Marine (la Spirale Céleste)
+	.db $04, $64, <TX_5b39	; Givrolin (le Palais Givré)
+	.db $05, $c4, <TX_5b3a	; Dark Link (la Tour, 2F)
+	.db $05, $c7, <TX_5b3b	; Ganon (la Tour, 3F)
+	.db $05, $ca, <TX_5b3c	; le Cauchemar de Cocolint (la Tour, 4F)
+	.db $04, $d7, <TX_5b3d	; la machine possédée (le Terrier des Serpents)
+	.db $ff
