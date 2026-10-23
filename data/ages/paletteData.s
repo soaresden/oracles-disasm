@@ -117,19 +117,14 @@ paletteData4098:
 	m_RGB16 $00 $00 $00
 
 	m_RGB16 $11 $14 $1c
-	m_RGB16 $11 $13 $1a
-	m_RGB16 $0e $11 $17
-	m_RGB16 $0b $0d $12
+	m_RGB16 $11 $14 $1b
+	m_RGB16 $0f $11 $17
+	m_RGB16 $0b $0d $13
 
 	m_RGB16 $19 $1d $1f
 	m_RGB16 $14 $17 $1f
 	m_RGB16 $00 $03 $0f
 	m_RGB16 $00 $00 $00
-
-	m_RGB16 $13 $16 $1e
-	m_RGB16 $11 $14 $1b
-	m_RGB16 $0f $12 $19
-	m_RGB16 $0c $0e $14
 
 	m_RGB16 $16 $19 $1f
 	m_RGB16 $13 $17 $1f
@@ -137,9 +132,14 @@ paletteData4098:
 	m_RGB16 $11 $14 $1c
 
 	m_RGB16 $14 $17 $1f
-	m_RGB16 $12 $14 $1c
-	m_RGB16 $10 $12 $19
+	m_RGB16 $12 $15 $1c
+	m_RGB16 $0f $12 $19
 	m_RGB16 $0e $11 $17
+
+	m_RGB16 $13 $16 $1e
+	m_RGB16 $11 $14 $1c
+	m_RGB16 $10 $12 $19
+	m_RGB16 $0c $0e $14
 
 paletteData40d8:
 	; BALLADE: la carte de nos îles (tools/make_minimap.py)
@@ -159,29 +159,29 @@ paletteData40d8:
 	m_RGB16 $00 $00 $00
 
 	m_RGB16 $1c $1b $02
-	m_RGB16 $11 $19 $0b
+	m_RGB16 $10 $19 $0f
 	m_RGB16 $16 $14 $02
-	m_RGB16 $0f $0d $01
+	m_RGB16 $10 $0d $01
 
 	m_RGB16 $1f $1f $1f
 	m_RGB16 $11 $18 $1e
 	m_RGB16 $1f $04 $00
 	m_RGB16 $00 $00 $00
 
-	m_RGB16 $15 $11 $18
-	m_RGB16 $16 $0e $13
-	m_RGB16 $18 $0d $0b
-	m_RGB16 $12 $08 $06
-
 	m_RGB16 $15 $19 $1d
 	m_RGB16 $0c $19 $1d
 	m_RGB16 $14 $14 $18
 	m_RGB16 $12 $0f $19
 
-	m_RGB16 $12 $19 $1a
-	m_RGB16 $15 $10 $15
-	m_RGB16 $15 $0e $0d
+	m_RGB16 $12 $17 $1c
+	m_RGB16 $15 $0f $16
+	m_RGB16 $16 $0e $0c
 	m_RGB16 $16 $0c $0a
+
+	m_RGB16 $14 $12 $1b
+	m_RGB16 $16 $0f $14
+	m_RGB16 $19 $0d $0b
+	m_RGB16 $12 $09 $06
 
 paletteData4118:
 	m_RGB16 $15 $11 $02

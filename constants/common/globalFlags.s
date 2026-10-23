@@ -123,6 +123,7 @@
 	GLOBALFLAG_BALLADE_SONGE2		db ; $60: le 2e Songe des Héros vu (les masques)
 	GLOBALFLAG_BALLADE_CONTRE		db ; $61: Bulle a appris le contre parfait à Link (code/ages/balladeParry.s)
 	GLOBALFLAG_BALLADE_CONTRE_PRET		db ; $62: Link est descendu à la 3e profondeur de la Fosse (Bulle le lui apprendra)
+	GLOBALFLAG_BALLADE_CACHE		db ; $63: Tic et Tac jouent à cache-cache (ils se cachent dans le Songe de l'île 2)
 
 .else; ROM_SEASONS
 

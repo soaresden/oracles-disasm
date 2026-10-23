@@ -958,6 +958,11 @@ interactionedSubidData:
 	m_InteractionSubidData $00 $00 $00 ; $39 le quiz de Marine, à l'auberge (invisible)
 	m_InteractionSubidData $e3 $14 $02 ; $3a l'Arbre-Passage (image 5, palette 0 : le vert)
 	m_InteractionSubidData $e3 $18 $22 ; $3b Lila endormie (image 6, palette 2 : le rouge)
+	m_InteractionSubidData $3e $00 $12 ; $3c Tic, un des jumeaux (le terrain de jeu, 1:20)
+	m_InteractionSubidData $3e $00 $12 ; $3d Tac, l'autre jumeau (les mêmes)
+	m_InteractionSubidData $e8 $00 $12 ; $3e un jumeau caché, dans le Songe (spr_ballade_grelot, image 0)
+	m_InteractionSubidData $e8 $04 $22 ; $3f le vieux cerf-volant (image 1, palette 2 : le rouge)
+	m_InteractionSubidData $00 $00 $00 ; $40 Marine dans le Songe de l'île 2 : le jeu de l'oie, le pont-levis (invisible)
 	m_InteractionSubidDataEnd
 
 interactiond4SubidData:

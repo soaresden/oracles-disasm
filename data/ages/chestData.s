@@ -28,6 +28,8 @@ chestGroup0Data:
 
 chestGroup1Data:
 	m_ChestData $43, $6d, TREASURE_OBJECT_RING_27
+	m_ChestData $11, $c1, TREASURE_OBJECT_RUPEES_03 ; BALLADE: le lac de glace (1:c1) : des rubis (20) (il était dans la liste du groupe 2 : le coffre ne s'ouvrait pas)
+	m_ChestData $36, $13, TREASURE_OBJECT_RUPEES_05 ; BALLADE: le château de sable de Hameau-Grelot (1:13) : on y passe par le Songe (le pont-levis)
 	.db $ff
 
 chestGroup2Data:
@@ -40,7 +42,6 @@ chestGroup2Data:
 	m_ChestData $34, $f4, TREASURE_OBJECT_RING_19
 	m_ChestData $18, $4f, TREASURE_OBJECT_RING_22
 	m_ChestData $14, $c0, TREASURE_OBJECT_GASHA_SEED_01
-	m_ChestData $11, $c1, TREASURE_OBJECT_RUPEES_03 ; BALLADE: le lac de glace (1:c1) : des rubis (20)
 	.db $ff
 
 chestGroup3Data:

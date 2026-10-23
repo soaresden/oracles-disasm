@@ -3407,9 +3407,12 @@ group0Map00ObjectData:
 	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
 	obj_End
 group0Map01ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $3f $34 $30 ; le cerf-volant
+	obj_Interaction INTERAC_BALLADE_OBJECT $3e $54 $28 ; dans le buisson, sous son arbre (Link à sa droite)
 	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
 	obj_End
 group0Map02ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $3e $34 $48 ; derrière le plateau du manège
 	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
 	obj_End
 group0Map03ObjectData:
@@ -3443,15 +3446,19 @@ group0Map0cObjectData:
 	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
 	obj_End
 group0Map10ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $3e $54 $18 ; dans le buisson du bois (Link à sa gauche)
 	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
 	obj_End
 group0Map11ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $40 $08 $08 ; Marine : le jeu de l'oie
 	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
 	obj_End
 group0Map12ObjectData:
 	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
 	obj_End
 group0Map13ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $40 $08 $08 ; Marine : le pont-levis
+	obj_Interaction INTERAC_BALLADE_OBJECT $3e $34 $68 ; derrière le grand château, sur l'îlot
 	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
 	obj_End
 group0Map14ObjectData:
@@ -3493,6 +3500,7 @@ group0Map22ObjectData:
 	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
 	obj_End
 group0Map23ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $3e $14 $38 ; dans les fleurs du jardin des toupies
 	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
 	obj_End
 group0Map24ObjectData:
@@ -3825,6 +3833,7 @@ group0MapdaObjectData:
 group1Map00ObjectData:
 	obj_End
 group1Map01ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $3f $34 $30
 	obj_End
 group1Map02ObjectData:
 	obj_End
@@ -3882,6 +3891,8 @@ group1Map1bObjectData:
 group1Map1cObjectData:
 	obj_End
 group1Map20ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $3c $48 $48 ; Tic
+	obj_Interaction INTERAC_BALLADE_OBJECT $3d $48 $68 ; Tac
 	obj_End
 group1Map21ObjectData:
 	obj_End

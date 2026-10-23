@@ -59,6 +59,11 @@
 ; @subid_39{Invisible, à l'auberge (3:9e) : après les photos, le quiz de Marine sur Cocolint}
 ; @subid_3a{L'Arbre-Passage, au cœur de chaque île : comme le Bateau-Rondin, sans la mer}
 ; @subid_3b{Lila endormie dans son lit (3:21), après Sire Bouchon, avant le Coffre à Jouets}
+; @subid_3c{Tic, un des jumeaux (le terrain de jeu, 1:20) : le cache-cache du Songe, le quart de cœur}
+; @subid_3d{Tac, l'autre jumeau}
+; @subid_3e{Un jumeau caché, dans le Songe de l'île 2 (cinq salles : twinRooms)}
+; @subid_3f{Le vieux cerf-volant (1:01, 0:01) : coincé dans le Réel ; il parle dans le Songe}
+; @subid_40{Invisible, le Songe de l'île 2 : Marine parle du jeu de l'oie (0:11), du pont-levis (0:13)}
 ; ==================================================================================================
 
 ;;
@@ -126,6 +131,11 @@ main:
 	.dw marineQuiz
 	.dw passTree
 	.dw sleepingLila
+	.dw twins
+	.dw twins
+	.dw hidingTwin
+	.dw kite
+	.dw dreamComment
 
 
 ;;
@@ -3733,3 +3743,266 @@ marineQuiz:
 	.db <TX_5af7, $ff ; sa mère (personne ne le sait)
 	.db <TX_5af9, $00 ; Tarkin fait penser à : Mario
 
+
+; ==================================================================================================
+; Hameau-Grelot (île 2), le Songe (idée de Denis ; story/iles.md). Tic et Tac (subids $3c et $3d,
+; le terrain de jeu 1:20) jouent à cache-cache sans se cacher ; leur parler lance le jeu
+; (GLOBALFLAG_BALLADE_CACHE). Dans le Songe, un jumeau se cache dans cinq salles (subid $3e) ; trouvé,
+; c'est le drapeau $40 de sa salle du Songe (groupe 0). Les cinq trouvés : Tic donne un quart de
+; cœur (ROOMFLAG_ITEM de 1:20). Le cerf-volant ($3f) dit où ils sont.
+; ==================================================================================================
+
+; Les salles du Songe (groupe 0) où un jumeau se cache : le bois, le manège, le jardin des toupies, la
+; colline (sous l'arbre du cerf-volant), l'îlot du château de sable (par le pont-levis du Songe)
+twinRooms:
+	.db $10, $02, $23, $01, $13, $ff
+
+;;
+; @param[out]	c	Le nombre de cachettes trouvées (0 à 5)
+countFoundTwins:
+	ld hl,twinRooms
+	ld c,$00
+@next:
+	ldi a,(hl)
+	cp $ff
+	ret z
+	push hl
+	push bc
+	ld b,a
+	xor a
+	call getRoomFlags
+	pop bc
+	pop hl
+	and $40
+	jr z,@next
+	inc c
+	jr @next
+
+;;
+; Le nombre a (0 à 99), en BCD, pour \num1
+setTextNumber:
+	call hexToDec
+	ld (wTextNumberSubstitution),a
+	xor a
+	ld (wTextNumberSubstitution+1),a
+	ret
+
+;;
+; Tic ($3c) et Tac ($3d), au terrain de jeu (1:20)
+twins:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw npcInit
+	.dw @idle
+	.dw npcWaitText
+	.dw @gift
+
+@idle:
+	call interactionAnimateAsNpc
+	call npcCheckTalk
+	ret z
+	ld e,Interaction.subid
+	ld a,(de)
+	cp $3d
+	jr z,@tac
+	; Tic. Le quart de cœur déjà donné : ils jouent
+	call getThisRoomFlags
+	and ROOMFLAG_ITEM
+	ld bc,TX_5b52
+	jr nz,@say
+	; La première fois : le jeu commence
+	ld a,GLOBALFLAG_BALLADE_CACHE
+	call checkGlobalFlag
+	jr nz,+
+	ld a,GLOBALFLAG_BALLADE_CACHE
+	call setGlobalFlag
+	ld bc,TX_5b4f
+	jr @say
++
+	call countFoundTwins
+	ld a,c
+	cp $05
+	jr nc,@allFound
+	call setTextNumber
+	ld bc,TX_5b50
+@say:
+	ld a,$02
+	jp npcSay
+@allFound:
+	ld a,$03
+	ld bc,TX_5b51
+	jp npcSay
+@tac:
+	call getThisRoomFlags
+	and ROOMFLAG_ITEM
+	ld bc,TX_5b54
+	jr nz,@say
+	ld bc,TX_5b53
+	jr @say
+
+@gift:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	call getThisRoomFlags
+	set 5,(hl) ; ROOMFLAG_ITEM
+	ldbc TREASURE_HEART_PIECE, $00
+	call giveTreasureAtLink
+	xor a
+	ld (wDisabledObjects),a
+	ld e,Interaction.state
+	inc a
+	ld (de),a
+	ret
+
+;;
+; Un jumeau caché ($3e), dans le Songe : sa tête dépasse de sa cachette. Là seulement quand le jeu a
+; commencé et qu'il n'a pas encore été trouvé ici. A devant lui : trouvé !
+hidingTwin:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw @init
+	.dw @idle
+	.dw @found
+
+@init:
+	ld a,GLOBALFLAG_BALLADE_CACHE
+	call checkGlobalFlag
+	jp z,interactionDelete
+	call getThisRoomFlags
+	and $40
+	jp nz,interactionDelete
+	call interactionInitGraphics
+	call interactionIncState
+	ld h,d
+	ld l,Interaction.collisionRadiusY
+	ld (hl),$0a
+	inc l
+	ld (hl),$08
+	ld e,Interaction.pressedAButton
+	call objectAddToAButtonSensitiveObjectList
+	jp objectSetVisible82
+
+@idle:
+	call npcCheckTalk
+	ret z
+	call getThisRoomFlags
+	set 6,(hl)
+	ld a,SND_SOLVEPUZZLE
+	call playSound
+	call countFoundTwins
+	ld a,$05
+	sub c
+	ld bc,TX_5b56
+	jr z,+
+	call setTextNumber
+	ld bc,TX_5b55
++
+	ld a,$02
+	jp npcSay
+
+@found:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	xor a
+	ld (wDisabledObjects),a
+	ld e,Interaction.start
+	call objectRemoveFromAButtonSensitiveObjectList
+	call objectCreatePuff
+	jp interactionDelete
+
+;;
+; Le vieux cerf-volant ($3f), dans l'arbre de la colline (1:01, 0:01). Dans le Réel, il est coincé ;
+; dans le Songe, le vent le fait bouger et il parle : il voit où se cachent les jumeaux.
+kite:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw @init
+	.dw @idle
+	.dw npcWaitText
+
+@init:
+	call interactionInitGraphics
+	call interactionIncState
+	ld h,d
+	ld l,Interaction.collisionRadiusY
+	ld (hl),$0a
+	inc l
+	ld (hl),$08
+	ld e,Interaction.pressedAButton
+	call objectAddToAButtonSensitiveObjectList
+	jp objectSetVisible82
+
+@idle:
+	; Dans le Songe, le vent le balance (deux pixels, deux fois par seconde)
+	ld a,(wActiveGroup)
+	or a
+	jr nz,+
+	ld a,(wFrameCounter)
+	and $1f
+	jr nz,+
+	ld h,d
+	ld l,Interaction.xh
+	ld a,(hl)
+	xor $02
+	ld (hl),a
++
+	call npcCheckTalk
+	ret z
+	ld a,(wActiveGroup)
+	or a
+	ld bc,TX_5b57
+	jr nz,@say
+	ld a,GLOBALFLAG_BALLADE_CACHE
+	call checkGlobalFlag
+	ld bc,TX_5b58
+	jr z,@say
+	call countFoundTwins
+	ld a,c
+	cp $05
+	ld bc,TX_5b59
+	jr c,@say
+	ld bc,TX_5b5a
+@say:
+	ld a,$02
+	jp npcSay
+
+;;
+; Marine, la première fois qu'on entre dans ces salles du Songe ($40, invisible) : le jeu de l'oie
+; (0:11), le pont-levis (0:13). Drapeau $80 de la salle du Songe.
+dreamComment:
+	ld e,Interaction.state
+	ld a,(de)
+	or a
+	jr nz,@wait
+	call waitRoomReady
+	ret nz
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	call getThisRoomFlags
+	bit 7,(hl)
+	jp nz,interactionDelete
+	set 7,(hl)
+	call interactionIncState
+	ld a,$91
+	ld (wDisabledObjects),a
+	ld a,(wActiveRoom)
+	cp $11
+	ld bc,TX_5b5b
+	jr z,+
+	ld bc,TX_5b5c
++
+	jp showText
+
+@wait:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	xor a
+	ld (wDisabledObjects),a
+	jp interactionDelete

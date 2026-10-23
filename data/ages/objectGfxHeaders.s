@@ -238,3 +238,4 @@ objectGfxHeaderTable:
 	/* $e5 */ m_ObjectGfxHeader spr_ballade_terrier ; le Terrier des Serpents (art/terrier.txt)
 	/* $e6 */ m_ObjectGfxHeader spr_ballade_rex ; son boss (art/rex.txt)
 	/* $e7 */ m_ObjectGfxHeader spr_ballade_ile ; l'île de Marine (art/ile_marine.txt)
+	/* $e8 */ m_ObjectGfxHeader spr_ballade_grelot ; Hameau-Grelot, le Songe (art/grelot.txt)

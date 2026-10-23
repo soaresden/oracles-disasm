@@ -117,9 +117,9 @@ applyRoomSpecificTileChangesAfterGfxLoad:
 	.db $ad $08
 	.db $cb $08
 	.db $d7 $08
-	.db $13 $01
+	;.db $13 $01 ; BALLADE: Hameau-Grelot, le Songe (0:13 : le pont-levis, pas d'arbre)
 	.db $ac $03
-	.db $c1 $01
+	;.db $c1 $01 ; BALLADE: le lac de glace du Songe (0:c1) : pas d'arbre
 	.db $83 $00
 	;.db $38 $06 ; BALLADE: Mont-Braise (1:08-3c)
 	;.db $0a $07 ; BALLADE: Mont-Braise (1:08-3c)
@@ -138,7 +138,7 @@ applyRoomSpecificTileChangesAfterGfxLoad:
 	;.db $25 $01 ; BALLADE: la Lagune des Serments (1:04-37)
 	.db $2d $01
 	.db $80 $01
-	.db $c1 $01
+	;.db $c1 $01 ; BALLADE: le lac de glace (1:c1) : pas d'arbre (un rond au milieu de la glace)
 	.db $67 $09
 	;.db $38 $0a ; BALLADE: Mont-Braise (1:08-3c)
 	.db $00
