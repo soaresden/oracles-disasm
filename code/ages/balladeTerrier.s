@@ -660,389 +660,379 @@ jar:
 	.db 0, 1, 2, 3
 
 
-;;
-; Le boss ($0c) : la machine possédée. var30 sa vie, var31 son temps d'invincibilité après un coup,
-; var32 1 quand son blindage est tombé
+; ==================================================================================================
+; Le boss ($0c) : la machine possédée, en grand, au fond de l'arène (Denis : « regarde comment c'est
+; dans Ghost Babel ») : 7 x 5 briques du décor (tools/make_rex.py) qui sortent de l'ombre quand elle
+; apparaît. Elle tire des missiles et fait tomber des rochers (les projectiles, $0f). Seule une bombe
+; qui explose contre elle l'arrête (Denis) : cinq secondes, ses yeux s'éteignent, des étincelles ;
+; une attaque tourbillon contre elle, alors, la touche. Cinq fois, et elle explose ; le gantelet
+; absorbe l'âme du fantôme : le Bracelet des Âmes ; puis Link revient à l'entrée du Terrier.
+;
+; var30 sa vie, var31 la rangée de briques (en apparaissant, en disparaissant), var32 le temps
+; qu'elle reste arrêtée (images), var33 l'attaque suivante (0 missiles, 1 rochers), var34 le temps
+; qu'elle reste blanche (touchée), counter1 le temps avant l'attaque suivante
+; ==================================================================================================
+
+.define REX_HP		5
+.define REX_STUN	300	; (cinq secondes)
+.define REX_BRICK	$c0	; ses briques ($c0-$e2, tools/make_rex.py), 7 par rangée
+.define REX_POS		$14	; la brique en haut à gauche (ligne 1, colonne 4)
+.define REX_BOTTOM	$60	; (en pixels : le bas, la gauche, la droite de la machine)
+.define REX_LEFT	$40
+.define REX_RIGHT	$b0
+
 rex:
 	ld e,Interaction.state
 	ld a,(de)
-	or a
-	jr nz,@run
-	inc a
-	ld (de),a
-	call interactionInitGraphics
-	ld a,$03
-	call interactionSetAnimation
-	call objectSetVisible82
-	ld e,Interaction.var30
-	ld a,TERRIER_BOSS_HP
-	ld (de),a
+	rst_jumpTable
+	.dw @init
+	.dw @rise
+	.dw @fight
+	.dw @explode
+	.dw @vanish
+	.dw @relic
+
+@init:
+	call interactionIncState
+	call interactionInitGraphics	; (les images des projectiles : spr_ballade_rex)
+	ld h,d
+	ld l,Interaction.var30
+	ld (hl),REX_HP
+	ld l,Interaction.counter1
+	ld (hl),90
+	ld a,PALH_REX
+	call loadPaletteHeader
+	; Link pas dans la machine
+	ld a,(w1Link.yh)
+	cp REX_BOTTOM+$10
+	jr nc,+
+	ld a,$88
+	ld (w1Link.yh),a
++
 	ld a,MUS_MINIBOSS
 	jp playSound
 
-@run:
+; Elle sort de l'ombre : une rangée de briques toutes les 8 images, de bas en haut
+@rise:
+	ld a,(wFrameCounter)
+	and $07
+	ret nz
+	ld h,d
+	ld l,Interaction.var31
+	ld a,(hl)
+	cp $05
+	jp nc,interactionIncState
+	inc (hl)
+	ld b,a
+	ld a,$04
+	sub b
+	ld e,$01
+	call @drawRow
+	ld a,SND_STRONG_POUND
+	call playSound
+	ld a,$08
+	jp setScreenShakeCounter
+
+;;
+; Une rangée de briques : la machine (e = 1) ou le sol (e = 0)
+; @param	a	La rangée (0-4)
+@drawRow:
+	ld c,a
+	swap a
+	add REX_POS
+	ld b,a			; b = la position de la première brique
+	ld a,c
+	add a
+	add a
+	add a
+	sub c
+	add REX_BRICK
+	ld c,a			; c = sa brique
+	ld a,$07
+--
+	push af
+	push bc
+	push de
+	ld a,e
+	or a
+	ld a,c
+	jr nz,+
+	ld a,$a0
++
+	ld c,b
+	call setTile
+	pop de
+	pop bc
+	inc b
+	inc c
+	pop af
+	dec a
+	jr nz,--
+	ret
+
+@fight:
 	ld a,(wTextIsActive)
 	or a
 	ret nz
-	call interactionAnimate
+	; touchée : elle reste blanche un instant
 	ld h,d
-	ld l,Interaction.var31
+	ld l,Interaction.var34
 	ld a,(hl)
 	or a
 	jr z,+
 	dec (hl)
+	call z,@palette
 +
-	call @visibility
-	call @move
-	call @hurtLink
-	jp @checkSword
-
-; Visible ; il clignote après un coup ; blessé, il s'efface de plus en plus (il « maigrit »)
-@visibility:
 	ld h,d
-	ld l,Interaction.visible
-	set 7,(hl)
-	ld l,Interaction.var31
-	ld a,(hl)
-	or a
-	jr z,+
-	ld a,(wFrameCounter)
-	and $02
-	jr nz,@hide
-+
 	ld l,Interaction.var32
 	ld a,(hl)
 	or a
-	ret z
-	ld l,Interaction.var30
-	ld a,(hl)
-	ld b,$07
-	cp $05
-	jr nc,+
-	ld b,$03
-	cp $03
-	jr nc,+
-	ld b,$01
+	jr z,@active
+	; arrêtée : des étincelles ; une attaque tourbillon la touche
+	ld a,(wFrameCounter)
+	rrca
+	jr c,+
+	dec (hl)
+	jp z,@palette
 +
 	ld a,(wFrameCounter)
-	and b
+	and $0f
+	call z,@spark
+	jp @checkSpin
+
+@active:
+	call @checkBomb
+	ret c
+	call interactionDecCounter1
 	ret nz
-@hide:
-	ld h,d
-	ld l,Interaction.visible
-	res 7,(hl)
+	ld (hl),100
+	ld l,Interaction.var33
+	ld a,(hl)
+	xor $01
+	ld (hl),a
+	jr z,@rocks
+
+	; les missiles : deux, depuis le lance-missiles, vers Link
+	ld a,SND_THROW
+	call playSound
+	ld hl,$2868
+	call @missile
+	ld hl,$2888
+@missile:
+	ld b,$0f
+	jp createTerrierObjectAt
+
+	; les rochers : elle frappe du pied ; trois rochers tombent, dont un sur Link
+@rocks:
+	ld a,SND_STRONG_POUND
+	call playSound
+	ld a,$20
+	call setScreenShakeCounter
+	ld a,(w1Link.yh)
+	ld h,a
+	ld a,(w1Link.xh)
+	ld l,a
+	call @rock
+	call @randomFloor
+	call @rock
+	call @randomFloor
+@rock:
+	ld b,$0f
+	jp createTerrierObjectAt
+
+; hl = une position au hasard, devant la machine
+@randomFloor:
+	call getRandomNumber
+	and $1f
+	add REX_BOTTOM+$18
+	ld h,a
+	call getRandomNumber
+	and $7f
+	add $30
+	ld l,a
 	ret
 
-; Il marche vers Link : trois images sur quatre, puis à chaque image quand il a maigri ; ses pas
-; font trembler le sol. Il va partout dans l'arène (avant, il s'arrêtait à 32 pixels du mur de
-; droite : Denis restait à droite, intouchable)
-@move:
+; une étincelle, sur la machine
+@spark:
+	call getRandomNumber
+	and $3f
+	add $18
+	ld h,a
+	call getRandomNumber
+	and $5f
+	add REX_LEFT+8
+	ld l,a
+	ld b,$0f
+	call createTerrierObjectAt
+	ld a,SND_SHOCK
+	jp playSound
+
+;;
+; Une bombe explose contre elle : elle s'arrête (cf : oui)
+@checkBomb:
+	ld h,FIRST_ITEM_INDEX
+--
+	ld l,Item.enabled
+	ld a,(hl)
+	or a
+	jr z,@nextItem
+	inc l
+	ld a,(hl)
+	cp ITEM_BOMB
+	jr nz,@nextItem
+	ld l,Item.var2f
+	bit 4,(hl)
+	jr z,@nextItem
+	ld l,Item.yh
+	ld a,(hl)
+	cp REX_BOTTOM+$20
+	jr nc,@nextItem
+	ld l,Item.xh
+	ld a,(hl)
+	cp REX_LEFT-$10
+	jr c,@nextItem
+	cp REX_RIGHT+$10
+	jr nc,@nextItem
+	; arrêtée (var32 compte toutes les deux images)
+	ld h,d
+	ld l,Interaction.var32
+	ld (hl),REX_STUN/2
+	call @palette
+	ld a,SND_SHOCK
+	call playSound
+	scf
+	ret
+@nextItem:
+	inc h
+	ld a,h
+	cp LAST_ITEM_INDEX+1
+	jr c,--
+	xor a
+	ret
+
+;;
+; Une attaque tourbillon contre elle (pendant qu'elle est arrêtée) : touchée
+@checkSpin:
+	ld a,(w1WeaponItem.enabled)
+	or a
+	ret z
+	ld a,(w1WeaponItem.id)
+	cp ITEM_SWORD
+	ret nz
+	ld a,(w1WeaponItem.state)
+	cp $04
+	ret nz
+	ld a,(w1Link.yh)
+	cp REX_BOTTOM+$20
+	ret nc
+	ld a,(w1Link.xh)
+	cp REX_LEFT-$10
+	ret c
+	cp REX_RIGHT+$10
+	ret nc
+	; touchée
+	ld h,d
+	ld l,Interaction.var32
+	ld (hl),$00
+	ld l,Interaction.var34
+	ld (hl),24
+	ld l,Interaction.counter1
+	ld (hl),60
+	ld a,PALH_REX_HIT
+	call loadPaletteHeader
+	ld a,SND_BOSS_DAMAGE
+	call playSound
+	ld a,$10
+	call setScreenShakeCounter
+	ld h,d
+	ld l,Interaction.var30
+	dec (hl)
+	ret nz
+	; Cinq fois : elle explose
+	ld l,Interaction.state
+	ld (hl),$03
+	ld l,Interaction.counter1
+	ld (hl),80
+	ld a,SNDCTRL_STOPMUSIC
+	jp playSound
+
+; Ses couleurs : les yeux éteints quand elle est arrêtée
+@palette:
 	ld e,Interaction.var32
 	ld a,(de)
 	or a
+	ld a,PALH_REX
+	jr z,+
+	ld a,PALH_REX_STUN
++
+	jp loadPaletteHeader
+
+; Elle explose : des explosions partout sur elle
+@explode:
+	ld a,(wFrameCounter)
+	and $07
 	jr nz,+
-	ld a,(wFrameCounter)
-	and $1f
-	jr nz,++
-	ld a,$06
-	call setScreenShakeCounter
-++
-	ld a,(wFrameCounter)
-	and $03
-	ret z
-+
-	ld h,d
-	ld l,Interaction.yh
-	ld a,(w1Link.yh)
-	sub $08
-	call @toward
-	ld a,(hl)
-	cp $18
-	jr nc,+
-	ld (hl),$18
-+
-	cp $88
-	jr c,+
-	ld (hl),$88
-+
-	ld l,Interaction.xh
-	ld a,(w1Link.xh)
-	call @toward
-	ld a,(hl)
-	cp $20
-	jr nc,+
-	ld (hl),$20
-+
-	cp $d0
-	ret c
-	ld (hl),$d0
-	ret
-
-@toward:
-	sub (hl)
-	ret z
-	jr c,+
-	inc (hl)
-	ret
-+
-	dec (hl)
-	ret
-
-; Il touche Link : un cœur en moins
-@hurtLink:
-	ld h,d
-	ld l,Interaction.yh
-	ld a,(w1Link.yh)
-	sub (hl)
-	sub $08
-	call terrierAbs
-	cp $0e
-	ret nc
-	ld l,Interaction.xh
-	ld a,(w1Link.xh)
-	sub (hl)
-	call terrierAbs
-	cp $0e
-	ret nc
-	ld a,(w1Link.invincibilityCounter)
-	or a
-	ret nz
-	ld a,$f8
-	ld (w1Link.damageToApply),a
-	ld a,$30
-	ld (w1Link.invincibilityCounter),a
-	ld a,SND_DAMAGE_LINK
-	jp playSound
-
-; L'épée le touche : une âme lui est arrachée
-@checkSword:
-	ld e,Interaction.var31
-	ld a,(de)
-	or a
-	ret nz
-	ld a,(w1WeaponItem.enabled)
-	or a
-	ret z
-	ld h,d
-	ld l,Interaction.yh
-	ld a,(w1WeaponItem.yh)
-	sub (hl)
-	call terrierAbs
-	cp $12
-	ret nc
-	ld l,Interaction.xh
-	ld a,(w1WeaponItem.xh)
-	sub (hl)
-	call terrierAbs
-	cp $12
-	ret nc
-	; touché
-	ld l,Interaction.var31
-	ld (hl),$20
-	ld a,SND_BOSS_DAMAGE
-	call playSound
-	ld h,d
-	ld l,Interaction.yh
-	ld a,(hl)
-	ld l,Interaction.xh
-	ld l,(hl)
+	call getRandomNumber
+	and $3f
+	add $18
 	ld h,a
-	ld b,$0b
-	call createTerrierObjectAt
-	ld h,d
-	ld l,Interaction.var30
-	dec (hl)
-	ld a,(hl)
-	jr z,@defeated
-	cp TERRIER_BOSS_HP / 2
-	ret nz
-	; Son blindage tombe : le fantôme brille à travers, il va plus vite
-	ld l,Interaction.var32
-	ld (hl),$01
-	ld a,$04
-	call interactionSetAnimation
-	ld a,$10
-	call setScreenShakeCounter
-	ld a,SND_BIG_EXPLOSION
-	jp playSound
-
-@defeated:
-	; La machine tombe en morceaux ; le fantôme s'en échappe
-	ld a,$20
-	call setScreenShakeCounter
-	ld a,SND_BOSS_DEAD
-	call playSound
-	ld h,d
-	ld l,Interaction.yh
-	ld a,(hl)
-	ld l,Interaction.xh
-	ld l,(hl)
-	ld h,a
-	push hl
-	call createTerrierPuffAt
-	pop hl
-	push hl
-	ld a,l
-	add $08
+	call getRandomNumber
+	and $5f
+	add REX_LEFT+8
 	ld l,a
 	call createTerrierPuffAt
-	pop hl
-	ld b,$0f
-	call createTerrierObjectAt
-	jp interactionDelete
-
-
-;;
-; Le fantôme ($0f), échappé de la machine : il file en diagonale et rebondit sur les murs ; trois
-; coups, et le gantelet absorbe son âme : la relique. var30 sa vie, var31 son invincibilité, var32
-; dy, var33 dx
-ghost:
-	ld e,Interaction.state
-	ld a,(de)
-	or a
-	jr nz,@run
-	call terrierObjectInit
-	ld h,d
-	ld l,Interaction.var30
-	ld (hl),TERRIER_GHOST_HP
-	ld l,Interaction.var32
-	ld (hl),$02
-	inc l
-	ld (hl),$02
-	ret
-
-@run:
-	cp $02
-	jp z,@leave
-	ld a,(wTextIsActive)
-	or a
+	ld a,SND_EXPLOSION
+	call playSound
+	ld a,$08
+	call setScreenShakeCounter
++
+	call interactionDecCounter1
 	ret nz
-	ld h,d
-	ld l,Interaction.visible
-	set 7,(hl)
 	ld l,Interaction.var31
-	ld a,(hl)
-	or a
-	jr z,+
-	dec (hl)
+	ld (hl),$00
+	ld a,SND_BIG_EXPLOSION
+	call playSound
+	jp interactionIncState
+
+; Elle disparaît : le sol, une rangée toutes les 8 images
+@vanish:
 	ld a,(wFrameCounter)
-	and $02
-	jr z,+
-	ld l,Interaction.visible
-	res 7,(hl)
-+
-	; il file et rebondit
-	ld h,d
-	ld l,Interaction.var32
-	ld b,(hl)
-	ld l,Interaction.yh
-	ld a,(hl)
-	add b
-	ld (hl),a
-	cp $20
-	jr c,@bounceY
-	cp $91
-	jr c,+
-@bounceY:
-	ld l,Interaction.var32
-	ld a,(hl)
-	cpl
-	inc a
-	ld (hl),a
-+
-	ld h,d
-	ld l,Interaction.var33
-	ld b,(hl)
-	ld l,Interaction.xh
-	ld a,(hl)
-	add b
-	ld (hl),a
-	cp $20
-	jr c,@bounceX
-	cp $d9
-	jr c,+
-@bounceX:
-	ld l,Interaction.var33
-	ld a,(hl)
-	cpl
-	inc a
-	ld (hl),a
-+
-	; il touche Link : un demi-cœur
-	ld h,d
-	ld l,Interaction.yh
-	ld a,(w1Link.yh)
-	sub (hl)
-	call terrierAbs
-	cp $0a
-	jr nc,@sword
-	ld l,Interaction.xh
-	ld a,(w1Link.xh)
-	sub (hl)
-	call terrierAbs
-	cp $0a
-	jr nc,@sword
-	ld a,(w1Link.invincibilityCounter)
-	or a
-	jr nz,@sword
-	ld a,$fc
-	ld (w1Link.damageToApply),a
-	ld a,$30
-	ld (w1Link.invincibilityCounter),a
-	ld a,SND_DAMAGE_LINK
-	call playSound
-@sword:
-	ld e,Interaction.var31
-	ld a,(de)
-	or a
+	and $07
 	ret nz
-	ld a,(w1WeaponItem.enabled)
-	or a
-	ret z
 	ld h,d
-	ld l,Interaction.yh
-	ld a,(w1WeaponItem.yh)
-	sub (hl)
-	call terrierAbs
-	cp $0c
-	ret nc
-	ld l,Interaction.xh
-	ld a,(w1WeaponItem.xh)
-	sub (hl)
-	call terrierAbs
-	cp $0c
-	ret nc
 	ld l,Interaction.var31
-	ld (hl),$20
-	ld a,SND_BOSS_DAMAGE
-	call playSound
-	ld h,d
-	ld l,Interaction.var30
-	dec (hl)
-	ret nz
-	; Le gantelet absorbe son âme : la relique, le Bracelet des Âmes
+	ld a,(hl)
+	cp $05
+	jr nc,@done
+	inc (hl)
+	push af
+	ld b,a
+	swap b
+	; une explosion sur la rangée
+	ld a,b
+	add $18
+	ld h,a
+	ld l,$78
+	call createTerrierPuffAt
+	pop af
+	ld e,$00
+	jp @drawRow
+@done:
+	; Le gantelet absorbe l'âme du fantôme : la relique, le Bracelet des Âmes
 	ld hl,wBalladeSoulState
 	set 1,(hl)
-	ld a,SNDCTRL_STOPMUSIC
-	call playSound
 	ld a,SND_SOLVEPUZZLE
 	call playSound
 	ld bc,TX_5a1d
 	call showText
-	; les textes finis (et la réplique de Marine, INTERAC_MARINE $08), Link revient à l'entrée du
-	; Terrier
-	ld e,Interaction.state
-	ld a,$02
-	ld (de),a
-	ld e,Interaction.counter1
-	ld a,90
-	ld (de),a
-	ld h,d
-	ld l,Interaction.visible
-	res 7,(hl)
+	call interactionIncState
+	ld l,Interaction.counter1
+	ld (hl),90
 	ret
 
-@leave:
+; Les textes finis (et la réplique de Marine, INTERAC_MARINE $08) : Link revient à l'entrée du
+; Terrier (Denis : pas tout le chemin à l'envers)
+@relic:
 	ld a,(wTextIsActive)
 	or a
 	jr z,+
@@ -1066,3 +1056,213 @@ ghost:
 	ld a,SND_TELEPORT
 	call playSound
 	jp interactionDelete
+
+
+;;
+; Les projectiles de la machine ($0f) : var3e 0 un missile (il file vers là où était Link), 1 un
+; rocher (son ombre, puis il tombe), 2 une étincelle. Images (spr_ballade_rex, art/rex.txt) : 0-1 le
+; missile, 2 le rocher, 3 son ombre, 4-5 l'étincelle
+ghost:
+	ld e,Interaction.state
+	ld a,(de)
+	or a
+	jr nz,@run
+	inc a
+	ld (de),a
+	call interactionInitGraphics
+	; son type, d'après là où il apparaît (un objet tout neuf est vidé avant sa première image :
+	; la machine ne peut pas le lui dire) : un rocher devant la machine, un missile au lance-missiles,
+	; sinon une étincelle
+	ld e,Interaction.yh
+	ld a,(de)
+	ld b,$01
+	cp REX_BOTTOM+$08
+	jr nc,++
+	ld b,$02
+	cp $28
+	jr nz,++
+	ld e,Interaction.xh
+	ld a,(de)
+	cp $68
+	jr z,+
+	cp $88
+	jr nz,++
++
+	ld b,$00
+++
+	ld e,Interaction.var3e
+	ld a,b
+	ld (de),a
+	ld hl,@first
+	rst_addAToHl
+	ld b,(hl)
+	ld a,(de)
+	ld hl,@time
+	rst_addAToHl
+	ld c,(hl)
+	ld h,d
+	ld l,Interaction.counter1
+	ld (hl),c
+	ld a,b
+	call @image
+	ld e,Interaction.var3e
+	ld a,(de)
+	or a
+	jr nz,+
+	; le missile : vers Link
+	call objectGetAngleTowardLink
+	ld e,Interaction.angle
+	ld (de),a
+	ld e,Interaction.speed
+	ld a,SPEED_180
+	ld (de),a
++
+	jp objectSetVisible81
+
+@first:
+	.db 0, 3, 4
+@time:
+	.db 120, 64, 20
+
+; a = l'image
+@image:
+	add a
+	add a
+	ld h,d
+	ld l,Interaction.var3f
+	ld b,a
+	ld a,(hl)
+	or a
+	jr nz,+
+	ld l,Interaction.oamTileIndexBase
+	ld a,(hl)
+	ld l,Interaction.var3f
+	ld (hl),a		; var3f : la première tuile (l'image 0)
++
+	ld a,(hl)
+	add b
+	ld l,Interaction.oamTileIndexBase
+	ld (hl),a
+	ret
+
+@run:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	ld e,Interaction.var3e
+	ld a,(de)
+	rst_jumpTable
+	.dw @missileRun
+	.dw @rockRun
+	.dw @sparkRun
+
+@missileRun:
+	call objectApplySpeed
+	; la flamme : deux images
+	ld a,(wFrameCounter)
+	and $04
+	rrca
+	rrca
+	call @image
+	ld a,$0a
+	call @touch
+	ld a,$fc
+	jr c,@hit
+	call interactionDecCounter1
+	jr z,@puff
+	ld e,Interaction.yh
+	ld a,(de)
+	cp $a8
+	jr nc,@puff
+	ret
+
+@rockRun:
+	call interactionDecCounter1
+	jr z,@landed
+	ld a,(hl)
+	cp 24
+	jr nc,@shadow
+	jr nz,+
+	; il tombe, de haut
+	ld a,2
+	call @image
+	ld h,d
+	ld l,Interaction.zh
+	ld (hl),-48
++
+	ld h,d
+	ld l,Interaction.zh
+	ld a,(hl)
+	add $02
+	ld (hl),a
+	ret
+@shadow:
+	; l'ombre, qui clignote
+	ld h,d
+	ld l,Interaction.visible
+	set 7,(hl)
+	ld a,(wFrameCounter)
+	and $02
+	ret z
+	res 7,(hl)
+	ret
+@landed:
+	ld a,SND_STRONG_POUND
+	call playSound
+	ld a,$06
+	call setScreenShakeCounter
+	ld a,$0c
+	call @touch
+	ld a,$f8
+	jr c,@hit
+	jr @puff
+
+@sparkRun:
+	ld a,(wFrameCounter)
+	and $04
+	rrca
+	rrca
+	add $04
+	call @image
+	call interactionDecCounter1
+	ret nz
+	jp interactionDelete
+
+; Il touche Link : des dégâts (a), puis un nuage
+@hit:
+	ld b,a
+	ld a,(w1Link.invincibilityCounter)
+	or a
+	jr nz,@puff
+	ld a,b
+	ld (w1Link.damageToApply),a
+	ld a,$30
+	ld (w1Link.invincibilityCounter),a
+	ld a,SND_DAMAGE_LINK
+	call playSound
+@puff:
+	ld h,d
+	ld l,Interaction.yh
+	ld a,(hl)
+	ld l,Interaction.xh
+	ld l,(hl)
+	ld h,a
+	call createTerrierPuffAt
+	jp interactionDelete
+
+; cf : Link est à moins de a pixels
+@touch:
+	ld b,a
+	ld h,d
+	ld l,Interaction.yh
+	ld a,(w1Link.yh)
+	sub (hl)
+	call terrierAbs
+	cp b
+	ret nc
+	ld l,Interaction.xh
+	ld a,(w1Link.xh)
+	sub (hl)
+	call terrierAbs
+	cp b
+	ret

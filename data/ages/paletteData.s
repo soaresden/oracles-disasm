@@ -4843,6 +4843,29 @@ paletteDataZelda: ; Zelda : contour noir, blonde (or), la peau et la robe claire
 	m_RGB16 $1f $19 $04
 	m_RGB16 $1f $1a $14
 
+; BALLADE: la machine du Terrier, en grand (tools/make_rex.py) : le corps (BG 5) et les yeux (BG 1),
+; éteints quand elle est arrêtée, tout blanc quand elle est touchée
+paletteDataRexBody:
+	m_RGB16 $00 $00 $00
+	m_RGB16 $07 $04 $0c
+	m_RGB16 $0e $0b $16
+	m_RGB16 $17 $15 $1e
+paletteDataRexEyes:
+	m_RGB16 $00 $00 $00
+	m_RGB16 $07 $04 $0c
+	m_RGB16 $0e $0b $16
+	m_RGB16 $1f $1c $06
+paletteDataRexEyesOff:
+	m_RGB16 $00 $00 $00
+	m_RGB16 $07 $04 $0c
+	m_RGB16 $0e $0b $16
+	m_RGB16 $07 $04 $0c
+paletteDataRexHit:
+	m_RGB16 $00 $00 $00
+	m_RGB16 $1f $1f $1f
+	m_RGB16 $1f $1f $1f
+	m_RGB16 $1f $1f $1f
+
 paletteDataTerrier: ; la machine possédée : noir, gris acier, la lueur cyan du fantôme
 	m_RGB16 $1f $1f $1f
 	m_RGB16 $00 $00 $00

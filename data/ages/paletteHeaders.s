@@ -7,7 +7,7 @@
 ; - PALH_SPR:     Loads sprite palettes only
 ; - PALH:         If none of the above, could load both sprite & bg palettes (or not yet categorized)
 
-.define NUM_PALETTE_HEADERS $e2 ; BALLADE: + film, Songe, titre
+.define NUM_PALETTE_HEADERS $e5 ; BALLADE: + film, Songe, titre
 
 paletteHeaderTable:
 	.repeat NUM_PALETTE_HEADERS index COUNT
@@ -908,6 +908,21 @@ m_PaletteHeaderStart $dc, PALH_PHOTO
 ; BALLADE: Zelda, en rêve (la fin du jeu, l'île de Marine) : blonde, palette 7 des sprites
 m_PaletteHeaderStart $e0, PALH_ZELDA
 	m_PaletteHeaderSpr 7, 1, paletteDataZelda
+	m_PaletteHeaderEnd
+
+; BALLADE: la machine du Terrier, en grand (code/ages/balladeTerrier.s rex) : ses couleurs, ses yeux
+; éteints (arrêtée par une bombe), blanche (touchée)
+m_PaletteHeaderStart $e2, PALH_REX
+	m_PaletteHeaderBg 5, 1, paletteDataRexBody
+	m_PaletteHeaderBg 1, 1, paletteDataRexEyes
+	m_PaletteHeaderEnd
+m_PaletteHeaderStart $e3, PALH_REX_STUN
+	m_PaletteHeaderBg 5, 1, paletteDataRexBody
+	m_PaletteHeaderBg 1, 1, paletteDataRexEyesOff
+	m_PaletteHeaderEnd
+m_PaletteHeaderStart $e4, PALH_REX_HIT
+	m_PaletteHeaderBg 5, 1, paletteDataRexHit
+	m_PaletteHeaderBg 1, 1, paletteDataRexHit
 	m_PaletteHeaderEnd
 
 m_PaletteHeaderStart $df, PALH_TERRIER
