@@ -965,6 +965,7 @@ interactionedSubidData:
 	m_InteractionSubidData $00 $00 $00 ; $40 Marine dans le Songe de l'île 2 : le jeu de l'oie, le pont-levis (invisible)
 	m_InteractionSubidData $e8 $08 $32 ; $41 la vasque du soleil (l'Œil ; image 2, allumée 3 ; palette 3)
 	m_InteractionSubidData $e8 $10 $12 ; $42 la vasque de la lune (image 4, allumée 5 ; palette 1)
+	m_InteractionSubidData $e4 $18 $32 ; $43 un coquillage-écho du Récif (spr_ballade_ghost image 6, palette 3)
 	m_InteractionSubidDataEnd
 
 interactiond4SubidData:

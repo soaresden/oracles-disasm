@@ -4630,6 +4630,10 @@ group5Map38ObjectData:
 	obj_End
 group5Map39ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $13 $08 $08
+	obj_Interaction INTERAC_BALLADE_OBJECT $43 $28 $78 ; le grand coquillage
+	obj_Interaction INTERAC_BALLADE_OBJECT $43 $58 $38 ; les trois petits
+	obj_Interaction INTERAC_BALLADE_OBJECT $43 $58 $78
+	obj_Interaction INTERAC_BALLADE_OBJECT $43 $58 $b8
 	obj_End
 group5Map3aObjectData:
 	obj_RandomEnemy $40 ENEMY_ROPE $00

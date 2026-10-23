@@ -66,6 +66,7 @@
 ; @subid_40{Invisible, le Songe de l'île 2 : Marine parle du jeu de l'oie (0:11), du pont-levis (0:13)}
 ; @subid_41{La vasque du soleil (l'Œil, 1:c8 et 0:c8) : une graine de feu l'allume, dans le Réel}
 ; @subid_42{La vasque de la lune (1:ca et 0:ca) : une graine de feu l'allume, dans le Songe}
+; @subid_43{Un coquillage-écho du Récif (5:39) : le dessin, sur la case que regarde echoShells}
 ; ==================================================================================================
 
 ;;
@@ -140,6 +141,7 @@ main:
 	.dw dreamComment
 	.dw brazier
 	.dw brazier
+	.dw echoShellSprite
 
 
 ;;
@@ -4406,3 +4408,18 @@ brazier:
 	jr c,@nextItem
 	xor a
 	ret
+
+
+;;
+; Un coquillage-écho du Récif ($43) : le dessin (le coquillage de l'île de Marine), solide, sur une
+; des cases que regarde echoShells (le grand, les trois petits)
+echoShellSprite:
+	ld e,Interaction.state
+	ld a,(de)
+	or a
+	ret nz
+	inc a
+	ld (de),a
+	call interactionInitGraphics
+	call objectMarkSolidPosition
+	jp objectSetVisible82
