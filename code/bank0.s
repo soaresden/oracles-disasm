@@ -7925,21 +7925,13 @@ getSomariaBlockIndex:
 	ret
 
 seasonsToAgesItemCountsLevelsTable:
-	; FR: what the game link secret carries (and the crossworld hack didn't copy):
-	; game ID (secrets), Link's name, the kid's name and status ("behavior")
-	.db $01 $01 ; wGameID+1 (wGameID: see the end of the copy routines)
+	; FR: Link's name (the rest of what the game link secret carries: see
+	; frCopyLinkData)
 	.db $02 $02 ; wLinkName
 	.db $03 $03
 	.db $04 $04
 	.db $05 $05
 	.db $06 $06
-	.db $09 $09 ; wKidName
-	.db $0a $0a
-	.db $0b $0b
-	.db $0c $0c
-	.db $0d $0d
-	.db $0e $0e
-	.db $0f $0f ; wChildStatus
 	.db $a9 $af ; wShieldLevel
 	.db $aa $b0 ; wNumBombs
 	.db $ab $b1 ; wMaxBombs
@@ -8129,10 +8121,8 @@ saveSeasonsTreasureDataForAges:
 	ld (hl),a
 	jr --
 ++
-	; FR: wGameID low byte (offset 0 would end the table)
-	ld a,($c600-wFileStart+SEASONS_BACKUP)
-	ld ($c600),a
-	ret
+	ld hl,$c600-wFileStart+SEASONS_BACKUP
+	jp frCopyLinkData
 
 saveAgesTreasureDataForSeasons:
 	; Copy inventory items and wObtainedTreasureFlags for each
@@ -8204,10 +8194,35 @@ saveAgesTreasureDataForSeasons:
 	ld (hl),a
 	jr --
 ++
-	; FR: wGameID low byte (offset 0 would end the table)
-	ld a,($c600-wFileStart+AGES_BACKUP)
+	ld hl,$c600-wFileStart+AGES_BACKUP
+	jp frCopyLinkData
+
+;;
+; FR: what the game link secret of the original games carries and the crossworld
+; hack didn't copy: the game ID (secrets), the kid's name and status
+; ("behavior"). Only when set in the game left, so that a game where the kid
+; isn't named yet doesn't erase his name in the other one.
+; @param	hl	$c600 in the other game's backup (wGameID)
+frCopyLinkData:
+	ldi a,(hl)
+	ld b,(hl)
+	dec hl
+	ld c,a
+	or b
+	jr z,+
+	ld a,c
 	ld ($c600),a
-	ret
+	ld a,b
+	ld ($c601),a
++
+	ld de,wKidName-wGameID
+	add hl,de
+	ld a,(hl)
+	or a
+	ret z
+	ld de,wKidName
+	ld b,wChildStatus+1-wKidName
+	jp copyMemory
 
 swapGame:
 	push de
