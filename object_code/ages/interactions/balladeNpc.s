@@ -11,7 +11,24 @@ interactionCodee8:
 	jr nz,@state1
 
 @state0:
-	inc a
+	; L'aubergiste ($00) n'est pas là pendant la scène de l'auberge (après le chapitre 5, le quiz
+	; pas encore réussi) : Marine veut être seule avec Link (balladeObjects.inviteDream)
+	ld e,Interaction.subid
+	ld a,(de)
+	or a
+	jr nz,+
+	ld a,(wEssencesObtained)
+	and $10
+	jr z,+
+	ld a,(wBalladeEnding)
+	or a
+	jr nz,+
+	ld a,GLOBALFLAG_BALLADE_QUIZ
+	call checkGlobalFlag
+	jp z,interactionDelete
++
+	ld e,Interaction.state
+	ld a,$01
 	ld (de),a
 	call interactionInitGraphics
 	call objectSetVisiblec2

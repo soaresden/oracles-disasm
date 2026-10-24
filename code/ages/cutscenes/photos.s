@@ -1,5 +1,5 @@
 ; ==================================================================================================
-; BALLADE: les photos de Cocolint (CUTSCENE_BALLADE_PHOTOS ; idée de Denis). Lancée à l'auberge par
+; BALLADE: les photos de Cocolint (CUTSCENE_BALLADE_PHOTOS ; idée de Denis). Lancée à l'auberge du Songe par
 ; INTERAC_BALLADE_OBJECT $37 (Marine trouve les photos dans la poche de Link) : les vraies photos de
 ; l'album de Link's Awakening DX, en sépia et en plein écran (tools/make_photos.py : GFXH_PHOTO_1-3,
 ; PALH_PHOTO, palette 2), une réplique de Marine sur chacune (la boîte de texte dessine dans
@@ -99,6 +99,9 @@ run:
 	ret
 +
 	inc (hl)
+	; (la musique de la salle : en y revenant, le jeu ne la relance pas, la Ballade continuerait)
+	ld a,(wActiveMusic)
+	call playSound
 	ld a,(wActiveGroup)
 	or $80
 	ld (wWarpDestGroup),a

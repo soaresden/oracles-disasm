@@ -54,9 +54,9 @@
 ; @subid_34{Invisible : le souffle, dans la Fosse de Bulle (les cœurs se vident)}
 ; @subid_35{L'Épée de Légende, au fond de la Fosse de Bulle (5:d4)}
 ; @subid_36{Invisible : Ganon (5:c7) ne craint que l'Épée de Légende}
-; @subid_37{Invisible, à l'auberge (3:9e) : après le chapitre 5, Marine trouve les photos}
+; @subid_37{Invisible, à l'auberge du Songe (2:9e) : après le chapitre 5, Marine fouille les poches de Link, les photos}
 ; @subid_38{Invisible, le 4F de la Tour (5:c8) : les Veilleurs en fantômes ; vu : « LIIINK! »}
-; @subid_39{Invisible, à l'auberge (3:9e) : après les photos, le quiz de Marine sur Cocolint}
+; @subid_39{Invisible, à l'auberge du Songe (2:9e) : après les photos, le quiz de Marine sur Cocolint}
 ; @subid_3a{L'Arbre-Passage, au cœur de chaque île : comme le Bateau-Rondin, sans la mer}
 ; @subid_3b{Lila endormie dans son lit (3:21), après Sire Bouchon, avant le Coffre à Jouets}
 ; @subid_3c{Tic, un des jumeaux (le terrain de jeu, 1:20) : le cache-cache du Songe, le quart de cœur}
@@ -166,7 +166,33 @@ main:
 	.dw ganonEscape
 	.dw ganonEscape
 	.dw progressTracker
+	.dw inviteDream
 
+
+;;
+; hl = Marine humaine (INTERAC_BALLADE_NPC $07, dans l'auberge du Songe) ; nz : elle n'est pas là
+findHumanMarine:
+	ld h,FIRST_INTERACTION_INDEX
+-
+	ld l,Interaction.enabled
+	ld a,(hl)
+	or a
+	jr z,+
+	inc l
+	ld a,(hl)
+	cp INTERAC_BALLADE_NPC
+	jr nz,+
+	inc l
+	ld a,(hl)
+	cp $07
+	ret z
++
+	inc h
+	ld a,h
+	cp LAST_INTERACTION_INDEX+1
+	jr c,-
+	or a
+	ret
 
 ;;
 ; Une boîte de collision (pour parler à l'objet avec A) : 16 pixels de haut, 40 de large (le
@@ -4201,16 +4227,53 @@ progressTracker:
 
 
 ; ==================================================================================================
-; Les photos de Cocolint (subid $37, à l'auberge 3:9e ; idée de Denis) : une fois le chapitre 5 fini
-; (l'essence 5, le souvenir de la maison de Tarkin), Marine fouille la poche de Link et trouve les
-; photos de Link's Awakening (TX_5ae8), une fois (GLOBALFLAG_BALLADE_PHOTOS) ; puis
-; CUTSCENE_BALLADE_PHOTOS (code/ages/cutscenes/photos.s), qui ramène Link sur sa case.
+; L'auberge (subid $54, 3:9e ; Denis) : après le chapitre 5, tant que le quiz n'est pas réussi,
+; Marine, en mouette, veut parler à Link « en face à face » : va dormir ! (TX_5b7b, à chaque entrée).
+; Le lit mène à l'auberge du Songe (2:9e), où elle a son corps : elle fouille les poches de Link
+; (photoScene), puis le quiz (marineQuiz). L'aubergiste n'est pas là (balladeNpc.s) : ils sont seuls.
+; ==================================================================================================
+inviteDream:
+	call waitRoomReady
+	ret nz
+	call innSceneDue
+	jp nz,interactionDelete
+	ld bc,TX_5b7b
+	call showText
+	jp interactionDelete
+
+;;
+; z : la scène de l'auberge est à venir (après le chapitre 5, le quiz pas encore réussi, pas
+; pendant la fin d'un chapitre)
+innSceneDue:
+	ld a,(wEssencesObtained)
+	and $10
+	jr z,@no
+	ld a,(wBalladeEnding)
+	or a
+	ret nz
+	ld a,GLOBALFLAG_BALLADE_QUIZ
+	jp checkGlobalFlag
+@no:
+	or $01
+	ret
+
+
+; ==================================================================================================
+; Les photos de Cocolint (subid $37, à l'auberge du Songe 2:9e ; idée de Denis) : une fois le
+; chapitre 5 fini (l'essence 5, le souvenir de la maison de Tarkin), Link vient dormir (inviteDream) ;
+; Marine, humaine, fouille ses poches (« fais voir... », elle s'agite contre lui, ça froisse) :
+; « J'AI TROUVÉ ÇA DANS TES POCHES ! », les photos de Link's Awakening (TX_5ae8), une fois
+; (GLOBALFLAG_BALLADE_PHOTOS) ; puis CUTSCENE_BALLADE_PHOTOS (code/ages/cutscenes/photos.s), qui
+; ramène Link sur sa case. La première fois dans l'auberge du Songe, Marine serre d'abord Link dans
+; ses bras (marineHumanScript, le drapeau $40 de la salle) : les photos attendent la visite suivante.
 ; ==================================================================================================
 photoScene:
 	ld e,Interaction.state
 	ld a,(de)
 	rst_jumpTable
 	.dw @init
+	.dw @look
+	.dw @rummage
 	.dw @waitText
 
 @init:
@@ -4225,11 +4288,51 @@ photoScene:
 	ld a,GLOBALFLAG_BALLADE_PHOTOS
 	call checkGlobalFlag
 	jp nz,interactionDelete
-	ld a,GLOBALFLAG_BALLADE_PHOTOS
-	call setGlobalFlag
+	call getThisRoomFlags
+	and $40
+	jp z,interactionDelete
 	call interactionIncState
 	ld a,$91
 	ld (wDisabledObjects),a
+	ld bc,TX_5b7c
+	jp showText
+
+@look:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	call interactionIncState
+	ld e,Interaction.counter1
+	ld a,72
+	ld (de),a
+	ret
+
+	; Elle fouille : elle s'agite contre Link (2 pixels à droite, à gauche, toutes les 8 images :
+	; elle revient à sa place), ça froisse
+@rummage:
+	call interactionDecCounter1
+	jr z,@found
+	ld a,(hl)
+	and $07
+	ret nz
+	ld b,(hl)
+	ld a,SND_MENU_MOVE
+	call playSound
+	call findHumanMarine
+	ret nz
+	ld l,Interaction.xh
+	ld a,$02
+	bit 3,b
+	jr nz,+
+	ld a,-$02
++
+	add (hl)
+	ld (hl),a
+	ret
+@found:
+	call interactionIncState
+	ld a,SND_PICKUP
+	call playSound
 	ld bc,TX_5ae8
 	jp showText
 
@@ -4237,6 +4340,9 @@ photoScene:
 	ld a,(wTextIsActive)
 	or a
 	ret nz
+	; (seulement maintenant : le quiz, dans la même salle, attend les photos)
+	ld a,GLOBALFLAG_BALLADE_PHOTOS
+	call setGlobalFlag
 	; (la case de Link, pour y revenir après les photos)
 	ld a,(w1Link.yh)
 	and $f0
@@ -4318,7 +4424,7 @@ ghostVeil:
 
 
 ; ==================================================================================================
-; Le quiz de Marine (subid $39, à l'auberge 3:9e ; idée de Denis) : juste après les photos
+; Le quiz de Marine (subid $39, à l'auberge du Songe 2:9e ; idée de Denis) : juste après les photos
 ; (GLOBALFLAG_BALLADE_PHOTOS), « on va voir si tu as tout oublié de l'île Cocolint ! » : six
 ; questions sur Link's Awakening (@questions : le texte, la bonne réponse ; $ff = pas notée : sa
 ; mère, Marine raconte), la blague de Tarkin (Mario) et sa tirade (« ne joue pas avec mon cœur »).
@@ -4482,8 +4588,8 @@ marineQuiz:
 	ret nz
 	xor a
 	ld (wDisabledObjects),a
-	; (la musique de l'auberge revient)
-	ld a,MUS_BALLADE_AUBERGE
+	; (la musique de la salle revient)
+	ld a,(wActiveMusic)
 	call playSound
 	jp interactionDelete
 

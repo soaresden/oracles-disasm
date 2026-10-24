@@ -4198,6 +4198,8 @@ group2Map21ObjectData:
 	obj_End
 group2Map9eObjectData:
 	obj_Interaction INTERAC_BALLADE_NPC $07 $28 $68
+	obj_Interaction INTERAC_BALLADE_OBJECT $37 $08 $08 ; après le chapitre 5 : elle fouille ses poches, les photos de Cocolint
+	obj_Interaction INTERAC_BALLADE_OBJECT $39 $08 $08 ; puis le quiz de Marine sur Cocolint
 	obj_End
 group3Map20ObjectData:
 	obj_Interaction $47 $15 $28 $50 ; un quart de cœur (300, une fois)
@@ -4249,8 +4251,7 @@ group3Map5eObjectData:
 	obj_End
 group3Map9eObjectData:
 	obj_Interaction INTERAC_BALLADE_NPC $00 $48 $38
-	obj_Interaction INTERAC_BALLADE_OBJECT $37 $08 $08 ; après le chapitre 5 : les photos de Cocolint
-	obj_Interaction INTERAC_BALLADE_OBJECT $39 $08 $08 ; puis le quiz de Marine sur Cocolint
+	obj_Interaction INTERAC_BALLADE_OBJECT $54 $08 $08 ; après le chapitre 5 : « en face à face... va dormir ! »
 	obj_Interaction INTERAC_MARINE $05 $08 $08 ; la fin du chapitre 1 : le tour du village
 	obj_Interaction INTERAC_BALLADE_OBJECT $07 $08 $08 ; parties de la v1.0/1.1 : le Carnet des Rêves
 	obj_End

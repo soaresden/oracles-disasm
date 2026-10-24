@@ -984,6 +984,7 @@ interactionedSubidData:
 	m_InteractionSubidData $00 $00 $00 ; $51 la tour : Marine propose de sortir (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $52 la tour : la Fosse, puis sortir (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $53 la progression (le menu, 3e page, B) (invisible)
+	m_InteractionSubidData $00 $00 $00 ; $54 l'auberge : Marine envoie Link dormir (invisible)
 	m_InteractionSubidDataEnd
 
 interactiond4SubidData:
