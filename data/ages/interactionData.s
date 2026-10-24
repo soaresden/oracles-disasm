@@ -970,6 +970,12 @@ interactionedSubidData:
 	m_InteractionSubidData $e9 $00 $32 ; $45 le cristal de soufre (spr_ballade_braise image 0, palette 3)
 	m_InteractionSubidData $e9 $04 $32 ; $46 le foyer de la forge (image 1, 2 : scintille ; palette 3)
 	m_InteractionSubidData $e9 $0c $22 ; $47 la pierre de lave (image 3, 4 : rougeoie ; palette 2)
+	; l'Easter Egg (balladeObjects.easterMirror...) : le miroir de Marine (spr_ballade_rex image 6)
+	m_InteractionSubidData $e6 $18 $62 ; $48 le miroir (image 6, palette 6 : PALH_TERRIER)
+	m_InteractionSubidData $00 $00 $00 ; $49 les remerciements, sur l'étagère (invisible)
+	m_InteractionSubidData $00 $00 $00 ; $4a le sound test (invisible)
+	m_InteractionSubidData $00 $00 $00 ; $4b le music test (invisible)
+	m_InteractionSubidData $00 $00 $00 ; $4c le bestiaire : les ennemis figés (invisible)
 	m_InteractionSubidDataEnd
 
 interactiond4SubidData:

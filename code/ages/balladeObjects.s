@@ -149,6 +149,11 @@ main:
 	.dw sulphurCrystal
 	.dw forgeHearth
 	.dw lavaStone
+	.dw easterMirror
+	.dw easterThanks
+	.dw easterJukebox
+	.dw easterJukebox
+	.dw easterBestiary
 
 
 ;;
@@ -4754,3 +4759,246 @@ terrierTomb:
 	call getThisRoomFlags
 	set 6,(hl)
 	jp interactionDelete
+
+
+; ==================================================================================================
+; L'Easter Egg (Denis) : la bague que Marine donne quand tout est fini (balladeFin.islandMarine).
+; Portée, le miroir de sa maison ($48, à coté de l'armoire, 3:2a) se traverse : on fonce dedans
+; (haut, un moment) et on se retrouve derrière, dans la salle secrète (5:ef, story/salles/
+; ile_marine.txt) : les remerciements ($49, l'étagère), le sound test et le music test ($4a, $4b :
+; un choix +1, -1, Jouer, Fin), le bestiaire ($4c : les ennemis du jeu, figés). Le miroir de la
+; salle secrète ramène chez Marine. Sans la bague, ce n'est qu'un miroir.
+; ==================================================================================================
+
+;;
+; Le miroir ($48). var30 le temps que Link pousse contre lui
+easterMirror:
+	ld e,Interaction.state
+	ld a,(de)
+	or a
+	jr nz,@idle
+	inc a
+	ld (de),a
+	call interactionInitGraphics
+	ld h,d
+	ld l,Interaction.collisionRadiusY
+	ld (hl),$06
+	inc l
+	ld (hl),$06
+	ld a,PALH_TERRIER
+	call loadPaletteHeader
+	jp objectSetVisible82
+
+@idle:
+	call objectPreventLinkFromPassing
+	ld e,Interaction.var30
+	ld a,(wActiveRing)
+	cp BALLADE_EASTER_RING
+	jr nz,@reset
+	; Link juste en dessous, tourné vers le haut, qui pousse
+	ld a,(w1Link.direction)
+	or a
+	jr nz,@reset
+	ld a,(wGameKeysPressed)
+	and BTN_UP
+	jr z,@reset
+	ld h,d
+	ld l,Interaction.xh
+	ld a,(w1Link.xh)
+	sub (hl)
+	add $08
+	cp $11
+	jr nc,@reset
+	ld l,Interaction.yh
+	ld a,(w1Link.yh)
+	sub (hl)
+	cp $18
+	jr nc,@reset
+	ld a,(de)
+	inc a
+	ld (de),a
+	cp 30
+	ret c
+	; il passe à travers
+	ld a,(wActiveGroup)
+	cp $03
+	ld bc,$85ef		; chez Marine -> la salle secrète (5:ef)
+	ld a,$97
+	jr z,+
+	ld bc,$832a		; la salle secrète -> chez Marine (3:2a), devant le miroir
+	ld a,$66
++
+	ld (wWarpDestPos),a
+	ld a,b
+	ld (wWarpDestGroup),a
+	ld a,c
+	ld (wWarpDestRoom),a
+	xor a
+	ld (wWarpTransition),a
+	ld a,$03 ; fondu
+	ld (wWarpTransition2),a
+	ld a,SND_ENERGYTHING
+	call playSound
+	jp interactionDelete
+@reset:
+	xor a
+	ld (de),a
+	ret
+
+;;
+; La première image d'une étagère, d'un buste : A devant lui le fait parler (pressedAButton)
+easterSensitive:
+	call interactionIncState
+	ld h,d
+	ld l,Interaction.collisionRadiusY
+	ld (hl),$08
+	inc l
+	ld (hl),$08
+	ld e,Interaction.pressedAButton
+	jp objectAddToAButtonSensitiveObjectList
+
+;;
+; A devant lui : cf
+easterPressed:
+	ld e,Interaction.pressedAButton
+	ld a,(de)
+	or a
+	ret z
+	xor a
+	ld (de),a
+	scf
+	ret
+
+;;
+; Les remerciements ($49), sur l'étagère
+easterThanks:
+	ld e,Interaction.state
+	ld a,(de)
+	or a
+	jp z,easterSensitive
+	call easterPressed
+	ret nc
+	ld bc,TX_5b73
+	jp showText
+
+;;
+; Le sound test ($4a) et le music test ($4b) : var30 le numéro, state 1 rien, 2 le choix affiché
+easterJukebox:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw @init
+	.dw @idle
+	.dw @choice
+
+@init:
+	call easterSensitive
+	ld e,Interaction.subid
+	ld a,(de)
+	cp $4a
+	ld a,$4c		; (les bruitages : $4c-$df)
+	jr z,+
+	ld a,$01		; (les musiques : $01-$4b)
++
+	ld e,Interaction.var30
+	ld (de),a
+	ret
+
+@idle:
+	call easterPressed
+	ret nc
+@show:
+	; le numéro pour \num1 (en BCD : les centaines dans l'octet haut)
+	ld e,Interaction.var30
+	ld a,(de)
+	call hexToDec		; b les centaines, c les dizaines, a les unités
+	ld l,a
+	ld a,c
+	swap a
+	or l
+	ld (wTextNumberSubstitution),a
+	ld a,b
+	ld (wTextNumberSubstitution+1),a
+	ld e,Interaction.subid
+	ld a,(de)
+	cp $4a
+	ld bc,TX_5b75
+	jr z,+
+	ld bc,TX_5b74
++
+	call showText
+	ld e,Interaction.state
+	ld a,$02
+	ld (de),a
+	ret
+
+@choice:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	ld e,Interaction.state
+	ld a,$01
+	ld (de),a
+	ld e,Interaction.var30
+	ld a,(wSelectedTextOption)
+	or a
+	jr z,@plus
+	dec a
+	jr z,@minus
+	dec a
+	ret nz			; Fin
+	; Jouer
+	ld a,(de)
+	call playSound
+	jr @show
+@plus:
+	call @range
+	ld a,(de)
+	cp c
+	jr nc,+
+	inc a
+	ld (de),a
+	jr @show
++
+	ld a,b
+	ld (de),a
+	jr @show
+@minus:
+	call @range
+	ld a,(de)
+	cp b
+	jr z,+
+	dec a
+	ld (de),a
+	jr @show
++
+	ld a,c
+	ld (de),a
+	jr @show
+
+; b, c = le premier et le dernier numéro
+@range:
+	push de
+	ld e,Interaction.subid
+	ld a,(de)
+	pop de
+	cp $4a
+	ld bc,$4cdf
+	ret z
+	ld bc,$014b
+	ret
+
+;;
+; Le bestiaire ($4c, invisible) : les ennemis de la salle sont figés (statues), sans collisions
+easterBestiary:
+	ld hl,wDisabledObjects
+	set 2,(hl)
+	ld h,FIRST_ENEMY_INDEX
+-
+	ld l,Enemy.collisionType
+	res 7,(hl)
+	inc h
+	ld a,h
+	cp LAST_ENEMY_INDEX+1
+	jr c,-
+	ret

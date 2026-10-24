@@ -3362,9 +3362,6 @@ group5Mape8ObjectData:
 
 
 
-group5MapefObjectData:
-	obj_Interaction $b8 $01 $00 $78
-	obj_End
 
 group5Mapf6ObjectData:
 	obj_Interaction $b1 $00 $28 $78
@@ -4245,6 +4242,7 @@ group3Map29ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $29 $48 $58
 	obj_End
 group3Map2aObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $48 $58 $68
 	obj_End
 group3Map5eObjectData:
 	obj_Interaction $47 $03 $28 $50 ; le bouclier (50 ; puis le bouclier de fer 150, le miroir 300)
@@ -4854,4 +4852,20 @@ group5MapeeObjectData:
 	obj_SpecificEnemyA     ENEMY_LYNEL $04 $58 $78
 	obj_SpecificEnemyA     ENEMY_LYNEL $05 $58 $68
 	obj_SpecificEnemyA     ENEMY_LYNEL $06 $58 $88
+	obj_End
+group5MapefObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $48 $88 $78 ; le miroir du retour
+	obj_Interaction INTERAC_BALLADE_OBJECT $49 $28 $18 ; les remerciements
+	obj_Interaction INTERAC_BALLADE_OBJECT $49 $28 $c8
+	obj_Interaction INTERAC_BALLADE_OBJECT $4b $18 $58 ; le music test
+	obj_Interaction INTERAC_BALLADE_OBJECT $4a $18 $98 ; le sound test
+	obj_Interaction INTERAC_BALLADE_OBJECT $4c $08 $08 ; le bestiaire
+	obj_SpecificEnemyA $00 ENEMY_LYNEL $00 $58 $28
+	obj_SpecificEnemyA     ENEMY_SWORD_DARKNUT $00 $58 $58
+	obj_SpecificEnemyA     ENEMY_MASKED_MOBLIN $00 $58 $98
+	obj_SpecificEnemyA     ENEMY_STALFOS $00 $58 $c8
+	obj_SpecificEnemyA     ENEMY_OCTOROK $00 $78 $28
+	obj_SpecificEnemyA     ENEMY_GHINI $00 $78 $58
+	obj_SpecificEnemyA     ENEMY_ROPE $00 $78 $98
+	obj_SpecificEnemyA     ENEMY_KEESE $00 $78 $c8
 	obj_End
