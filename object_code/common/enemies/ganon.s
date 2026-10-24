@@ -86,6 +86,11 @@ ganon_state_uninitialized:
 	ld l,Enemy.zh
 	dec (hl)
 
+.ifdef ROM_AGES
+	; BALLADE: Ganon se bat dans la salle de la Tour (5:c7), là où Link est entré (Denis : « je vais
+	; à gauche, je finis au milieu ») ; pas d'arène de Twinrova (5:f5)
+	ld hl,w1Link.enabled
+.else
 	ld hl,w1Link.yh
 	ld (hl),$88
 	ld l,<w1Link.xh
@@ -93,6 +98,7 @@ ganon_state_uninitialized:
 	ld l,<w1Link.direction
 	ld (hl),DIR_UP
 	ld l,<w1Link.enabled
+.endif
 	ld (hl),$03
 
 	; Load extra graphics for ganon
@@ -131,6 +137,11 @@ ganon_state_uninitialized:
 	ld a,h
 	ld (de),a
 
+.ifdef ROM_AGES
+	; BALLADE: la salle reste celle de la Tour (ses murs violets, son escalier : balladeObjects) ;
+	; ses images à lui, chargées tout de suite (sans le rechargement de la salle d'Ages)
+	call reloadObjectGfx
+.else
 	call disableLcd
 	ld a,<ROOM_TWINROVA_FIGHT
 	ld (wActiveRoom),a
@@ -143,6 +154,7 @@ ganon_state_uninitialized:
 	call func_131f
 	call resetCamera
 	call loadCommonGraphics
+.endif
 
 .ifdef ROM_AGES
 	ld a,PALH_8b
@@ -151,10 +163,12 @@ ganon_state_uninitialized:
 .endif
 	call loadPaletteHeader
 .ifdef ROM_AGES
-	ld a,PALH_b1
+	; BALLADE: dans la salle de la Tour, telle quelle (pas d'écran de résurrection)
+	ldh a,(<hActiveObject)
+	ld d,a
+	jp objectSetVisible83
 .else
 	ld a,PALH_SEASONS_b1
-.endif
 	ld (wExtraBgPaletteHeader),a
 	ld a,GFXH_GANON_REVIVAL
 	call loadGfxHeader
@@ -166,6 +180,7 @@ ganon_state_uninitialized:
 	call objectSetVisible83
 
 	jp fadeinFromWhite
+.endif
 
 
 ; Spawning ENEMY_GANON_REVIVAL_CUTSCENE

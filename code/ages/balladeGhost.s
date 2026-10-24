@@ -39,6 +39,8 @@ box:
 	jp objectSetVisiblec2
 
 @onFloor:
+	; Par terre, elle est solide (Denis : on passait dessous)
+	call objectPreventLinkFromPassing
 	ld e,Interaction.pressedAButton
 	ld a,(de)
 	or a
