@@ -23,6 +23,8 @@ counter:
 	jr z,@boss
 	cp ENEMY_RAMROCK
 	jr z,@boss
+	cp ENEMY_LINK_MIMIC	; (Dark Link, la Tour : un duel, deux contres)
+	jr z,@boss
 	ld (hl),$00
 	jr @link
 @boss:

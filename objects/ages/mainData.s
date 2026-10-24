@@ -4779,8 +4779,7 @@ group5Mapc3ObjectData:
 group5Mapc4ObjectData:
 	obj_Interaction INTERAC_MARINE $08 $08 $08 ; Marine félicite Link quand le boss est battu
 	obj_Interaction $1e $0b $50 $00
-	obj_SpecificEnemyA $00 $64 $00 $38 $b8
-	obj_SpecificEnemyA $00 $64 $00 $78 $b8
+	obj_SpecificEnemyA $00 $64 $00 $58 $b8
 	obj_Interaction INTERAC_BALLADE_OBJECT $32 $58 $78
 	obj_Interaction INTERAC_BALLADE_OBJECT $01 $08 $08
 	obj_End

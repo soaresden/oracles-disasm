@@ -295,7 +295,7 @@ extraEnemyData:
 	.db $06 $06 $fa $09 ; 0x18
 	.db $06 $06 $f8 $09 ; 0x19
 	.db $06 $06 $fc $0a ; 0x1a
-	.db $06 $06 $f8 $0c ; 0x1b
+	.db $06 $06 $fe $10 ; 0x1b ; BALLADE: Dark Link (Link Mimic) : 16 de vie, un demi-cœur par coup
 	.db $0a $0a $fe $18 ; 0x1c ; BALLADE: le Ghini géant (mini-boss du Phare) : 24 points de vie au lieu de 12 (Denis : trop simple)
 	.db $0a $0a $fc $14 ; 0x1d
 	.db $06 $06 $fc $14 ; 0x1e

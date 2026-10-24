@@ -253,6 +253,11 @@ specialObjectLoadAnimationFrameToBuffer:
 		.include "code/ages/balladeTerrier.s"
 	.ends
 
+	 ; BALLADE: Dark Link (la Tour Sans-Nuit, 2F) : son duel (ENEMY_LINK_MIMIC)
+	 m_section_superfree Ballade_DarkLink namespace balladeDarkLink
+		.include "code/ages/balladeDarkLink.s"
+	.ends
+
 	 ; BALLADE: la fin du jeu et l'après-jeu (INTERAC_BALLADE_CREUSE $10-$18)
 	 m_section_superfree Ballade_Fin namespace balladeFin
 		.include "code/ages/balladeFin.s"
