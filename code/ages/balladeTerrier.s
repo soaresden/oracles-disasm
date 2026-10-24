@@ -1286,6 +1286,15 @@ soulSpin:
 	ld a,(hl)
 	or a
 	jr z,@skip
+	; Jamais un boss ni un mini-boss (ENEMY_$01-$08 : Ramrock et ses bras, Veran... ; $70 et
+	; plus) : Givrolin n'a que 4 points de vie, ses phases se comptent ailleurs ; vidé, il ne
+	; renvoyait plus ses bras (Denis, bloqué)
+	ld l,Enemy.id
+	ld a,(hl)
+	cp ENEMY_RIVER_ZORA
+	jr c,@skip
+	cp $70
+	jr nc,@skip
 	ld l,Enemy.collisionType
 	bit 7,(hl)
 	jr z,@skip

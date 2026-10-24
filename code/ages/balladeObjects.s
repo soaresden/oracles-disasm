@@ -1176,9 +1176,9 @@ giveTreasureAboveLink:
 
 ;;
 ; $4e : Givrolin (4:64). Ses phases demandent des bombes puis des graines (le Lance-Graines) : tant
-; qu'il vit, s'il en reste moins de 4, un paquet de bombes apparaît devant le cristal du haut à
-; gauche et des graines de feu devant celui de droite (un seul de chaque au sol ; Denis : « sinon
-; c'est softlock assuré »).
+; qu'il vit, un coup d'épée dans la fougère du haut à gauche en fait sortir des bombes, dans celle
+; de droite des graines de feu, à volonté (un seul paquet de chaque au sol ; Denis : « sinon
+; c'est softlock assuré », puis « faut planquer les bombes et les graines »).
 bossSupplies:
 	ld a,(wNumEnemies)
 	or a
@@ -1191,17 +1191,29 @@ bossSupplies:
 	dec (hl)
 	ret
 +
-	ld (hl),90
-	ld a,(wNumBombs)
-	cp $04
-	jr nc,+
-	ld bc,(ITEM_DROP_BOMBS<<8)|$31
-	call @supply
-+
-	ld a,(wNumEmberSeeds)
-	cp $04
+	; L'épée, dans une fougère (lignes 1-2 ; colonnes 1-2 ou 12-13) ?
+	ld a,(w1WeaponItem.enabled)
+	or a
+	ret z
+	ld a,(w1WeaponItem.id)
+	cp ITEM_SWORD
+	ret nz
+	ld a,(w1WeaponItem.yh)
+	cp $34
 	ret nc
+	ld a,(w1WeaponItem.xh)
+	ld bc,(ITEM_DROP_BOMBS<<8)|$31
+	cp $34
+	jr c,+
+	cp $bc
+	ret c
 	ld bc,(ITEM_DROP_EMBER_SEEDS<<8)|$3d
++
+	ld (hl),30
+	push bc
+	ld a,SND_CUTGRASS
+	call playSound
+	pop bc
 
 ; Pose l'objet b en case c, s'il n'y en a pas déjà un au sol
 @supply:
