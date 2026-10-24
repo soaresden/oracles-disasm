@@ -242,8 +242,8 @@ objectGfxHeaderTable:
 	/* $e9 */ m_ObjectGfxHeader spr_ballade_braise ; Mont-Braise, les trois couleurs (art/braise.txt)
 	/* $ea */ m_ObjectGfxHeader spr_ballade_miroir ; le miroir de Marine, la porte tournante de DX (art/miroir.txt)
 	/* $eb */ m_ObjectGfxHeader spr_ballade_tarkin ; Tarkin, son sprite de DX (tools/make_tarkin.py)
-	; les habitants, des PNJ de DX (tools/make_pnj_dx.py) : deux par feuille (tuiles $00, $10)
-	/* $ec */ m_ObjectGfxHeader spr_ballade_pnj_1 ; le garçon, la fille
-	/* $ed */ m_ObjectGfxHeader spr_ballade_pnj_2 ; le petit, le gamin à la mèche
-	/* $ee */ m_ObjectGfxHeader spr_ballade_pnj_3 ; la dame, l'homme
-	/* $ef */ m_ObjectGfxHeader spr_ballade_pnj_4 ; l'homme aux cheveux fous, l'homme aux cheveux en pétard
+	; les habitants, des PNJ de DX, seulement des humains (tools/make_pnj_dx.py) : deux par feuille (tuiles $00, $10)
+	/* $ec */ m_ObjectGfxHeader spr_ballade_pnj_1 ; deux enfants de Mabe
+	/* $ed */ m_ObjectGfxHeader spr_ballade_pnj_2 ; le marchand, Papahl
+	/* $ee */ m_ObjectGfxHeader spr_ballade_pnj_3 ; Madame Miaou-Miaou, l'homme du Jeu Branché
+	/* $ef */ m_ObjectGfxHeader spr_ballade_pnj_4 ; Grand-mère Ulrira, Richard

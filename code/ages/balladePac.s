@@ -16,8 +16,8 @@
 ; one shot ») et tous retournent à l'enclos ; attrapé avec un seul cœur, c'est perdu. Tous les rubis
 ; ramassés : gagné. Deux labyrinthes (Denis) : le 1er (5:e9) gagné, le forain envoie Link dans le
 ; 2e (5:ee, art/labyrinthe2.txt), plus dur : les Lynels vont plus vite, sortent plus tôt de l'enclos,
-; et la gemme fait moins longtemps peur ; le 2e gagné : 20 rubis et, la première fois, un quart de
-; cœur (drapeau $80 de 5:ee). Perdu, ou le 2e gagné : retour chez le forain.
+; et la gemme fait moins longtemps peur ; le 2e gagné : 20 rubis et, la première fois, l'Anneau de
+; Force et un quart de cœur (drapeau $80 de 5:ee). Perdu, ou le 2e gagné : retour chez le forain.
 ;
 ; Le contrôleur : INTERAC_BALLADE_CREUSE $01 (object_code/ages/interactions/balladeCreuse.s) ; les
 ; Lynels : object_code/common/enemies/lynel.s appelle « lynel » ci-dessous.
@@ -224,20 +224,12 @@ main:
 	cp PAC_HARD_ROOM
 	jr z,++
 	ld bc,TX_5b40
-	call showText
-	; BALLADE: l'Anneau de Force, la première fois (Link le ramasse avant de partir : var31)
-	ld a,POWER_RING_L1
-	ld bc,TREASURE_OBJECT_RING_29
-	call balladeRingReward
-	ret nz
-	ld e,Interaction.var31
-	ld a,$01
-	ld (de),a
-	ret
+	jp showText
 ++
 	ld bc,TX_5a4e
 	call showText
-	; Le 2e, la première fois : un quart de cœur (drapeau $80 du 2e labyrinthe)
+	; Le 2e, la première fois : un quart de cœur (drapeau $80 du 2e labyrinthe) ; puis l'Anneau de
+	; Force (@ending)
 	call getThisRoomFlags
 	bit 7,(hl)
 	ret nz
@@ -331,6 +323,23 @@ main:
 	xor a
 	ld (de),a
 ++
+	; BALLADE: le 2e labyrinthe gagné, la première fois : l'Anneau de Force (Denis : au niveau 2),
+	; après le quart de cœur ; Link le ramasse et lit son texte (var31, comme le quart de cœur)
+	ld a,(wActiveRoom)
+	cp PAC_HARD_ROOM
+	jr nz,+
+	ld a,(wBalladePacState)
+	cp $02
+	jr nz,+
+	ld a,POWER_RING_L1
+	ld bc,TREASURE_OBJECT_RING_29
+	call balladeRingReward
+	jr nz,+
+	ld e,Interaction.var31
+	ld a,$01
+	ld (de),a
+	ret
++
 	ld e,Interaction.state
 	ld a,$03
 	ld (de),a

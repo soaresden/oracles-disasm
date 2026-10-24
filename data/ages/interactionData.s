@@ -839,13 +839,13 @@ interactiond2SubidData:
 
 ; BALLADE: habitants de nos îles (INTERAC_BALLADE_NPC) : gfx, tuile de départ, palette + animation
 interactione8SubidData:
-	m_InteractionSubidData $ee $10 $12 ; l'aubergiste (l'homme de DX)
+	m_InteractionSubidData $ee $10 $12 ; l'aubergiste (l'homme du Jeu Branché de DX)
 	m_InteractionSubidData $5b $00 $32 ; le vieux pêcheur (casquette)
-	m_InteractionSubidData $ec $00 $02 ; un garçon (de DX)
-	m_InteractionSubidData $ed $00 $02 ; un autre enfant (le petit de DX)
-	m_InteractionSubidData $ee $00 $22 ; la dame insomniaque (la dame de DX)
+	m_InteractionSubidData $ec $00 $02 ; un garçon (un enfant de Mabe, DX)
+	m_InteractionSubidData $ec $10 $02 ; un autre enfant (un enfant de Mabe, DX)
+	m_InteractionSubidData $ee $00 $22 ; la dame insomniaque (Madame Miaou-Miaou, DX)
 	m_InteractionSubidData $42 $00 $32 ; le vieux qui compte les moutons
-	m_InteractionSubidData $ed $10 $12 ; l'ado (le gamin à la mèche de DX)
+	m_InteractionSubidData $ec $10 $12 ; l'ado (un enfant de Mabe, DX)
 	m_InteractionSubidData $e2 $00 $32 ; Marine humaine (spr_marine_human) : cheveux orange, robe jaune pâle
 	m_InteractionSubidData $42 $00 $12 ; le forain (le vieux, autres couleurs)
 	m_InteractionSubidDataEnd
@@ -909,10 +909,10 @@ interactionedSubidData:
 	m_InteractionSubidData $00 $00 $00 ; $08 l'essence du donjon 2 apparaît après le boss (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $09 l'entrée d'un donjon : son nom (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $0a la fin d'un chapitre (invisible)
-	m_InteractionSubidData $ec $00 $02 ; $0b un enfant de la place du Grelot (le garçon de DX)
-	m_InteractionSubidData $ec $10 $32 ; $0c un autre enfant (la fille de DX)
-	m_InteractionSubidData $ee $00 $12 ; $0d Mme Bonnet, la maîtresse (la dame de DX, en bleu)
-	m_InteractionSubidData $42 $10 $32 ; $0e Héloïse (la vieille dame d'Ages)
+	m_InteractionSubidData $ec $00 $02 ; $0b un enfant de la place du Grelot (un enfant de Mabe, DX)
+	m_InteractionSubidData $ec $10 $32 ; $0c un autre enfant (un enfant de Mabe, DX)
+	m_InteractionSubidData $ee $00 $12 ; $0d Mme Bonnet, la maîtresse (Madame Miaou-Miaou de DX, en bleu)
+	m_InteractionSubidData $ef $00 $32 ; $0e Héloïse (Grand-mère Ulrira de DX)
 	m_InteractionSubidData $44 $00 $12 ; $0f Bulle, la monitrice (la Zora d'Ages : Denis préférait ce dessin)
 	m_InteractionSubidData $41 $00 $22 ; $10 le facteur des bouteilles (le facteur d'Ages)
 	m_InteractionSubidData $42 $00 $02 ; $11 Gaspard (le vieux monsieur)
@@ -924,24 +924,24 @@ interactionedSubidData:
 	m_InteractionSubidData $2a $00 $32 ; $17 un musicien des Cuivres
 	m_InteractionSubidData $42 $00 $22 ; $18 le marchand de copies
 	m_InteractionSubidData $41 $10 $02 ; $19 Bêche, le fossoyeur (le vieil homme d'Ages)
-	m_InteractionSubidData $ec $00 $12 ; $1a Noé (le garçon de DX)
-	m_InteractionSubidData $42 $10 $12 ; $1b la grand-mère de Noé (dans le Songe)
-	m_InteractionSubidData $ee $00 $32 ; $1c la veuve Marée (la dame de DX)
-	m_InteractionSubidData $ef $00 $22 ; $1d le sonneur (l'homme aux cheveux fous de DX)
+	m_InteractionSubidData $ec $00 $12 ; $1a Noé (un enfant de Mabe, DX)
+	m_InteractionSubidData $ef $00 $12 ; $1b la grand-mère de Noé (dans le Songe ; Grand-mère Ulrira de DX)
+	m_InteractionSubidData $ee $00 $32 ; $1c la veuve Marée (Madame Miaou-Miaou de DX)
+	m_InteractionSubidData $ed $10 $22 ; $1d le sonneur (Papahl de DX)
 	m_InteractionSubidData $00 $00 $00 ; $1e la clé enterrée (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $1f la grille de la cathédrale (invisible)
 	m_InteractionSubidData $eb $04 $62 ; $20 Tarkin, le père de Marine (son sprite de DX : spr_ballade_tarkin, de dos ; PALH_TARKIN)
 	m_InteractionSubidData $3e $10 $02 ; $21 le Rito égaré
-	m_InteractionSubidData $ed $10 $22 ; $22 Zéphyr (le gamin à la mèche de DX)
-	m_InteractionSubidData $ed $10 $22 ; $23 Zéphyr dans le Songe
-	m_InteractionSubidData $ee $10 $32 ; $24 un meunier (l'homme de DX)
-	m_InteractionSubidData $42 $10 $22 ; $25 Mère Plume
-	m_InteractionSubidData $ef $10 $12 ; $26 le roi d'une nuit (endormi ; l'homme aux cheveux en pétard de DX)
+	m_InteractionSubidData $ec $00 $22 ; $22 Zéphyr (un enfant de Mabe, DX)
+	m_InteractionSubidData $ec $00 $22 ; $23 Zéphyr dans le Songe
+	m_InteractionSubidData $ee $10 $32 ; $24 un meunier (l'homme du Jeu Branché de DX)
+	m_InteractionSubidData $ef $00 $22 ; $25 Mère Plume (Grand-mère Ulrira de DX)
+	m_InteractionSubidData $ef $10 $12 ; $26 le roi d'une nuit (endormi ; Richard, le prince de DX)
 	m_InteractionSubidData $41 $00 $12 ; $27 le veilleur
-	m_InteractionSubidData $ec $10 $12 ; $28 la petite sœur (la fille de DX)
+	m_InteractionSubidData $ec $10 $12 ; $28 la petite sœur (un enfant de Mabe, DX)
 	m_InteractionSubidData $3f $00 $12 ; $29 la chanteuse
-	m_InteractionSubidData $ee $00 $22 ; $2a la mère (endormie ; la dame de DX)
-	m_InteractionSubidData $ee $10 $22 ; $2b le père (endormi ; l'homme de DX)
+	m_InteractionSubidData $ee $00 $22 ; $2a la mère (endormie ; Madame Miaou-Miaou de DX)
+	m_InteractionSubidData $ee $10 $22 ; $2b le père (endormi ; l'homme du Jeu Branché de DX)
 	m_InteractionSubidData $ef $10 $12 ; $2c le roi dans le Songe
 	m_InteractionSubidData $00 $00 $00 ; $2d la porte gelée du palais (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $2e le cristal du Songe (invisible)
@@ -977,7 +977,7 @@ interactionedSubidData:
 	m_InteractionSubidData $00 $00 $00 ; $4a le sound test (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $4b le music test (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $4c le bestiaire : les ennemis figés (invisible)
-	m_InteractionSubidData $ef $00 $32 ; $4d le second meunier (l'homme aux cheveux fous de DX)
+	m_InteractionSubidData $ed $00 $32 ; $4d le second meunier (le marchand de DX)
 	m_InteractionSubidData $00 $00 $00 ; $4e Givrolin : bombes et graines (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $4f la Spirale : un pont du ciel (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $50 la Spirale : les bombes frappent les cristaux (invisible)

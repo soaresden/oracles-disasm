@@ -10,6 +10,9 @@
 ; ses voisines toute seule (@flood, 4 par image ; leurs rubis vont droit dans la bourse). Deux niveaux (Denis) : Facile, Difficile ; la
 ; première victoire en Difficile donne un quart de cœur (drapeau $80 de la salle).
 ;
+; B sur une case pas creusée : un drapeau (Denis : « ici, une bombe ! » ; B de nouveau l'enlève) ; une
+; case avec un drapeau ne se creuse pas.
+;
 ; Le forain (INTERAC_BALLADE_NPC $08) propose ses trois jeux (TX_5a43 : Creuse, Mamono, Lynels,
 ; Non) ; ce contrôleur voit ce texte se fermer et lit le choix (wSelectedTextOption), propose le
 ; niveau (TX_5a4b), fait payer et prépare le champ. Le Mamono se joue dans l'arène du forain (5:ea,
@@ -22,6 +25,7 @@
 .define CREUSE_UNDUG_TILE	$12	; sable meuble
 .define CREUSE_DUG_TILE		$bf	; sable lisse
 .define CREUSE_FIRST_NUMBER	$40	; brique $40 + n : le chiffre n (1-8), sur le sable
+.define CREUSE_FLAG_TILE	$49	; le drapeau du joueur, sur le sable meuble
 .define CREUSE_FIRST_ROW	2
 .define CREUSE_FIRST_COL	1
 
@@ -205,27 +209,20 @@ main:
 	or a
 	jp nz,@flood
 	ld a,(wGameKeysJustPressed)
+	bit BTN_BIT_B,a
+	jp nz,@flag
 	and BTN_A
 	ret z
 
-	; La case devant Link : la sienne, plus un pas dans la direction où il regarde
-	ld a,(w1Link.yh)
-	and $f0
-	ld c,a
-	ld a,(w1Link.xh)
-	swap a
-	and $0f
-	or c
-	ld c,a
-	ld a,(w1Link.direction)
-	ld hl,@frontOffsets
-	rst_addAToHl
-	ld a,c
-	add (hl)
-	ld c,a			; c = position de la case (YX)
-	call @cellIndex
+	call @frontCell
 	ret c			; hors du champ
 	ld b,a			; b = numéro de la case
+	; (un drapeau : on ne creuse pas là)
+	ld h,>wRoomLayout
+	ld l,c
+	ld a,(hl)
+	cp CREUSE_FLAG_TILE
+	ret z
 
 	ld hl,wBalladeCreuseDug
 	call @testBit
@@ -727,6 +724,48 @@ main:
 
 @frontOffsets:
 	.db $f0 $01 $10 $ff ; haut, droite, bas, gauche
+
+;;
+; B : un drapeau sur la case devant Link, pas creusée ; ou on l'enlève
+@flag:
+	call @frontCell
+	ret c
+	ld h,>wRoomLayout
+	ld l,c
+	ld a,(hl)
+	ld b,CREUSE_FLAG_TILE
+	cp CREUSE_UNDUG_TILE
+	jr z,+
+	cp CREUSE_FLAG_TILE
+	ret nz			; creusée
+	ld b,CREUSE_UNDUG_TILE
++
+	ld a,SND_MENU_MOVE
+	call playSound
+	ld a,b
+	jp setTile
+
+;;
+; La case devant Link : la sienne, plus un pas dans la direction où il regarde
+; @param[out]	a	son numéro
+; @param[out]	c	sa position (YX)
+; @param[out]	cflag	hors du champ
+@frontCell:
+	ld a,(w1Link.yh)
+	and $f0
+	ld c,a
+	ld a,(w1Link.xh)
+	swap a
+	and $0f
+	or c
+	ld c,a
+	ld a,(w1Link.direction)
+	ld hl,@frontOffsets
+	rst_addAToHl
+	ld a,c
+	add (hl)
+	ld c,a
+	jp @cellIndex
 
 ; Rubis selon le nombre de bombes autour (0, 1, 2, 3 ou plus) : vert, vert, bleu, rouge
 @rupeeDrops:

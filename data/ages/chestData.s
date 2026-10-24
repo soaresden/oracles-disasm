@@ -214,7 +214,8 @@ chestGroup5Data:
 	m_ChestData $15, $b5, TREASURE_OBJECT_RUPEES_04
 	m_ChestData $74, $bd, TREASURE_OBJECT_RING_16
 	m_ChestData $47, $b9, TREASURE_OBJECT_RUPEES_05
-	m_ChestData $15, $ee, TREASURE_OBJECT_GASHA_SEED_01
+	; BALLADE: plus de coffre d'Ages en 5:ee (le 2e Labyrinthe des Lynels) : le quart de cœur ramassé,
+	; le jeu y dessinait un coffre ouvert en plein mur (Denis)
 	m_ChestData $15, $dd, TREASURE_OBJECT_BOMBS_00
 	m_ChestData $81, $c0, TREASURE_OBJECT_RUPEES_04
 	m_ChestData $24, $c0, TREASURE_OBJECT_RUPEES_04

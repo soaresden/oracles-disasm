@@ -5,8 +5,8 @@
 ; 2-9, colonnes 1-13 de la salle) cache des monstres d'un niveau de 1 à 5 (Keese, Octorok, Moblin,
 ; Darknut, Lynel). Link creuse la case devant lui avec A. Une case vide montre la somme des niveaux
 ; des monstres qui l'entourent (les chiffres de 1 à 40 : tools/make_mamono.py, décor $6a). Un
-; monstre déterré apparaît, figé sur sa case (le vrai ennemi), puis s'en va en fumée et laisse son
-; niveau dans un cadre (on voit qu'il y avait là un monstre, pour continuer à compter) : s'il n'est
+; monstre déterré apparaît, figé sur sa case (le vrai ennemi), puis s'en va en fumée ; sa case montre
+; alors, comme les autres, la somme des niveaux autour d'elle (Denis : on la recompte) : s'il n'est
 ; pas plus fort que Link, Link le bat ; sinon Link perd un demi-cœur par niveau d'écart, et tout son
 ; niveau si le monstre est découvert à l'aveugle (aucune case creusée autour). Chaque monstre battu
 ; donne autant d'expérience que son niveau, et Link monte de niveau (« L-n » dans la barre d'état,
@@ -14,7 +14,8 @@
 ; (quatre par image). Gagné quand tous les monstres sont déterrés ; à bout de forces, perdu. Deux
 ; niveaux (Denis) : Facile, Dur ; le gros lot en Dur sans une égratignure (un « perfect » :
 ; wBalladeMamonoHurt) : un quart de cœur la première fois (drapeau $80 de l'arène), 30 rubis
-; ensuite. On sort par le haut, chez le forain.
+; ensuite. On sort par le haut, chez le forain. B sur une case pas creusée : une note du joueur
+; (Denis : 1, 2... jusqu'à 5, puis plus rien) ; une case notée ne se creuse pas.
 ;
 ; Les ennemis modèles : un de chaque niveau dans les objets de la salle (story/salles/objets.txt),
 ; pour que leurs images soient chargées ; après quelques images, ce contrôleur les cache, coupe leurs
@@ -26,7 +27,7 @@
 .define MAMONO_UNDUG		$12	; sable à creuser
 .define MAMONO_SAND		$bf	; sable lisse : rien autour
 .define MAMONO_FIRST_NUMBER	$40	; brique $40 + n : le chiffre n (1-40)
-.define MAMONO_FIRST_BOXED	$68	; brique $68 + n : un monstre vaincu de niveau n, dans un cadre
+.define MAMONO_FIRST_NOTE	$68	; brique $68 + n : la note n du joueur (1-5), sur le sable meuble
 .define MAMONO_FLOOD_PER_FRAME	4
 .define MAMONO_ROWS		8
 .define MAMONO_COLS		13
@@ -207,11 +208,11 @@ main:
 	call @puffAt
 	ld a,SND_POOF
 	call playSound
+	; sa case : la somme des niveaux autour, comme les autres (Denis)
 	ld a,(wBalladeMamonoShowPos)
 	ld c,a
-	ld a,(wBalladeMamonoTmp)
-	add MAMONO_FIRST_BOXED
-	jp setTile
+	ld a,(wBalladeMamonoShowIndex)
+	jp @reveal
 
 @playing:
 	ld a,(wBalladeMamonoState)
@@ -227,33 +228,19 @@ main:
 	or a
 	jp nz,@flood
 	ld a,(wGameKeysJustPressed)
+	bit BTN_BIT_B,a
+	jp nz,@note
 	and BTN_A
 	ret z
 
-	; La case devant Link : la sienne, plus un pas dans la direction où il regarde
-	ld a,(w1Link.yh)
-	and $f0
-	ld c,a
-	ld a,(w1Link.xh)
-	swap a
-	and $0f
-	or c
-	ld c,a
-	ld a,(w1Link.direction)
-	and $03
-	ld hl,@frontOffsets
-	rst_addAToHl
-	ld a,c
-	add (hl)
-	ld c,a			; c = position de la case (YX)
-	call @cellIndex
+	call @frontCell
 	ret c			; hors du champ
 	ld b,a			; b = numéro de la case
 	ld h,>wRoomLayout
 	ld l,c
 	ld a,(hl)
 	cp MAMONO_UNDUG
-	ret nz			; déjà creusée
+	ret nz			; déjà creusée (ou notée : B l'efface)
 
 	; Au premier coup de pelle, les monstres se cachent (jamais autour de cette case)
 	ld a,(wBalladeMamonoPlaced)
@@ -324,7 +311,7 @@ main:
 	ld h,>wRoomLayout
 	ld l,a
 	ld a,(hl)
-	cp MAMONO_UNDUG
+	call @isUndug
 	jr nz,@floodSkip
 	push de
 	ld a,(wBalladeMamonoTmp+1)
@@ -358,6 +345,68 @@ main:
 	ret nz
 	xor a
 	ld (wBalladeMamonoFlood),a
+	ret
+
+;;
+; B : une note du joueur sur la case devant Link, pas creusée : rien -> 1 -> 2 ... -> 5 -> rien
+@note:
+	call @frontCell
+	ret c
+	ld h,>wRoomLayout
+	ld l,c
+	ld a,(hl)
+	cp MAMONO_UNDUG
+	ld b,MAMONO_FIRST_NOTE+1
+	jr z,+
+	sub MAMONO_FIRST_NOTE+1
+	cp $05
+	ret nc			; creusée : pas de note
+	cp $04
+	ld b,MAMONO_UNDUG
+	jr z,+
+	add MAMONO_FIRST_NOTE+2
+	ld b,a
++
+	ld a,SND_MENU_MOVE
+	call playSound
+	ld a,b
+	jp setTile
+
+;;
+; La case devant Link : la sienne, plus un pas dans la direction où il regarde
+; @param[out]	a	son numéro
+; @param[out]	c	sa position (YX)
+; @param[out]	cflag	hors du champ
+@frontCell:
+	ld a,(w1Link.yh)
+	and $f0
+	ld c,a
+	ld a,(w1Link.xh)
+	swap a
+	and $0f
+	or c
+	ld c,a
+	ld a,(w1Link.direction)
+	and $03
+	ld hl,@frontOffsets
+	rst_addAToHl
+	ld a,c
+	add (hl)
+	ld c,a
+	jp @cellIndex
+
+;;
+; z : la brique a est du sable pas creusé (meuble, ou notée par le joueur)
+@isUndug:
+	cp MAMONO_UNDUG
+	ret z
+	sub MAMONO_FIRST_NOTE+1
+	cp $05
+	jr nc,+
+	xor a
+	ret
++
+	or $01
 	ret
 
 ;;
@@ -656,7 +705,7 @@ main:
 	ld h,>wRoomLayout
 	ld l,a
 	ld a,(hl)
-	cp MAMONO_UNDUG
+	call @isUndug
 	jr nz,@openFound
 @openNext:
 	inc e
