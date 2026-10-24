@@ -4866,6 +4866,13 @@ paletteDataRexHit:
 	m_RGB16 $1f $1f $1f
 	m_RGB16 $1f $1f $1f
 
+paletteDataPassTree: ; l'Arbre-Passage : le vert des sprites (la palette 0), mais à lui (l'Anneau Caméléon
+	; recolore la palette 0 : la tunique de Link ; Denis : l'arbre devenait rose)
+	m_RGB16 $1f $1f $1f
+	m_RGB16 $00 $00 $00
+	m_RGB16 $02 $15 $08
+	m_RGB16 $1f $1a $11
+
 paletteDataTarkin: ; Tarkin, les couleurs de Tarin dans Link's Awakening DX (PAL2 : noir, rouge, peau)
 	m_RGB16 $1f $1f $1f
 	m_RGB16 $00 $00 $00

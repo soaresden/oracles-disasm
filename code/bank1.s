@@ -3506,8 +3506,25 @@ loadingRoom:
 	call clearScreenVariablesAndWramBank1
 	call clearStaticObjects
 	call stopTextThread
+.ifdef ROM_AGES
+	; BALLADE: en entrant dans une maison ou en en sortant (du groupe 1 au 3, du 0 au 2, et
+	; inversement), la musique continue si c'est la même (Denis : elle recommençait)
+	ld a,(wActiveGroup)
+	cp $04
+	jr nc,+
+	ld b,a
+	ld a,(wWarpDestGroup)
+	and $7f
+	cp $04
+	jr nc,+
+	xor b
+	cp $02
+	jr z,++
++
+.endif
 	ld a,$ff
 	ld (wActiveMusic),a
+++
 	call applyWarpDest
 
 ;;

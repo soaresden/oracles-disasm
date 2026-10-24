@@ -841,8 +841,8 @@ interactiond2SubidData:
 interactione8SubidData:
 	m_InteractionSubidData $ee $10 $12 ; l'aubergiste (l'homme du Jeu Branché de DX)
 	m_InteractionSubidData $5b $00 $32 ; le vieux pêcheur (casquette)
-	m_InteractionSubidData $ec $00 $02 ; un garçon (un enfant de Mabe, DX)
-	m_InteractionSubidData $ec $10 $02 ; un autre enfant (un enfant de Mabe, DX)
+	m_InteractionSubidData $ec $00 $12 ; un garçon (un enfant de Mabe, DX) (palette 1 : la 0 est celle de la tunique, que l'Anneau Caméléon recolore)
+	m_InteractionSubidData $ec $10 $12 ; un autre enfant (un enfant de Mabe, DX) (palette 1 : la 0 est celle de la tunique, que l'Anneau Caméléon recolore)
 	m_InteractionSubidData $ee $00 $22 ; la dame insomniaque (Madame Miaou-Miaou, DX)
 	m_InteractionSubidData $42 $00 $32 ; le vieux qui compte les moutons
 	m_InteractionSubidData $ec $10 $12 ; l'ado (un enfant de Mabe, DX)
@@ -909,13 +909,13 @@ interactionedSubidData:
 	m_InteractionSubidData $00 $00 $00 ; $08 l'essence du donjon 2 apparaît après le boss (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $09 l'entrée d'un donjon : son nom (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $0a la fin d'un chapitre (invisible)
-	m_InteractionSubidData $ec $00 $02 ; $0b un enfant de la place du Grelot (un enfant de Mabe, DX)
+	m_InteractionSubidData $ec $00 $12 ; $0b un enfant de la place du Grelot (un enfant de Mabe, DX) (palette 1 : la 0 est celle de la tunique, que l'Anneau Caméléon recolore)
 	m_InteractionSubidData $ec $10 $32 ; $0c un autre enfant (un enfant de Mabe, DX)
 	m_InteractionSubidData $ee $00 $12 ; $0d Mme Bonnet, la maîtresse (Madame Miaou-Miaou de DX, en bleu)
 	m_InteractionSubidData $ef $00 $32 ; $0e Héloïse (Grand-mère Ulrira de DX)
 	m_InteractionSubidData $44 $00 $12 ; $0f Bulle, la monitrice (la Zora d'Ages : Denis préférait ce dessin)
 	m_InteractionSubidData $41 $00 $22 ; $10 le facteur des bouteilles (le facteur d'Ages)
-	m_InteractionSubidData $42 $00 $02 ; $11 Gaspard (le vieux monsieur)
+	m_InteractionSubidData $42 $00 $12 ; $11 Gaspard (le vieux monsieur) (palette 1 : la 0 est celle de la tunique, que l'Anneau Caméléon recolore)
 	m_InteractionSubidData $e3 $0c $32 ; $12 la bouteille à la mer (palette 3)
 	m_InteractionSubidData $00 $00 $00 ; $13 les coquillages-échos (invisible)
 	m_InteractionSubidData $2a $00 $22 ; $14 Brasia, la forgeronne goron
@@ -923,7 +923,7 @@ interactionedSubidData:
 	m_InteractionSubidData $5b $00 $22 ; $16 Pinceau dans le Songe
 	m_InteractionSubidData $2a $00 $32 ; $17 un musicien des Cuivres
 	m_InteractionSubidData $42 $00 $22 ; $18 le marchand de copies
-	m_InteractionSubidData $41 $10 $02 ; $19 Bêche, le fossoyeur (le vieil homme d'Ages)
+	m_InteractionSubidData $41 $10 $12 ; $19 Bêche, le fossoyeur (le vieil homme d'Ages) (palette 1 : la 0 est celle de la tunique, que l'Anneau Caméléon recolore)
 	m_InteractionSubidData $ec $00 $12 ; $1a Noé (un enfant de Mabe, DX)
 	m_InteractionSubidData $ef $00 $12 ; $1b la grand-mère de Noé (dans le Songe ; Grand-mère Ulrira de DX)
 	m_InteractionSubidData $ee $00 $32 ; $1c la veuve Marée (Madame Miaou-Miaou de DX)
@@ -931,7 +931,7 @@ interactionedSubidData:
 	m_InteractionSubidData $00 $00 $00 ; $1e la clé enterrée (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $1f la grille de la cathédrale (invisible)
 	m_InteractionSubidData $eb $04 $62 ; $20 Tarkin, le père de Marine (son sprite de DX : spr_ballade_tarkin, de dos ; PALH_TARKIN)
-	m_InteractionSubidData $3e $10 $02 ; $21 le Rito égaré
+	m_InteractionSubidData $3e $10 $12 ; $21 le Rito égaré (palette 1 : la 0 est celle de la tunique, que l'Anneau Caméléon recolore)
 	m_InteractionSubidData $ec $00 $22 ; $22 Zéphyr (un enfant de Mabe, DX)
 	m_InteractionSubidData $ec $00 $22 ; $23 Zéphyr dans le Songe
 	m_InteractionSubidData $ee $10 $32 ; $24 un meunier (l'homme du Jeu Branché de DX)
@@ -956,7 +956,7 @@ interactionedSubidData:
 	m_InteractionSubidData $00 $00 $00 ; $37 les photos de Cocolint, à l'auberge (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $38 Ghost Babel : les fantômes du 4F de la Tour (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $39 le quiz de Marine, à l'auberge (invisible)
-	m_InteractionSubidData $e3 $14 $02 ; $3a l'Arbre-Passage (image 5, palette 0 : le vert)
+	m_InteractionSubidData $e3 $14 $72 ; $3a l'Arbre-Passage (image 5, palette 7 : PALH_PASS_TREE, le vert à lui)
 	m_InteractionSubidData $e3 $18 $22 ; $3b Lila endormie (image 6, palette 2 : le rouge)
 	m_InteractionSubidData $3e $00 $12 ; $3c Tic, un des jumeaux (le terrain de jeu, 1:20 ; l'enfant d'Ages, comme le jumeau caché du Songe)
 	m_InteractionSubidData $3e $00 $12 ; $3d Tac, l'autre jumeau (les mêmes)

@@ -677,6 +677,9 @@ passTree:
 	ld a,(de)
 	or a
 	jr nz,+
+	; son vert à lui (la palette 0 est celle de la tunique de Link : l'Anneau Caméléon la recolore)
+	ld a,PALH_PASS_TREE
+	call loadPaletteHeader
 	; (un vrai arbre : on ne passe pas au travers ; Denis, île 3) : la boîte d'un arbre, pas celle
 	; du radeau (40 pixels de large)
 	call raft
