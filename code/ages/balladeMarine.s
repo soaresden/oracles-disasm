@@ -6,6 +6,40 @@
 ; ==================================================================================================
 
 ;;
+; Chaque image, dehors (b2_updateMenus, bank2.s) : après le chapitre 5 (le 5e couplet, et Marine a
+; repéré le Nid des Vents : la fin du chapitre est passée), tant que la scène des photos n'est pas
+; vue (l'auberge de la Brume, 3:9e : balladeObjects.photoScene), Marine le dit une fois : « Link...
+; on peut revenir à l'auberge ? J'ai quelque chose à te dire... » (Denis : le joueur comprendra).
+photosHint:
+	ld a,(wActiveGroup)
+	dec a
+	ret nz
+	ld a,(wEssencesObtained)
+	and $10
+	ret z
+	ld a,(wTextIsActive)
+	ld b,a
+	ld a,(wDisabledObjects)
+	or b
+	ret nz
+	ld a,(wBalladeEnding)
+	or a
+	ret nz
+	ld a,GLOBALFLAG_BALLADE_ISLAND6
+	call checkGlobalFlag
+	ret z
+	ld a,GLOBALFLAG_BALLADE_PHOTOS
+	call checkGlobalFlag
+	ret nz
+	ld a,GLOBALFLAG_BALLADE_PHOTOS_HINT
+	call checkGlobalFlag
+	ret nz
+	ld a,GLOBALFLAG_BALLADE_PHOTOS_HINT
+	call setGlobalFlag
+	ld bc,TX_5b7a
+	jp showText
+
+;;
 marineTalk:
 	; Dans le Récif Murmurant (donjon 3) et la Fosse de Bulle (9), Link est seul : Marine l'attend
 	; dehors

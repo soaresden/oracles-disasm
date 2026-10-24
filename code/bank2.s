@@ -3066,6 +3066,8 @@ b2_updateMenus:
 	inc l
 	ld (hl),$53
 +
+	; BALLADE: après le chapitre 5, Marine demande à revenir à l'auberge (les photos ; une fois)
+	callab balladeMarine.photosHint
 	; BALLADE: Start = inventaire (Start + Select = sauvegarde), comme avant. Select : un appui
 	; court ouvre la carte ; gardé enfoncé, Marine parle.
 	ld a,(wKeysJustPressed)

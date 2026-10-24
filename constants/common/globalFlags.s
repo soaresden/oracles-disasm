@@ -124,6 +124,7 @@
 	GLOBALFLAG_BALLADE_CONTRE		db ; $61: Bulle a appris le contre parfait à Link (code/ages/balladeParry.s)
 	GLOBALFLAG_BALLADE_CONTRE_PRET		db ; $62: Link est descendu à la 3e profondeur de la Fosse (Bulle le lui apprendra)
 	GLOBALFLAG_BALLADE_CACHE		db ; $63: Tic et Tac jouent à cache-cache (ils se cachent dans le Songe de l'île 2)
+	GLOBALFLAG_BALLADE_PHOTOS_HINT		db ; $64: Marine a demandé à revenir à l'auberge (les photos l'y attendent)
 
 .else; ROM_SEASONS
 
