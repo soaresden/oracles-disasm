@@ -5264,13 +5264,18 @@ terrierTomb:
 ; ==================================================================================================
 
 ;;
-; Le miroir ($48). var30 le temps que Link pousse contre lui
+; Le miroir ($48). var30 le temps que Link pousse contre lui. C'est la porte tournante de Link's
+; Awakening DX (Denis) : avec la bague, Link le pousse, le panneau tourne avec lui (les poses de DX,
+; art/miroir.txt : Link pousse, aplati, le panneau de biais, la face, de biais) et il passe de
+; l'autre côté. var31 : les images du tour ; var32 : l'image montrée (4 x la pose).
 easterMirror:
 	ld e,Interaction.state
 	ld a,(de)
-	or a
-	jr nz,@idle
-	inc a
+	dec a
+	jr z,@idle
+	dec a
+	jp z,@turn
+	ld a,$01
 	ld (de),a
 	call interactionInitGraphics
 	ld h,d
@@ -5287,32 +5292,80 @@ easterMirror:
 	ld e,Interaction.var30
 	ld a,(wActiveRing)
 	cp BALLADE_EASTER_RING
-	jr nz,@reset
+	jp nz,@reset
 	; Link juste en dessous, tourné vers le haut, qui pousse
 	ld a,(w1Link.direction)
 	or a
-	jr nz,@reset
+	jp nz,@reset
 	ld a,(wGameKeysPressed)
 	and BTN_UP
-	jr z,@reset
+	jp z,@reset
 	ld h,d
 	ld l,Interaction.xh
 	ld a,(w1Link.xh)
 	sub (hl)
 	add $08
 	cp $11
-	jr nc,@reset
+	jp nc,@reset
 	ld l,Interaction.yh
 	ld a,(w1Link.yh)
 	sub (hl)
 	cp $18
-	jr nc,@reset
+	jp nc,@reset
 	ld a,(de)
 	inc a
 	ld (de),a
 	cp 30
 	ret c
-	; il passe à travers
+	; il passe à travers : le panneau tourne avec lui (Link, caché, est dans les images du miroir)
+	ld h,d
+	ld l,Interaction.state
+	ld (hl),$02
+	ld l,Interaction.var31
+	ld (hl),$00
+	ld a,DISABLE_LINK
+	ld (wDisabledObjects),a
+	ld hl,w1Link.visible
+	res 7,(hl)
+	ld a,SND_SWORDSPIN
+	jp playSound
+
+; Le tour : 8 images par pose, comme DX (Link pousse, aplati, de biais, la face, la face, de
+; biais de l'autre côté, de biais), puis le passage
+@turn:
+	ld h,d
+	ld l,Interaction.var31
+	ld a,(hl)
+	inc (hl)
+	cp 7*8
+	jr nc,@through
+	rrca
+	rrca
+	rrca
+	and $07
+	ld hl,@turnPoses
+	rst_addAToHl
+	ld a,(hl)
+	; en relatif (var32 = l'image montrée) : le jeu recale oamTileIndexBase selon la place des
+	; images en mémoire vidéo
+	ld h,d
+	ld l,Interaction.var32
+	ld b,(hl)
+	ld (hl),a
+	sub b
+	ld l,Interaction.oamTileIndexBase
+	add (hl)
+	ld (hl),a
+	ret
+
+@turnPoses:
+	.db $04, $08, $0c, $00, $00, $10, $0c
+
+@through:
+	xor a
+	ld (wDisabledObjects),a
+	ld hl,w1Link.visible
+	set 7,(hl)
 	ld a,(wActiveGroup)
 	cp $03
 	ld bc,$85ef		; chez Marine -> la salle secrète (5:ef)
