@@ -839,13 +839,13 @@ interactiond2SubidData:
 
 ; BALLADE: habitants de nos îles (INTERAC_BALLADE_NPC) : gfx, tuile de départ, palette + animation
 interactione8SubidData:
-	m_InteractionSubidData $5c $10 $12 ; l'aubergiste
+	m_InteractionSubidData $ee $10 $12 ; l'aubergiste (l'homme de DX)
 	m_InteractionSubidData $5b $00 $32 ; le vieux pêcheur (casquette)
-	m_InteractionSubidData $3e $00 $02 ; un garçon
-	m_InteractionSubidData $3e $10 $02 ; un autre enfant
-	m_InteractionSubidData $5c $00 $22 ; la dame insomniaque
+	m_InteractionSubidData $ec $00 $02 ; un garçon (de DX)
+	m_InteractionSubidData $ed $00 $02 ; un autre enfant (le petit de DX)
+	m_InteractionSubidData $ee $00 $22 ; la dame insomniaque (la dame de DX)
 	m_InteractionSubidData $42 $00 $32 ; le vieux qui compte les moutons
-	m_InteractionSubidData $4f $10 $12 ; l'ado
+	m_InteractionSubidData $ed $10 $12 ; l'ado (le gamin à la mèche de DX)
 	m_InteractionSubidData $e2 $00 $32 ; Marine humaine (spr_marine_human) : cheveux orange, robe jaune pâle
 	m_InteractionSubidData $42 $00 $12 ; le forain (le vieux, autres couleurs)
 	m_InteractionSubidDataEnd
@@ -909,9 +909,9 @@ interactionedSubidData:
 	m_InteractionSubidData $00 $00 $00 ; $08 l'essence du donjon 2 apparaît après le boss (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $09 l'entrée d'un donjon : son nom (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $0a la fin d'un chapitre (invisible)
-	m_InteractionSubidData $3e $00 $02 ; $0b un enfant de la place du Grelot
-	m_InteractionSubidData $3e $10 $32 ; $0c un autre enfant
-	m_InteractionSubidData $5c $00 $12 ; $0d Mme Bonnet, la maîtresse (en bleu)
+	m_InteractionSubidData $ec $00 $02 ; $0b un enfant de la place du Grelot (le garçon de DX)
+	m_InteractionSubidData $ec $10 $32 ; $0c un autre enfant (la fille de DX)
+	m_InteractionSubidData $ee $00 $12 ; $0d Mme Bonnet, la maîtresse (la dame de DX, en bleu)
 	m_InteractionSubidData $42 $10 $32 ; $0e Héloïse (la vieille dame d'Ages)
 	m_InteractionSubidData $44 $00 $12 ; $0f Bulle, la monitrice (la Zora d'Ages : Denis préférait ce dessin)
 	m_InteractionSubidData $41 $00 $22 ; $10 le facteur des bouteilles (le facteur d'Ages)
@@ -924,25 +924,25 @@ interactionedSubidData:
 	m_InteractionSubidData $2a $00 $32 ; $17 un musicien des Cuivres
 	m_InteractionSubidData $42 $00 $22 ; $18 le marchand de copies
 	m_InteractionSubidData $41 $10 $02 ; $19 Bêche, le fossoyeur (le vieil homme d'Ages)
-	m_InteractionSubidData $3e $10 $12 ; $1a Noé
+	m_InteractionSubidData $ec $00 $12 ; $1a Noé (le garçon de DX)
 	m_InteractionSubidData $42 $10 $12 ; $1b la grand-mère de Noé (dans le Songe)
-	m_InteractionSubidData $5c $00 $32 ; $1c la veuve Marée
-	m_InteractionSubidData $4f $10 $22 ; $1d le sonneur
+	m_InteractionSubidData $ee $00 $32 ; $1c la veuve Marée (la dame de DX)
+	m_InteractionSubidData $ef $00 $22 ; $1d le sonneur (l'homme aux cheveux fous de DX)
 	m_InteractionSubidData $00 $00 $00 ; $1e la clé enterrée (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $1f la grille de la cathédrale (invisible)
 	m_InteractionSubidData $eb $04 $62 ; $20 Tarkin, le père de Marine (son sprite de DX : spr_ballade_tarkin, de dos ; PALH_TARKIN)
 	m_InteractionSubidData $3e $10 $02 ; $21 le Rito égaré
-	m_InteractionSubidData $3e $00 $22 ; $22 Zéphyr
-	m_InteractionSubidData $3e $00 $22 ; $23 Zéphyr dans le Songe
-	m_InteractionSubidData $4f $10 $32 ; $24 un meunier (l'ado d'Ages : $00 était Syrup la sorcière, sans corps)
+	m_InteractionSubidData $ed $10 $22 ; $22 Zéphyr (le gamin à la mèche de DX)
+	m_InteractionSubidData $ed $10 $22 ; $23 Zéphyr dans le Songe
+	m_InteractionSubidData $ee $10 $32 ; $24 un meunier (l'homme de DX)
 	m_InteractionSubidData $42 $10 $22 ; $25 Mère Plume
-	m_InteractionSubidData $4f $10 $12 ; $26 le roi d'une nuit (endormi)
+	m_InteractionSubidData $ef $10 $12 ; $26 le roi d'une nuit (endormi ; l'homme aux cheveux en pétard de DX)
 	m_InteractionSubidData $41 $00 $12 ; $27 le veilleur
-	m_InteractionSubidData $3e $00 $12 ; $28 la petite sœur
+	m_InteractionSubidData $ec $10 $12 ; $28 la petite sœur (la fille de DX)
 	m_InteractionSubidData $3f $00 $12 ; $29 la chanteuse
-	m_InteractionSubidData $5c $00 $22 ; $2a la mère (endormie)
-	m_InteractionSubidData $5c $10 $22 ; $2b le père (endormi ; le villageois d'Ages, pas Syrup)
-	m_InteractionSubidData $4f $10 $12 ; $2c le roi dans le Songe
+	m_InteractionSubidData $ee $00 $22 ; $2a la mère (endormie ; la dame de DX)
+	m_InteractionSubidData $ee $10 $22 ; $2b le père (endormi ; l'homme de DX)
+	m_InteractionSubidData $ef $10 $12 ; $2c le roi dans le Songe
 	m_InteractionSubidData $00 $00 $00 ; $2d la porte gelée du palais (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $2e le cristal du Songe (invisible)
 	m_InteractionSubidData $41 $10 $12 ; $2f un garde endormi debout (le Palais Givré)
@@ -958,7 +958,7 @@ interactionedSubidData:
 	m_InteractionSubidData $00 $00 $00 ; $39 le quiz de Marine, à l'auberge (invisible)
 	m_InteractionSubidData $e3 $14 $02 ; $3a l'Arbre-Passage (image 5, palette 0 : le vert)
 	m_InteractionSubidData $e3 $18 $22 ; $3b Lila endormie (image 6, palette 2 : le rouge)
-	m_InteractionSubidData $3e $00 $12 ; $3c Tic, un des jumeaux (le terrain de jeu, 1:20)
+	m_InteractionSubidData $3e $00 $12 ; $3c Tic, un des jumeaux (le terrain de jeu, 1:20 ; l'enfant d'Ages, comme le jumeau caché du Songe)
 	m_InteractionSubidData $3e $00 $12 ; $3d Tac, l'autre jumeau (les mêmes)
 	m_InteractionSubidData $e8 $00 $12 ; $3e un jumeau caché, dans le Songe (spr_ballade_grelot, image 0)
 	m_InteractionSubidData $e8 $04 $22 ; $3f le vieux cerf-volant (image 1, palette 2 : le rouge)
@@ -977,7 +977,7 @@ interactionedSubidData:
 	m_InteractionSubidData $00 $00 $00 ; $4a le sound test (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $4b le music test (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $4c le bestiaire : les ennemis figés (invisible)
-	m_InteractionSubidData $5c $10 $12 ; $4d le second meunier (le villageois d'Ages)
+	m_InteractionSubidData $ef $00 $32 ; $4d le second meunier (l'homme aux cheveux fous de DX)
 	m_InteractionSubidData $00 $00 $00 ; $4e Givrolin : bombes et graines (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $4f la Spirale : un pont du ciel (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $50 la Spirale : les bombes frappent les cristaux (invisible)

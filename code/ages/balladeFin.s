@@ -1088,8 +1088,8 @@ followSpawner:
 ;;
 ; Marine qui suit Link ($19) : elle marche vers lui quand il s'éloigne ; quand l'épée de Link sort,
 ; elle frappe aussi ($1b) ; quand Link ne fait rien, elle chante. Chez elle (3:2a), elle reste là.
-; var30 son attente entre deux coups, var31 sa direction (0 bas, 1 haut, 2 gauche, 3 droite : ses
-; dessins), var32 son premier dessin
+; var30 son attente entre deux coups, var31 sa direction (0 bas, 1 haut, 2 gauche, 3 droite) ; ses
+; poses de DX : humanShow
 follower:
 	ld e,Interaction.state
 	ld a,(de)
@@ -1109,10 +1109,6 @@ follower:
 	ld (hl),$06
 	inc l
 	ld (hl),$06
-	ld e,Interaction.oamTileIndexBase
-	ld a,(de)
-	ld e,Interaction.var32
-	ld (de),a
 	call followPlace
 	call objectSetVisiblec2
 	; chez elle (sa maison, 3:2a) : elle reste là, Link reviendra la chercher sur la plage
@@ -1268,13 +1264,24 @@ follower:
 @setDir:
 	ld l,Interaction.var31
 	ld (hl),a
-	add a
-	add a
-	ld l,Interaction.var32
-	add (hl)
-	ld l,Interaction.oamTileIndexBase
-	ld (hl),a
-	ret
+	; un pas toutes les 8 images, comme dans DX : de face et de dos, l'image retournée ; de profil,
+	; l'image du pas (vers la droite : retournée)
+	ld c,a
+	ld a,(wFrameCounter)
+	and $08
+	rrca
+	rrca
+	rrca
+	ld b,a			; b = le pas (0 ou 1)
+	ld a,c
+	cp $02
+	jp c,humanShow		; a = 0 de face, 1 de dos ; b : retournée au pas
+	sub $02
+	ld c,a			; c = 1 vers la droite
+	ld a,b
+	add $02
+	ld b,c
+	jp humanShow
 
 ; Quand l'épée de Link sort, elle frappe aussi, devant elle
 @sword:
@@ -1618,17 +1625,21 @@ stopSinging:
 	ret z
 	xor a
 	ld (de),a
+	; de nouveau de face
+	ld b,a
+	call humanShow
 	ld e,Interaction.var35
 	ld a,(de)
 	ld (wActiveMusic),a
 	jp playSound
 
-; Pendant qu'elle chante : une note qui s'envole, de temps en temps
+; Pendant qu'elle chante : elle se balance (singPose) ; une note qui s'envole, de temps en temps
 singNotes:
 	ld e,Interaction.var36
 	ld a,(de)
 	or a
 	ret z
+	call singPose
 	ld h,d
 	ld l,Interaction.var37
 	ld a,(hl)
@@ -1642,6 +1653,55 @@ singNotes:
 	and $01
 	ld bc,$f800
 	jp objectCreateFloatingMusicNote
+
+;;
+; Pendant qu'elle chante, elle se balance comme dans DX (MarinCreditsSpriteVariants 8, 8, 8, 9, 10,
+; 10, 10, 9 : penchée, droite, penchée de l'autre côté, droite ; 16 images chacune)
+singPose:
+	ld a,(wFrameCounter)
+	swap a
+	and $07
+	ld hl,@sway
+	rst_addAToHl
+	ld a,(hl)
+	ld b,$00
+	cp $06
+	jr c,+
+	ld a,$04		; (6 : la 4 retournée)
+	inc b
++
+	jp humanShow
+
+@sway:
+	.db $04 $04 $04 $05 $06 $06 $06 $05
+
+;;
+; Marine humaine (spr_marine_human, tools/make_marine_dx.py : ses poses de Link's Awakening DX) :
+; montre l'image a (0 de face, 1 de dos, 2-3 de profil vers la gauche, 4-5 elle chante), retournée
+; si b = 1 (l'animation 5 d'INTERAC_BALLADE_CREUSE). En relatif : le jeu recale oamTileIndexBase
+; selon la place des images en mémoire vidéo. var3e l'image montrée (4 x l'image), var3f retournée
+humanShow:
+	add a
+	add a
+	ld h,d
+	ld l,Interaction.var3e
+	ld c,(hl)
+	ld (hl),a
+	sub c
+	ld l,Interaction.oamTileIndexBase
+	add (hl)
+	ld (hl),a
+	ld l,Interaction.var3f
+	ld a,(hl)
+	cp b
+	ret z
+	ld (hl),b
+	ld a,b
+	or a
+	jr z,+
+	ld a,$05
++
+	jp interactionSetAnimation
 
 ;;
 ; Marine sur son île : de temps en temps, elle chante (var33-var34 : le temps qui reste avant de

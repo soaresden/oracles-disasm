@@ -529,6 +529,10 @@
 	m_GfxData spr_ballade_braise
 	m_GfxData spr_ballade_miroir
 	m_GfxData spr_ballade_tarkin
+	m_GfxData spr_ballade_pnj_1
+	m_GfxData spr_ballade_pnj_2
+	m_GfxData spr_ballade_pnj_3
+	m_GfxData spr_ballade_pnj_4
 	m_GfxData spr_film
 	m_GfxData gfx_film_bg
 	m_GfxData map_film_bg

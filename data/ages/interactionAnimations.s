@@ -781,12 +781,13 @@ interaction4bAnimations:
 	.dw interactionAnimation5a3e9
 interaction4cAnimations:
 interactione3Animations:
-interactionebAnimations: ; BALLADE: 0 une image (deux sprites), 1 un seul sprite, 2 une grande image (32 x 32), 3-4 le boss du Terrier qui marche (avec, sans blindage)
+interactionebAnimations: ; BALLADE: 0 une image (deux sprites), 1 un seul sprite, 2 une grande image (32 x 32), 3-4 le boss du Terrier qui marche (avec, sans blindage), 5 une image retournée (Marine humaine vers la droite)
 	.dw interactionAnimationBalladeTwo
 	.dw interactionAnimationBalladeOne
 	.dw interactionAnimationBalladeBig
 	.dw interactionAnimationRexWalk
 	.dw interactionAnimationRexHurt
+	.dw interactionAnimationBalladeMirror
 
 interactionAnimationBalladeTwo:
 	.db $7f $00 $00
@@ -799,6 +800,10 @@ interactionAnimationBalladeOne:
 interactionAnimationBalladeBig:
 	.db $7f $04 $00
 	m_AnimationLoop interactionAnimationBalladeBig
+
+interactionAnimationBalladeMirror:
+	.db $7f $0e $00
+	m_AnimationLoop interactionAnimationBalladeMirror
 
 interactionAnimationRexWalk:
 	.db $10 $06 $00
@@ -3542,6 +3547,7 @@ interactionebOamDataPointers: ; BALLADE: Ghost Babel, le Terrier des Serpents
 	.dw interactionOamDataRexB
 	.dw interactionOamDataRexHurtA
 	.dw interactionOamDataRexHurtB
+	.dw interactionOamData502a7 ; (une image retournée)
 
 interactione7OamDataPointers: ; BALLADE
 	.dw interactionOamData5020e
