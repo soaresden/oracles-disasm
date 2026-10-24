@@ -978,6 +978,10 @@ interactionedSubidData:
 	m_InteractionSubidData $00 $00 $00 ; $4c le bestiaire : les ennemis figés (invisible)
 	m_InteractionSubidData $5c $10 $12 ; $4d le second meunier (le villageois d'Ages)
 	m_InteractionSubidData $00 $00 $00 ; $4e Givrolin : bombes et graines (invisible)
+	m_InteractionSubidData $00 $00 $00 ; $4f la Spirale : un pont du ciel (invisible)
+	m_InteractionSubidData $00 $00 $00 ; $50 la Spirale : les bombes frappent les cristaux (invisible)
+	m_InteractionSubidData $00 $00 $00 ; $51 la tour : Marine propose de sortir (invisible)
+	m_InteractionSubidData $00 $00 $00 ; $52 la tour : la Fosse, puis sortir (invisible)
 	m_InteractionSubidDataEnd
 
 interactiond4SubidData:

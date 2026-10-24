@@ -1918,9 +1918,6 @@ group4Map38ObjectData:
 
 
 
-group4Map49ObjectData:
-	obj_Interaction $7f $00 $28 $78
-	obj_End
 
 
 
@@ -4394,6 +4391,8 @@ group4Map3eObjectData:
 group4Map3fObjectData:
 	obj_End
 group4Map40ObjectData:
+	obj_Part $05 $10 $13
+	obj_Interaction INTERAC_BALLADE_OBJECT $4f $00 $00
 	obj_End
 group4Map41ObjectData:
 	obj_RandomEnemy $40 ENEMY_STALFOS $00
@@ -4410,42 +4409,62 @@ group4Map43ObjectData:
 	obj_Interaction $1e $04 $07 $03
 	obj_End
 group4Map44ObjectData:
+	obj_Part $05 $40 $57
+	obj_Interaction INTERAC_BALLADE_OBJECT $50 $08 $08
+	obj_Interaction $24 $61 $00 $00
+	obj_Interaction $1e $05 $5e $06
+	obj_Interaction INTERAC_BALLADE_OBJECT $01 $08 $08
 	obj_End
 group4Map45ObjectData:
-	obj_RandomEnemy $40 ENEMY_STALFOS $00
+	obj_Part $05 $20 $17
+	obj_Interaction INTERAC_BALLADE_OBJECT $4f $01 $00
+	obj_Interaction INTERAC_BALLADE_OBJECT $4f $02 $00
 	obj_End
 group4Map46ObjectData:
 	obj_End
 group4Map47ObjectData:
+	obj_Interaction $1e $0b $50 $00
+	obj_Interaction $1e $09 $5e $00
+	obj_Interaction $20 $00 $58 $78
+	obj_Interaction $12 $02 $38 $78
+	obj_BeforeEvent group4Map4dBeforeEventObjectData
 	obj_End
 group4Map48ObjectData:
+	obj_End
+group4Map49ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $01 $08 $08
 	obj_End
 group4Map4aObjectData:
 	obj_Interaction INTERAC_BALLADE_RHYTHM $00 $58 $78
 	obj_End
 group4Map4bObjectData:
-	obj_RandomEnemy $40 ENEMY_STALFOS $00
+	obj_RandomEnemy $30 ENEMY_KEESE $00
 	obj_End
 group4Map4cObjectData:
-	obj_Part $05 $04 $4c
 	obj_End
 group4Map4dObjectData:
+	obj_Part $05 $80 $7b
+	obj_Interaction INTERAC_BALLADE_OBJECT $50 $08 $08
+	obj_Interaction $24 $71 $00 $00
+	obj_Interaction $21 $17 $65 $80
 	obj_End
 group4Map4eObjectData:
 	obj_RandomEnemy $30 ENEMY_KEESE $00
 	obj_End
 group4Map4fObjectData:
+	obj_RandomEnemy $30 ENEMY_KEESE $00
 	obj_End
 group4Map50ObjectData:
+	obj_Interaction $1e $15 $50 $00
+	obj_Pointer objectData_makeAllTorchesLightable
 	obj_End
 group4Map51ObjectData:
 	obj_End
 group4Map52ObjectData:
 	obj_Interaction $1e $0a $a7 $00
 	obj_Interaction $1e $09 $5e $00
-	obj_Interaction $7e $00 $58 $78
-	obj_Interaction $20 $00 $58 $78
-	obj_BeforeEvent group4Map4dBeforeEventObjectData
+	obj_RandomEnemy $40 ENEMY_STALFOS $00
+	obj_RandomEnemy $30 ENEMY_KEESE $00
 	obj_End
 group4Map53ObjectData:
 	obj_End

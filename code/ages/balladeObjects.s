@@ -70,6 +70,10 @@
 ; @subid_45{Le cristal de soufre, au milieu de la source chaude (1:1b) : le jaune de Pinceau}
 ; @subid_46{Le foyer de la forge de Brasia (1:2a) : le Boomerang en rapporte une braise (l'orange)}
 ; @subid_47{La pierre de lave, sur l'îlot de la coulée du belvédère (1:2c) : le rouge}
+; @subid_4f{Invisible, la Spirale Céleste : un pont qui se déploie case par case (Y = le pont)}
+; @subid_50{Invisible, la Spirale Céleste : une bombe qui explose contre un cristal le frappe}
+; @subid_51{Invisible : devant Ganon sans l'Épée de Légende, Marine propose de sortir de la tour}
+; @subid_52{Invisible : la même, après « nos coups ne lui font rien » (TX_5ae5)}
 ; ==================================================================================================
 
 ;;
@@ -156,6 +160,10 @@ main:
 	.dw easterBestiary
 	.dw villager
 	.dw bossSupplies
+	.dw skyBridge
+	.dw bombCrystal
+	.dw ganonEscape
+	.dw ganonEscape
 
 
 ;;
@@ -278,6 +286,8 @@ arrivalTalk:
 	.db $01, $75, <TX_5aad, $ff ; le Nid des Vents, le courant ascendant
 	.db $01, $57, <TX_5aae, $ff ; le pont de nuages : dans le Songe, rien ne tombe
 	.db $04, $3c, <TX_5ab8, $ff ; la Spirale Céleste : ne pas regarder en bas
+	.db $04, $44, <TX_5a1e, $ff ; le cristal emmuré : elle, elle vole
+	.db $04, $49, <TX_5a1f, $ff ; la salle secrète
 	.db $04, $54, <TX_5ab9, $ff ; l'Ombre de Marine, Marine lui répond
 	.db $01, $d1, <TX_5abc, $ff ; l'île du Grand Sommeil, le ponton
 	.db $01, $b2, <TX_5acd, $ff ; le Palais Givré : la porte gelée
@@ -1180,6 +1190,10 @@ giveTreasureAboveLink:
 ; de droite des graines de feu, à volonté (un seul paquet de chaque au sol ; Denis : « sinon
 ; c'est softlock assuré », puis « faut planquer les bombes et les graines »).
 bossSupplies:
+	; Les fougères repoussent aussitôt coupées (Denis : « que les fougères soient éternelles »)
+	ld a,(wFrameCounter)
+	and $07
+	call z,@regrowFerns
 	ld a,(wNumEnemies)
 	or a
 	ret z
@@ -1214,6 +1228,32 @@ bossSupplies:
 	ld a,SND_CUTGRASS
 	call playSound
 	pop bc
+	jr @supply
+
+; Remet les briques des deux fougères (20 21 / 20 21, en haut à gauche et à droite)
+@regrowFerns:
+	ld hl,@ferns
+-
+	ldi a,(hl)
+	or a
+	ret z
+	ld c,a
+	ld b,(hl)
+	inc hl
+	push hl
+	ld h,>wRoomLayout
+	ld l,c
+	ld a,(hl)
+	cp b
+	ld a,b
+	call nz,setTile
+	pop hl
+	jr -
+
+@ferns:
+	.db $11 $20, $12 $21, $21 $20, $22 $21
+	.db $1c $20, $1d $21, $2c $20, $2d $21
+	.db $00
 
 ; Pose l'objet b en case c, s'il n'y en a pas déjà un au sol
 @supply:
@@ -1255,6 +1295,214 @@ bossSupplies:
 	and $f0
 	add $08
 	ld (hl),a
+	ret
+
+
+;;
+; $4f : un pont du ciel (la Spirale Céleste ; Denis : « les switch qu'on tape je vois même pas leur
+; effet »). Un cristal (PART_SWITCH) bascule un bit de wSwitchState ; le pont se déploie (ou se
+; replie) sous les yeux de Link, une case toutes les 6 images, avec un bruit de pierre. En entrant
+; dans la salle, il est déjà dans le bon état. Interaction.yh (la position Y de l'objet) = le numéro
+; du pont dans @bridges.
+skyBridge:
+	ld e,Interaction.state
+	ld a,(de)
+	or a
+	jr nz,@update
+	inc a
+	ld (de),a
+	; Pose d'un coup toutes les cases voulues
+	call @target
+	ld e,Interaction.var31
+	ld (de),a
+	ld b,a
+	or a
+	ret z
+-
+	push bc
+	dec b
+	ld a,b
+	call @tileAt
+	ld a,$a0
+	call setTile
+	pop bc
+	dec b
+	jr nz,-
+	ret
+
+@update:
+	ld h,d
+	ld l,Interaction.counter1
+	ld a,(hl)
+	or a
+	jr z,+
+	dec (hl)
+	ret
++
+	call @target
+	ld b,a
+	ld e,Interaction.var31
+	ld a,(de)
+	cp b
+	ret z
+	ld h,d
+	ld l,Interaction.counter1
+	ld (hl),6
+	jr c,@grow
+	; Une case de moins (la dernière posée)
+	dec a
+	ld (de),a
+	call @tileAt
+	ld a,$f4
+	jr @place
+@grow:
+	ld c,a
+	inc a
+	ld (de),a
+	ld a,c
+	call @tileAt
+	ld a,$a0
+@place:
+	call setTile
+	ld a,SND_MOVEBLOCK
+	jp playSound
+
+; @param[out]	a	Le nombre de cases voulues (0 ou toutes)
+; @param[out]	hl	Le pont (son masque)
+@target:
+	call @bridge
+	ld a,(wSwitchState)
+	and (hl)
+	inc hl
+	jr z,+
+	ld a,$01
++
+	xor (hl)
+	inc hl
+	ret z
+	ld a,(hl)
+	ret
+
+; @param	a	Le numéro de la case
+; @param[out]	c	Sa position
+@tileAt:
+	push af
+	call @bridge
+	inc hl
+	inc hl
+	inc hl
+	pop af
+	rst_addAToHl
+	ld c,(hl)
+	ret
+
+; @param[out]	hl	Le pont numéro [Interaction.yh] : masque, sens (0 : posé quand le bit est
+;			mis ; 1 : quand il ne l'est pas), nombre de cases, positions
+@bridge:
+	ld e,Interaction.yh
+	ld a,(de)
+	add a
+	ld hl,@bridges
+	rst_addAToHl
+	ldi a,(hl)
+	ld h,(hl)
+	ld l,a
+	ret
+
+@bridges:
+	.dw @bridge0, @bridge1, @bridge2
+; 4:40 : le cristal de la rive nord (bit $10), le Boomerang par-dessus le gouffre : la colonne 7
+@bridge0:
+	.db $10, $00, $03, $47, $37, $27
+; 4:45 : le cristal du pilier (bit $20) : de la rive ouest à l'îlot quand il est éteint...
+@bridge1:
+	.db $20, $01, $03, $55, $54, $53
+; ... de l'îlot à la rive est quand il est allumé
+@bridge2:
+	.db $20, $00, $04, $59, $5a, $5b, $5c
+
+;;
+; $50 : dans la Spirale, une bombe qui explose à moins de 24 pixels d'un cristal le frappe (Marine la
+; porte par-dessus les statues qui le protègent : 4:44, 4:4d). Ages ne le fait pas : l'explosion
+; touche Link et les ennemis, pas les cristaux. Une fois par bombe (une seconde d'attente).
+bombCrystal:
+	ld h,d
+	ld l,Interaction.counter1
+	ld a,(hl)
+	or a
+	jr z,+
+	dec (hl)
+	ret
++
+	ld b,FIRST_ITEM_INDEX
+@nextItem:
+	ld h,b
+	ld l,Item.enabled
+	ld a,(hl)
+	or a
+	jr z,@skipItem
+	inc l
+	ld a,(hl)
+	cp ITEM_BOMB
+	jr nz,@skipItem
+	ld l,Item.collisionType
+	ld a,(hl)
+	cp $80|ITEMCOLLISION_BOMB
+	jr nz,@skipItem
+	; Une bombe qui explose : y a-t-il un cristal tout près ?
+	ld c,FIRST_PART_INDEX
+@nextPart:
+	ld h,c
+	ld l,Part.enabled
+	ld a,(hl)
+	or a
+	jr z,@skipPart
+	inc l
+	ld a,(hl)
+	cp PART_SWITCH
+	jr nz,@skipPart
+	ld l,Part.yh
+	ld a,(hl)
+	ld h,b
+	ld l,Item.yh
+	sub (hl)
+	call @abs
+	cp 24
+	jr nc,@skipPart
+	ld h,c
+	ld l,Part.xh
+	ld a,(hl)
+	ld h,b
+	ld l,Item.xh
+	sub (hl)
+	call @abs
+	cp 24
+	jr nc,@skipPart
+	; Frappé
+	ld h,c
+	ld l,Part.var2a
+	ld (hl),$80|ITEMCOLLISION_BOMB
+	ld h,d
+	ld l,Interaction.counter1
+	ld (hl),60
+	ret
+@skipPart:
+	inc c
+	ld a,c
+	cp LAST_PART_INDEX+1
+	jr c,@nextPart
+@skipItem:
+	inc b
+	ld a,b
+	cp LAST_ITEM_INDEX+1
+	jr c,@nextItem
+	ret
+
+@abs:
+	bit 7,a
+	ret z
+	cpl
+	inc a
 	ret
 
 ;;
@@ -3722,14 +3970,34 @@ masterSword:
 
 
 ; ==================================================================================================
-; Ganon (subid $36, dans 5:c7 ; il pose son arène 5:f5) ne craint que l'Épée de Légende : sans elle,
-; sa vie revient à chaque coup (SND_CLINK), et la première fois Marine parle de la Fosse (TX_5ae5).
+; Ganon (subid $36, dans 5:c7 ; il pose son arène 5:f5) ne craint que l'Épée de Légende. Sans elle,
+; son mode de collision devient celui d'un ennemi invincible (ENEMYCOLLISION_PODOBOO : l'épée
+; rebondit, « bump », au lieu de le faire souffrir pour rien ; Denis) ; sa vie revient quand même
+; s'il en perdait. Au premier coup, Marine parle de la Fosse (TX_5ae5) et propose de sortir ($52) ;
+; la tour garde le souvenir de l'essai (bit 5 de la salle 5:c7). Revenu avec l'épée : Marine lui
+; lance « Maintenant, tu n'as aucune chance ! » (TX_5b17).
 ; var30 : sa vie de départ ; var31 : Marine a parlé.
 ; ==================================================================================================
 ganonGuard:
 	ld a,(wSwordLevel)
 	cp $03
-	jp nc,interactionDelete
+	jr c,@noSword
+	; L'épée : la réplique, une fois, si Link est déjà venu sans (quand tout est calme : pas de texte,
+	; Link libre)
+	ld hl,wGroup5RoomFlags+$c7
+	bit 5,(hl)
+	jp z,interactionDelete
+	ld a,(wTextIsActive)
+	ld b,a
+	ld a,(wDisabledObjects)
+	or b
+	ret nz
+	res 5,(hl)
+	call interactionDelete
+	ld bc,TX_5b17
+	jp showText
+
+@noSword:
 	ld h,FIRST_ENEMY_INDEX
 -
 	ld l,Enemy.enabled
@@ -3748,6 +4016,39 @@ ganonGuard:
 	ret
 
 @found:
+	; Invincible : le mode de Ganon (bit 7 : ses phases ouvrent et ferment les coups) devient celui
+	; d'un podoboo
+	ld l,Enemy.enemyCollisionMode
+	ld a,(hl)
+	ld b,a
+	and $7f
+	cp ENEMYCOLLISION_GANON
+	jr nz,+
+	ld a,b
+	and $80
+	or ENEMYCOLLISION_PODOBOO
+	ld (hl),a
++
+	; Frappé ? (invincible, il ne note plus les coups : l'épée de Link contre lui, à 20 pixels)
+	ld a,(w1WeaponItem.enabled)
+	or a
+	jr z,@health
+	ld a,(w1WeaponItem.id)
+	cp ITEM_SWORD
+	jr nz,@health
+	ld l,Enemy.yh
+	ld a,(w1WeaponItem.yh)
+	sub (hl)
+	call @abs
+	cp 20
+	jr nc,@health
+	ld l,Enemy.xh
+	ld a,(w1WeaponItem.xh)
+	sub (hl)
+	call @abs
+	cp 20
+	jr c,@hit
+@health:
 	ld l,Enemy.health
 	ld e,Interaction.var30
 	ld a,(de)
@@ -3762,16 +4063,89 @@ ganonGuard:
 	cp b
 	ret nc
 	ld (hl),b
-	ld a,SND_CLINK
-	call playSound
+@hit:
 	ld e,Interaction.var31
 	ld a,(de)
 	or a
 	ret nz
 	inc a
 	ld (de),a
+	ld hl,wGroup5RoomFlags+$c7
+	set 5,(hl)
+	ld b,$52
+	jp ganonEscapeSpawn
+
+@abs:
+	bit 7,a
+	ret z
+	cpl
+	inc a
+	ret
+
+;;
+; Crée l'interaction de la sortie : b = $51 (la question seule), $52 (la Fosse, puis la question)
+ganonEscapeSpawn:
+	call getFreeInteractionSlot
+	ret nz
+	ld (hl),INTERAC_BALLADE_OBJECT
+	inc l
+	ld (hl),b
+	ret
+
+; ==================================================================================================
+; La sortie de la tour (subids $51, $52 ; Denis : « elle nous fait partir du donjon, sinon c'est
+; soft lock ») : Marine propose de sortir (TX_5a0f) ; Oui : le parvis de la tour (1:c9), en fondu.
+; $52 : d'abord la Fosse (TX_5ae5). Select (marineTalk) en crée une ($51) devant Ganon sans l'épée.
+; ==================================================================================================
+ganonEscape:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw @init
+	.dw @waitFosse
+	.dw @waitAnswer
+
+@init:
+	call interactionIncState
+	ld e,Interaction.subid
+	ld a,(de)
+	cp $52
+	jr nz,@ask
 	ld bc,TX_5ae5
 	jp showText
+
+@waitFosse:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+@ask:
+	ld e,Interaction.state
+	ld a,$02
+	ld (de),a
+	ld bc,TX_5a0f
+	jp showText
+
+@waitAnswer:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	ld a,(wSelectedTextOption)
+	or a
+	jp nz,interactionDelete
+	; Oui : le parvis (1:c9), devant la porte
+	ld a,$81
+	ld (wWarpDestGroup),a
+	ld a,$c9
+	ld (wWarpDestRoom),a
+	ld a,$64
+	ld (wWarpDestPos),a
+	xor a
+	ld (wWarpTransition),a
+	ld a,$03 ; fondu
+	ld (wWarpTransition2),a
+	ld a,SND_BALLADE_GULL
+	call playSound
+	jp interactionDelete
 
 
 ; ==================================================================================================

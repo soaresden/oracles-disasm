@@ -465,7 +465,7 @@ debugEntries:
 	.dw debugNone
 	.db $18, $04, $3c, $97 ; la Spirale Céleste, l'entrée (la Plume de Roc)
 	.dw debugNone
-	.db $19, $04, $52, $97 ; le Fouisseur (la Cape de Roc)
+	.db $18, $04, $47, $51 ; le Fouisseur (avant la Cape de Roc : son coffre apparaît quand il est battu)
 	.dw debugNone
 	.db $1a, $04, $53, $52 ; devant la porte du boss, avec la clé du boss
 	.dw debugSpiraleBossKey
@@ -601,11 +601,11 @@ debugMilestones:
 	; 24. Mère Plume : la Plume de Roc
 	.db DBG_TREASURE, TREASURE_FEATHER, $01
 	.db DBG_END
-	; 25. Le cœur de la spirale : la Cape de Roc (la plume, niveau 2)
-	.db DBG_TREASURE, TREASURE_FEATHER, $02
+	; 25. Le Fouisseur est battu (4:47)
+	.db DBG_ROOMFLAG, $04, $47, $80
 	.db DBG_END
-	; 26. Le Fouisseur est battu
-	.db DBG_ROOMFLAG, $04, $52, $80
+	; 26. Son coffre : la Cape de Roc (la plume, niveau 2)
+	.db DBG_TREASURE, TREASURE_FEATHER, $02
 	.db DBG_END
 	; 27. L'Ombre de Marine est battue : l'essence (le 6e couplet), un cœur de plus
 	.db DBG_TREASURE, TREASURE_ESSENCE, $05

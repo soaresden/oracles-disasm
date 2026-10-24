@@ -59,8 +59,9 @@ chestGroup4Data:
 	m_ChestData $5a, $42, TREASURE_OBJECT_MAP_02        ; le carrelage bleu : la carte
 	m_ChestData $85, $43, TREASURE_OBJECT_COMPASS_02    ; les chauves-souris battues : la boussole
 	m_ChestData $15, $46, TREASURE_OBJECT_SMALL_KEY_03  ; le Grappin-Écho puis un saut : la petite clé 2
-	m_ChestData $8b, $4d, TREASURE_OBJECT_BOSS_KEY_03   ; l'îlot (le pont du cristal de 4c) : la clé du boss
-	m_ChestData $57, $50, TREASURE_OBJECT_FEATHER_03    ; le cœur de la spirale : la Cape de Roc
+	m_ChestData $65, $4d, TREASURE_OBJECT_BOSS_KEY_03   ; l'îlot (Marine et la bombe sur le cristal emmuré) : la clé du boss
+	m_ChestData $37, $47, TREASURE_OBJECT_FEATHER_03    ; le Fouisseur battu : la Cape de Roc
+	m_ChestData $57, $49, TREASURE_OBJECT_RUPEES_06     ; la salle secrète (le mur fissuré de 41) : 100 rubis
 	; BALLADE: le Palais Givré (story/salles/palais.txt)
 	m_ChestData $87, $5b, TREASURE_OBJECT_SMALL_KEY_03  ; les deux torches allumées en biais : la petite clé 1
 	m_ChestData $72, $5c, TREASURE_OBJECT_MAP_02        ; le champ de glace : la carte

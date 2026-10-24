@@ -28,6 +28,23 @@ marineTalk:
 	ld (hl),$01
 	ret
 +
+	; Devant Ganon (5:c7, son arène 5:f5) sans l'Épée de Légende : elle propose de sortir de la tour
+	; (balladeObjects.ganonEscape ; Denis : sinon, c'est bloqué)
+	ld a,(wActiveGroup)
+	cp $05
+	jr nz,++
+	ld a,(wActiveRoom)
+	cp $c7
+	jr z,+
+	cp $f5
+	jr nz,++
++
+	ld a,(wSwordLevel)
+	cp $03
+	jr nc,++
+	ld b,$51
+	jpab balladeObjects.ganonEscapeSpawn
+++
 	ld a,(wActiveGroup)
 	ld b,a
 	ld a,(wActiveRoom)
