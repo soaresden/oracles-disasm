@@ -3052,6 +3052,20 @@ b2_updateMenus:
 
 	call playHeartBeepAtInterval
 .ifdef ROM_AGES
+	; BALLADE: la progression demandée dans le menu (3e page, B : wcbab = $53) : Marine compte, une
+	; fois le menu fermé (les objets du jeu sont remis en place à la fermeture : créé dans le menu,
+	; il serait effacé)
+	ld a,(wcbaa+1)
+	cp $53
+	jr nz,+
+	xor a
+	ld (wcbaa+1),a
+	call getFreeInteractionSlot
+	jr nz,+
+	ld (hl),INTERAC_BALLADE_OBJECT
+	inc l
+	ld (hl),$53
++
 	; BALLADE: Start = inventaire (Start + Select = sauvegarde), comme avant. Select : un appui
 	; court ouvre la carte ; gardé enfoncé, Marine parle.
 	ld a,(wKeysJustPressed)
@@ -4789,6 +4803,17 @@ inventoryMenuState1:
 ;;
 ; Main code for last item screen (essences, heart pieces, s&q option)
 @subscreen2:
+.ifdef ROM_AGES
+	; BALLADE: B : la progression vers le 100 % (balladeObjects.progressTracker : Marine compte,
+	; une fois le menu fermé : la demande attend dans wcbab, voir b2_updateMenus)
+	ld a,(wKeysJustPressed)
+	bit BTN_BIT_B,a
+	jr z,+
+	ld a,$53
+	ld (wcbaa+1),a
+	jp closeMenu
++
+.endif
 	ld a,(wKeysJustPressed)
 	and BTN_A
 	jr z,+

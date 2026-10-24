@@ -74,6 +74,7 @@
 ; @subid_50{Invisible, la Spirale Céleste : une bombe qui explose contre un cristal le frappe}
 ; @subid_51{Invisible : devant Ganon sans l'Épée de Légende, Marine propose de sortir de la tour}
 ; @subid_52{Invisible : la même, après « nos coups ne lui font rien » (TX_5ae5)}
+; @subid_53{Invisible : la progression vers le 100 % (le menu, 3e page, B)}
 ; ==================================================================================================
 
 ;;
@@ -164,6 +165,7 @@ main:
 	.dw bombCrystal
 	.dw ganonEscape
 	.dw ganonEscape
+	.dw progressTracker
 
 
 ;;
@@ -4146,6 +4148,13 @@ ganonEscape:
 	ld a,SND_BALLADE_GULL
 	call playSound
 	jp interactionDelete
+
+
+; ==================================================================================================
+; La progression vers le 100 % (subid $53) : code/ages/balladeTracker.s (sa propre section)
+; ==================================================================================================
+progressTracker:
+	jpab balladeTracker.main
 
 
 ; ==================================================================================================

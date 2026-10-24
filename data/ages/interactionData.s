@@ -982,6 +982,7 @@ interactionedSubidData:
 	m_InteractionSubidData $00 $00 $00 ; $50 la Spirale : les bombes frappent les cristaux (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $51 la tour : Marine propose de sortir (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $52 la tour : la Fosse, puis sortir (invisible)
+	m_InteractionSubidData $00 $00 $00 ; $53 la progression (le menu, 3e page, B) (invisible)
 	m_InteractionSubidDataEnd
 
 interactiond4SubidData:

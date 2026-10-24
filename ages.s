@@ -258,6 +258,11 @@ specialObjectLoadAnimationFrameToBuffer:
 		.include "code/ages/balladeDarkLink.s"
 	.ends
 
+	 ; BALLADE: la progression vers le 100 % (le menu, 3e page, B)
+	 m_section_superfree Ballade_Tracker namespace balladeTracker
+		.include "code/ages/balladeTracker.s"
+	.ends
+
 	 ; BALLADE: la fin du jeu et l'après-jeu (INTERAC_BALLADE_CREUSE $10-$18)
 	 m_section_superfree Ballade_Fin namespace balladeFin
 		.include "code/ages/balladeFin.s"
