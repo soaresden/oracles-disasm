@@ -686,9 +686,8 @@ groups:
   - name: TX_0052
     index: 0x52
     text: |-
-      Your \col(1)Seed
-      Satchel\col(0) is full!
-
+      Ta \col(1)sacoche\col(0)
+      est pleine!
   - name: TX_0053
     index: 0x53
     text: |-
@@ -1032,11 +1031,9 @@ groups:
   - name: TX_0080
     index: 0x80
     text: |-
-      Your \col(1)Seed
-      Satchel\col(0) can now
-      carry more
-      \col(1)seeds\col(0)!
-
+      Ta \col(1)sacoche\col(0)
+      peut porter plus
+      de \col(1)graines\col(0)!
   # CROSSITEMS: Text for obtaining Seasons items.
   - name: TX_00_GET_MAGNETGLOVES
     index: auto
@@ -4214,10 +4211,9 @@ groups:
   - name: TX_092d
     index: 0x2d
     text: |-
-      Seed Satchel
-      A bag for
-      carrying seeds.
-
+      Sacoche
+      Pour porter des
+      graines.
   - name: TX_092e
     index: 0x2e
     text: |-
@@ -4248,66 +4244,63 @@ groups:
   - name: TX_0932
     index: 0x32
     text: |-
-      Ember Seeds
-      A fiery burst.
-
+      Graines de feu
+      Une gerbe de
+      flammes.
   - name: TX_0933
     index: 0x33
     text: |-
-      Scent Seeds
-      Aroma therapy?
-
+      Graines odeur
+      Un parfum qui
+      attire.
   - name: TX_0934
     index: 0x34
     text: |-
-      Pegasus Seeds
-      Legendary speed.
-
+      Graines Pégase
+      Pour courir
+      vite.
   - name: TX_0935
     index: 0x35
     text: |-
-      Gale Seeds
-      A windy trip.
-
+      Graines vent
+      Un grand coup
+      de vent.
   - name: TX_0936
     index: 0x36
     text: |-
-      Mystery Seeds
-      A producer of
-      unknown effects.
-
+      Graines mystère
+      On ne sait
+      jamais.
   - name: TX_0937
     index: 0x37
     text: |-
-      Ember Seeds
-      A burst of fire!
-
+      Graines de feu
+      Une gerbe de
+      flammes!
   - name: TX_0938
     index: 0x38
     text: |-
-      Scent Seeds
-      An aromatic
-      blast!
-
+      Graines odeur
+      Un parfum qui
+      attire!
   - name: TX_0939
     index: 0x39
     text: |-
-      Pegasus Seeds
-      Steals speed?
-
+      Graines Pégase
+      Pour courir
+      vite!
   - name: TX_093a
     index: 0x3a
     text: |-
-      Gale Seeds
-      A mighty blow!
-
+      Graines vent
+      Un grand coup
+      de vent!
   - name: TX_093b
     index: 0x3b
     text: |-
-      Mystery Seeds
-      A producer of
-      unknown effects.
-
+      Graines mystère
+      On ne sait
+      jamais!
   - name: TX_093c
     index: 0x3c
     text: |-
@@ -14257,10 +14250,9 @@ groups:
   - name: TX_2f00
     index: 0x00
     text: |-
-      One with no
-      wings is no
-      match for me!
-
+      Reste endormi,
+      Link. Reste
+      avec moi...
   - name: TX_2f01
     index: 0x01
     text: |-
@@ -14281,11 +14273,10 @@ groups:
   - name: TX_2f03
     index: 0x03
     text: |-
-      \pos(2)As long as I'm
-      underground,
-      your attacks
-      don't scare me!
-
+      \pos(2)Tant que je suis
+      sous terre, tes
+      coups ne me font
+      rien!
   - name: TX_2f04
     index: 0x04
     text: |-
@@ -22005,6 +21996,26 @@ groups:
 # ===== Gulls of Life (story/textes.yaml) =====
 - group: 0x5a
   data:
+  # L'autre meunier (1:66, $4d) : avant, après le Chant des Tempêtes
+  - name: TX_5a6f
+    index: 0x6f
+    text: |-
+      \col(1)Meunier\col(0): Mon
+      frère attend le
+      vent. Moi, je
+      l'appelle!\stop
+      Mais il ne
+      répond plus.
+      Il dort, lui
+      aussi.
+  - name: TX_5a8f
+    index: 0x8f
+    text: |-
+      \col(1)Meunier\col(0): Tu
+      l'as réveillé!\stop
+      Écoute-le
+      siffler dans les
+      ailes!
 
   # Prologue (film d'ouverture)
   - name: TX_5a00
@@ -23419,7 +23430,14 @@ groups:
       droit de jouer.\stop
       Qui a dit ça?
       On ne sait
-      plus...
+      plus...\stop
+      Quand je
+      dormais avant,
+      j'arrivais à
+      parler aux
+      objets!\stop
+      Tu devrais
+      essayer!
 
   - name: TX_5a69
     index: 0x69
@@ -23438,7 +23456,13 @@ groups:
       Mais se cacher,
       à quoi bon?
       Personne ne
-      cherche.
+      cherche.\stop
+      Mon cerf-volant
+      est coincé dans
+      l'arbre.\stop
+      C'est marrant,
+      on dirait qu'il
+      était vivant!
 
   - name: TX_5a6b
     index: 0x6b

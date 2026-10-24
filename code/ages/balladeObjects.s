@@ -154,6 +154,8 @@ main:
 	.dw easterJukebox
 	.dw easterJukebox
 	.dw easterBestiary
+	.dw villager
+	.dw bossSupplies
 
 
 ;;
@@ -866,6 +868,9 @@ npcInit:
 ; @param[out]	zflag	z si Link n'a pas appuyé sur A devant l'habitant (sinon : nz, et les
 ;			objets sont arrêtés pendant la conversation)
 npcCheckTalk:
+	; (les habitants sont solides : objectMarkSolidPosition ne bloque pas Link ; Denis passait
+	; au travers)
+	call objectPreventLinkFromPassing
 	ld e,Interaction.pressedAButton
 	ld a,(de)
 	or a
@@ -1167,6 +1172,78 @@ giveCarnet:
 ; @param	a	TREASURE_*
 giveTreasureAboveLink:
 	ld c,$00
+
+
+;;
+; $4e : Givrolin (4:64). Ses phases demandent des bombes puis des graines (le Lance-Graines) : tant
+; qu'il vit, s'il en reste moins de 4, un paquet de bombes apparaît devant le cristal du haut à
+; gauche et des graines de feu devant celui de droite (un seul de chaque au sol ; Denis : « sinon
+; c'est softlock assuré »).
+bossSupplies:
+	ld a,(wNumEnemies)
+	or a
+	ret z
+	ld h,d
+	ld l,Interaction.counter1
+	ld a,(hl)
+	or a
+	jr z,+
+	dec (hl)
+	ret
++
+	ld (hl),90
+	ld a,(wNumBombs)
+	cp $04
+	jr nc,+
+	ld bc,(ITEM_DROP_BOMBS<<8)|$31
+	call @supply
++
+	ld a,(wNumEmberSeeds)
+	cp $04
+	ret nc
+	ld bc,(ITEM_DROP_EMBER_SEEDS<<8)|$3d
+
+; Pose l'objet b en case c, s'il n'y en a pas déjà un au sol
+@supply:
+	ld h,FIRST_PART_INDEX
+@next:
+	ld l,Part.enabled
+	ld a,(hl)
+	or a
+	jr z,@skip
+	inc l
+	ld a,(hl)
+	cp PART_ITEM_DROP
+	jr nz,@skip
+	inc l
+	ld a,(hl)
+	and $7f
+	cp b
+	ret z
+@skip:
+	inc h
+	ld a,h
+	cp LAST_PART_INDEX+1
+	jr c,@next
+	push bc
+	call getFreePartSlot
+	pop bc
+	ret nz
+	ld (hl),PART_ITEM_DROP
+	inc l
+	ld (hl),b
+	ld l,Part.yh
+	ld a,c
+	and $f0
+	add $08
+	ld (hl),a
+	ld l,Part.xh
+	ld a,c
+	swap a
+	and $f0
+	add $08
+	ld (hl),a
+	ret
 
 ;;
 ; @param	a	TREASURE_*
@@ -1646,6 +1723,7 @@ villagerTexts:
 	.db $22, $20, <TX_5ab1, <TX_5ab2 ; Zéphyr
 	.db $23, $20, <TX_5ab3, <TX_5ab3 ; Zéphyr dans le Songe
 	.db $24, $20, <TX_5ab4, <TX_5ab5 ; un meunier
+	.db $4d, $20, <TX_5a6f, <TX_5a8f ; l'autre meunier
 	.db $26, $40, <TX_5abd, <TX_5abe ; le roi d'une nuit (endormi : sleeper)
 	.db $28, $40, <TX_5ac1, <TX_5ac2 ; la petite sœur
 	.db $2a, $40, <TX_5ac3, <TX_5ac4 ; la mère (sleeper)

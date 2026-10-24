@@ -4030,7 +4030,7 @@ group1Map65ObjectData:
 	obj_End
 group1Map66ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $24 $28 $18
-	obj_Interaction INTERAC_BALLADE_OBJECT $24 $28 $88
+	obj_Interaction INTERAC_BALLADE_OBJECT $4d $28 $88
 	obj_End
 group1Map67ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $22 $58 $78
@@ -4511,6 +4511,7 @@ group4Map64ObjectData:
 	obj_Interaction $20 $01 $58 $78
 	obj_Interaction INTERAC_BALLADE_OBJECT $01 $08 $08
 	obj_Interaction INTERAC_BALLADE_OBJECT $08 $38 $78
+	obj_Interaction INTERAC_BALLADE_OBJECT $4e $08 $08 ; des bombes et des graines devant les cristaux
 	obj_BeforeEvent group5Map78BeforeEventObjectData
 	obj_End
 group4MapaeObjectData:

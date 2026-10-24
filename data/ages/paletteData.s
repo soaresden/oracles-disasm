@@ -4787,11 +4787,11 @@ paletteDataTitleSpr: ; écran titre : sprites
 ; BALLADE-TITRE-FIN
 
 ; BALLADE: l'Ombre de Marine (PALH_OMBRE)
-paletteDataOmbre:
+paletteDataOmbre: ; (une ombre gris-noir : elle était violette, Denis)
 	m_RGB16 $1f $1f $1f
-	m_RGB16 $15 $12 $1a
-	m_RGB16 $09 $06 $0e
-	m_RGB16 $02 $01 $04
+	m_RGB16 $10 $10 $12
+	m_RGB16 $05 $05 $07
+	m_RGB16 $00 $00 $00
 
 ; BALLADE: Givrolin (PALH_GIVROLIN)
 paletteDataFantome: ; les fantômes du 4F de la Tour : blanc bleuté, contour bleu nuit

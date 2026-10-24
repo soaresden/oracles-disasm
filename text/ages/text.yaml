@@ -14273,10 +14273,9 @@ groups:
   - name: TX_2f00
     index: 0x00
     text: |-
-      One with no
-      wings is no
-      match for me!
-
+      Stay asleep,
+      Link. Stay with
+      me...
   - name: TX_2f01
     index: 0x01
     text: |-
@@ -22031,6 +22030,24 @@ groups:
 # ===== Gulls of Life (story/textes.en.yaml) =====
 - group: 0x5a
   data:
+  # The other miller (1:66, $4d): before, after the Song of Storms
+  - name: TX_5a6f
+    index: 0x6f
+    text: |-
+      \col(1)Miller\col(0): My
+      brother waits
+      for the wind. I
+      call it!\stop
+      But it won't
+      answer. It's
+      asleep too.
+  - name: TX_5a8f
+    index: 0x8f
+    text: |-
+      \col(1)Miller\col(0): You
+      woke it up!\stop
+      Hear it whistle
+      in the sails!
 
   # Prologue (opening film)
   - name: TX_5a00
@@ -23389,7 +23406,11 @@ groups:
       allowed to play.\stop
       Who said that?
       We don't
-      remember...
+      remember...\stop
+      When I used to
+      sleep, I could
+      talk to things!\stop
+      You should try!
 
   - name: TX_5a69
     index: 0x69
@@ -23405,7 +23426,12 @@ groups:
       hide-and-seek...\stop
       But why hide?
       Nobody comes
-      looking.
+      looking.\stop
+      My kite is stuck
+      in the tree.\stop
+      Funny... it was
+      like it was
+      alive!
 
   - name: TX_5a6b
     index: 0x6b

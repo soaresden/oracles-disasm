@@ -65,7 +65,7 @@ chestGroup4Data:
 	m_ChestData $87, $5b, TREASURE_OBJECT_SMALL_KEY_03  ; les deux torches allumées en biais : la petite clé 1
 	m_ChestData $72, $5c, TREASURE_OBJECT_MAP_02        ; le champ de glace : la carte
 	m_ChestData $37, $5a, TREASURE_OBJECT_FLUTE_03      ; le Chevalier Gelé battu : la Clochette d'Aube
-	m_ChestData $87, $60, TREASURE_OBJECT_RUPEES_04  ; le cristal frappé en biais : des rubis (la petite clé 2 ne sert plus : l'antichambre s'ouvre avec la clé du boss)
+	m_ChestData $87, $60, TREASURE_OBJECT_SMALL_KEY_03  ; le cristal frappé en biais : la petite clé 2 (la porte de l'est du carrefour, 4:5e -> 4:5f)
 	m_ChestData $67, $61, TREASURE_OBJECT_COMPASS_02    ; l'îlot (le Grappin-Écho) : la boussole
 	m_ChestData $53, $5f, TREASURE_OBJECT_BOSS_KEY_03   ; les deux torches entourées de trous : la clé du boss
 	; BALLADE: la Forge Endormie (story/salles/forge.txt)
