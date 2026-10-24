@@ -3297,8 +3297,14 @@ checkUpdateDungeonMinimap:
 	ret nz
 
 	bit TILESETFLAG_BIT_OUTDOORS,a
-	jr nz,@setMinimapRoom
-
+	jr z,+
+	; BALLADE: une salle « dehors » des groupes 4-5 (les Songes des Héros, les jeux du forain) : la
+	; carte reste sur la dernière case de l'archipel (sinon Link y est hors de la carte : Denis)
+	ld a,(wActiveGroup)
+	cp $04
+	ret nc
+	jr @setMinimapRoom
++
 	bit TILESETFLAG_BIT_DUNGEON,a
 	ret z
 

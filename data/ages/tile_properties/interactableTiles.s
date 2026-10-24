@@ -39,7 +39,7 @@ interactableTilesTable:
 	.db $f2 $05
 	.db $d8 $80
 	.db $d9 $80
-	.db $ec $06
+	;.db $ec $06 ; BALLADE: la grille de la cathédrale des Échos (1:42) n'est pas une serrure d'Ages (balladeObjects.cathedralGate)
 	.db $da $80
 	.db $00
 

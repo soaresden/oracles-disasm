@@ -86,6 +86,10 @@ loadRememberedCompanion:
 checkAndSpawnMaple:
 	xor a
 	ld (wIsMaplePresent),a
+.ifdef ROM_AGES
+	; BALLADE: plus de Maple dans Gulls of Life (Denis : elle ne sert à rien)
+	ret
+.endif
 	ld a,(wcc85)
 	or a
 	ret nz

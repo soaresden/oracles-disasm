@@ -196,14 +196,14 @@ warpSource771e:
 
 
 group1WarpSources:
-	m_StandardWarp $0 $48 $01 $4 $4
+	;m_StandardWarp $0 $48 $01 $4 $4 ; BALLADE: (Ages : 1:48 -> Maku Road ; elle passait avant la Spirale Céleste)
 	m_StandardWarp $0 $83 $03 $4 $4
 	m_StandardWarp $0 $5c $02 $5 $4
 	;m_StandardWarp $0 $38 $09 $4 $2 ; BALLADE: Mont-Braise (1:08-3c)
 	;m_StandardWarp $4 $38 $03 $1 $3 ; BALLADE: Mont-Braise (1:08-3c)
 	;m_StandardWarp $8 $38 $03 $1 $3 ; BALLADE: Mont-Braise (1:08-3c)
-	m_StandardWarp $1 $48 $04 $1 $3
-	m_StandardWarp $2 $48 $04 $1 $3
+	;m_StandardWarp $1 $48 $04 $1 $3 ; BALLADE: (Ages : 1:48 -> Maku Road ; elle passait avant la Spirale Céleste)
+	;m_StandardWarp $2 $48 $04 $1 $3 ; BALLADE: (Ages : 1:48 -> Maku Road ; elle passait avant la Spirale Céleste)
 	m_StandardWarp $0 $0e $00 $5 $4
 	m_StandardWarp $4 $0e $2a $0 $3
 	;m_StandardWarp $0 $02 $13 $3 $4 ; BALLADE: 1:02 est le manège de Hameau-Grelot

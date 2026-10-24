@@ -89,6 +89,8 @@ controller:
 	ret
 
 @texts:
+	; (les serpents gris dès qu'ils sont là, même pendant que l'écran défile)
+	call @snakes
 	; Les textes en arrivant (la salle prête) : l'entrée (une fois), l'arène (une fois)
 	ld a,(wPaletteThread_mode)
 	or a
@@ -1265,4 +1267,66 @@ ghost:
 	sub (hl)
 	call terrierAbs
 	cp b
+	ret
+
+
+;;
+; Le Bracelet des Âmes (Denis) : l'attaque tourbillon aspire l'âme des ennemis autour de Link (à
+; moins de 40 pixels) : une âme vole de chacun jusqu'au gantelet ($0b) et il perd 6 points de vie
+; (les petits en meurent, les gros sont blessés ; pas les boss). C'est tout : plus de rayon, plus de
+; vie rendue à chaque coup (object_code/common/itemParents/swordParent.s appelle ceci quand le
+; tourbillon part).
+soulSpin:
+	ld a,(wBalladeSoulState)
+	bit 1,a
+	ret z
+	ld h,FIRST_ENEMY_INDEX
+@next:
+	ld l,Enemy.enabled
+	ld a,(hl)
+	or a
+	jr z,@skip
+	ld l,Enemy.collisionType
+	bit 7,(hl)
+	jr z,@skip
+	ld l,Enemy.health
+	ld a,(hl)
+	or a
+	jr z,@skip
+	cp 25
+	jr nc,@skip		; (les boss)
+	ld l,Enemy.yh
+	ld a,(w1Link.yh)
+	sub (hl)
+	call terrierAbs
+	cp 40
+	jr nc,@skip
+	ld l,Enemy.xh
+	ld a,(w1Link.xh)
+	sub (hl)
+	call terrierAbs
+	cp 40
+	jr nc,@skip
+	; son âme, aspirée
+	ld l,Enemy.health
+	ld a,(hl)
+	sub 6
+	jr nc,+
+	xor a
++
+	ld (hl),a
+	push hl
+	ld l,Enemy.yh
+	ld a,(hl)
+	ld l,Enemy.xh
+	ld l,(hl)
+	ld h,a
+	ld b,$0b
+	call createTerrierObjectAt
+	pop hl
+@skip:
+	inc h
+	ld a,h
+	cp LAST_ENEMY_INDEX+1
+	jr c,@next
 	ret

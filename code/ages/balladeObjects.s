@@ -2350,13 +2350,10 @@ cathedralGate:
 	ld a,(wDisabledObjects)
 	or b
 	ret nz
-	ld a,(wGameKeysJustPressed)
-	and BTN_A|BTN_B
-	ret z
 	; Link juste en dessous, tourné vers le haut
 	ld a,(w1Link.direction)
 	or a
-	ret nz
+	jr nz,@away
 	call objectGetShortPosition
 	add $10
 	ld b,a
@@ -2368,7 +2365,25 @@ cathedralGate:
 	and $0f
 	or c
 	cp b
-	ret nz
+	jr nz,@away
+	; A, B, ou il pousse contre la grille un moment (Denis : la grille disait « serrure », et ne
+	; s'ouvrait qu'à l'épée)
+	ld a,(wGameKeysJustPressed)
+	and BTN_A|BTN_B
+	jr nz,@try
+	ld a,(wGameKeysPressed)
+	and BTN_UP
+	jr z,@away
+	ld e,Interaction.counter1
+	ld a,(de)
+	inc a
+	ld (de),a
+	cp 20
+	ret c
+@try:
+	ld e,Interaction.counter1
+	xor a
+	ld (de),a
 	ld a,TREASURE_GRAVEYARD_KEY
 	call checkTreasureObtained
 	jr c,+
@@ -2385,6 +2400,11 @@ cathedralGate:
 	ld a,$dd
 	call setTile
 	jp interactionDelete
+@away:
+	ld e,Interaction.counter1
+	xor a
+	ld (de),a
+	ret
 
 
 ; ==================================================================================================

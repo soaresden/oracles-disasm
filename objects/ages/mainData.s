@@ -4569,8 +4569,8 @@ group4Mapd0ObjectData:
 	; « Le Terrier des Serpents » en entrant (INTERAC_DUNGEON_STUFF $00, texte TX_020b)
 	obj_Interaction $12 $00 $88 $78
 	obj_Interaction INTERAC_BALLADE_CREUSE $0a $08 $08
-	obj_SpecificEnemyA $00 ENEMY_ROPE $00 $38 $38
-	obj_SpecificEnemyA     ENEMY_ROPE $00 $38 $b8
+	obj_SpecificEnemyA $00 ENEMY_ROPE $00 $58 $38 ; (pas sur les statues : Denis)
+	obj_SpecificEnemyA     ENEMY_ROPE $00 $58 $b8
 	obj_End
 group4Mapd1ObjectData:
 	obj_Interaction INTERAC_BALLADE_CREUSE $0a $08 $08
