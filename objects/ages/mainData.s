@@ -4225,7 +4225,7 @@ group3Map25ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $19 $48 $38
 	obj_End
 group3Map26ObjectData:
-	obj_Interaction INTERAC_BALLADE_OBJECT $20 $48 $58
+	obj_Interaction INTERAC_BALLADE_OBJECT $20 $68 $88
 	obj_End
 group3Map27ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $27 $48 $38
@@ -4239,7 +4239,7 @@ group3Map29ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $29 $48 $58
 	obj_End
 group3Map2aObjectData:
-	obj_Interaction INTERAC_BALLADE_OBJECT $48 $58 $68
+	obj_Interaction INTERAC_BALLADE_OBJECT $48 $18 $68
 	obj_End
 group3Map5eObjectData:
 	obj_Interaction $47 $03 $28 $50 ; le bouclier (50 ; puis le bouclier de fer 150, le miroir 300)

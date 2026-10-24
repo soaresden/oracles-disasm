@@ -2749,24 +2749,67 @@ cathedralGate:
 
 ; ==================================================================================================
 ; Tarkin (subid $20), dans le souvenir : la maison de Marine à Mabe (3:26, sous le chœur de la
-; Cathédrale des Échos). Il met trois assiettes ; Marine lui chante le cinquième couplet. Le
-; souvenir fini (drapeau $80 de la salle), l'essence apparaît dans le chœur (essenceSpawner).
+; Cathédrale des Échos ; comme dans DX). Il met trois assiettes ; Marine lui chante le cinquième
+; couplet. Le souvenir fini (drapeau $80 de la salle), l'essence apparaît dans le chœur
+; (essenceSpawner). Son sprite de DX (spr_ballade_tarkin, PALH_TARKIN ; Denis) : assis de dos à sa
+; table ; il se retourne quand Link approche (il le connaît : TX_5aa0) ou quand on lui parle.
+; var32 : l'image montrée (4 x la pose) ; var33 : il a vu Link (une fois par visite).
 ; ==================================================================================================
 tarkin:
 	ld e,Interaction.state
 	ld a,(de)
 	rst_jumpTable
-	.dw npcInit
+	.dw @init
 	.dw @idle
 	.dw npcWaitText
 	.dw @marine
 	.dw @song
 	.dw @done
 
+@init:
+	ld a,PALH_TARKIN
+	call loadPaletteHeader
+	ld e,Interaction.var32
+	ld a,$04		; (de dos : spr_ballade_tarkin image 1)
+	ld (de),a
+	jp npcInit
+
+; Une pose (a = 4 x l'image), en relatif : le jeu recale oamTileIndexBase selon la place des images
+; en mémoire vidéo
+@show:
+	ld h,d
+	ld l,Interaction.var32
+	ld b,(hl)
+	ld (hl),a
+	sub b
+	ret z
+	ld l,Interaction.oamTileIndexBase
+	add (hl)
+	ld (hl),a
+	ret
+
 @idle:
-	call interactionAnimateAsNpc
+	ld a,$04		; de dos, à sa table
+	call @show
+	; Il connaît Link (Link's Awakening) : quand Link approche (à moins de 40 pixels), il se
+	; retourne de lui-même, une fois par visite (var33) : « OH ! LINK ! Quel plaisir ! »
+	ld e,Interaction.var33
+	ld a,(de)
+	or a
+	jr nz,@talk
+	ld c,$28
+	call objectCheckLinkWithinDistance
+	jr nc,@talk
+	ld e,Interaction.var33
+	ld a,$01
+	ld (de),a
+	jr @speak
+@talk:
 	call npcCheckTalk
 	ret z
+@speak:
+	xor a			; il se retourne (de face : image 0)
+	call @show
 	call getThisRoomFlags
 	and $80
 	ld bc,TX_5aa3
@@ -5371,8 +5414,8 @@ easterMirror:
 	ld bc,$85ef		; chez Marine -> la salle secrète (5:ef)
 	ld a,$97
 	jr z,+
-	ld bc,$832a		; la salle secrète -> chez Marine (3:2a), devant le miroir
-	ld a,$66
+	ld bc,$832a		; la salle secrète -> chez Marine (3:2a), devant le miroir (2,6)
+	ld a,$26
 +
 	ld (wWarpDestPos),a
 	ld a,b

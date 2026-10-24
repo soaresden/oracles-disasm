@@ -930,7 +930,7 @@ interactionedSubidData:
 	m_InteractionSubidData $4f $10 $22 ; $1d le sonneur
 	m_InteractionSubidData $00 $00 $00 ; $1e la clé enterrée (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $1f la grille de la cathédrale (invisible)
-	m_InteractionSubidData $46 $1c $12 ; $20 Tarkin, le père de Marine (le moustachu d'Ages)
+	m_InteractionSubidData $eb $04 $62 ; $20 Tarkin, le père de Marine (son sprite de DX : spr_ballade_tarkin, de dos ; PALH_TARKIN)
 	m_InteractionSubidData $3e $10 $02 ; $21 le Rito égaré
 	m_InteractionSubidData $3e $00 $22 ; $22 Zéphyr
 	m_InteractionSubidData $3e $00 $22 ; $23 Zéphyr dans le Songe

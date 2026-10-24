@@ -4866,6 +4866,12 @@ paletteDataRexHit:
 	m_RGB16 $1f $1f $1f
 	m_RGB16 $1f $1f $1f
 
+paletteDataTarkin: ; Tarkin, les couleurs de Tarin dans Link's Awakening DX (PAL2 : noir, rouge, peau)
+	m_RGB16 $1f $1f $1f
+	m_RGB16 $00 $00 $00
+	m_RGB16 $1f $01 $05
+	m_RGB16 $1f $17 $11
+
 paletteDataTerrier: ; la machine possédée : noir, gris acier, la lueur cyan du fantôme
 	m_RGB16 $1f $1f $1f
 	m_RGB16 $00 $00 $00

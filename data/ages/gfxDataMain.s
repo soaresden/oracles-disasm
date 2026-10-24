@@ -528,6 +528,7 @@
 	m_GfxData spr_ballade_grelot
 	m_GfxData spr_ballade_braise
 	m_GfxData spr_ballade_miroir
+	m_GfxData spr_ballade_tarkin
 	m_GfxData spr_film
 	m_GfxData gfx_film_bg
 	m_GfxData map_film_bg
