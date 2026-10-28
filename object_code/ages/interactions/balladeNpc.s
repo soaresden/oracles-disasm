@@ -27,6 +27,35 @@ interactionCodee8:
 	call checkGlobalFlag
 	jp z,interactionDelete
 +
+	; Marine humaine ($07, l'auberge du Songe 2:9e) : une fois les retrouvailles vues (le drapeau $40
+	; de la salle), elle n'est plus toujours au même endroit (Denis) : une place au hasard à chaque
+	; visite (pas quand les photos l'attendent : elle fouille les poches de Link, là où il dort)
+	ld e,Interaction.subid
+	ld a,(de)
+	cp $07
+	jr nz,@placed
+	call getThisRoomFlags
+	and $40
+	jr z,@placed
+	ld a,(wEssencesObtained)
+	and $10
+	jr z,+
+	ld a,GLOBALFLAG_BALLADE_PHOTOS
+	call checkGlobalFlag
+	jr z,@placed
++
+	call getRandomNumber
+	and $03
+	add a
+	ld hl,@marinePlaces
+	rst_addAToHl
+	ld e,Interaction.yh
+	ldi a,(hl)
+	ld (de),a
+	ld e,Interaction.xh
+	ld a,(hl)
+	ld (de),a
+@placed:
 	ld e,Interaction.state
 	ld a,$01
 	ld (de),a
@@ -54,6 +83,11 @@ interactionCodee8:
 @state1:
 	call interactionRunScript
 	jp interactionAnimateAsNpc
+
+; Les places de Marine dans l'auberge du Songe (y, x) : là où on l'a trouvée la 1re fois, près du
+; pot, au milieu, près de l'étagère
+@marinePlaces:
+	.db $28 $68, $58 $28, $48 $58, $68 $78
 
 @scripts:
 	.dw mainScripts.balladeNpc00Script

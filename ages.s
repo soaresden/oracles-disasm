@@ -258,6 +258,11 @@ specialObjectLoadAnimationFrameToBuffer:
 		.include "code/ages/balladeDarkLink.s"
 	.ends
 
+	 ; BALLADE: pas d'une île à l'autre par les bords de l'écran
+	 m_section_superfree Ballade_Islands namespace balladeIslands
+		.include "code/ages/balladeIslands.s"
+	.ends
+
 	 ; BALLADE: la progression vers le 100 % (le menu, 3e page, B)
 	 m_section_superfree Ballade_Tracker namespace balladeTracker
 		.include "code/ages/balladeTracker.s"

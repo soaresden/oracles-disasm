@@ -256,10 +256,7 @@ marineEndingScript:
 @inn:
 	showtext TX_5a41
 	wait 20
-	; l'aubergiste donne le Carnet des Rêves
-	showtext TX_5a58
-	giveitem TREASURE_OBJECT_12_00
-	wait 30
+	; (l'aubergiste ne donne plus le Carnet des Rêves : Denis, « il sert à rien »)
 	writememory wBalladeEnding, $04
 	writememory wWarpDestRoom, $ab
 	writememory wWarpTransition, $00

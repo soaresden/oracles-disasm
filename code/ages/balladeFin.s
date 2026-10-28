@@ -354,6 +354,8 @@ islandMarine:
 	res 7,(hl)
 	ret
 +
+	; solide : Link ne lui passe pas à travers (Denis, 1:5c)
+	call objectPreventLinkFromPassing
 	; de temps en temps, elle chante la Ballade du Poisson-Rêve
 	call islandSinging
 	ld e,Interaction.pressedAButton
@@ -1135,9 +1137,78 @@ follower:
 	ld a,(wTextIsActive)
 	or a
 	ret nz
+	call @bombCheck
+	ret c
 	call @idle
 	call @walk
 	jp @sword
+
+; La bombe (Select : Marine l'emporte, INTERAC_MARINE $06) : humaine, elle ne peut pas venir de la
+; tunique (Denis : « faut désincarner Marine vite fait ») : un nuage, la mouette s'envole de là où
+; elle est, et la remporte ; la mouette rentrée, Marine réapparaît (un nuage) derrière Link.
+; var3d : 1 pendant que la mouette vole. cflag : c tant qu'elle est cachée
+@bombCheck:
+	ld h,FIRST_INTERACTION_INDEX
+-
+	ld l,Interaction.enabled
+	ld a,(hl)
+	or a
+	jr z,+
+	inc l
+	ld a,(hl)
+	cp INTERAC_MARINE
+	jr nz,+
+	inc l
+	ld a,(hl)
+	cp $06
+	jr z,@carrier
++
+	inc h
+	ld a,h
+	cp LAST_INTERACTION_INDEX+1
+	jr c,-
+	ld e,Interaction.var3d
+	ld a,(de)
+	or a
+	ret z
+	xor a
+	ld (de),a
+	call followPlace
+	call objectSetVisiblec2
+	call @puffHere
+	or a
+	ret
+@carrier:
+	ld e,Interaction.var3d
+	ld a,(de)
+	or a
+	jr nz,++
+	inc a
+	ld (de),a
+	; la mouette part de Marine, pas de la tunique de Link
+	ld l,Interaction.yh
+	ld e,l
+	ld a,(de)
+	ld (hl),a
+	ld l,Interaction.xh
+	ld e,l
+	ld a,(de)
+	ld (hl),a
+	call stopSinging
+	call @puffHere
+	call objectSetInvisible
+++
+	scf
+	ret
+
+@puffHere:
+	ld e,Interaction.yh
+	ld a,(de)
+	ld h,a
+	ld e,Interaction.xh
+	ld a,(de)
+	ld l,a
+	jp createFinPuffAt
 
 ; Quand Link ne fait rien (10 secondes sans bouger ni toucher un bouton), elle chante ; dès qu'il
 ; bouge, elle s'arrête. var38-var39 : où était Link ; var3a-var3b : depuis combien de temps
@@ -1201,48 +1272,143 @@ follower:
 	call createFinPuffAt
 	jp interactionDelete
 
-; Elle marche vers Link quand il est à plus de 20 pixels
+; Elle marche derrière Link, comme dans DX (Denis : « elle passe sur l'eau, elle nous suit pas ») :
+; elle vise la case dans le dos de Link, un pixel par image sur chaque axe, sans marcher sur l'eau,
+; un trou ou un mur ; coincée loin de lui 1,5 s : un nuage, elle réapparaît derrière lui.
+; var3c : depuis combien de temps elle est coincée
 @walk:
+	ld a,(w1Link.direction)
+	and $03
+	add a
+	ld hl,@behind
+	rst_addAToHl
+	ld a,(w1Link.yh)
+	add (hl)
+	ld b,a
+	inc hl
+	ld a,(w1Link.xh)
+	add (hl)
+	ld c,a
+	; b, c = l'écart jusqu'à sa place
 	ld h,d
 	ld l,Interaction.yh
-	ld a,(w1Link.yh)
+	ld a,b
 	sub (hl)
-	ld b,a			; dy
+	ld b,a
 	ld l,Interaction.xh
-	ld a,(w1Link.xh)
+	ld a,c
 	sub (hl)
-	ld c,a			; dx
+	ld c,a
 	ld a,b
 	call finAbs
 	ld e,a
 	ld a,c
 	call finAbs
 	add e
-	cp 20
+	cp 4
 	ret c
-	; un pas sur chaque axe (pas plus d'un pixel par image)
-	ld l,Interaction.yh
+	push bc
+	ld e,$00		; les axes où elle a pu avancer
+	; en y
 	ld a,b
 	or a
-	jr z,++
+	jr z,+
+	ld b,$01
 	bit 7,a
-	jr nz,+
-	inc (hl)
-	jr ++
-+
-	dec (hl)
+	jr z,++
+	ld b,$ff
 ++
+	ld l,Interaction.yh
+	ld a,(hl)
+	add b
+	add $04			; (ses pieds)
+	ld b,a
 	ld l,Interaction.xh
+	ld c,(hl)
+	call @walkable
+	jr c,+
+	ld h,d
+	ld l,Interaction.yh
+	ld a,b
+	sub $04
+	ld (hl),a
+	inc e
++
+	pop bc
+	push bc
+	; en x
 	ld a,c
 	or a
-	jr z,++
+	jr z,+
+	ld c,$01
 	bit 7,a
-	jr nz,+
-	inc (hl)
-	jr ++
-+
-	dec (hl)
+	jr z,++
+	ld c,$ff
 ++
+	ld h,d
+	ld l,Interaction.xh
+	ld a,(hl)
+	add c
+	ld c,a
+	ld l,Interaction.yh
+	ld a,(hl)
+	add $04
+	ld b,a
+	call @walkable
+	jr c,+
+	ld h,d
+	ld l,Interaction.xh
+	ld (hl),c
+	inc e
++
+	pop bc
+	; coincée, et loin de Link : elle le rejoint d'un coup (un nuage)
+	ld h,d
+	ld l,Interaction.var3c
+	ld a,e
+	or a
+	jr z,+
+	ld (hl),$00
+	jr @draw
++
+	push bc
+	ld c,40
+	push hl
+	call objectCheckLinkWithinDistance
+	pop hl
+	pop bc
+	jr c,@draw
+	inc (hl)
+	ld a,(hl)
+	cp 90
+	jr c,@draw
+	ld (hl),$00
+	call @puffHere
+	call followPlace
+	call @puffHere
+	ret
+
+; @param	bc	La position à essayer (ses pieds)
+; @param[out]	cflag	c si elle ne peut pas y aller (un mur, un trou, de l'eau)
+@walkable:
+	push bc
+	push de
+	call checkTileCollisionAt_disallowHoles
+	pop de
+	pop bc
+	ret c
+	push bc
+	push de
+	call checkTileAtPositionIsWater
+	pop de
+	pop bc
+	ret
+
+@behind:
+	.db $10 $00, $00 $f0, $f0 $00, $00 $10	; Link regarde en haut, à droite, en bas, à gauche
+
+@draw:
+	ld h,d
 	; son dessin : face, dos, profil (le plus grand des deux écarts)
 	ld a,b
 	call finAbs
@@ -1283,7 +1449,8 @@ follower:
 	ld b,c
 	jp humanShow
 
-; Quand l'épée de Link sort, elle frappe aussi, devant elle
+; Elle frappe toute seule un ennemi tout près (Denis : « elle ne tape que quand on tape, c'est
+; débile ») : elle se tourne vers lui ; et aussi quand l'épée de Link sort, devant elle
 @sword:
 	ld h,d
 	ld l,Interaction.var30
@@ -1293,9 +1460,14 @@ follower:
 	dec (hl)
 	ret
 +
+	call @nearEnemy
+	jr c,+
 	ld a,(w1WeaponItem.enabled)
 	or a
 	ret z
++
+	ld h,d
+	ld l,Interaction.var30
 	ld (hl),30
 	ld l,Interaction.var31
 	ld a,(hl)
@@ -1330,6 +1502,69 @@ follower:
 
 @swordOffsets:
 	.db $0e $00, $f2 $00, $00 $f2, $00 $0e	; bas, haut, gauche, droite
+
+; Un ennemi à moins de 28 pixels (sur chaque axe) : elle se tourne vers lui (var31)
+; @param[out]	cflag	c s'il y en a un
+@nearEnemy:
+	ld h,FIRST_ENEMY_INDEX
+-
+	ld l,Enemy.enabled
+	ld a,(hl)
+	or a
+	jr z,@nextEnemy
+	ld l,Enemy.health
+	ld a,(hl)
+	or a
+	jr z,@nextEnemy
+	ld l,Enemy.yh
+	ld b,(hl)
+	ld e,Interaction.yh
+	ld a,(de)
+	sub b
+	cpl
+	inc a
+	ld b,a			; b = y de l'ennemi - le sien
+	ld l,Enemy.xh
+	ld c,(hl)
+	ld e,Interaction.xh
+	ld a,(de)
+	sub c
+	cpl
+	inc a
+	ld c,a			; c = x de l'ennemi - le sien
+	ld a,b
+	call finAbs
+	cp 28
+	jr nc,@nextEnemy
+	ld e,a
+	ld a,c
+	call finAbs
+	cp 28
+	jr nc,@nextEnemy
+	cp e
+	jr nc,@enemySide
+	bit 7,b
+	ld a,$00		; en bas
+	jr z,@enemyDir
+	inc a			; en haut
+	jr @enemyDir
+@enemySide:
+	bit 7,c
+	ld a,$03		; à droite
+	jr z,@enemyDir
+	dec a			; à gauche
+@enemyDir:
+	ld e,Interaction.var31
+	ld (de),a
+	scf
+	ret
+@nextEnemy:
+	inc h
+	ld a,h
+	cp LAST_ENEMY_INDEX+1
+	jr c,-
+	or a
+	ret
 
 ;;
 ; Le coup d'épée de Marine ($1b) : un instant ; chaque ennemi qu'il touche perd 2 points de vie (une

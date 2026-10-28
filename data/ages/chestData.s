@@ -24,6 +24,7 @@ chestGroup0Data:
 	m_ChestData $25, $d4, TREASURE_OBJECT_RING_23
 	m_ChestData $25, $d5, TREASURE_OBJECT_RING_25
 	;m_ChestData $12, $63, TREASURE_OBJECT_GASHA_SEED_01 ; BALLADE: l'île des Échos (1:40-74)
+	m_ChestData $11, $c1, TREASURE_OBJECT_RUPEES_02 ; BALLADE: le lac de glace, dans le Songe (0:c1) : 10 rubis (sans contenu, le coffre recopié du Réel s'ouvrait pour rien et revenait plein : Denis)
 	.db $ff
 
 chestGroup1Data:

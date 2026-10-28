@@ -611,9 +611,28 @@ shopkeeperCheckLinkHasItemAlready:
 	ld (de),a
 	ret
 
+.ifdef ROM_AGES
+	; BALLADE: un bouclier se vend si Link en a un de niveau plus bas (le marchand refusait tout
+	; bouclier dès que Link en avait un : Denis ne pouvait pas acheter le miroir, niveau 3)
+@shield:
+	ld c,$01
+	ld a,b
+	cp $03
+	jr z,+
+	inc c
+	cp $11
+	jr z,+
+	inc c
++
+	ld a,(wShieldLevel)
+	cp c
+	ret c
+	jr @cantSell
+.else
 @shield:
 	ld a,TREASURE_SHIELD
 	jr @checkObtained
+.endif
 
 @fairy:
 	ld a,TREASURE_POTION

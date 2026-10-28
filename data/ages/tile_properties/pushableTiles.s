@@ -28,7 +28,7 @@ pushableTilePropertiesTable:
 	dbrel @five
 
 @overworld:
-	.db $d3 $3a $02 $01
+	.db $d3 $3a $d3 $01 ; BALLADE: la statue reste une statue (la brique $02 d'Ages est une tombe dans nos décors : Denis, 1:13)
 	.db $d8 $3a $02 $05
 	.db $d9 $dc $02 $85 ; BALLADE: seulement à l'entrée du Terrier (1:60) ; ailleurs, des tombes 02
 	.db $02 $3a $02 $05

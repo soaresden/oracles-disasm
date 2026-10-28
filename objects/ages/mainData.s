@@ -4073,6 +4073,7 @@ group1Map7bObjectData:
 group1Map7cObjectData:
 	obj_End
 group1Map89ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $58 $48 $48
 	obj_End
 group1Map8aObjectData:
 	obj_End
@@ -4235,7 +4236,11 @@ group3Map29ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $29 $48 $58
 	obj_End
 group3Map2aObjectData:
-	obj_Interaction INTERAC_BALLADE_OBJECT $48 $18 $68
+	obj_Interaction INTERAC_BALLADE_OBJECT $48 $08 $68 ; au mur (Denis : « le miroir est censé être au mur »)
+	obj_Interaction INTERAC_BALLADE_OBJECT $59 $18 $78
+	obj_Interaction INTERAC_BALLADE_OBJECT $5a $68 $18
+	obj_Interaction INTERAC_BALLADE_OBJECT $5b $28 $88
+	obj_Interaction INTERAC_BALLADE_OBJECT $5c $58 $78
 	obj_End
 group3Map5eObjectData:
 	obj_Interaction $47 $03 $28 $50 ; le bouclier (50 ; puis le bouclier de fer 150, le miroir 300)

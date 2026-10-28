@@ -78,6 +78,8 @@
 ; @subid_55{Un trésor flottant de la Fosse de Bulle (rubis à 2 m et 4 m, quart de cœur à 3 m)}
 ; @subid_56{Invisible : le bassin de Bulle (3:24) ; Link y saute : la plongée dans la Fosse}
 ; @subid_57{L'Insomnis à terre, agonisant (5:cc) : Marine le frappe, il meurt}
+; @subid_58{Invisible : un quart de cœur enterré au milieu du motif de 1:89 ; la Pelle le déterre}
+; @subid_59{Invisible, chez Marine (3:2a) : clins d'œil à Link's Awakening, A devant un meuble ($59-$5c)}
 ; ==================================================================================================
 
 ;;
@@ -173,6 +175,11 @@ main:
 	.dw fosseTreasure
 	.dw fossePool
 	.dw insomnis
+	.dw buriedHeart
+	.dw marineWink
+	.dw marineWink
+	.dw marineWink
+	.dw marineWink
 
 
 ;;
@@ -1179,6 +1186,9 @@ readCarnet:
 ; donne en entrant. Rien pendant le tour lui-même (wBalladeEnding).
 ; ==================================================================================================
 carnetCatchUp:
+	; (plus de Carnet des Rêves : Denis, « il sert à rien, enlève-le » ; objectLoading.s le retire
+	; des parties qui l'avaient)
+	jp interactionDelete
 	ld e,Interaction.state
 	ld a,(de)
 	or a
@@ -2698,6 +2708,43 @@ buriedKey:
 	call giveTreasure
 	ld bc,TX_0023
 	call showText
+	jp interactionDelete
+
+
+; ==================================================================================================
+; Un quart de cœur enterré (subid $58, invisible, au milieu du motif de 1:89 ; Denis : « le motif
+; donne envie de creuser, il faut cacher quelque chose dedans »). La Pelle creuse la case (le tas de
+; terre cd) : le quart de cœur sort de terre. Le drapeau $40 de la salle s'en souvient.
+; ==================================================================================================
+buriedHeart:
+	ld e,Interaction.state
+	ld a,(de)
+	or a
+	jr nz,@watch
+	call getThisRoomFlags
+	bit 6,a
+	jp nz,interactionDelete
+	call interactionIncState
+	call objectGetTileAtPosition
+	ld e,Interaction.var30
+	ld (de),a
+	ret
+
+@watch:
+	call objectGetTileAtPosition
+	ld b,a
+	ld e,Interaction.var30
+	ld a,(de)
+	cp b
+	ret z
+	call getThisRoomFlags
+	set 6,(hl)
+	ld a,SND_SOLVEPUZZLE
+	call playSound
+	ldbc TREASURE_HEART_PIECE, $00
+	call createTreasure
+	jp nz,interactionDelete
+	call objectCopyPosition
 	jp interactionDelete
 
 
@@ -5892,6 +5939,26 @@ easterThanks:
 	call easterPressed
 	ret nc
 	ld bc,TX_5b73
+	jp showText
+
+;;
+; Les clins d'œil de la maison de Marine ($59-$5c, 3:2a ; Denis : « chez elle devrait y avoir des
+; easter eggs, des clins d'œil ») : A devant la commode (sa robe de Cocolint), la jarre (le
+; champignon qui a changé Tarkin en raton laveur), la caisse (les coquillages secrets), la table
+; (l'œuf, la Ballade du Poisson-Rêve) : TX_5be7 + (subid - $59)
+marineWink:
+	ld e,Interaction.state
+	ld a,(de)
+	or a
+	jp z,easterSensitive
+	call easterPressed
+	ret nc
+	ld e,Interaction.subid
+	ld a,(de)
+	sub $59
+	add <TX_5be7
+	ld c,a
+	ld b,>TX_5be7
 	jp showText
 
 ;;

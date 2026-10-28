@@ -1,8 +1,9 @@
 ; Généré par tools/make_tracker.py (ne pas modifier à la main) : les coffres de la Ballade
 ; (groupe, salle), pour l'écran de progression (balladeObjects.progressTracker).
-.define BALLADE_TRACKER_CHESTS 56
+.define BALLADE_TRACKER_CHESTS 57
 
 progressTrackerChests:
+	.db $00, $c1
 	.db $01, $c1
 	.db $01, $13
 	.db $04, $3f

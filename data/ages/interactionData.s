@@ -988,6 +988,11 @@ interactionedSubidData:
 	m_InteractionSubidData $00 $00 $00 ; $55 un trésor flottant de la Fosse (invisible : il pose INTERAC_TREASURE)
 	m_InteractionSubidData $00 $00 $00 ; $56 le bassin de Bulle : Link y saute, la plongée (invisible)
 	m_InteractionSubidData $e9 $14 $2f ; $57 l'Insomnis à terre (spr_ballade_braise images 5-6, 32 x 16 ; palette 2, animation $0f)
+	m_InteractionSubidData $00 $00 $00 ; $58 un quart de cœur enterré (1:89) (invisible)
+	m_InteractionSubidData $00 $00 $00 ; $59 chez Marine : la commode (invisible)
+	m_InteractionSubidData $00 $00 $00 ; $5a chez Marine : la jarre (invisible)
+	m_InteractionSubidData $00 $00 $00 ; $5b chez Marine : la caisse (invisible)
+	m_InteractionSubidData $00 $00 $00 ; $5c chez Marine : la table (invisible)
 	m_InteractionSubidDataEnd
 
 interactiond4SubidData:

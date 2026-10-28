@@ -4,7 +4,7 @@
 ; - les couplets (les essences, 7, + le 8e, chanté à Zelda à la fin : GLOBALFLAG_BALLADE_FIN) ;
 ; - les cœurs (11 au plus : 3 + 6 réceptacles + 9 quarts, le dernier reste un quart) et les quarts
 ;   du cœur suivant ;
-; - les objets (@items, 16, et 3 améliorations : la Cape, l'Épée de Légende, le Bracelet des Âmes) ;
+; - les objets (@items, 15, et 3 améliorations : la Cape, l'Épée de Légende, le Bracelet des Âmes) ;
 ; - les anneaux (les 5 de la Ballade) ;
 ; - les coffres (balladeTrackerChests.s, tools/make_tracker.py : le drapeau $20 de leur salle).
 ; Le pour cent : 20 points par sorte, au prorata (les cœurs : les quarts gagnés depuis les 3 du
@@ -160,7 +160,7 @@ main:
 	ld e,Interaction.var33
 	ld a,(de)
 	ld b,a
-	ld c,19
+	ld c,18
 	call @points
 	call @addPoints
 	ld e,Interaction.var34
@@ -261,12 +261,12 @@ main:
 
 ; Les objets : la Lanterne, l'épée, le Boomerang, les bombes, les Palmes, les Écailles de Sirène,
 ; la Canne, le Bracelet, le Grappin-Écho, la Pelle, la Plume, la Clochette d'Aube, le Lance-Graines,
-; la sacoche, le Carnet des Rêves, la boîte à anneaux
+; la sacoche, la boîte à anneaux (plus le Carnet des Rêves : Denis l'a fait enlever)
 @items:
 	.db TREASURE_HARP, TREASURE_SWORD, TREASURE_BOOMERANG, TREASURE_BOMBS, TREASURE_FLIPPERS
 	.db TREASURE_MERMAID_SUIT, TREASURE_CANE_OF_SOMARIA, TREASURE_BRACELET, TREASURE_SWITCH_HOOK
 	.db TREASURE_SHOVEL, TREASURE_FEATHER, TREASURE_FLUTE, TREASURE_SHOOTER, TREASURE_SEED_SATCHEL
-	.db TREASURE_12, TREASURE_RING_BOX, $00
+	.db TREASURE_RING_BOX, $00
 
 ; Les anneaux de la Ballade
 @rings:

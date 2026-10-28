@@ -333,10 +333,19 @@ screenTransitionState2:
 	; Check leftmost map boundary
 	ld a,e
 	and $0f
-	jr nz,@doneBoundaryChecks
+	jr nz,+
 	ld a,c
 	cp DIR_LEFT
 	ret z
++
+	; BALLADE: pas d'une île à l'autre par les bords (balladeIslands.s ; Denis passait de
+	; Hameau-Grelot à l'île des Échos, et partout à la nage)
+	push bc
+	callab balladeIslands.blockedCrossing
+	ld a,b
+	pop bc
+	or a
+	ret nz
 
 @doneBoundaryChecks:
 	; Skip hazard checks if underwater

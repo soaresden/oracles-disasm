@@ -88,6 +88,14 @@ parseObjectData:
 	xor a
 	ld (wNumUnappraisedRingsBcd),a
 +
+	; BALLADE: plus de Carnet des Rêves (Denis : « il sert à rien du tout, enlève-le ») : retiré
+	; des parties qui l'avaient (et de l'inventaire)
+	ld a,TREASURE_12
+	call checkTreasureObtained
+	jr nc,+
+	ld a,TREASURE_12
+	call loseTreasure
++
 	callab getObjectDataAddress
 .else; ROM_SEASONS
 	ld a,(wActiveGroup)
