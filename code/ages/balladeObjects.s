@@ -76,6 +76,7 @@
 ; @subid_52{Invisible : la même, après « nos coups ne lui font rien » (TX_5ae5)}
 ; @subid_53{Invisible : la progression vers le 100 % (le menu, 3e page, B)}
 ; @subid_55{Un trésor flottant de la Fosse de Bulle (rubis à 2 m et 4 m, quart de cœur à 3 m)}
+; @subid_56{Invisible : le bassin de Bulle (3:24) ; Link y saute : la plongée dans la Fosse}
 ; ==================================================================================================
 
 ;;
@@ -169,6 +170,7 @@ main:
 	.dw progressTracker
 	.dw inviteDream
 	.dw fosseTreasure
+	.dw fossePool
 
 
 ;;
@@ -3515,6 +3517,46 @@ surfInstructor:
 	ld e,Interaction.state
 	ld a,$05
 	ld (de),a
+	jp fosseDive
+
+@done:
+	ret
+
+@gift:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	ld a,GLOBALFLAG_BALLADE_SURF
+	call setGlobalFlag
+	ld a,SND_GETITEM
+	call playSound
+	ld bc,TX_5ae0
+	ld a,$02
+	jp npcSay
+
+
+; ==================================================================================================
+; Le bassin de Bulle (subid $56, 3:24 ; Denis : « je m'attendais à avoir un carré d'eau dans la
+; maison du Zora ») : 2 x 2 cases d'eau profonde à côté d'elle (story/salles/lagune_interieurs.txt).
+; Une fois la planche de surf donnée (la plongée permise), Link y saute : la Fosse (comme « Oui » à
+; « On plonge ? »). Avant, c'est un bassin comme un autre.
+; ==================================================================================================
+fossePool:
+	ld a,GLOBALFLAG_BALLADE_SURF
+	call checkGlobalFlag
+	ret z
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	ld a,(wActiveTileType)
+	cp TILETYPE_WATER
+	ret nz
+	call fosseDive
+	jp interactionDelete
+
+;;
+; La plongée : 5:d0 (1 m), le souffle plein, en fondu, avec un plouf
+fosseDive:
 	; (on part le souffle plein)
 	ld a,(wLinkMaxHealth)
 	ld (wLinkHealth),a
@@ -3531,21 +3573,6 @@ surfInstructor:
 	ld (wWarpTransition2),a
 	ld a,SND_SPLASH
 	jp playSound
-
-@done:
-	ret
-
-@gift:
-	ld a,(wTextIsActive)
-	or a
-	ret nz
-	ld a,GLOBALFLAG_BALLADE_SURF
-	call setGlobalFlag
-	ld a,SND_GETITEM
-	call playSound
-	ld bc,TX_5ae0
-	ld a,$02
-	jp npcSay
 
 
 ; ==================================================================================================

@@ -24455,10 +24455,11 @@ groups:
   - name: TX_5ae1
     index: 0xe1
     text: |-
-      \col(1)Bulle\col(0): Out
-      at sea, the Pit
-      goes down very,
-      very deep.\stop
+      \col(1)Bulle\col(0): My
+      pool leads to
+      the Pit. It goes
+      down very, very
+      deep.\stop
       Underwater, your
       hearts are your
       breath: they
@@ -24488,6 +24489,8 @@ groups:
     text: |-
       \col(1)Bulle\col(0): Any
       time you like!
+      Jump in the
+      pool!
 
   - name: TX_5ae4
     index: 0xe4
@@ -26877,10 +26880,11 @@ groups:
   - name: TX_5be5
     index: 0xe5
     text: |-
-      \col(1)Bulle\col(0): Out
-      at sea, the Pit
-      goes down very,
-      very deep.\stop
+      \col(1)Bulle\col(0): My
+      pool leads to
+      the Pit. It goes
+      down very, very
+      deep.\stop
       Underwater, your
       hearts are your
       breath: they
@@ -26901,5 +26905,6 @@ groups:
       hole!\stop
       A heart piece,
       I bet!\stop
-      Shall we dive?
+      \col(1)Bulle\col(0): Shall
+      we dive?
         \opt()Yes \opt()No

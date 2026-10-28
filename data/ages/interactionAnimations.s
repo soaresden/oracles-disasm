@@ -236,7 +236,7 @@ interactionAnimationTable:
 	.dw interactione4Animations ; BALLADE: $ea (rien à afficher)
 	.dw interactionebAnimations ; BALLADE: $eb (Ghost Babel : la boîte, le regard, le radar)
 	.dw interactione4Animations ; BALLADE: $ec (rien à afficher)
-	.dw interactione8Animations ; BALLADE: $ed, les objets (images fixes des villageois)
+	.dw interactionedAnimations ; BALLADE: $ed, les objets (images fixes des villageois, Bulle)
 
 interactionOamDataTable: ; 0x59a23
 	.dw interaction00OamDataPointers
@@ -476,7 +476,7 @@ interactionOamDataTable: ; 0x59a23
 	.dw interactione4OamDataPointers ; BALLADE: $ea
 	.dw interactionebOamDataPointers ; BALLADE: $eb
 	.dw interactione4OamDataPointers ; BALLADE: $ec
-	.dw interactione8OamDataPointers ; BALLADE: $ed
+	.dw interactionedOamDataPointers ; BALLADE: $ed
 
 interaction00Animations:
 interaction01Animations:
@@ -733,6 +733,25 @@ interactionc4Animations:
 	.dw interactionAnimation5a663
 	.dw interactionAnimation5a3d5
 	.dw interactionAnimation5a3be
+
+; BALLADE: $ed, les objets : les animations des villageois, plus la $0e (Bulle : la Zora d'Ages en
+; entier, 3 sprites de large ; avec les cadres des villageois, il lui manquait le bout de la tête)
+interactionedAnimations:
+	.dw interactionAnimation5a468
+	.dw interactionAnimation5a5a6
+	.dw interactionAnimation5a60c
+	.dw interactionAnimation5a653
+	.dw interactionAnimation5a61c
+	.dw interactionAnimation5a62a
+	.dw interactionAnimation5a3ee
+	.dw interactionAnimation5a71b
+	.dw interactionAnimation5a743
+	.dw interactionAnimation5a763
+	.dw interactionAnimation5a3da
+	.dw interactionAnimation5a663
+	.dw interactionAnimation5a3d5
+	.dw interactionAnimation5a3be
+	.dw interactionAnimationBalladeBulle
 interaction3eAnimations:
 	.dw interactionAnimation5a6ae
 interaction30Animations:
@@ -2048,6 +2067,12 @@ interactionAnimation5a60c:
 	.db $10 $08 $00
 	.db $10 $0a $00
 	m_AnimationLoop interactionAnimation5a60c
+
+; BALLADE: Bulle, comme la Zora d'Ages (interactionAnimation5a60c avec ses cadres à elle)
+interactionAnimationBalladeBulle:
+	.db $10 $1a $00
+	.db $10 $1c $00
+	m_AnimationLoop interactionAnimationBalladeBulle
 
 interactionAnimation5a614:
 	.db $18 $08 $00
@@ -3584,6 +3609,25 @@ interactionbfOamDataPointers: ; 0x5b034
 	.dw interactionOamData5040f
 	.dw interactionOamData50445
 	.dw interactionOamData50538
+
+; BALLADE: $ed, les objets : les cadres des villageois, plus ceux de la Zora d'Ages (3 sprites :
+; Bulle, interactionAnimationBalladeBulle)
+interactionedOamDataPointers:
+	.dw interactionOamData502f8
+	.dw interactionOamData50325
+	.dw interactionOamData50388
+	.dw interactionOamData503d0
+	.dw interactionOamData5020e
+	.dw interactionOamData502a7
+	.dw interactionOamData5037f
+	.dw interactionOamData503b5
+	.dw interactionOamData503f4
+	.dw interactionOamData50433
+	.dw interactionOamData5040f
+	.dw interactionOamData50445
+	.dw interactionOamData50538
+	.dw interactionOamData50f3f ; $1a
+	.dw interactionOamData50f4c ; $1c
 
 interaction48OamDataPointers: ; 0x5b04e
 	.dw interactionOamData50dfa

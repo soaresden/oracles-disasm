@@ -913,7 +913,7 @@ interactionedSubidData:
 	m_InteractionSubidData $ec $10 $32 ; $0c un autre enfant (un enfant de Mabe, DX)
 	m_InteractionSubidData $ee $00 $12 ; $0d Mme Bonnet, la maîtresse (Madame Miaou-Miaou de DX, en bleu)
 	m_InteractionSubidData $ef $00 $32 ; $0e Héloïse (Grand-mère Ulrira de DX)
-	m_InteractionSubidData $44 $00 $12 ; $0f Bulle, la monitrice (la Zora d'Ages : Denis préférait ce dessin)
+	m_InteractionSubidData $44 $00 $1e ; $0f Bulle, la monitrice (la Zora d'Ages : Denis préférait ce dessin ; animation $0e : ses 3 sprites, la tête entière)
 	m_InteractionSubidData $41 $00 $22 ; $10 le facteur des bouteilles (le facteur d'Ages)
 	m_InteractionSubidData $42 $00 $12 ; $11 Gaspard (le vieux monsieur) (palette 1 : la 0 est celle de la tunique, que l'Anneau Caméléon recolore)
 	m_InteractionSubidData $e3 $0c $32 ; $12 la bouteille à la mer (palette 3)
@@ -985,6 +985,8 @@ interactionedSubidData:
 	m_InteractionSubidData $00 $00 $00 ; $52 la tour : la Fosse, puis sortir (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $53 la progression (le menu, 3e page, B) (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $54 l'auberge : Marine envoie Link dormir (invisible)
+	m_InteractionSubidData $00 $00 $00 ; $55 un trésor flottant de la Fosse (invisible : il pose INTERAC_TREASURE)
+	m_InteractionSubidData $00 $00 $00 ; $56 le bassin de Bulle : Link y saute, la plongée (invisible)
 	m_InteractionSubidDataEnd
 
 interactiond4SubidData:

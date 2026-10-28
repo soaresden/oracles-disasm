@@ -4215,6 +4215,7 @@ group3Map23ObjectData:
 	obj_End
 group3Map24ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $0f $48 $38
+	obj_Interaction INTERAC_BALLADE_OBJECT $56 $08 $08 ; le bassin : Link y saute, la plongée
 	obj_End
 group3Map25ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $19 $48 $38
