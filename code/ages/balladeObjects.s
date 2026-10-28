@@ -3471,6 +3471,21 @@ surfInstructor:
 	ld a,$02
 	jp npcSay
 ++
+	; Link est remonté d'une syncope (trop bas dans la Fosse) : Bulle se moque de lui
+	ld a,GLOBALFLAG_BALLADE_SYNCOPE
+	call checkGlobalFlag
+	jr z,@noSyncope
+	ld a,(wScrollMode)
+	and $01
+	ret z
+	ld a,GLOBALFLAG_BALLADE_SYNCOPE
+	call unsetGlobalFlag
+	ld a,$91
+	ld (wDisabledObjects),a
+	ld bc,TX_5be6
+	ld a,$02
+	jp npcSay
+@noSyncope:
 	call npcCheckTalk
 	ret z
 	ld a,GLOBALFLAG_BALLADE_SURF
@@ -3542,6 +3557,17 @@ surfInstructor:
 ; « On plonge ? »). Avant, c'est un bassin comme un autre.
 ; ==================================================================================================
 fossePool:
+	; Au retour d'une syncope (fosseAir), l'écran était noir : il se rallume doucement
+	ld e,Interaction.var30
+	ld a,(de)
+	or a
+	jr nz,+
+	inc a
+	ld (de),a
+	ld a,GLOBALFLAG_BALLADE_SYNCOPE
+	call checkGlobalFlag
+	call nz,fadeinFromBlack
++
 	ld a,GLOBALFLAG_BALLADE_SURF
 	call checkGlobalFlag
 	ret z
@@ -3933,10 +3959,11 @@ sablierHold:
 ; (surfInstructor). Sous l'eau, les cœurs sont le souffle : le souffle (subid $34, dans chaque
 ; salle) en retire un quart toutes les FOSSE_FRAMES images ; à une demi-coeur, Bulle tire sur la
 ; corde (TX_5ae2) : retour au club (3:24), les cœurs pleins. Link peut aussi remonter par la surface
-; de 1 m. Il descend aussi bas qu'il a de couplets de Marine (essences, 7 m au plus) : plus bas,
-; « l'eau est noire » (TX_5ae7) et le passage du bas ne mène nulle part. L'Épée de Légende (subid
-; $35) est au fond, à 7 m : il faut sept couplets.
-; Variables : var30 = 1 une fois TX_5ae7 montré dans cette salle.
+; de 1 m. Il descend aussi bas qu'il a de couplets de Marine (essences, 7 m au plus) : un mètre
+; plus bas (Denis : « le screen blackout si on n'a pas le niveau »), « l'eau est noire » (TX_5ae7),
+; l'écran devient noir et Bulle remonte Link ; au club, elle se moque de lui (« t'es pas un vrai
+; Bubulle », TX_5be6 ; GLOBALFLAG_BALLADE_SYNCOPE). L'Épée de Légende (subid $35) est au fond, à
+; 7 m : il faut sept couplets.
 ; ==================================================================================================
 .define FOSSE_FRAMES 90 ; (un quart de cœur toutes les 1,5 s)
 .define FOSSE_FIRST_ROOM $d0
@@ -3966,11 +3993,25 @@ fosseAir:
 	.dw @init
 	.dw @breathe
 	.dw fosseSurface
+	.dw @tooDeep
+	.dw @darken
+	.dw @faint
 
 @init:
 	call interactionIncState
 	ld l,Interaction.counter1
 	ld (hl),FOSSE_FRAMES
+	; Plus bas que les couplets ne le permettent : l'écran noir
+	call fosseMaxDepth
+	ld b,a
+	call fosseDepth
+	dec a
+	cp b
+	jr c,+
+	ld l,Interaction.state
+	ld (hl),$03
+	ret
++
 	; À la 3e profondeur (5:d2), Link a trouvé le calme : Bulle lui apprendra le contre parfait
 	ld a,(wActiveRoom)
 	cp $d2
@@ -4006,8 +4047,6 @@ fosseAir:
 	call interactionIncState
 	jp fosseSurface
 +
-	call @checkTooDeep
-
 	call interactionDecCounter1
 	ret nz
 	ld (hl),FOSSE_FRAMES
@@ -4023,49 +4062,36 @@ fosseAir:
 	ld bc,TX_5ae2
 	jp showText
 
-; Au mètre le plus bas permis, pas de passage vers le bas : au-dessus du passage du bas, les
-; transitions d'écran sont coupées et Link ne descend pas plus bas ; la 1re fois, TX_5ae7
-@checkTooDeep:
-	call fosseMaxDepth
-	ld b,a
-	call fosseDepth
-	cp FOSSE_MAX_DEPTH
-	ret nc
-	cp b
-	ret c
-	; (au-dessus du passage seulement : la dernière ligne de la salle est de l'eau sous Link)
-	ld a,(w1Link.xh)
-	swap a
-	and $0f
-	add $a0
-	ld l,a
-	ld h,>wRoomLayout
-	ld a,(hl)
-	cp $1b
-	ld a,$00
-	jr nz,@setTransitions
-	ld hl,w1Link.yh
-	ld a,(hl)
-	cp $90
-	ld a,$00
-	jr c,@setTransitions
-	ld a,(hl)
-	cp $a0
-	jr c,+
-	ld (hl),$a0
-+
-	ld e,Interaction.var30
-	ld a,(de)
-	or a
-	jr nz,+
-	inc a
-	ld (de),a
+; Trop bas : « l'eau est noire » (une fois Link arrivé dans la salle : sinon la boîte est refusée)
+@tooDeep:
+	ld a,(wScrollMode)
+	and $01
+	ret z
+	call interactionIncState
 	ld bc,TX_5ae7
-	call showText
-+
+	jp showText
+
+; Le texte lu : l'écran devient noir, Link ne bouge plus
+@darken:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	call interactionIncState
+	ld l,Interaction.counter1
+	ld (hl),75
 	ld a,$01
-@setTransitions:
-	ld (wDisableScreenTransitions),a
+	ld (wDisabledObjects),a
+	jp fadeoutToBlack
+
+; Une syncope : Bulle remonte Link (et s'en moquera au club)
+@faint:
+	call interactionDecCounter1
+	ret nz
+	ld a,GLOBALFLAG_BALLADE_SYNCOPE
+	call setGlobalFlag
+	ld e,Interaction.state
+	ld a,$02
+	ld (de),a
 	ret
 
 ;;
@@ -4075,6 +4101,13 @@ fosseSurface:
 	ld a,(wTextIsActive)
 	or a
 	ret nz
+	; (après une syncope, l'écran est déjà noir : pas de fondu au blanc, il se rallume au club)
+	ld a,GLOBALFLAG_BALLADE_SYNCOPE
+	call checkGlobalFlag
+	ld b,$03 ; fondu
+	jr z,+
+	ld b,$01 ; d'un coup
++
 	ld a,(wLinkMaxHealth)
 	ld (wLinkHealth),a
 	ld a,$83
@@ -4087,7 +4120,7 @@ fosseSurface:
 	ld (wWarpTransition),a
 	ld (wDisabledObjects),a
 	ld (wDisableScreenTransitions),a
-	ld a,$03 ; fondu
+	ld a,b
 	ld (wWarpTransition2),a
 	ld a,SND_SPLASH
 	call playSound

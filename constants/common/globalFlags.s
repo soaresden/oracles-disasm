@@ -125,6 +125,7 @@
 	GLOBALFLAG_BALLADE_CONTRE_PRET		db ; $62: Link est descendu à la 3e profondeur de la Fosse (Bulle le lui apprendra)
 	GLOBALFLAG_BALLADE_CACHE		db ; $63: Tic et Tac jouent à cache-cache (ils se cachent dans le Songe de l'île 2)
 	GLOBALFLAG_BALLADE_PHOTOS_HINT		db ; $64: Marine a demandé à revenir à l'auberge (les photos l'y attendent)
+	GLOBALFLAG_BALLADE_SYNCOPE		db ; $65: trop bas dans la Fosse, l'écran noir : Bulle a remonté Link (elle s'en moque au club)
 
 .else; ROM_SEASONS
 
