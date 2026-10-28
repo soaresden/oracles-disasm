@@ -6,8 +6,8 @@
 ;   le suit, ses bottes dépassent ; Link est caché, sans collisions (bit 2 de
 ;   wDisableLinkCollisionsAndMenu : les fantômes ne le voient pas) et sans objets (wccd8). A : il en sort, la boîte reste par terre (wBalladeGhostBox : la boîte
 ;   portée, 0 sinon).
-; - Le contrôleur ($05) crée le regard des fantômes (deux points rouges devant chacun, $06) et le
-;   radar (un petit écran dans le coin, $08, avec un point par fantôme et un vert pour Link, $09).
+; - Le contrôleur ($05) crée le regard des fantômes (deux points rouges devant chacun, $06) (le
+;   radar, $08 / $09, et « NO ITEM », $23, ne sont plus créés : Denis, 28/10).
 ;   Quand un fantôme aurait vu Link dans sa boîte, un « ? » apparaît au-dessus de lui ($07).
 ; ==================================================================================================
 
@@ -120,20 +120,16 @@ controller:
 	jr nz,@watch
 	inc a
 	ld (de),a
-	; L'écran de Ghost Babel : la barre d'état en bas, « NO ITEM » dans les cases B et A (Link entre
-	; sans rien en main : seulement les boîtes)
-	ld a,$01
-	ld (wBalladeGhostHud),a
-	ld a,$ff
-	ld (wStatusBarNeedsRefresh),a
-	ld bc,$2300
-	call @create
-	; Le radar, et le point de Link
-	ld bc,$0800
-	call @create
-	ld bc,$09d0
-	call @create
-	; Pour chaque fantôme : deux points de regard et un point du radar
+	; (Denis, 28/10 : plus de « NO ITEM » ni de radar, « mal fait » : la barre d'état et les objets
+	; restent comme ailleurs ; noItem, radar et radarDot ne sont plus créés)
+	; Vu par deux fantômes à la fois : le 1er réveille Link à l'escalier (ambiGuard.s, il débloque
+	; tout), mais le 2e a déjà rebloqué le menu (wMenuDisabled = $80) juste avant ; la salle
+	; rechargée, plus personne ne le débloquait (le menu et les escaliers bloqués pour de bon)
+	xor a
+	ld (wMenuDisabled),a
+	ld (wDisabledObjects),a
+	ld (wDisableScreenTransitions),a
+	; Pour chaque fantôme : deux points de regard
 	ld h,FIRST_ENEMY_INDEX
 @nextGuard:
 	ld l,Enemy.enabled
@@ -155,11 +151,6 @@ controller:
 	ld c,h
 	ld e,$02
 	call @createK
-	pop hl
-	push hl
-	ld b,$09
-	ld c,h
-	call @create
 	pop hl
 @skipGuard:
 	inc h

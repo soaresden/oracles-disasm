@@ -736,6 +736,7 @@ interactionc4Animations:
 
 ; BALLADE: $ed, les objets : les animations des villageois, plus la $0e (Bulle : la Zora d'Ages en
 ; entier, 3 sprites de large ; avec les cadres des villageois, il lui manquait le bout de la tête)
+; et la $0f (l'Insomnis à terre, 32 x 16)
 interactionedAnimations:
 	.dw interactionAnimation5a468
 	.dw interactionAnimation5a5a6
@@ -752,6 +753,7 @@ interactionedAnimations:
 	.dw interactionAnimation5a3d5
 	.dw interactionAnimation5a3be
 	.dw interactionAnimationBalladeBulle
+	.dw interactionAnimationBalladeInsomnis
 interaction3eAnimations:
 	.dw interactionAnimation5a6ae
 interaction30Animations:
@@ -2073,6 +2075,16 @@ interactionAnimationBalladeBulle:
 	.db $10 $1a $00
 	.db $10 $1c $00
 	m_AnimationLoop interactionAnimationBalladeBulle
+
+; BALLADE: l'Insomnis à terre : il respire mal (agonisant)
+interactionAnimationBalladeInsomnis:
+	.db $30 $1e $00
+	.db $14 $20 $00
+	.db $06 $1e $00
+	.db $0a $20 $00
+	.db $24 $1e $00
+	.db $20 $20 $00
+	m_AnimationLoop interactionAnimationBalladeInsomnis
 
 interactionAnimation5a614:
 	.db $18 $08 $00
@@ -3628,6 +3640,8 @@ interactionedOamDataPointers:
 	.dw interactionOamData50538
 	.dw interactionOamData50f3f ; $1a
 	.dw interactionOamData50f4c ; $1c
+	.dw interactionOamDataBalladeInsomnisA ; $1e
+	.dw interactionOamDataBalladeInsomnisB ; $20
 
 interaction48OamDataPointers: ; 0x5b04e
 	.dw interactionOamData50dfa

@@ -22,6 +22,11 @@ interactionCodee7:
 	jr nz,+
 	jpab balladeMarine.praise
 +
+	; Sous-type $09 : le coup de grâce sur l'Insomnis (code/ages/balladeMarine.s)
+	cp $09
+	jr nz,+
+	jpab balladeMarine.finale
++
 	call checkInteractionState
 	jr nz,@state1
 

@@ -4794,11 +4794,12 @@ group5Mapc7ObjectData:
 group5Mapc8ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $01 $08 $08
 	obj_Interaction INTERAC_BALLADE_OBJECT $38 $08 $08
-	obj_SpecificEnemyA $00 ENEMY_AMBI_GUARD $11 $58 $28
-	obj_SpecificEnemyA $00 ENEMY_AMBI_GUARD $13 $18 $c8
-	obj_Interaction INTERAC_BALLADE_CREUSE $05 $08 $08 ; Ghost Babel : le regard des fantômes, le radar
-	obj_Interaction INTERAC_BALLADE_CREUSE $04 $68 $48 ; une boîte en carton
-	obj_Interaction INTERAC_BALLADE_CREUSE $04 $28 $a8 ; une autre boîte
+	obj_SpecificEnemyA $00 ENEMY_AMBI_GUARD $15 $18 $d8
+	obj_SpecificEnemyA $00 ENEMY_AMBI_GUARD $16 $58 $18
+	obj_SpecificEnemyA $00 ENEMY_AMBI_GUARD $17 $58 $c8
+	obj_Interaction INTERAC_BALLADE_CREUSE $05 $08 $08 ; Ghost Babel : le regard des fantômes
+	obj_Interaction INTERAC_BALLADE_CREUSE $04 $88 $58 ; une boîte en carton (l'arrivée)
+	obj_Interaction INTERAC_BALLADE_CREUSE $04 $98 $98 ; une autre (l'arrivée : les couloirs n'ont qu'une case de large, une boîte posée les boucherait)
 	obj_End
 group5Mapc9ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $2f $58 $d8
@@ -4814,6 +4815,7 @@ group5MapcbObjectData:
 	obj_End
 group5MapccObjectData:
 	obj_Interaction INTERAC_BALLADE_RHYTHM $00 $58 $78
+	obj_Interaction INTERAC_BALLADE_OBJECT $57 $70 $78 ; l'Insomnis à terre (Marine le frappe : INTERAC_MARINE $09)
 	obj_Interaction INTERAC_BALLADE_CREUSE $10 $08 $08 ; la fin : Zelda, en rêve (code/ages/balladeFin.s)
 	obj_End
 group5Mapd0ObjectData:

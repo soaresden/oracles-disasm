@@ -1,13 +1,15 @@
 ; ==================================================================================================
 ; BALLADE: la progression (INTERAC_BALLADE_OBJECT $53, balladeObjects.progressTracker ; Denis : « un tracker pour savoir si on est près des 100 % : quarts de
 ; cœur, anneaux, objets »). Dans le menu, 3e page, B : le menu se ferme et Marine compte (bank2.s).
-; - les couplets (les essences, 8) ;
-; - les cœurs (12 au plus) et les quarts du cœur suivant ;
+; - les couplets (les essences, 7, + le 8e, chanté à Zelda à la fin : GLOBALFLAG_BALLADE_FIN) ;
+; - les cœurs (11 au plus : 3 + 6 réceptacles + 9 quarts, le dernier reste un quart) et les quarts
+;   du cœur suivant ;
 ; - les objets (@items, 16, et 3 améliorations : la Cape, l'Épée de Légende, le Bracelet des Âmes) ;
 ; - les anneaux (les 5 de la Ballade) ;
 ; - les coffres (balladeTrackerChests.s, tools/make_tracker.py : le drapeau $20 de leur salle).
 ; Le pour cent : 20 points par sorte, au prorata (les cœurs : les quarts gagnés depuis les 3 du
-; départ, sur 36). Deux boîtes, TX_5b78 puis TX_5b79 ; les nombres sont des textes appelés
+; départ, sur 33 : 6 réceptacles et 9 quarts ; Denis lisait « 15/12 » : trois boss sans le mot
+; « boss » dans leur plan revenaient après la fin et redonnaient leur réceptacle). Deux boîtes, TX_5b78 puis TX_5b79 ; les nombres sont des textes appelés
 ; (\call($ff) à \call($fc) : wTextSubstitutions, TX_5b80 + n, de 0 à 100).
 ; var30-36 : couplets, cœurs, quarts, objets, anneaux, coffres, pour cent.
 ; ==================================================================================================
@@ -34,6 +36,18 @@ main:
 +
 	dec b
 	jr nz,-
+	; Le 8e couplet n'est pas une essence : Marine le chante à Zelda, à la fin (Denis lisait
+	; « 7/8 » après la fin et croyait le jeu infinissable)
+	ld a,GLOBALFLAG_BALLADE_FIN
+	push bc
+	call checkGlobalFlag
+	pop bc
+	jr z,+
+	ld a,c
+	cp $08
+	jr nc,+
+	inc c
++
 	ld e,Interaction.var30
 	ld a,c
 	ld (de),a
@@ -140,7 +154,7 @@ main:
 	xor a
 +
 	ld b,a
-	ld c,36
+	ld c,33
 	call @points
 	call @addPoints
 	ld e,Interaction.var33

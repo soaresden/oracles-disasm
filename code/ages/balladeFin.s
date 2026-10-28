@@ -1364,8 +1364,12 @@ marineSword:
 +
 	cp $02
 	jr nz,+
-	set 5,(hl)		; vers la gauche : retournée
+	; vers la gauche : retournée, ses deux moitiés échangées (l'animation 5 ; le miroir seul
+	; (oamFlags bit 5) retournait chaque moitié sur place : l'épée à l'envers que Denis voyait)
+	ld a,$05
+	call interactionSetAnimation
 +
+	ld h,d
 	ld l,Interaction.counter1
 	ld (hl),12
 	ret

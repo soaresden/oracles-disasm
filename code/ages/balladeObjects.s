@@ -77,6 +77,7 @@
 ; @subid_53{Invisible : la progression vers le 100 % (le menu, 3e page, B)}
 ; @subid_55{Un trésor flottant de la Fosse de Bulle (rubis à 2 m et 4 m, quart de cœur à 3 m)}
 ; @subid_56{Invisible : le bassin de Bulle (3:24) ; Link y saute : la plongée dans la Fosse}
+; @subid_57{L'Insomnis à terre, agonisant (5:cc) : Marine le frappe, il meurt}
 ; ==================================================================================================
 
 ;;
@@ -171,6 +172,7 @@ main:
 	.dw inviteDream
 	.dw fosseTreasure
 	.dw fossePool
+	.dw insomnis
 
 
 ;;
@@ -3579,6 +3581,91 @@ fossePool:
 	ret nz
 	call fosseDive
 	jp interactionDelete
+
+; ==================================================================================================
+; L'Insomnis (subid $57, 5:cc ; Denis : « y'a même pas de boss, je m'attendais à un sprite de
+; cauchemar par terre agonisant et du coup il crève ») : une ombre noire couchée au milieu de la
+; salle (art/braise.txt images 5-6, 32 x 16), qui respire mal pendant le combat en rythme. Marine
+; (INTERAC_MARINE $09, balladeMarine.finale) pique sur lui au « RETOURNE D'OÙ TU VIENS ! » et met
+; son var30 à 1 en le touchant ; le boss vaincu (wBalladeRhythmStage = 3), il clignote, explose de
+; partout et disparaît. Après la fin du jeu (on refait la tour) : plus là.
+; Variables : var30 = 1 Marine l'a touché ; counter2 : attente de Marine (au cas où)
+; ==================================================================================================
+insomnis:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw @init
+	.dw @agonize
+	.dw @dying
+
+@init:
+	ld a,GLOBALFLAG_BALLADE_FIN
+	call checkGlobalFlag
+	jp nz,interactionDelete
+	call interactionInitGraphics
+	call interactionSetAlwaysUpdateBit
+	call interactionIncState
+	ld l,Interaction.counter2
+	ld (hl),90
+	jp objectSetVisible83
+
+@agonize:
+	call interactionAnimate
+	ld a,(wBalladeRhythmStage)
+	cp $03
+	ret c
+	; Le coup de grâce : Marine l'a touché (sinon, un moment après)
+	ld e,Interaction.var30
+	ld a,(de)
+	or a
+	jr nz,+
+	call interactionDecCounter2
+	ret nz
++
+	call interactionIncState
+	ld l,Interaction.counter1
+	ld (hl),100
+	ld a,SND_BOSS_DEAD
+	call playSound
+	ld a,40
+	jp setScreenShakeCounter
+
+; Il clignote et explose de partout, puis disparaît
+@dying:
+	ld b,$01
+	call objectFlickerVisibility
+	call interactionDecCounter1
+	jp z,interactionDelete
+	ld a,(hl)
+	and $07
+	ret nz
+	call getFreeInteractionSlot
+	ret nz
+	ld (hl),INTERAC_EXPLOSION
+	push hl
+	call getRandomNumber
+	pop hl
+	ld b,a
+	and $0f
+	sub $08
+	ld e,Interaction.yh
+	ld c,a
+	ld a,(de)
+	add c
+	ld l,Interaction.yh
+	ld (hl),a
+	ld a,b
+	swap a
+	and $1f
+	sub $10
+	ld c,a
+	ld e,Interaction.xh
+	ld a,(de)
+	add c
+	ld l,Interaction.xh
+	ld (hl),a
+	ret
 
 ;;
 ; La plongée : 5:d0 (1 m), le souffle plein, en fondu, avec un plouf

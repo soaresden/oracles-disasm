@@ -264,6 +264,10 @@ main:
 	call interactionIncState
 	ld a,$03
 	ld (wBalladeRhythmStage),a
+	; (dans la tour, c'est l'Insomnis qui meurt quand Marine le frappe : balladeObjects.insomnis)
+	ld a,(wActiveGroup)
+	cp $05
+	ret z
 	ld a,SND_BOSS_DEAD
 	call playSound
 	ld a,30
@@ -310,7 +314,13 @@ startFinale:
 	ld (wBalladeRhythmStage),a
 	ld a,$ff
 	ld ($ff00+R_NR51),a
-	; « Je vais me le faire ! »
+	; « Je vais me le faire ! » : Marine sort de la tunique (balladeMarine.finale)
+	call getFreeInteractionSlot
+	jr nz,+
+	ld (hl),INTERAC_MARINE
+	inc l
+	ld (hl),$09
++
 	ld bc,TX_5a3a
 	call showText
 	ld a,MUS_BALLADE_RYTHME_FIN

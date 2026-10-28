@@ -821,6 +821,9 @@ ambiGuard_tossesLinkOut_scriptTable:
 	.dw @subid12
 	.dw @subid13
 	.dw @subid14
+	.dw @subid15
+	.dw @subid16
+	.dw @subid17
 
 @subid00:
 	.db SPEED_c0
@@ -1077,6 +1080,38 @@ ambiGuard_tossesLinkOut_scriptTable:
 	ms_wait  60
 	ms_down  $58
 	ms_wait  60
+	ms_loop  @@loop
+
+; BALLADE: le labyrinthe de Ghost Babel (5:c8 ; Denis : « un labyrinthe où les gardes vont et
+; viennent et on doit se déporter pour les éviter ») : le couloir du nord (ligne 1)
+@subid15:
+	.db SPEED_80
+	.db DIR_LEFT
+@@loop:
+	ms_left  $18
+	ms_wait  30
+	ms_right $d8
+	ms_wait  30
+	ms_loop  @@loop
+; le couloir du milieu (ligne 5), sa moitié ouest, plus vite
+@subid16:
+	.db SPEED_c0
+	.db DIR_RIGHT
+@@loop:
+	ms_right $78
+	ms_wait  20
+	ms_left  $18
+	ms_wait  20
+	ms_loop  @@loop
+; le couloir du milieu, sa moitié est (jusque devant la porte)
+@subid17:
+	.db SPEED_80
+	.db DIR_LEFT
+@@loop:
+	ms_left  $78
+	ms_wait  40
+	ms_right $c8
+	ms_wait  40
 	ms_loop  @@loop
 
 

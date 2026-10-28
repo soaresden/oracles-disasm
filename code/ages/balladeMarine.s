@@ -853,3 +853,229 @@ kissCheck:
 @reset:
 	ld (hl),$00
 	ret
+
+;;
+; INTERAC_MARINE $09 : le coup de grâce sur l'Insomnis (5:cc ; Denis : « quand elle dit "je vais me le
+; faire", il faut qu'elle sorte de la tunique »). Créée par balladeRhythm.startFinale : elle sort de
+; la tunique (un nuage, son cri), vole au-dessus de l'Insomnis (INTERAC_BALLADE_OBJECT $57) pendant
+; qu'elle chante ; au « RETOURNE D'OÙ TU VIENS ! » (la 2e boîte de texte), elle pique sur lui, le
+; touche (son var30 = 1 : il meurt) et le picore ; puis elle reste en mouette à côté de Link (Denis :
+; « il aurait fallu voir Marine en mouette aussi » pendant la scène de Zelda).
+; Variables : var30 = 1 une fois sa 1re boîte (« Je vais me le faire ! ») fermée
+finale:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw @init
+	.dw @hover
+	.dw @dive
+	.dw @peck
+	.dw @perch
+
+@init:
+	call interactionInitGraphics
+	call interactionSetAlwaysUpdateBit
+	call interactionIncState
+	ld l,Interaction.yh
+	ld a,(w1Link.yh)
+	ld (hl),a
+	ld l,Interaction.xh
+	ld a,(w1Link.xh)
+	ld (hl),a
+	ld l,Interaction.zh
+	ld (hl),$f8
+	ld a,$03		; en vol
+	call interactionSetAnimation
+	; un nuage : elle sort de la tunique
+	call getFreeInteractionSlot
+	jr nz,+
+	ld (hl),INTERAC_PUFF
+	call objectCopyPosition
++
+	ld a,SND_BALLADE_GULL
+	call playSound
+	jp objectSetVisible80
+
+; Au-dessus de l'Insomnis, elle chante
+@hover:
+	call interactionAnimate
+	call @findInsomnis
+	ld a,b
+	sub $14
+	ld b,a
+	call @moveTo1
+	ld a,(wBalladeRhythmStage)
+	cp $03
+	jr nc,@startDive
+	ld e,Interaction.var30
+	ld a,(wTextIsActive)
+	or a
+	jr nz,+
+	inc a
+	ld (de),a
+	ret
++
+	ld a,(de)
+	or a
+	ret z
+	; « RETOURNE D'OÙ TU VIENS ! »
+@startDive:
+	call interactionIncState
+	ld a,SND_BALLADE_GULL
+	jp playSound
+
+; Elle pique sur lui (3 pixels par image) ; touché : il meurt (son var30)
+@dive:
+	call interactionAnimate
+	call @findInsomnis
+	push hl
+	ld a,b
+	sub $04
+	ld b,a
+	ld h,$03
+	call @moveTo
+	pop hl
+	ld a,c
+	cp $02
+	ret nz
+	ld a,h
+	or a
+	jr z,+
+	ld l,Interaction.var30
+	ld (hl),$01
++
+	call interactionIncState
+	ld l,Interaction.counter1
+	ld (hl),$00
+	ld a,SND_BOMB_LAND
+	jp playSound
+
+; Elle le picore (elle sautille) jusqu'à ce qu'il meure
+@peck:
+	call interactionAnimate
+	ld h,d
+	ld l,Interaction.counter1
+	inc (hl)
+	ld a,(hl)
+	and $08
+	ld a,$fc
+	jr z,+
+	ld a,$f8
++
+	ld l,Interaction.zh
+	ld (hl),a
+	ld a,(wBalladeRhythmStage)
+	cp $03
+	ret c
+	call @findInsomnis
+	ld a,h
+	or a
+	ret nz
+	; Il n'est plus là : elle rejoint Link
+	call interactionIncState
+	ld a,SND_BALLADE_GULL
+	jp playSound
+
+; À côté de Link, au-dessus de son épaule, elle bat des ailes
+@perch:
+	call interactionAnimate
+	ld a,(w1Link.yh)
+	sub $10
+	ld b,a
+	ld a,(w1Link.xh)
+	add $0c
+	ld c,a
+	ld l,Interaction.zh
+	ld h,d
+	ld (hl),$f8
+	jr @moveTo1
+
+;;
+; @param[out]	hl	L'Insomnis (h = 0 s'il n'est pas là)
+; @param[out]	bc	Sa position (y, x) ; sans lui : au-dessus de Link
+@findInsomnis:
+	ld h,FIRST_INTERACTION_INDEX
+-
+	ld l,Interaction.enabled
+	ld a,(hl)
+	or a
+	jr z,+
+	inc l
+	ld a,(hl)
+	cp INTERAC_BALLADE_OBJECT
+	jr nz,+
+	inc l
+	ld a,(hl)
+	cp $57
+	jr nz,+
+	ld l,Interaction.yh
+	ld b,(hl)
+	ld l,Interaction.xh
+	ld c,(hl)
+	ret
++
+	inc h
+	ld a,h
+	cp LAST_INTERACTION_INDEX+1
+	jr c,-
+	ld h,$00
+	ld a,(w1Link.yh)
+	sub $18
+	ld b,a
+	ld a,(w1Link.xh)
+	ld c,a
+	ret
+
+;;
+; Aller vers (b, c), 1 pixel par image ; @moveTo : h pixels par image
+; @param[out]	c	2 si elle est arrivée (sur les deux axes)
+@moveTo1:
+	ld h,$01
+@moveTo:
+	push bc
+	ld e,Interaction.yh
+	ld a,b
+	call @step
+	pop bc
+	push af
+	ld e,Interaction.xh
+	ld a,c
+	call @step
+	pop bc
+	add b
+	ld c,a
+	ret
+
+; @param	a	La cible
+; @param	e	La coordonnée de Marine
+; @param	h	Le pas
+; @param[out]	a	1 si elle y est
+@step:
+	ld l,a
+	ld a,(de)
+	sub l
+	jr z,@stepArrived
+	jr c,@stepUp
+	cp h
+	jr c,@stepSnap
+	ld a,(de)
+	sub h
+	ld (de),a
+	xor a
+	ret
+@stepUp:
+	cpl
+	inc a
+	cp h
+	jr c,@stepSnap
+	ld a,(de)
+	add h
+	ld (de),a
+	xor a
+	ret
+@stepSnap:
+	ld a,l
+	ld (de),a
+@stepArrived:
+	ld a,$01
+	ret

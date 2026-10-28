@@ -314,6 +314,21 @@ interactionOamDataBalladeOne:
 	.db $01
 	.db $08 $04 $00 $00
 
+; BALLADE: l'Insomnis à terre (32 x 16 : spr_ballade_braise images 5-6) ; B : il respire (un pixel
+; plus bas)
+interactionOamDataBalladeInsomnisA:
+	.db $04
+	.db $08 $f8 $00 $00
+	.db $08 $00 $02 $00
+	.db $08 $08 $04 $00
+	.db $08 $10 $06 $00
+interactionOamDataBalladeInsomnisB:
+	.db $04
+	.db $09 $f8 $00 $00
+	.db $09 $00 $02 $00
+	.db $09 $08 $04 $00
+	.db $09 $10 $06 $00
+
 ; BALLADE: une grande image de 32 x 32 (le boss du Terrier) : quatre carrés de 16 x 16 (haut
 ; gauche, haut droite, bas gauche, bas droite)
 interactionOamDataBalladeBig:
