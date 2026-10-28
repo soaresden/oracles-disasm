@@ -175,6 +175,42 @@ switchDream:
 ; compteur de clés, qui n'apparaît que dans les donjons). Appelé par updateStatusBar_body
 ; (code/bank2.s), la banque 4 de la WRAM étant sélectionnée.
 drawNoctambuleTimer:
+	; La Fosse de Bulle (donjon 9, vue de côté) : la profondeur, « 3m », à la place de la petite clé
+	; et de son compteur (Denis y lisait « A x0 ») ; un « m » à nous (tuile $1e, make_sprites.py)
+	ld a,(wDungeonIndex)
+	cp $09
+	jr nz,+++
+	ld a,(wTilesetFlags)
+	bit TILESETFLAG_BIT_DUNGEON,a
+	jr z,+++
+	ld hl,w4StatusBarTileMap+$0a
+	ld a,(wcbe8)
+	rrca
+	jr nc,+
+	dec l
++
+	ld a,(wActiveRoom)
+	sub $d0-1
+	cp 10
+	jr c,+
+	ld a,9
++
+	ld (hl),$00		; (pas de clé)
+	inc l
+	add $10
+	ld (hl),a
+	inc l
+	ld (hl),$1e		; « m »
+	; une profondeur nouvelle : la barre d'état sera redessinée
+	ld hl,wBalladeNoctambuleShown
+	or $40
+	cp (hl)
+	ret z
+	ld (hl),a
+	ld hl,wStatusBarNeedsRefresh
+	set 4,(hl)
+	ret
++++
 	; Le Mamono (code/ages/balladeMamono.s) : le niveau de Link, « L-n », à la même place
 	ld a,(wBalladeMamonoState)
 	or a
@@ -755,6 +791,13 @@ praise:
 ; exprès). Appelé à chaque image.
 kissCheck:
 	ld hl,wBalladeBeepIdle
+	; Marine n'est pas là dans le Récif (3) ni dans la Fosse de Bulle (9, où les cœurs sont le
+	; souffle : un bisou le remplirait)
+	ld a,(wDungeonIndex)
+	cp $03
+	jr z,@reset
+	cp $09
+	jr z,@reset
 	; Ça bippe ? (4 x (vie - 1) < vie maximum)
 	ld a,(wLinkHealth)
 	dec a

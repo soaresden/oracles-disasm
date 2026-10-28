@@ -160,10 +160,12 @@ chestGroup5Data:
 	m_ChestData $1c, $b0, TREASURE_OBJECT_TRADEITEM_0c ; BALLADE: la grotte de la Boîte : Sire Bouchon, le jouet de Lila
 	m_ChestData $17, $b1, TREASURE_OBJECT_RUPEES_03 ; BALLADE: la grotte des amoureux : des rubis (20)
 	m_ChestData $1b, $b2, TREASURE_OBJECT_RUPEES_03 ; BALLADE: la mine abandonnée (Mont-Braise) : des rubis (20)
-	; BALLADE: la Fosse de Bulle (story/salles/fosse.txt)
-	m_ChestData $81, $d1, TREASURE_OBJECT_RUPEES_03      ; profondeur 2 : des rubis (20)
-	m_ChestData $11, $d2, TREASURE_OBJECT_HEART_PIECE_01 ; profondeur 3 : un quart de cœur
-	m_ChestData $4d, $d3, TREASURE_OBJECT_RUPEES_05      ; profondeur 4 : beaucoup de rubis (50)
+	; BALLADE: la Fosse de Bulle (story/salles/fosse.txt). En vue de côté, plus de coffres : des
+	; trésors flottants (INTERAC_BALLADE_OBJECT $55, le même drapeau $20 de la salle) ; ces lignes
+	; restent pour l'écran de progression (tools/make_tracker.py)
+	m_ChestData $6d, $d1, TREASURE_OBJECT_RUPEES_03      ; 2 m : des rubis (20)
+	m_ChestData $82, $d2, TREASURE_OBJECT_HEART_PIECE_01 ; 3 m : un quart de cœur
+	m_ChestData $42, $d3, TREASURE_OBJECT_RUPEES_05      ; 4 m : des rubis (30)
 	; BALLADE: le Récif Murmurant (story/salles/recif.txt)
 	m_ChestData $53, $3a, TREASURE_OBJECT_COMPASS_02    ; la boussole
 	m_ChestData $2b, $40, TREASURE_OBJECT_MAP_02        ; la carte

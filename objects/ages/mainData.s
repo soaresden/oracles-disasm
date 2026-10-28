@@ -3241,14 +3241,7 @@ group5MapceObjectData:
 
 
 
-group5Mapd5ObjectData:
-	obj_Interaction $40 $0d $38 $78 $0f
-	obj_Pointer group5Mapd5EnemyObjectData
-	obj_End
 
-group5Mapd6ObjectData:
-	obj_Pointer group5Mapd6EnemyObjectData
-	obj_End
 
 group5Mapd7ObjectData:
 	obj_Interaction $2d $00 $48 $78
@@ -4827,16 +4820,25 @@ group5Mapd0ObjectData:
 	obj_End
 group5Mapd1ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $34 $08 $08
+	obj_Interaction INTERAC_BALLADE_OBJECT $55 $68 $d8
 	obj_End
 group5Mapd2ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $34 $08 $08
+	obj_Interaction INTERAC_BALLADE_OBJECT $55 $88 $28
 	obj_End
 group5Mapd3ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $34 $08 $08
+	obj_Interaction INTERAC_BALLADE_OBJECT $55 $48 $28
 	obj_End
 group5Mapd4ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $34 $08 $08
-	obj_Interaction INTERAC_BALLADE_OBJECT $35 $58 $78
+	obj_End
+group5Mapd5ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $34 $08 $08
+	obj_End
+group5Mapd6ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $34 $08 $08
+	obj_Interaction INTERAC_BALLADE_OBJECT $35 $98 $88
 	obj_End
 group5Mape9ObjectData:
 	obj_Interaction INTERAC_BALLADE_CREUSE $01 $08 $08

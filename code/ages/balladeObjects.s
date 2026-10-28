@@ -51,8 +51,8 @@
 ; @subid_31{Invisible : la Lune qui tombe (5:c1) : quatre torches allumées peu de temps ; l'escalier}
 ; @subid_32{Invisible : l'escalier d'un étage de la tour, quand l'étage est vaincu (plus d'ennemis)}
 ; @subid_33{Invisible : le Sablier retourné (le temps arrêté, puis les coups en crescendo)}
-; @subid_34{Invisible : le souffle, dans la Fosse de Bulle (les cœurs se vident)}
-; @subid_35{L'Épée de Légende, au fond de la Fosse de Bulle (5:d4)}
+; @subid_34{Invisible : le souffle, dans la Fosse de Bulle (les cœurs se vident ; la profondeur permise)}
+; @subid_35{L'Épée de Légende, au fond de la Fosse de Bulle (5:d6, 7 m)}
 ; @subid_36{Invisible : Ganon (5:c7) ne craint que l'Épée de Légende}
 ; @subid_37{Invisible, à l'auberge du Songe (2:9e) : après le chapitre 5, Marine fouille les poches de Link, les photos}
 ; @subid_38{Invisible, le 4F de la Tour (5:c8) : les Veilleurs en fantômes ; vu : « LIIINK! »}
@@ -75,6 +75,7 @@
 ; @subid_51{Invisible : devant Ganon sans l'Épée de Légende, Marine propose de sortir de la tour}
 ; @subid_52{Invisible : la même, après « nos coups ne lui font rien » (TX_5ae5)}
 ; @subid_53{Invisible : la progression vers le 100 % (le menu, 3e page, B)}
+; @subid_55{Un trésor flottant de la Fosse de Bulle (rubis à 2 m et 4 m, quart de cœur à 3 m)}
 ; ==================================================================================================
 
 ;;
@@ -167,6 +168,7 @@ main:
 	.dw ganonEscape
 	.dw progressTracker
 	.dw inviteDream
+	.dw fosseTreasure
 
 
 ;;
@@ -3480,14 +3482,21 @@ surfInstructor:
 	call interactionAnimateAsNpc
 	jp villagerTalk
 
-	; La Fosse : une plongée ? (une fois l'Épée de Légende trouvée, une offre plus courte)
+	; La Fosse : une plongée ? (une fois l'Épée de Légende trouvée, une offre plus courte ; tant que
+	; le quart de cœur de 3 m est là, Marine le signale : TX_5be5, Denis l'avait trouvé mal indiqué)
 @offer:
 	ld bc,TX_5ae1
 	ld a,(wSwordLevel)
 	cp $03
 	jr c,+
 	ld c,<TX_5ae6
+	jr ++
 +
+	ld a,(wGroup5RoomFlags+$d2)
+	and ROOMFLAG_ITEM
+	jr nz,++
+	ld bc,TX_5be5
+++
 	ld a,$04
 	jp npcSay
 
@@ -3891,14 +3900,37 @@ sablierHold:
 
 
 ; ==================================================================================================
-; La Fosse de Bulle (5:d0-d4, story/salles/fosse.txt ; idée de Denis, plongeur). Bulle y emmène Link
-; le souffle plein (surfInstructor). Sous l'eau, les cœurs sont le souffle : le souffle (subid $34,
-; dans chaque salle) en retire un quart toutes les FOSSE_FRAMES images ; à une demi-coeur, Bulle tire
-; sur la corde (TX_5ae2) : retour au club (3:24), les cœurs pleins. Plus Link a de cœurs, plus il
-; descend (un quart toutes les 1,5 s : avec 8 cœurs, on atteint le fond) ; l'Épée de
-; Légende (subid $35, 5:d4) demande neuf cœurs pour être dégagée du sable.
+; La Fosse de Bulle (5:d0-d6, story/salles/fosse.txt ; idée de Denis, plongeur). Vue de côté, comme
+; les salles sous l'eau de Link's Awakening DX : une salle par mètre (5:d0 = 1 m ... 5:d6 = 7 m ; la
+; barre d'état le montre, balladeMarine.drawNoctambuleTimer). Bulle y emmène Link le souffle plein
+; (surfInstructor). Sous l'eau, les cœurs sont le souffle : le souffle (subid $34, dans chaque
+; salle) en retire un quart toutes les FOSSE_FRAMES images ; à une demi-coeur, Bulle tire sur la
+; corde (TX_5ae2) : retour au club (3:24), les cœurs pleins. Link peut aussi remonter par la surface
+; de 1 m. Il descend aussi bas qu'il a de couplets de Marine (essences, 7 m au plus) : plus bas,
+; « l'eau est noire » (TX_5ae7) et le passage du bas ne mène nulle part. L'Épée de Légende (subid
+; $35) est au fond, à 7 m : il faut sept couplets.
+; Variables : var30 = 1 une fois TX_5ae7 montré dans cette salle.
 ; ==================================================================================================
 .define FOSSE_FRAMES 90 ; (un quart de cœur toutes les 1,5 s)
+.define FOSSE_FIRST_ROOM $d0
+.define FOSSE_MAX_DEPTH 7
+
+;;
+; @param[out]	a	Profondeur de la salle, en mètres (1 = 5:d0)
+fosseDepth:
+	ld a,(wActiveRoom)
+	sub FOSSE_FIRST_ROOM-1
+	ret
+
+;;
+; @param[out]	a	Profondeur permise : le nombre de couplets (essences), 7 au plus
+fosseMaxDepth:
+	ld a,(wEssencesObtained)
+	call getNumSetBits
+	cp FOSSE_MAX_DEPTH
+	ret c
+	ld a,FOSSE_MAX_DEPTH
+	ret
 
 fosseAir:
 	ld e,Interaction.state
@@ -3927,6 +3959,28 @@ fosseAir:
 	ld a,(wDisabledObjects)
 	and $81
 	ret nz
+
+	; Remonter par la surface (en haut de 1 m, en nageant vers le haut : sinon Link, qui flotte,
+	; ressortirait dès son arrivée)
+	ld a,(wActiveRoom)
+	cp FOSSE_FIRST_ROOM
+	jr nz,+
+	ld a,(w1Link.yh)
+	cp $0c
+	jr nc,+
+	ld a,(wGameKeysPressed)
+	and BTN_UP
+	jr nz,++
+	; (pas plus haut : il n'y a pas de salle au-dessus)
+	ld a,$0c
+	ld (w1Link.yh),a
+	jr +
+++
+	call interactionIncState
+	jp fosseSurface
++
+	call @checkTooDeep
+
 	call interactionDecCounter1
 	ret nz
 	ld (hl),FOSSE_FRAMES
@@ -3941,6 +3995,51 @@ fosseAir:
 	call interactionIncState
 	ld bc,TX_5ae2
 	jp showText
+
+; Au mètre le plus bas permis, pas de passage vers le bas : au-dessus du passage du bas, les
+; transitions d'écran sont coupées et Link ne descend pas plus bas ; la 1re fois, TX_5ae7
+@checkTooDeep:
+	call fosseMaxDepth
+	ld b,a
+	call fosseDepth
+	cp FOSSE_MAX_DEPTH
+	ret nc
+	cp b
+	ret c
+	; (au-dessus du passage seulement : la dernière ligne de la salle est de l'eau sous Link)
+	ld a,(w1Link.xh)
+	swap a
+	and $0f
+	add $a0
+	ld l,a
+	ld h,>wRoomLayout
+	ld a,(hl)
+	cp $1b
+	ld a,$00
+	jr nz,@setTransitions
+	ld hl,w1Link.yh
+	ld a,(hl)
+	cp $90
+	ld a,$00
+	jr c,@setTransitions
+	ld a,(hl)
+	cp $a0
+	jr c,+
+	ld (hl),$a0
++
+	ld e,Interaction.var30
+	ld a,(de)
+	or a
+	jr nz,+
+	inc a
+	ld (de),a
+	ld bc,TX_5ae7
+	call showText
++
+	ld a,$01
+@setTransitions:
+	ld (wDisableScreenTransitions),a
+	ret
 
 ;;
 ; Attendre la fin du texte, puis Bulle remonte Link : le club de plongée (3:24), devant elle, les
@@ -3960,6 +4059,7 @@ fosseSurface:
 	xor a
 	ld (wWarpTransition),a
 	ld (wDisabledObjects),a
+	ld (wDisableScreenTransitions),a
 	ld a,$03 ; fondu
 	ld (wWarpTransition2),a
 	ld a,SND_SPLASH
@@ -3968,10 +4068,9 @@ fosseSurface:
 
 
 ; ==================================================================================================
-; L'Épée de Légende (subid $35), plantée dans le sable au fond de la Fosse (5:d4) : A devant elle ->
-; elle passe au-dessus de la tête de Link (TREASURE_SWORD, niveau 3, TX_001e), puis Bulle le remonte
-; (TX_5ae4). Partie si Link l'a déjà. Prise dans le sable : il faut neuf cœurs (le souffle) pour la
-; dégager (TX_5ae7 sinon) : avant le donjon 7, on voit le fond sans pouvoir la prendre.
+; L'Épée de Légende (subid $35), plantée dans le sable au fond de la Fosse (5:d6, 7 m) : Link la
+; touche (ou A) -> elle passe au-dessus de sa tête (TREASURE_SWORD, niveau 3, TX_001e), puis Bulle le
+; remonte (TX_5ae4). Partie si Link l'a déjà. Pour descendre à 7 m, il faut sept couplets (fosseAir).
 ; ==================================================================================================
 masterSword:
 	ld e,Interaction.state
@@ -3999,19 +4098,17 @@ masterSword:
 	ret
 
 @idle:
+	; (en vue de côté, il suffit de la toucher ; A marche aussi)
+	call objectCheckCollidedWithLink
+	jr c,+
 	call npcCheckTalk
 	ret z
-	; Prise dans le sable : il faut le souffle de neuf cœurs pour la dégager (après le donjon 7)
-	ld a,(wLinkMaxHealth)
-	cp 9*4
-	jr nc,+
-	ld bc,TX_5ae7
-	ld a,$06
-	jp npcSay
 +
 	xor a
 	ld (wDisabledObjects),a
 	call interactionIncState
+	ld l,Interaction.counter1
+	ld (hl),30
 	call objectSetInvisible
 	call objectUnmarkSolidPosition
 	ld a,TREASURE_SWORD
@@ -4019,10 +4116,10 @@ masterSword:
 	jp giveTreasureAboveLinkSubid
 
 @textOn:
-	; (le texte du trésor commence...)
-	ld a,(wTextIsActive)
-	or a
-	ret z
+	; (le texte du trésor commence... ; en vue de côté, l'objet ne tourne pas pendant le texte :
+	; on attend un peu, puis la fin du texte)
+	call interactionDecCounter1
+	ret nz
 	jp interactionIncState
 
 @textOff:
@@ -4041,6 +4138,77 @@ masterSword:
 	call interactionIncState
 	ld bc,TX_5ae4
 	jp showText
+
+
+; ==================================================================================================
+; Un trésor flottant de la Fosse (subid $55 ; 5:d1 : 20 rubis, 5:d2 : le quart de cœur, 5:d3 : 30
+; rubis). En vue de côté, plus de coffres : INTERAC_TREASURE, posé dans l'eau ; il met le drapeau $20
+; de la salle quand Link le prend (ses données ont le bit 3), le même que les anciens coffres (déjà
+; pris : rien). Le quart de cœur scintille (Denis : « super mal indiqué qu'il fallait y aller »).
+; ==================================================================================================
+fosseTreasure:
+	ld e,Interaction.state
+	ld a,(de)
+	or a
+	jr nz,@sparkle
+	call getThisRoomFlags
+	and ROOMFLAG_ITEM
+	jp nz,interactionDelete
+	call interactionIncState
+	ld l,Interaction.counter1
+	ld (hl),20
+	ld a,(wActiveRoom)
+	ld bc,TREASURE_OBJECT_HEART_PIECE_00
+	cp $d2
+	jr z,+
+	ld bc,TREASURE_OBJECT_RUPEES_0b
+	cp $d1
+	jr z,+
+	ld bc,TREASURE_OBJECT_RUPEES_0c
++
+	call createTreasure
+	ret nz
+	jp objectCopyPosition
+
+; Une étincelle de temps en temps autour du quart de cœur, tant qu'il est là
+@sparkle:
+	call getThisRoomFlags
+	and ROOMFLAG_ITEM
+	jp nz,interactionDelete
+	ld a,(wActiveRoom)
+	cp $d2
+	ret nz
+	call interactionDecCounter1
+	ret nz
+	ld (hl),40
+	call getFreeInteractionSlot
+	ret nz
+	ld (hl),INTERAC_SPARKLE
+	inc l
+	ld (hl),$00
+	push hl
+	call getRandomNumber
+	pop hl
+	ld b,a
+	and $0f
+	sub $08
+	ld e,Interaction.yh
+	ld c,a
+	ld a,(de)
+	add c
+	ld l,Interaction.yh
+	ld (hl),a
+	ld a,b
+	swap a
+	and $0f
+	sub $08
+	ld c,a
+	ld e,Interaction.xh
+	ld a,(de)
+	add c
+	ld l,Interaction.xh
+	ld (hl),a
+	ret
 
 
 ; ==================================================================================================
