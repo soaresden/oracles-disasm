@@ -397,7 +397,6 @@ group3Map1bObjectData:
 group3Map1cObjectData:
 group3Map1dObjectData:
 group3Map1eObjectData:
-group3Map2bObjectData:
 group3Map2cObjectData:
 group3Map2dObjectData:
 group3Map2fObjectData:
@@ -3638,6 +3637,8 @@ group0Map65ObjectData:
 	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
 	obj_End
 group0Map66ObjectData:
+	obj_Interaction INTERAC_BALLADE_OBJECT $5d $20 $30
+	obj_Interaction INTERAC_BALLADE_OBJECT $5d $20 $70
 	obj_Interaction INTERAC_BALLADE_DREAM_FX $00
 	obj_End
 group0Map67ObjectData:
@@ -3994,7 +3995,8 @@ group1Map57ObjectData:
 group1Map58ObjectData:
 	obj_End
 group1Map5bObjectData:
-	obj_Interaction INTERAC_BALLADE_CREUSE $15 $58 $38 ; le coquillage qui appelle Zelda
+	obj_Interaction INTERAC_BALLADE_CREUSE $15 $58 $38 ; le téléphone qui appelle Zelda
+	obj_Interaction INTERAC_BALLADE_CREUSE $24 $58 $78 ; Zelda, invitée au téléphone (GLOBALFLAG_BALLADE_ZELDA)
 	obj_End
 group1Map5cObjectData:
 	obj_Interaction INTERAC_BALLADE_CREUSE $14 $28 $78 ; Marine
@@ -4021,6 +4023,8 @@ group1Map65ObjectData:
 group1Map66ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $24 $28 $18
 	obj_Interaction INTERAC_BALLADE_OBJECT $4d $28 $88
+	obj_Interaction INTERAC_BALLADE_OBJECT $5d $20 $30
+	obj_Interaction INTERAC_BALLADE_OBJECT $5d $20 $70
 	obj_End
 group1Map67ObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $22 $58 $78
@@ -4241,6 +4245,9 @@ group3Map2aObjectData:
 	obj_Interaction INTERAC_BALLADE_OBJECT $5a $68 $18
 	obj_Interaction INTERAC_BALLADE_OBJECT $5b $28 $88
 	obj_Interaction INTERAC_BALLADE_OBJECT $5c $58 $78
+	obj_End
+group3Map2bObjectData:
+	obj_Interaction INTERAC_BALLADE_CREUSE $25 $48 $28
 	obj_End
 group3Map5eObjectData:
 	obj_Interaction $47 $03 $28 $50 ; le bouclier (50 ; puis le bouclier de fer 150, le miroir 300)

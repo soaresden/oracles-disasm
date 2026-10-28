@@ -2,13 +2,13 @@
 ; BALLADE: la progression (INTERAC_BALLADE_OBJECT $53, balladeObjects.progressTracker ; Denis : « un tracker pour savoir si on est près des 100 % : quarts de
 ; cœur, anneaux, objets »). Dans le menu, 3e page, B : le menu se ferme et Marine compte (bank2.s).
 ; - les couplets (les essences, 7, + le 8e, chanté à Zelda à la fin : GLOBALFLAG_BALLADE_FIN) ;
-; - les cœurs (11 au plus : 3 + 6 réceptacles + 9 quarts, le dernier reste un quart) et les quarts
+; - les cœurs (11 au plus : 3 + 6 réceptacles + 10 quarts, les deux derniers restent des quarts) et les quarts
 ;   du cœur suivant ;
 ; - les objets (@items, 15, et 3 améliorations : la Cape, l'Épée de Légende, le Bracelet des Âmes) ;
 ; - les anneaux (les 5 de la Ballade) ;
 ; - les coffres (balladeTrackerChests.s, tools/make_tracker.py : le drapeau $20 de leur salle).
 ; Le pour cent : 20 points par sorte, au prorata (les cœurs : les quarts gagnés depuis les 3 du
-; départ, sur 33 : 6 réceptacles et 9 quarts ; Denis lisait « 15/12 » : trois boss sans le mot
+; départ, sur 34 : 6 réceptacles et 10 quarts (le 10e enterré en 1:89) ; Denis lisait « 15/12 » : trois boss sans le mot
 ; « boss » dans leur plan revenaient après la fin et redonnaient leur réceptacle). Deux boîtes, TX_5b78 puis TX_5b79 ; les nombres sont des textes appelés
 ; (\call($ff) à \call($fc) : wTextSubstitutions, TX_5b80 + n, de 0 à 100).
 ; var30-36 : couplets, cœurs, quarts, objets, anneaux, coffres, pour cent.
@@ -154,7 +154,7 @@ main:
 	xor a
 +
 	ld b,a
-	ld c,33
+	ld c,34
 	call @points
 	call @addPoints
 	ld e,Interaction.var33

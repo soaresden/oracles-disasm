@@ -8043,6 +8043,8 @@ mapMenu_drawSprites:
 	jp nz,mapMenu_drawWarpSites
 
 .ifdef ROM_AGES
+	; BALLADE: après la fin, ce qui reste à trouver clignote (code/ages/balladeMapMarks.s)
+	callab balladeMapMarks.draw
 	jp mapMenu_drawTimePortal
 
 .else; ROM_SEASONS

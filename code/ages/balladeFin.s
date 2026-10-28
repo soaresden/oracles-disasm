@@ -253,7 +253,10 @@ epilogue:
 	ld bc,TX_5b08
 	jp showText
 
-; Le générique : TX_5b09 à TX_5b0e, l'un après l'autre (var30 : le numéro)
+; Le générique (Denis : « c'était d'une tristesse à appuyer sur A... un truc à défilement, comme
+; DX ») : 20 cartons de deux lignes (TX_5c14-5c27) qui se ferment seuls (\wait), l'un après
+; l'autre, sur la musique de fin ; Marine chante en se balançant (wBalladeEpilogue = 4 : marine).
+; var30 : le numéro du carton
 @credits:
 	ld a,(wTextIsActive)
 	or a
@@ -262,7 +265,9 @@ epilogue:
 	ld e,Interaction.var30
 	xor a
 	ld (de),a
-	ld bc,TX_5b09
+	ld a,$04
+	ld (wBalladeEpilogue),a
+	ld bc,TX_5c14
 	jp showText
 
 @creditsNext:
@@ -273,11 +278,11 @@ epilogue:
 	ld l,Interaction.var30
 	inc (hl)
 	ld a,(hl)
-	cp $06
+	cp 20
 	jr nc,+
-	add <TX_5b09
+	add <TX_5c14
 	ld c,a
-	ld b,>TX_5b09
+	ld b,>TX_5c14
 	jp showText
 +
 	call interactionIncState
@@ -302,6 +307,14 @@ epilogue:
 marine:
 	call finObjectInit
 	ld a,(wBalladeEpilogue)
+	; pendant le générique, elle chante en se balançant (sans changer la musique)
+	cp $04
+	jr nz,+
+	ld e,Interaction.var36
+	ld a,$01
+	ld (de),a
+	jp singNotes
++
 	cp $03
 	ret nz
 	xor a
@@ -472,8 +485,12 @@ islandMarine:
 
 
 ;;
-; Le coquillage qui appelle Zelda ($15), devant la maison de Marine : « Appeler ? » ; Zelda
-; apparaît, en rêve, et parle ; puis elle repart
+; Le téléphone qui appelle Zelda ($15), devant la maison de Marine (Denis : « on parle à Zelda depuis
+; un téléphone ? y'a un sprite de téléphone dans Link DX ! et elle a une seule ligne de dialogue » ;
+; « propose-la de venir aussi ») : art/braise.txt image 7. « Appeler Zelda ? » ; ça sonne ; une de
+; ses six répliques au hasard (TX_5c01-06) ; puis, tant qu'elle n'est pas venue, « je peux venir
+; vous voir ? » : Oui -> GLOBALFLAG_BALLADE_ZELDA, elle est sur l'île (zeldaVisit, $24) ; venue :
+; « Retourne-toi ! »
 shell:
 	ld e,Interaction.state
 	ld a,(de)
@@ -481,8 +498,9 @@ shell:
 	.dw @init
 	.dw @idle
 	.dw @ask
-	.dw @zelda
-	.dw @gone
+	.dw @ring
+	.dw @invite
+	.dw @answer
 
 @init:
 	ld a,GLOBALFLAG_BALLADE_FIN
@@ -491,6 +509,7 @@ shell:
 	jp npcLikeInit
 
 @idle:
+	call objectPreventLinkFromPassing
 	ld e,Interaction.pressedAButton
 	ld a,(de)
 	or a
@@ -498,7 +517,7 @@ shell:
 	xor a
 	ld (de),a
 	call interactionIncState
-	ld bc,TX_5b14
+	ld bc,TX_5c00
 	jp showText
 
 @ask:
@@ -510,48 +529,130 @@ shell:
 	jr nz,@back
 	call interactionIncState
 	ld e,Interaction.counter1
-	ld a,60
+	ld a,50
 	ld (de),a
-	; Zelda apparaît, à côté du coquillage
-	ld h,d
-	ld l,Interaction.yh
-	ld a,(hl)
-	ld l,Interaction.xh
-	ld l,(hl)
-	ld h,a
-	ld a,l
-	add $18
-	ld l,a
-	xor a
-	ld (wBalladeEpilogue),a
-	ld b,$11
-	call createFinObjectAt
-	ld a,SND_FAIRYCUTSCENE
+	; ça sonne
+	ld a,SND_TEXT_2
 	jp playSound
 
-@zelda:
+@ring:
 	call interactionDecCounter1
+	jr z,+
+	ld a,(hl)
+	and $0f
 	ret nz
+	ld a,SND_TEXT_2
+	jp playSound
++
 	call interactionIncState
+	; venue sur l'île : « Retourne-toi ! »
+	ld a,GLOBALFLAG_BALLADE_ZELDA
+	call checkGlobalFlag
+	ld bc,TX_5c0a
+	jp nz,showText
 	call getRandomNumber
-	and $01
-	add <TX_5b15
+	and $07
+	cp $06
+	jr c,+
+	sub $04
++
+	add <TX_5c01
 	ld c,a
-	ld b,>TX_5b15
+	ld b,>TX_5c01
 	jp showText
 
-@gone:
+@invite:
 	ld a,(wTextIsActive)
 	or a
 	ret nz
-	; elle repart (wBalladeEpilogue = 2 : elle s'efface)
-	ld a,$02
-	ld (wBalladeEpilogue),a
+	call interactionIncState
+	ld a,GLOBALFLAG_BALLADE_ZELDA
+	call checkGlobalFlag
+	jr nz,@back
+	ld bc,TX_5c07
+	jp showText
+
+@answer:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	ld a,(wSelectedTextOption)
+	or a
+	ld bc,TX_5c09
+	jr nz,+
+	ld a,GLOBALFLAG_BALLADE_ZELDA
+	call setGlobalFlag
+	ld bc,TX_5c08
++
+	call showText
 @back:
 	ld e,Interaction.state
 	ld a,$01
 	ld (de),a
 	ret
+
+;;
+; Zelda en visite sur l'île de Marine ($24, 1:5b ; GLOBALFLAG_BALLADE_ZELDA : invitée au
+; téléphone) : immobile, solide ; A : une de ses répliques (TX_5c0b-0e)
+zeldaVisit:
+	ld e,Interaction.state
+	ld a,(de)
+	or a
+	jr nz,@idle
+	ld a,GLOBALFLAG_BALLADE_ZELDA
+	call checkGlobalFlag
+	jp z,interactionDelete
+	ld a,PALH_ZELDA
+	call loadPaletteHeader
+	jp npcLikeInit
+@idle:
+	call objectPreventLinkFromPassing
+	ld e,Interaction.pressedAButton
+	ld a,(de)
+	or a
+	ret z
+	xor a
+	ld (de),a
+	call getRandomNumber
+	and $03
+	add <TX_5c0b
+	ld c,a
+	ld b,>TX_5c0b
+	jp showText
+
+;;
+; Tarkin, le voisin de Marine ($25, sa maison 3:2b, à côté de celle de Marine ; Denis : « comme
+; Tarkin sera à côté de chez Marine, il devrait avoir d'autres lignes de dialogue ») : son sprite de
+; DX (PALH_TARKIN), de face ; A : une de ses répliques (TX_5c0f-13)
+tarkinNeighbor:
+	ld e,Interaction.state
+	ld a,(de)
+	or a
+	jr nz,@idle
+	ld a,GLOBALFLAG_BALLADE_FIN
+	call checkGlobalFlag
+	jp z,interactionDelete
+	ld a,PALH_TARKIN
+	call loadPaletteHeader
+	jp npcLikeInit
+@idle:
+	call objectPreventLinkFromPassing
+	ld e,Interaction.pressedAButton
+	ld a,(de)
+	or a
+	ret z
+	xor a
+	ld (de),a
+	call getRandomNumber
+	and $07
+	cp $05
+	jr c,+
+	sub $03
++
+	add <TX_5c0f
+	ld c,a
+	ld b,>TX_5c0f
+	jp showText
 
 
 ;;

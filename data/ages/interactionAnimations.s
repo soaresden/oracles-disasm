@@ -754,6 +754,8 @@ interactionedAnimations:
 	.dw interactionAnimation5a3be
 	.dw interactionAnimationBalladeBulle
 	.dw interactionAnimationBalladeInsomnis
+	.dw interactionAnimationBalladeMoulin ; $10 (posée par le code : les moulins arrêtés)
+	.dw interactionAnimationBalladeMoulinTourne ; $11 (ils tournent)
 interaction3eAnimations:
 	.dw interactionAnimation5a6ae
 interaction30Animations:
@@ -2075,6 +2077,15 @@ interactionAnimationBalladeBulle:
 	.db $10 $1a $00
 	.db $10 $1c $00
 	m_AnimationLoop interactionAnimationBalladeBulle
+
+; BALLADE: les moulins du Nid des Vents : arrêtés, puis qui tournent
+interactionAnimationBalladeMoulin:
+	.db $7f $22 $00 ; (pas $ff : c'est la marque de la boucle)
+	m_AnimationLoop interactionAnimationBalladeMoulin
+interactionAnimationBalladeMoulinTourne:
+	.db $10 $22 $00
+	.db $10 $24 $00
+	m_AnimationLoop interactionAnimationBalladeMoulinTourne
 
 ; BALLADE: l'Insomnis à terre : il respire mal (agonisant)
 interactionAnimationBalladeInsomnis:
@@ -3642,6 +3653,8 @@ interactionedOamDataPointers:
 	.dw interactionOamData50f4c ; $1c
 	.dw interactionOamDataBalladeInsomnisA ; $1e
 	.dw interactionOamDataBalladeInsomnisB ; $20
+	.dw interactionOamDataBalladeBig ; $22 (les moulins, ailes en +)
+	.dw interactionOamDataBalladeBigB ; $24 (ailes en x)
 
 interaction48OamDataPointers: ; 0x5b04e
 	.dw interactionOamData50dfa

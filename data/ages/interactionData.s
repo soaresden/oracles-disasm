@@ -877,7 +877,7 @@ interactionebSubidData:
 	m_InteractionSubidData $00 $00 $00 ; $12 l'épilogue, sur la plage du réveil (invisible)
 	m_InteractionSubidData $e2 $00 $30 ; $13 Marine humaine, le matin
 	m_InteractionSubidData $e2 $00 $30 ; $14 Marine sur son île
-	m_InteractionSubidData $e4 $18 $30 ; $15 le coquillage qui appelle Zelda
+	m_InteractionSubidData $e9 $1c $30 ; $15 le téléphone qui appelle Zelda (spr_ballade_braise image 7, palette 3)
 	m_InteractionSubidData $00 $00 $00 ; $16 le volley : le terrain (invisible)
 	m_InteractionSubidData $e4 $1c $20 ; $17 le ballon de volley
 	m_InteractionSubidData $e2 $00 $30 ; $18 Marine sur le terrain de volley
@@ -893,6 +893,8 @@ interactionebSubidData:
 	m_InteractionSubidData $e7 $14 $30 ; $21 un masque (images 5-7, palette 3 ; les Eaux : 1)
 	m_InteractionSubidData $00 $00 $00 ; $22 3e rêve : Célesbourg (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $23 Ghost Babel : « NO ITEM » sur B et A (invisible : il dessine dans la barre)
+	m_InteractionSubidData $11 $00 $70 ; $24 Zelda en visite sur l'île (son dessin d'Ages ; palette 7, PALH_ZELDA)
+	m_InteractionSubidData $eb $00 $60 ; $25 Tarkin, le voisin (spr_ballade_tarkin, de face ; palette 6, PALH_TARKIN)
 	m_InteractionSubidDataEnd
 
 ; BALLADE: les objets de nos îles (INTERAC_BALLADE_OBJECT) : spr_ballade_objects ($e3), image n =
@@ -993,6 +995,8 @@ interactionedSubidData:
 	m_InteractionSubidData $00 $00 $00 ; $5a chez Marine : la jarre (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $5b chez Marine : la caisse (invisible)
 	m_InteractionSubidData $00 $00 $00 ; $5c chez Marine : la table (invisible)
+	m_InteractionSubidData $f0 $00 $30 ; $5d un moulin du Nid des Vents (spr_ballade_moulin, 32 x 32 ; palette 3 ; animations $10 / $11 posées par le code)
+	m_InteractionSubidData $00 $00 $00 ; $5e Marine : une vanne, puis un indice (invisible)
 	m_InteractionSubidDataEnd
 
 interactiond4SubidData:

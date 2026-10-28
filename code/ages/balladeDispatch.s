@@ -42,6 +42,8 @@ dispatch:
 	.dw @songesMask
 	.dw @songesSky
 	.dw @noItem		; $23 Ghost Babel : « NO ITEM » (balladeGhost.s)
+	.dw @zeldaVisit		; $24 Zelda en visite sur l'île de Marine (balladeFin.s)
+	.dw @tarkinNeighbor	; $25 Tarkin, le voisin de Marine (balladeFin.s)
 
 @creuse:
 	jpab balladeCreuse.main
@@ -115,3 +117,7 @@ dispatch:
 	jpab balladeSonges.sky
 @noItem:
 	jpab balladeGhost.noItem
+@zeldaVisit:
+	jpab balladeFin.zeldaVisit
+@tarkinNeighbor:
+	jpab balladeFin.tarkinNeighbor

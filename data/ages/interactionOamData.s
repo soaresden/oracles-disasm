@@ -342,6 +342,18 @@ interactionOamDataBalladeBig:
 	.db $10 $08 $0c $00
 	.db $10 $10 $0e $00
 
+; BALLADE: les moulins (spr_ballade_moulin) : la même grande image, ses tuiles $10-$1f (les ailes en x)
+interactionOamDataBalladeBigB:
+	.db $08
+	.db $00 $f8 $10 $00
+	.db $00 $00 $12 $00
+	.db $00 $08 $14 $00
+	.db $00 $10 $16 $00
+	.db $10 $f8 $18 $00
+	.db $10 $00 $1a $00
+	.db $10 $08 $1c $00
+	.db $10 $10 $1e $00
+
 ; BALLADE: le boss du Terrier qui marche (spr_ballade_rex, art/rex.txt) : le haut (avec blindage
 ; tuiles $00-$07, sans $08-$0f) sur les pattes (pas A $10-$17, pas B $18-$1f)
 ; avec blindage, pas A

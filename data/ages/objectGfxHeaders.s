@@ -247,3 +247,4 @@ objectGfxHeaderTable:
 	/* $ed */ m_ObjectGfxHeader spr_ballade_pnj_2 ; le marchand, Papahl
 	/* $ee */ m_ObjectGfxHeader spr_ballade_pnj_3 ; Madame Miaou-Miaou, l'homme du Jeu Branché
 	/* $ef */ m_ObjectGfxHeader spr_ballade_pnj_4 ; Grand-mère Ulrira, Richard
+	/* $f0 */ m_ObjectGfxHeader spr_ballade_moulin ; les moulins du Nid des Vents (art/moulin.txt)

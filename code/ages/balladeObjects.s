@@ -80,6 +80,8 @@
 ; @subid_57{L'Insomnis à terre, agonisant (5:cc) : Marine le frappe, il meurt}
 ; @subid_58{Invisible : un quart de cœur enterré au milieu du motif de 1:89 ; la Pelle le déterre}
 ; @subid_59{Invisible, chez Marine (3:2a) : clins d'œil à Link's Awakening, A devant un meuble ($59-$5c)}
+; @subid_5d{Un moulin à vent du Nid des Vents (1:66, 32 x 32) : ses ailes tournent après le chapitre 6}
+; @subid_5e{Invisible : Marine (Select) fait une vanne, puis donne un indice selon la progression}
 ; ==================================================================================================
 
 ;;
@@ -180,6 +182,8 @@ main:
 	.dw marineWink
 	.dw marineWink
 	.dw marineWink
+	.dw windmill
+	.dw marineChat
 
 
 ;;
@@ -5940,6 +5944,95 @@ easterThanks:
 	ret nc
 	ld bc,TX_5b73
 	jp showText
+
+;;
+; Marine parle (Select, ailleurs que dans une salle qui a sa réplique ; balladeMarine.marineTalk) :
+; Denis : « une dizaine de vannes et de trucs drôles, mais après une vanne elle reprend son sérieux
+; et donne des indices sur ce qu'il y a à faire ». Une vanne au hasard (TX_5beb-5bf4), puis
+; « Bon, sérieux... » et l'indice du chapitre (TX_5bf5 + le nombre de couplets ; après la fin, 5bfd).
+marineChat:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw @joke
+	.dw @hint
+	.dw @end
+
+@joke:
+	call interactionIncState
+	call getRandomNumber
+	and $0f
+	cp 10
+	jr c,+
+	sub 6
++
+	add <TX_5beb
+	ld c,a
+	ld b,>TX_5beb
+	jp showText
+
+@hint:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	call interactionIncState
+	ld a,GLOBALFLAG_BALLADE_FIN
+	call checkGlobalFlag
+	ld a,$08
+	jr nz,+
+	ld a,(wEssencesObtained)
+	call getNumSetBits
+	cp $08
+	jr c,+
+	ld a,$07
++
+	add <TX_5bf5
+	ld c,a
+	ld b,>TX_5bf5
+	jp showText
+
+@end:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	jp interactionDelete
+
+;;
+; Un moulin à vent ($5d, le Nid des Vents 1:66 et son Songe ; Denis : « toujours pas de moulins
+; dessinés dans les airs ») : art/moulin.txt, 32 x 32, solide (sa tour). Ses ailes sont arrêtées ; la
+; Sérénade du Vent les relance à la fin du chapitre 6 (l'essence 6) : elles tournent.
+windmill:
+	ld e,Interaction.state
+	ld a,(de)
+	or a
+	jr nz,@run
+	inc a
+	ld (de),a
+	call interactionInitGraphics
+	ld h,d
+	ld l,Interaction.collisionRadiusY
+	ld (hl),$10
+	inc l
+	ld (hl),$08
+	ld l,Interaction.var30
+	ld (hl),$ff
+	call objectSetVisible82
+@run:
+	call objectPreventLinkFromPassing
+	ld a,(wEssencesObtained)
+	and $20
+	ld a,$10
+	jr z,+
+	inc a
++
+	ld e,Interaction.var30
+	ld b,a
+	ld a,(de)
+	cp b
+	jp z,interactionAnimate
+	ld a,b
+	ld (de),a
+	jp interactionSetAnimation
 
 ;;
 ; Les clins d'œil de la maison de Marine ($59-$5c, 3:2a ; Denis : « chez elle devrait y avoir des

@@ -258,6 +258,11 @@ specialObjectLoadAnimationFrameToBuffer:
 		.include "code/ages/balladeDarkLink.s"
 	.ends
 
+	 ; BALLADE: après la fin, sur la carte : ce qui reste à trouver
+	 m_section_superfree Ballade_MapMarks namespace balladeMapMarks
+		.include "code/ages/balladeMapMarks.s"
+	.ends
+
 	 ; BALLADE: pas d'une île à l'autre par les bords de l'écran
 	 m_section_superfree Ballade_Islands namespace balladeIslands
 		.include "code/ages/balladeIslands.s"

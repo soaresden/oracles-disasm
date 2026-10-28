@@ -102,10 +102,13 @@ marineTalk:
 	jr @next
 
 @anywhere:
-	call getRandomNumber
-	and $03
-	add <TX_5a10
-	ld c,a
+	; une vanne, puis elle reprend son sérieux : un indice (Denis ; balladeObjects.marineChat)
+	call getFreeInteractionSlot
+	ret nz
+	ld (hl),INTERAC_BALLADE_OBJECT
+	inc l
+	ld (hl),$5e
+	ret
 @show:
 	ld b,>TX_5a00
 	jp showText
