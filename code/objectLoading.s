@@ -88,6 +88,14 @@ parseObjectData:
 	xor a
 	ld (wNumUnappraisedRingsBcd),a
 +
+	; BALLADE: les parties finies avant la v1.4 n'avaient pas le huitième couplet (Marine le chante à
+	; Zelda, à la fin : balladeFin.towerEnding) : il est dans l'inventaire
+	ld a,GLOBALFLAG_BALLADE_FIN
+	call checkGlobalFlag
+	jr z,+
+	ld hl,wEssencesObtained
+	set 7,(hl)
++
 	; BALLADE: plus de Carnet des Rêves (Denis : « il sert à rien du tout, enlève-le ») : retiré
 	; des parties qui l'avaient (et de l'inventaire)
 	ld a,TREASURE_12

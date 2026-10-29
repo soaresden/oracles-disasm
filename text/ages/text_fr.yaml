@@ -3976,12 +3976,11 @@ groups:
   - name: TX_0908
     index: 0x08
     text: |-
-      Falling Star\stop
-      Its eternal
-      light acts as
-      guide to the
-      other essences.
-
+      Huitième couplet
+      La berceuse
+      qu'on chante à
+      ceux qui ne
+      dorment plus.
   - name: TX_0909
     index: 0x09
     text: |-

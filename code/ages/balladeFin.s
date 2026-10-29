@@ -84,6 +84,18 @@ towerEnding:
 	ld c,a
 	add <TX_5b01
 	push af
+	; « La Ballade de la Mouette est complète ! » : le huitième couplet, dans l'inventaire (Denis :
+	; « je vais finir par avoir la 8e dans mon inventaire ? » ; la 8e essence d'Ages)
+	ld a,c
+	cp $03
+	jr nz,+
+	ld hl,wEssencesObtained
+	set 7,(hl)
+	ld a,SND_GETITEM
+	push bc
+	call playSound
+	pop bc
++
 	; « Dors, princesse » : la chanson de Marine (le thème du jeu)
 	ld a,c
 	cp $01
