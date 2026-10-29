@@ -75,6 +75,8 @@ main:
 +
 	dec b
 	jr nz,-
+	call drawBIcon
+	call @blinkDead
 	; et leurs objets à part ne reviennent pas (l'épée du Darknut, recréée quand on le montre)
 	ld h,FIRST_ENEMY_INDEX
 -
@@ -207,6 +209,98 @@ main:
 	ld (wWarpTransition),a
 	ld a,$03 ; fondu
 	ld (wWarpTransition2),a
+	ret
+
+;;
+; Les monstres vaincus (le Mamono) : leur case alterne entre leur image et leur chiffre (la somme des
+; niveaux autour), une seconde chacun (Denis : « il faut que les monstres morts alternent entre le
+; chiffre qu'ils ont en dessous d'eux et le sprite mort »). Un quart du champ par image, quatre
+; briques au plus (setTile). Interaction.var38 : la case suivante ; var39 : ce qui reste à changer
+@blinkDead:
+	ld a,(wBalladeCreuseMode)
+	or a
+	ret z
+	ld a,(wBalladeMamonoPlaced)
+	or a
+	ret z
+	ld e,Interaction.var39
+	ld a,$04
+	ld (de),a
+	ld b,MAMONO_CELLS / 4
+@blinkCell:
+	push bc
+	ld e,Interaction.var38
+	ld a,(de)
+	inc a
+	cp MAMONO_CELLS
+	jr c,+
+	xor a
++
+	ld (de),a
+	ld c,a
+	call @blinkOne
+	pop bc
+	ld e,Interaction.var39
+	ld a,(de)
+	or a
+	ret z
+	dec b
+	jr nz,@blinkCell
+	ret
+
+; La case c : un monstre vaincu ? sa brique du moment
+@blinkOne:
+	; (le monstre montré en ce moment : pas encore)
+	ld a,(wBalladeMamonoShow)
+	or a
+	jr z,+
+	ld a,(wBalladeMamonoShowIndex)
+	cp c
+	ret z
++
+	ld a,c
+	call @levelAt
+	or a
+	ret z
+	ld b,a
+	ld a,c
+	call @positionOf
+	ld l,a
+	ld h,>wRoomLayout
+	ld a,(hl)
+	call @isUndug
+	ret z			; pas encore déterré
+	ld a,(wFrameCounter)
+	and $40
+	jr z,@dead
+	ld a,c
+	call @sum
+	or a
+	ld a,MAMONO_SAND
+	jr z,++
+	ld a,(wBalladeMamonoTmp+2)
+	add MAMONO_FIRST_NUMBER
+	jr ++
+@dead:
+	ld a,b
+	add MAMONO_FIRST_DEAD-1
+++
+	push af
+	ld a,c
+	call @positionOf
+	ld c,a
+	ld l,a
+	ld h,>wRoomLayout
+	pop af
+	cp (hl)
+	ret z
+	push de
+	call setTile
+	pop de
+	ld e,Interaction.var39
+	ld a,(de)
+	dec a
+	ld (de),a
 	ret
 
 ;;
@@ -1063,3 +1157,82 @@ main:
 @thresholds:
 	.db 5, 12, 20, $ff
 	.db 7, 16, 28, 44
+
+;;
+; Pendant une partie, l'icône de B (Denis : « en B invente une icône : 🚩, et 1-5 pour le Mamono ») :
+; le drapeau au démineur, « 1-5 » au Mamono (B : la croix, les notes). Comme « NO ITEM » de Ghost
+; Babel (balladeGhost.noItem) : B n'a pas d'objet (wBItemTreasure = $ff), on met notre image dans
+; w4ItemIconGfx (le sprite de B) ; la barre redessinée (un rubis, la fin de la partie) l'efface, on
+; la remet.
+drawBIcon:
+	ld a,(wBalladeMamonoState)
+	cp $01
+	ret nz
+	ld a,(wBItemTreasure)
+	inc a
+	jr z,+
+	; B montre encore un objet : la barre se redessine d'abord
+	ld hl,wStatusBarNeedsRefresh
+	set 0,(hl)
+	ret
++
+	; déjà là ?
+	ld a,(wBItemSpriteXOffset)
+	cp $08
+	ret z
+	ld hl,@flag
+	ld b,$0a		; (palette 2 : la toile rouge)
+	ld a,(wBalladeCreuseMode)
+	or a
+	jr z,+
+	ld hl,@numbers
+	ld b,$08		; (palette 0)
++
+	push hl
+	ld hl,wBItemSpriteAttribute1
+	ld a,b
+	ldi (hl),a
+	ldi (hl),a
+	ld a,$08
+	ldi (hl),a
+	ld (hl),$ff
+	pop hl
+	ld a,$04
+	ld ($ff00+R_SVBK),a
+	ld de,w4ItemIconGfx
+	ld b,$40
+-
+	ldi a,(hl)
+	ld (de),a
+	inc de
+	dec b
+	jr nz,-
+	; le décor de la case de B ne passe plus devant le sprite (colonnes 1-2, deux lignes)
+	ld hl,w4StatusBarAttributeMap+$01
+	xor a
+	ldi (hl),a
+	ld (hl),a
+	ld l,<w4StatusBarAttributeMap+$21
+	ldi (hl),a
+	ld (hl),a
+	ld ($ff00+R_SVBK),a
+	ld a,UNCMP_GFXH_02
+	jp loadUncompressedGfxHeader
+
+; Le drapeau (16 x 16, deux sprites de 8 x 16 : gauche puis droite ; 1 la hampe, 2 la toile)
+;   ...1............      ...122222222....
+;   ...1222.........      ...12222222.....
+;   ...12222222.....      ...122222.......
+@flag:
+	.db $00 $00 $10 $00 $10 $0e $10 $0f $10 $0f $10 $0f $10 $0f $10 $00
+	.db $10 $00 $10 $00 $10 $00 $10 $00 $38 $00 $7c $00 $00 $00 $00 $00
+	.db $00 $00 $00 $00 $00 $00 $00 $e0 $00 $f0 $00 $e0 $00 $80 $00 $00
+	.db $00 $00 $00 $00 $00 $00 $00 $00 $00 $00 $00 $00 $00 $00 $00 $00
+
+; « 1-5 » (couleur 1)
+@numbers:
+	.db $00 $00 $00 $00 $00 $00 $60 $00 $e0 $00 $60 $00 $67 $00 $60 $00
+	.db $60 $00 $f0 $00 $00 $00 $00 $00 $00 $00 $00 $00 $00 $00 $00 $00
+	.db $00 $00 $00 $00 $00 $00 $3c $00 $20 $00 $38 $00 $04 $00 $04 $00
+	.db $24 $00 $38 $00 $00 $00 $00 $00 $00 $00 $00 $00 $00 $00 $00 $00
+

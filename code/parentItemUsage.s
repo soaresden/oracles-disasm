@@ -93,10 +93,8 @@ checkUseItems:
 	ld a,(wBalladeGhostHud)
 	or a
 	jr nz,@updateParentItems
-	; Les jeux du forain : la Pelle est là pour la forme (A creuse : balladeCreuse.s)
-	ld a,(wBalladeLoadout)
-	cp $01
-	jr z,@updateParentItems
+	; Les jeux du forain : la Pelle sert pour la forme (Denis : « qu'on voie quand même qu'on utilise
+	; une pelle ») ; c'est le jeu qui creuse (balladeMamono.s : A)
 .endif
 
 	; Set carry flag if in a spinner or bit 7 of wInAir is set.

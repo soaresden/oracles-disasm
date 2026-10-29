@@ -13,6 +13,15 @@ itemCode15:
 	ld l,Item.counter1
 	ld (hl),$04
 
+.ifdef ROM_AGES
+	; BALLADE: les jeux du forain : Link sort la Pelle (Denis : « qu'on voie quand même qu'on utilise
+	; une pelle »), mais c'est le jeu qui creuse (balladeMamono.s) : ni la case, ni le bruit. Tant
+	; qu'on est dans l'arène (une partie, ou sa fin : le dernier coup de pelle gagnant laissait un trou)
+	ld a,(wBalladeMamonoState)
+	or a
+	ret nz
+.endif
+
 	ld a,BREAKABLETILESOURCE_SHOVEL
 	call itemTryToBreakTile
 	ld a,SND_CLINK
