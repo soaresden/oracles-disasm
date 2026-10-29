@@ -396,6 +396,9 @@
 .define MUS_BALLADE_ILE   $42
 .define MUS_BALLADE_AUBERGE $43
 .define MUS_BALLADE_GENERIQUE $1d ; le générique de fin (music/generique.txt)
+.define MUS_BALLADE_BERCEUSE $38 ; la berceuse de Zelda (music/berceuse.txt, la partition de Denis ; au lieu de MUS_ZELDA_SAVED)
+.define MUS_BALLADE_DUO $2a ; le duo Marine / Zelda en haut de la tour (music/duo.txt ; au lieu de MUS_CREDITS_2)
+.define MUS_BALLADE_ZELDA2 $2c ; le duel contre Dark Link : le thème du Temple de Zelda II (music/zelda2.txt ; au lieu de MUS_MAPLE_GAME)
 .define MUS_BALLADE_LYNELS $0c ; le Labyrinthe des Lynels (music/lynels.txt), le générique d'Euro-Mir
 .define MUS_BALLADE_QUIZ $0a ; le quiz de Marine (music/quiz.txt), façon « Qui veut gagner des millions »
 .define MUS_BALLADE_THEME $44

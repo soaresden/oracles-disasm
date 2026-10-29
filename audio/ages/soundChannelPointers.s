@@ -250,16 +250,7 @@ musCredits1:
 	.dw musCredits1Channel6
 	.db $ff
 
-musCredits2:
-	.db $00
-	.dw musCredits2Channel0
-	.db $01
-	.dw musCredits2Channel1
-	.db $04
-	.dw musCredits2Channel4
-	.db $06
-	.dw musCredits2Channel6
-	.db $ff
+; BALLADE: (musCredits2 retiré : son numéro, $2a, joue le duo Marine / Zelda (music/duo.txt))
 
 musMapleTheme:
 	.db $00
@@ -272,16 +263,7 @@ musMapleTheme:
 	.dw musMapleThemeChannel6
 	.db $ff
 
-musMapleGame:
-	.db $00
-	.dw musMapleGameChannel0
-	.db $01
-	.dw musMapleGameChannel1
-	.db $04
-	.dw musMapleGameChannel4
-	.db $06
-	.dw musMapleGameChannel6
-	.db $ff
+; BALLADE: (musMapleGame retiré : son numéro, $2c, joue le thème du Temple de Zelda II)
 
 musMiniboss:
 	.db $00
@@ -371,16 +353,7 @@ musCave:
 	.dw musCaveChannel6
 	.db $ff
 
-musZeldaSaved:
-	.db $00
-	.dw musZeldaSavedChannel0
-	.db $01
-	.dw musZeldaSavedChannel1
-	.db $04
-	.dw musZeldaSavedChannel4
-	.db $06
-	.dw musZeldaSavedChannel6
-	.db $ff
+; BALLADE: (musZeldaSaved retiré : son numéro, $38, joue la berceuse de Zelda (music/berceuse.txt))
 
 musGreatMoblin:
 	.db $00

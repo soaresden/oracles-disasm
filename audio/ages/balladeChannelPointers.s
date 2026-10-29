@@ -330,6 +330,17 @@ musBalladeLynels:
 	.dw musBalladeLynelsChannel6
 	.db $ff
 
+musBalladeZelda2:
+	.db $00
+	.dw musBalladeZelda2Channel0
+	.db $01
+	.dw musBalladeZelda2Channel1
+	.db $04
+	.dw musBalladeZelda2Channel4
+	.db $06
+	.dw musBalladeZelda2Channel6
+	.db $ff
+
 musBalladeGenerique:
 	.db $00
 	.dw musBalladeGeneriqueChannel0
@@ -339,6 +350,28 @@ musBalladeGenerique:
 	.dw musBalladeGeneriqueChannel4
 	.db $06
 	.dw musBalladeGeneriqueChannel6
+	.db $ff
+
+musBalladeBerceuse:
+	.db $00
+	.dw musBalladeBerceuseChannel0
+	.db $01
+	.dw musBalladeBerceuseChannel1
+	.db $04
+	.dw musBalladeBerceuseChannel4
+	.db $06
+	.dw musBalladeBerceuseChannel6
+	.db $ff
+
+musBalladeDuo:
+	.db $00
+	.dw musBalladeDuoChannel0
+	.db $01
+	.dw musBalladeDuoChannel1
+	.db $04
+	.dw musBalladeDuoChannel4
+	.db $06
+	.dw musBalladeDuoChannel6
 	.db $ff
 
 sndBalladeGull:

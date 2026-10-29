@@ -5,9 +5,10 @@
 ; 1. En haut de la Tour Sans-Nuit (5:cc), l'Insomnis battu ($10) : Zelda apparaît, en rêve ($11).
 ;    Depuis que Link a disparu en mer, elle ne dort plus ; l'Insomnis se nourrissait de son
 ;    inquiétude. Marine comprend, et lui chante sa chanson complète (le huitième couplet), comme une
-;    berceuse : Zelda s'endort. Fondu : la plage du réveil (1:aa).
+;    berceuse ; Zelda lui répond avec la sienne, elles chantent ensemble, et leur chant rend Marine
+;    humaine. Zelda s'endort. Fondu : la plage du réveil (1:aa).
 ; 2. L'épilogue ($12, sur la plage du réveil, wBalladeEpilogue = 1) : cette nuit-là, tout
-;    l'archipel s'est endormi ; au matin, Marine est humaine en plein jour ($13). Elle reste : elle a
+;    l'archipel s'est endormi ; au matin, Marine est encore humaine, en plein jour ($13). Elle reste : elle a
 ;    son île, le Nid de la Mouette. Le générique (MUS_BALLADE_GENERIQUE), puis le jeu continue
 ;    (GLOBALFLAG_BALLADE_FIN).
 ; 3. L'après-jeu, sur l'île de Marine (1:5b-6c) : Marine ($14 : le volley, parler), le coquillage
@@ -16,7 +17,13 @@
 
 
 ;;
-; La fin, en haut de la tour ($10)
+; La fin, en haut de la tour ($10). Zelda apparaît sur sa berceuse (MUS_BALLADE_BERCEUSE) ; puis le
+; duo (MUS_BALLADE_DUO, music/duo.txt ; Denis : « fais en sorte que ce soit les deux qui chantent qui
+; fait que Marine redevient humaine ; tu la fais chanter en mouette puis en humaine, et les deux
+; finissent par chanter ensemble ») : la scène suit la musique à l'image près (@duoMoments).
+; wBalladeEpilogue pendant le duo : 5 la mouette chante, 6 Zelda chante avec elle, 7 la mouette
+; redevient Marine (balladeMarine.finale), 4 Marine humaine chante (marine) avec Zelda.
+; Variables : var30-var31 les images depuis le début du duo, var32 le prochain moment
 towerEnding:
 	ld e,Interaction.state
 	ld a,(de)
@@ -25,9 +32,10 @@ towerEnding:
 	.dw @zeldaAppears
 	.dw @zeldaTalks
 	.dw @next		; Marine : « C'est elle, hein ? »
-	.dw @next		; « Dors, princesse » (la chanson)
-	.dw @next		; le huitième couplet
-	.dw @next		; la chanson est complète
+	.dw @next		; « Dors, princesse. Je connais une chanson »
+	.dw @duo
+	.dw @duoPlaying
+	.dw @complete		; la chanson est complète : le huitième couplet
 	.dw @zeldaSleeps
 	.dw @fadeOut
 	.dw @done
@@ -64,6 +72,10 @@ towerEnding:
 	ld b,$11
 	call createFinObjectAt
 	ld a,SND_FAIRYCUTSCENE
+	call playSound
+	; sa berceuse (la partition de Denis, music/berceuse.txt)
+	ld a,MUS_BALLADE_BERCEUSE
+	ld (wActiveMusic),a
 	jp playSound
 
 @zeldaTalks:
@@ -73,7 +85,7 @@ towerEnding:
 	ld bc,TX_5b00
 	jp showText
 
-; Les textes l'un après l'autre : l'état n (3-6) montre TX_5b01 + (n-3)
+; Les textes l'un après l'autre : l'état n (3-4) montre TX_5b01 + (n-3)
 @next:
 	ld a,(wTextIsActive)
 	or a
@@ -81,30 +93,151 @@ towerEnding:
 	ld e,Interaction.state
 	ld a,(de)
 	sub $03
-	ld c,a
 	add <TX_5b01
-	push af
-	; « La Ballade de la Mouette est complète ! » : le huitième couplet, dans l'inventaire (Denis :
-	; « je vais finir par avoir la 8e dans mon inventaire ? » ; la 8e essence d'Ages)
-	ld a,c
-	cp $03
+	ld c,a
+	ld b,>TX_5b01
+	push bc
+	call interactionIncState
+	pop bc
+	jp showText
+
+; Le duo commence
+@duo:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	call interactionIncState
+	; l'horloge du duo tourne aussi pendant les textes (sinon elle prendrait du retard sur la musique)
+	call interactionSetAlwaysUpdateBit
+	ld h,d
+	ld l,Interaction.var30
+	xor a
+	ldi (hl),a
+	ldi (hl),a
+	ld (hl),a
+	ld a,MUS_BALLADE_DUO
+	ld (wActiveMusic),a
+	jp playSound
+
+; Une image de plus ; le prochain moment (@duoMoments) est-il arrivé ?
+@duoPlaying:
+	ld h,d
+	ld l,Interaction.var30
+	inc (hl)
 	jr nz,+
+	inc l
+	inc (hl)
++
+	ld l,Interaction.var32
+	ld a,(hl)
+	ld c,a
+	add a
+	add a
+	add c
+	ld hl,@duoMoments
+	rst_addAToHl
+	ld e,Interaction.var30
+	ld a,(de)
+	sub (hl)
+	inc hl
+	inc e
+	ld a,(de)
+	sbc (hl)
+	ret c
+	inc hl
+	ldi a,(hl)
+	cp $fe
+	jp z,interactionIncState
+	ld b,a
+	ldi a,(hl)
+	ld c,a
+	ld e,(hl)
+	; un texte : on attend que le précédent se soit fermé
+	ld a,e
+	or a
+	jr z,+
+	ld a,(wTextIsActive)
+	or a
+	ret nz
++
+	ld a,b
+	cp $ff
+	jr z,++
+	ld (wBalladeEpilogue),a
+	; elle redevient humaine : la magie
+	cp $07
+	jr nz,++
+	push bc
+	push de
+	ld a,SND_FAIRYCUTSCENE
+	call playSound
+	pop de
+	pop bc
+++
+	ld b,e
+	ld h,d
+	ld l,Interaction.var32
+	inc (hl)
+	ld a,b
+	or a
+	ret z
+	jp showText
+
+; Les moments du duo (music/duo.txt, tempo 20 : MARINE 0, PONT 1280, ZELDA 1520, HUMAINE 2480,
+; ENSEMBLE 3440, la fin 5000) : l'image, ce que devient wBalladeEpilogue ($ff rien, $fe la fin),
+; le texte (0 aucun ; ils se ferment seuls, \wait)
+@duoMoments:
+	.dw    0
+	.db $05
+	.dw 0			; la mouette chante sa Ballade
+	.dw   60
+	.db $ff
+	.dw TX_5b03		; « Dors, petite lumière.
+	.dw  420
+	.db $ff
+	.dw TX_5c28		; Ce qu'on rêve fort...
+	.dw  760
+	.db $ff
+	.dw TX_5c29		; ... ne se perd jamais. »
+	.dw 1300
+	.db $ff
+	.dw TX_5c2a		; Zelda : « Et moi, j'ai la mienne. »
+	.dw 1520
+	.db $06
+	.dw 0			; Zelda chante sa berceuse, la mouette avec elle
+	.dw 1900
+	.db $ff
+	.dw TX_5c2b		; « Leurs deux airs se mêlèrent... »
+	.dw 2480
+	.db $07
+	.dw 0			; Marine redevient humaine
+	.dw 2540
+	.db $ff
+	.dw TX_5c2c		; « Ma voix ! Mes bras ! »
+	.dw 2900
+	.db $ff
+	.dw TX_5c2d		; « Je chante avec ma vraie voix ! »
+	.dw 3500
+	.db $ff
+	.dw TX_5c2e		; « Et leurs deux voix s'unirent. »
+	.dw 5000
+	.db $fe
+	.dw 0
+
+; « La Ballade de la Mouette est complète ! » : le huitième couplet, dans l'inventaire (Denis :
+; « je vais finir par avoir la 8e dans mon inventaire ? » ; la 8e essence d'Ages)
+@complete:
+	ld a,(wTextIsActive)
+	or a
+	ret nz
+	call interactionIncState
+	xor a
+	ld (wBalladeEpilogue),a
 	ld hl,wEssencesObtained
 	set 7,(hl)
 	ld a,SND_GETITEM
-	push bc
 	call playSound
-	pop bc
-+
-	; « Dors, princesse » : la chanson de Marine (le thème du jeu)
-	ld a,c
-	cp $01
-	ld a,MUS_BALLADE_THEME
-	call z,playSound
-	call interactionIncState
-	pop af
-	ld c,a
-	ld b,>TX_5b01
+	ld bc,TX_5b04
 	jp showText
 
 ; Zelda remercie, et s'endort (elle s'efface)
@@ -150,7 +283,7 @@ towerEnding:
 
 
 ;;
-; Zelda, en rêve ($11) : elle flotte doucement ; quand elle s'endort (wBalladeEpilogue = 2), elle
+; Zelda, en rêve ($11) : elle flotte doucement ; elle chante pendant le duo ; quand elle s'endort (wBalladeEpilogue = 2), elle
 ; s'efface peu à peu
 zelda:
 	ld e,Interaction.state
@@ -159,6 +292,8 @@ zelda:
 	jr nz,+
 	ld a,PALH_ZELDA
 	call loadPaletteHeader
+	; elle chante aussi pendant les textes du duo
+	call interactionSetAlwaysUpdateBit
 +
 	call finObjectInit
 	ld a,(wFrameCounter)
@@ -170,7 +305,21 @@ zelda:
 	xor $ff
 	ld (hl),a
 +
+	; pendant le duo, elle chante (une note qui s'envole, de temps en temps)
 	ld a,(wBalladeEpilogue)
+	cp $06
+	jr z,+
+	cp $04
+	jr nz,++
++
+	ld a,(wFrameCounter)
+	and $3f
+	ret nz
+	call getRandomNumber
+	and $01
+	ld bc,$f800
+	jp objectCreateFloatingMusicNote
+++
 	cp $02
 	ret nz
 	ld h,d
@@ -317,6 +466,11 @@ epilogue:
 ;;
 ; Marine humaine, le matin de l'épilogue ($13) : elle s'en va (un nuage) quand le générique est fini
 marine:
+	; (elle chante aussi pendant les textes : le duo, le générique)
+	ld e,Interaction.state
+	ld a,(de)
+	or a
+	call z,interactionSetAlwaysUpdateBit
 	call finObjectInit
 	ld a,(wBalladeEpilogue)
 	; pendant le générique, elle chante en se balançant (sans changer la musique)
@@ -522,6 +676,17 @@ shell:
 
 @idle:
 	call objectPreventLinkFromPassing
+	; l'appel fini (plus de texte) : la musique de l'île revient
+	ld a,(wTextIsActive)
+	or a
+	jr nz,+
+	ld a,(wActiveMusic)
+	cp MUS_BALLADE_BERCEUSE
+	jr nz,+
+	ld a,MUS_BALLADE_ILE
+	ld (wActiveMusic),a
+	call playSound
++
 	ld e,Interaction.pressedAButton
 	ld a,(de)
 	or a
@@ -557,6 +722,10 @@ shell:
 	jp playSound
 +
 	call interactionIncState
+	; elle décroche : sa berceuse (MUS_BALLADE_BERCEUSE ; la musique de l'île revient après l'appel)
+	ld a,MUS_BALLADE_BERCEUSE
+	ld (wActiveMusic),a
+	call playSound
 	; venue sur l'île : « Retourne-toi ! »
 	ld a,GLOBALFLAG_BALLADE_ZELDA
 	call checkGlobalFlag

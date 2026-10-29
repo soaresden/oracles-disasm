@@ -43,9 +43,9 @@ soundPointers:
 	/* 0x27 */ m_soundPointer musRosaDate
 	/* 0x28 */ m_soundPointer musBlackTower
 	/* 0x29 */ m_soundPointer musCredits1
-	/* 0x2a */ m_soundPointer musCredits2
+	/* 0x2a */ m_soundPointer musBalladeDuo ; BALLADE: le duo Marine / Zelda en haut de la tour (au lieu du 2e générique)
 	/* 0x2b */ m_soundPointer musBalladeTempetes ; BALLADE: le Chant des Tempêtes (les moulins du Nid des Vents ; au lieu du thème de Maple)
-	/* 0x2c */ m_soundPointer musMapleGame
+	/* 0x2c */ m_soundPointer musBalladeZelda2 ; BALLADE: le duel contre Dark Link, le thème du Temple de Zelda II (au lieu du jeu de Maple)
 	/* 0x2d */ m_soundPointer musBalladeMiniboss ; BALLADE: (au lieu de musMiniboss)
 	/* 0x2e */ m_soundPointer musBalladeTheme ; BALLADE: le thème du jeu contre les boss (au lieu de musBoss)
 	/* 0x2f */ m_soundPointer musLadxSideview
@@ -57,7 +57,7 @@ soundPointers:
 	/* 0x35 */ m_soundPointer musRalph
 	/* 0x36 */ m_soundPointer musCave
 	/* 0x37 */ m_soundPointer musBalladeRythme4 ; BALLADE: boss en rythme, niveau 4
-	/* 0x38 */ m_soundPointer musZeldaSaved
+	/* 0x38 */ m_soundPointer musBalladeBerceuse ; BALLADE: la berceuse de Zelda, la partition de Denis (au lieu de « Zelda sauvée »)
 	/* 0x39 */ m_soundPointer musGreatMoblin
 	/* 0x3a */ m_soundPointer musBalladeRythme5 ; BALLADE: boss en rythme, niveau 5
 	/* 0x3b */ m_soundPointer musBalladeCoffre ; BALLADE: le Coffre à Jouets (donjon 2)

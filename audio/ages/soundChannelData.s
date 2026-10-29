@@ -61,7 +61,7 @@ sndbdStart:
 sndbdChannel2:
 	cmdff
 
-.include "audio/common/mus/mapleGame.s"
+; BALLADE: .include "audio/common/mus/mapleGame.s" (retiré : la place du thème de Zelda II)
 .include "audio/common/mus/finalBoss.s"
 .include "audio/common/mus/essence.s"
 .include "audio/ages/sfx/echoes.s"
@@ -299,7 +299,7 @@ bank3dChannelFallback:
 .include "audio/common/mus/rosaDate.s"
 .include "audio/common/mus/roomOfRites.s"
 .include "audio/common/mus/blackTowerEntrance.s"
-.include "audio/common/mus/zeldaSaved.s"
+; BALLADE: .include "audio/common/mus/zeldaSaved.s" (retiré : la place de la berceuse de Zelda)
 .include "audio/common/mus/mapleTheme.s"
 .include "audio/common/mus/intro1.s"
 .include "audio/common/mus/crazyDance.s"
@@ -466,7 +466,7 @@ sndddChannel6:
 .include "audio/common/mus/ladxSideview.s"
 .include "audio/common/mus/syrup.s"
 .include "audio/common/mus/goronCave.s"
-.include "audio/common/mus/credits2.s"
+; BALLADE: .include "audio/common/mus/credits2.s" (retiré : la place du duo Marine / Zelda)
 .include "audio/common/mus/boss.s"
 .include "audio/common/mus/credits1.s"
 .include "audio/ages/mus/symmetryPast.s"

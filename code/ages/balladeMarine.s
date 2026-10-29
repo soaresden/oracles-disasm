@@ -979,9 +979,28 @@ finale:
 	ld a,SND_BALLADE_GULL
 	jp playSound
 
-; À côté de Link, au-dessus de son épaule, elle bat des ailes
+; À côté de Link, au-dessus de son épaule, elle bat des ailes ; pendant le duo avec Zelda
+; (balladeFin.towerEnding), elle chante (wBalladeEpilogue 5 ou 6), puis redevient Marine (7)
 @perch:
 	call interactionAnimate
+	ld a,(wBalladeEpilogue)
+	cp $07
+	jr z,@becomeHuman
+	cp $05
+	jr z,+
+	cp $06
+	jr nz,++
++
+	; une note qui s'envole, de temps en temps
+	ld a,(wFrameCounter)
+	and $3f
+	cp $20
+	jr nz,++
+	call getRandomNumber
+	and $01
+	ld bc,$f800
+	call objectCreateFloatingMusicNote
+++
 	ld a,(w1Link.yh)
 	sub $10
 	ld b,a
@@ -992,6 +1011,35 @@ finale:
 	ld h,d
 	ld (hl),$f8
 	jr @moveTo1
+
+; Le chant des deux la rend humaine : un nuage, et Marine (INTERAC_BALLADE_CREUSE $13, balladeFin.marine :
+; elle chante, wBalladeEpilogue = 4) debout à côté de Link, là où elle volait
+@becomeHuman:
+	call getFreeInteractionSlot
+	jr nz,+
+	ld (hl),INTERAC_PUFF
+	call objectCopyPosition
++
+	call getFreeInteractionSlot
+	jr nz,+
+	ld (hl),INTERAC_BALLADE_CREUSE
+	inc l
+	ld (hl),$13
+	call objectCopyPosition
+	ld l,Interaction.zh
+	ld (hl),$00
+	ld l,Interaction.yh
+	ld a,(hl)
+	add $0c
+	ld (hl),a
+	ld l,Interaction.xh
+	ld a,(hl)
+	add $06
+	ld (hl),a
++
+	ld a,$04
+	ld (wBalladeEpilogue),a
+	jp interactionDelete
 
 ;;
 ; @param[out]	hl	L'Insomnis (h = 0 s'il n'est pas là)
