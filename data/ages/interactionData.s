@@ -895,6 +895,7 @@ interactionebSubidData:
 	m_InteractionSubidData $00 $00 $00 ; $23 Ghost Babel : « NO ITEM » sur B et A (invisible : il dessine dans la barre)
 	m_InteractionSubidData $11 $00 $70 ; $24 Zelda en visite sur l'île (son dessin d'Ages ; palette 7, PALH_ZELDA)
 	m_InteractionSubidData $eb $00 $60 ; $25 Tarkin, le voisin (spr_ballade_tarkin, de face ; palette 6, PALH_TARKIN)
+	m_InteractionSubidData $00 $00 $00 ; $26 un anneau gagné, donné quand la voie est libre (invisible)
 	m_InteractionSubidDataEnd
 
 ; BALLADE: les objets de nos îles (INTERAC_BALLADE_OBJECT) : spr_ballade_objects ($e3), image n =

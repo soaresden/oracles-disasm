@@ -81,6 +81,26 @@ interactionCodee8:
 	call objectMarkSolidPosition
 
 @state1:
+	; Le forain ($08) : pendant une partie, il ne relance pas ses jeux (Denis : « si on reparle au
+	; PNJ un peu vite il refait son speech et on repaye alors qu'on est toujours en jeu ») ; son
+	; texte (lu quand Link appuie sur A : genericNpcScript) change
+	ld e,Interaction.subid
+	ld a,(de)
+	cp $08
+	jr nz,++
+	ld a,(wBalladeCreuseState)
+	dec a
+	ld bc,TX_5a43
+	jr nz,+
+	ld bc,TX_5c30
++
+	ld e,Interaction.textID
+	ld a,c
+	ld (de),a
+	inc e
+	ld a,b
+	ld (de),a
+++
 	call interactionRunScript
 	jp interactionAnimateAsNpc
 

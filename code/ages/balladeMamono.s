@@ -15,7 +15,7 @@
 ; niveaux (Denis) : Facile, Dur ; le gros lot en Dur sans une égratignure (un « perfect » :
 ; wBalladeMamonoHurt) : un quart de cœur la première fois (drapeau $80 de l'arène), 30 rubis
 ; ensuite. On sort par le haut, chez le forain. B sur une case pas creusée : une note du joueur
-; (Denis : 1, 2... jusqu'à 5, puis plus rien) ; une case notée ne se creuse pas.
+; (Denis : 1, 2... jusqu'à 5, puis plus rien) ; une case notée se creuse quand même (A).
 ;
 ; Les ennemis modèles : un de chaque niveau dans les objets de la salle (story/salles/objets.txt),
 ; pour que leurs images soient chargées ; après quelques images, ce contrôleur les cache, coupe leurs
@@ -239,8 +239,9 @@ main:
 	ld h,>wRoomLayout
 	ld l,c
 	ld a,(hl)
-	cp MAMONO_UNDUG
-	ret nz			; déjà creusée (ou notée : B l'efface)
+	call @isUndug
+	ret nz			; déjà creusée (une case notée se creuse aussi : Denis, « mettre un chiffre
+				; ça doit pas nous empêcher de creuser »)
 
 	; Au premier coup de pelle, les monstres se cachent (jamais autour de cette case)
 	ld a,(wBalladeMamonoPlaced)
@@ -462,13 +463,24 @@ main:
 	ld b,a
 	ld a,(wLinkHealth)
 	cp b
-	jr z,@tooHurt
-	jr c,@tooHurt
+	jp z,@tooHurt
+	jp c,@tooHurt
 	ld a,b
 	add a			; damageToApply : en huitièmes de cœur
 	cpl
 	inc a
 	ld (w1Link.damageToApply),a
+	; En Dur, la première blessure : plus de gros lot (Denis : « Dommage, tu ne joueras pas pour
+	; le gros lot, mais continue ! »)
+	ld a,(wBalladeMamonoHurt)
+	or a
+	jr nz,+
+	ld a,(wBalladeCreuseLevel)
+	or a
+	jr z,+
+	ld bc,TX_5c2f
+	call showText
++
 	ld a,$01
 	ld (wBalladeMamonoHurt),a
 	ld a,SND_DAMAGE_LINK

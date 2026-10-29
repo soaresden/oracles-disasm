@@ -707,7 +707,20 @@ passTree:
 	ld (hl),$06
 	ret
 +
+	; son vert, remis de temps en temps : le jeu recharge parfois les palettes des sprites (Denis :
+	; « l'arbre est devenu rose à un moment »)
 	push af
+	ld a,(wFrameCounter)
+	and $3f
+	jr nz,++
+	ld a,(wPaletteThread_mode)
+	or a
+	jr nz,++
+	push de
+	ld a,PALH_PASS_TREE
+	call loadPaletteHeader
+	pop de
+++
 	call objectPreventLinkFromPassing
 	pop af
 	cp $01
@@ -1088,7 +1101,13 @@ toyChest:
 @init:
 	call interactionInitGraphics
 	call interactionIncState
-	call setCollisionRadii
+	; sa boîte, à sa taille (Denis : « un bloc invisible » à côté : la large du Bateau-Rondin,
+	; setCollisionRadii, le débordait de 12 pixels de chaque côté)
+	ld h,d
+	ld l,Interaction.collisionRadiusY
+	ld (hl),$06
+	inc l
+	ld (hl),$06
 	call objectMarkSolidPosition
 	ld e,Interaction.pressedAButton
 	call objectAddToAButtonSensitiveObjectList
@@ -5092,8 +5111,10 @@ twins:
 ; Un jumeau caché ($3e), dans le Songe. On ne le voit pas (Denis : « trop visible ») : de temps en
 ; temps, un petit mouvement le trahit, des feuilles qui bougent au-dessus d'un buisson ou le bout de
 ; son bonnet qui dépasse (twinHints). Là seulement quand le jeu a commencé et qu'il n'a pas encore
-; été trouvé ici. A devant sa cachette : trouvé ! (un petit nuage, il file)
-; var30 : sa hauteur de départ ; var31 : 1 pendant le petit mouvement
+; été trouvé ici. A devant sa cachette : trouvé ! Il se montre pendant qu'il parle (Denis : « on voit
+; même pas ce qu'on a découvert ! »), puis un petit nuage, il file.
+; var30 : sa hauteur de départ ; var31 : 1 pendant le petit mouvement ; var32-33 : son image et sa
+; palette à lui (avant l'indice)
 hidingTwin:
 	ld e,Interaction.state
 	ld a,(de)
@@ -5119,6 +5140,14 @@ hidingTwin:
 	ld l,Interaction.yh
 	ld a,(hl)
 	ld l,Interaction.var30
+	ld (hl),a
+	ld l,Interaction.oamTileIndexBase
+	ld a,(hl)
+	ld l,Interaction.var32
+	ldi (hl),a
+	ld l,Interaction.oamFlags
+	ld a,(hl)
+	ld l,Interaction.var33
 	ld (hl),a
 	; Son indice : des feuilles (image 6, palette 0) ou le bonnet (image 7, palette 1)
 	ld a,(wActiveRoom)
@@ -5210,8 +5239,22 @@ hidingTwin:
 @foundHere:
 	call getThisRoomFlags
 	set 6,(hl)
-	call objectSetInvisible
-	call objectCreatePuff
+	; il se montre, lui, dans sa cachette
+	ld h,d
+	ld l,Interaction.var32
+	ldi a,(hl)
+	ld b,(hl)
+	ld l,Interaction.oamTileIndexBase
+	ld (hl),a
+	ld l,Interaction.oamFlags
+	ld (hl),b
+	ld l,Interaction.var30
+	ld a,(hl)
+	ld l,Interaction.yh
+	ld (hl),a
+	ld l,Interaction.zh
+	ld (hl),$00
+	call objectSetVisible82
 	ld a,SND_SOLVEPUZZLE
 	call playSound
 	call countFoundTwins
@@ -5233,6 +5276,8 @@ hidingTwin:
 	ld (wDisabledObjects),a
 	ld e,Interaction.start
 	call objectRemoveFromAButtonSensitiveObjectList
+	; un petit nuage, il file
+	call objectCreatePuff
 	jp interactionDelete
 
 ; Les cachettes : salle du Songe, son indice (0 : des feuilles qui bougent ; 1 : le bout d'un

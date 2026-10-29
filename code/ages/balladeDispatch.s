@@ -44,6 +44,7 @@ dispatch:
 	.dw @noItem		; $23 Ghost Babel : « NO ITEM » (balladeGhost.s)
 	.dw @zeldaVisit		; $24 Zelda en visite sur l'île de Marine (balladeFin.s)
 	.dw @tarkinNeighbor	; $25 Tarkin, le voisin de Marine (balladeFin.s)
+	.dw @ringGiver		; $26 un anneau gagné, donné quand la voie est libre (balladeFin.s)
 
 @creuse:
 	jpab balladeCreuse.main
@@ -121,3 +122,5 @@ dispatch:
 	jpab balladeFin.zeldaVisit
 @tarkinNeighbor:
 	jpab balladeFin.tarkinNeighbor
+@ringGiver:
+	jpab balladeFin.ringGiver

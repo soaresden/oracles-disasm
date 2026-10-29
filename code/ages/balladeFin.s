@@ -767,6 +767,80 @@ zeldaVisit:
 	jp showText
 
 ;;
+; Un anneau gagné ($26, créé par balladeRingReward ; var30-31 : l'objet du trésor) : il attend que
+; la voie soit libre (plus de texte, plus d'autre trésor en train d'être ramassé, 30 images de
+; calme ; 10 secondes au plus), puis l'anneau apparaît sur Link, qui le brandit (son texte)
+ringGiver:
+	ld e,Interaction.state
+	ld a,(de)
+	or a
+	jr nz,+
+	inc a
+	ld (de),a
+	call interactionSetAlwaysUpdateBit
+	ld h,d
+	ld l,Interaction.counter1
+	ld (hl),30
+	inc l
+	ld (hl),$02		; counter2 : la limite (x 256 images)
++
+	; la limite
+	ld h,d
+	ld l,Interaction.var32
+	inc (hl)
+	jr nz,+
+	ld l,Interaction.counter2
+	dec (hl)
+	jr z,@give
++
+	ld a,(wTextIsActive)
+	or a
+	jr nz,@busy
+	; un autre trésor (un quart de cœur...) pas encore ramassé
+	ld h,FIRST_INTERACTION_INDEX
+-
+	ld l,Interaction.enabled
+	ld a,(hl)
+	or a
+	jr z,++
+	inc l
+	ld a,(hl)
+	cp INTERAC_TREASURE
+	jr z,@busy
+++
+	inc h
+	ld a,h
+	cp LAST_INTERACTION_INDEX+1
+	jr c,-
+	call interactionDecCounter1
+	ret nz
+@give:
+	call getFreeInteractionSlot
+	ret nz
+	ld (hl),INTERAC_TREASURE
+	inc l
+	ld e,Interaction.var30
+	ld a,(de)
+	ldi (hl),a
+	inc e
+	ld a,(de)
+	ld (hl),a
+	ld l,Interaction.yh
+	ld a,(w1Link.yh)
+	ld (hl),a
+	ld l,Interaction.xh
+	ld a,(w1Link.xh)
+	ld (hl),a
+	jp interactionDelete
+
+@busy:
+	ld e,Interaction.counter1
+	ld a,30
+	ld (de),a
+	ret
+
+
+;;
 ; Tarkin, le voisin de Marine ($25, sa maison 3:2b, à côté de celle de Marine ; Denis : « comme
 ; Tarkin sera à côté de chez Marine, il devrait avoir d'autres lignes de dialogue ») : son sprite de
 ; DX (PALH_TARKIN), de face ; A : une de ses répliques (TX_5c0f-13)

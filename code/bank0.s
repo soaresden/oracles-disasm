@@ -14084,8 +14084,10 @@ balladeHudFixItemsY:
 .include "code/debug.s"
 
 ;;
-; BALLADE: un de nos anneaux en récompense, s'il n'est pas déjà eu : il apparaît sur Link (son texte
-; quand il le ramasse)
+; BALLADE: un de nos anneaux en récompense, s'il n'est pas déjà eu. Il n'apparaît sur Link que
+; quand la voie est libre (balladeFin.ringGiver : plus de texte, plus d'autre objet en train d'être
+; ramassé) ; Link le brandit, son texte (Denis : « tu l'annonces pas qu'on a gagné les anneaux,
+; pas l'animation » ; chez Tic et Tac, il brandissait le quart de cœur donné en même temps)
 ;
 ; @param	a	L'anneau
 ; @param	bc	Son objet (TREASURE_OBJECT_RING_29-2d)
@@ -14101,17 +14103,13 @@ balladeRingReward:
 +
 	call getFreeInteractionSlot
 	ret nz
-	ld (hl),INTERAC_TREASURE
+	ld (hl),INTERAC_BALLADE_CREUSE
 	inc l
+	ld (hl),$26
+	ld l,Interaction.var30
 	ld (hl),b
 	inc l
 	ld (hl),c
-	ld l,Interaction.yh
-	ld a,(w1Link.yh)
-	ld (hl),a
-	ld l,Interaction.xh
-	ld a,(w1Link.xh)
-	ld (hl),a
 	xor a
 	ret
 
