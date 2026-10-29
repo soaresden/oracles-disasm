@@ -57,8 +57,9 @@ main:
 	ld a,(de)
 	or a
 	jr z,@capture
-	; Les monstres restent figés, et sans collision (Denis : « j'ai pris un dégât en démineur, y'a un
-	; ennemi invisible ? » : le Darknut modèle, caché au bord du champ, frappait encore)
+	; Les monstres restent figés, sans collision, et cachés hors de l'écran (Denis : « j'ai pris un
+	; dégât en démineur, y'a un ennemi invisible ? », puis au Mamono en marchant : le Darknut modèle,
+	; caché au bord du champ, frappait encore, même sans collision) ; @monster les remet sur leur case
 	ld hl,wDisabledObjects
 	set 2,(hl)		; DISABLE_ENEMIES
 	ld hl,wBalladeMamonoSlots
@@ -71,17 +72,30 @@ main:
 	ld h,a
 	ld l,Enemy.collisionType
 	res 7,(hl)
+	ld l,Enemy.visible
+	bit 7,(hl)
+	jr nz,++
+	ld l,Enemy.yh
+	ld (hl),$f8
+	ld l,Enemy.xh
+	ld (hl),$f8
+++
 	pop hl
 +
 	dec b
 	jr nz,-
+	push de
 	call drawBIcon
+	pop de
 	call @blinkDead
-	; et leurs objets à part ne reviennent pas (l'épée du Darknut, recréée quand on le montre)
+	; et leurs objets à part ne reviennent pas (l'épée du Darknut, recréée quand on le montre) ; leur
+	; collision non plus (effacée, l'épée du Darknut touchait encore Link : Denis, au Mamono)
 	ld h,FIRST_ENEMY_INDEX
 -
 	ld l,Part.enabled
 	ld (hl),$00
+	ld l,Part.collisionType
+	res 7,(hl)
 	inc h
 	ld a,h
 	cp LAST_ENEMY_INDEX+1
