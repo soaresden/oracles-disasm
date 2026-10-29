@@ -3635,6 +3635,7 @@ standardGameState:
 	.dw cutscene20
 	.dw cutscene21
 	.dw cutscene22 ; BALLADE: les photos de Cocolint
+	.dw cutscene23 ; BALLADE: le générique qui défile
 .endif
 
 

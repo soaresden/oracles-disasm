@@ -450,7 +450,8 @@ wBalladeTerrierTmp: ; $c5a8
 	dsb 3
 
 ; BALLADE: la fin du jeu (code/ages/balladeFin.s) : l'épilogue (1 à venir, sur la plage du
-; réveil ; 2 Zelda s'endort ; 3 le générique est fini) ; le volley contre Marine (l'état, le score
+; réveil ; 2 Zelda s'endort ; pendant le duo de la tour : 5 la mouette chante, 6 Zelda aussi, 7 la
+; mouette redevient Marine, 4 Marine humaine chante) ; le volley contre Marine (l'état, le score
 ; de Link et de Marine, qui sert : 1 Link)
 wBalladeEpilogue: ; $c5ab
 	db

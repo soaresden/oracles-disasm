@@ -42,6 +42,7 @@
 	CUTSCENE_FLAME_OF_DESPAIR	db ; 0x20: The final flame is lit
 	CUTSCENE_BLACK_TOWER_COMPLETE	db ; 0x21
 	CUTSCENE_BALLADE_PHOTOS		db ; 0x22: BALLADE: les photos de Cocolint
+	CUTSCENE_BALLADE_GENERIQUE	db ; 0x23: BALLADE: le générique qui défile
 .ende
 
 ; Seasons

@@ -198,6 +198,21 @@ specialObjectLoadAnimationFrameToBuffer:
 		.include "code/ages/cutscenes/photos.s"
 	.ends
 
+	 ; BALLADE: le générique qui défile (CUTSCENE_BALLADE_GENERIQUE) ; ses cartes (tools/make_credits.py)
+	 m_section_superfree Ballade_Generique namespace balladeGenerique
+		.include "code/ages/cutscenes/generique.s"
+	.ends
+	 ; (alignées sur 16 octets : la copie DMA du GBC ignore les 4 bits bas de la source)
+	 m_section_superfree Ballade_GeneriqueTiles ALIGN $10
+		.include "code/ages/balladeCreditsTiles.s"
+	.ends
+	 m_section_superfree Ballade_GeneriqueFr ALIGN $10
+		.include "code/ages/balladeCreditsMapFr.s"
+	.ends
+	 m_section_superfree Ballade_GeneriqueEn ALIGN $10
+		.include "code/ages/balladeCreditsMapEn.s"
+	.ends
+
 	 ; BALLADE: film d'ouverture (la banque 3 des cinématiques est pleine)
 	 m_section_superfree Ballade_Film namespace balladeFilm
 		.include "code/ages/cutscenes/film.s"

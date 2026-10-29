@@ -9,8 +9,8 @@
 ;    humaine. Zelda s'endort. Fondu : la plage du réveil (1:aa).
 ; 2. L'épilogue ($12, sur la plage du réveil, wBalladeEpilogue = 1) : cette nuit-là, tout
 ;    l'archipel s'est endormi ; au matin, Marine est encore humaine, en plein jour ($13). Elle reste : elle a
-;    son île, le Nid de la Mouette. Le générique (MUS_BALLADE_GENERIQUE), puis le jeu continue
-;    (GLOBALFLAG_BALLADE_FIN).
+;    son île, le Nid de la Mouette, près de son père. Le générique qui défile
+;    (CUTSCENE_BALLADE_GENERIQUE), puis le jeu continue (GLOBALFLAG_BALLADE_FIN).
 ; 3. L'après-jeu, sur l'île de Marine (1:5b-6c) : Marine ($14 : le volley, parler), le coquillage
 ;    qui appelle Zelda ($15), le volley contre Marine ($16 le terrain, $17 le ballon, $18 Marine).
 ; ==================================================================================================
@@ -357,8 +357,6 @@ epilogue:
 	.dw @marine1
 	.dw @marine2
 	.dw @credits
-	.dw @creditsNext
-	.dw @end
 
 @init:
 	ld a,(wBalladeEpilogue)
@@ -384,7 +382,8 @@ epilogue:
 	ld l,a
 	ld b,$13
 	call createFinObjectAt
-	ld a,MUS_BALLADE_GENERIQUE
+	; le matin : la Ballade, tout en douceur, avec les mouettes (le générique la suit)
+	ld a,MUS_TITLESCREEN
 	call playSound
 	ld e,Interaction.counter1
 	ld a,90
@@ -415,56 +414,35 @@ epilogue:
 	jp showText
 
 ; Le générique (Denis : « c'était d'une tristesse à appuyer sur A... un truc à défilement, comme
-; DX ») : 20 cartons de deux lignes (TX_5c14-5c27) qui se ferment seuls (\wait), l'un après
-; l'autre, sur la musique de fin ; Marine chante en se balançant (wBalladeEpilogue = 4 : marine).
-; var30 : le numéro du carton
+; DX » ; « pas de barre de texte ! ») : CUTSCENE_BALLADE_GENERIQUE (code/ages/cutscenes/generique.s),
+; les crédits qui montent sur un écran noir ; il ramène Link ici, sur la plage, et le jeu continue
+; (Marine est partie vers son île). Le jeu est fini dès maintenant (GLOBALFLAG_BALLADE_FIN).
 @credits:
 	ld a,(wTextIsActive)
 	or a
 	ret nz
-	call interactionIncState
-	ld e,Interaction.var30
-	xor a
-	ld (de),a
-	ld a,$04
-	ld (wBalladeEpilogue),a
-	ld bc,TX_5c14
-	jp showText
-
-@creditsNext:
-	ld a,(wTextIsActive)
-	or a
-	ret nz
-	ld h,d
-	ld l,Interaction.var30
-	inc (hl)
-	ld a,(hl)
-	cp 20
-	jr nc,+
-	add <TX_5c14
-	ld c,a
-	ld b,>TX_5c14
-	jp showText
-+
-	call interactionIncState
-	ret
-
-; Fin : le jeu continue ; Marine s'envole vers son île
-@end:
 	ld a,GLOBALFLAG_BALLADE_FIN
 	call setGlobalFlag
-	ld a,$03
-	ld (wBalladeEpilogue),a
 	xor a
+	ld (wBalladeEpilogue),a
 	ld (wDisabledObjects),a
 	ld (wMenuDisabled),a
-	ld a,MUS_BALLADE_ILE
-	call playSound
+	; (la case de Link, pour y revenir après le générique)
+	ld a,(w1Link.yh)
+	and $f0
+	ld b,a
+	ld a,(w1Link.xh)
+	swap a
+	and $0f
+	or b
+	ld (wTmpcbbf),a
+	ld a,CUTSCENE_BALLADE_GENERIQUE
+	ld (wCutsceneTrigger),a
 	jp interactionDelete
 
 
 ;;
-; Marine humaine, le matin de l'épilogue ($13) : elle s'en va (un nuage) quand le générique est fini
+; Marine humaine : à la tour, quand le chant la rend humaine ; le matin de l'épilogue ($13)
 marine:
 	; (elle chante aussi pendant les textes : le duo, le générique)
 	ld e,Interaction.state
@@ -473,26 +451,13 @@ marine:
 	call z,interactionSetAlwaysUpdateBit
 	call finObjectInit
 	ld a,(wBalladeEpilogue)
-	; pendant le générique, elle chante en se balançant (sans changer la musique)
+	; pendant le duo, elle chante en se balançant (sans changer la musique)
 	cp $04
-	jr nz,+
+	ret nz
 	ld e,Interaction.var36
 	ld a,$01
 	ld (de),a
 	jp singNotes
-+
-	cp $03
-	ret nz
-	xor a
-	ld (wBalladeEpilogue),a
-	ld h,d
-	ld l,Interaction.yh
-	ld a,(hl)
-	ld l,Interaction.xh
-	ld l,(hl)
-	ld h,a
-	call createFinPuffAt
-	jp interactionDelete
 
 
 ;;

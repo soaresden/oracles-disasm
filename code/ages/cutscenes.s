@@ -129,3 +129,12 @@ cutscene22:
 	jp nz,applyWarpTransition2
 	jpab balladePhotos.run
 
+;;
+; BALLADE: CUTSCENE_BALLADE_GENERIQUE : le générique qui défile (code/ages/cutscenes/generique.s) ;
+; il finit par une téléportation sur place (retour sur la plage)
+cutscene23:
+	ld a,(wWarpTransition2)
+	or a
+	jp nz,applyWarpTransition2
+	jpab balladeGenerique.run
+
