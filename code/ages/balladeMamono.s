@@ -5,8 +5,8 @@
 ; 2-9, colonnes 1-13 de la salle) cache des monstres d'un niveau de 1 à 5 (Keese, Octorok, Moblin,
 ; Darknut, Lynel). Link creuse la case devant lui avec A. Une case vide montre la somme des niveaux
 ; des monstres qui l'entourent (les chiffres de 1 à 40 : tools/make_mamono.py, décor $6a). Un
-; monstre déterré apparaît, figé sur sa case (le vrai ennemi), puis s'en va en fumée ; sa case montre
-; alors, comme les autres, la somme des niveaux autour d'elle (Denis : on la recompte) : s'il n'est
+; monstre déterré apparaît, figé sur sa case (le vrai ennemi), puis s'en va en fumée ; sa case garde
+; son image (Denis, 29/10 : « pour savoir c'était quoi » ; briques $6f-$73) : s'il n'est
 ; pas plus fort que Link, Link le bat ; sinon Link perd un demi-cœur par niveau d'écart, et tout son
 ; niveau si le monstre est découvert à l'aveugle (aucune case creusée autour). Chaque monstre battu
 ; donne autant d'expérience que son niveau, et Link monte de niveau (« L-n » dans la barre d'état,
@@ -28,6 +28,8 @@
 .define MAMONO_SAND		$bf	; sable lisse : rien autour
 .define MAMONO_FIRST_NUMBER	$40	; brique $40 + n : le chiffre n (1-40)
 .define MAMONO_FIRST_NOTE	$68	; brique $68 + n : la note n du joueur (1-5), sur le sable meuble
+.define MAMONO_MINE_X		$6e	; le démineur : la croix du joueur (B), sur le sable meuble
+.define MAMONO_FIRST_DEAD	$6f	; brique $6f + n : le monstre de niveau n + 1 vaincu (son image, Denis)
 .define MAMONO_FLOOD_PER_FRAME	4
 .define MAMONO_ROWS		8
 .define MAMONO_COLS		13
@@ -55,9 +57,24 @@ main:
 	ld a,(de)
 	or a
 	jr z,@capture
-	; Les monstres restent figés
+	; Les monstres restent figés, et sans collision (Denis : « j'ai pris un dégât en démineur, y'a un
+	; ennemi invisible ? » : le Darknut modèle, caché au bord du champ, frappait encore)
 	ld hl,wDisabledObjects
 	set 2,(hl)		; DISABLE_ENEMIES
+	ld hl,wBalladeMamonoSlots
+	ld b,$05
+-
+	ldi a,(hl)
+	or a
+	jr z,+
+	push hl
+	ld h,a
+	ld l,Enemy.collisionType
+	res 7,(hl)
+	pop hl
++
+	dec b
+	jr nz,-
 	; et leurs objets à part ne reviennent pas (l'épée du Darknut, recréée quand on le montre)
 	ld h,FIRST_ENEMY_INDEX
 -
@@ -213,11 +230,15 @@ main:
 	call @puffAt
 	ld a,SND_POOF
 	call playSound
-	; sa case : la somme des niveaux autour, comme les autres (Denis)
+	; sa case garde son image, pour savoir ce que c'était (Denis, 29/10)
+	ld a,(wBalladeMamonoShowIndex)
+	call @levelAt
+	add MAMONO_FIRST_DEAD-1
+	ld b,a
 	ld a,(wBalladeMamonoShowPos)
 	ld c,a
-	ld a,(wBalladeMamonoShowIndex)
-	jp @reveal
+	ld a,b
+	jp setTile
 
 @playing:
 	ld a,(wBalladeMamonoState)
@@ -365,6 +386,23 @@ main:
 	ret c
 	ld h,>wRoomLayout
 	ld l,c
+	; au démineur, juste une croix (Denis : « il a hérité de tous les chiffres, c'est inutile »)
+	ld a,(wBalladeCreuseMode)
+	or a
+	jr nz,+
+	ld a,(hl)
+	ld b,MAMONO_MINE_X
+	cp MAMONO_UNDUG
+	jr z,++
+	cp MAMONO_MINE_X
+	ret nz			; creusée : pas de croix
+	ld b,MAMONO_UNDUG
+++
+	ld a,SND_MENU_MOVE
+	call playSound
+	ld a,b
+	jp setTile
++
 	ld a,(hl)
 	cp MAMONO_UNDUG
 	ld b,MAMONO_FIRST_NOTE+1
@@ -407,9 +445,11 @@ main:
 	jp @cellIndex
 
 ;;
-; z : la brique a est du sable pas creusé (meuble, ou notée par le joueur)
+; z : la brique a est du sable pas creusé (meuble, notée par le joueur, ou sa croix au démineur)
 @isUndug:
 	cp MAMONO_UNDUG
+	ret z
+	cp MAMONO_MINE_X
 	ret z
 	sub MAMONO_FIRST_NOTE+1
 	cp $05

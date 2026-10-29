@@ -998,9 +998,9 @@ interactionedSubidData:
 	m_InteractionSubidData $00 $00 $00 ; $5c chez Marine : la table (invisible)
 	m_InteractionSubidData $f0 $00 $30 ; $5d un moulin du Nid des Vents (spr_ballade_moulin, 32 x 32 ; palette 3 ; animations $10 / $11 posées par le code)
 	m_InteractionSubidData $00 $00 $00 ; $5e Marine : une vanne, puis un indice (invisible)
-	m_InteractionSubidData $f1 $00 $30 ; $5f le coffre du forain à la bombe (le démineur ; spr_ballade_forain, palette 3 ; animations $12-$17 posées par le code)
-	m_InteractionSubidData $f1 $00 $30 ; $60 le coffre au monstre (le Mamono)
-	m_InteractionSubidData $f1 $00 $30 ; $61 le coffre au Lynel (le Labyrinthe)
+	m_InteractionSubidData $f1 $00 $30 ; $5f le coffre du forain à la bombe (le démineur ; son icône : spr_ballade_forain, palette 3 ; animations $12-$14 posées par le code)
+	m_InteractionSubidData $f1 $00 $20 ; $60 le coffre au monstre (le Mamono ; le vrai Moblin masqué, palette 2)
+	m_InteractionSubidData $f1 $00 $20 ; $61 le coffre au Lynel (le Labyrinthe ; le vrai Lynel, palette 2)
 	m_InteractionSubidDataEnd
 
 interactiond4SubidData:

@@ -6053,7 +6053,9 @@ marineChat:
 ; fini les jeux en mode dur ; le forain donne pas les objets, il autorisera juste à les ouvrir ; une
 ; icône au-dessus de chaque coffre »). Le jeu gagné en Dur (GLOBALFLAG_BALLADE_FORAIN_*), A : le
 ; coffre s'ouvre, le quart de cœur de ce jeu (son drapeau : le même qu'avant, pour la progression et
-; la carte) ; sinon : « Fermé ». art/forain.txt ; animations $12 + 2 x n (+ 1 : ouvert).
+; la carte) ; sinon : « Fermé ». Le coffre : le vrai, une brique du décor ($41 fermé, $42 ouvert :
+; copies des coffres d'Ages, tools/make_mamono.py, qui ne s'ouvrent pas tout seuls) ; l'objet n'est que
+; son icône (art/forain.txt : la bombe ; le vrai Moblin masqué, le vrai Lynel ; animations $12 + n).
 forainChest:
 	ld e,Interaction.state
 	ld a,(de)
@@ -6073,6 +6075,9 @@ forainChest:
 	call objectMarkSolidPosition
 	ld e,Interaction.pressedAButton
 	call objectAddToAButtonSensitiveObjectList
+	call @index
+	add $12
+	call interactionSetAnimation
 	call @showLid
 	jp objectSetVisible82
 
@@ -6107,19 +6112,19 @@ forainChest:
 	ld (wDisabledObjects),a
 	ret
 
-; Son image : fermé, ou ouvert (le quart pris)
+; Sa brique : le coffre fermé, ou ouvert (le quart pris)
 @showLid:
 	call @heartFlag
 	and (hl)
-	ld b,$00
+	ld a,$41
 	jr z,+
-	inc b
+	inc a
 +
-	call @index
-	add a
-	add $12
-	add b
-	jp interactionSetAnimation
+	push af
+	call objectGetShortPosition
+	ld c,a
+	pop af
+	jp setTile
 
 ; @param[out]	a	0 la bombe, 1 le monstre, 2 le Lynel
 @index:
