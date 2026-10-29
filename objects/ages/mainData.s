@@ -4128,6 +4128,9 @@ group1MapabObjectData:
 group1MapacObjectData:
 	obj_Interaction INTERAC_BALLADE_NPC $08 $38 $78
 	obj_Interaction INTERAC_BALLADE_CREUSE $00 $08 $08
+	obj_Interaction INTERAC_BALLADE_OBJECT $5f $48 $28 ; la bombe : le démineur
+	obj_Interaction INTERAC_BALLADE_OBJECT $60 $48 $48 ; le monstre : le Mamono
+	obj_Interaction INTERAC_BALLADE_OBJECT $61 $48 $68 ; le Lynel : le Labyrinthe
 	obj_End
 group1Mapb0ObjectData:
 	obj_End

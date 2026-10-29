@@ -354,6 +354,45 @@ interactionOamDataBalladeBigB:
 	.db $10 $08 $1c $00
 	.db $10 $10 $1e $00
 
+; BALLADE: les coffres du forain (spr_ballade_forain : image 0 le coffre fermé, 1 ouvert ; 2-4 les
+; icônes) : l'icône, une case au-dessus du coffre
+interactionOamDataBalladeCoffreBombe:
+	.db $04
+	.db $f8 $00 $08 $00
+	.db $f8 $08 $0a $00
+	.db $08 $00 $00 $00
+	.db $08 $08 $02 $00
+interactionOamDataBalladeCoffreBombeOuvert:
+	.db $04
+	.db $f8 $00 $08 $00
+	.db $f8 $08 $0a $00
+	.db $08 $00 $04 $00
+	.db $08 $08 $06 $00
+interactionOamDataBalladeCoffreMonstre:
+	.db $04
+	.db $f8 $00 $0c $00
+	.db $f8 $08 $0e $00
+	.db $08 $00 $00 $00
+	.db $08 $08 $02 $00
+interactionOamDataBalladeCoffreMonstreOuvert:
+	.db $04
+	.db $f8 $00 $0c $00
+	.db $f8 $08 $0e $00
+	.db $08 $00 $04 $00
+	.db $08 $08 $06 $00
+interactionOamDataBalladeCoffreLynel:
+	.db $04
+	.db $f8 $00 $10 $00
+	.db $f8 $08 $12 $00
+	.db $08 $00 $00 $00
+	.db $08 $08 $02 $00
+interactionOamDataBalladeCoffreLynelOuvert:
+	.db $04
+	.db $f8 $00 $10 $00
+	.db $f8 $08 $12 $00
+	.db $08 $00 $04 $00
+	.db $08 $08 $06 $00
+
 ; BALLADE: le boss du Terrier qui marche (spr_ballade_rex, art/rex.txt) : le haut (avec blindage
 ; tuiles $00-$07, sans $08-$0f) sur les pattes (pas A $10-$17, pas B $18-$1f)
 ; avec blindage, pas A

@@ -167,7 +167,12 @@ main:
 	inc a
 	ld (wBalladeMamonoLevel),a
 	ld (wBalladeMamonoState),a
+	ld a,(wBalladeCreuseMode)
+	or a
 	ld bc,TX_5a4a
+	jp nz,showText
+	; le démineur : Marine explique les chiffres
+	ld bc,TX_5a46
 	jp showText
 
 @leave:
@@ -270,6 +275,11 @@ main:
 ; se découvriront toutes seules (@flood)
 @reveal:
 	call @sum
+	push af
+	ld a,(wBalladeCreuseMode)
+	or a
+	call z,@mineSafe
+	pop af
 	or a
 	jr nz,+
 	ld a,$01
@@ -414,6 +424,9 @@ main:
 ; Un monstre déterré (a = son niveau, b = sa case, c = sa position)
 @monster:
 	ld (wBalladeMamonoTmp),a
+	ld a,(wBalladeCreuseMode)
+	or a
+	jp z,@boom
 	ld a,c
 	ld (wBalladeMamonoShowPos),a
 	ld a,b
@@ -517,18 +530,20 @@ main:
 	or a
 	ld bc,TX_5b3e
 	jp nz,@ringReward
+	; La première fois : le forain permet d'ouvrir son coffre au monstre, sur la plage (Denis :
+	; « le forain donne pas les objets, il autorisera juste à les ouvrir ») ; ensuite, 30 rubis
+	ld a,GLOBALFLAG_BALLADE_FORAIN_MAMONO
+	call checkGlobalFlag
+	jr nz,+
+	ld a,GLOBALFLAG_BALLADE_FORAIN_MAMONO
+	call setGlobalFlag
+	ld bc,TX_5c32
+	jp @ringReward
++
 	ld bc,TX_5b3f
 	call showText
 	call @ring
-	; Le quart de cœur, la première fois (drapeau $80) ; ensuite, 30 rubis
-	call getThisRoomFlags
-	ld a,(hl)
-	and $80
 	ld bc,TREASURE_OBJECT_RUPEES_04	; (30 rubis)
-	jr nz,+
-	set 7,(hl)
-	ldbc TREASURE_HEART_PIECE, $00
-+
 	call createTreasure
 	ret nz
 	ld de,w1Link.yh
@@ -589,12 +604,17 @@ main:
 	ldi (hl),a
 	dec b
 	jr nz,-
+	ld a,(wBalladeCreuseMode)
+	or a
+	ld hl,@counts
+	jr nz,+
+	ld hl,@mineCounts
++
 	ld a,(wBalladeCreuseLevel)
 	ld b,a
 	add a
 	add a
 	add b
-	ld hl,@counts
 	rst_addAToHl
 	ld b,$01		; b = le niveau
 @placeLevel:
@@ -645,7 +665,95 @@ main:
 	ld a,b
 	cp $06
 	jr c,@placeLevel
+	; au démineur, on compte les cases sûres qui restent à creuser
+	ld a,(wBalladeCreuseMode)
+	or a
+	ret nz
+	ld a,(wBalladeMamonoLeft)
+	cpl
+	inc a
+	add MAMONO_CELLS
+	ld (wBalladeMamonoLeft),a
 	ret
+
+;;
+; Le démineur (le Creuse-Rubis du forain, à la taille du Mamono : Denis) : une case sûre découverte
+; (son chiffre dans wBalladeMamonoTmp+2 : les bombes autour) : ses rubis (1-2 bombes : 1, 3-4 : 5,
+; plus : 20 ; rien autour : rien), une de moins à creuser ; la dernière : gagné. Garde bc et de.
+@mineSafe:
+	push bc
+	push de
+	ld a,(wBalladeMamonoTmp+2)
+	or a
+	jr z,++
+	ld c,RUPEEVAL_001
+	cp $03
+	jr c,+
+	ld c,RUPEEVAL_005
+	cp $05
+	jr c,+
+	ld c,RUPEEVAL_020
++
+	ld a,TREASURE_RUPEES
+	call giveTreasure
+++
+	ld hl,wBalladeMamonoLeft
+	ld a,(hl)
+	or a
+	jr z,++
+	dec (hl)
+	call z,@mineWin
+++
+	pop de
+	pop bc
+	ret
+
+; Toutes les cases sûres : gagné. L'Anneau Caméléon (la première victoire) ; en Difficile, la
+; première fois, le forain permet d'ouvrir son coffre à la bombe
+@mineWin:
+	ld a,$02
+	ld (wBalladeMamonoState),a
+	ld a,SND_SOLVEPUZZLE
+	call playSound
+	ld bc,TX_5a48
+	ld a,(wBalladeCreuseLevel)
+	or a
+	jr z,+
+	ld a,GLOBALFLAG_BALLADE_FORAIN_CREUSE
+	call checkGlobalFlag
+	jr nz,+
+	ld a,GLOBALFLAG_BALLADE_FORAIN_CREUSE
+	call setGlobalFlag
+	ld bc,TX_5c31
++
+	call showText
+	ld a,BALLADE_CAMELEON_RING
+	ld bc,TREASURE_OBJECT_RING_2c
+	jp balladeRingReward
+
+; Une bombe déterrée (c = sa position) : BOUM, c'est perdu
+@boom:
+	ld a,$02
+	ld (wBalladeMamonoState),a
+	call getFreeInteractionSlot
+	jr nz,+
+	ld (hl),INTERAC_EXPLOSION
+	ld l,Interaction.yh
+	ld a,c
+	and $f0
+	add $08
+	ld (hl),a
+	ld l,Interaction.xh
+	ld a,c
+	swap a
+	and $f0
+	add $08
+	ld (hl),a
++
+	ld a,SND_EXPLOSION
+	call playSound
+	ld bc,TX_5a47
+	jp showText
 
 ;;
 ; @param	a	Une case
@@ -907,6 +1015,10 @@ main:
 @counts:
 	.db 6, 4, 3, 1, 0
 	.db 8, 6, 5, 3, 2
+; Le démineur : des bombes (niveau 1, le chiffre = les bombes autour) : Facile, Difficile
+@mineCounts:
+	.db 14, 0, 0, 0, 0
+	.db 20, 0, 0, 0, 0
 ; L'expérience pour passer aux niveaux 2, 3, 4, 5 : Facile, Dur
 @thresholds:
 	.db 5, 12, 20, $ff

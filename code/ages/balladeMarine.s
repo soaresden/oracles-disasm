@@ -214,8 +214,12 @@ drawNoctambuleTimer:
 	set 4,(hl)
 	ret
 +++
-	; Le Mamono (code/ages/balladeMamono.s) : le niveau de Link, « L-n », à la même place
+	; Le Mamono (code/ages/balladeMamono.s) : le niveau de Link, « L-n », à la même place (pas au
+	; démineur, qui se joue dans la même arène)
 	ld a,(wBalladeMamonoState)
+	or a
+	jr z,++
+	ld a,(wBalladeCreuseMode)
 	or a
 	jr z,++
 	ld hl,w4StatusBarTileMap+$0b

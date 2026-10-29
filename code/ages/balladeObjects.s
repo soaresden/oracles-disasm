@@ -82,6 +82,8 @@
 ; @subid_59{Invisible, chez Marine (3:2a) : clins d'œil à Link's Awakening, A devant un meuble ($59-$5c)}
 ; @subid_5d{Un moulin à vent du Nid des Vents (1:66, 32 x 32) : ses ailes tournent après le chapitre 6}
 ; @subid_5e{Invisible : Marine (Select) fait une vanne, puis donne un indice selon la progression}
+; @subid_5f{Les coffres du forain, sur sa plage : $5f la bombe (le démineur), $60 le monstre (le Mamono),
+;          $61 le Lynel (le Labyrinthe)}
 ; ==================================================================================================
 
 ;;
@@ -184,6 +186,9 @@ main:
 	.dw marineWink
 	.dw windmill
 	.dw marineChat
+	.dw forainChest
+	.dw forainChest
+	.dw forainChest
 
 
 ;;
@@ -6041,6 +6046,104 @@ marineChat:
 	or a
 	ret nz
 	jp interactionDelete
+
+;;
+; Les coffres du forain ($5f la bombe, le démineur ; $60 le monstre, le Mamono ; $61 le Lynel, le
+; Labyrinthe), sur sa plage (1:ac ; Denis : « fais plutôt les coffres, ouvrables uniquement si on a
+; fini les jeux en mode dur ; le forain donne pas les objets, il autorisera juste à les ouvrir ; une
+; icône au-dessus de chaque coffre »). Le jeu gagné en Dur (GLOBALFLAG_BALLADE_FORAIN_*), A : le
+; coffre s'ouvre, le quart de cœur de ce jeu (son drapeau : le même qu'avant, pour la progression et
+; la carte) ; sinon : « Fermé ». art/forain.txt ; animations $12 + 2 x n (+ 1 : ouvert).
+forainChest:
+	ld e,Interaction.state
+	ld a,(de)
+	rst_jumpTable
+	.dw @init
+	.dw @idle
+	.dw npcWaitText
+
+@init:
+	call interactionInitGraphics
+	call interactionIncState
+	ld h,d
+	ld l,Interaction.collisionRadiusY
+	ld (hl),$06
+	inc l
+	ld (hl),$06
+	call objectMarkSolidPosition
+	ld e,Interaction.pressedAButton
+	call objectAddToAButtonSensitiveObjectList
+	call @showLid
+	jp objectSetVisible82
+
+@idle:
+	call npcCheckTalk
+	ret z
+	call @heartFlag
+	and (hl)
+	jr nz,@empty
+	; le jeu gagné en Dur ?
+	call @index
+	add GLOBALFLAG_BALLADE_FORAIN_CREUSE
+	call checkGlobalFlag
+	ld a,$02
+	ld bc,TX_5c34
+	jp z,npcSay
+	; il s'ouvre : le quart de cœur
+	call @heartFlag
+	or (hl)
+	ld (hl),a
+	call @showLid
+	ld a,SND_OPENCHEST
+	call playSound
+	ldbc TREASURE_HEART_PIECE, $00
+	call giveTreasureAtLink
+	ld e,Interaction.state
+	ld a,$02
+	ld (de),a
+	ret
+@empty:
+	xor a
+	ld (wDisabledObjects),a
+	ret
+
+; Son image : fermé, ou ouvert (le quart pris)
+@showLid:
+	call @heartFlag
+	and (hl)
+	ld b,$00
+	jr z,+
+	inc b
++
+	call @index
+	add a
+	add $12
+	add b
+	jp interactionSetAnimation
+
+; @param[out]	a	0 la bombe, 1 le monstre, 2 le Lynel
+@index:
+	ld e,Interaction.subid
+	ld a,(de)
+	sub $5f
+	ret
+
+; @param[out]	hl	L'octet du drapeau de son quart de cœur
+; @param[out]	a	Son masque ($80)
+@heartFlag:
+	call @index
+	ld hl,@heartFlags
+	rst_addDoubleIndex
+	ldi a,(hl)
+	ld h,(hl)
+	ld l,a
+	ld a,$80
+	ret
+
+@heartFlags:
+	.dw wGroup1RoomFlags+$ac	; le démineur (le quart du Creuse-Rubis, en Difficile)
+	.dw wGroup5RoomFlags+$ea	; le Mamono (l'arène)
+	.dw wGroup5RoomFlags+$ee	; le 2e Labyrinthe des Lynels
 
 ;;
 ; Un moulin à vent ($5d, le Nid des Vents 1:66 et son Songe ; Denis : « toujours pas de moulins

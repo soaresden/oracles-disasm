@@ -17,7 +17,8 @@
 ; ramassés : gagné. Deux labyrinthes (Denis) : le 1er (5:e9) gagné, le forain envoie Link dans le
 ; 2e (5:ee, art/labyrinthe2.txt), plus dur : les Lynels vont plus vite, sortent plus tôt de l'enclos,
 ; et la gemme fait moins longtemps peur ; le 2e gagné : 20 rubis et, la première fois, l'Anneau de
-; Force et un quart de cœur (drapeau $80 de 5:ee). Perdu, ou le 2e gagné : retour chez le forain.
+; Force, et le forain permet d'ouvrir son coffre au Lynel (balladeObjects.forainChest : le quart de
+; cœur, drapeau $80 de 5:ee). Perdu, ou le 2e gagné : retour chez le forain.
 ;
 ; Le contrôleur : INTERAC_BALLADE_CREUSE $01 (object_code/ages/interactions/balladeCreuse.s) ; les
 ; Lynels : object_code/common/enemies/lynel.s appelle « lynel » ci-dessous.
@@ -226,23 +227,17 @@ main:
 	ld bc,TX_5b40
 	jp showText
 ++
+	; Le 2e, la première fois : le forain permet d'ouvrir son coffre au Lynel, sur la plage (Denis :
+	; « le forain donne pas les objets, il autorisera juste à les ouvrir ») ; puis l'Anneau de Force
+	; (@ending)
+	ld a,GLOBALFLAG_BALLADE_FORAIN_LYNELS
+	call checkGlobalFlag
 	ld bc,TX_5a4e
-	call showText
-	; Le 2e, la première fois : un quart de cœur (drapeau $80 du 2e labyrinthe) ; puis l'Anneau de
-	; Force (@ending)
-	call getThisRoomFlags
-	bit 7,(hl)
-	ret nz
-	set 7,(hl)
-	; (@ending attend que Link l'ait ramassé, et son texte lu, avant de partir : var31)
-	ld e,Interaction.var31
-	ld a,$01
-	ld (de),a
-	ldbc TREASURE_HEART_PIECE, $00
-	call createTreasure
-	ret nz
-	ld de,w1Link.yh
-	jp objectCopyPosition_rawAddress
+	jp nz,showText
+	ld a,GLOBALFLAG_BALLADE_FORAIN_LYNELS
+	call setGlobalFlag
+	ld bc,TX_5c33
+	jp showText
 
 @lostText:
 	call @wait

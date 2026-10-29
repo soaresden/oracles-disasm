@@ -127,6 +127,9 @@
 	GLOBALFLAG_BALLADE_PHOTOS_HINT		db ; $64: Marine a demandé à revenir à l'auberge (les photos l'y attendent)
 	GLOBALFLAG_BALLADE_SYNCOPE		db ; $65: trop bas dans la Fosse, l'écran noir : Bulle a remonté Link (elle s'en moque au club)
 	GLOBALFLAG_BALLADE_ZELDA		db ; $66: Zelda, invitée au téléphone, est venue sur l'île de Marine
+	GLOBALFLAG_BALLADE_FORAIN_CREUSE	db ; $67: le démineur gagné en Difficile : le coffre à la bombe du forain s'ouvre
+	GLOBALFLAG_BALLADE_FORAIN_MAMONO	db ; $68: le Mamono gagné en Dur sans une égratignure : le coffre au monstre
+	GLOBALFLAG_BALLADE_FORAIN_LYNELS	db ; $69: le 2e Labyrinthe des Lynels gagné : le coffre au Lynel
 
 .else; ROM_SEASONS
 

@@ -23,11 +23,11 @@ mapMarks:
 	.db $40 ; enterré au milieu du motif
 	.db $00, $ac, 3
 	.dw wGroup1RoomFlags+$ac
-	.db $80 ; le Creuse-Rubis, en Difficile
+	.db $80 ; le coffre à la bombe du forain (le démineur en Difficile)
 	.dw wGroup5RoomFlags+$ea
-	.db $80 ; le Mamono, en Dur sans être blessé
+	.db $80 ; le coffre au monstre du forain (le Mamono en Dur sans être blessé)
 	.dw wGroup5RoomFlags+$ee
-	.db $80 ; le 2e Labyrinthe des Lynels
+	.db $80 ; le coffre au Lynel du forain (le 2e Labyrinthe des Lynels)
 	.db $00, $b3, 1
 	.dw wGroup1RoomFlags+$b3
 	.db $02 ; la chanteuse du Grand Sommeil

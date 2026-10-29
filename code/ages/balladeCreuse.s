@@ -509,9 +509,9 @@ main:
 +
 	pop af
 	call removeRupeeValue
-	ld a,(wBalladeCreuseMode)
-	or a
-	jp nz,@mamonoGo
+	; Les deux jeux se jouent dans l'arène (le démineur à la taille du Mamono : Denis ;
+	; balladeMamono.s, wBalladeCreuseMode 0) ; le champ de la plage n'existe plus (les coffres)
+	jp @mamonoGo
 
 	; Le champ : tout est à creuser
 	xor a

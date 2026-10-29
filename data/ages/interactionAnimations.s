@@ -756,6 +756,12 @@ interactionedAnimations:
 	.dw interactionAnimationBalladeInsomnis
 	.dw interactionAnimationBalladeMoulin ; $10 (posée par le code : les moulins arrêtés)
 	.dw interactionAnimationBalladeMoulinTourne ; $11 (ils tournent)
+	.dw interactionAnimationBalladeCoffreBombe ; $12 les coffres du forain : fermé, ouvert ; la bombe
+	.dw interactionAnimationBalladeCoffreBombeOuvert ; $13
+	.dw interactionAnimationBalladeCoffreMonstre ; $14 le monstre
+	.dw interactionAnimationBalladeCoffreMonstreOuvert ; $15
+	.dw interactionAnimationBalladeCoffreLynel ; $16 le Lynel
+	.dw interactionAnimationBalladeCoffreLynelOuvert ; $17
 interaction3eAnimations:
 	.dw interactionAnimation5a6ae
 interaction30Animations:
@@ -2086,6 +2092,25 @@ interactionAnimationBalladeMoulinTourne:
 	.db $10 $22 $00
 	.db $10 $24 $00
 	m_AnimationLoop interactionAnimationBalladeMoulinTourne
+; BALLADE: les coffres du forain (une seule image : l'icône sur le coffre)
+interactionAnimationBalladeCoffreBombe:
+	.db $7f $26 $00
+	m_AnimationLoop interactionAnimationBalladeCoffreBombe
+interactionAnimationBalladeCoffreBombeOuvert:
+	.db $7f $28 $00
+	m_AnimationLoop interactionAnimationBalladeCoffreBombeOuvert
+interactionAnimationBalladeCoffreMonstre:
+	.db $7f $2a $00
+	m_AnimationLoop interactionAnimationBalladeCoffreMonstre
+interactionAnimationBalladeCoffreMonstreOuvert:
+	.db $7f $2c $00
+	m_AnimationLoop interactionAnimationBalladeCoffreMonstreOuvert
+interactionAnimationBalladeCoffreLynel:
+	.db $7f $2e $00
+	m_AnimationLoop interactionAnimationBalladeCoffreLynel
+interactionAnimationBalladeCoffreLynelOuvert:
+	.db $7f $30 $00
+	m_AnimationLoop interactionAnimationBalladeCoffreLynelOuvert
 
 ; BALLADE: l'Insomnis à terre : il respire mal (agonisant)
 interactionAnimationBalladeInsomnis:
@@ -3655,6 +3680,12 @@ interactionedOamDataPointers:
 	.dw interactionOamDataBalladeInsomnisB ; $20
 	.dw interactionOamDataBalladeBig ; $22 (les moulins, ailes en +)
 	.dw interactionOamDataBalladeBigB ; $24 (ailes en x)
+	.dw interactionOamDataBalladeCoffreBombe ; $26 les coffres du forain
+	.dw interactionOamDataBalladeCoffreBombeOuvert ; $28
+	.dw interactionOamDataBalladeCoffreMonstre ; $2a
+	.dw interactionOamDataBalladeCoffreMonstreOuvert ; $2c
+	.dw interactionOamDataBalladeCoffreLynel ; $2e
+	.dw interactionOamDataBalladeCoffreLynelOuvert ; $30
 
 interaction48OamDataPointers: ; 0x5b04e
 	.dw interactionOamData50dfa
