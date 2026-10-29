@@ -1,12 +1,65 @@
 ; Généré par tools/make_credits.py depuis story/generique.txt (ne pas modifier à la main) :
 ; le générique qui défile (code/ages/cutscenes/generique.s).
-.define CREDITS_TILES 71
+.define CREDITS_TILES 92
 .define CREDITS_FADE_FRAME 5550 ; la musique finit : fondu
 .define CREDITS_END_FRAME 5670 ; puis le retour au jeu
 .define CREDITS_SCROLL_END_FR 1424 ; FIN au milieu de l'écran (en pixels)
 .define CREDITS_STEP_FR $45 ; la vitesse, en 1/256 de pixel par image
 .define CREDITS_SCROLL_END_EN 1424 ; FIN au milieu de l'écran (en pixels)
 .define CREDITS_STEP_EN $45 ; la vitesse, en 1/256 de pixel par image
+.define PROGRESS_FIRST_ROW 3 ; la progression : la 1re ligne (couplets), puis une toutes les 2 rangées
+.define PROGRESS_TOTAL_ROW 16 ; le total
+.define PROGRESS_SLASH_COL 16 ; le « / » (le nombre avant, son maximum après)
+
+; La progression : les chiffres 0-9 (la tuile du haut, celle du bas)
+progressDigits:
+	.db $89 $8f $d0 $d1 $89 $d2 $89 $d3 $d4 $d5 $85 $d6 $89 $d7 $d8 $d9 $89 $da $89 $db
+
+; La progression (fr) : 18 rangées de 20 tuiles, puis la palette de chaque rangée
+progressMapFr:
+	.db $80 $80 $80 $80 $8d $8d $89 $89 $8d $85 $89 $89 $af $89 $8b $80 $80 $80 $80 $80
+	.db $80 $80 $80 $80 $a7 $b8 $8f $8a $b8 $86 $c2 $c2 $b0 $8f $8c $80 $80 $80 $80 $80
+	.db $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80
+	.db $80 $80 $89 $80 $80 $80 $96 $80 $96 $80 $80 $80 $80 $80 $80 $80 $c7 $80 $80 $80
+	.db $80 $80 $a2 $98 $95 $ac $82 $9c $9a $97 $80 $80 $80 $80 $80 $80 $c8 $80 $80 $80
+	.db $80 $80 $89 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $c7 $80 $80 $80
+	.db $80 $80 $a2 $c9 $95 $a1 $97 $80 $80 $80 $80 $80 $80 $80 $80 $80 $c8 $80 $80 $80
+	.db $80 $80 $89 $80 $80 $80 $96 $80 $80 $80 $80 $80 $80 $80 $80 $80 $c7 $80 $80 $80
+	.db $80 $80 $ca $95 $a3 $a1 $9a $97 $80 $80 $80 $80 $80 $80 $80 $80 $c8 $80 $80 $80
+	.db $80 $80 $89 $b2 $80 $80 $96 $80 $80 $80 $80 $80 $80 $80 $80 $80 $c7 $80 $80 $80
+	.db $80 $80 $8f $b3 $c0 $9c $9a $97 $80 $80 $80 $80 $80 $80 $80 $80 $c8 $80 $80 $80
+	.db $80 $80 $93 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $c7 $80 $80 $80
+	.db $80 $80 $94 $9d $9d $9c $a3 $95 $cb $80 $80 $80 $80 $80 $80 $80 $c8 $80 $80 $80
+	.db $80 $80 $89 $80 $99 $99 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $c7 $80 $80 $80
+	.db $80 $80 $a2 $98 $9a $9a $a1 $9c $97 $80 $80 $80 $80 $80 $80 $80 $c8 $80 $80 $80
+	.db $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80
+	.db $80 $80 $81 $80 $96 $80 $96 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $cc $80 $80
+	.db $80 $80 $82 $98 $9a $a3 $82 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $cd $80 $80
+progressPalettesFr:
+	.db 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1
+
+; La progression (en) : 18 rangées de 20 tuiles, puis la palette de chaque rangée
+progressMapEn:
+	.db $80 $80 $80 $80 $80 $80 $8d $8d $89 $89 $8d $85 $89 $89 $80 $80 $80 $80 $80 $80
+	.db $80 $80 $80 $80 $80 $80 $a7 $b8 $8f $8a $b8 $86 $c2 $c2 $80 $80 $80 $80 $80 $80
+	.db $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80
+	.db $80 $80 $ce $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $c7 $80 $80 $80
+	.db $80 $80 $cf $9c $a1 $97 $9c $97 $80 $80 $80 $80 $80 $80 $80 $80 $c8 $80 $80 $80
+	.db $80 $80 $83 $80 $80 $80 $96 $80 $80 $80 $80 $80 $80 $80 $80 $80 $c7 $80 $80 $80
+	.db $80 $80 $84 $9c $a3 $a1 $9a $97 $80 $80 $80 $80 $80 $80 $80 $80 $c8 $80 $80 $80
+	.db $80 $80 $8d $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $c7 $80 $80 $80
+	.db $80 $80 $a7 $9b $9c $ae $9c $97 $80 $80 $80 $80 $80 $80 $80 $80 $c8 $80 $80 $80
+	.db $80 $80 $af $96 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $c7 $80 $80 $80
+	.db $80 $80 $b0 $9a $9c $a6 $97 $80 $80 $80 $80 $80 $80 $80 $80 $80 $c8 $80 $80 $80
+	.db $80 $80 $8d $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $c7 $80 $80 $80
+	.db $80 $80 $b8 $9b $9d $a5 $97 $80 $80 $80 $80 $80 $80 $80 $80 $80 $c8 $80 $80 $80
+	.db $80 $80 $89 $b2 $80 $80 $96 $80 $80 $80 $80 $80 $80 $80 $80 $80 $c7 $80 $80 $80
+	.db $80 $80 $a2 $b7 $9c $97 $9a $97 $80 $80 $80 $80 $80 $80 $80 $80 $c8 $80 $80 $80
+	.db $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80
+	.db $80 $80 $81 $80 $96 $80 $96 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $cc $80 $80
+	.db $80 $80 $82 $98 $9a $a3 $82 $80 $80 $80 $80 $80 $80 $80 $80 $80 $80 $cd $80 $80
+progressPalettesEn:
+	.db 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1
 
 ; La palette de chaque rangée (fr)
 creditsPalettesFr:

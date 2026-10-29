@@ -79,7 +79,7 @@ cutscene0e:
 	call refreshLoadedTreeGfx
 	ld a,(wWarpTransition2)
 	or a
-	jr nz,applyWarpTransition2
+	jp nz,applyWarpTransition2 ; BALLADE: (jr : trop loin, après nos cinématiques $22-$24)
 
 .ifdef REGION_JP
 	callab animationAndUniqueGfxData.updateAnimations
@@ -137,4 +137,13 @@ cutscene23:
 	or a
 	jp nz,applyWarpTransition2
 	jpab balladeGenerique.run
+
+;;
+; BALLADE: CUTSCENE_BALLADE_PROGRESS : l'écran de la progression (code/ages/cutscenes/generique.s) ; il
+; finit par une téléportation sur place
+cutscene24:
+	ld a,(wWarpTransition2)
+	or a
+	jp nz,applyWarpTransition2
+	jpab balladeGenerique.progress
 

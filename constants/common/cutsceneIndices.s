@@ -43,6 +43,7 @@
 	CUTSCENE_BLACK_TOWER_COMPLETE	db ; 0x21
 	CUTSCENE_BALLADE_PHOTOS		db ; 0x22: BALLADE: les photos de Cocolint
 	CUTSCENE_BALLADE_GENERIQUE	db ; 0x23: BALLADE: le générique qui défile
+	CUTSCENE_BALLADE_PROGRESS	db ; 0x24: BALLADE: l'écran de la progression
 .ende
 
 ; Seasons

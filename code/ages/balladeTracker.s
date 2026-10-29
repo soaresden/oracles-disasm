@@ -1,6 +1,7 @@
 ; ==================================================================================================
 ; BALLADE: la progression (INTERAC_BALLADE_OBJECT $53, balladeObjects.progressTracker ; Denis : « un tracker pour savoir si on est près des 100 % : quarts de
-; cœur, anneaux, objets »). Dans le menu, 3e page, B : le menu se ferme et Marine compte (bank2.s).
+; cœur, anneaux, objets »). Dans le menu, 3e page, B : le menu se ferme et l'écran de la progression
+; s'ouvre (CUTSCENE_BALLADE_PROGRESS ; Denis : « l'écran comme les secrets d'Ages »).
 ; - les couplets (les essences, 7, + le 8e, chanté à Zelda à la fin : GLOBALFLAG_BALLADE_FIN) ;
 ; - les cœurs (11 au plus : 3 + 6 réceptacles + 10 quarts, les deux derniers restent des quarts) et les quarts
 ;   du cœur suivant ;
@@ -9,8 +10,8 @@
 ; - les coffres (balladeTrackerChests.s, tools/make_tracker.py : le drapeau $20 de leur salle).
 ; Le pour cent : 20 points par sorte, au prorata (les cœurs : les quarts gagnés depuis les 3 du
 ; départ, sur 34 : 6 réceptacles et 10 quarts (le 10e enterré en 1:89) ; Denis lisait « 15/12 » : trois boss sans le mot
-; « boss » dans leur plan revenaient après la fin et redonnaient leur réceptacle). Deux boîtes, TX_5b78 puis TX_5b79 ; les nombres sont des textes appelés
-; (\call($ff) à \call($fc) : wTextSubstitutions, TX_5b80 + n, de 0 à 100).
+; « boss » dans leur plan revenaient après la fin et redonnaient leur réceptacle). (Avant le 29/10 :
+; deux boîtes de Marine, TX_5b78 et TX_5b79, plus affichées.)
 ; var30-36 : couplets, cœurs, quarts, objets, anneaux, coffres, pour cent.
 ; ==================================================================================================
 .include "code/ages/balladeTrackerChests.s"
@@ -176,48 +177,31 @@ main:
 	call @points
 	call @addPoints
 
-	; La 1re boîte : le pour cent, les couplets, les cœurs, les quarts
-	ld hl,wTextSubstitutions
-	ld e,Interaction.var36
-	call @sub
+	; L'écran de la progression (CUTSCENE_BALLADE_PROGRESS, cutscenes/generique.s ; Denis : « l'écran
+	; comme les secrets d'Ages ») : les nombres dans wTmpcbb6-cbbc, la case de Link dans wTmpcbbf
 	ld e,Interaction.var30
-	call @sub
-	ld e,Interaction.var31
-	call @sub
-	ld e,Interaction.var32
-	call @sub
-	ld bc,TX_5b78
-	jp showText
-
-; La 2e boîte : les objets, les anneaux, les coffres (et leur nombre)
-@second:
-	ld a,(wTextIsActive)
-	or a
-	ret nz
-	call interactionIncState
-	; Les objets, les anneaux, les coffres (et leur nombre)
-	ld hl,wTextSubstitutions
-	ld e,Interaction.var33
-	call @sub
-	ld e,Interaction.var34
-	call @sub
-	ld e,Interaction.var35
-	call @sub
-	ld (hl),$80+BALLADE_TRACKER_CHESTS
-	ld bc,TX_5b79
-	jp showText
-
-@end:
-	ld a,(wTextIsActive)
-	or a
-	ret nz
+	ld hl,wTmpcbb6
+	ld b,7
+-
+	ld a,(de)
+	ldi (hl),a
+	inc e
+	dec b
+	jr nz,-
+	ld a,(w1Link.yh)
+	and $f0
+	ld b,a
+	ld a,(w1Link.xh)
+	swap a
+	and $0f
+	or b
+	ld (wTmpcbbf),a
+	ld a,CUTSCENE_BALLADE_PROGRESS
+	ld (wCutsceneTrigger),a
 	jp interactionDelete
 
-; Le nombre (de) en texte : TX_5b80 + n, en (hl), puis hl suivant
-@sub:
-	ld a,(de)
-	add $80
-	ldi (hl),a
+@second:
+@end:
 	ret
 
 ; a = b * 20 / c (arrondi en dessous)
